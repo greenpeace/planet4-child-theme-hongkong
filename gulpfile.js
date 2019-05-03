@@ -60,6 +60,14 @@ function cleanfonts() {
   return del('static/fonts')
 }
 
+function cleanjs() {
+  return del('static/script.js')
+}
+
+function cleancss() {
+  return del('static/style.css')
+}
+
 const watch = () => {
   browserSync.init({
     server: path,
@@ -72,5 +80,5 @@ const watch = () => {
   gulp.watch(path + '/*.html').on('change', browserSync.reload)
 }
 
-exports.build = gulp.series(clean, gulp.parallel(scss(true), js(true)), assets, fonts, cleanfonts)
+exports.build = gulp.series(clean, gulp.parallel(scss(true), js(true)), assets, fonts, cleanfonts, cleanjs, cleancss)
 exports.default = gulp.series(gulp.parallel(scss(true), js(true)), watch)
