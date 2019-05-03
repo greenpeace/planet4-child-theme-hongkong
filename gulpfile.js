@@ -51,6 +51,15 @@ const assets = () => {
   .pipe(gulp.dest("static"))
 }
 
+const fonts = () => {
+  return gulp.src("static/fonts/*.*")
+  .pipe(gulp.dest("static/css/fonts/"))
+}
+
+function cleanfonts() {
+  return del('static/fonts')
+}
+
 const watch = () => {
   browserSync.init({
     server: path,
@@ -63,5 +72,5 @@ const watch = () => {
   gulp.watch(path + '/*.html').on('change', browserSync.reload)
 }
 
-exports.build = gulp.series(clean, gulp.parallel(scss(true), js(true)), assets)
+exports.build = gulp.series(clean, gulp.parallel(scss(true), js(true)), assets, fonts, cleanfonts)
 exports.default = gulp.series(gulp.parallel(scss(true), js(true)), watch)
