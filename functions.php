@@ -4,6 +4,25 @@
  * Additional code for the child theme goes in here.
  */
 
+/**
+ * This will remove parent assets, uncomment as needed.
+ * Register code can be found under parent theme at:
+ * class-p4-master-site.php -> enqueue_public_assets
+ */
+function dequeue_parent_assets() {
+    wp_dequeue_style( 'parent-style' );
+    wp_deregister_style( 'parent-style' );
+    wp_dequeue_style( 'bootstrap' );
+    wp_dequeue_style( 'slick' );
+    // wp_deregister_script( 'jquery' );
+    wp_dequeue_script( 'popperjs' );
+    wp_dequeue_script( 'bootstrapjs' );
+    wp_dequeue_script( 'main' );
+    wp_dequeue_script( 'slick' );
+    wp_dequeue_script( 'hammer' );
+}
+add_action( 'wp_enqueue_scripts', 'dequeue_parent_assets', 20 );
+
 function enqueue_child_styles() {
 	$css_creation = filectime(get_stylesheet_directory() . '/static/css/style.css');
 	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/static/css/style.css', [], $css_creation );
@@ -12,7 +31,7 @@ add_action( 'wp_enqueue_scripts', 'enqueue_child_styles', 99);
 
 function enqueue_child_scripts() {
 	$js_creation = filectime(get_stylesheet_directory() . '/static/js/script.js');
-	wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js', array(), $js_creation, false );
+	wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js', array(), $js_creation, true );
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_child_scripts', 99);
 
