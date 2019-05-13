@@ -186,3 +186,6 @@ function p4_child_register_taxonomy() {
 	register_taxonomy( 'p4_post_attribute', array( 'post', 'page' ), $args );
 }
 
+// add settings gpea  
+
+require_once( __DIR__ . '/includes/gpea-settings.php' );
