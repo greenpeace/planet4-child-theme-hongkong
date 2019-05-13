@@ -37,9 +37,9 @@ function gpea_register_main_options_metabox() {
 	 * Prefix is not needed.
 	 */
 	$main_options->add_field( array(
-		'name'    => esc_html__( 'Background image for "Main Issues" section', 'gpea_theme' ),
+		'name'    => esc_html__( 'Background image for "Values" section', 'gpea_theme' ),
 		'desc'    => esc_html__( 'Specify the image to be used as background', 'gpea_theme' ),
-		'id'      => 'gpea_main_issues_bg_image',
+		'id'      => 'gpea_values_section_bg_image',
 		'type'    => 'file',
 	) );
 
