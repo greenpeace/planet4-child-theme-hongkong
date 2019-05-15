@@ -1,0 +1,59 @@
+{% extends "base.twig" %}
+
+{% block content %}	
+
+	<article id="post-{{ post.ID }}">
+
+		<section
+			class="section-hero-top"
+			style="background-image: url('{{ background_image }}')"
+		>
+			<div class="section-hero-shade"></div>
+			<div class="ct-container">
+				<div class="top-bar">
+					<a href="" class="back-button">
+						<span class="icon-chevron-left"></span>
+						<p>返回上一頁</p>
+					</a>
+					<a href="" class="button light">按照主題</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="section-post-content generic-content">
+			<div class="title-box">
+				<div class="top">
+					<div class="left">
+						<p>專題報導</p>
+						<p>森林</p>
+					</div>
+					<div class="right">
+						<span class="icon-clock"></span>
+						<p>4 min 閱讀</p>
+						<p><time class="single-post-time" pubdate>{{ post.post_date|date }}</time></p>
+					</div>
+				</div>
+			
+				<h1>{{ post.title|raw }}</h1>
+				<div class="bottom">
+					<p>作者：{{ post.author.name }}</p>
+				</div>
+			</div>
+
+			{{ post.content|e('wp_kses_post')|raw }}
+
+		</section>
+
+				
+
+		<!-- <section class="article-listing page-section">
+			{% if ( post.articles ) %}
+				{{ post.articles|shortcodes|raw }}
+			{% endif %}
+		</section> -->
+		<!-- {% if ( 'closed' != post.comment_status ) %}
+			{% include "comments_section.twig" with {comments:post.get_comments()} %}
+		{% endif %} -->
+	</article>
+	
+{% endblock %}

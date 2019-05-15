@@ -196,3 +196,21 @@ function p4_child_register_taxonomy() {
 // add settings gpea  
 
 require_once( __DIR__ . '/includes/gpea-settings.php' );
+
+// add embedding responsive
+function setup_theme(  ) {
+    // Filters the oEmbed process to run the responsive_embed() function
+    add_filter('embed_oembed_html', 'responsive_embed', 10, 3);
+}
+add_action('after_setup_theme', 'setup_theme');
+
+/**
+ * Adds a responsive embed wrapper around oEmbed content
+ * @param  string $html The oEmbed markup
+ * @param  string $url  The URL being embedded
+ * @param  array  $attr An array of attributes
+ * @return string       Updated embed markup
+ */
+function responsive_embed($html, $url, $attr) {
+    return $html!=='' ? '<div class="embed-container">'.$html.'</div>' : '';
+}

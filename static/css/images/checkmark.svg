@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <path id="check_on-a" d="M11.63 0l2.08 1.88-9.07 8.4L0 5.99l2.08-1.87 2.56 2.37z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <g transform="translate(5.14 6.86)">
+      <mask id="check_on-b" fill="#fff">
+        <use xlink:href="#check_on-a"/>
+      </mask>
+      <use fill="#563131" fill-rule="nonzero" xlink:href="#check_on-a"/>
+      <g fill="#FFF" mask="url(#check_on-b)">
+        <path d="M-.86-1.71h15v14h-15z"/>
+      </g>
+    </g>
+  </g>
+</svg>
