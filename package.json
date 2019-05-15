@@ -9,6 +9,7 @@
   "author": "HaThaiHoang <jonlefcun@gmail.com>",
   "license": "UNLICENSED",
   "dependencies": {
+    "js-cookie": "^2.2.0",
     "swiper": "4.5.0",
     "vanilla-lazyload": "12.0.0"
   },
