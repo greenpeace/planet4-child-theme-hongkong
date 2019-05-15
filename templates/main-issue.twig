@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <section class="section-hero-top" style="background-image: url({{ post.img_url }})">
+	<div class="ct-container">
+	    <div class="content">
+		<div class="top-bar">
+		    <a href="" class="back-button">
+			<span class="icon-chevron-left"></span>
+		    </a>
+		    <a href="" class="button light">關注</a>
+		</div>
+		<!-- <div class="info-box">
+		     <p class="title">海洋</p>
+		     <p class="subtitle">oceans</p>
+		     </div> -->
+	    </div>
+	</div>
+    </section>
+
+    {{ post.content|raw }}
+{% endblock %}
