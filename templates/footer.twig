@@ -4,13 +4,12 @@
             <div class="first-box">
 		<div class="socials">
 		    <p class="text small semi-bold">跟着我们</p>
-		    <a href="" aria-label="instagram"><span class="icon-instagram"></span></a>
-		    <a href="" aria-label="facebook"><span class="icon-facebook"></span></a>
-		    <a href="" aria-label="twitter"><span class="icon-twitter"></span></a>
-		    <a href="" aria-label="youtube"><span class="icon-youtube"></span></a>
+		    {% for item in footer_social_menu %}
+			<a href="{{ item.url }}" aria-label="{{ item.title|lower }}"><span class="icon-{{ item.title|lower }}"></span></a>
+		    {% endfor %}
 		</div>
 		<span class="icon-greenpeace"></span>
-		<p class="description text tiny semi-bold">绿色和平组织是领先的独立竞选组织，利用和平抗议和创造性对抗来揭露全球环境问题，并推广对绿色和和平未来至关重要的解决方案。</p>
+		<p class="description text tiny semi-bold">{{ generic_footer_text }}</p>
 		<div class="links text bold">
 		    <a href="">新闻稿和媒体</a>
 		    <a href="">我的喜好</a>
@@ -31,14 +30,9 @@
 			關於綠色和平
 		    </p>
 		    <ul class="text bold">
-			<li><a href="">關於我們</a></li>
-			<li><a href="">核心使命</a></li>
-			<li><a href="">行動理念</a></li>
-			<li><a href="">報告出版</a></li>
-			<li><a href="">團隊成員</a></li>
-			<li><a href="">職位空缺</a></li>
-			<li><a href="">聯絡我們</a></li>
-			<li><a href="">常見問題</a></li>
+			{% for item in footer_primary_menu %}
+			    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+			{% endfor %}
 		    </ul>
 		</div>
             </div>
@@ -51,9 +45,9 @@
 		<a href="">我的喜好</a>
             </div>
             <div class="bottom-content">
-		<a href="">Privacy and cookies</a>
-		<a href="">Terms</a>
-		<a href="">Our community policy</a>
+		{% for item in footer_secondary_menu %}
+		    <a href="{{ item.url }}">{{ item.title }}</a>
+		{% endfor %}
             </div>
 	</div>
     </div>

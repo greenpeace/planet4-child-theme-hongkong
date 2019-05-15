@@ -189,3 +189,18 @@ function p4_child_register_taxonomy() {
 // add settings gpea  
 
 require_once( __DIR__ . '/includes/gpea-settings.php' );
+
+
+// timber context info
+
+add_filter( 'timber_context', 'add_to_timber_context' );
+
+function add_to_timber_context( $context ) {
+    // global $wp;
+    // Add generic footer option field
+    $key = 'gpea_decription_generic_footer_text';
+    $options = get_option( 'gpea_options' );
+    $context[ 'generic_footer_text' ] = isset( $options[ $key ] ) ? $options[ $key ] : '';
+    return $context;
+}
+
