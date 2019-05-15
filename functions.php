@@ -147,6 +147,31 @@ function register_sidebar_metabox_child() {
 		'options'          => generate_post_select('post')
 	) );
 
+	// add project related meta fields (for example percentage of project)
+
+	$cmb_project = new_cmb2_box( array(
+		'id'           => 'p4-gpea-project-box',
+		'title'        => 'Information about current project',
+		'object_types' => array( 'page' ), // post type
+		// 'show_on'      => array( 'key' => 'page-template', 'value' => 'project.php' ),
+		'context'      => 'normal', //  'normal', 'advanced', or 'side'
+		'priority'     => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names'   => true, // Show field names on the left
+	) );
+
+	$cmb_project->add_field( array(
+		'name'             => esc_html__( 'Project percentage', 'cmb2' ),
+		'desc'             => esc_html__( 'Percentage of completition of the project', 'cmb2' ),
+		'id'               => 'p4-gpea_project_percentage',
+		'type'             => 'text',
+		'attributes' => array(
+			'type' => 'number',
+			'pattern' => '\d*',
+		),
+		// 'sanitization_cb' => 'intval',
+		// 'escape_cb'       => 'intval',
+	) );
+
 }
 
 
