@@ -42,18 +42,154 @@
 
 			{{ post.content|e('wp_kses_post')|raw }}
 
+
+			<div class="card-box full-width green">
+				<div class="ct-container">
+					<p class="title">是時候採取行動了</p>
+					<div
+					class="card"
+					style="background-image: url(https://picsum.photos/id/217/304/444)"
+					>
+						<div class="box">
+							<div class="progress-bar">
+								<div class="percent" style="width: 90%"></div>
+							</div>
+							<p class="stats">已有2,347 名簽署者</p>
+							<div class="content">
+								<p>拯救紅毛猩猩<br />保衛天堂雨林</p>
+								<a href="" class="button small light">我要支持</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-box">
+				<form action="">
+					<h2>在收件箱中獲取每週更新！</h2>
+					<div class="field">
+					<input type="text" placeholder="電郵地址" />
+					</div>
+					<button class="button fluid">訂閱</button>
+				</form>
+			</div>
+
 		</section>
 
-				
-
-		<!-- <section class="article-listing page-section">
-			{% if ( post.articles ) %}
-				{{ post.articles|shortcodes|raw }}
-			{% endif %}
-		</section> -->
-		<!-- {% if ( 'closed' != post.comment_status ) %}
-			{% include "comments_section.twig" with {comments:post.get_comments()} %}
-		{% endif %} -->
+					
 	</article>
+
+	<section class="section-updates second-color">
+		<div class="ct-container">
+			<div class="content">
+			<div class="first">
+				<h2>相關主題</h2>
+				<div class="tags">
+				<a href="" class="tag">污染</a>
+				<a href="" class="tag">塑膠</a>
+				<a href="" class="tag">動物</a>
+				<a href="" class="tag">空氣</a>
+				<a href="" class="tag">電子</a>
+				</div>
+			</div>
+			<a href="" class="second type-2">
+				<div class="left">
+				<div class="top-box">
+					<div class="tag">海洋</div>
+					<p class="type">新闻</p>
+				</div>
+				<div
+					class="thumbnail lazy"
+					data-bg="url(https://picsum.photos/id/81/200/300)"
+				></div>
+				<div class="info-box">
+					<div class="number">00.00.0000</div>
+					<div class="time">
+					<span class="icon-clock"></span>
+					<p>4 min 閱讀</p>
+					</div>
+				</div>
+				<div class="name text large bold">
+					三大年宵每日派膠超過30萬件 大多不能回收
+				</div>
+				<p class="ps text bold">了解綠色和平的歷史</p>
+				</div>
+				<div class="right">
+				<div
+					class="thumbnail lazy"
+					data-bg="url(https://picsum.photos/id/81/200/300)"
+				></div>
+				</div>
+			</a>
+			<div class="posts">
+				<a class="post type-2" href="">
+				<div class="info-box">
+					<div class="top">
+					<div class="tag">北極</div>
+					<p class="type">成就</p>
+					</div>
+					<div class="name">
+					在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
+					</div>
+					<div class="bottom">
+					<div class="time">
+						<span class="icon-clock"></span>
+						<p>4 min 閱讀</p>
+					</div>
+					<div class="number">00.00.0000</div>
+					</div>
+				</div>
+				<div
+					class="thumbnail lazy"
+					data-bg="url(https://picsum.photos/id/82/200/300)"
+				></div>
+				</a>
+				<a class="post type-2" href="">
+				<div class="info-box">
+					<div class="top">
+					<div class="tag">北極</div>
+					<p class="type">成就</p>
+					</div>
+					<div class="name">
+					在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
+					</div>
+					<div class="bottom">
+					<div class="time">
+						<span class="icon-clock"></span>
+						<p>4 min 閱讀</p>
+					</div>
+					<div class="number">00.00.0000</div>
+					</div>
+				</div>
+				<div
+					class="thumbnail lazy"
+					data-bg="url(https://picsum.photos/id/83/200/300)"
+				></div>
+				</a>
+				<a class="post type-2" href="">
+				<div class="info-box">
+					<div class="top">
+					<div class="tag">北極</div>
+					<p class="type">成就</p>
+					</div>
+					<div class="name">
+					在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
+					</div>
+					<div class="bottom">
+					<div class="time">
+						<span class="icon-clock"></span>
+						<p>4 min 閱讀</p>
+					</div>
+					<div class="number">00.00.0000</div>
+					</div>
+				</div>
+				<div
+					class="thumbnail lazy"
+					data-bg="url(https://picsum.photos/id/84/200/300)"
+				></div>
+				</a>
+			</div>
+			</div>
+		</div>
+		</section>
 	
 {% endblock %}
