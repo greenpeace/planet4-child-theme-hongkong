@@ -43,6 +43,13 @@ function gpea_register_main_options_metabox() {
 		'type'    => 'file',
 	) );
 
+	$main_options->add_field( array(
+		'name'    => esc_html__( 'Description text for generic footer', 'gpea_theme' ),
+		'desc'    => esc_html__( 'Description text for generic footer', 'gpea_theme' ),
+		'id'      => 'gpea_decription_generic_footer_text',
+		'type'    => 'text',
+	) );
+
 
 }
 add_action( 'cmb2_admin_init', 'gpea_register_main_options_metabox' );

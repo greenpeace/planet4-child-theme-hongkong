@@ -3,40 +3,27 @@
 	<div class="ct-container">
 	    <div class="content">
 		<div class="mobile-box">
-		    <a href="">
+		    <a href="{{ home_url }}">
 			<span class="icon-search"></span>
 		    </a>
 		</div>
 		<div class="left-box">
-		    <a href="" class="logo" aria-label="Search">
+		    <a href="{{ home_url }}" class="logo" aria-label="Search">
 			<span class="icon-greenpeace"></span>
 		    </a>
-		    <div class="dropdown">
-			<button>
-			    <p>HK</p>
-			    <span class="icon-down-arrow"></span>
-			</button>
-			<div class="dropdown-menu">
-			    <a class="dropdown-item" href="#">HK</a>
-			    <a class="dropdown-item" href="#">TW</a>
-			    <a class="dropdown-item" href="#">SK</a>
-			</div>
-		    </div>
+		    {% include 'countries.twig' %}
 		</div>
 		<div class="center-box">
 		    <ul class="menu">
-			<li class="item">
-			    <a href="">
-				<span class="icon-globe"></span>
-				<p>最新消息</p>
-			    </a>
-			</li>
-			<li class="item">
-			    <a href="">
-				<span class="icon-people"></span>
-				<p>推動改變</p>
-			    </a>
-			</li>
+			{% for key,item in navbar_menu.get_items %}
+			    <li class="item" class="{{ item == item.current ? 'active' : '' }}">
+				<a href="{{ item.get_link }}">
+				    <!-- TODO add icon-globe or icon-people under menu CSS classes -->
+				    <span class="{{ item.class }}"></span>
+				    <p>{{ item.title }}</p>
+				</a>
+			    </li>
+			{% endfor %}
 		    </ul>
 		</div>
 		<div class="right-box">
