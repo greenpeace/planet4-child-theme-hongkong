@@ -52,7 +52,7 @@ const assets = () => {
 }
 
 const fonts = () => {
-  return gulp.src("static/fonts/*.*")
+  return gulp.src("static/fonts/**/*")
   .pipe(gulp.dest("static/css/fonts/"))
 }
 
@@ -81,4 +81,5 @@ const watch = () => {
 }
 
 exports.build = gulp.series(clean, gulp.parallel(scss(true), js(true)), assets, fonts, cleanfonts, cleanjs, cleancss)
+exports.sass = gulp.series(clean, gulp.parallel(scss(true)), assets, fonts, cleanfonts, cleanjs, cleancss)
 exports.default = gulp.series(gulp.parallel(scss(true), js(true)), watch)
