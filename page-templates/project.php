@@ -57,7 +57,7 @@ $categories = array_filter( $categories , function( $cat ) use ( $issues ) {
     return $cat->category_parent === $issues;
 });
 $categories = array_reduce( $categories, function( $acc, $cat ) {
-    return $acc . 'is-' . ( $cat->slug ) . ' ';
+    return $acc . ( $cat->slug ) . ' ';
 }, '');
 
 if ( has_post_thumbnail( $post->ID ) ) {
@@ -78,5 +78,8 @@ $context['background_image']            = wp_get_attachment_url( get_post_meta( 
 $context['custom_body_classes']         = $categories;
 $context['project_percentage'] 			= $page_meta_data['p4-gpea_project_percentage'][0] ?? 0;
 $context['stroke_dashoffset']         	= $context['project_percentage'] ? 697.433*((100-$context['project_percentage'])/100) : 0;
+$context['start_date'] 					= $page_meta_data['p4-gpea_project_start_date'][0] ?? '';
+$context['localization'] 			= $page_meta_data['p4-gpea_project_localization'][0] ?? 0;
+
 
 Timber::render( [ 'project.twig' ], $context );

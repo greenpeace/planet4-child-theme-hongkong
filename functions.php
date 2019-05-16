@@ -153,12 +153,30 @@ function register_sidebar_metabox_child() {
 		'id'           => 'p4-gpea-project-box',
 		'title'        => 'Information about current project',
 		'object_types' => array( 'page' ), // post type
-		// 'show_on'      => array( 'key' => 'page-template', 'value' => 'project.php' ),
+		'show_on'      => array( 'key' => 'page-template', 'value' => 'page-templates/project.php' ),
 		'context'      => 'normal', //  'normal', 'advanced', or 'side'
 		'priority'     => 'high',  //  'high', 'core', 'default' or 'low'
 		'show_names'   => true, // Show field names on the left
 	) );
 
+	$cmb_project->add_field( array(
+		'name'             => esc_html__( 'Start date', 'cmb2' ),
+		'desc'             => esc_html__( 'The date the project started (textual)', 'cmb2' ),
+		'id'               => 'p4-gpea_project_start_date',
+		'type'             => 'text',		
+		// 'sanitization_cb' => 'intval',
+		// 'escape_cb'       => 'intval',
+	) );
+
+	$cmb_project->add_field( array(
+		'name'             => esc_html__( 'Zone interested', 'cmb2' ),
+		'desc'             => esc_html__( 'Country, city or place involved by the project', 'cmb2' ),
+		'id'               => 'p4-gpea_project_localization',
+		'type'             => 'text',		
+		// 'sanitization_cb' => 'intval',
+		// 'escape_cb'       => 'intval',
+	) );
+	
 	$cmb_project->add_field( array(
 		'name'             => esc_html__( 'Project percentage', 'cmb2' ),
 		'desc'             => esc_html__( 'Percentage of completition of the project', 'cmb2' ),
@@ -171,6 +189,27 @@ function register_sidebar_metabox_child() {
 		// 'sanitization_cb' => 'intval',
 		// 'escape_cb'       => 'intval',
 	) );
+
+
+	// add post related meta fields
+
+	$cmb_project = new_cmb2_box( array(
+		'id'           => 'p4-gpea-post-box',
+		'title'        => 'Information about current post',
+		'object_types' => array( 'post' ), // post type		
+		'context'      => 'normal', //  'normal', 'advanced', or 'side'
+		'priority'     => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names'   => true, // Show field names on the left
+	) );
+
+	$cmb_project->add_field( array(
+		'name'             => esc_html__( 'Reading time', 'cmb2' ),
+		'desc'             => esc_html__( 'Specify the time extimated to read the article (i.e. 4 min)', 'cmb2' ),
+		'id'               => 'p4-gpea_post_reading_time',
+		'type'             => 'text',		
+		// 'sanitization_cb' => 'intval',
+		// 'escape_cb'       => 'intval',
+	) );	
 
 }
 

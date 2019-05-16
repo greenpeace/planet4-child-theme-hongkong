@@ -47,7 +47,7 @@ $categories = array_filter( $categories , function( $cat ) use ( $issues ) {
     return $cat->category_parent === $issues;
 });
 $categories = array_reduce( $categories, function( $acc, $cat ) {
-    return $acc . 'is-' . ( $cat->slug ) . ' ';
+    return $acc . ( $cat->slug ) . ' ';
 }, '');
 
 if ( has_post_thumbnail( $post->ID ) ) {
