@@ -40,6 +40,16 @@ if ( is_array( $page_tags ) && $page_tags ) {
 	$context['campaigns'] = $tags;
 }
 
+$issues = get_category_by_slug( 'issues' );
+$issues = $issues->term_id;
+$categories = get_the_category( $post->ID );
+$categories = array_filter( $categories , function( $cat ) use ( $issues ) {
+    return $cat->category_parent === $issues;
+});
+$categories = array_reduce( $categories, function( $acc, $cat ) {
+    return $acc . 'is-' . ( $cat->slug ) . ' ';
+}, '');
+
 if ( has_post_thumbnail( $post->ID ) ) {
     $img_id = get_post_thumbnail_id( $post->ID );
     $img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
@@ -54,6 +64,6 @@ $context['header_button_title']         = $page_meta_data['p4_button_title'][0] 
 $context['header_button_link']          = $page_meta_data['p4_button_link'][0] ?? '';
 // $context['header_button_link_checkbox'] = $page_meta_data['p4_button_link_checkbox'];
 $context['background_image']            = wp_get_attachment_url( get_post_meta( get_the_ID(), 'background_image_id', 1 ) );
-$context['custom_body_classes']         = 'white-bg';
+$context['custom_body_classes']         = $categories;
 
 Timber::render( [ 'main-issue.twig' ], $context );
