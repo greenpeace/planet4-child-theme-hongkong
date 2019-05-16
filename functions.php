@@ -126,10 +126,10 @@ function register_sidebar_metabox_child() {
 	
 	// funzione per recuperare posts e usare in backend con cmb2
 	// da ottimizzare in secondo momento
-	function generate_post_select($post_type) {
+	function generate_post_select($post_type,$post_attribute) {
 		$post_type_object = get_post_type_object($post_type);
 		$label = $post_type_object->label;
-		$posts = get_posts(array('post_type'=> $post_type, 'post_status'=> 'publish', 'suppress_filters' => false, 'posts_per_page'=>-1,'tax_query'=>array(array('taxonomy' => 'p4_post_attribute','field' => 'slug', 'terms' => 'project'))));
+		$posts = get_posts(array('post_type'=> $post_type, 'post_status'=> 'publish', 'suppress_filters' => false, 'posts_per_page'=>-1,'tax_query'=>array(array('taxonomy' => 'p4_post_attribute','field' => 'slug', 'terms' => $post_attribute))));
 		$output = array();        
 		foreach ($posts as $post) {
 			$postid = $post->ID;
@@ -144,7 +144,7 @@ function register_sidebar_metabox_child() {
 		'id'               => $prefix . 'select_project_related',
 		'type'             => 'select',
 		'show_option_none' => true,
-		'options'          => generate_post_select('post')
+		'options'          => generate_post_select('post','project')
 	) );
 
 	// add project related meta fields (for example percentage of project)
@@ -188,12 +188,55 @@ function register_sidebar_metabox_child() {
 		),
 		// 'sanitization_cb' => 'intval',
 		// 'escape_cb'       => 'intval',
+	) );	
+
+	// add Tip extra field
+
+	$cmb_tip = new_cmb2_box( array(
+		'id'           => 'p4-gpea-tip-box',
+		'title'        => 'Tip card',
+		'object_types' => array( 'post' ), // post type		
+		'context'      => 'normal', //  'normal', 'advanced', or 'side'
+		'priority'     => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names'   => true, // Show field names on the left
+		'show_on' => array( 
+			'key' => 'taxonomy', 
+			'value' => array( 
+				'p4_post_attribute' => array( 'tip' ) 
+			) 
+		),
 	) );
 
+	$cmb_tip->add_field( array(
+		'name'             => esc_html__( 'Frequency pledge', 'cmb2' ),
+		'desc'             => esc_html__( 'Will be displayed in the tip card, in the top', 'cmb2' ),
+		'id'               => 'p4-gpea_tip_frequency',
+		'type'             => 'text',		
+		// 'sanitization_cb' => 'intval',
+		// 'escape_cb'       => 'intval',
+	) );
+
+	// $cmb_tip->add_field( array(
+	// 	'name'             => esc_html__( 'Tip icon', 'cmb2' ),
+	// 	'desc'             => esc_html__( 'Icon/image shown in the card', 'cmb2' ),
+	// 	'id'               => 'p4-gpea_tip_icon',
+	// 	'type'             => 'file',
+	// 	// Optional.
+	// 	'options'		   => [
+	// 							'url' => false,
+	// 						  ],
+	// 	'text'  	       => [
+	// 							'add_upload_file_text' => __( 'Add Tip Image', 'planet4-master-theme-backend' ),
+	// 						  ],
+	// 	'query_args'	   => [
+	// 							'type' => 'image',
+	// 							],
+	// 	'preview_size' => 'small',
+	// ) );
 
 	// add post related meta fields
 
-	$cmb_project = new_cmb2_box( array(
+	$cmb_post = new_cmb2_box( array(
 		'id'           => 'p4-gpea-post-box',
 		'title'        => 'Information about current post',
 		'object_types' => array( 'post' ), // post type		
@@ -202,7 +245,7 @@ function register_sidebar_metabox_child() {
 		'show_names'   => true, // Show field names on the left
 	) );
 
-	$cmb_project->add_field( array(
+	$cmb_post->add_field( array(
 		'name'             => esc_html__( 'Reading time', 'cmb2' ),
 		'desc'             => esc_html__( 'Specify the time extimated to read the article (i.e. 4 min)', 'cmb2' ),
 		'id'               => 'p4-gpea_post_reading_time',
