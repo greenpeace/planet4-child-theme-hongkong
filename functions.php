@@ -216,23 +216,23 @@ function register_sidebar_metabox_child() {
 		// 'escape_cb'       => 'intval',
 	) );
 
-	// $cmb_tip->add_field( array(
-	// 	'name'             => esc_html__( 'Tip icon', 'cmb2' ),
-	// 	'desc'             => esc_html__( 'Icon/image shown in the card', 'cmb2' ),
-	// 	'id'               => 'p4-gpea_tip_icon',
-	// 	'type'             => 'file',
-	// 	// Optional.
-	// 	'options'		   => [
-	// 							'url' => false,
-	// 						  ],
-	// 	'text'  	       => [
-	// 							'add_upload_file_text' => __( 'Add Tip Image', 'planet4-master-theme-backend' ),
-	// 						  ],
-	// 	'query_args'	   => [
-	// 							'type' => 'image',
-	// 							],
-	// 	'preview_size' => 'small',
-	// ) );
+	$cmb_tip->add_field( array(
+		'name'             => esc_html__( 'Tip icon', 'cmb2' ),
+		'desc'             => esc_html__( 'Icon/image shown in the card', 'cmb2' ),
+		'id'               => 'p4-gpea_tip_icon',
+		'type'             => 'file',
+		// Optional.
+		'options'		   => [
+								'url' => false,
+							  ],
+		'text'  	       => [
+								'add_upload_file_text' => __( 'Add Tip Image', 'planet4-master-theme-backend' ),
+							  ],
+		'query_args'	   => [
+								'type' => 'image',
+								],
+		'preview_size' => 'small',
+	) );
 
 	// add post related meta fields
 
