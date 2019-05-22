@@ -234,6 +234,41 @@ function register_sidebar_metabox_child() {
 		'preview_size' => 'small',
 	) );
 
+	// add Testimonial extra field
+
+	$cmb_team = new_cmb2_box( array(
+		'id'           => 'p4-gpea-team-box',
+		'title'        => 'Team extra info',
+		'object_types' => array( 'post' ), // post type		
+		'context'      => 'normal', //  'normal', 'advanced', or 'side'
+		'priority'     => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names'   => true, // Show field names on the left
+		'show_on' => array( 
+			'key' => 'taxonomy', 
+			'value' => array( 
+				'p4-page-type' => array( 'team' ) 
+			) 
+		),
+	) );
+
+	$cmb_team->add_field( array(
+		'name'             => esc_html__( 'Role', 'cmb2' ),
+		'desc'             => esc_html__( 'Role in the staff', 'cmb2' ),
+		'id'               => 'p4-gpea_team_role',
+		'type'             => 'text',
+		// 'sanitization_cb' => 'intval',
+		// 'escape_cb'       => 'intval',
+	) );
+
+	$cmb_team->add_field( array(
+		'name'             => esc_html__( 'Citation', 'cmb2' ),
+		'desc'             => esc_html__( 'Will be displayed in testimonials carousel', 'cmb2' ),
+		'id'               => 'p4-gpea_team_citation',
+		'type'             => 'textarea',
+		// 'sanitization_cb' => 'intval',
+		// 'escape_cb'       => 'intval',
+	) );	
+
 	// add post related meta fields
 
 	$cmb_post = new_cmb2_box( array(
