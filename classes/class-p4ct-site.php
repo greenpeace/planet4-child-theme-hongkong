@@ -168,11 +168,10 @@ class P4CT_Site {
 	 * @param string $hook Hook.
 	 */
 	public function enqueue_admin_assets( $hook ) {
-		// TODO check that this one still works if not hooked on 'init'
-		add_editor_style( get_stylesheet_directory_uri().'/admin/css/admin_editor_style.css' );
-
 		$css_creation = filectime(get_stylesheet_directory() . '/admin/css/admin_style.css');
+
 		wp_enqueue_style( 'admin-child-style', get_stylesheet_directory_uri() . '/admin/css/admin_style.css', [], $css_creation );
+		add_editor_style( get_stylesheet_directory_uri().'/admin/css/admin_editor_style.css' );
 	}
 
 	/**
