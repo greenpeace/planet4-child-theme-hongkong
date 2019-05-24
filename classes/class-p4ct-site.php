@@ -196,15 +196,15 @@ class P4CT_Site {
 	public function register_taxonomies() {
 
 		$labels = array(
-			'name'				=> _x( 'Special attributes', 'taxonomy general name', 'p4' ),
-			'singular_name'		=> _x( 'Special attribute', 'taxonomy singular name', 'p4' ),
-			'search_items'		=> __( 'Search attributes', 'p4' ),
-			'all_items'			=> __( 'All attributes', 'p4' ),
-			'edit_item'			=> __( 'Edit attribute', 'p4' ),
-			'update_item'		=> __( 'Update attribute', 'p4' ),
-			'add_new_item'		=> __( 'Add New attribute', 'p4' ),
-			'new_item_name'		=> __( 'New attribute Name', 'p4' ),
-			'menu_name'			=> __( 'Attribute', 'p4' ),
+			'name'				=> _x( 'Special attributes', 'taxonomy general name', 'planet4-child-theme-backend'),
+			'singular_name'		=> _x( 'Special attribute', 'taxonomy singular name', 'planet4-child-theme-backend' ),
+			'search_items'		=> __( 'Search attributes', 'planet4-child-theme-backend' ),
+			'all_items'			=> __( 'All attributes', 'planet4-child-theme-backend' ),
+			'edit_item'			=> __( 'Edit attribute', 'planet4-child-theme-backend' ),
+			'update_item'		=> __( 'Update attribute', 'planet4-child-theme-backend' ),
+			'add_new_item'		=> __( 'Add New attribute', 'planet4-child-theme-backend' ),
+			'new_item_name'		=> __( 'New attribute Name', 'planet4-child-theme-backend' ),
+			'menu_name'			=> __( 'Attribute', 'planet4-child-theme-backend' ),
 		);
 		$args = array(
 			'hierarchical'		=> true,
@@ -414,6 +414,41 @@ class P4CT_Site {
 			],
 			'preview_size' => 'small',
 		) );
+
+		// add Testimonial extra field
+
+	$cmb_team = new_cmb2_box( array(
+		'id'		   => 'p4-gpea-team-box',
+		'title'		   => 'Team extra info',
+		'object_types' => array( 'post' ), // post type
+		'context'	   => 'normal', //	'normal', 'advanced', or 'side'
+		'priority'	   => 'high',  //  'high', 'core', 'default' or 'low'
+		'show_names'   => true, // Show field names on the left
+		'show_on' => array(
+			'key' => 'taxonomy',
+			'value' => array(
+				'p4-page-type' => array( 'team' )
+			)
+		),
+	) );
+
+	$cmb_team->add_field( array(
+		'name'			   => esc_html__( 'Role', 'cmb2' ),
+		'desc'			   => esc_html__( 'Role in the staff', 'cmb2' ),
+		'id'			   => 'p4-gpea_team_role',
+		'type'			   => 'text',
+		// 'sanitization_cb' => 'intval',
+		// 'escape_cb'		 => 'intval',
+	) );
+
+	$cmb_team->add_field( array(
+		'name'			   => esc_html__( 'Citation', 'cmb2' ),
+		'desc'			   => esc_html__( 'Will be displayed in testimonials carousel', 'cmb2' ),
+		'id'			   => 'p4-gpea_team_citation',
+		'type'			   => 'textarea',
+		// 'sanitization_cb' => 'intval',
+		// 'escape_cb'		 => 'intval',
+	) );
 
 		// add post related meta fields
 
