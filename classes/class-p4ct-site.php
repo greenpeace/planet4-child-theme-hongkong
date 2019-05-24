@@ -272,6 +272,44 @@ class P4CT_Site {
 		return $display;
 	}
 
+	/**
+	 * Fetches posts to use with cmb2
+	 * TODO optimize
+	 *
+	 * @param bool $display
+	 * @param array $metabox
+	 * @return bool display metabox
+	 */
+	private function generate_post_select( $post_type, $post_attribute ) {
+		$post_type_object = get_post_type_object( $post_type );
+		$label = $post_type_object->label;
+		$posts = get_posts(
+			array(
+				'post_type'		   => $post_type,
+				'post_status'	   => 'publish',
+				'suppress_filters' => false,
+				'posts_per_page'   => -1,
+				'tax_query'		   => array(
+					array(
+						'taxonomy' => 'p4_post_attribute',
+						'field'	   => 'slug',
+						'terms'	   => $post_attribute,
+					)
+				)
+			)
+		);
+		$output = array();
+		foreach ($posts as $post) {
+			$postid = $post->ID;
+			$output[$postid] = $post->post_title;
+		}
+		return $output;
+	}
+
+	/**
+	 * Registers some metaboxes.
+	 * TODO refactor/separate concerns, maybe move to own class?
+	 */
 	public function register_sidebar_metabox_child() {
 
 		$prefix = 'p4_';
@@ -288,46 +326,18 @@ class P4CT_Site {
 				//	)
 				// ),
 				'context'		=> 'side',
-				'priority'		=> 'low'
+				'priority'		=> 'low',
 			]
 		);
 
-		// funzione per recuperare posts e usare in backend con cmb2
-		// da ottimizzare in secondo momento
-		function generate_post_select($post_type,$post_attribute) {
-			$post_type_object = get_post_type_object($post_type);
-			$label = $post_type_object->label;
-			$posts = get_posts(
-				array(
-					'post_type'		   => $post_type,
-					'post_status'	   => 'publish',
-					'suppress_filters' => false,
-					'posts_per_page'   => -1,
-					'tax_query'		   => array(
-						array(
-							'taxonomy' => 'p4_post_attribute',
-							'field'	   => 'slug',
-							'terms'	   => $post_attribute
-						)
-					)
-				)
-			);
-			$output = array();
-			foreach ($posts as $post) {
-				$postid = $post->ID;
-				$output[$postid] = $post->post_title;
-			}
-			return $output;
-		}
-
-			$p4_sidebar->add_field( array(
-				'name'			   => esc_html__( 'Project related', 'cmb2' ),
-				'desc'			   => esc_html__( 'Select a project connected to this post (optional)', 'cmb2' ),
-				'id'			   => $prefix . 'select_project_related',
-				'type'			   => 'select',
-				'show_option_none' => true,
-				'options'		   => generate_post_select('post','project')
-			) );
+		$p4_sidebar->add_field( array(
+			'name'			   => esc_html__( 'Project related', 'cmb2' ),
+			'desc'			   => esc_html__( 'Select a project connected to this post (optional)', 'cmb2' ),
+			'id'			   => $prefix . 'select_project_related',
+			'type'			   => 'select',
+			'show_option_none' => true,
+			'options'		   => $this->generate_post_select( 'post', 'project' ),
+		) );
 
 		// add project related meta fields (for example percentage of project)
 
@@ -385,7 +395,7 @@ class P4CT_Site {
 				'key' => 'taxonomy',
 				'value' => array(
 					'p4_post_attribute' => array( 'tip' )
-				)
+				),
 			),
 		) );
 
@@ -429,7 +439,7 @@ class P4CT_Site {
 			'key' => 'taxonomy',
 			'value' => array(
 				'p4-page-type' => array( 'team' )
-			)
+			),
 		),
 	) );
 
