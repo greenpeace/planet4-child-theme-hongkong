@@ -21,5 +21,3 @@ $services = [
 
 new P4CT_Site( $services );
 
-// TODO move this one to own class
-require_once( __DIR__ . '/includes/gpea-settings.php' );
