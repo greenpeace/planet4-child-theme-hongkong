@@ -1,0 +1,7 @@
+/344_gp_frontend
+/node_modules
+/vendor
+/classes/backups
+.tern-port
+.dir-locals.el
+.ac-php-conf.json

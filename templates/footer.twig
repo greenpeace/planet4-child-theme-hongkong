@@ -1,0 +1,54 @@
+<footer>
+    <div class="ct-container">
+	<div class="content">
+            <div class="first-box">
+		<div class="socials">
+		    <p class="text small semi-bold">跟着我们</p>
+		    {% for item in footer_social_menu %}
+			<a href="{{ item.url }}" aria-label="{{ item.title|lower }}"><span class="icon-{{ item.title|lower }}"></span></a>
+		    {% endfor %}
+		</div>
+		<span class="icon-greenpeace"></span>
+		<p class="description text tiny semi-bold">{{ generic_footer_text }}</p>
+		<div class="links text bold">
+		    <a href="">新闻稿和媒体</a>
+		    <a href="">我的喜好</a>
+		</div>
+            </div>
+            <div class="box-group">
+		<div class="box">
+		    <p class="title text huge light">
+			我們的承諾
+		    </p>
+		    <ul class="text bold">
+			<li><a href="">現行項目</a></li>
+			<li><a href="">環保議題</a></li>
+		    </ul>
+		</div>
+		<div class="box">
+		    <p class="title text huge light">
+			關於綠色和平
+		    </p>
+		    <ul class="text bold">
+			{% for item in footer_primary_menu %}
+			    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+			{% endfor %}
+		    </ul>
+		</div>
+            </div>
+	</div>
+    </div>
+    <div class="bottom-bar">
+	<div class="ct-container">
+            <div class="mobile-links">
+		<a href="">新闻稿和媒体</a>
+		<a href="">我的喜好</a>
+            </div>
+            <div class="bottom-content">
+		{% for item in footer_secondary_menu %}
+		    <a href="{{ item.url }}">{{ item.title }}</a>
+		{% endfor %}
+            </div>
+	</div>
+    </div>
+</footer>

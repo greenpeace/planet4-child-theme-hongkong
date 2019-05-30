@@ -1,13 +1,15 @@
 <?php
-
 /**
  * Additional code for the child theme goes in here.
+ *
+ * @package P4CT
  */
 
-add_action( 'wp_enqueue_scripts', 'enqueue_child_styles', 99);
+require_once( __DIR__ . '/classes/class-p4ct-site.php' );
 
-function enqueue_child_styles() {
-	$css_creation = filectime(get_stylesheet_directory() . '/style.css');
+$services = [
+	'P4CT_Metabox_Register',
+];
 
-	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', [], $css_creation );
-}
+new P4CT_Site( $services );
+

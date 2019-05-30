@@ -1,0 +1,42 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <section class="section-hero-top has-hero-submenu has-hero-description" style="background-image: url({{ background_image }})">
+	<div class="section-hero-shade"></div>
+	<div class="top-bar-wrapper-white">
+            <div class="ct-container">
+		<div class="top-bar">
+		    <div class="top-bar-title">
+			<a href="" class="back-button">
+			    <span class="icon-close"></span>
+			</a>
+			TODO 年度小總結
+		    </div>
+		    <a href="" class="button green">TODO 關注</a>
+		</div>
+            </div>
+	</div>
+	<div class="hero-submenu">
+            <div class="hero-submenu-hidebar">
+		<ul class="hero-submenu-container ct-container">
+		    <li class="hero-submenu-item"><a href="#">TODO 我們的任務</a></li>
+		    <li class="hero-submenu-item current">
+			<a href="#">我們如何行事</a>
+		    </li>
+		    <li class="hero-submenu-item"><a href="#">我們的報告</a></li>
+		    <li class="hero-submenu-item"><a href="#">我們的報告</a></li>
+		</ul>
+            </div>
+	</div>
+	<div class="ct-container anchor-bottom">
+            <div class="hero-description">
+		<h1>{{ header_title }}</h1>
+		<p>{{ header_subtitle }}</p>
+		<div class="hero-description-link">
+		    <a href="{{ header_button_link }}">{{ header_button_title }}</a>
+		</div>
+            </div>
+	</div>
+    </section>
+    {{ post.content|raw }}
+{% endblock %}
