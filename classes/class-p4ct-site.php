@@ -80,19 +80,20 @@ class P4CT_Site {
 	/**
 	 * Filters the oEmbed process to run the responsive_embed() function
 	 */
-	public function add_oembed_filter(	) {
-		add_filter('embed_oembed_html', [ $this, 'responsive_embed' ], 10, 3);
+	public function add_oembed_filter() {
+		add_filter( 'embed_oembed_html', [ $this, 'responsive_embed' ], 10, 3 );
 	}
 
 	/**
-	 * Adds a responsive embed wrapper around oEmbed content
-	 * @param  string $html The oEmbed markup
-	 * @param  string $url	The URL being embedded
-	 * @param  array  $attr An array of attributes
-	 * @return string		Updated embed markup
+	 * Adds a responsive embed wrapper around oEmbed content.
+	 *
+	 * @param  string $html The oEmbed markup.
+	 * @param  string $url  The URL being embedded.
+	 * @param  array  $attr An array of attributes.
+	 * @return string       Updated embed markup.
 	 */
-	public function responsive_embed($html, $url, $attr) {
-		return $html!=='' ? '<div class="embed-container">'.$html.'</div>' : '';
+	public function responsive_embed( $html, $url, $attr ) {
+		return '' !== $html ? '<div class="embed-container">' . $html . '</div>' : '';
 	}
 
 	/**
@@ -168,10 +169,10 @@ class P4CT_Site {
 	 * @param string $hook Hook.
 	 */
 	public function enqueue_admin_assets( $hook ) {
-		$css_creation = filectime(get_stylesheet_directory() . '/admin/css/admin_style.css');
+		$css_creation = filectime( get_stylesheet_directory() . '/admin/css/admin_style.css' );
 
 		wp_enqueue_style( 'admin-child-style', get_stylesheet_directory_uri() . '/admin/css/admin_style.css', [], $css_creation );
-		add_editor_style( get_stylesheet_directory_uri().'/admin/css/admin_editor_style.css' );
+		add_editor_style( get_stylesheet_directory_uri() . '/admin/css/admin_editor_style.css' );
 	}
 
 	/**
@@ -180,8 +181,8 @@ class P4CT_Site {
 	 * @param string $hook Hook.
 	 */
 	public function enqueue_public_assets( $hook ) {
-		$css_creation = filectime(get_stylesheet_directory() . '/static/css/style.css');
-		$js_creation = filectime(get_stylesheet_directory() . '/static/js/script.js');
+		$css_creation = filectime( get_stylesheet_directory() . '/static/css/style.css' );
+		$js_creation = filectime( get_stylesheet_directory() . '/static/js/script.js' );
 
 		wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/static/css/style.css', [], $css_creation );
 		wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js', array(), $js_creation, true );
@@ -193,23 +194,25 @@ class P4CT_Site {
 	public function register_taxonomies() {
 
 		$labels = array(
-			'name'				=> _x( 'Special attributes', 'taxonomy general name', 'planet4-child-theme-backend'),
-			'singular_name'		=> _x( 'Special attribute', 'taxonomy singular name', 'planet4-child-theme-backend' ),
-			'search_items'		=> __( 'Search attributes', 'planet4-child-theme-backend' ),
-			'all_items'			=> __( 'All attributes', 'planet4-child-theme-backend' ),
-			'edit_item'			=> __( 'Edit attribute', 'planet4-child-theme-backend' ),
-			'update_item'		=> __( 'Update attribute', 'planet4-child-theme-backend' ),
-			'add_new_item'		=> __( 'Add New attribute', 'planet4-child-theme-backend' ),
-			'new_item_name'		=> __( 'New attribute Name', 'planet4-child-theme-backend' ),
-			'menu_name'			=> __( 'Attribute', 'planet4-child-theme-backend' ),
+			'name'              => _x( 'Special attributes', 'taxonomy general name', 'planet4-child-theme-backend' ),
+			'singular_name'     => _x( 'Special attribute', 'taxonomy singular name', 'planet4-child-theme-backend' ),
+			'search_items'      => __( 'Search attributes', 'planet4-child-theme-backend' ),
+			'all_items'         => __( 'All attributes', 'planet4-child-theme-backend' ),
+			'edit_item'         => __( 'Edit attribute', 'planet4-child-theme-backend' ),
+			'update_item'       => __( 'Update attribute', 'planet4-child-theme-backend' ),
+			'add_new_item'      => __( 'Add New attribute', 'planet4-child-theme-backend' ),
+			'new_item_name'     => __( 'New attribute Name', 'planet4-child-theme-backend' ),
+			'menu_name'         => __( 'Attribute', 'planet4-child-theme-backend' ),
 		);
 		$args = array(
-			'hierarchical'		=> true,
-			'labels'			=> $labels,
-			'show_ui'			=> true,
+			'hierarchical'      => true,
+			'labels'            => $labels,
+			'show_ui'           => true,
 			'show_admin_column' => true,
-			'query_var'			=> true,
-			'rewrite'			=> array( 'slug' => 'attribute' ),
+			'query_var'         => true,
+			'rewrite'           => array(
+				'slug' => 'attribute',
+			),
 		);
 		register_taxonomy( 'p4_post_attribute', array( 'post', 'page' ), $args );
 
@@ -226,7 +229,7 @@ class P4CT_Site {
 	/**
 	 * Auto generate excerpt for post.
 	 *
-	 * @param int	  $post_id Id of the saved post.
+	 * @param int     $post_id Id of the saved post.
 	 * @param WP_Post $post Post object.
 	 */
 	public function p4_auto_generate_excerpt( $post_id, $post ) {

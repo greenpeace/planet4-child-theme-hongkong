@@ -1,3 +1,5 @@
 /344_gp_frontend
 /node_modules
 .tern-port
+.dir-locals.el
+.ac-php-conf.json
