@@ -132,16 +132,25 @@ class P4CT_Metabox_Register {
 		$cmb_tip = new_cmb2_box( array(
 			'id'           => 'p4-gpea-tip-box',
 			'title'        => 'Tip card',
-			'object_types' => array( 'post' ), // post type
+			'object_types' => array( 'tips' ), // post type
 			'context'      => 'normal', //  'normal', 'advanced', or 'side'
 			'priority'     => 'high',  //  'high', 'core', 'default' or 'low'
 			'show_names'   => true, // Show field names on the left
-			'show_on' => array(
-				'key' => 'taxonomy',
-				'value' => array(
-					'p4_post_attribute' => array( 'tip' ),
-				),
-			),
+			// 'show_on' => array(
+			// 	'key' => 'taxonomy',
+			// 	'value' => array(
+			// 		'p4_post_attribute' => array( 'tip' ),
+			// 	),
+			// ),
+		) );
+
+		$cmb_tip->add_field( array(
+			'name'             => esc_html__( 'Ask users to engage?', 'cmb2' ),
+			'desc'             => esc_html__( 'If checked, an action for users will be encouraged', 'cmb2' ),
+			'id'               => 'p4-gpea_tip_engage',
+			'type'             => 'checkbox',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
 		) );
 
 		$cmb_tip->add_field( array(
@@ -170,6 +179,19 @@ class P4CT_Metabox_Register {
 			],
 			'preview_size' => 'small',
 		) );
+
+		$cmb_tip->add_field( array(
+			'name'             => esc_html__( 'Number of commitments', 'cmb2' ),
+			'desc'             => esc_html__( 'Number of users that clicked on this tip (readonly)', 'cmb2' ),
+			'id'               => 'p4-gpea_tip_commitments',
+			'type'             => 'text',
+			'save_field'  => false, // Otherwise CMB2 will end up removing the value.
+			'attributes'  => array(
+				'readonly' => 'readonly',
+				'disabled' => 'disabled',
+			),
+		) );
+
 	}
 
 	/**
