@@ -1,12 +1,12 @@
 {% extends "base.twig" %}
 
-{% block content %}	
+{% block content %}
 
 	<article id="post-{{ post.ID }}">
 
 		<section
 			class="section-hero-top"
-			style="background-image: url('{{ background_image }}')"
+			style="background-image: url('{{ background_image ? background_image : post.thumbnail.src }}')"
 		>
 			<div class="section-hero-shade"></div>
 			<div class="ct-container">
@@ -20,12 +20,13 @@
 			</div>
 		</section>
 
-		<section class="section-post-content generic-content">
+		<section class="section-post-content generic-content ct-container">
 			<div class="title-box">
 				<div class="top">
 					<div class="left">
 						<p>專題報導</p>
-						<p>森林</p>
+						<!-- TODO: agganciare issue name -->
+						<p class="issue forests">森林</p>
 					</div>
 					<div class="right">
 						<span class="icon-clock"></span>
@@ -33,7 +34,7 @@
 						<p><time class="single-post-time" pubdate>{{ post.post_date|date }}</time></p>
 					</div>
 				</div>
-			
+
 				<h1>{{ post.title|raw }}</h1>
 				<div class="bottom">
 					<p>作者：{{ post.author.name }}</p>
@@ -43,7 +44,7 @@
 			{{ post.content|e('wp_kses_post')|raw }}
 
 
-			<div class="card-box full-width green">
+			<div class="has-card full-width green">
 				<div class="ct-container">
 					<p class="title">是時候採取行動了</p>
 					<div
@@ -62,11 +63,11 @@
 						</div>
 					</div>
 				</div>
-			</div>			
+			</div>
 
 		</section>
 
-					
+
 	</article>
 
 	<section class="section-updates second-color">
@@ -182,5 +183,5 @@
 			</div>
 		</div>
 		</section>
-	
+
 {% endblock %}
