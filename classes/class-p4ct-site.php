@@ -63,6 +63,7 @@ class P4CT_Site {
 		add_filter( 'timber_context', [ $this, 'add_to_context' ] );
 		add_filter( 'get_twig', [ $this, 'add_to_twig' ] );
 		add_action( 'init', [ $this, 'register_taxonomies' ], 2 );
+		add_action( 'wp_print_styles', [ $this, 'dequeue_parent_assets' ] );
 		// add_action( 'pre_get_posts', [ $this, 'add_search_options' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_assets' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_public_assets' ] );
