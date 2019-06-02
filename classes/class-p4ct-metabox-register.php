@@ -71,7 +71,7 @@ class P4CT_Metabox_Register {
 			'id'               => $this->prefix . 'select_project_related',
 			'type'             => 'select',
 			'show_option_none' => true,
-			'options'          => $this->generate_post_select( 'post', 'project' ),
+			'options'          => $this->generate_post_select( 'page', null, 'page-templates/project.php' ),
 		) );
 
 	}
@@ -366,26 +366,37 @@ class P4CT_Metabox_Register {
 	 *
 	 * @param string $post_type
 	 * @param string $post_attribute
+	 * @param string $page_template
 	 * @return bool  display metabox
 	 */
-	private function generate_post_select( $post_type, $post_attribute ) {
+	private function generate_post_select( $post_type, $post_attribute, $page_template ) {
 		$post_type_object = get_post_type_object( $post_type );
 		$label = $post_type_object->label;
-		$posts = get_posts(
-			array(
-				'post_type'        => $post_type,
-				'post_status'      => 'publish',
-				'suppress_filters' => false,
-				'posts_per_page'   => -1,
-				'tax_query'        => array(
-					array(
-						'taxonomy' => 'p4_post_attribute',
-						'field'    => 'slug',
-						'terms'    => $post_attribute,
-					),
-				),
-			)
+
+		$options = array(
+			'post_type'        => $post_type,
+			'post_status'      => 'publish',
+			'suppress_filters' => false,
+			'posts_per_page'   => -1,
 		);
+
+		if ( $post_attribute ) {
+			$options['tax_query'] = array(
+				array(
+					'taxonomy' => 'p4_post_attribute',
+					'field'    => 'slug',
+					'terms'    => $post_attribute,
+				),
+			);
+		}
+
+		if ( $page_template ) {
+			$options['meta_key'] = '_wp_page_template';
+			$options['meta_value']  = $page_template;
+		}
+
+		$posts = get_posts( $options );
+
 		$output = array();
 		foreach ( $posts as $post ) {
 			$postid = $post->ID;
