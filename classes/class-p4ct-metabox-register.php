@@ -72,7 +72,7 @@ class P4CT_Metabox_Register {
 				'id'               => $this->prefix . 'select_project_related',
 				'type'             => 'select',
 				'show_option_none' => true,
-				'options'          => $this->generate_post_select( 'post', 'project' ),
+				'options'          => $this->generate_post_select( 'page', null, 'page-templates/project.php' ),
 			)
 		);
 
@@ -146,16 +146,27 @@ class P4CT_Metabox_Register {
 			array(
 				'id'           => 'p4-gpea-tip-box',
 				'title'        => 'Tip card',
-				'object_types' => array( 'post' ), // post type
+				'object_types' => array( 'tips' ), // post type
 			'context'      => 'normal', // 'normal', 'advanced', or 'side'
 			'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
 			'show_names'   => true, // Show field names on the left
-			'show_on' => array(
-				'key' => 'taxonomy',
-				'value' => array(
-					'p4_post_attribute' => array( 'tip' ),
-				),
-			 ),
+			// 'show_on' => array(
+			// 'key' => 'taxonomy',
+			// 'value' => array(
+			// 'p4_post_attribute' => array( 'tip' ),
+			// ),
+			// ),
+			)
+		);
+
+		$cmb_tip->add_field(
+			array(
+				'name'             => esc_html__( 'Ask users to engage?', 'cmb2' ),
+				'desc'             => esc_html__( 'If checked, an action for users will be encouraged', 'cmb2' ),
+				'id'               => 'p4-gpea_tip_engage',
+				'type'             => 'checkbox',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
 			)
 		);
 
@@ -189,6 +200,21 @@ class P4CT_Metabox_Register {
 				'preview_size' => 'small',
 			)
 		);
+
+		$cmb_tip->add_field(
+			array(
+				'name'             => esc_html__( 'Number of commitments', 'cmb2' ),
+				'desc'             => esc_html__( 'Number of users that clicked on this tip (readonly)', 'cmb2' ),
+				'id'               => 'p4-gpea_tip_commitments',
+				'type'             => 'text',
+				'save_field'  => false, // Otherwise CMB2 will end up removing the value.
+			'attributes'  => array(
+				'readonly' => 'readonly',
+				'disabled' => 'disabled',
+			 ),
+			)
+		);
+
 	}
 
 	/**
@@ -361,26 +387,37 @@ class P4CT_Metabox_Register {
 	 *
 	 * @param string $post_type
 	 * @param string $post_attribute
+	 * @param string $page_template
 	 * @return bool  display metabox
 	 */
-	private function generate_post_select( $post_type, $post_attribute ) {
+	private function generate_post_select( $post_type, $post_attribute, $page_template ) {
 		$post_type_object = get_post_type_object( $post_type );
 		$label = $post_type_object->label;
-		$posts = get_posts(
-			array(
-				'post_type'        => $post_type,
-				'post_status'      => 'publish',
-				'suppress_filters' => false,
-				'posts_per_page'   => -1,
-				'tax_query'        => array(
-					array(
-						'taxonomy' => 'p4_post_attribute',
-						'field'    => 'slug',
-						'terms'    => $post_attribute,
-					),
-				),
-			)
+
+		$options = array(
+			'post_type'        => $post_type,
+			'post_status'      => 'publish',
+			'suppress_filters' => false,
+			'posts_per_page'   => -1,
 		);
+
+		if ( $post_attribute ) {
+			$options['tax_query'] = array(
+				array(
+					'taxonomy' => 'p4_post_attribute',
+					'field'    => 'slug',
+					'terms'    => $post_attribute,
+				),
+			);
+		}
+
+		if ( $page_template ) {
+			$options['meta_key'] = '_wp_page_template';
+			$options['meta_value']  = $page_template;
+		}
+
+		$posts = get_posts( $options );
+
 		$output = array();
 		foreach ( $posts as $post ) {
 			$postid = $post->ID;

@@ -4,6 +4,7 @@
   "description": "GPEA",
   "scripts": {
     "start": "gulp",
+    "sass": "gulp sass",
     "build": "gulp build"
   },
   "author": "HaThaiHoang <jonlefcun@gmail.com>",
