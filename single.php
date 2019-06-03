@@ -45,12 +45,12 @@ $context['custom_body_classes'] = 'white-bg';
 // reading time and categories info!
 $context['reading_time']        = $page_meta_data['p4-gpea_post_reading_time'][0] ?? '';
 $post_categories     = get_the_terms( $post, 'category' );
+
+$context['post_categories'] = '';
 if ( $post_categories ) {
 	foreach ( $post_categories as $post_category ) {
 		$context['post_categories'] .= $post_category->slug . ' ';
 	}
-} else {
-	$context['post_categories'] = '';
 }
 
 $context['filter_url'] = add_query_arg(
