@@ -220,6 +220,55 @@ class P4CT_Site {
 	}
 
 	/**
+	 * Gpea_get_realated gets related posts.
+	 *
+	 * @param int  $exclude_post_id Id to be excluded, usually the current one.
+	 * @param text $limit limit of related posts to be retrieved, default 3.
+	 */
+	public function gpea_get_related( $exclude_post_id, $limit) {
+
+		$exclude_post_id = (int) ( $exclude_post_id ?? '' );
+		$limit           = (int) ( $limit ?? '3' );
+
+		// Get page categories.
+		$post_categories   = get_the_category();
+		$category_id_array = [];
+		foreach ( $post_categories as $category ) {
+			$category_id_array[] = $category->term_id;
+		}
+		// Get page/post tags.
+		$post_tags = get_the_tags();
+
+		$post_args = [
+			'orderby'          => 'date',
+			'post_status'      => 'publish',
+			'suppress_filters' => false,
+			'posts_per_page'   => $limit,
+		];
+
+		/* build other options, category and tags info + exclude post */
+		if ( $category_id_array ) {
+			$post_args['category__in'] = $category_id_array;
+		}
+		if ( $exclude_post_id ) {
+			$post_args['post__not_in'] = [ $exclude_post_id ];
+		}
+		/*if ( $post_tags ) {
+			$tag_id_array = [];
+			foreach ( $post_tags as $tag ) {
+				$tag_id_array[] = $tag->term_id;
+			}
+			$post_args['tag__in'] = $tag_id_array;
+		}*/
+
+		$templates          = [ 'tease-related-post.twig' ];
+		$pagetype_posts     = new \Timber\PostQuery( $post_args, 'P4_Post' );
+
+		return $pagetype_posts;
+
+	}
+
+	/**
 	 * Add custom options to the main WP_Query.
 	 *
 	 * @param WP_Query $wp The WP Query to customize.

@@ -53,6 +53,11 @@ if ( $post_categories ) {
 	}
 }
 
+/* get useful theme options */
+$options = get_option( 'gpea_options' );
+$context['latest_link'] = isset( $options['gpea_default_latest_link'] ) ? get_page_link($options['gpea_default_latest_link']) : site_url();
+
+
 $context['filter_url'] = add_query_arg(
 	[
 		's'                                       => ' ',
@@ -65,7 +70,9 @@ $context['filter_url'] = add_query_arg(
 
 // Build the shortcode for articles block.
 if ( 'yes' === $post->include_articles ) {
-	$post->articles = "[shortcake_articles exclude_post_id='" . $post->ID . "' /]";
+	// $post->articles = "[shortcake_articles exclude_post_id='" . $post->ID . "' /]"; !
+	$gpea_extra = new P4CT_Site();
+	$context['related_posts'] = $gpea_extra->gpea_get_related( $post->ID, 3 );
 }
 
 // Build the shortcode for take action boxout block
@@ -103,6 +110,8 @@ $context['post_comments_count'] = get_comments(
 );
 
 $context['post_tags'] = implode( ', ', $post->tags() );
+/* for main issue relation we use categories */
+$context['categories'] = implode( ', ', $post->categories() );
 
 if ( post_password_required( $post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );

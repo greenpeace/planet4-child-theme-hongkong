@@ -11,11 +11,11 @@
 			<div class="section-hero-shade"></div>
 			<div class="ct-container">
 				<div class="top-bar">
-					<a href="" class="back-button">
+					<a href="{{ latest_link }}" class="back-button">
 						<span class="icon-chevron-left"></span>
 						<p>返回上一頁</p>
 					</a>
-					<a href="" class="button light">按照主題</a>
+					<!-- <a href="" class="button light">按照主題</a> -->
 				</div>
 			</div>
 		</section>
@@ -48,118 +48,18 @@
 
 	</article>
 
-	<section class="section-updates second-color">
+
+	<section class="section-latest-news">
 		<div class="ct-container">
-			<div class="content">
-			<div class="first">
-				<h2>相關主題</h2>
-				<div class="tags">
-				<a href="" class="tag">污染</a>
-				<a href="" class="tag">塑膠</a>
-				<a href="" class="tag">動物</a>
-				<a href="" class="tag">空氣</a>
-				<a href="" class="tag">電子</a>
-				</div>
-			</div>
-			<a href="" class="second type-2">
-				<div class="left">
-				<div class="top-box">
-					<div class="tag">海洋</div>
-					<p class="type">新闻</p>
-				</div>
-				<div
-					class="thumbnail lazy"
-					data-bg="url(https://picsum.photos/id/81/200/300)"
-				></div>
-				<div class="info-box">
-					<div class="number">00.00.0000</div>
-					<div class="time">
-					<span class="icon-clock"></span>
-					<p>4 min 閱讀</p>
-					</div>
-				</div>
-				<div class="name text large bold">
-					三大年宵每日派膠超過30萬件 大多不能回收
-				</div>
-				<p class="ps text bold">了解綠色和平的歷史</p>
-				</div>
-				<div class="right">
-				<div
-					class="thumbnail lazy"
-					data-bg="url(https://picsum.photos/id/81/200/300)"
-				></div>
-				</div>
-			</a>
-			<div class="posts">
-				<a class="post type-2" href="">
-				<div class="info-box">
-					<div class="top">
-					<div class="tag">北極</div>
-					<p class="type">成就</p>
-					</div>
-					<div class="name">
-					在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
-					</div>
-					<div class="bottom">
-					<div class="time">
-						<span class="icon-clock"></span>
-						<p>4 min 閱讀</p>
-					</div>
-					<div class="number">00.00.0000</div>
-					</div>
-				</div>
-				<div
-					class="thumbnail lazy"
-					data-bg="url(https://picsum.photos/id/82/200/300)"
-				></div>
-				</a>
-				<a class="post type-2" href="">
-				<div class="info-box">
-					<div class="top">
-					<div class="tag">北極</div>
-					<p class="type">成就</p>
-					</div>
-					<div class="name">
-					在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
-					</div>
-					<div class="bottom">
-					<div class="time">
-						<span class="icon-clock"></span>
-						<p>4 min 閱讀</p>
-					</div>
-					<div class="number">00.00.0000</div>
-					</div>
-				</div>
-				<div
-					class="thumbnail lazy"
-					data-bg="url(https://picsum.photos/id/83/200/300)"
-				></div>
-				</a>
-				<a class="post type-2" href="">
-				<div class="info-box">
-					<div class="top">
-					<div class="tag">北極</div>
-					<p class="type">成就</p>
-					</div>
-					<div class="name">
-					在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
-					</div>
-					<div class="bottom">
-					<div class="time">
-						<span class="icon-clock"></span>
-						<p>4 min 閱讀</p>
-					</div>
-					<div class="number">00.00.0000</div>
-					</div>
-				</div>
-				<div
-					class="thumbnail lazy"
-					data-bg="url(https://picsum.photos/id/84/200/300)"
-				></div>
-				</a>
-			</div>
+			<h2>最新消息</h2>
+			<div class="list">
+				{% if ( related_posts ) %}
+					{% for related_post in related_posts %}
+						{% include "blocks/tease-related-post.twig" with {post:related_post} %}						
+					{% endfor %}
+				{% endif %}
 			</div>
 		</div>
-		</section>
+	</section>
 
 {% endblock %}

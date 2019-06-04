@@ -30,6 +30,8 @@ class P4CT_Metabox_Register {
 	private function hooks() {
 		add_action( 'cmb2_admin_init', [ $this, 'register_p4_meta_box' ] );
 		add_filter( 'cmb2_show_on', [ $this, 'be_taxonomy_show_on_filter' ], 10, 2 );
+		add_filter( 'cmb2_render_supportus_page_dropdown', [ $this, 'gpea_render_supportus_page_dropdown' ], 10, 2 );
+		add_filter( 'cmb2_render_latest_page_dropdown', [ $this, 'gpea_render_latest_page_dropdown' ], 10, 2 );
 	}
 
 	/**
@@ -88,13 +90,13 @@ class P4CT_Metabox_Register {
 				'id'           => 'p4-gpea-project-box',
 				'title'        => 'Information about current project',
 				'object_types' => array( 'page' ), // post type
-			'show_on'      => array(
-			'key' => 'page-template',
-			'value' => 'page-templates/project.php',
-			 ),
-			 'context'      => 'normal', // 'normal', 'advanced', or 'side'
-			 'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
-			 'show_names'   => true, // Show field names on the left
+				'show_on'      => array(
+					'key'          => 'page-template',
+					'value'        => 'page-templates/project.php',
+				),
+				'context'      => 'normal', // 'normal', 'advanced', or 'side'
+				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
+				'show_names'   => true, // Show field names on the left
 			)
 		);
 
@@ -147,15 +149,15 @@ class P4CT_Metabox_Register {
 				'id'           => 'p4-gpea-tip-box',
 				'title'        => 'Tip card',
 				'object_types' => array( 'tips' ), // post type
-			'context'      => 'normal', // 'normal', 'advanced', or 'side'
-			'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
-			'show_names'   => true, // Show field names on the left
-			// 'show_on' => array(
-			// 'key' => 'taxonomy',
-			// 'value' => array(
-			// 'p4_post_attribute' => array( 'tip' ),
-			// ),
-			// ),
+				'context'      => 'normal', // 'normal', 'advanced', or 'side'
+				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
+				'show_names'   => true, // Show field names on the left
+				// 'show_on' => array(
+				// 'key' => 'taxonomy',
+				// 'value' => array(
+				// 'p4_post_attribute' => array( 'tip' ),
+				// ),
+				// ),
 			)
 		);
 
@@ -208,10 +210,10 @@ class P4CT_Metabox_Register {
 				'id'               => 'p4-gpea_tip_commitments',
 				'type'             => 'text',
 				'save_field'  => false, // Otherwise CMB2 will end up removing the value.
-			'attributes'  => array(
-				'readonly' => 'readonly',
-				'disabled' => 'disabled',
-			 ),
+				'attributes'  => array(
+					'readonly' => 'readonly',
+					'disabled' => 'disabled',
+				),
 			)
 		);
 
@@ -255,8 +257,8 @@ class P4CT_Metabox_Register {
 				'title'        => 'Information about current post',
 				'object_types' => array( 'post' ),
 				'context'      => 'normal', // 'normal', 'advanced', or 'side'
-			'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
-			'show_names'   => true, // Show field names on the left
+				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
+				'show_names'   => true, // Show field names on the left
 			)
 		);
 
@@ -290,16 +292,16 @@ class P4CT_Metabox_Register {
 				 */
 
 				'option_key'      => 'gpea_options', // The option key and admin menu page slug.
-			// 'icon_url'        => 'dashicons-palmtree', // Menu icon. Only applicable if 'parent_slug' is left empty.
-			// 'menu_title'      => esc_html__( 'Options', 'cmb2' ), // Falls back to 'title' (above).
-			'parent_slug'     => 'options-general.php', // Make options page a submenu item of the themes menu.
-			// 'capability'      => 'manage_options', // Cap required to view options-page.
-			// 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
-			// 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
-			// 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
-			// 'save_button'     => esc_html__( 'Save Theme Options', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
-			// 'disable_settings_errors' => true, // On settings pages (not options-general.php sub-pages), allows disabling.
-			// 'message_cb'      => 'yourprefix_options_page_message_callback',
+				// 'icon_url'        => 'dashicons-palmtree', // Menu icon. Only applicable if 'parent_slug' is left empty.
+				// 'menu_title'      => esc_html__( 'Options', 'cmb2' ), // Falls back to 'title' (above).
+				'parent_slug'     => 'options-general.php', // Make options page a submenu item of the themes menu.
+				// 'capability'      => 'manage_options', // Cap required to view options-page.
+				// 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
+				// 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
+				// 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
+				// 'save_button'     => esc_html__( 'Save Theme Options', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
+				// 'disable_settings_errors' => true, // On settings pages (not options-general.php sub-pages), allows disabling.
+				// 'message_cb'      => 'yourprefix_options_page_message_callback',
 			)
 		);
 
@@ -322,6 +324,36 @@ class P4CT_Metabox_Register {
 				'desc'    => esc_html__( 'Description text for generic footer', 'gpea_theme' ),
 				'id'      => 'gpea_decription_generic_footer_text',
 				'type'    => 'text',
+			)
+		);
+
+		/* donation default link */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Default external link for donation ', 'gpea_theme' ),
+				'desc'    => esc_html__( 'Parameters and fields of donation box will be sent to this link', 'gpea_theme' ),
+				'id'      => 'gpea_default_donation_link',
+				'type'    => 'text',
+			)
+		);
+
+		/* support us */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Select the "support" landing page', 'gpea_theme' ),
+				'desc'    => esc_html__( 'Support page with all information and links', 'gpea_theme' ),
+				'id'      => 'gpea_default_supportus_link',
+				'type'    => 'supportus_page_dropdown',
+			)
+		);
+
+		/* latest from the Earth */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Select the "latest from the Earth" page', 'gpea_theme' ),
+				'desc'    => esc_html__( 'Page with latest news', 'gpea_theme' ),
+				'id'      => 'gpea_default_latest_link',
+				'type'    => 'latest_page_dropdown',
 			)
 		);
 
@@ -424,6 +456,42 @@ class P4CT_Metabox_Register {
 			$output[ $postid ] = $post->post_title;
 		}
 		return $output;
+	}
+
+	/**
+	 * Render support us page dropdown.
+	 *
+	 * @param array  $field_args Field arguments.
+	 * @param string $value Value.
+	 */
+	public function gpea_render_supportus_page_dropdown( $field_args, $value ) {
+		wp_dropdown_pages(
+			[
+				'show_option_none' => __( 'Select Page', 'planet4-master-theme-backend' ),
+				'hide_empty'       => 0,
+				'hierarchical'     => true,
+				'selected'         => $value,
+				'name'             => 'gpea_default_supportus_link',
+			]
+		);
+	}
+
+	/**
+	 * Render latest from earth page dropdown.
+	 *
+	 * @param array  $field_args Field arguments.
+	 * @param string $value Value.
+	 */
+	public function gpea_render_latest_page_dropdown( $field_args, $value ) {
+		wp_dropdown_pages(
+			[
+				'show_option_none' => __( 'Select Page', 'planet4-master-theme-backend' ),
+				'hide_empty'       => 0,
+				'hierarchical'     => true,
+				'selected'         => $value,
+				'name'             => 'gpea_default_latest_link',
+			]
+		);
 	}
 
 }
