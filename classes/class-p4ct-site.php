@@ -70,6 +70,7 @@ class P4CT_Site {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_assets' ] );
 		add_action( 'after_setup_theme', [ $this, 'add_oembed_filter' ] );
 		// add_action( 'save_post', [ $this, 'p4_auto_generate_excerpt' ], 10, 2 );
+		add_action( 'save_post', [ $this, 'gpea_auto_set_tag' ], 10, 2 );
 		register_nav_menus(
 			[
 				'navigation-bar-menu' => __( 'Navigation Bar Menu', 'planet4-child-theme-backend' ),
@@ -267,6 +268,25 @@ class P4CT_Site {
 		return $pagetype_posts;
 
 	}
+
+	/**
+	 * Auto generate excerpt for post.
+	 *
+	 * @param int     $post_id Id of the saved post.
+	 * @param WP_Post $post Post object.
+	 */
+	public function gpea_auto_set_tag( $post_id, $post ) {
+		if ( 'user_story' === $post->post_type ) {
+
+			// Unhook save_post function so it doesn't loop infinitely.
+			remove_action( 'save_post', [ $this, 'gpea_auto_set_tag' ], 10 );
+
+			wp_set_post_tags( $post_id, 'stories', true );
+
+			// re-hook save_post function.
+			add_action( 'save_post', [ $this, 'gpea_auto_set_tag' ], 10, 2 );
+		}
+	}	
 
 	/**
 	 * Add custom options to the main WP_Query.
