@@ -357,6 +357,16 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		/* Engaging default newsletter recipient */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Id code of your Engaging default subscription page', 'gpea_theme' ),
+				'desc'    => esc_html__( 'When user will select one or more topics to follow, he will be able to subscribe to that page', 'gpea_theme' ),
+				'id'      => 'gpea_default_en_subscription_page',
+				'type'    => 'text',
+			)
+		);
+
 	}
 
 	/**
