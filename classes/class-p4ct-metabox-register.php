@@ -467,7 +467,7 @@ class P4CT_Metabox_Register {
 	public function gpea_render_supportus_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
-				'show_option_none' => __( 'Select Page', 'planet4-master-theme-backend' ),
+				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
 				'hide_empty'       => 0,
 				'hierarchical'     => true,
 				'selected'         => $value,
@@ -485,7 +485,7 @@ class P4CT_Metabox_Register {
 	public function gpea_render_latest_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
-				'show_option_none' => __( 'Select Page', 'planet4-master-theme-backend' ),
+				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
 				'hide_empty'       => 0,
 				'hierarchical'     => true,
 				'selected'         => $value,
