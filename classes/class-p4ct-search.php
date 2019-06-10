@@ -772,6 +772,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		}
 
 		/**
+		 * Return search results as JSON.
+		 */
+		public function view_json() {
+			return wp_json_encode( $this->context['posts'] );
+		}
+
+		/**
 		 * View the paged posts of the next page/load.
 		 */
 		public function view_paged_posts() {
@@ -799,9 +806,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 */
 		public function enqueue_public_assets() {
 			if ( is_search() ) {
-				wp_register_script( 'search', get_template_directory_uri() . '/assets/js/search.js', [ 'jquery' ], '0.2.8', true );
-				wp_localize_script( 'search', 'localizations', $this->localizations );
-				wp_enqueue_script( 'search' );
+				wp_register_script( 'search_autocomplete', get_stylesheet_directory_uri() . '/static_tmp/js/vendor/jquery.auto-complete.min.js', [ 'jquery' ], '0.1', true );
+
+				wp_register_script( 'p4ct_search', get_stylesheet_directory_uri() . '/static_tmp/js/p4ct_search.js', [ 'jquery', 'search_autocomplete' ], '0.1', true );
+				wp_localize_script( 'p4ct_search', 'localizations', $this->localizations );
+
+				wp_enqueue_script( 'p4ct_search' );
+				wp_enqueue_script( 'search_autocomplete' );
 			}
 		}
 	}
