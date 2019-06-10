@@ -29,6 +29,11 @@ class P4CT_AJAX_Handler {
 	 */
 	private function hooks() {
 		add_action( 'wp_ajax_supportLauncher', [ $this, 'support_launcher_ajax_handler' ] );
+		add_action( 'wp_ajax_nopriv_supportLauncher', [ $this, 'support_launcher_ajax_handler' ] );
+
+		// TODO maybe move these ones to P4CT_ElasticSearch class?
+		add_action( 'wp_ajax_p4ct_search_site', [ $this, 'search_posts_ajax' ] );
+		add_action( 'wp_ajax_nopriv_p4ct_search_site', [ $this, 'search_posts_ajax' ] );
 	}
 
 	/**
@@ -64,14 +69,24 @@ class P4CT_AJAX_Handler {
 	}
 
 	/**
+	 * Get post results for AJAX autocomplete.
+	 */
+	public function search_posts_ajax() {
+		$query = $_POST['search'];
+		$search = new P4CT_ElasticSearch(); // TODO Can we create a new search only once?
+		$search->load( $query, $selected_sort, $filters );
+		$this->safe_echo( $search->view_json(), false );
+	}
+
+	/**
 	 * Echo escaped response and stop processing the request.
 	 *
 	 * @param string $string The message to be sent.
+	 * @param bool   $escape Whether to esc_html $string.
 	 */
-	private function safe_echo( $string ) {
-		echo esc_html( $string );
+	private function safe_echo( $string, $escape = true ) {
+		echo $escape ? esc_html( $string ) : $string;
 		wp_die();
 	}
-
 
 }
