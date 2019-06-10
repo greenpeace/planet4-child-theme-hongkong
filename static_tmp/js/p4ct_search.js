@@ -4,6 +4,7 @@ jQuery(function($){
 
   var searchRequest;
   var ajaxurl = localizations.ajaxurl;
+  var results = $('.tmp-ajax-search');
 
   $('.search-autocomplete').autoComplete({
     minChars: 2,
@@ -19,8 +20,13 @@ jQuery(function($){
           search: term,
         },
         function(res) {
-          console.log(res);
-          // suggest(res.data);
+          // Frontend TODO: integrate
+          res = JSON.parse(res);
+          res = res.map(post => post.post_title);
+          res = res.join('<br>');
+          res = res || 'Nothing found';
+          results.html(res);
+         // suggest(res.data);
         }
       );
     }
