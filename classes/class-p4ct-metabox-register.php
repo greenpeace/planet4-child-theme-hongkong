@@ -149,20 +149,20 @@ class P4CT_Metabox_Register {
 	/**
 	 * Registers Petition meta box(es).
 	 */
-	 public function register_petition_metabox() {
+	public function register_petition_metabox() {
 
 		$cmb_petition = new_cmb2_box(
 			array(
 				'id'           => 'p4-gpea-donation-box',
 				'title'        => 'Information about this petition',
 				'object_types' => array( 'page' ), // post type
-				'show_on'      => array(
-					'key'          => 'page-template',
-					'value'        => 'page-templates/petition.php',
-				),
-				'context'      => 'normal', // 'normal', 'advanced', or 'side'
-				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
-				'show_names'   => true, // Show field names on the left
+			  'show_on'      => array(
+				  'key'          => 'page-template',
+				  'value'        => 'page-templates/petition.php',
+			  ),
+			  'context'      => 'normal', // 'normal', 'advanced', or 'side'
+			  'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
+			  'show_names'   => true, // Show field names on the left
 			)
 		);
 
@@ -185,8 +185,8 @@ class P4CT_Metabox_Register {
 					'type' => 'number',
 					'pattern' => '\d*',
 				),
-			 // 'sanitization_cb' => 'intval',
-			 // 'escape_cb'       => 'intval',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
 			)
 		);
 
@@ -197,8 +197,7 @@ class P4CT_Metabox_Register {
 				'id'               => 'p4-gpea_petition_external_link',
 				'type'             => 'text',
 			)
-		);		
-
+		);
 
 	}
 
@@ -341,7 +340,7 @@ class P4CT_Metabox_Register {
 	/**
 	 * Registers post meta box(es).
 	 */
-	 public function register_page_metabox() {
+	public function register_page_metabox() {
 
 		$cmb_page = new_cmb2_box(
 			array(
@@ -349,8 +348,8 @@ class P4CT_Metabox_Register {
 				'title'        => 'Extra field for the current page',
 				'object_types' => array( 'page' ),
 				'context'      => 'normal', // 'normal', 'advanced', or 'side'
-				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
-				'show_names'   => true, // Show field names on the left
+			  'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
+			  'show_names'   => true, // Show field names on the left
 			)
 		);
 
@@ -668,7 +667,7 @@ class P4CT_Metabox_Register {
 	 * @param array  $field_args Field arguments.
 	 * @param string $value Value.
 	 */
-	 public function gpea_render_make_change_page_dropdown( $field_args, $value ) {
+	public function gpea_render_make_change_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
 				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
@@ -679,14 +678,14 @@ class P4CT_Metabox_Register {
 			]
 		);
 	}
-	
+
 	/**
 	 * Render Press media page dropdown.
 	 *
 	 * @param array  $field_args Field arguments.
 	 * @param string $value Value.
 	 */
-	 public function gpea_render_press_media_page_dropdown( $field_args, $value ) {
+	public function gpea_render_press_media_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
 				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
@@ -697,14 +696,14 @@ class P4CT_Metabox_Register {
 			]
 		);
 	}
-	
+
 	/**
 	 * Render Preferences page dropdown.
 	 *
 	 * @param array  $field_args Field arguments.
 	 * @param string $value Value.
 	 */
-	 public function gpea_render_preferences_page_dropdown( $field_args, $value ) {
+	public function gpea_render_preferences_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
 				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
@@ -715,14 +714,14 @@ class P4CT_Metabox_Register {
 			]
 		);
 	}
-	
+
 	/**
 	 * Render commitment projects page dropdown.
 	 *
 	 * @param array  $field_args Field arguments.
 	 * @param string $value Value.
 	 */
-	 public function gpea_render_commitment_projects_page_dropdown( $field_args, $value ) {
+	public function gpea_render_commitment_projects_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
 				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
@@ -733,14 +732,14 @@ class P4CT_Metabox_Register {
 			]
 		);
 	}
-	
+
 	/**
 	 * Render commitment issues page dropdown.
 	 *
 	 * @param array  $field_args Field arguments.
 	 * @param string $value Value.
 	 */
-	 public function gpea_render_commitment_issues_page_dropdown( $field_args, $value ) {
+	public function gpea_render_commitment_issues_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
 				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
@@ -750,7 +749,7 @@ class P4CT_Metabox_Register {
 				'name'             => 'gpea_default_commitment_issues',
 			]
 		);
-	}	
+	}
 
 
 	/**
