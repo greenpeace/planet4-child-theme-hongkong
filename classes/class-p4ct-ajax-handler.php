@@ -16,6 +16,7 @@ class P4CT_AJAX_Handler {
 	 * @const string NONCE_STRING
 	 */
 	const SUPPORT_LAUNCHER_NONCE_STRING = 'support_launcher';
+	const TOPICS_FOLLOWING_NONCE_STRING = 'topics_following';
 
 	/**
 	 * P4CT_AJAX_Handler constructor.
@@ -29,6 +30,7 @@ class P4CT_AJAX_Handler {
 	 */
 	private function hooks() {
 		add_action( 'wp_ajax_supportLauncher', [ $this, 'support_launcher_ajax_handler' ] );
+		add_action( 'wp_ajax_topicsFollowing', [ $this, 'topics_following_ajax_handler' ] );
 		add_action( 'wp_ajax_nopriv_supportLauncher', [ $this, 'support_launcher_ajax_handler' ] );
 
 		// TODO maybe move these ones to P4CT_ElasticSearch class?
@@ -69,13 +71,89 @@ class P4CT_AJAX_Handler {
 	}
 
 	/**
+	 * Send mail upon AJAX request from support_launcher module.
+	 */
+	public function topics_following_ajax_handler() {
+
+		if ( ( ! isset( $_COOKIE['gpea_issues'] ) ) && ( ! isset( $_COOKIE['gpea_topics'] ) ) ) {
+			return;
+		}
+
+		// if ( ! wp_verify_nonce( $data['_wpnonce'], self::TOPICS_FOLLOWING_NONCE_STRING ) ) {
+		// $this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'planet4-child-theme-backend' ) );
+		// return;
+		// }
+		$posts_result = array();
+
+		if ( isset( $_COOKIE['gpea_issues'] ) ) {
+			$gpea_issues = json_decode( sanitize_text_field( wp_unslash( $_COOKIE['gpea_issues'] ) ) );
+
+			foreach ( $gpea_issues as $gpea_issue ) {
+				$query = new \WP_Query(
+					array(
+						'cat'            => $gpea_issue,
+						'order'          => 'desc',
+						'orderby'        => 'date',
+						'posts_per_page' => 5,
+					)
+				);
+
+				$posts = $query->posts;
+
+				if ( $posts ) {
+					foreach ( $posts as $post ) {
+						$posts_result[] = array(
+							'title' => $post->post_title,
+							'post_date' => date( 'Y - m - d', strtotime( $post->post_date ) ),
+						);
+					}
+				}
+				// $this->safe_echo( json_encode( $posts_result ) );
+				// return;
+			}
+		}
+
+		if ( isset( $_COOKIE['gpea_topics'] ) ) {
+			$gpea_topics = json_decode( sanitize_text_field( wp_unslash( $_COOKIE['gpea_topics'] ) ) );
+
+			foreach ( $gpea_topics as $gpea_topic ) {
+				$query = new \WP_Query(
+					array(
+						'tag_id'         => $gpea_topic,
+						'order'          => 'desc',
+						'orderby'        => 'date',
+						'posts_per_page' => 5,
+					)
+				);
+
+				$posts = $query->posts;
+
+				if ( $posts ) {
+					foreach ( $posts as $post ) {
+						$posts_result[] = array(
+							'title' => $post->post_title,
+							'post_date' => date( 'Y - m - d', strtotime( $post->post_date ) ),
+						);
+					}
+				}
+			}
+
+			if ( $posts_result ) {
+				$this->safe_echo( json_encode( $posts_result ) );
+			}
+			return;
+
+		}
+	}
+
+	/**
 	 * Get post results for AJAX autocomplete.
 	 */
 	public function search_posts_ajax() {
 		$query = $_POST['search'];
 		$search = new P4CT_ElasticSearch(); // TODO Can we create a new search only once?
-		$search->load( $query, $selected_sort, $filters );
-		$this->safe_echo( $search->view_json(), false );
+		$search->gpea_load_ajax( $query, $selected_sort, $filters );
+		$this->safe_echo( $search->gpea_view_json(), false );
 	}
 
 	/**

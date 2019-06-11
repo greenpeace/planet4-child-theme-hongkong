@@ -7,6 +7,7 @@
 
 use Timber\Timber;
 use Timber\Post as TimberPost;
+use Timber\Term as TimberTerm;
 
 if ( ! class_exists( 'P4CT_Search' ) ) {
 
@@ -32,6 +33,11 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			'post',
 			'attachment',
 		];
+		const POST_TYPES_AJAX       = [
+			'page',
+			'post',
+			'attachment',
+		];
 		const DOCUMENT_TYPES        = [
 			'application/pdf',
 		];
@@ -49,6 +55,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * @var array|bool|null $posts
 		 */
 		protected $posts;
+
+		/**
+		 * Terms
+		 *
+		 * @var array|bool|null $terms
+		 */
+		protected $terms;
 
 		/**
 		 * Paged Posts
@@ -77,6 +90,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * @var array $localizations
 		 */
 		protected $localizations;
+
+		/**
+		 * AJAX request flag
+		 *
+		 * @var bool $is_ajax_request
+		 */
+		protected $is_ajax_request = false;
 
 		/**
 		 * Templates
@@ -128,6 +148,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * @param array|null $context An associative array with all the context needed to render the template found first.
 		 */
 		public function load( $search_query, $selected_sort = self::DEFAULT_SORT, $filters = [], $templates = [ 'search.twig', 'archive.twig', 'index.twig' ], $context = null ) {
+
+			$this->is_ajax_request = false;
 			$this->initialize();
 			$this->search_query = $search_query;
 			$this->templates    = $templates;
@@ -159,6 +181,45 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				$this->current_page = ( 0 === get_query_var( 'paged' ) ) ? 1 : get_query_var( 'paged' );
 				$this->set_context( $this->context );
 			}
+		}
+
+		/**
+		 * Conducts the actual AJAX search.
+		 * TODO rename without gpea_.
+		 *
+		 * @param string     $search_query The searched term.
+		 * @param string     $selected_sort The selected order_by.
+		 * @param array      $filters The selected filters.
+		 * @param array|null $context An associative array with all the context needed to render the template found first.
+		 */
+		public function gpea_load_ajax( $search_query, $selected_sort = self::DEFAULT_SORT, $filters = [], $context = null ) {
+
+			$this->search_query = $search_query;
+			$this->context = Timber::get_context();
+			$this->is_ajax_request = true;
+
+			// Validate user input (sort, filters, etc).
+			if ( $this->validate( $selected_sort, $filters, $this->context ) ) {
+				$this->selected_sort = $selected_sort;
+				$this->filters       = $filters;
+			}
+
+			// Set the decoded url query string as key.
+			$query_string = urldecode( filter_input( INPUT_SERVER, 'search', FILTER_SANITIZE_STRING ) );
+			$group        = 'search';
+			$subgroup     = $this->search_query ? $this->search_query : 'all';
+
+			// Check Object cache for stored key.
+			$this->check_cache( $query_string, "$group:$subgroup" );
+
+			// If posts were found either in object cache or primary database then get the first POSTS_PER_LOAD results.
+			if ( $this->posts ) {
+				$this->paged_posts = array_slice( $this->posts, 0, self::POSTS_PER_LOAD );
+			}
+
+			$this->current_page = 1;
+			$this->set_context( $this->context );
+
 		}
 
 		/**
@@ -235,14 +296,24 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * @param string $cache_group The group that will be used for storing the results in the object cache.
 		 */
 		protected function check_cache( $cache_key, $cache_group ) {
+			$cache_group_terms = $cache_group . '_terms';
+			// TODO IMPORTANT!!! reactivate cache on production.
 			// Get search results from cache and then set the context for those results.
-			$this->posts = wp_cache_get( $cache_key, $cache_group );
-
+			// $this->posts = wp_cache_get( $cache_key, $cache_group );
+			// $this->terms = wp_cache_get( $cache_key, $cache_group_terms );
+			$this->posts = false;
+			$this->terms = false;
 			// If cache key expired then retrieve results once again and re-cache them.
 			if ( false === $this->posts ) {
 				$this->posts = $this->get_timber_posts();
 				if ( $this->posts ) {
 					wp_cache_add( $cache_key, $this->posts, $cache_group, self::DEFAULT_CACHE_TTL );
+				}
+			}
+			if ( false === $this->terms ) {
+				$this->terms = $this->get_timber_terms();
+				if ( $this->terms ) {
+					wp_cache_add( $cache_key, $this->posts, $cache_group_terms, self::DEFAULT_CACHE_TTL );
 				}
 			}
 		}
@@ -292,6 +363,40 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		}
 
 		/**
+		 * Gets the respective Timber Terms, to be used with the twig template.
+		 * If there are not then uses Timber's get_posts to retrieve all of them (up to the limit set).
+		 *
+		 * @param int $paged The number of the page of the results to be shown when using pagination/load_more.
+		 *
+		 * @return array The respective Timber Posts.
+		 */
+		protected function get_timber_terms( $paged = 1 ) : array {
+			$timber_terms = [];
+
+			$terms = $this->get_terms( $paged );
+			// Use Timber's Post instead of WP_Post so that we can make use of Timber within the template.
+			if ( $terms ) {
+				foreach ( $terms as $term ) {
+					$timber_terms[] = new TimberTerm( $term->term_id );
+				}
+			}
+			return (array) $timber_terms;
+		}
+
+		/**
+		 * Gets the query terms.
+		 *
+		 * @return array The terms of the search.
+		 */
+		public function get_terms() : array {
+			$args = [];
+
+			$this->set_general_terms_args( $args );
+			$terms = ( new WP_Term_Query( $args ) )->terms;
+			return (array) $terms;
+		}
+
+		/**
 		 * Sets arguments for the WP_Query that are related to the application.
 		 *
 		 * @param array $args The search query args.
@@ -300,9 +405,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		protected function set_general_args( &$args, $paged ) {
 			$args = [
 				'posts_per_page' => self::POSTS_LIMIT,          // Set a high maximum because -1 will get ALL posts and this can be very intensive in production.
-				'no_found_rows'  => true,                       // This means that the result counters of each filter might not be 100% precise.
-				'post_type'      => self::POST_TYPES,
-				'post_status'    => [ 'publish', 'inherit' ],
+			'no_found_rows'  => true,                       // This means that the result counters of each filter might not be 100% precise.
+			'post_type'      => self::POST_TYPES,
+			'post_status'    => [ 'publish', 'inherit' ],
 			];
 
 			if ( $paged > 1 ) {
@@ -341,6 +446,24 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				$args['orderby'] = 'date';
 				$args['order']   = 'desc';
 			}
+		}
+
+		/**
+		 * Sets arguments for the WP_Query that are related to the application.
+		 *
+		 * @param array $args The search query args.
+		 */
+		protected function set_general_terms_args( &$args ) {
+
+			// TODO move this to settings first...
+			$issues_term_id = get_category_by_slug( 'issues' )->term_id;
+
+			$args = [
+				'taxonomy' => array( 'category', 'post_tag' ),
+			];
+
+			$args['name__like'] = $this->search_query;
+
 		}
 
 		/**
@@ -444,6 +567,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 			// Search context.
 			$context['posts']            = $this->posts;
+			$context['terms']            = $this->terms;
 			$context['paged_posts']      = $this->paged_posts;
 			$context['current_page']     = $this->current_page;
 			$context['search_query']     = $this->search_query;
@@ -714,7 +838,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			$search_action = filter_input( INPUT_GET, 'search-action', FILTER_SANITIZE_STRING );
 
 			if ( ! is_admin() && is_search() ||
-				wp_doing_ajax() && ( 'get_paged_posts' === $search_action ) ) {
+			wp_doing_ajax() && ( 'get_paged_posts' === $search_action ) ) {
 				$mime_types = implode( ',', self::DOCUMENT_TYPES );
 				$where     .= ' AND ' . $wpdb->posts . '.post_mime_type IN("' . $mime_types . '","") ';
 			}
@@ -767,15 +891,27 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * View the Search page template.
 		 */
 		public function view() {
-			Timber::render( $this->templates, $this->context );
-			// Timber::render( $this->templates, $this->context, self::DEFAULT_CACHE_TTL, \Timber\Loader::CACHE_OBJECT );
+			Timber::render(
+				$this->templates,
+				$this->context
+				// TODO Uncomment these to enable search page cache.
+				// ,self::DEFAULT_CACHE_TTL,
+				// \Timber\Loader::CACHE_OBJECT
+			);
 		}
 
 		/**
 		 * Return search results as JSON.
+		 * TODO rename without gpea_.
 		 */
-		public function view_json() {
-			return wp_json_encode( $this->context['posts'] );
+		public function gpea_view_json() {
+			return wp_json_encode(
+				array(
+					'posts' => array_slice( $this->context['posts'], 0, self::POSTS_PER_LOAD ),
+					'terms' => array_slice( $this->context['terms'], 0, self::POSTS_PER_LOAD ),
+				)
+			);
+			// return wp_json_encode( array_slice( $this->context['posts'], 0, self::POSTS_PER_LOAD ) );
 		}
 
 		/**

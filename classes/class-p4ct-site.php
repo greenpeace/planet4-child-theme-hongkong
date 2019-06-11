@@ -194,6 +194,8 @@ class P4CT_Site {
 
 		wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/static/css/style.css', [], $css_creation );
 		wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js', array(), $js_creation, true );
+		// to be removed after frontend merge!!
+		wp_enqueue_script( 'child-dev-script', get_stylesheet_directory_uri() . '/static/js/dev_integration.js', array(), $js_creation, true );
 	}
 
 	/**

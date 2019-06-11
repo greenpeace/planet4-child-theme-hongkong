@@ -1,17 +1,20 @@
 // Custom code
 
+$ = jQuery; // eslint-disable-line no-global-assign
+
 jQuery(function($){
 
   var searchRequest;
-  var ajaxurl = localizations.ajaxurl;
-  var results = $('.tmp-ajax-search');
+  var ajaxurl = localizations.ajaxurl; // eslint-disable-line no-undef
+  var results_posts = $('.tmp-ajax-search-posts');
+  var results_terms = $('.tmp-ajax-search-terms');
 
   $('.search-autocomplete').autoComplete({
     minChars: 2,
     source: function(term, suggest) {
       try {
         searchRequest.abort();
-      } catch(e) {}
+      } catch(e) {} // eslint-disable-line no-empty
 
       searchRequest = $.post(
         ajaxurl,
@@ -22,10 +25,17 @@ jQuery(function($){
         function(res) {
           // Frontend TODO: integrate
           res = JSON.parse(res);
-          res = res.map(post => post.post_title);
-          res = res.join('<br>');
-          res = res || 'Nothing found';
-          results.html(res);
+          window.res = res;
+          var posts = res.posts,
+              terms = res.terms;
+          posts = posts.map(post => post.post_title);
+          posts = posts.join('<br>');
+          posts = posts || 'No posts found';
+          results_posts.html(posts);
+          terms = terms.map(term => term.name);
+          terms = terms.join('<br>');
+          terms = terms || 'No terms found';
+          results_terms.html(terms);
          // suggest(res.data);
         }
       );
