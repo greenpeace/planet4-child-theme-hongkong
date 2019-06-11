@@ -9,6 +9,7 @@ jQuery(function($){
   var ajaxurl = localizations.ajaxurl; // eslint-disable-line no-undef
   var results_posts = $('.tmp-ajax-search-posts');
   var results_terms = $('.tmp-ajax-search-terms');
+  var reset_filters = $('#btn_filter_reset');
 
   $('.search-autocomplete').autoComplete({
     minChars: 2,
@@ -54,10 +55,12 @@ jQuery(function($){
   });
 
   filters_search.change(function(ev) {
-    console.log('OUCH');
-    var filters = {};
+    $search_form.submit();
+  });
+
+  reset_filters.click(function(ev) {
     filters_search.map(function() {
-      filters[this.id] = this.value;
+      $(this).val('');
     });
     $search_form.submit();
   });

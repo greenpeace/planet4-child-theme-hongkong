@@ -44,51 +44,28 @@
 
     <p>Filters</p>
     {% if ( categories|length > 0 ) %}
-        <select form="search_form_inner" class="filter-search" id="filter_categories" name="filter_categories">
-            <option disabled selected value> -- select an option -- </option>
+        <select form="search_form_inner" class="filter-search" id="f[cat]" name="f[cat]">
+            <option disabled selected value> -- None -- </option>
 	    {% for category in categories %}
-		{% if ( category.results >= 0 ) %}
+		{% if ( category.results > 0 ) %}
                     <option value="{{ category.term_id }}">{{ category.name|e('wp_kses_post')|raw }} ({{ category.results }})</option>
 		{% endif %}
 	    {% endfor %}
         </select>
-        <br>
-    {% endif %}
-    {% if ( page_types|length > 0 ) %}
-        <select form="search_form_inner" class="filter-search" id="filter_pagetypes" name="filter_pagetypes">
-            <option disabled selected value> -- select an option -- </option>
-	    {% for page_type in page_types %}
-		{% if ( page_type.results >= 0 ) %}
-                    <option value="{{ page_type.term_id }}">{{ page_type.name|e('wp_kses_post')|raw }} ({{ page_type.results }})</option>
-		{% endif %}
-	    {% endfor %}
-        </select>
-        <br>
-    {% endif %}
-    {% if ( content_types|length > 0 ) %}
-        <select form="search_form_inner" class="filter-search" id="filter_content_types" name="filter_content_types">
-            <option disabled selected value> -- select an option -- </option>
-	    {% for id, content_type in content_types %}
-		{% if ( content_type.results >= 0 ) %}
-                    <option value="{{ id }}">{{ content_type.name|e('wp_kses_post')|raw }} ({{ content_type.results }})</option>
-		{% endif %}
-	    {% endfor %}
-        </select>
-        <br>
     {% endif %}
     {% if ( tags|length > 0 ) %}
-        <select form="search_form_inner" class="filter-search" id="filter_tags" name="filter_tags">
-            <option disabled selected value> -- select an option -- </option>
+        <select form="search_form_inner" class="filter-search" id="f[tag]" name="f[tag]">
+            <option disabled selected value> -- None -- </option>
 	    {% for tag in tags %}
-                <option value="{{ tag.term_id }}">{{ tag.name|e('wp_kses_post')|raw }} ({{ tag.results }})</option>
+		{% if ( tag.results > 0 ) %}
+                    <option value="{{ tag.term_id }}">{{ tag.name|e('wp_kses_post')|raw }} ({{ tag.results }})</option>
+		{% endif %}
 	    {% endfor %}
         </select>
-        <br>
     {% endif %}
 
+    <button id="btn_filter_reset">{{ __( 'Reset Filters', 'planet4-child-theme-backend' ) }}</button>
     <br>
-    <button>{{ __( 'Cancel', 'planet4-child-theme-backend' ) }}</button>
-    <button>{{ __( 'Apply Filters', 'planet4-child-theme-backend' ) }}</button><br>
 
     <br>
     <label for="select_order">{{ __('Sort by', 'planet4-child-theme-backend' ) }}</label><br>

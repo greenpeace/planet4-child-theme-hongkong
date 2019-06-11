@@ -169,7 +169,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				$query_string = urldecode( filter_input( INPUT_SERVER, 'QUERY_STRING', FILTER_SANITIZE_STRING ) );
 				$group        = 'search';
 				$subgroup     = $this->search_query ? $this->search_query : 'all';
-
 				// Check Object cache for stored key.
 				$this->check_cache( $query_string, "$group:$subgroup" );
 
@@ -306,15 +305,15 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			// If cache key expired then retrieve results once again and re-cache them.
 			if ( false === $this->posts ) {
 				$this->posts = $this->get_timber_posts();
-				if ( $this->posts ) {
-					wp_cache_add( $cache_key, $this->posts, $cache_group, self::DEFAULT_CACHE_TTL );
-				}
+				// if ( $this->posts ) {
+				// wp_cache_add( $cache_key, $this->posts, $cache_group, self::DEFAULT_CACHE_TTL );
+				// }
 			}
 			if ( false === $this->terms ) {
 				$this->terms = $this->get_timber_terms();
-				if ( $this->terms ) {
-					wp_cache_add( $cache_key, $this->posts, $cache_group_terms, self::DEFAULT_CACHE_TTL );
-				}
+				// if ( $this->terms ) {
+				// wp_cache_add( $cache_key, $this->posts, $cache_group_terms, self::DEFAULT_CACHE_TTL );
+				// }
 			}
 		}
 
@@ -405,9 +404,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		protected function set_general_args( &$args, $paged ) {
 			$args = [
 				'posts_per_page' => self::POSTS_LIMIT,          // Set a high maximum because -1 will get ALL posts and this can be very intensive in production.
-			'no_found_rows'  => true,                       // This means that the result counters of each filter might not be 100% precise.
-			'post_type'      => self::POST_TYPES,
-			'post_status'    => [ 'publish', 'inherit' ],
+				'no_found_rows'  => true,                       // This means that the result counters of each filter might not be 100% precise.
+				'post_type'      => self::POST_TYPES,
+				'post_status'    => [ 'publish', 'inherit' ],
 			];
 
 			if ( $paged > 1 ) {
@@ -482,62 +481,24 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 */
 		public function set_filters_args( &$args ) {
 			if ( $this->filters ) {
-				foreach ( $this->filters as $type => $filter_type ) {
-					foreach ( $filter_type as $filter ) {
-						switch ( $type ) {
-							case 'cat':
-								$args['tax_query'][] = [
-									'taxonomy' => 'category',
-									'field'    => 'term_id',
-									'terms'    => $filter['id'],
-								];
-								break;
-							case 'tag':
-								$args['tax_query'][] = [
-									'taxonomy' => 'post_tag',
-									'field'    => 'term_id',
-									'terms'    => $filter['id'],
-								];
-								break;
-							case 'ptype':
-								// This taxonomy is used only for Posts.
-								$args['post_type']   = 'post';
-								$args['tax_query'][] = [
-									'taxonomy' => 'p4-page-type',
-									'field'    => 'term_id',
-									'terms'    => $filter['id'],
-								];
-								break;
-							case 'ctype':
-								switch ( $filter['id'] ) {
-									case 0:
-										$args['post_type']   = 'page';
-										$args['post_status'] = 'publish';
-										$options             = get_option( 'planet4_options' );
-										$args['post_parent'] = esc_sql( $options['act_page'] );
-										break;
-									case 1:
-										$args['post_type']      = 'attachment';
-										$args['post_status']    = 'inherit';
-										$args['post_mime_type'] = self::DOCUMENT_TYPES;
-										break;
-									case 2:
-										$args['post_type']             = [ 'page', 'campaign' ];
-										$args['post_status']           = 'publish';
-										$options                       = get_option( 'planet4_options' );
-										$args['post_parent__not_in'][] = esc_sql( $options['act_page'] );
-										break;
-									case 3:
-										$args['post_type']   = 'post';
-										$args['post_status'] = 'publish';
-										break;
-									default:
-										throw new UnexpectedValueException( 'Unexpected content type!' );
-								}
-								break;
-							default:
-								throw new UnexpectedValueException( 'Unexpected filter!' );
-						}
+				foreach ( $this->filters as $type => $id ) {
+					switch ( $type ) {
+						case 'cat':
+							$args['tax_query'][] = [
+								'taxonomy' => 'category',
+								'field'    => 'term_id',
+								'terms'    => $id,
+							];
+							break;
+						case 'tag':
+							$args['tax_query'][] = [
+								'taxonomy' => 'post_tag',
+								'field'    => 'term_id',
+								'terms'    => $id,
+							];
+							break;
+						default:
+							throw new UnexpectedValueException( 'Unexpected filter!' );
 					}
 				}
 			}
@@ -681,29 +642,28 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			];
 
 			// Keep track of which filters are already checked.
-			if ( $this->filters ) {
-				foreach ( $this->filters as $type => $filter_type ) {
-					foreach ( $filter_type as $filter ) {
-						switch ( $type ) {
-							case 'cat':
-								$context['categories'][ $filter['id'] ]['checked'] = 'checked';
-								break;
-							case 'tag':
-								$context['tags'][ $filter['id'] ]['checked'] = 'checked';
-								break;
-							case 'ptype':
-								$context['page_types'][ $filter['id'] ]['checked'] = 'checked';
-								break;
-							case 'ctype':
-								$context['content_types'][ $filter['id'] ]['checked'] = 'checked';
-								break;
-							default:
-								throw new UnexpectedValueException( 'Unexpected filter!' );
-						}
-					}
-				}
-			}
-
+			// TODO adapt to select.
+			// if ( $this->filters ) {
+			// foreach ( $this->filters as $type => $filter ) {
+			// echo $type;
+			// switch ( $type ) {
+			// case 'cat':
+			// $context['categories'][ $filter['id'] ]['checked'] = 'checked';
+			// break;
+			// case 'tag':
+			// $context['tags'][ $filter['id'] ]['checked'] = 'checked';
+			// break;
+			// case 'ptype':
+			// $context['page_types'][ $filter['id'] ]['checked'] = 'checked';
+			// break;
+			// case 'ctype':
+			// $context['content_types'][ $filter['id'] ]['checked'] = 'checked';
+			// break;
+			// default:
+			// throw new UnexpectedValueException( 'Unexpected filter!' );
+			// }
+			// }
+			// }
 			// Sort associative array with filters alphabetically.
 			if ( $context['categories'] ) {
 				uasort(
@@ -861,12 +821,10 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			}
 
 			if ( $filters ) {
-				foreach ( $filters as &$filter_type ) {
-					foreach ( $filter_type as &$filter ) {
-						$filter['id'] = filter_var( $filter['id'], FILTER_VALIDATE_INT );
-						if ( false === $filter['id'] || null === $filter['id'] || $filter['id'] < 0 ) {
-							return false;
-						}
+				foreach ( $filters as &$filter ) {
+					$filter = filter_var( $filter, FILTER_VALIDATE_INT );
+					if ( false === $filter || null === $filter || $filter < 0 ) {
+						return false;
 					}
 				}
 			}
