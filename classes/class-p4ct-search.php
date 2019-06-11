@@ -642,29 +642,21 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			];
 
 			// Keep track of which filters are already checked.
-			// TODO adapt to select.
-			// if ( $this->filters ) {
-			// foreach ( $this->filters as $type => $filter ) {
-			// echo $type;
-			// switch ( $type ) {
-			// case 'cat':
-			// $context['categories'][ $filter['id'] ]['checked'] = 'checked';
-			// break;
-			// case 'tag':
-			// $context['tags'][ $filter['id'] ]['checked'] = 'checked';
-			// break;
-			// case 'ptype':
-			// $context['page_types'][ $filter['id'] ]['checked'] = 'checked';
-			// break;
-			// case 'ctype':
-			// $context['content_types'][ $filter['id'] ]['checked'] = 'checked';
-			// break;
-			// default:
-			// throw new UnexpectedValueException( 'Unexpected filter!' );
-			// }
-			// }
-			// }
-			// Sort associative array with filters alphabetically.
+			if ( $this->filters ) {
+				foreach ( $this->filters as $type => $filter ) {
+					switch ( $type ) {
+						case 'cat':
+							$context['categories'][ $filter ]['selected'] = true;
+							break;
+						case 'tag':
+							$context['tags'][ $filter ]['selected'] = true;
+							break;
+						default:
+							throw new UnexpectedValueException( 'Unexpected filter!' );
+					}
+				}
+			}
+			// Sort associative array with filters alphabetically .
 			if ( $context['categories'] ) {
 				uasort(
 					$context['categories'],
