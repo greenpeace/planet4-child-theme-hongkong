@@ -4,6 +4,7 @@ $ = jQuery; // eslint-disable-line no-global-assign
 
 jQuery(function($){
 
+  var $search_form = $( '#search_form_inner' );
   var searchRequest;
   var ajaxurl = localizations.ajaxurl; // eslint-disable-line no-undef
   var results_posts = $('.tmp-ajax-search-posts');
@@ -41,6 +42,26 @@ jQuery(function($){
       );
     }
   });
+
+  var filters_search = $('.filter-search');
+
+  var search = window.location.search.substring(1);
+  search = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
+  filters_search.map(function() {
+    if(search.hasOwnProperty(this.name)) {
+      $(this).val(search[this.name]);
+    }
+  });
+
+  filters_search.change(function(ev) {
+    console.log('OUCH');
+    var filters = {};
+    filters_search.map(function() {
+      filters[this.id] = this.value;
+    });
+    $search_form.submit();
+  });
+
 });
 
 // /* global localizations */
