@@ -29,18 +29,19 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		const DUMMY_THUMBNAIL       = '/images/dummy-thumbnail.png';
 		const POST_TYPES            = [
 			'page',
-			'campaign',
-			'post',
-			'attachment',
-		];
-		const POST_TYPES_AJAX       = [
-			'page',
 			'post',
 			'attachment',
 		];
 		const DOCUMENT_TYPES        = [
 			'application/pdf',
 		];
+
+		/**
+		 * Engaging campaign ID meta key.
+		 *
+		 * @const string ENGAGING_CAMPAIGN_ID_META_KEY
+		 */
+		const ENGAGING_CAMPAIGN_ID_META_KEY = 'engaging_campaign_ID';
 
 		/**
 		 * Search Query
@@ -454,9 +455,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 */
 		protected function set_general_terms_args( &$args ) {
 
-			// TODO move this to settings first...
-			$issues_term_id = get_category_by_slug( 'issues' )->term_id;
-
 			$args = [
 				'taxonomy' => array( 'category', 'post_tag' ),
 			];
@@ -571,13 +569,14 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		protected function set_filters_context( &$context ) {
 			// Retrieve P4CT settings in order to check that we add only categories that are children of the Issues category.
 			$options = get_option( 'planet4_options' );
+			$issues_parent_category = (int) $options['issues_parent_category'];
 
 			// Category <-> Issue.
 			// Consider Issues that have multiple Categories.
 			$categories = get_categories();
 			if ( $categories ) {
 				foreach ( $categories as $category ) {
-					if ( $category->parent === (int) $options['issues_parent_category'] ) {
+					if ( $category->parent === $issues_parent_category ) {
 						$context['categories'][ $category->term_id ] = [
 							'term_id' => $category->term_id,
 							'name'    => $category->name,
@@ -596,12 +595,15 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			);
 			if ( $tags ) {
 				foreach ( (array) $tags as $tag ) {
-					// Tag filters.
-					$context['tags'][ $tag->term_id ] = [
-						'term_id' => $tag->term_id,
-						'name'    => $tag->name,
-						'results' => 0,
-					];
+					// Get only tags that have an associated Engaging campaign
+					if ( get_term_meta( $tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true ) ) {
+						// Tag filters.
+						$context['tags'][ $tag->term_id ] = [
+							'term_id' => $tag->term_id,
+							'name'    => $tag->name,
+							'results' => 0,
+						];
+					}
 				}
 			}
 
@@ -761,16 +763,19 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$tags = get_the_terms( $post->ID, 'post_tag' );
 					if ( $tags ) {
 						foreach ( (array) $tags as $tag ) {
-							// Set tags info for each result item.
-							$context['posts_data'][ $post->ID ]['tags'][] = [
-								'name' => $tag->name,
-								'link' => get_tag_link( $tag ),
-							];
+							// Get only tags that have an associated Engaging campaign
+							if ( get_term_meta( $tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true ) ) {
+								// Set tags info for each result item.
+								$context['posts_data'][ $post->ID ]['tags'][] = [
+									'name' => $tag->name,
+									'link' => get_tag_link( $tag ),
+								];
 
-							// Tag filters.
-							$context['tags'][ $tag->term_id ]['term_id'] = $tag->term_id;
-							$context['tags'][ $tag->term_id ]['name']    = $tag->name;
-							$context['tags'][ $tag->term_id ]['results'] ++;
+								// Tag filters.
+								$context['tags'][ $tag->term_id ]['term_id'] = $tag->term_id;
+								$context['tags'][ $tag->term_id ]['name']    = $tag->name;
+								$context['tags'][ $tag->term_id ]['results'] ++;
+							}
 						}
 					}
 				}
