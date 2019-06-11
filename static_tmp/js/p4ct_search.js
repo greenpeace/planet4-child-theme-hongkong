@@ -46,14 +46,6 @@ jQuery(function($){
 
   var filters_search = $('.filter-search');
 
-  var search = window.location.search.substring(1);
-  search = JSON.parse('{"' + decodeURI(search).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g,'":"') + '"}');
-  filters_search.map(function() {
-    if(search.hasOwnProperty(this.name)) {
-      $(this).val(search[this.name]);
-    }
-  });
-
   filters_search.change(function(ev) {
     $search_form.submit();
   });

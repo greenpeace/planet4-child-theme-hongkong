@@ -48,7 +48,7 @@
             <option disabled selected value> -- None -- </option>
 	    {% for category in categories %}
 		{% if ( category.results > 0 ) %}
-                    <option value="{{ category.term_id }}">{{ category.name|e('wp_kses_post')|raw }} ({{ category.results }})</option>
+                    <option value="{{ category.term_id }}" {{ category.selected ? 'selected' : '' }}>{{ category.name|e('wp_kses_post')|raw }} ({{ category.results }})</option>
 		{% endif %}
 	    {% endfor %}
         </select>
@@ -58,16 +58,13 @@
             <option disabled selected value> -- None -- </option>
 	    {% for tag in tags %}
 		{% if ( tag.results > 0 ) %}
-                    <option value="{{ tag.term_id }}">{{ tag.name|e('wp_kses_post')|raw }} ({{ tag.results }})</option>
+                    <option value="{{ tag.term_id }}" {{ tag.selected ? 'selected' : '' }}>{{ tag.name|e('wp_kses_post')|raw }} ({{ tag.results }})</option>
 		{% endif %}
 	    {% endfor %}
         </select>
     {% endif %}
 
-    <button id="btn_filter_reset">{{ __( 'Reset Filters', 'planet4-child-theme-backend' ) }}</button>
-    <br>
-
-    <br>
+    <button id="btn_filter_reset">{{ __( 'Reset Filters', 'planet4-child-theme-backend' ) }}</button><br>
     <label for="select_order">{{ __('Sort by', 'planet4-child-theme-backend' ) }}</label><br>
     <select form="search_form_innerg" class="filter-search" id="select_order" name="select_order">
 	{% for key, sort_option in sort_options %}
