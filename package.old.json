@@ -1,0 +1,34 @@
+{
+  "name": "gpea",
+  "version": "1.0.0",
+  "description": "GPEA",
+  "scripts": {
+    "start": "gulp",
+    "sass": "gulp sass",
+    "build": "gulp build"
+  },
+  "author": "HaThaiHoang <jonlefcun@gmail.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "js-cookie": "^2.2.0",
+    "swiper": "4.5.0",
+    "vanilla-lazyload": "12.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "9.5.1",
+    "browser-sync": "^2.26.5",
+    "cssnano": "4.1.10",
+    "del": "4.1.0",
+    "gulp": "4.0.0",
+    "gulp-connect": "5.7.0",
+    "gulp-notify": "3.2.0",
+    "gulp-plumber": "1.2.1",
+    "gulp-postcss": "8.0.0",
+    "gulp-rename": "1.4.0",
+    "gulp-sass": "4.0.2",
+    "lost": "8.3.1",
+    "rucksack-css": "1.0.2",
+    "webpack-stream": "5.2.1",
+    "tar": "2.2.2"
+  }
+}
