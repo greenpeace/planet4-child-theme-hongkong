@@ -57,6 +57,54 @@ jQuery(function($){
     $search_form.submit();
   });
 
+
+  var $load_more_button = $( '.btn-load-more-click-scroll' );
+  var load_more_count   = 0;
+  var loaded_more       = false;
+  // Add click event for load more button in blocks.
+  $load_more_button.off( 'click' ).on( 'click', function() {
+    // If this button has this class then Lazy-loading is enabled.
+    if ( $(this).hasClass( 'btn-load-more-async' ) ) {
+      var total_posts    = $(this).data('total_posts');
+      var posts_per_load = $(this).data('posts_per_load');
+      var next_page      = $(this).data( 'current_page' ) + 1;
+      $(this).data( 'current_page', next_page );
+
+      var $load_more_button = $( '.btn-load-more-click-scroll' );
+      var load_more_count   = 0;
+      var loaded_more       = false;
+      $.ajax({
+        url: localizations.ajaxurl,
+        type: 'GET',
+        data: {
+          action:          'get_paged_posts',
+          'search-action': 'get_paged_posts',
+          'search_query':  $( '#search_input' ).val().trim(),
+          'paged':         next_page,
+          'query-string':  decodeURIComponent( location.search ).substr( 1 )		// Ignore the ? in the search url (first char).
+        },
+        dataType: 'html'
+      }).done(function ( response ) {
+        // Append the response at the bottom of the results and then show it.
+        $( '.multiple-search-result .list-unstyled' ).append( response );
+        $( '.row-hidden:last' ).removeClass( 'row-hidden' ).show( 'fast' );
+        if (posts_per_load * next_page > total_posts) {
+          $load_more_button.hide();
+        }
+      }).fail(function ( jqXHR, textStatus, errorThrown ) {
+        console.log(errorThrown); //eslint-disable-line no-console
+      });
+    } else {
+      var $row = $( '.row-hidden', $load_more_button.closest( '.container' ) );
+
+      if ( 1 === $row.length ) {
+        $load_more_button.closest( '.load-more-button-div' ).hide( 'fast' );
+      }
+      $row.first().show( 'fast' ).removeClass( 'row-hidden' );
+    }
+  });
+
+
 });
 
 // /* global localizations */

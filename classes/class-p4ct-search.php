@@ -253,13 +253,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 					// Handle submitted filter options.
 					if ( $selected_filters && is_array( $selected_filters ) ) {
-						foreach ( $selected_filters as $type => $filter_type ) {
-							foreach ( $filter_type as $name => $id ) {
-								$filters[ $type ][] = [
-									'id'   => $id,
-									'name' => $name,
-								];
-							}
+						foreach ( $selected_filters as $type => $id ) {
+							$filters[ $type ] = $id;
 						}
 					}
 
@@ -418,21 +413,10 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			if ( $this->search_query ) {
 				$args['s'] = $this->search_query;
 			} else {
-				// If we search for everything then order first by 'weight' and then by 'post_date'.
+				// If we search for everything then order by 'post_date'.
 				$args2 = [
-					'orderby'    => 'meta_value date',
-					'order'      => 'DESC DESC',
-					'meta_query' => [
-						'relation' => 'OR',
-						[
-							'key'     => 'weight',
-							'compare' => 'NOT EXISTS',
-						],
-						[
-							'key'     => 'weight',
-							'compare' => 'EXISTS',
-						],
-					],
+					'orderby'    => 'date',
+					'order'      => 'DESC',
 				];
 				$args  = array_merge( $args, $args2 );
 			}
@@ -595,7 +579,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			);
 			if ( $tags ) {
 				foreach ( (array) $tags as $tag ) {
-					// Get only tags that have an associated Engaging campaign
+					// Get only tags that have an associated Engaging campaign.
 					if ( get_term_meta( $tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true ) ) {
 						// Tag filters.
 						$context['tags'][ $tag->term_id ] = [
@@ -607,38 +591,11 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				}
 			}
 
-			// Page Type <-> Category.
-			$page_types = get_terms(
-				[
-					'taxonomy'   => 'p4-page-type',
-					'hide_empty' => false,
-				]
-			);
-			if ( $page_types ) {
-				foreach ( (array) $page_types as $page_type ) {
-					// p4-page-type filters.
-					$context['page_types'][ $page_type->term_id ] = [
-						'term_id' => $page_type->term_id,
-						'name'    => $page_type->name,
-						'results' => 0,
-					];
-				}
-			}
-
-			// Post Type (+Action) <-> Content Type.
 			$context['content_types']['0'] = [
-				'name'    => __( 'Action', 'planet4-master-theme' ),
-				'results' => 0,
-			];
-			$context['content_types']['1'] = [
-				'name'    => __( 'Document', 'planet4-master-theme' ),
-				'results' => 0,
-			];
-			$context['content_types']['2'] = [
 				'name'    => __( 'Page', 'planet4-master-theme' ),
 				'results' => 0,
 			];
-			$context['content_types']['3'] = [
+			$context['content_types']['1'] = [
 				'name'    => __( 'Post', 'planet4-master-theme' ),
 				'results' => 0,
 			];
@@ -658,6 +615,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					}
 				}
 			}
+
 			// Sort associative array with filters alphabetically .
 			if ( $context['categories'] ) {
 				uasort(
@@ -704,46 +662,20 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				// Post Type (+Action) <-> Content Type.
 				switch ( $post->post_type ) {
 					case 'page':
-					case 'campaign':
-						if ( $post->post_parent === (int) $options['act_page'] ) {
-							$content_type_text = __( 'ACTION', 'planet4-master-theme' );
-							$content_type      = 'action';
-							$context['content_types']['0']['results']++;
-						} else {
 							$content_type_text = __( 'PAGE', 'planet4-master-theme' );
 							$content_type      = 'page';
-							$context['content_types']['2']['results']++;
-						}
-						break;
-					case 'attachment':
-						$content_type_text = __( 'DOCUMENT', 'planet4-master-theme' );
-						$content_type      = 'document';
-						$context['content_types']['1']['results']++;
+							$context['content_types']['0']['results']++;
 						break;
 					case 'post':
 						$content_type_text = __( 'POST', 'planet4-master-theme' );
 						$content_type      = 'post';
-						$context['content_types']['3']['results']++;
+						$context['content_types']['1']['results']++;
 						break;
 					default:
 						continue 2;     // Ignore other post_types and continue with next $post.
 				}
 				$context['posts_data'][ $post->ID ]['content_type_text'] = $content_type_text;
 				$context['posts_data'][ $post->ID ]['content_type']      = $content_type;
-
-				// Page Type <-> Category. This taxonomy is used only for Posts.
-				if ( 'post' === $post->post_type ) {
-					$page_types = get_the_terms( $post->ID, 'p4-page-type' );
-					if ( is_array( $page_types ) ) {
-						foreach ( (array) $page_types as $page_type ) {
-							// p4-page-type filters.
-							$context['page_types'][ $page_type->term_id ]['term_id'] = $page_type->term_id;
-							$context['page_types'][ $page_type->term_id ]['name']    = $page_type->name;
-							$context['page_types'][ $page_type->term_id ]['results'] ++;
-						}
-					}
-					$context['posts_data'][ $post->ID ]['page_types'] = $page_types;
-				}
 
 				// Tag <-> Campaign.
 				if ( 'attachment' !== $post->post_type ) {
