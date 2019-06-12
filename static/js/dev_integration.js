@@ -34,9 +34,9 @@ $(document).ready(function(){
             console.log(data);
         },
         error: function(errorThrown){
-            alert(errorThrown);
+            //alert(errorThrown);
             console.log(errorThrown);
         }
-    }); 
+    });
 
 });
