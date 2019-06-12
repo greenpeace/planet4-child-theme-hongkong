@@ -169,87 +169,69 @@ function logger(err, stats) {
   }
 }
 
-gulp.task('default', callback => {
-  global.watch = true;
-  global.open = true;
-  // fs.writeFileSync('build.txt', 'dirty');
-  return gulp.series(
-    gulp.parallel('sass', settings.jsTasker),
-    'watcher',
-    callback
-  )();
-});
+// gulp.task('default', callback => {
+//   global.watch = true;
+//   global.open = true;
+//   // fs.writeFileSync('build.txt', 'dirty');
+//   return gulp.series(
+//     gulp.parallel('sass', settings.jsTasker),
+//     'watcher',
+//     callback
+//   )();
+// });
 
-gulp.task('watch', callback => {
-  global.watch = true;
-  // fs.writeFileSync('build.txt', 'dirty');
-  return gulp.series(
-    gulp.parallel('sass', settings.jsTasker),
-    'watcher',
-    callback
-  )();
-});
+// gulp.task('watch', callback => {
+//   global.watch = true;
+//   // fs.writeFileSync('build.txt', 'dirty');
+//   return gulp.series(
+//     gulp.parallel('sass', settings.jsTasker),
+//     'watcher',
+//     callback
+//   )();
+// });
 
-gulp.task('build', callback => {
-  global.production = true;
-  // fs.writeFileSync('build.txt', new Date());
-  return gulp.series(gulp.parallel('sass', settings.jsTasker), callback)();
-});
+// const watch = () => {
+//   return gulp.series(
+//     gulp.parallel(scss(), jsPack(false, true)),
+//     'watcher',
+//     callback
+//   )();
+// };
 
-gulp.task('serve', callback => {
-  global.open = true;
-  gulp.series(gulp.parallel('browserSync'), callback);
-});
+// gulp.task('serve', callback => {
+//   global.open = true;
+//   gulp.series(gulp.parallel('browserSync'), callback);
+// });
 
-gulp.task('sass', () => {
-  const outputStyle = global.production ? 'compressed' : 'compact';
+const scss = isProduction => {
+  const outputStyle = isProduction ? 'compressed' : 'compact';
   const config = {
-    // [delete this] autoprefixer: { browsers: settings.prefixer },
     sass: {
-      // #FOUNDATION - Uncomment here
-      /* includePaths: [
-				'./node_modules/foundation-sites/scss/',
-				'./node_modules/motion-ui/src/',
-			], */
       outputStyle,
     },
   };
 
-  return gulp
-    .src(settings.styleSrc)
-    .pipe(sourcemaps.init())
-    .pipe(sass(config.sass))
-    .on('error', handleErrors)
-    .pipe(autoprefixer(/*config.autoprefixer*/))
-    .pipe(
-      sourcemaps.write('./', {
-        includeContent: false,
-        sourceRoot: settings.styleMapRoot,
-      })
-    )
-    .pipe(gulp.dest(settings.styleDest))
-    .pipe(browserSync.stream({ match: '**/*.css' }))
-    .pipe(gulp.dest(settings.styleDest));
-});
+  const scss = () =>
+    gulp
+      .src(settings.styleSrc)
+      .pipe(sourcemaps.init())
+      .pipe(sass(config.sass))
+      .on('error', handleErrors)
+      .pipe(autoprefixer(/*config.autoprefixer*/))
+      .pipe(
+        sourcemaps.write('./', {
+          includeContent: false,
+          sourceRoot: settings.styleMapRoot,
+        })
+      )
+      .pipe(gulp.dest(settings.styleDest))
+      .pipe(browserSync.stream({ match: '**/*.css' }))
+      .pipe(gulp.dest(settings.styleDest));
 
-gulp.task('js', () => {
-  gulp
-    .src(settings.jsSrc)
-    .pipe(sourcemaps.init())
-    .pipe(concat('app.js'))
-    .pipe(uglify())
-    .on('error', handleErrors)
-    .pipe(
-      sourcemaps.write('./', {
-        includeContent: false,
-        sourceRoot: settings.jsMapRoot,
-      })
-    )
-    .pipe(gulp.dest(settings.jsDest));
-  browserSync.reload();
-});
+  return scss;
+};
 
-gulp.task('webpack', callback => {
+const jsPack = (isProduction, doWatch) => {
   let built = false;
   const config = {
     entry: settings.jsEntry,
@@ -302,61 +284,64 @@ gulp.task('webpack', callback => {
     ],
   };
 
-  if (global.production) {
-    // config.plugins.push(
-    //   new webpack.DefinePlugin({
-    //     // this is probably only needed by React
-    //     'process.env': {
-    //       NODE_ENV: JSON.stringify('production'),
-    //     },
-    //   })
-    //   // new webpack.optimize.UglifyJsPlugin({
-    //   //   compress: {
-    //   //     warnings: false,
-    //   //   },
-    //   // }),
-    //   // new webpack.NoEmitOnErrorsPlugin() // eslint-disable-line
-    // );
+  if (isProduction) {
     config.mode = 'production';
     config.optimization = {
       noEmitOnErrors: true,
-      // minimizer: [
-      //   new UglifyJsPlugin({
-      //     sourceMap: true,
-      //     uglifyOptions: {
-      //       warnings: false,
-      //     },
-      //   }),
-      // ],
     };
   } else {
     config.mode = 'development';
-    config.devtool = 'eval';
-    config.output.pathinfo = true;
-    webpack.debug = true;
+    // config.devtool = 'eval';
+    // config.output.pathinfo = true;
+    // webpack.debug = true;
   }
 
-  if (global.watch) {
-    webpack(config).watch(200, (err, stats) => {
-      logger(err, stats);
-      browserSync.reload();
-      // On the initial compile, let gulp know the task is done
-      if (!built) {
-        built = true;
-        callback();
-      }
-    });
+  let jsPack;
+
+  if (doWatch) {
+    jsPack = () =>
+      new Promise(resolve =>
+        webpack(config).watch(200, (err, stats) => {
+          logger(err, stats);
+          browserSync.reload();
+          // On the initial compile, let gulp know the task is done
+          if (!built) {
+            built = true;
+            resolve();
+          }
+        })
+      );
   } else {
-    webpack(config, (err, stats) => {
-      logger(err, stats);
-      callback();
-    });
+    jsPack = () =>
+      new Promise(resolve =>
+        webpack(config, (err, stats) => {
+          logger(err, stats);
+          resolve();
+        })
+      );
   }
-});
 
-gulp.task('browserSync', () => {
+  return jsPack;
+};
+
+// gulp.task('browserSync', () => {
+//   const config = {
+//     open: global.open || false,
+//     files: settings.watch,
+//   };
+
+//   if (settings.proxy) {
+//     config.proxy = settings.proxy;
+//   } else {
+//     config.server = settings.docroot;
+//   }
+
+//   return browserSync(config);
+// });
+
+const liveReload = doOpen => {
   const config = {
-    open: global.open || false,
+    open: doOpen || false,
     files: settings.watch,
   };
 
@@ -366,12 +351,43 @@ gulp.task('browserSync', () => {
     config.server = settings.docroot;
   }
 
+  const liveReload = () => browserSync(config);
   return browserSync(config);
-});
+};
 
-gulp.task(
-  'watcher',
-  gulp.parallel('browserSync', () => {
-    gulp.watch(settings.styleSrc, gulp.series('sass'));
-  })
+// gulp.task(
+//   'watcher',
+//   gulp.parallel('browserSync', () => {
+//     gulp.watch(settings.styleSrc, gulp.series('sass'));
+//   })
+// );
+
+const watcher = doOpen => {
+  const config = {
+    open: doOpen || false,
+    files: settings.watch,
+  };
+
+  if (settings.proxy) {
+    config.proxy = settings.proxy;
+  } else {
+    config.server = settings.docroot;
+  }
+
+  const watcher = () => {
+    browserSync.init(config);
+    gulp.watch(settings.styleSrc, scss());
+  };
+
+  return watcher;
+};
+
+exports.build = gulp.parallel(scss(true), jsPack(true));
+exports.watch = gulp.series(
+  gulp.parallel(scss(), jsPack(false, true)),
+  watcher(false)
+);
+exports.default = gulp.series(
+  gulp.parallel(scss(), jsPack(false, true)),
+  watcher(true)
 );
