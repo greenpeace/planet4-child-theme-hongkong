@@ -44,6 +44,7 @@ const webpack = require('webpack');
 const browserSync = require('browser-sync');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 /* eslint-enable no-multi-spaces */
 
 /**
@@ -97,7 +98,7 @@ const settings = {
   proxy: 'https://www.planet4.test:8043',
 
   // and finally tell autoprefixer which browsers we care about
-  prefixer: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'IE >= 9'],
+  // prefixer: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'IE >= 9'],
 };
 
 // Merge settings with local config
@@ -192,7 +193,7 @@ gulp.task('watch', callback => {
 gulp.task('build', callback => {
   global.production = true;
   // fs.writeFileSync('build.txt', new Date());
-  gulp.series(gulp.parallel('sass', settings.jsTasker), callback);
+  return gulp.series(gulp.parallel('sass', settings.jsTasker), callback)();
 });
 
 gulp.task('serve', callback => {
@@ -219,7 +220,7 @@ gulp.task('sass', () => {
     .pipe(sourcemaps.init())
     .pipe(sass(config.sass))
     .on('error', handleErrors)
-    .pipe(autoprefixer(config.autoprefixer))
+    .pipe(autoprefixer(/*config.autoprefixer*/))
     .pipe(
       sourcemaps.write('./', {
         includeContent: false,
@@ -302,21 +303,34 @@ gulp.task('webpack', callback => {
   };
 
   if (global.production) {
-    config.plugins.push(
-      new webpack.DefinePlugin({
-        // this is probably only needed by React
-        'process.env': {
-          NODE_ENV: JSON.stringify('production'),
-        },
-      }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false,
-        },
-      }),
-      new webpack.NoEmitOnErrorsPlugin() // eslint-disable-line
-    );
+    // config.plugins.push(
+    //   new webpack.DefinePlugin({
+    //     // this is probably only needed by React
+    //     'process.env': {
+    //       NODE_ENV: JSON.stringify('production'),
+    //     },
+    //   })
+    //   // new webpack.optimize.UglifyJsPlugin({
+    //   //   compress: {
+    //   //     warnings: false,
+    //   //   },
+    //   // }),
+    //   // new webpack.NoEmitOnErrorsPlugin() // eslint-disable-line
+    // );
+    config.mode = 'production';
+    config.optimization = {
+      noEmitOnErrors: true,
+      // minimizer: [
+      //   new UglifyJsPlugin({
+      //     sourceMap: true,
+      //     uglifyOptions: {
+      //       warnings: false,
+      //     },
+      //   }),
+      // ],
+    };
   } else {
+    config.mode = 'development';
     config.devtool = 'eval';
     config.output.pathinfo = true;
     webpack.debug = true;
