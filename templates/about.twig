@@ -39,4 +39,11 @@
 	</div>
     </section>
     {{ post.content|raw }}
+
+	{% if extra_content %}
+		<section class="section-post-content generic-content ct-container">
+			{{ extra_content|raw }}
+		</section>
+	{% endif %}
+
 {% endblock %}
