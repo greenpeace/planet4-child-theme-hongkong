@@ -24,7 +24,6 @@
  * $ gulp          Start watching and fire up a browser tab at localhost:3000
  * $ gulp watch    Start watching but do not open a new tab
  * $ gulp build    Build and compress all files production ready mode
- * $ gulp serve    Fire up a browser tab and serve the files at localhost:3000
  *
  */
 
@@ -38,13 +37,9 @@ const PluginError = require('plugin-error');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
-const watch = require('gulp-watch');
 const notify = require('gulp-notify');
 const webpack = require('webpack');
 const browserSync = require('browser-sync');
-const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 /* eslint-enable no-multi-spaces */
 
 /**
@@ -62,10 +57,6 @@ const settings = {
 
   // here is where app.css will end up
   styleDest: './static/css/',
-
-  // set this to 'webpack' if you want CommonJS-like modules support, leave it to 'js' if all you
-  // need is minification and concatenation
-  jsTasker: 'webpack',
 
   // this is the entry js file(s) (the array keys define the output filenames),
   // it's used only by the 'webpack' task
@@ -86,29 +77,25 @@ const settings = {
   jsDest: path.join(__dirname, '/static/js/'),
 
   // here you can tell browserSync which static (PHP, HTML, etc…) files to watch
-  watch: [
-    '../../plugins/planet4-gpea-plugin-blocks/**/*.twig' /* , './framework/controllers/*.php', … */,
-  ],
+  watch: ['../../plugins/planet4-gpea-plugin-blocks/**/*.twig'],
 
   // now you have two choices: either you indicate a folder which will be
   // considered the document root by the server [docroot], or you can
   // specify which virtual host domain to proxy in gulpconfig.js (comment this
   // line and uncomment below to include gulpconfig.js)
   //docroot: './dist',
-  proxy: 'https://www.planet4.test:8043',
-
-  // and finally tell autoprefixer which browsers we care about
-  // prefixer: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'IE >= 9'],
 };
 
 // Merge settings with local config
-// const localConfig = require('./gulpconfig');
+const localConfig = require('./gulpconfig');
 
-// for (const attrName in localConfig) { // eslint-disable-line
-// 	if (localConfig.hasOwnProperty(attrName)) { // eslint-disable-line
-// 		settings[attrName] = localConfig[attrName];
-// 	}
-// }
+for (const attrName in localConfig) {
+  // eslint-disable-line
+  if (localConfig.hasOwnProperty(attrName)) {
+    // eslint-disable-line
+    settings[attrName] = localConfig[attrName];
+  }
+}
 
 // You can stop editing here, the rest will just work, unless you need
 // Masonry, GSAP, jQuery or Foundation, then keep looking down --v
@@ -169,40 +156,6 @@ function logger(err, stats) {
   }
 }
 
-// gulp.task('default', callback => {
-//   global.watch = true;
-//   global.open = true;
-//   // fs.writeFileSync('build.txt', 'dirty');
-//   return gulp.series(
-//     gulp.parallel('sass', settings.jsTasker),
-//     'watcher',
-//     callback
-//   )();
-// });
-
-// gulp.task('watch', callback => {
-//   global.watch = true;
-//   // fs.writeFileSync('build.txt', 'dirty');
-//   return gulp.series(
-//     gulp.parallel('sass', settings.jsTasker),
-//     'watcher',
-//     callback
-//   )();
-// });
-
-// const watch = () => {
-//   return gulp.series(
-//     gulp.parallel(scss(), jsPack(false, true)),
-//     'watcher',
-//     callback
-//   )();
-// };
-
-// gulp.task('serve', callback => {
-//   global.open = true;
-//   gulp.series(gulp.parallel('browserSync'), callback);
-// });
-
 const scss = isProduction => {
   const outputStyle = isProduction ? 'compressed' : 'compact';
   const config = {
@@ -257,7 +210,7 @@ const jsPack = (isProduction, doWatch) => {
           test: /\.jsx?$/,
           exclude: /node_modules\/(?!foundation)/,
           loader: 'babel-loader',
-          query: { presets: ['env', 'react'] },
+          query: { presets: ['@babel/preset-env', '@babel/preset-react'] },
         },
         // {
         //   enforce: 'pre',
@@ -291,9 +244,6 @@ const jsPack = (isProduction, doWatch) => {
     };
   } else {
     config.mode = 'development';
-    // config.devtool = 'eval';
-    // config.output.pathinfo = true;
-    // webpack.debug = true;
   }
 
   let jsPack;
@@ -323,44 +273,6 @@ const jsPack = (isProduction, doWatch) => {
 
   return jsPack;
 };
-
-// gulp.task('browserSync', () => {
-//   const config = {
-//     open: global.open || false,
-//     files: settings.watch,
-//   };
-
-//   if (settings.proxy) {
-//     config.proxy = settings.proxy;
-//   } else {
-//     config.server = settings.docroot;
-//   }
-
-//   return browserSync(config);
-// });
-
-const liveReload = doOpen => {
-  const config = {
-    open: doOpen || false,
-    files: settings.watch,
-  };
-
-  if (settings.proxy) {
-    config.proxy = settings.proxy;
-  } else {
-    config.server = settings.docroot;
-  }
-
-  const liveReload = () => browserSync(config);
-  return browserSync(config);
-};
-
-// gulp.task(
-//   'watcher',
-//   gulp.parallel('browserSync', () => {
-//     gulp.watch(settings.styleSrc, gulp.series('sass'));
-//   })
-// );
 
 const watcher = doOpen => {
   const config = {
