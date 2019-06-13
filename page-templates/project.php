@@ -47,7 +47,7 @@ if ( has_post_thumbnail( $post->ID ) ) {
 }
 
 // Calculate post percentage
-$percent_complete = $post->custom['p4-gpea_project_percentage'];
+$percent_complete = $post->custom['p4-gpea_project_percentage'] ?? 0;
 $percent_complete = preg_match( '/^\d+$/' , $percent_complete ) ? intval( $percent_complete ) : 0;
 
 $issues = get_category_by_slug( 'issues' );

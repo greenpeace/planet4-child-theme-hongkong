@@ -20,28 +20,27 @@
 			</div>
 		</section>
 
-		<section class="section-post-content generic-content ct-container">
-			<div class="title-box">
-				<div class="top">
-					<div class="left">
-						<p>專題報導</p>
-						<!-- TODO: agganciare issue name -->
-						<p class="issue forests">森林</p>
-					</div>
-					<div class="right">
-						<span class="icon-clock"></span>
-						<p>{{ reading_time }} 閱讀</p>
-						<p><time class="single-post-time" pubdate>{{ post.post_date|date }}</time></p>
-					</div>
+		<section class="section-post-content ct-container">
+			<div class="meta-box">
+				<div>
+					<!-- TODO: agganciare... boh, cos'è questo? -->
+					<span>專題報導</span>
+					<!-- TODO: agganciare issue name -->
+					<span class="issue forests">森林</span>
 				</div>
-
-				<h1>{{ post.title|raw }}</h1>
-				<div class="bottom">
-					<p>作者：{{ post.author.name }}</p>
+				<div>
+					<span><span class="icon-clock"></span> {{ reading_time }} 閱讀</span>
+					<span><time class="single-post-time" pubdate>{{ post.post_date|date }}</time></span>
 				</div>
 			</div>
 
-			{{ post.content|e('wp_kses_post')|raw }}			
+			<h1>{{ post.title|raw }}</h1>
+
+			<div class="meta-box">
+				<span>作者：{{ post.author.name }}</span>
+			</div>
+
+			{{ post.content|e('wp_kses_post')|raw }}
 
 		</section>
 
@@ -52,10 +51,10 @@
 	<section class="section-latest-news">
 		<div class="ct-container">
 			<h2>最新消息</h2>
-			<div class="list">
+			<div class="news-list">
 				{% if ( related_posts ) %}
 					{% for related_post in related_posts %}
-						{% include "blocks/tease-related-post.twig" with {post:related_post} %}						
+						{% include "blocks/tease-related-post.twig" with {post:related_post} %}
 					{% endfor %}
 				{% endif %}
 			</div>

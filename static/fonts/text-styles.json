@@ -1,0 +1,652 @@
+{
+  "styles": [
+    {
+      "name": "M/ Title Big/ Green",
+      "font": "NotoSansTC-Medium",
+      "size": 34,
+      "color": {
+        "red": 0.4,
+        "green": 0.8,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Sub/ Gray",
+      "font": "NotoSansTC-Medium",
+      "size": 16,
+      "color": {
+        "red": 0.3738111413043478,
+        "green": 0.3738111413043478,
+        "blue": 0.3738111413043478,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 21,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Sub/ Gray",
+      "font": "NotoSansTC-Medium",
+      "size": 24,
+      "color": {
+        "red": 0.3738111413043478,
+        "green": 0.3738111413043478,
+        "blue": 0.3738111413043478,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Text/ Black - NoMobile",
+      "font": "NotoSansTC-Regular",
+      "size": 18,
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 28,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Title Big/ Black",
+      "font": "NotoSansTC-Medium",
+      "size": 34,
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Title Big/ black",
+      "font": "NotoSansTC-Medium",
+      "size": 50,
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Title Big/ White",
+      "font": "NotoSansTC-Medium",
+      "size": 34,
+      "color": {
+        "red": 1,
+        "green": 1,
+        "blue": 1,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Text/ White",
+      "font": "NotoSansTC-Regular",
+      "size": 18,
+      "color": {
+        "red": 1,
+        "green": 1,
+        "blue": 1,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 28,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Title Big/ white",
+      "font": "NotoSansTC-Medium",
+      "size": 50,
+      "color": {
+        "red": 1,
+        "green": 1,
+        "blue": 1,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Text/ White",
+      "font": "NotoSansTC-Regular",
+      "size": 24,
+      "color": {
+        "red": 1,
+        "green": 1,
+        "blue": 1,
+        "alpha": 1
+      },
+      "alignment": 2,
+      "spacing": null,
+      "lineHeight": 38,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Link/ Green",
+      "font": "NotoSansTC-Medium",
+      "size": 14,
+      "color": {
+        "red": 0.4,
+        "green": 0.8,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 20,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Link/ Green",
+      "font": "NotoSansTC-Medium",
+      "size": 20,
+      "color": {
+        "red": 0.4,
+        "green": 0.8,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 20,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Text/ Black",
+      "font": "NotoSansTC-Regular",
+      "size": 18,
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 28,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Title Big/ Green",
+      "font": "NotoSansTC-Medium",
+      "size": 50,
+      "color": {
+        "red": 0.4,
+        "green": 0.8,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 70,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Title Mid/ white",
+      "font": "NotoSansTC-Medium",
+      "size": 34,
+      "color": {
+        "red": 1,
+        "green": 1,
+        "blue": 1,
+        "alpha": 1
+      },
+      "alignment": 2,
+      "spacing": null,
+      "lineHeight": 55,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Caption/ White",
+      "font": "NotoSansTC-Regular",
+      "size": 14,
+      "color": {
+        "red": 1,
+        "green": 1,
+        "blue": 1,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 20,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Caption/ Gray",
+      "font": "NotoSansTC-Regular",
+      "size": 14,
+      "color": {
+        "red": 0.3738111413043478,
+        "green": 0.3738111413043478,
+        "blue": 0.3738111413043478,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 20,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Caption/Sub Green",
+      "font": "NotoSansTC-Regular",
+      "size": 28,
+      "color": {
+        "red": 0.4,
+        "green": 0.8,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 45,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Caption/Sub Number Green",
+      "font": "Montserrat-Medium",
+      "size": 30,
+      "color": {
+        "red": 0.4,
+        "green": 0.8,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": -0.5999999,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Caption/Sub Number Green",
+      "font": "Montserrat-Medium",
+      "size": 24,
+      "color": {
+        "red": 0.4,
+        "green": 0.8,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": -0.48,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Caption/Sub Green",
+      "font": "NotoSansTC-Medium",
+      "size": 16,
+      "color": {
+        "red": 0.4,
+        "green": 0.8,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 21,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Title Big/Number IssueColor",
+      "font": "Montserrat-Light",
+      "size": 42,
+      "color": {
+        "red": 0,
+        "green": 0.561,
+        "blue": 0.886,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": 0,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Title Big/Number IssueColor",
+      "font": "Montserrat-Light",
+      "size": 60,
+      "color": {
+        "red": 0,
+        "green": 0.561,
+        "blue": 0.886,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": 0,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Title Big/ Gray",
+      "font": "NotoSansTC-Medium",
+      "size": 34,
+      "color": {
+        "red": 0.3738111413043478,
+        "green": 0.3738111413043478,
+        "blue": 0.3738111413043478,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Title Big/ Gray",
+      "font": "NotoSansTC-Medium",
+      "size": 50,
+      "color": {
+        "red": 0.3738111413043478,
+        "green": 0.3738111413043478,
+        "blue": 0.3738111413043478,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 70,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Caption/Txt Gray",
+      "font": "NotoSansTC-Regular",
+      "size": 20,
+      "color": {
+        "red": 0.3738111413043478,
+        "green": 0.3738111413043478,
+        "blue": 0.3738111413043478,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 32,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Title Mid/ White",
+      "font": "NotoSansTC-Medium",
+      "size": 24,
+      "color": {
+        "red": 1,
+        "green": 1,
+        "blue": 1,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Text/Big  IssueColor",
+      "font": "NotoSansTC-Medium",
+      "size": 24,
+      "color": {
+        "red": 0,
+        "green": 0.561,
+        "blue": 0.886,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": 0,
+      "lineHeight": 36,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Text/Big IssueColor",
+      "font": "NotoSansTC-Medium",
+      "size": 34,
+      "color": {
+        "red": 0,
+        "green": 0.561,
+        "blue": 0.886,
+        "alpha": 1
+      },
+      "alignment": 2,
+      "spacing": 0,
+      "lineHeight": 50,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Title Mid/ Black",
+      "font": "NotoSansTC-Medium",
+      "size": 24,
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Title Mid/ Black",
+      "font": "NotoSansTC-Medium",
+      "size": 34,
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Text/ Black",
+      "font": "NotoSansTC-Regular",
+      "size": 24,
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 38,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Title Mid/ Green",
+      "font": "NotoSansTC-Medium",
+      "size": 24,
+      "color": {
+        "red": 0.4,
+        "green": 0.8,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Title Mid/ Green",
+      "font": "NotoSansTC-Medium",
+      "size": 34,
+      "color": {
+        "red": 0.4,
+        "green": 0.8,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 0,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "D/ Caption/Txt White",
+      "font": "NotoSansTC-Regular",
+      "size": 20,
+      "color": {
+        "red": 1,
+        "green": 1,
+        "blue": 1,
+        "alpha": 1
+      },
+      "alignment": 0,
+      "spacing": null,
+      "lineHeight": 32,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    },
+    {
+      "name": "M/ Text/Black - NoMobile",
+      "font": "NotoSansTC-Regular",
+      "size": 16,
+      "color": {
+        "red": 0,
+        "green": 0,
+        "blue": 0,
+        "alpha": 1
+      },
+      "alignment": 2,
+      "spacing": null,
+      "lineHeight": 24,
+      "paragraphSpacing": 0,
+      "textTransform": 0,
+      "strikethrough": null,
+      "underline": null
+    }
+  ]
+}

@@ -43,6 +43,7 @@ class P4CT_Metabox_Register {
 		$this->register_tip_metabox();
 		$this->register_team_metabox();
 		$this->register_post_metabox();
+		$this->register_page_metabox();
 		$this->register_main_options_metabox();
 	}
 
@@ -276,6 +277,35 @@ class P4CT_Metabox_Register {
 	}
 
 	/**
+	 * Registers post meta box(es).
+	 */
+	 public function register_page_metabox() {
+
+		$cmb_page = new_cmb2_box(
+			array(
+				'id'           => 'p4-gpea-page-box',
+				'title'        => 'Extra field for the current page',
+				'object_types' => array( 'page' ),
+				'context'      => 'normal', // 'normal', 'advanced', or 'side'
+				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
+				'show_names'   => true, // Show field names on the left
+			)
+		);
+
+		$cmb_page->add_field(
+			array(
+				'name'             => esc_html__( 'Extra content section', 'cmb2' ),
+				'desc'             => esc_html__( 'You can use this extra field to add rich text content below the main section', 'cmb2' ),
+				'id'               => 'p4-gpea_page_extra_content',
+				'type'             => 'wysiwyg',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
+			)
+		);
+
+	}
+
+	/**
 	 * Registers main option meta box(es).
 	 */
 	public function register_main_options_metabox() {
@@ -360,10 +390,23 @@ class P4CT_Metabox_Register {
 		/* Engaging default newsletter recipient */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Id code of your Engaging default subscription page', 'gpea_theme' ),
+				'name'    => esc_html__( '"Id" code of your Engaging default subscription page', 'gpea_theme' ),
 				'desc'    => esc_html__( 'When user will select one or more topics to follow, he will be able to subscribe to that page', 'gpea_theme' ),
 				'id'      => 'gpea_default_en_subscription_page',
 				'type'    => 'text',
+			)
+		);
+
+		/* default Engaging planet4-form associated to the tag cloud */
+
+		$cmb_options->add_field(
+			array(
+				'name'             => esc_html__( 'Select the form for tag cloud subsciption', 'gpea_theme' ),
+				'desc'             => esc_html__( 'Form will be shown below the tag cloud to subscribe to Engaging Newsletter', 'gpea_theme' ),
+				'id'               => 'gpea_tag_cloud_newsletter_form',
+				'type'             => 'select',
+				'show_option_none' => true,
+				'options'          => $this->generate_post_select( 'p4en_form', null, null ),
 			)
 		);
 

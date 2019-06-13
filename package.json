@@ -1,34 +1,47 @@
 {
   "name": "gpea",
-  "version": "1.0.0",
-  "description": "GPEA",
-  "scripts": {
-    "start": "gulp",
-    "sass": "gulp sass",
-    "build": "gulp build"
+  "version": "0.0.1",
+  "description": "GPEA Frontend",
+  "author": "us",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "ansi-colors": "^3.2.4",
+    "babel-loader": "^8.0.6",
+    "browser-sync": "^2.26.7",
+    "exports-loader": "^0.7.0",
+    "expose-loader": "^0.7.5",
+    "fancy-log": "^1.3.3",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-notify": "^3.2.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "imports-loader": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "plugin-error": "^1.0.1",
+    "promise-polyfill": "^8.1.0",
+    "webpack": "^4.34.0",
+    "whatwg-fetch": "^3.0.0"
   },
-  "author": "HaThaiHoang <jonlefcun@gmail.com>",
-  "license": "UNLICENSED",
   "dependencies": {
     "js-cookie": "^2.2.0",
     "swiper": "4.5.0",
     "vanilla-lazyload": "12.0.0"
   },
-  "devDependencies": {
-    "autoprefixer": "9.5.1",
-    "browser-sync": "^2.26.5",
-    "cssnano": "4.1.10",
-    "del": "4.1.0",
-    "gulp": "4.0.0",
-    "gulp-connect": "5.7.0",
-    "gulp-notify": "3.2.0",
-    "gulp-plumber": "1.2.1",
-    "gulp-postcss": "8.0.0",
-    "gulp-rename": "1.4.0",
-    "gulp-sass": "4.0.2",
-    "lost": "8.3.1",
-    "rucksack-css": "1.0.2",
-    "webpack-stream": "5.2.1",
-    "tar": "2.2.2"
-  }
+  "scripts": {
+    "start": "gulp",
+    "watch": "gulp watch",
+    "build": "gulp build"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "Firefox ESR",
+    "Opera 12.1",
+    "IE >= 9"
+  ]
 }

@@ -1,109 +1,124 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <section class="section-hero-top" style="background-image: url({{ background_image }})">
+	<section class="section-hero-top" style="background-image: url({{ background_image }})">
 		<div class="section-hero-shade"></div>
 	<div class="ct-container">
-	    <div class="content">
+		<div class="content">
 		<div class="top-bar">
-		    <a href="" class="back-button">
+			<a href="" class="back-button">
 			<span class="icon-chevron-left"></span>
-		    </a>
-		    <a href="" class="button light">關注</a>
+			</a>
+			<a href="" class="button light">關注</a>
 		</div>
-		<div class="info-box">
-		     <h1>{{ post.title|raw }}</h1>
-		     <p class="subtitle">{{ custom_body_classes|default("") }}</p>
-		     </div>
-	    </div>
+		<div class="hero-issue-title">
+			 <h1>{{ post.title|raw }}</h1>
+			 <p>{{ custom_body_classes|default("") }}</p>
+			 </div>
+		</div>
 	</div>
-    </section>
+	</section>
 
 	{{ post.content|raw }}
 
-	<section class="section-issue-main">
+	<section class="section-related-tags">
 		<div class="ct-container">
-			<div class="divider"></div>
-			<p>關於海洋你要知道的是…</p>
+			<hr />
+			<h2>關於海洋你要知道的是…</h2>
 			<div class="tags">
-			<a href="" class="tag">污染</a>
-			<a href="" class="tag">塑膠</a>
-			<a href="" class="tag">動物</a>
-			<a href="" class="tag">空氣</a>
-			<a href="" class="tag">電子</a>
+				<a href="" class="button tag">污染</a>
+				<a href="" class="button tag">塑膠</a>
+				<a href="" class="button tag">動物</a>
+				<a href="" class="button tag">空氣</a>
+				<a href="" class="button tag">電子</a>
 			</div>
 		</div>
 	</section>
 	<section class="section-latest-news">
 		<div class="ct-container">
 			<h2>最新消息</h2>
-			<div class="list">
-			<a class="post" href="">
-				<div class="info-box">
-				<div class="top">
-					<div class="tag">北極</div>
-					<p class="type">成就</p>
-				</div>
-				<div class="name">
-					在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
-				</div>
-				<div class="bottom">
-					<div class="time">
-					<span class="icon-clock"></span>
-					<p>4 min 閱讀</p>
+			<div class="news-list">
+				<a class="card-update compact" href="">
+					<div
+					class="thumbnail lazy"
+					data-bg="url(https://picsum.photos/id/82/200/300)"
+					></div>
+					<div class="box">
+						<div class="meta-box">
+							<div>
+								<!-- TODO: print real issue -->
+								<span class="issue oceans">海洋</span>
+								<!-- TODO: print post type -->
+								<span>新聞</span>
+							</div>
+						</div>
+						<p>
+							在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
+						</p>
+						<div class="meta-box">
+							<div>
+								<!-- TODO: print reading time -->
+								<span> <span class="icon-clock"></span> 4 min 閱讀 </span>
+								<!-- TODO: print real date -->
+								<span>2018-12-07</span>
+							</div>
+						</div>
 					</div>
-					<div class="number">00.00.0000</div>
-				</div>
-				</div>
-				<div
-				class="thumbnail lazy"
-				data-bg="url(https://picsum.photos/id/82/200/300)"
-				></div>
-			</a>
-			<a class="post" href="">
-				<div class="info-box">
-				<div class="top">
-					<div class="tag">北極</div>
-					<p class="type">成就</p>
-				</div>
-				<div class="name">
-					在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
-				</div>
-				<div class="bottom">
-					<div class="time">
-					<span class="icon-clock"></span>
-					<p>4 min 閱讀</p>
+				</a>
+				<a class="card-update compact" href="">
+					<div
+					class="thumbnail lazy"
+					data-bg="url(https://picsum.photos/id/82/200/300)"
+					></div>
+					<div class="box">
+						<div class="meta-box">
+							<div>
+								<!-- TODO: print real issue -->
+								<span class="issue oceans">海洋</span>
+								<!-- TODO: print post type -->
+								<span>新聞</span>
+							</div>
+						</div>
+						<p>
+							在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
+						</p>
+						<div class="meta-box">
+							<div>
+								<!-- TODO: print reading time -->
+								<span> <span class="icon-clock"></span> 4 min 閱讀 </span>
+								<!-- TODO: print real date -->
+								<span>2018-12-07</span>
+							</div>
+						</div>
 					</div>
-					<div class="number">00.00.0000</div>
-				</div>
-				</div>
-				<div
-				class="thumbnail lazy"
-				data-bg="url(https://picsum.photos/id/83/200/300)"
-				></div>
-			</a>
-			<a class="post" href="">
-				<div class="info-box">
-				<div class="top">
-					<div class="tag">北極</div>
-					<p class="type">成就</p>
-				</div>
-				<div class="name">
-					在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
-				</div>
-				<div class="bottom">
-					<div class="time">
-					<span class="icon-clock"></span>
-					<p>4 min 閱讀</p>
+				</a>
+				<a class="card-update compact" href="">
+					<div
+					class="thumbnail lazy"
+					data-bg="url(https://picsum.photos/id/82/200/300)"
+					></div>
+					<div class="box">
+						<div class="meta-box">
+							<div>
+								<!-- TODO: print real issue -->
+								<span class="issue oceans">海洋</span>
+								<!-- TODO: print post type -->
+								<span>新聞</span>
+							</div>
+						</div>
+						<p>
+							在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
+						</p>
+						<div class="meta-box">
+							<div>
+								<!-- TODO: print reading time -->
+								<span> <span class="icon-clock"></span> 4 min 閱讀 </span>
+								<!-- TODO: print real date -->
+								<span>2018-12-07</span>
+							</div>
+						</div>
 					</div>
-					<div class="number">00.00.0000</div>
-				</div>
-				</div>
-				<div
-				class="thumbnail lazy"
-				data-bg="url(https://picsum.photos/id/84/200/300)"
-				></div>
-			</a>
+				</a>
 			</div>
 		</div>
 	</section>
