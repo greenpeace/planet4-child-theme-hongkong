@@ -43,6 +43,7 @@ class P4CT_Metabox_Register {
 		$this->register_tip_metabox();
 		$this->register_team_metabox();
 		$this->register_post_metabox();
+		$this->register_page_metabox();
 		$this->register_main_options_metabox();
 	}
 
@@ -268,6 +269,35 @@ class P4CT_Metabox_Register {
 				'desc'             => esc_html__( 'Specify the time extimated to read the article (i.e. 4 min)', 'cmb2' ),
 				'id'               => 'p4-gpea_post_reading_time',
 				'type'             => 'text',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
+			)
+		);
+
+	}
+
+	/**
+	 * Registers post meta box(es).
+	 */
+	 public function register_page_metabox() {
+
+		$cmb_page = new_cmb2_box(
+			array(
+				'id'           => 'p4-gpea-page-box',
+				'title'        => 'Extra field for the current page',
+				'object_types' => array( 'page' ),
+				'context'      => 'normal', // 'normal', 'advanced', or 'side'
+				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
+				'show_names'   => true, // Show field names on the left
+			)
+		);
+
+		$cmb_page->add_field(
+			array(
+				'name'             => esc_html__( 'Extra content section', 'cmb2' ),
+				'desc'             => esc_html__( 'You can use this extra field to add rich text content below the main section', 'cmb2' ),
+				'id'               => 'p4-gpea_page_extra_content',
+				'type'             => 'wysiwyg',
 			// 'sanitization_cb' => 'intval',
 			// 'escape_cb'       => 'intval',
 			)
