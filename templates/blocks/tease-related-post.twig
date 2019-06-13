@@ -1,27 +1,26 @@
-<a class="post" href="{{ post.link }}">
-	<div class="info-box">
-	<div class="top">
-		{% if (post.categories) %}
-			<div class="tag">{{ post.categories|first.name|e('wp_kses_post')|raw }}</div>
-		{% endif %}
-		{% if (post.tags) %}
-			<div class="type">{{ post.tags|first.name|e('wp_kses_post')|raw }}</div>
-		{% endif %}
-	</div>
-	<div class="name">
-		{{ post.post_title }}
-		<!-- - TODO or recent_post.post_excerpt? -->
-	</div>
-	<div class="bottom">
-		<div class="time">
-		<span class="icon-clock"></span>
-		<p>{{ fn( 'get_post_meta', post.ID, 'p4-gpea_post_reading_time', true)|raw }}</p>
-		</div>
-		<div class="number">{{ post.post_date|date }}</div>
-	</div>
-	</div>
+<a class="card-update compact" href="{{ post.link }}">
 	<div
 	class="thumbnail lazy"
 	data-bg="url({{ fn('get_the_post_thumbnail_url', recent_post.ID, 'articles-medium-large' ) }})"
 	></div>
+	<div class="box">
+		<div class="meta-box">
+			<div>
+				<!-- TODO: print real issue -->
+				<span class="issue oceans">海洋</span>
+				<!-- TODO: print post type -->
+				<span>新聞</span>
+			</div>
+		</div>
+		<p>
+			{{ post.post_title }}
+			<!-- - TODO or recent_post.post_excerpt? -->
+		</p>
+		<div class="meta-box">
+			<div>
+				<span> <span class="icon-clock"></span> {{ fn( 'get_post_meta', post.ID, 'p4-gpea_post_reading_time', true)|raw }} 閱讀 </span>
+				<span>{{ post.post_date|date }}</span>
+			</div>
+		</div>
+	</div>
 </a>
