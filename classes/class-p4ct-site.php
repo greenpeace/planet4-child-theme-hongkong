@@ -132,6 +132,13 @@ class P4CT_Site {
 		// $context['antani'] = 'scappellamento';
 		// $options = get_option( 'planet4_tarapia' );
 		// $context['sbiriguda'] = $options['brematurata'] ?? '';
+		$options = get_option( 'gpea_options' );
+		$context['press_media_link'] = $options['gpea_default_press_media'] ? get_permalink( $options['gpea_default_press_media'] ) : site_url();
+		$context['make_change_link'] = $options['gpea_default_make_change'] ? get_permalink( $options['gpea_default_make_change'] ) : site_url();
+		$context['preferences_link'] = $options['gpea_default_preferences'] ? get_permalink( $options['gpea_default_preferences'] ) : site_url();
+		$context['commitment_projects_link'] = $options['gpea_default_commitment_projects'] ? get_permalink( $options['gpea_default_commitment_projects'] ) : site_url();
+		$context['commitment_issues_link'] = $options['gpea_default_commitment_issues'] ? get_permalink( $options['gpea_default_commitment_issues'] ) : site_url();
+
 		return $context;
 	}
 
@@ -309,4 +316,18 @@ class P4CT_Site {
 	public function p4_auto_generate_excerpt( $post_id, $post ) {
 	}
 
+}
+/**
+ * Wrapper function around cmb2_get_option.
+ *
+ * @param  string $key Options array key.
+ * @return mixed Option value.
+ */
+ function gpea_get_option( $key = '' ) {
+	if ( function_exists( 'cmb2_get_option' ) ) {
+		return cmb2_get_option( 'gpea_options', $key );
+	} else {
+		$options = get_option( 'gpea_options' );
+		return isset( $options[ $key ] ) ? $options[ $key ] : false;
+	}
 }

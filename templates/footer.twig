@@ -11,8 +11,8 @@
 		<span class="icon-greenpeace"></span>
 		<p class="description text tiny semi-bold">{{ generic_footer_text }}</p>
 		<div class="links text bold">
-		    <a href="">新闻稿和媒体</a>
-		    <a href="">我的喜好</a>
+		    <a href="{{ press_media_link }}">新闻稿和媒体</a>
+		    <a href="{{ preferences_link }}">我的喜好</a>
 		</div>
             </div>
             <div class="box-group">
@@ -21,8 +21,8 @@
 			我們的承諾
 		    </p>
 		    <ul class="text bold">
-			<li><a href="">現行項目</a></li>
-			<li><a href="">環保議題</a></li>
+			<li><a href="{{ commitment_projects_link }}">現行項目</a></li>
+			<li><a href="{{ commitment_issues_link }}">環保議題</a></li>
 		    </ul>
 		</div>
 		<div class="box">
@@ -41,8 +41,8 @@
     <div class="bottom-bar">
 	<div class="ct-container">
             <div class="mobile-links">
-		<a href="">新闻稿和媒体</a>
-		<a href="">我的喜好</a>
+		<a href="{{ press_media_link }}">新闻稿和媒体</a>
+		<a href="{{ preferences_link }}">我的喜好</a>
             </div>
             <div class="bottom-content">
 		{% for item in footer_secondary_menu %}
