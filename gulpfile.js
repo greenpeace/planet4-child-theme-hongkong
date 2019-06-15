@@ -77,7 +77,10 @@ const settings = {
   jsDest: path.join(__dirname, '/static/js/'),
 
   // here you can tell browserSync which static (PHP, HTML, etc…) files to watch
-  watch: ['../../plugins/planet4-gpea-plugin-blocks/**/*.twig'],
+  watch: [
+    '../../plugins/planet4-gpea-plugin-blocks/**/*.twig',
+    './static/demo/**/*.html',
+  ],
 
   // now you have two choices: either you indicate a folder which will be
   // considered the document root by the server [docroot], or you can
