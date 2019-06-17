@@ -1,0 +1,63 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<section class="section-hero-top" style="background-image: url({{ background_image }})">
+		<div class="section-hero-shade"></div>
+		<div class="ct-container">
+			<div class="top-bar">
+			<a href="" class="back-button">
+				<span class="icon-chevron-left"></span>
+			</a>
+			<a href="" class="button green">關注</a>
+			</div>
+		</div>
+		<div class="ct-container anchor-bottom">
+			<div class="project-summary">
+			<h1 class="project-summary-title">{{ post.title|raw }}</h1>
+			<div class="project-summary-details">
+				<!-- TODO: print real issue -->
+				<div class="project-summary-issue issue plastics">塑料</div>
+				<div class="project-summary-open">
+					<div class="project-summary-open-name">開始</div>
+					{{ start_date }}<!-- 2017年1月 -->
+				</div>
+				<div class="project-summary-area">
+					<div class="project-summary-area-name">實施領域</div>
+					{{ localization }}
+				</div>
+				<div class="project-summary-progress">
+				<div class="circle-progress-bar">
+					<span>{{ project_percentage }}%</span>
+					<svg width="232" height="232" viewBox="0 0 232 232">
+					<circle
+						cx="116"
+						cy="116"
+						r="112"
+						fill="none"
+						stroke="#ffffff"
+						stroke-opacity="0.3"
+						stroke-width="8"
+					/>
+					<!--    Assuming a percentage of 43%:                     -->
+					<!--    stroke-dasharray = 2 * π * r = 697.433             -->
+					<!--    stroke-dashoffset = stroke-dasharray * (1 - 0.43)    -->
+					<circle
+						cx="116"
+						cy="116"
+						r="112"
+						fill="none"
+						stroke="#ffffff"
+						stroke-width="8"
+						stroke-dasharray="697.433"
+						stroke-dashoffset="{{ stroke_dashoffset }}"
+					/>
+					</svg>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+
+	{{ post.content|raw }}
+{% endblock %}

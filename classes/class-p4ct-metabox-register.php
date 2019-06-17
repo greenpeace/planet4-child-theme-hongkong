@@ -45,6 +45,7 @@ class P4CT_Metabox_Register {
 	public function register_p4_meta_box() {
 		$this->register_sidebar_metabox();
 		$this->register_project_metabox();
+		$this->register_petition_metabox();
 		$this->register_tip_metabox();
 		$this->register_team_metabox();
 		$this->register_post_metabox();
@@ -142,6 +143,62 @@ class P4CT_Metabox_Register {
 			 // 'escape_cb'       => 'intval',
 			)
 		);
+
+	}
+
+	/**
+	 * Registers Petition meta box(es).
+	 */
+	 public function register_petition_metabox() {
+
+		$cmb_petition = new_cmb2_box(
+			array(
+				'id'           => 'p4-gpea-donation-box',
+				'title'        => 'Information about this petition',
+				'object_types' => array( 'page' ), // post type
+				'show_on'      => array(
+					'key'          => 'page-template',
+					'value'        => 'page-templates/petition.php',
+				),
+				'context'      => 'normal', // 'normal', 'advanced', or 'side'
+				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
+				'show_names'   => true, // Show field names on the left
+			)
+		);
+
+		$cmb_petition->add_field(
+			array(
+				'name'    => esc_html__( '"Id" code of Engaging connected petition', 'gpea_theme' ),
+				'desc'    => esc_html__( 'This will be used to retrieve current signature number', 'gpea_theme' ),
+				'id'               => 'p4-gpea_petition_engaging_pageid',
+				'type'             => 'text',
+			)
+		);
+
+		$cmb_petition->add_field(
+			array(
+				'name'             => esc_html__( 'Petition goal number', 'cmb2' ),
+				'desc'             => esc_html__( 'Number of signatures to be reached by this petition', 'cmb2' ),
+				'id'               => 'p4-gpea_petition_engaging_target',
+				'type'             => 'text',
+				'attributes' => array(
+					'type' => 'number',
+					'pattern' => '\d*',
+				),
+			 // 'sanitization_cb' => 'intval',
+			 // 'escape_cb'       => 'intval',
+			)
+		);
+
+		$cmb_petition->add_field(
+			array(
+				'name'    => esc_html__( 'External link to redirect petition (optional)', 'gpea_theme' ),
+				'desc'    => esc_html__( 'If set, card on the website will link to this external link instead of internal page', 'gpea_theme' ),
+				'id'               => 'p4-gpea_petition_external_link',
+				'type'             => 'text',
+			)
+		);		
+
 
 	}
 
@@ -457,6 +514,24 @@ class P4CT_Metabox_Register {
 				'type'             => 'select',
 				'show_option_none' => true,
 				'options'          => $this->generate_post_select( 'p4en_form', null, null ),
+			)
+		);
+
+		/* Other Engaging newsletter default module */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Thank you main text, for "topic/issue" newsletter subscribe', 'gpea_theme' ),
+				'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme' ),
+				'id'      => 'gpea_subscription_page_thankyou_title',
+				'type'    => 'text',
+			)
+		);
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Thank you message: second line', 'gpea_theme' ),
+				'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme' ),
+				'id'      => 'gpea_subscription_page_thankyou_subtitle',
+				'type'    => 'text',
 			)
 		);
 
