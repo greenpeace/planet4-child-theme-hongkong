@@ -133,11 +133,11 @@ class P4CT_Site {
 		// $options = get_option( 'planet4_tarapia' );
 		// $context['sbiriguda'] = $options['brematurata'] ?? '';
 		$options = get_option( 'gpea_options' );
-		$context['press_media_link'] = $options['gpea_default_press_media'] ? get_permalink( $options['gpea_default_press_media'] ) : site_url();
-		$context['make_change_link'] = $options['gpea_default_make_change'] ? get_permalink( $options['gpea_default_make_change'] ) : site_url();
-		$context['preferences_link'] = $options['gpea_default_preferences'] ? get_permalink( $options['gpea_default_preferences'] ) : site_url();
-		$context['commitment_projects_link'] = $options['gpea_default_commitment_projects'] ? get_permalink( $options['gpea_default_commitment_projects'] ) : site_url();
-		$context['commitment_issues_link'] = $options['gpea_default_commitment_issues'] ? get_permalink( $options['gpea_default_commitment_issues'] ) : site_url();
+		$context['press_media_link'] = isset( $options['gpea_default_press_media'] ) ? get_permalink( $options['gpea_default_press_media'] ) : site_url();
+		$context['make_change_link'] = isset( $options['gpea_default_make_change'] ) ? get_permalink( $options['gpea_default_make_change'] ) : site_url();
+		$context['preferences_link'] = isset( $options['gpea_default_preferences'] ) ? get_permalink( $options['gpea_default_preferences'] ) : site_url();
+		$context['commitment_projects_link'] = isset( $options['gpea_default_commitment_projects'] ) ? get_permalink( $options['gpea_default_commitment_projects'] ) : site_url();
+		$context['commitment_issues_link'] = isset( $options['gpea_default_commitment_issues'] ) ? get_permalink( $options['gpea_default_commitment_issues'] ) : site_url();
 
 		return $context;
 	}
