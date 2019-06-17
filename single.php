@@ -46,12 +46,27 @@ $context['custom_body_classes'] = 'white-bg';
 $context['reading_time']        = $page_meta_data['p4-gpea_post_reading_time'][0] ?? '';
 $post_categories     = get_the_terms( $post, 'category' );
 
+$planet4_options = get_option( 'planet4_options' );
+
+$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+if ( ! $main_issues_category_id ) {
+	$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+	if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+}
+
 $context['post_categories'] = '';
 if ( $post_categories ) {
 	foreach ( $post_categories as $post_category ) {
 		$context['post_categories'] .= $post_category->slug . ' ';
+		if ( ( $main_issues_category_id ) && ( intval($post_category->parent) === intval($main_issues_category_id) ) ) {			
+			$context['main_issue'] = $post_category->name;
+			$context['main_issue_slug'] = $post_category->slug;
+		}
 	}
 }
+
+/* 
+
 
 /* get useful theme options */
 $options = get_option( 'gpea_options' );
@@ -111,7 +126,7 @@ $context['post_comments_count'] = get_comments(
 
 $context['post_tags'] = implode( ', ', $post->tags() );
 /* for main issue relation we use categories */
-$context['categories'] = implode( ', ', $post->categories() );
+// $context['categories'] = implode( ', ', $post->categories() );
 
 if ( post_password_required( $post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );

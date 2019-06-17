@@ -265,13 +265,13 @@ class P4CT_Site {
 		if ( $exclude_post_id ) {
 			$post_args['post__not_in'] = [ $exclude_post_id ];
 		}
-		/*if ( $post_tags ) {
+		if ( $post_tags ) {
 			$tag_id_array = [];
 			foreach ( $post_tags as $tag ) {
 				$tag_id_array[] = $tag->term_id;
 			}
 			$post_args['tag__in'] = $tag_id_array;
-		}*/
+		}
 
 		$templates          = [ 'tease-related-post.twig' ];
 		$pagetype_posts     = new \Timber\PostQuery( $post_args, 'P4_Post' );
