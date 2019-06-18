@@ -16,10 +16,10 @@
 		<div class="center-box">
 		    <ul class="menu">
 			{% for key,item in navbar_menu.get_items %}
-			    <li class="item" class="{{ item == item.current ? 'active' : '' }}">
+			    <li class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
 				<a href="{{ item.get_link }}">
 				    <!-- TODO add icon-globe or icon-people under menu CSS classes -->
-				    <span class="{{ item.class }}"></span>
+				    <span class="item__menu__icon"></span>
 				    <p>{{ item.title }}</p>
 				</a>
 			    </li>
@@ -37,16 +37,18 @@
     </header>
 
     <div class="mobile-toolbar">
-	<a href="">
-	    <p>最新消息</p>
-	    <span class="icon-globe"></span>
-	</a>
-	<a href="">
-	    <span class="icon-home"></span>
-	</a>
-	<a href="">
-	    <span class="icon-people"></span>
-	    <p>推動改變</p>
-	</a>
+		{% for key,item in navbar_menu.get_items %}
+			{% if (key) < 2 %}
+			<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">				
+				<p>{{ item.title }}</p>
+				<span class="item__menu__icon"></span>
+			</a>
+			{% else %}
+			<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">								
+				<span class="item__menu__icon"></span>
+				<p>{{ item.title }}</p>
+			</a>
+			{% endif %}
+		{% endfor %}	
     </div>
 {% endblock %}
