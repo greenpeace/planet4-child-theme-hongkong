@@ -12,6 +12,9 @@
   src: url('../fonts/Noto_Sans_TC/NotoSansTC-Medium.otf') format('opentype');
 }
 
-body {
+body,
+.form-caption h1,
+.form-caption p,
+.enform {
   font-family: 'Noto Sans TC', sans-serif;
 }

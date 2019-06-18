@@ -82,4 +82,4 @@ $context['start_date'] 					= $page_meta_data['p4-gpea_project_start_date'][0] ?
 $context['localization'] 			= $page_meta_data['p4-gpea_project_localization'][0] ?? 0;
 
 
-Timber::render( [ 'project.twig' ], $context );
+Timber::render( [ 'petition.twig' ], $context );
