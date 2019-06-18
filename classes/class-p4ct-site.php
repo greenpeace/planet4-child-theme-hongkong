@@ -63,7 +63,7 @@ class P4CT_Site {
 		add_filter( 'timber_context', [ $this, 'add_to_context' ] );
 		add_filter( 'get_twig', [ $this, 'add_to_twig' ] );
 		add_action( 'init', [ $this, 'register_taxonomies' ], 2 );
-		add_action( 'wp_print_styles', [ $this, 'dequeue_parent_assets' ] );
+		add_action( 'wp_print_styles', [ $this, 'dequeue_parent_assets' ], 100 );
 		// add_action( 'pre_get_posts', [ $this, 'add_search_options' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_assets' ] );
 		// add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_public_assets' ] );
@@ -133,11 +133,11 @@ class P4CT_Site {
 		// $options = get_option( 'planet4_tarapia' );
 		// $context['sbiriguda'] = $options['brematurata'] ?? '';
 		$options = get_option( 'gpea_options' );
-		$context['press_media_link'] = $options['gpea_default_press_media'] ? get_permalink( $options['gpea_default_press_media'] ) : site_url();
-		$context['make_change_link'] = $options['gpea_default_make_change'] ? get_permalink( $options['gpea_default_make_change'] ) : site_url();
-		$context['preferences_link'] = $options['gpea_default_preferences'] ? get_permalink( $options['gpea_default_preferences'] ) : site_url();
-		$context['commitment_projects_link'] = $options['gpea_default_commitment_projects'] ? get_permalink( $options['gpea_default_commitment_projects'] ) : site_url();
-		$context['commitment_issues_link'] = $options['gpea_default_commitment_issues'] ? get_permalink( $options['gpea_default_commitment_issues'] ) : site_url();
+		$context['press_media_link'] = isset( $options['gpea_default_press_media'] ) ? get_permalink( $options['gpea_default_press_media'] ) : site_url();
+		$context['make_change_link'] = isset( $options['gpea_default_make_change'] ) ? get_permalink( $options['gpea_default_make_change'] ) : site_url();
+		$context['preferences_link'] = isset( $options['gpea_default_preferences'] ) ? get_permalink( $options['gpea_default_preferences'] ) : site_url();
+		$context['commitment_projects_link'] = isset( $options['gpea_default_commitment_projects'] ) ? get_permalink( $options['gpea_default_commitment_projects'] ) : site_url();
+		$context['commitment_issues_link'] = isset( $options['gpea_default_commitment_issues'] ) ? get_permalink( $options['gpea_default_commitment_issues'] ) : site_url();
 
 		return $context;
 	}
@@ -164,6 +164,7 @@ class P4CT_Site {
 		wp_deregister_style( 'parent-style' );
 		wp_dequeue_style( 'bootstrap' );
 		wp_dequeue_style( 'slick' );
+		// wp_dequeue_style( 'plugin-en' );
 		// wp_deregister_script( 'jquery' );
 		wp_dequeue_script( 'popperjs' );
 		wp_dequeue_script( 'bootstrapjs' );
