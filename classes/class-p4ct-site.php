@@ -63,7 +63,7 @@ class P4CT_Site {
 		add_filter( 'timber_context', [ $this, 'add_to_context' ] );
 		add_filter( 'get_twig', [ $this, 'add_to_twig' ] );
 		add_action( 'init', [ $this, 'register_taxonomies' ], 2 );
-		add_action( 'wp_print_styles', [ $this, 'dequeue_parent_assets' ] );
+		add_action( 'wp_print_styles', [ $this, 'dequeue_parent_assets' ], 100 );
 		// add_action( 'pre_get_posts', [ $this, 'add_search_options' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_assets' ] );
 		// add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_public_assets' ] );
@@ -132,6 +132,13 @@ class P4CT_Site {
 		// $context['antani'] = 'scappellamento';
 		// $options = get_option( 'planet4_tarapia' );
 		// $context['sbiriguda'] = $options['brematurata'] ?? '';
+		$options = get_option( 'gpea_options' );
+		$context['press_media_link'] = isset( $options['gpea_default_press_media'] ) ? get_permalink( $options['gpea_default_press_media'] ) : site_url();
+		$context['make_change_link'] = isset( $options['gpea_default_make_change'] ) ? get_permalink( $options['gpea_default_make_change'] ) : site_url();
+		$context['preferences_link'] = isset( $options['gpea_default_preferences'] ) ? get_permalink( $options['gpea_default_preferences'] ) : site_url();
+		$context['commitment_projects_link'] = isset( $options['gpea_default_commitment_projects'] ) ? get_permalink( $options['gpea_default_commitment_projects'] ) : site_url();
+		$context['commitment_issues_link'] = isset( $options['gpea_default_commitment_issues'] ) ? get_permalink( $options['gpea_default_commitment_issues'] ) : site_url();
+
 		return $context;
 	}
 
@@ -157,6 +164,7 @@ class P4CT_Site {
 		wp_deregister_style( 'parent-style' );
 		wp_dequeue_style( 'bootstrap' );
 		wp_dequeue_style( 'slick' );
+		// wp_dequeue_style( 'plugin-en' );
 		// wp_deregister_script( 'jquery' );
 		wp_dequeue_script( 'popperjs' );
 		wp_dequeue_script( 'bootstrapjs' );
@@ -258,13 +266,13 @@ class P4CT_Site {
 		if ( $exclude_post_id ) {
 			$post_args['post__not_in'] = [ $exclude_post_id ];
 		}
-		/*if ( $post_tags ) {
+		if ( $post_tags ) {
 			$tag_id_array = [];
 			foreach ( $post_tags as $tag ) {
 				$tag_id_array[] = $tag->term_id;
 			}
 			$post_args['tag__in'] = $tag_id_array;
-		}*/
+		}
 
 		$templates          = [ 'tease-related-post.twig' ];
 		$pagetype_posts     = new \Timber\PostQuery( $post_args, 'P4_Post' );
@@ -309,4 +317,18 @@ class P4CT_Site {
 	public function p4_auto_generate_excerpt( $post_id, $post ) {
 	}
 
+}
+/**
+ * Wrapper function around cmb2_get_option.
+ *
+ * @param  string $key Options array key.
+ * @return mixed Option value.
+ */
+ function gpea_get_option( $key = '' ) {
+	if ( function_exists( 'cmb2_get_option' ) ) {
+		return cmb2_get_option( 'gpea_options', $key );
+	} else {
+		$options = get_option( 'gpea_options' );
+		return isset( $options[ $key ] ) ? $options[ $key ] : false;
+	}
 }

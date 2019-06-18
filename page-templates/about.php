@@ -51,6 +51,26 @@ $context['header_button_link']			= $page_meta_data['p4_button_link'][0] ?? '';
 $context['background_image']            = wp_get_attachment_url( get_post_meta( get_the_ID(), 'background_image_id', 1 ) );
 $context['custom_body_classes']         = 'white-bg';
 $context['page_category']               = 'About Page';
-$context['extra_content']				= $page_meta_data['p4-gpea_page_extra_content'][0] ? wpautop ( $page_meta_data['p4-gpea_page_extra_content'][0]  ) :  '';
+
+$extra_content                          = $page_meta_data['p4-gpea_page_extra_content'][0] ?? '';
+$context['extra_content']				= $extra_content ? wpautop ( $extra_content  ) :  '';
+
+/* build about menu */
+$parent_id = wp_get_post_parent_id( $post->ID );
+if ( $parent_id ) {
+    $about_menu_args = array(
+        'post_parent' => $parent_id,
+        'post_type'   => 'page', 
+        'numberposts' => 20,
+        'post_status' => 'publish' 
+    );
+    $about_menu = get_children( $about_menu_args );
+    if ( ! empty( $about_menu ) ) {
+        foreach ( $about_menu as $about_menu_item ) {
+            $about_menu_item->link = get_permalink( $about_menu_item->ID );
+        }
+        $context['about_menu'] = $about_menu;
+    }
+}
 
 Timber::render( [ 'about.twig' ], $context );

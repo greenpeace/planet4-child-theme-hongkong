@@ -32,6 +32,11 @@ class P4CT_Metabox_Register {
 		add_filter( 'cmb2_show_on', [ $this, 'be_taxonomy_show_on_filter' ], 10, 2 );
 		add_filter( 'cmb2_render_supportus_page_dropdown', [ $this, 'gpea_render_supportus_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_latest_page_dropdown', [ $this, 'gpea_render_latest_page_dropdown' ], 10, 2 );
+		add_filter( 'cmb2_render_make_change_page_dropdown', [ $this, 'gpea_render_make_change_page_dropdown' ], 10, 2 );
+		add_filter( 'cmb2_render_press_media_page_dropdown', [ $this, 'gpea_render_press_media_page_dropdown' ], 10, 2 );
+		add_filter( 'cmb2_render_preferences_page_dropdown', [ $this, 'gpea_render_preferences_page_dropdown' ], 10, 2 );
+		add_filter( 'cmb2_render_commitment_projects_page_dropdown', [ $this, 'gpea_render_commitment_projects_page_dropdown' ], 10, 2 );
+		add_filter( 'cmb2_render_commitment_issues_page_dropdown', [ $this, 'gpea_render_commitment_issues_page_dropdown' ], 10, 2 );
 	}
 
 	/**
@@ -40,6 +45,7 @@ class P4CT_Metabox_Register {
 	public function register_p4_meta_box() {
 		$this->register_sidebar_metabox();
 		$this->register_project_metabox();
+		$this->register_petition_metabox();
 		$this->register_tip_metabox();
 		$this->register_team_metabox();
 		$this->register_post_metabox();
@@ -137,6 +143,62 @@ class P4CT_Metabox_Register {
 			 // 'escape_cb'       => 'intval',
 			)
 		);
+
+	}
+
+	/**
+	 * Registers Petition meta box(es).
+	 */
+	 public function register_petition_metabox() {
+
+		$cmb_petition = new_cmb2_box(
+			array(
+				'id'           => 'p4-gpea-donation-box',
+				'title'        => 'Information about this petition',
+				'object_types' => array( 'page' ), // post type
+				'show_on'      => array(
+					'key'          => 'page-template',
+					'value'        => 'page-templates/petition.php',
+				),
+				'context'      => 'normal', // 'normal', 'advanced', or 'side'
+				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
+				'show_names'   => true, // Show field names on the left
+			)
+		);
+
+		$cmb_petition->add_field(
+			array(
+				'name'    => esc_html__( '"Id" code of Engaging connected petition', 'gpea_theme' ),
+				'desc'    => esc_html__( 'This will be used to retrieve current signature number', 'gpea_theme' ),
+				'id'               => 'p4-gpea_petition_engaging_pageid',
+				'type'             => 'text',
+			)
+		);
+
+		$cmb_petition->add_field(
+			array(
+				'name'             => esc_html__( 'Petition goal number', 'cmb2' ),
+				'desc'             => esc_html__( 'Number of signatures to be reached by this petition', 'cmb2' ),
+				'id'               => 'p4-gpea_petition_engaging_target',
+				'type'             => 'text',
+				'attributes' => array(
+					'type' => 'number',
+					'pattern' => '\d*',
+				),
+			 // 'sanitization_cb' => 'intval',
+			 // 'escape_cb'       => 'intval',
+			)
+		);
+
+		$cmb_petition->add_field(
+			array(
+				'name'    => esc_html__( 'External link to redirect petition (optional)', 'gpea_theme' ),
+				'desc'    => esc_html__( 'If set, card on the website will link to this external link instead of internal page', 'gpea_theme' ),
+				'id'               => 'p4-gpea_petition_external_link',
+				'type'             => 'text',
+			)
+		);		
+
 
 	}
 
@@ -387,6 +449,51 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		/* Make a change */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Select the "Make a change" page', 'gpea_theme' ),
+				'id'      => 'gpea_default_make_change',
+				'type'    => 'make_change_page_dropdown',
+			)
+		);
+
+		/* Press & Media link */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Select the "Press&Media" page', 'gpea_theme' ),
+				'id'      => 'gpea_default_press_media',
+				'type'    => 'press_media_page_dropdown',
+			)
+		);
+
+		/* My preferences */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Select the "User preferences" page', 'gpea_theme' ),
+				'id'      => 'gpea_default_preferences',
+				'type'    => 'preferences_page_dropdown',
+			)
+		);
+
+		/* Our commitment: projects */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Select the page with full list of projects', 'gpea_theme' ),
+				'id'      => 'gpea_default_commitment_projects',
+				'type'    => 'commitment_projects_page_dropdown',
+			)
+		);
+
+		/* Our commitment: issues */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Select the page with full list of issues', 'gpea_theme' ),
+				'id'      => 'gpea_default_commitment_issues',
+				'type'    => 'commitment_issues_page_dropdown',
+			)
+		);
+
 		/* Engaging default newsletter recipient */
 		$cmb_options->add_field(
 			array(
@@ -407,6 +514,24 @@ class P4CT_Metabox_Register {
 				'type'             => 'select',
 				'show_option_none' => true,
 				'options'          => $this->generate_post_select( 'p4en_form', null, null ),
+			)
+		);
+
+		/* Other Engaging newsletter default module */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Thank you main text, for "topic/issue" newsletter subscribe', 'gpea_theme' ),
+				'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme' ),
+				'id'      => 'gpea_subscription_page_thankyou_title',
+				'type'    => 'text',
+			)
+		);
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Thank you message: second line', 'gpea_theme' ),
+				'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme' ),
+				'id'      => 'gpea_subscription_page_thankyou_subtitle',
+				'type'    => 'text',
 			)
 		);
 
@@ -528,6 +653,97 @@ class P4CT_Metabox_Register {
 			]
 		);
 	}
+
+	/**
+	 * Render make a change page dropdown.
+	 *
+	 * @param array  $field_args Field arguments.
+	 * @param string $value Value.
+	 */
+	 public function gpea_render_make_change_page_dropdown( $field_args, $value ) {
+		wp_dropdown_pages(
+			[
+				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'hide_empty'       => 0,
+				'hierarchical'     => true,
+				'selected'         => $value,
+				'name'             => 'gpea_default_make_change',
+			]
+		);
+	}
+	
+	/**
+	 * Render Press media page dropdown.
+	 *
+	 * @param array  $field_args Field arguments.
+	 * @param string $value Value.
+	 */
+	 public function gpea_render_press_media_page_dropdown( $field_args, $value ) {
+		wp_dropdown_pages(
+			[
+				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'hide_empty'       => 0,
+				'hierarchical'     => true,
+				'selected'         => $value,
+				'name'             => 'gpea_default_press_media',
+			]
+		);
+	}
+	
+	/**
+	 * Render Preferences page dropdown.
+	 *
+	 * @param array  $field_args Field arguments.
+	 * @param string $value Value.
+	 */
+	 public function gpea_render_preferences_page_dropdown( $field_args, $value ) {
+		wp_dropdown_pages(
+			[
+				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'hide_empty'       => 0,
+				'hierarchical'     => true,
+				'selected'         => $value,
+				'name'             => 'gpea_default_preferences',
+			]
+		);
+	}
+	
+	/**
+	 * Render commitment projects page dropdown.
+	 *
+	 * @param array  $field_args Field arguments.
+	 * @param string $value Value.
+	 */
+	 public function gpea_render_commitment_projects_page_dropdown( $field_args, $value ) {
+		wp_dropdown_pages(
+			[
+				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'hide_empty'       => 0,
+				'hierarchical'     => true,
+				'selected'         => $value,
+				'name'             => 'gpea_default_commitment_projects',
+			]
+		);
+	}
+	
+	/**
+	 * Render commitment issues page dropdown.
+	 *
+	 * @param array  $field_args Field arguments.
+	 * @param string $value Value.
+	 */
+	 public function gpea_render_commitment_issues_page_dropdown( $field_args, $value ) {
+		wp_dropdown_pages(
+			[
+				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'hide_empty'       => 0,
+				'hierarchical'     => true,
+				'selected'         => $value,
+				'name'             => 'gpea_default_commitment_issues',
+			]
+		);
+	}	
+
 
 	/**
 	 * Render latest from earth page dropdown.

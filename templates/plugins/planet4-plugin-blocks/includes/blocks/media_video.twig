@@ -1,12 +1,12 @@
 {% block media_video %}
-    {% if ( fields ) %}
-	<section>
-	    {% if ( fields.title ) %}
-		<h2>{{ fields.title }}</h2>
-	    {% endif %}
-	    {% if fields.embed_html %}
-		{{ fields.embed_html | raw }}
-	    {% endif %}
+	{% if ( fields ) %}
+	<section class="section-media-block ct-container">
+		{% if ( fields.title ) %}
+			<h2>{{ fields.title }}</h2>
+		{% endif %}
+		{% if fields.embed_html %}
+			{{ fields.embed_html | raw }}
+		{% endif %}
 	</section>
-    {% endif %}
+	{% endif %}
 {% endblock %}

@@ -10,7 +10,7 @@
 			<a href="" class="back-button">
 			    <span class="icon-close"></span>
 			</a>
-			年度小總結
+			{{ post.title|raw }}
 		    </div>
 		    <a href="" class="button green">關注</a>
 		</div>
@@ -19,12 +19,9 @@
 	<div class="hero-submenu">
             <div class="hero-submenu-hidebar">
 		<ul class="hero-submenu-container ct-container">
-		    <li class="hero-submenu-item"><a href="/about/mission">我們的任務</a></li>
-		    <li class="hero-submenu-item current">
-			<a href="/about/how-we-act/">我們如何行事</a>
-		    </li>
-		    <li class="hero-submenu-item"><a href="#">我們的報告</a></li>
-		    <li class="hero-submenu-item"><a href="#">我們的報告</a></li>
+			{% for item in about_menu %}
+				<li class="hero-submenu-item {% if (item.ID == post.ID) %}current{% endif %}"><a href="{{ item.link }}">{{ item.post_title }}</a></li>
+		    {% endfor %}		    
 		</ul>
             </div>
 	</div>

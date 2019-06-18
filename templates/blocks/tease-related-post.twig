@@ -6,10 +6,8 @@
 	<div class="box">
 		<div class="meta-box">
 			<div>
-				<!-- TODO: print real issue -->
-				<span class="issue oceans">海洋</span>
-				<!-- TODO: print post type -->
-				<span>新聞</span>
+				<span class="issue {{ post.categories[0].slug }}">{{ post.categories[0]|raw }}</span>
+				<span>{{ post.page_types[0].name }}</span>
 			</div>
 		</div>
 		<p>

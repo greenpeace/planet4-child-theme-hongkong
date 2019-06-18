@@ -24,9 +24,9 @@
 			<div class="meta-box">
 				<div>
 					<!-- TODO: agganciare... boh, cos'è questo? -->
-					<span>專題報導</span>
+					<span>{{ post.page_types[0].name }}</span>
 					<!-- TODO: agganciare issue name -->
-					<span class="issue forests">森林</span>
+					<span class="issue {{ main_issue_slug }}">{{ main_issue|raw }}</span>
 				</div>
 				<div>
 					<span><span class="icon-clock"></span> {{ reading_time }} 閱讀</span>
