@@ -47,10 +47,10 @@
   &.primary,
   &.btn-primary {
     @include font-smoothing;
-    // padding: 0 50px;
-    // height: 40px;
-    // font-size: 20px;
-    // line-height: 39px;
+    padding: 0 40px;
+    height: 40px;
+    font-size: 20px;
+    line-height: 39px;
     background: $color-orange;
     color: white;
     box-shadow: none !important;

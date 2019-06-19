@@ -1,6 +1,8 @@
 import SmoothScroll from 'smooth-scroll';
 
 function petitionThankyou() {
+  if (!document.querySelector('.page-template-petition-thankyou')) return;
+
   const state = {
     sign: true,
     share: null,

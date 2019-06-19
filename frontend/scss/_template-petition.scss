@@ -4,13 +4,14 @@
 }
 
 .page-template-petition,
-.page-template-petition-thankyou {
+.page-template-petition-thankyou,
+.page-template-donation {
   @include greaterThan('sm') {
     min-height: 100vh;
   }
 
   header {
-    position: fixed;
+    position: absolute;
     left: 0;
     right: 0;
     z-index: 4;

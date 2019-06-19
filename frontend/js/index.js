@@ -9,6 +9,36 @@ import LazyLoad from 'vanilla-lazyload';
 import * as Cookies from 'js-cookie';
 
 import petitionThankyou from './petition-thankyou';
+import donation from './donation';
+
+// matches polyfill
+window.Element &&
+  (function(ElementPrototype) {
+    ElementPrototype.matches =
+      ElementPrototype.matches ||
+      ElementPrototype.matchesSelector ||
+      ElementPrototype.webkitMatchesSelector ||
+      ElementPrototype.msMatchesSelector ||
+      function(selector) {
+        var node = this,
+          nodes = (node.parentNode || node.document).querySelectorAll(selector),
+          i = -1;
+        while (nodes[++i] && nodes[i] != node);
+        return !!nodes[i];
+      };
+  })(Element.prototype);
+
+// closest polyfill
+window.Element &&
+  (function(ElementPrototype) {
+    ElementPrototype.closest =
+      ElementPrototype.closest ||
+      function(selector) {
+        var el = this;
+        while (el.matches && !el.matches(selector)) el = el.parentNode;
+        return el.matches ? el : null;
+      };
+  })(Element.prototype);
 
 Swiper.use([Navigation, Pagination, Scrollbar]);
 
@@ -242,6 +272,7 @@ function connectENForm() {
   if (!form) return;
 
   const cta = document.querySelector('#p4en_form_save_button');
+  if (!cta) return;
 
   const stats = document.createElement('div');
   stats.classList.add('signatures');
@@ -271,5 +302,6 @@ function connectENForm() {
 }
 connectENForm();
 
-if (document.querySelector('.page-template-petition-thankyou'))
-  petitionThankyou();
+/* Page specific functionality */
+petitionThankyou();
+donation(Swiper);
