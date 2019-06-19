@@ -8,6 +8,8 @@ import {
 import LazyLoad from 'vanilla-lazyload';
 import * as Cookies from 'js-cookie';
 
+import petitionThankyou from './petition-thankyou';
+
 Swiper.use([Navigation, Pagination, Scrollbar]);
 
 new LazyLoad({
@@ -237,6 +239,8 @@ if (searchExpanderClose)
 
 function connectENForm() {
   const form = document.querySelector('#enform');
+  if (!form) return;
+
   const cta = document.querySelector('#p4en_form_save_button');
 
   const stats = document.createElement('div');
@@ -266,3 +270,6 @@ function connectENForm() {
   });
 }
 connectENForm();
+
+if (document.querySelector('.page-template-petition-thankyou'))
+  petitionThankyou();
