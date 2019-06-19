@@ -274,6 +274,8 @@ function connectENForm() {
   const cta = document.querySelector('#p4en_form_save_button');
   if (!cta) return;
 
+  const petitionSource = document.querySelector('#petition-source').getAttribute('data-petition');
+
   const stats = document.createElement('div');
   stats.classList.add('signatures');
   stats.innerHTML =
@@ -286,6 +288,18 @@ function connectENForm() {
   close.classList.add('close');
   close.innerHTML = '×';
 
+  const ctaFacebook = document.createElement('button');
+  ctaFacebook.classList.add('js-sign-facebook');
+  ctaFacebook.classList.add('button__facebook');
+  ctaFacebook.classList.add('btn');
+  ctaFacebook.innerHTML = 'Facebook';
+
+  ctaFacebook.addEventListener('click', e => {
+    alert("fb connection in progress..");
+  });
+
+  const submitArea = document.querySelector('.submit');
+
   form.insertBefore(stats, form.firstChild);
   form.insertBefore(close, form.firstChild);
 
@@ -293,6 +307,14 @@ function connectENForm() {
     if (!form.classList.contains('is-open')) {
       e.preventDefault();
       form.classList.add('is-open');
+      // submitArea.append(ctaFacebook);
+    } else {
+      // e.preventDefault();
+      let thankyouUrl = form.getAttribute('data-redirect-url');
+      let fn = document.getElementsByName("supporter.firstName")[0].value;
+      thankyouUrl += '?fn='+fn+'&pet=' + petitionSource;
+      form.setAttribute('data-redirect-url', thankyouUrl);
+      // form.querySelector('form').submit()
     }
   });
 
