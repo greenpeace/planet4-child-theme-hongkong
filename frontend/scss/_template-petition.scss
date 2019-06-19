@@ -1,0 +1,82 @@
+.page-template-petition header .left-box {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-template-petition,
+.page-template-petition-thankyou,
+.page-template-donation {
+  @include greaterThan('sm') {
+    min-height: 100vh;
+  }
+
+  header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 4;
+    height: 48px;
+    background-color: white;
+    color: $color-green;
+
+    .center-box,
+    .right-box {
+      display: none;
+    }
+
+    .content .left-box .logo {
+      font-size: 27px;
+      color: $color-green;
+    }
+
+    .content .left-box .dropdown button {
+      color: $color-green;
+
+      p {
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .mobile-toolbar {
+    display: none;
+  }
+
+  .mobile-box {
+    display: none !important;
+  }
+
+  .outer_block_container {
+    @include ct-container;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    > :last-child:not(.enform-side-style) {
+      margin-bottom: 145px;
+    }
+
+    @include greaterThan('sm') {
+      > p,
+      blockquote p {
+        padding-right: 450px;
+      }
+
+      > p > img {
+        transform: translateX(225px);
+      }
+
+      .wp-caption {
+        margin-left: 0;
+      }
+    }
+  }
+
+  footer {
+    display: none;
+  }
+
+  footer .bottom-bar {
+    height: calc(135px + 52px);
+    padding-bottom: 135px;
+  }
+}

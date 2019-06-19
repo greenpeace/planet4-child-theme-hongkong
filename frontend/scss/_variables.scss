@@ -1,0 +1,30 @@
+// Breakpoints
+$bs-lg: 1280px;
+$bs-sm: 1024px;
+
+// Colors
+$color-green: #66cc00;
+$color-blue: #292f47;
+$color-orange: #ff8100;
+$color-grey: #898b92;
+$color-lightblue: #e6f5f5;
+$color-red: #e41e1e;
+$color-forests: #00b474;
+$color-oceans: #008fe2;
+$color-arctic: #62cbd7;
+$color-climate: #ffbe00;
+$color-plastics: #afaa91;
+$color-health: #f96d8c;
+
+// Backgrounds
+$gradient-smoke: linear-gradient(
+  to bottom,
+  rgba(238, 238, 238, 0) 0%,
+  #eeeeee 100%
+);
+
+$gradient-smoke-inverted: linear-gradient(
+  to top,
+  rgba(238, 238, 238, 0) 0%,
+  #eeeeee 100%
+);

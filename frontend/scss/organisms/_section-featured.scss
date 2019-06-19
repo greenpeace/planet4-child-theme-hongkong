@@ -1,0 +1,23 @@
+.section-featured {
+  padding: 20px 0;
+
+  .home & {
+    background: $gradient-smoke;
+
+    @include greaterThan('sm') {
+      background: url(../images/world.png) left center / auto 100% no-repeat,
+        $gradient-smoke;
+    }
+  }
+
+  .home & .first,
+  .home & .mobile-top-box {
+    h2 {
+      color: $color-green;
+    }
+
+    .subtitle {
+      color: black;
+    }
+  }
+}

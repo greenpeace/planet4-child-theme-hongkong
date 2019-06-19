@@ -1,0 +1,32 @@
+.section-media-block {
+  padding: 20px 0;
+  text-align: center;
+
+  @include greaterThan('sm') {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 0;
+    text-align: left;
+  }
+
+  h2 {
+    @include title-mid;
+    margin-bottom: 30px;
+
+    @include greaterThan('sm') {
+      width: 48%;
+    }
+  }
+
+  iframe,
+  .wp-video {
+    @include card-tight;
+    margin: 0 auto;
+
+    @include greaterThan('sm') {
+      max-width: 48%;
+      margin: 0;
+      background: black;
+    }
+  }
+}

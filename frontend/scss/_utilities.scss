@@ -1,0 +1,11 @@
+.desktop-only {
+  @include lessThan('sm') {
+    display: none !important;
+  }
+}
+
+.mobile-only {
+  @include greaterThan('sm') {
+    display: none !important;
+  }
+}

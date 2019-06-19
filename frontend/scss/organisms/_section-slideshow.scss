@@ -1,0 +1,54 @@
+.section-slideshow {
+  padding: 40px 0;
+  background: $color-lightblue;
+
+  > .ct-container {
+    text-align: center;
+  }
+
+  &.layout-dark {
+    background: $color-blue;
+    color: white;
+
+    h2,
+    h3,
+    h4,
+    p {
+      @include font-smoothing;
+    }
+  }
+
+  h2 {
+    @include title-mid;
+    color: $color-green;
+  }
+
+  h2 + .swiper-container,
+  p + .swiper-container {
+    margin-top: 40px;
+
+    @include greaterThan('sm') {
+      margin-top: 60px;
+    }
+  }
+
+  .swiper-pagination-bullet {
+    background-color: white;
+
+    &.swiper-pagination-bullet-active {
+      opacity: 1;
+    }
+  }
+
+  .label-swiper {
+    height: 50px;
+  }
+
+  .label-slide {
+    width: 60px;
+  }
+
+  .see-more {
+    text-align: center;
+  }
+}

@@ -1,0 +1,361 @@
+/*
+ * ATTENTION!!!
+ * Most of the style of the donation page are taken from
+ * this file, and some are overridden (see:
+ * _template-donation-engaging.scss).
+ *
+ * IF YOU MODIFY ANYTHING HERE, ALWAY TEST THE
+ * DONATION PAGE AS WELL!
+ */
+
+.enform-side-style,
+.enform-side-style .container,
+.enform-side-style .row,
+.enform-side-style .col-md-12 {
+  min-height: 100%;
+}
+
+.outer_block_container > * {
+  position: relative;
+  z-index: 2;
+}
+
+.enform-side-style {
+  position: relative;
+  display: block;
+  min-height: 90vh;
+  width: initial;
+  overflow: initial;
+  margin-bottom: 0;
+  z-index: 3;
+
+  @include greaterThan('sm') {
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    overflow: hidden;
+  }
+
+  + * {
+    margin-top: 30px;
+  }
+
+  &::before,
+  &::after {
+    display: none;
+  }
+
+  .caption-overlay {
+    display: none;
+  }
+
+  // TYPOGRAPHY
+  .form-caption h1 {
+    @include title-big;
+  }
+
+  .form-caption p {
+    @include text;
+  }
+
+  .enform h2 {
+    font-size: 24px;
+    line-height: 36px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .enform p {
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .enform .invalid-feedback {
+    margin-top: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: $color-red;
+    font-weight: normal;
+    position: absolute;
+    display: inline-block;
+    padding: 0 8px;
+    left: 10px;
+    top: 34px;
+    background-color: white;
+  }
+
+  .form-container .en__field__element input[type='email'].is-invalid,
+  .form-container .en__field__element input[type='tel'].is-invalid,
+  .form-container .en__field__element input[type='text'].is-invalid,
+  .form-container .en__field__element select.is-invalid {
+    border-color: $color-red !important;
+    margin-bottom: 0;
+  }
+
+  .form-container .en__field__element.en__field__element--select {
+    border: none;
+    margin-bottom: 20px;
+  }
+
+  // BACKGROUND
+  > picture {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 100vw;
+    transform: translateX(-50%);
+
+    @include greaterThan('sm') {
+      min-height: 100vh;
+    }
+
+    img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover;
+      opacity: 1;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+  }
+
+  // LAYOUT
+  > .container {
+    position: relative;
+    height: 100%;
+  }
+
+  @include greaterThan('sm') {
+    .col-md-12 {
+      @include ct-container;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  @include lessThan('sm') {
+    .form-caption,
+    .enform {
+      @include ct-container;
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+  }
+
+  .form-caption {
+    padding-top: 110px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .close {
+    position: absolute;
+    top: -14px;
+    right: 10px;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    cursor: pointer;
+    z-index: 2;
+    transition: top 200ms ease;
+  }
+
+  .is-open .close {
+    top: 14px;
+  }
+
+  .signatures {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+
+    @include lessThan('sm') {
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+    }
+
+    .stats {
+      padding: 3px 20px;
+    }
+  }
+
+  // FORM
+  .enform {
+    @include card;
+    position: fixed;
+    box-sizing: inherit;
+    bottom: calc(-90vh + 125px);
+    left: 0;
+    right: 0;
+    height: 90vh;
+    min-height: 0;
+    overflow: auto;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transition: all 300ms ease;
+    -webkit-overflow-scrolling: touch;
+
+    @include greaterThan('sm') {
+      bottom: initial;
+      left: initial;
+      right: calc(50vw - 480px);
+      top: 48px;
+      width: 375px;
+      margin-top: 0;
+      height: auto;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .en__field__element {
+        input[type='email'],
+        input[type='number'],
+        input[type='search'],
+        input[type='text'],
+        input[type='tel'],
+        input[type='url'],
+        input[type='password'],
+        textarea,
+        select {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    @include greaterThan('lg') {
+      right: calc(50vw - 600px);
+    }
+
+    form .submit {
+      margin-top: 20px;
+      margin-bottom: 135px;
+
+      @include greaterThan('sm') {
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+    }
+
+    form .form-check-label-block {
+      padding-top: 0;
+      margin-bottom: 10px;
+    }
+
+    form {
+      input[type='radio'],
+      input[type='checkbox'] {
+        // try to reset EN styles :/
+        height: initial;
+        border-radius: initial;
+        border-top-left-radius: initial;
+        border-top-right-radius: initial;
+        border-bottom-right-radius: initial;
+        border-bottom-left-radius: initial;
+        border-left-color: initial;
+        border-top-color: initial;
+        border-right-color: initial;
+        border-bottom-color: initial;
+      }
+    }
+  }
+
+  .btn {
+    width: 100%;
+    margin-right: 0;
+    margin-top: 10px;
+  }
+
+  .title-and-description,
+  .form-container {
+    padding: 0;
+  }
+
+  .title-and-description {
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+
+  @include greaterThan('sm') {
+    .formblock-flex {
+      margin-left: -5px;
+      padding-left: 5px;
+      padding-top: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 300ms ease;
+    }
+
+    .title-and-description {
+      margin-bottom: 0;
+      max-height: 180px;
+      overflow: hidden;
+      transition: all 300ms ease;
+    }
+  }
+
+  .is-open .formblock-flex {
+    @include greaterThan('sm') {
+      padding-top: 5px;
+      max-height: 750px;
+    }
+  }
+
+  .is-open .title-and-description {
+    @include greaterThan('sm') {
+      margin-bottom: 0;
+      max-height: 0;
+    }
+  }
+
+  @include lessThan('sm') {
+    .title-and-description,
+    .formblock-flex {
+      overflow: hidden;
+      height: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .enform.is-open {
+      transform: translateY(-55vh);
+
+      .title-and-description,
+      .formblock-flex {
+        height: auto;
+      }
+
+      .formblock-flex {
+        padding-top: 10px;
+      }
+
+      .title-and-description {
+        margin-top: 10px;
+        margin-bottom: 30px;
+      }
+    }
+  }
+}

@@ -1,0 +1,171 @@
+.section-post-content,
+.page-template-petition .outer_block_container {
+  padding-top: 15px;
+  padding-bottom: 10px;
+
+  .meta-box {
+    margin-bottom: 25px;
+
+    @include greaterThan('sm') {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+
+      > div {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  h1 {
+    @include greaterThan('sm') {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+  }
+
+  h1 + .meta-box {
+    margin-top: 25px;
+  }
+
+  blockquote,
+  .embed-container,
+  .full-width,
+  > p > img {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 80px 0;
+    background-color: $color-green;
+
+    > * {
+      @include ct-container;
+      width: calc(100% - 40px);
+    }
+  }
+
+  blockquote {
+    padding-top: 35px;
+    padding-bottom: 35px;
+    color: white;
+    display: block;
+    text-align: left;
+    font-size: 18px;
+  }
+
+  .embed-container {
+    text-align: center;
+
+    iframe {
+      // width: calc(100% - 40px);
+      box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
+      padding: 0;
+      margin: 0 20px;
+
+      @include greaterThan('sm') {
+        // width: 100%;
+        height: 537px;
+        margin: 0 auto;
+      }
+
+      @include greaterThan('lg') {
+        height: 680px;
+      }
+    }
+  }
+
+  // images
+  > p > img {
+    display: block;
+    height: auto;
+    padding: 0;
+
+    @include greaterThan('sm') {
+      object-fit: cover;
+      object-position: center center;
+      max-height: 500px;
+    }
+  }
+
+  .wp-caption {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    max-width: 100%;
+
+    @include greaterThan('sm') {
+      margin: 80px auto;
+      max-width: 500px;
+    }
+
+    img {
+      margin-top: 0;
+      margin-bottom: 10px;
+      max-width: 100%;
+      height: auto;
+
+      @include greaterThan('sm') {
+        margin: 10px 0;
+      }
+    }
+  }
+
+  p.wp-caption-text {
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.4;
+
+    @include greaterThan('sm') {
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+
+  .forests & {
+    blockquote,
+    .embed-container,
+    .full-width {
+      background-color: $color-forests;
+    }
+  }
+  .oceans & {
+    blockquote,
+    .embed-container,
+    .full-width {
+      background-color: $color-oceans;
+    }
+  }
+  .arctic & {
+    blockquote,
+    .embed-container,
+    .full-width {
+      background-color: $color-arctic;
+    }
+  }
+  .climate & {
+    blockquote,
+    .embed-container,
+    .full-width {
+      background-color: $color-climate;
+    }
+  }
+  .plastics & {
+    blockquote,
+    .embed-container,
+    .full-width {
+      background-color: $color-plastics;
+    }
+  }
+  .health & {
+    blockquote,
+    .embed-container,
+    .full-width {
+      background-color: $color-health;
+    }
+  }
+}

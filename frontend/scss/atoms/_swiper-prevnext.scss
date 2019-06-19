@@ -1,0 +1,58 @@
+.swiper-button-next,
+.swiper-button-prev {
+  background-image: none;
+  background-color: white;
+  border-radius: 99px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3);
+  transition: all 140ms linear;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+    outline: none;
+  }
+
+  &:active {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
+    outline: none;
+  }
+
+  span {
+    color: $color-green;
+    font-size: 45px;
+  }
+
+  &.swiper-button-disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.swiper-button-next {
+  right: 16px;
+
+  span {
+    margin-left: 3px;
+  }
+}
+
+.swiper-button-prev {
+  left: 16px;
+
+  span {
+    margin-right: 3px;
+    transform: rotate(180deg);
+  }
+}
+
+@include lessThan('sm') {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+}

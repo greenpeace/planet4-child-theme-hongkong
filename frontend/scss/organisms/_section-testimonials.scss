@@ -1,0 +1,14 @@
+.section-testimonials {
+  @include font-smoothing;
+  padding: 20px 0;
+  background: $color-blue;
+  text-align: center;
+
+  .swiper-pagination-bullet {
+    background-color: white;
+
+    &.swiper-pagination-bullet-active {
+      opacity: 1;
+    }
+  }
+}

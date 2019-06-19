@@ -1,0 +1,181 @@
+footer {
+  background-color: #292f47;
+  color: #e6f5f5;
+
+  .content {
+    display: flex;
+    padding: 33px 0 42px;
+
+    .first-box {
+      width: 450px;
+      padding-right: 120px;
+      box-sizing: border-box;
+
+      .socials {
+        display: flex;
+        align-items: center;
+        margin-bottom: 41px;
+
+        p {
+          color: #5f5f5f;
+          margin-right: 27px;
+        }
+
+        a {
+          font-size: 27px;
+          margin-right: 25px;
+          color: white;
+          text-decoration: none;
+        }
+      }
+
+      .icon-greenpeace {
+        color: #9b9b9b;
+        font-size: 26px;
+        margin-bottom: 13px;
+      }
+
+      .description {
+        color: #9b9b9b;
+        margin-top: 13px;
+        margin-bottom: 27px;
+      }
+
+      .links {
+        a {
+          color: #66cc00;
+          text-decoration: none;
+          margin-right: 78px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    .box-group {
+      display: flex;
+
+      .box {
+        width: 182px;
+
+        .title {
+          color: #898b92;
+          margin-bottom: 2px;
+        }
+
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+
+          li {
+            a {
+              color: #e6f5f5;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .bottom-bar {
+    background-color: #1a1c26;
+    height: 52px;
+    display: flex;
+    align-items: center;
+
+    .mobile-links {
+      display: none;
+      border-bottom: 1px solid #6b6b6d;
+      padding: 12px 0;
+
+      a {
+        margin-right: 78px;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 1.31;
+        color: #66cc00;
+        text-decoration: none;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .bottom-content {
+      display: flex;
+      justify-content: center;
+
+      a {
+        color: #898b92;
+        font-size: 12px;
+        font-weight: 500;
+        font-family: Montserrat;
+        margin-right: 40px;
+        text-decoration: none;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+@include lessThan('md') {
+  footer {
+    .content {
+      flex-direction: column;
+      padding: 16px 0;
+
+      .first-box {
+        width: 100%;
+        padding-right: 0;
+
+        .socials {
+          margin-bottom: 21px;
+          padding-bottom: 5px;
+          border-bottom: 1px solid #5f5f5f;
+        }
+
+        .links {
+          display: none;
+        }
+      }
+
+      .box-group {
+        .box {
+          flex: 1;
+          width: auto;
+        }
+      }
+    }
+
+    .bottom-bar {
+      height: auto;
+      display: flex;
+      align-items: center;
+
+      .mobile-links {
+        display: flex;
+      }
+
+      .bottom-content {
+        display: flex;
+        justify-content: flex-start;
+        padding: 10px 0 7px;
+
+        a {
+          font-size: 10px;
+          line-height: 2.1;
+          margin-right: 20px;
+          letter-spacing: normal;
+        }
+      }
+    }
+  }
+}

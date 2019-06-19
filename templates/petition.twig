@@ -1,5 +1,6 @@
 {% extends "base.twig" %}
 
 {% block content %}
+	<span id="petition-source" data-petition="{{ post.id }}"></span> 
 	{{ post.content|raw }}
 {% endblock %}

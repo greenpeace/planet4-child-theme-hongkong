@@ -1,0 +1,24 @@
+.circle-progress-bar {
+  position: relative;
+
+  span {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Montserrat, sans-serif;
+    color: white;
+  }
+
+  svg {
+    display: block;
+    width: 232px;
+    height: 232px;
+    transform: rotate(-90deg);
+
+    circle:last-child {
+      stroke-linecap: round;
+    }
+  }
+}

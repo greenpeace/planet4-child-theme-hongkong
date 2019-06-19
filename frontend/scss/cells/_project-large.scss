@@ -1,0 +1,86 @@
+.project-large {
+  @include link-as-block;
+  position: relative;
+  height: 400px;
+
+  @include lessThan('sm') {
+    overflow: hidden;
+  }
+
+  @include greaterThan('sm') {
+    width: 50%;
+    overflow: visible;
+
+    .project-large-overflow {
+      position: relative;
+      height: 400px;
+      width: calc(100% + 200px);
+      margin-left: -100px;
+      overflow: hidden;
+    }
+  }
+
+  .thumbnail {
+    position: absolute;
+    width: 540px;
+    height: 540px;
+    left: 50%;
+    margin-left: -270px;
+    border-radius: 540px;
+    box-shadow: none;
+
+    @include greaterThan('sm') {
+      width: 500px;
+      height: 500px;
+      margin-left: -250px;
+    }
+  }
+
+  .project-summary {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 20px 20px;
+
+    @include lessThan('sm') {
+      background: linear-gradient(
+        to top,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 30%,
+        rgba(255, 255, 255, 0) 100%
+      );
+
+      .project-summary-details {
+        display: none;
+      }
+
+      .project-summary-title {
+        padding-top: 60px;
+        border-bottom: none;
+        color: black;
+        text-align: left;
+      }
+    }
+
+    @include greaterThan('sm') {
+      padding-left: 220px;
+      padding-right: 220px;
+
+      .project-summary-title span {
+        display: none;
+      }
+    }
+  }
+}
+
+.project-large + hr {
+  margin: 0;
+  border: 0;
+  height: 1px;
+  background: black;
+
+  @include lessThan('sm') {
+    display: none;
+  }
+}

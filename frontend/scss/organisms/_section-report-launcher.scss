@@ -1,0 +1,65 @@
+.section-report-launcher {
+  padding: 20px 0;
+  background-color: $color-blue;
+  color: white;
+  @include font-smoothing;
+
+  @include greaterThan('sm') {
+    padding: 40px 0;
+
+    .ct-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .content {
+      margin-right: 80px;
+    }
+  }
+
+  .content {
+    h2,
+    p {
+      margin-bottom: 30px;
+    }
+  }
+
+  .launcher {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    > img {
+      flex-shrink: 99;
+      max-width: 280px;
+    }
+
+    .launcher-content {
+      display: flex;
+      width: 50%;
+      margin-left: 10%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      @include greaterThan('sm') {
+        margin-left: 5%;
+      }
+    }
+  }
+
+  .button {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 18px;
+
+    @include greaterThan('sm') {
+      padding-left: 30px;
+      padding-right: 30px;
+      font-size: 24px;
+    }
+  }
+}

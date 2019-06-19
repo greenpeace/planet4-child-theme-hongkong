@@ -1,0 +1,31 @@
+.section-link-list {
+  padding: 20px 0;
+  background-color: $color-blue;
+  color: white;
+
+  h5 {
+    margin-bottom: 3px;
+  }
+
+  h5 + p {
+    margin-top: 3px;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid white;
+
+    @include greaterThan('sm') {
+      margin-bottom: 20px;
+      padding-bottom: 30px;
+    }
+  }
+
+  .caption + p {
+    @include greaterThan('sm') {
+      margin-bottom: 20px;
+    }
+  }
+
+  .link-list {
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,20 @@
+.issue {
+  &.forests {
+    color: $color-forests;
+  }
+  &.oceans {
+    color: $color-oceans;
+  }
+  &.arctic {
+    color: $color-arctic;
+  }
+  &.climate {
+    color: $color-climate;
+  }
+  &.plastics {
+    color: $color-plastics;
+  }
+  &.health {
+    color: $color-health;
+  }
+}
