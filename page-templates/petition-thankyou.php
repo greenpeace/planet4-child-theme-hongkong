@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Project
+ * Template Name: Thankyou page for petition
  * The template for displaying evergreen pages.
  *
  * To generate specific templates for your pages you can use:
@@ -47,14 +47,31 @@ if ( has_post_thumbnail( $post->ID ) ) {
 	$post->img_url = $img_data[0];
 }
 
-// Calculate post percentage
-$percent_complete = $post->custom['p4-gpea_project_percentage'] ?? 0;
-$percent_complete = preg_match( '/^\d+$/' , $percent_complete ) ? intval( $percent_complete ) : 0;
+/* get info from source page */
+
+$context['supporter_name']  = ( get_query_var( 'fn' ) ) ? sanitize_text_field( get_query_var( 'fn' ) ) : false;
+
+$pet = ( get_query_var( 'pet' ) ) ? intval( get_query_var( 'pet' ) ) : false;
+
+if ( $pet ) {
+	$context['source_title'] = get_the_title( $pet );
+	$context['source_description'] = get_post_meta( $pet, 'p4_og_description', true );
+	$context['source_link']  = get_the_permalink( $pet );
+
+	if ( has_post_thumbnail( $pet ) ) {
+		$img_id = get_post_thumbnail_id( $pet );
+		$img_data = wp_get_attachment_image_src( $img_id, 'medium_large' );
+		$context['source_thumb'] = $img_data[0];
+	}
+}
 
 $main_issues = $gpea_extra->gpea_get_main_issue( $post->ID );
-$categories = $main_issues->slug;
+if ( $main_issues ) {
+	$categories = $main_issues->slug;
+} else {
+	$categories = '';
+}
 
-$context['completion_percentage']       = $percent_complete;
 $context['post']                        = $post;
 $context['header_title']                = is_front_page() ? '' : ( $page_meta_data['p4_title'][0] ?? $post->title );
 $context['header_subtitle']             = $page_meta_data['p4_subtitle'][0] ?? '';
@@ -63,11 +80,10 @@ $context['header_button_title']         = $page_meta_data['p4_button_title'][0] 
 $context['header_button_link']          = $page_meta_data['p4_button_link'][0] ?? '';
 // $context['header_button_link_checkbox'] = $page_meta_data['p4_button_link_checkbox'];
 $context['background_image']            = wp_get_attachment_url( get_post_meta( get_the_ID(), 'background_image_id', 1 ) );
+if ( $context['background_image'] ) {
+	$context['body_extra_info'] = 'style="background-image: url(' . $context['background_image'] . ')"';
+}
 $context['custom_body_classes']         = $categories;
-$context['project_percentage']          = $page_meta_data['p4-gpea_project_percentage'][0] ?? 0;
-$context['stroke_dashoffset']           = $context['project_percentage'] ? 697.433 * ( ( 100 - $context['project_percentage'] ) / 100 ) : 0;
-$context['start_date']                  = $page_meta_data['p4-gpea_project_start_date'][0] ?? '';
-$context['localization']                = $page_meta_data['p4-gpea_project_localization'][0] ?? 0;
 
 
-Timber::render( [ 'project.twig' ], $context );
+Timber::render( [ 'petition-thankyou.twig' ], $context );

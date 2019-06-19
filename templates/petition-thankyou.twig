@@ -1,0 +1,104 @@
+{% extends "base.twig" %}
+
+{% block content %}
+<section class="section-petition-thankyou">
+	<div class="steps">
+		<div class="step-thankyou js-step-thankyou ct-container">
+		<h2>Thank you for signing, {{ supporter_name }}.</h2>
+		<p>
+			Now, will you share this petition with your friends? The more people
+			who sign, the more pressure the government will feel.
+		</p>
+		<p>
+			<button class="button grey js-no-share">NO</button>
+			<button class="button primary js-yes-share">YES</button>
+		</p>
+		</div>
+		<div class="step-share js-step-share ct-container">
+		<h2>
+			Thank you, {{ supporter_name }}.
+		</h2>
+		<p>
+			Let's wake more people up to this crisis
+		</p>
+		<p>
+			<!-- TODO: link petition URL -->
+			<a
+			href="https://www.facebook.com/sharer/sharer.php?u={{ source_link }}"
+			class="button fb js-share-fb"
+			target="_blank"
+			rel="noopener noreferrer"
+			>Share on Facebook</a
+			>
+			<a
+			href="mailto:?subject=[subject...]&body=[body no html ...]"
+			class="button primary js-share-email"
+			target="_blank"
+			rel="noopener noreferrer"
+			>Share by Email</a
+			>
+		</p>
+		<!-- TODO: link petition URL -->
+		<a
+			href="https://www.facebook.com/sharer/sharer.php?u={{ source_link }}"
+			class="fake-share-fb js-share-fb"
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			<img src="{{ source_thumb }}" />
+			<div class="fake-share-fb-website">
+			Greenpeace.org
+			</div>
+			<div class="fake-share-fb-title">
+				{{ source_title }}
+			</div>
+			<div class="fake-share-fb-description">
+				{{ source_description }}
+			</div>
+		</a>
+		<p>
+			<button class="button small js-skip-share">Skip</button>
+		</p>
+		</div>
+		<div class="step-donate js-step-donate ct-container">
+		<div class="content">
+			<h2>
+				{{ supporter_name }} - Greenpeace is urgently campaigning to protect our
+			planet.
+			</h2>
+			<p>
+			Our campaigns are 100% funded by individuals like you. Will you
+			join us as a supporter with a regular amount of 400HKD or more a
+			month?
+			</p>
+		</div>
+		<div class="donation-form">
+			<div class="tab-bar">
+			<div class="tab-item">
+				一次性
+			</div>
+			<div class="tab-item active">
+				每月一次
+			</div>
+			</div>
+			<form action="#" method="POST">
+			<input type="hidden" name="frequency" value="每月一次" />
+			<input type="hidden" name="currency" value="HK$" />
+			<div class="form-group">
+				<span class="currency">HK$</span>
+				<input
+				name="amount"
+				type="number"
+				aria-label="HK$"
+				required
+				min="1"
+				step="1"
+				/>
+			</div>
+			<button type="submit" class="button primary fluid">注哪</button>
+			</form>
+		</div>
+		</div>
+	</div>
+	</section>
+{% endblock %}

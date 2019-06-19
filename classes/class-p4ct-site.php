@@ -71,6 +71,7 @@ class P4CT_Site {
 		add_action( 'after_setup_theme', [ $this, 'add_oembed_filter' ] );
 		// add_action( 'save_post', [ $this, 'p4_auto_generate_excerpt' ], 10, 2 );
 		add_action( 'save_post', [ $this, 'gpea_auto_set_tag' ], 10, 2 );
+		add_filter( 'query_vars', [ $this, 'add_query_vars_filter' ], 10, 2 );
 		register_nav_menus(
 			[
 				'navigation-bar-menu' => __( 'Navigation Bar Menu', 'planet4-child-theme-backend' ),
@@ -281,6 +282,41 @@ class P4CT_Site {
 
 	}
 
+
+	/**
+	 * Gpea_get_main_issue
+	 *
+	 * @param int $post_id current post Id.
+	 */
+	public function gpea_get_main_issue( $post_id ) {
+
+		$post_id = (int) ( $post_id ?? '' );
+
+		// get related main issues!
+		$planet4_options = get_option( 'planet4_options' );
+		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+		if ( ! $main_issues_category_id ) {
+			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+			if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+		}
+
+		if ( $main_issues_category_id ) {
+			$categories = get_the_category( $post_id );
+			if ( ! empty( $categories ) ) {
+				$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
+					return $cat->category_parent === intval( $main_issues_category_id );
+				});
+				if ( ! empty( $categories ) ) {
+					$first_category = array_values( $categories )[0];
+					return $first_category;
+				}
+			}
+		}
+
+		return false;
+
+	}
+
 	/**
 	 * Auto generate excerpt for post.
 	 *
@@ -299,6 +335,19 @@ class P4CT_Site {
 			add_action( 'save_post', [ $this, 'gpea_auto_set_tag' ], 10, 2 );
 		}
 	}
+
+
+	/**
+	 * Allow parameter to be passed to url.
+	 *
+	 * @param text $vars text variable allowed.
+	 */
+	public function add_query_vars_filter( $vars ) {
+		$vars[] = 'fn';
+		$vars[] = 'pet';
+		return $vars;
+	}
+
 
 	/**
 	 * Add custom options to the main WP_Query.
