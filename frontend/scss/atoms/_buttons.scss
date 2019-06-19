@@ -25,7 +25,7 @@
 
   &:hover,
   &:focus {
-    background-color: darken(white, 1%);
+    background-color: darken(white, 2%);
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   }
 
@@ -47,10 +47,10 @@
   &.primary,
   &.btn-primary {
     @include font-smoothing;
-    padding: 0 50px;
-    height: 40px;
-    font-size: 20px;
-    line-height: 39px;
+    // padding: 0 50px;
+    // height: 40px;
+    // font-size: 20px;
+    // line-height: 39px;
     background: $color-orange;
     color: white;
     box-shadow: none !important;
@@ -95,6 +95,51 @@
       &:focus {
         background-color: darken($color-green, 5%);
       }
+    }
+  }
+
+  &.grey {
+    color: #5f5f5f;
+    font-weight: normal;
+    box-shadow: none;
+
+    &:hover,
+    &:focus {
+      background-color: darken(white, 2%);
+    }
+  }
+
+  &.fb {
+    @include font-smoothing;
+    color: white;
+    background-color: #007afa;
+    box-shadow: none;
+
+    &:hover,
+    &:focus {
+      background-color: darken(#007afa, 5%);
+    }
+  }
+
+  &.small {
+    color: #5f5f5f;
+    font-weight: normal;
+    box-shadow: none;
+    padding: 0 15px;
+    height: 26px;
+    font-size: 13px;
+    line-height: 25px;
+
+    @include greaterThan('sm') {
+      padding: 0 20px;
+      height: 30px;
+      font-size: 14px;
+      line-height: 29px;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: darken(white, 2%);
     }
   }
 
