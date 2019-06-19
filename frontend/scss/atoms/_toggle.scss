@@ -1,0 +1,107 @@
+.toggle {
+  position: relative;
+  display: inline-block;
+  border-bottom: none !important;
+
+  &:active {
+    outline: none;
+  }
+
+  &:not(.accordion) {
+    @include see-more;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: 0;
+      margin-left: 5px;
+      border-style: solid;
+      border-width: 6.9px 4px 0 4px;
+      border-color: $color-green transparent transparent transparent;
+      transform: rotate(-360deg);
+      transform-origin: center 40%;
+      transition: transform 300ms;
+
+      @include greaterThan('sm') {
+        border-width: 8.7px 5px 0 5px;
+        margin-left: 8px;
+      }
+    }
+
+    &.has-opened::after {
+      transform: rotate(-180deg);
+    }
+  }
+
+  &.accordion {
+    position: relative;
+    padding-left: 25px;
+    color: black;
+
+    @include greaterThan('sm') {
+      padding-left: 35px;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 7px;
+      height: 18px;
+      border-left: 2px solid $color-green;
+      transform: rotate(0deg);
+      transition: transform 300ms ease;
+
+      @include greaterThan('sm') {
+        top: 11px;
+      }
+    }
+
+    &::after {
+      transform: rotate(-90deg);
+    }
+
+    &.has-opened::before {
+      transform: rotate(135deg);
+    }
+
+    &.has-opened::after {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.togglee {
+  height: 0;
+  overflow: hidden;
+  margin-left: -10px;
+  margin-right: -10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: height 800ms ease;
+
+  &.accordion {
+    padding-left: 35px;
+    margin-bottom: 20px;
+    color: $color-grey;
+    transition-duration: 300ms;
+
+    @include greaterThan('sm') {
+      padding-left: 45px;
+    }
+  }
+
+  &.is-open {
+    height: auto;
+  }
+
+  > * > :first-child {
+    margin-top: 0;
+  }
+
+  > * > :last-child {
+    margin-bottom: 0;
+  }
+}

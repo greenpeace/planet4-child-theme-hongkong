@@ -1,0 +1,174 @@
+// Breakpoints
+@mixin greaterThan($point) {
+  @if $point == 'lg' {
+    @media only screen and (min-width: $bs-lg) {
+      @content;
+    }
+  } @else if $point == 'sm' {
+    @media only screen and (min-width: $bs-sm) {
+      @content;
+    }
+  }
+}
+
+@mixin lessThan($point) {
+  @if $point == 'lg' {
+    @media only screen and (max-width: ($bs-lg - 1px)) {
+      @content;
+    }
+  } @else if $point == 'sm' {
+    @media only screen and (max-width: ($bs-sm - 1px)) {
+      @content;
+    }
+  }
+}
+
+@mixin ct-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include greaterThan('sm') {
+    width: 960px;
+    max-width: none;
+  }
+
+  @include greaterThan('lg') {
+    width: 1200px;
+  }
+}
+
+// Typography
+@mixin title-big {
+  font-size: 34px;
+  line-height: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  @include greaterThan('sm') {
+    font-size: 50px;
+    line-height: 70px;
+    margin-top: 20px;
+    margin-top: 20px;
+  }
+}
+
+@mixin title-mid {
+  font-size: 24px;
+  line-height: 36px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  @include greaterThan('sm') {
+    font-size: 34px;
+    line-height: 50px;
+    margin-top: 20px;
+    margin-top: 20px;
+  }
+}
+
+@mixin subtitle {
+  font-size: 16px;
+  line-height: 21px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: rgb(95, 95, 95);
+
+  @include greaterThan('sm') {
+    font-size: 24px;
+    line-height: 36px;
+    margin-top: 20px;
+    margin-top: 20px;
+  }
+}
+
+@mixin text {
+  font-size: 18px;
+  line-height: 28px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  @include greaterThan('sm') {
+    font-size: 24px;
+    line-height: 38px;
+  }
+}
+
+@mixin caption {
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  @include greaterThan('sm') {
+    font-size: 20px;
+    line-height: 32px;
+  }
+}
+
+@mixin see-more {
+  font-size: 14px;
+  line-height: 20px;
+
+  @include greaterThan('sm') {
+    font-size: 20px;
+    line-height: 32px;
+  }
+}
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Layout
+@mixin card {
+  border-radius: 8px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+@mixin card-tight {
+  border-radius: 4px;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+@mixin link-as-block {
+  display: block;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  transition: opacity 0.2s;
+  color: black;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+@mixin profile {
+  text-align: center;
+
+  img {
+    display: block;
+    height: 100px;
+    width: 100px;
+    margin: 0 auto 8px;
+    object-fit: cover;
+    border-radius: 99px;
+  }
+
+  .name {
+    font: bold 16px/21px Montserrat, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .position {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 21px;
+  }
+}

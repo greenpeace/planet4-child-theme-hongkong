@@ -1,0 +1,60 @@
+.section-support-data {
+  @include greaterThan('sm') {
+    display: flex;
+  }
+
+  > div {
+    padding: 30px;
+    text-align: center;
+
+    @include greaterThan('sm') {
+      width: 50%;
+    }
+  }
+
+  h2 {
+    @include title-mid;
+    margin-top: 0 !important;
+    margin-bottom: 30px;
+  }
+
+  p {
+    @include caption;
+  }
+
+  img {
+    max-width: 100%;
+    margin: 20px 0 40px;
+
+    @include greaterThan('sm') {
+      max-width: 400px;
+    }
+  }
+
+  .support-data-left {
+    @include font-smoothing;
+    background-color: $color-blue;
+    color: white;
+  }
+
+  .support-data-right {
+    background-color: $color-lightblue;
+  }
+
+  .support-data-heart {
+    position: relative;
+
+    p {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+    }
+  }
+
+  .support-data-number {
+    display: block;
+    font: 46px/57px Montserrat, sans-serif;
+  }
+}

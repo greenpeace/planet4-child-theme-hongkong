@@ -49,11 +49,11 @@ const browserSync = require('browser-sync');
  */
 const settings = {
   // this is the folder where your scss files reside (you can use subfolders)
-  styleSrc: './344_gp_frontend/src/scss2/**/*.{sass,scss}',
+  styleSrc: './frontend/scss/**/*.{sass,scss}',
 
   // this is a helper for the soucemaps: make sure it matches the above,
   // it's relative to the position of the final css
-  styleMapRoot: '../../344_gp_frontend/src/scss2/',
+  styleMapRoot: '../../frontend/scss/',
 
   // here is where app.css will end up
   styleDest: './static/css/',
@@ -61,17 +61,12 @@ const settings = {
   // this is the entry js file(s) (the array keys define the output filenames),
   // it's used only by the 'webpack' task
   jsEntry: {
-    script: ['./344_gp_frontend/src/js/index.js'],
+    script: ['./frontend/js/index.js'],
   },
-
-  // this is the list of files and/or folders where your js source files reside: they will be
-  // minified and concatenated in this order (so put files such as jQuery first).
-  // It's used by the 'js' task
-  jsSrc: ['./src/code/**/*.js'],
 
   // this is a helper for the soucemaps: make sure it matches the above,
   // it's relative to the position of the final css
-  jsMapRoot: '../../344_gp_frontend/src/js/',
+  jsMapRoot: '../../frontend/js/',
 
   // this is where the files defined in jsEntry will end up
   jsDest: path.join(__dirname, '/static/js/'),

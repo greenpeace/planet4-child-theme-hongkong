@@ -1,0 +1,100 @@
+.mini-tip {
+  @include card;
+  width: 140px;
+  height: 190px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px;
+  background-color: white;
+  color: $color-blue;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  @include greaterThan('sm') {
+    width: 156px;
+    height: 210px;
+  }
+
+  .tip-icon {
+    height: 35px;
+
+    img {
+      height: 100%;
+      width: auto;
+      vertical-align: top;
+    }
+  }
+}
+
+.tip {
+  @include card;
+  width: 299px;
+  height: 412px;
+  padding: 15px;
+  background-color: white;
+  color: $color-blue;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .tip-icon {
+    height: 105px;
+
+    img {
+      height: 100%;
+      width: auto;
+      vertical-align: top;
+    }
+  }
+
+  p {
+    @include title-big;
+
+    @include greaterThan('sm') {
+      font-size: 34px;
+      line-height: 50px;
+    }
+  }
+
+  .meta-box {
+    @include greaterThan('sm') {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  .social-box a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    margin: 0 4px;
+    text-decoration: none !important;
+    border: none !important;
+    transition: box-shadow 140ms linear;
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.17);
+    }
+
+    span {
+      line-height: 40px;
+    }
+  }
+
+  .icon-facebook {
+    color: #0091e2;
+  }
+
+  .icon-whatsapp {
+    font-size: 25px;
+    color: #65ca05;
+  }
+}

@@ -1,0 +1,65 @@
+.section-project-phases {
+  padding-bottom: 20px;
+
+  // > img {
+  //   margin-top: 0;
+  // }
+}
+
+.project-phase {
+  padding-top: 40px;
+
+  @include greaterThan('sm') {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .project-phase-description,
+    .project-phase-milestones {
+      width: 48%;
+    }
+  }
+}
+
+.project-phase-milestone {
+  margin: 24px 0;
+
+  @include greaterThan('sm') {
+    margin: 24px 0 48px;
+  }
+}
+
+.project-phase-milestone-date {
+  font-size: 12px;
+  line-height: 24px;
+  color: $color-grey;
+  margin-bottom: 6px;
+
+  @include greaterThan('sm') {
+    font-size: 16px;
+  }
+
+  &:after {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    vertical-align: bottom;
+    margin-left: 10px;
+    border-radius: 99px;
+    border: 1px solid $color-grey;
+    content: '';
+  }
+
+  .achieved > & {
+    color: $color-green;
+
+    &::after {
+      background: $color-green url(../images/checkmark.svg) center center;
+      background-size: 24px;
+      border-color: $color-green;
+      color: white;
+      text-align: center;
+      content: '';
+    }
+  }
+}

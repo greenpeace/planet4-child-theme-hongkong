@@ -1,0 +1,12 @@
+.section-accordion-list {
+  padding: 20px 0;
+
+  h2 {
+    color: $color-green;
+    margin-bottom: 35px;
+
+    @include greaterThan('sm') {
+      margin-bottom: 50px;
+    }
+  }
+}

@@ -1,0 +1,249 @@
+.form-group {
+  position: relative;
+  margin-bottom: 20px;
+
+  .currency {
+    position: absolute;
+    bottom: 12px;
+    left: 20px;
+    color: $color-grey;
+    font-size: 16px;
+    font-family: Montserrat, sans-serif;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+body,
+.enform form,
+.enform-side-style .form-container .en__field__element {
+  input[type='email'],
+  input[type='number'],
+  input[type='search'],
+  input[type='text'],
+  input[type='tel'],
+  input[type='url'],
+  input[type='password'],
+  textarea,
+  select {
+    height: 46px;
+    width: 100%;
+    max-width: 400px;
+    padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+    font-size: 16px;
+    line-height: normal;
+    line-height: normal;
+    background-color: #fff;
+    border: 1px solid #9b9b9b;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.1);
+    transition: all 140ms linear;
+
+    @include greaterThan('sm') {
+      font-size: 20px;
+    }
+
+    .currency + & {
+      padding-left: 70px;
+    }
+  }
+
+  /* Removes awkward default styles on some inputs for iOS */
+  input[type='email'],
+  input[type='number'],
+  input[type='search'],
+  input[type='text'],
+  input[type='tel'],
+  input[type='url'],
+  input[type='password'],
+  textarea,
+  .select select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  /* Stylish select */
+  .select {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      width: 15px;
+      height: 15px;
+      margin-top: -10px;
+      border: 3px solid $color-green;
+      border-right: 0;
+      border-top: 0;
+      transform: rotate(-45deg);
+    }
+
+    &:hover::after,
+    &:focus::after {
+      border-color: darken($color-green, 5%);
+    }
+
+    & select {
+      cursor: pointer;
+    }
+  }
+
+  textarea {
+    min-height: 65px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  input[type='email']:focus,
+  input[type='number']:focus,
+  input[type='search']:focus,
+  input[type='text']:focus,
+  input[type='tel']:focus,
+  input[type='url']:focus,
+  input[type='password']:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid darken(#9b9b9b, 20%);
+    box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.2);
+    outline: 0;
+  }
+
+  label:not(.custom-checkbox),
+  .label,
+  legend {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+
+    @include greaterThan('sm') {
+      font-size: 20px;
+      line-height: 32px;
+    }
+  }
+
+  fieldset {
+    padding: 0;
+    border-width: 0;
+  }
+
+  input[type='checkbox'],
+  input[type='radio'] {
+    display: inline;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    margin-right: 5px;
+  }
+
+  label > .label-body {
+    display: inline-block;
+    padding-left: 0.5rem;
+    font-weight: normal;
+    cursor: pointer;
+  }
+
+  .form-group.small {
+    text-align: right;
+
+    label,
+    input {
+      display: inline-block;
+    }
+
+    label {
+      margin-bottom: 0;
+      margin-right: 10px;
+      font-size: 12px;
+      line-height: 33px;
+      color: $color-grey;
+      font-weight: normal;
+    }
+
+    .currency {
+      bottom: 7px;
+      left: initial;
+      right: 63px;
+      font-size: 14px;
+
+      + input[type='email'],
+      + input[type='number'],
+      + input[type='search'],
+      + input[type='text'],
+      + input[type='tel'],
+      + input[type='url'],
+      + input[type='password'],
+      + textarea,
+      + select {
+        padding-left: 40px;
+      }
+    }
+
+    input[type='email'],
+    input[type='number'],
+    input[type='search'],
+    input[type='text'],
+    input[type='tel'],
+    input[type='url'],
+    input[type='password'],
+    textarea,
+    select {
+      height: 33px;
+      width: 100px;
+      font-size: 14px;
+    }
+  }
+}
+
+form .error,
+form .success {
+  display: none;
+  font-size: 14px;
+  line-height: 20px;
+
+  @include greaterThan('sm') {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}
+
+.has-failed .error {
+  display: block;
+  color: $color-red;
+}
+
+.has-succeeded .success {
+  display: block;
+  color: $color-green;
+}
+
+@include greaterThan('sm') {
+  .enform form,
+  .enform-side-style .form-container .en__field__element {
+    input[type='email'],
+    input[type='number'],
+    input[type='search'],
+    input[type='text'],
+    input[type='tel'],
+    input[type='url'],
+    input[type='password'],
+    textarea,
+    select {
+      font-size: 16px;
+    }
+
+    label:not(.custom-checkbox),
+    .label,
+    legend {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+}

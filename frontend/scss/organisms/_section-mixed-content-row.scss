@@ -1,0 +1,123 @@
+.section-mixed-content-row {
+  position: relative;
+  padding: 20px 0;
+  background-size: cover;
+  background-position: center;
+
+  .content {
+    margin-bottom: 50px;
+  }
+
+  h2 {
+    @include greaterThan('sm') {
+      margin-bottom: 20px;
+    }
+  }
+
+  &.has-bg-image {
+    padding: 60px 0 20px;
+
+    @include greaterThan('sm') {
+      padding: 100px 0 40px;
+    }
+
+    .content {
+      position: relative;
+      margin-top: -40px;
+      margin-bottom: 280px;
+
+      @include greaterThan('sm') {
+        margin-top: -80px;
+        margin-bottom: 340px;
+      }
+    }
+
+    &::before {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 130px;
+      background: linear-gradient(to bottom, #ffffff, rgba(255, 255, 255, 0));
+      content: '';
+
+      @include greaterThan('sm') {
+        height: 170px;
+      }
+    }
+  }
+
+  &.layout-green-titles {
+    .card-mini h4 {
+      color: $color-green;
+    }
+  }
+
+  &.layout-dark,
+  &.has-bg-image {
+    .card-mini {
+      color: white;
+      h4 {
+        color: $color-green;
+      }
+    }
+  }
+}
+
+.page-template-about .section-mixed-content-row h2 {
+  color: $color-green;
+}
+.forests .section-mixed-content-row h2 {
+  color: $color-forests;
+}
+.oceans .section-mixed-content-row h2 {
+  color: $color-oceans;
+}
+.arctic .section-mixed-content-row h2 {
+  color: $color-arctic;
+}
+.climate .section-mixed-content-row h2 {
+  color: $color-climate;
+}
+.plastics .section-mixed-content-row h2 {
+  color: $color-plastics;
+}
+.health .section-mixed-content-row h2 {
+  color: $color-health;
+}
+
+.forests .section-mixed-content-row.layout-dark {
+  background-color: $color-forests;
+}
+.oceans .section-mixed-content-row.layout-dark {
+  background-color: $color-oceans;
+}
+.arctic .section-mixed-content-row.layout-dark {
+  background-color: $color-arctic;
+}
+.climate .section-mixed-content-row.layout-dark {
+  background-color: $color-climate;
+}
+.plastics .section-mixed-content-row.layout-dark {
+  background-color: $color-plastics;
+}
+.health .section-mixed-content-row.layout-dark {
+  background-color: $color-health;
+}
+
+.forests .section-mixed-content-row,
+.oceans .section-mixed-content-row,
+.arctic .section-mixed-content-row,
+.climate .section-mixed-content-row,
+.plastics .section-mixed-content-row,
+.health .section-mixed-content-row {
+  &.layout-dark h2,
+  &.layout-green-titles h2 {
+    color: $color-green;
+  }
+}
+
+.forests .section-mixed-content-row.layout-dark h2 {
+  color: black;
+}

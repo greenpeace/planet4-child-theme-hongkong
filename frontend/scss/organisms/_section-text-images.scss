@@ -1,0 +1,155 @@
+.section-text-images {
+  > .ct-container {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  h2 {
+    @include title-mid;
+  }
+
+  .boxes {
+    display: flex;
+    flex-direction: column;
+
+    @include greaterThan('sm') {
+      flex-direction: row;
+    }
+  }
+
+  .box {
+    flex: 1;
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+
+    &:not(.plain) {
+      color: $color-green;
+    }
+
+    @include greaterThan('sm') {
+      padding: 70px 0;
+    }
+
+    &:first-child {
+      flex-direction: column;
+      z-index: 2;
+    }
+
+    h2,
+    p {
+      width: 70%;
+      margin: 0 auto 10px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &.dark {
+      // padding: 24px 20px;
+      background-color: $color-green;
+      color: white;
+
+      @include greaterThan('sm') {
+        // padding: 113px 0;
+      }
+    }
+
+    &.fit {
+      height: 264px;
+      // I don't know why, but min-height is needed or it will disappear
+      min-height: 264px;
+      padding: 0;
+
+      @include greaterThan('sm') {
+        height: auto;
+        min-height: 0;
+      }
+    }
+  }
+
+  .swiper-container {
+    padding: 0;
+    width: 100%;
+  }
+
+  .swiper-wrapper {
+    .image {
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  .swiper-pagination {
+    padding: 0;
+    display: flex;
+    top: 13px;
+  }
+
+  .swiper-pagination-bullet {
+    width: auto;
+    flex: 1;
+    background-color: white;
+    opacity: 0.3;
+    height: 4px;
+    border-radius: 4px;
+
+    &:first-child {
+      margin-left: 38px;
+    }
+
+    &:last-child {
+      margin-right: 38px;
+    }
+
+    &.swiper-pagination-bullet-active {
+      opacity: 1;
+    }
+  }
+}
+
+.forests .section-text-images .boxes .box:not(.plain) {
+  color: $color-forests;
+  &.dark {
+    background-color: $color-forests;
+    color: white;
+  }
+}
+.oceans .section-text-images .boxes .box:not(.plain) {
+  color: $color-oceans;
+  &.dark {
+    background-color: $color-oceans;
+    color: white;
+  }
+}
+.arctic .section-text-images .boxes .box:not(.plain) {
+  color: $color-arctic;
+  &.dark {
+    background-color: $color-arctic;
+    color: white;
+  }
+}
+.climate .section-text-images .boxes .box:not(.plain) {
+  color: $color-climate;
+  &.dark {
+    background-color: $color-climate;
+    color: white;
+  }
+}
+.plastics .section-text-images .boxes .box:not(.plain) {
+  color: $color-plastics;
+  &.dark {
+    background-color: $color-plastics;
+    color: white;
+  }
+}
+.health .section-text-images .boxes .box:not(.plain) {
+  color: $color-health;
+  &.dark {
+    background-color: $color-health;
+    color: white;
+  }
+}

@@ -1,0 +1,42 @@
+.mobile-top-box {
+  margin-bottom: 40px;
+  > * {
+    margin: 10px 0;
+  }
+
+  @include greaterThan('sm') {
+    display: none;
+  }
+}
+
+.swiper-container {
+  overflow: visible;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  .swiper-slide.first {
+    display: none;
+
+    @include greaterThan('sm') {
+      display: block;
+      width: 250px;
+    }
+  }
+}
+
+.swiper-wrapper {
+  height: auto;
+}
+
+.swiper-slide {
+  box-sizing: border-box;
+}
+
+.dark {
+  @include font-smoothing;
+
+  .first,
+  .mobile-top-box {
+    color: white;
+  }
+}

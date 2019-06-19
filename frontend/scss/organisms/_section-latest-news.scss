@@ -1,0 +1,48 @@
+.section-latest-news {
+  padding: 20px 0;
+  background-color: #eeeeee;
+
+  h2 {
+    @include caption;
+    margin-bottom: 70px;
+    text-align: center;
+  }
+
+  .news-list {
+    margin-bottom: 60px;
+
+    > * {
+      padding: 20px 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+      &:first-child {
+        padding-top: 0;
+        border-top: none;
+      }
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
+
+    @include greaterThan('sm') {
+      display: flex;
+      justify-content: space-between;
+
+      > * {
+        padding: 0 30px;
+        border-top: none;
+        border-right: 1px solid rgba(0, 0, 0, 0.2);
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 0;
+          border-right: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.issues-swiper {
+  .swiper-slide {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    @include greaterThan('sm') {
+      margin-right: 0;
+    }
+  }
+}

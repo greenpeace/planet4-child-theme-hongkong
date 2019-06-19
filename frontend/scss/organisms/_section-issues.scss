@@ -1,0 +1,8 @@
+.section-issues {
+  padding: 20px 0;
+  text-align: center;
+
+  @include greaterThan('sm') {
+    padding: 40px 0;
+  }
+}

@@ -1,0 +1,99 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+h1,
+h2 {
+  @include title-big;
+}
+
+h3,
+h4 {
+  @include title-mid;
+}
+
+h5,
+h6,
+p,
+blockquote {
+  @include text;
+}
+
+.subtitle {
+  @include subtitle;
+}
+
+.caption {
+  @include caption;
+}
+
+.see-more {
+  @include see-more;
+}
+
+a {
+  color: $color-green;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 140ms linear;
+
+  &:hover,
+  &:focus {
+    border-bottom-color: $color-green;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  a {
+    display: block;
+    color: inherit;
+    border-bottom: none !important;
+    transition: opacity 140ms linear;
+
+    &:hover,
+    &:focus {
+      opacity: 0.7;
+    }
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  span {
+    line-height: inherit !important;
+    float: right;
+  }
+}
+
+hr {
+  margin: 0;
+  border: 0;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+img.lazy {
+  opacity: 0;
+  transition: opacity 140ms linear;
+
+  &.error,
+  &.loaded {
+    opacity: 1;
+  }
+}
