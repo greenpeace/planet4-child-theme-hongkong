@@ -412,6 +412,14 @@ class P4CT_Metabox_Register {
 
 		$cmb_options->add_field(
 			array(
+				'name'    => esc_html__( 'css file with fonts specifications (optional)', 'gpea_theme' ),
+				'id'      => 'gpea_css_fonts',
+				'type'    => 'text',
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
 				'name'    => esc_html__( 'Description text for generic footer', 'gpea_theme' ),
 				'desc'    => esc_html__( 'Description text for generic footer', 'gpea_theme' ),
 				'id'      => 'gpea_decription_generic_footer_text',

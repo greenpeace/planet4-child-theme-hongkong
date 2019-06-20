@@ -16,8 +16,12 @@
       color: $color-green;
     }
 
-    .subtitle {
-      color: black;
+    // .subtitle {
+    //   color: black;
+    // }
+
+    p {
+      @include title-text;
     }
   }
 }

@@ -51,6 +51,7 @@
 
   .issue {
     margin-right: 5px;
+    font-size: 15px;
 
     @include greaterThan('sm') {
       margin-right: 0;

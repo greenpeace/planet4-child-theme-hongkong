@@ -64,12 +64,17 @@
     }
 
     @include greaterThan('sm') {
-      padding-left: 220px;
-      padding-right: 220px;
+      padding-left: 140px;
+      padding-right: 140px;
 
       .project-summary-title span {
         display: none;
       }
+    }
+
+    @include greaterThan('lg') {
+      padding-left: 220px;
+      padding-right: 220px;
     }
   }
 }
