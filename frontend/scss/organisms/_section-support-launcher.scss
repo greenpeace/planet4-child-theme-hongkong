@@ -1,0 +1,18 @@
+.section-support-launcher {
+  @include ct-container;
+
+  @include greaterThan('sm') {
+    display: flex;
+  }
+
+  .support-launcher {
+    @include greaterThan('sm') {
+      width: 30%;
+      margin-right: 5%;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

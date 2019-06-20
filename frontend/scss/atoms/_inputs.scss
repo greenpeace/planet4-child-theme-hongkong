@@ -119,12 +119,12 @@ body,
     display: block;
     margin-bottom: 0.5rem;
     font-size: 14px;
-    line-height: 20px;
+    // line-height: 20px;
     font-weight: bold;
 
     @include greaterThan('sm') {
-      font-size: 20px;
-      line-height: 32px;
+      font-size: 16px;
+      // line-height: 32px;
     }
   }
 
