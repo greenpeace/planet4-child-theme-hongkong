@@ -195,8 +195,8 @@ class P4CT_Site {
 		$css_creation = filectime( get_stylesheet_directory() . '/static/css/style.css' );
 		$js_creation = filectime( get_stylesheet_directory() . '/static/js/script.js' );
 
-		// TODO: needs to load hk-fonts, or kr-fonts, or tw-fonts depending on the domain
-		wp_enqueue_style( 'child-style-fonts', get_stylesheet_directory_uri() . '/static/css/hk-fonts.css', [], $css_creation );
+		$css_fonts = gpea_get_option( 'gpea_css_fonts' ) ? gpea_get_option( 'gpea_css_fonts' ) : 'hk-fonts.css';
+		wp_enqueue_style( 'child-style-fonts', get_stylesheet_directory_uri() . '/static/css/' . $css_fonts, [], $css_creation );
 		wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/static/css/style.css', [], $css_creation );
 		wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js', array(), $js_creation, true );
 		// to be removed after frontend merge!!
