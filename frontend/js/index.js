@@ -115,16 +115,45 @@ new Swiper('.label-swiper', {
  *
  */
 function connectDonationTabs() {
-  document.querySelectorAll('.donation-form .tab-item').forEach(tab => {
+  document.querySelectorAll('.js-tab-item').forEach(tab => {
     tab.addEventListener('click', e => {
       const tabBar = e.target.parentElement;
       const siblings = tabBar.children;
       const form = tabBar.parentElement.querySelector('form');
+      const handles = tabBar.parentElement.querySelectorAll('.dollar-handles');
+      const paragraphs = tabBar.parentElement.querySelectorAll(
+        "[class^='paragraph-handles__'], [class*=' paragraph-handles__']"
+      );
 
       Array.from(siblings).forEach(sibling => {
-        sibling.classList.remove('active');
+        sibling.classList.remove('is-active');
       });
-      e.target.classList.add('active');
+      e.target.classList.add('is-active');
+
+      if (handles.length) {
+        Array.from(handles).forEach(handle => {
+          handle.classList.remove('is-active');
+        });
+        Array.from(paragraphs).forEach(paragraph => {
+          paragraph.classList.remove('is-active');
+        });
+        if (e.target.classList.contains('tab-item__once')) {
+          form
+            .querySelector('.dollar-handles__once')
+            .classList.add('is-active');
+          form
+            .querySelector('.paragraph-handles__once')
+            .classList.add('is-active');
+        } else if (e.target.classList.contains('tab-item__recurring')) {
+          form
+            .querySelector('.dollar-handles__recurring')
+            .classList.add('is-active');
+          form
+            .querySelector('.paragraph-handles__recurring')
+            .classList.add('is-active');
+        }
+      }
+
       form.frequency.value = e.target.textContent.trim();
     });
   });
@@ -136,11 +165,23 @@ connectDonationTabs();
  *
  */
 function connectDollarHandles() {
+  // Update paragraph content, and
   // Clear free amount value when I select a dollar handle
   document.querySelectorAll('.dollar-handle input').forEach(radio => {
     radio.addEventListener('change', e => {
       const form = e.target.form;
+      const group = e.target.closest('.dollar-handles');
+      const paragraph = group.classList.contains('dollar-handles__once')
+        ? form.querySelector('.paragraph-handles__once')
+        : form.querySelector('.paragraph-handles__recurring');
+      const paragraphOther = group.classList.contains(
+        'dollar-handles__recurring'
+      )
+        ? form.querySelector('.paragraph-handles__once')
+        : form.querySelector('.paragraph-handles__recurring');
       const freeAmount = form['free-amount'];
+      paragraph.textContent = radio.dataset.paragraph;
+      paragraphOther.textContent = '';
       freeAmount.value = '';
     });
   });
@@ -274,7 +315,9 @@ function connectENForm() {
   const cta = document.querySelector('#p4en_form_save_button');
   if (!cta) return;
 
-  const petitionSource = document.querySelector('#petition-source').getAttribute('data-petition');
+  const petitionSource = document
+    .querySelector('#petition-source')
+    .getAttribute('data-petition');
 
   const stats = document.createElement('div');
   stats.classList.add('signatures');
@@ -295,7 +338,7 @@ function connectENForm() {
   ctaFacebook.innerHTML = 'Facebook';
 
   ctaFacebook.addEventListener('click', e => {
-    alert("fb connection in progress..");
+    alert('fb connection in progress..');
   });
 
   const submitArea = document.querySelector('.submit');
@@ -311,8 +354,8 @@ function connectENForm() {
     } else {
       // e.preventDefault();
       let thankyouUrl = form.getAttribute('data-redirect-url');
-      let fn = document.getElementsByName("supporter.firstName")[0].value;
-      thankyouUrl += '?fn='+fn+'&pet=' + petitionSource;
+      let fn = document.getElementsByName('supporter.firstName')[0].value;
+      thankyouUrl += '?fn=' + fn + '&pet=' + petitionSource;
       form.setAttribute('data-redirect-url', thankyouUrl);
       // form.querySelector('form').submit()
     }
