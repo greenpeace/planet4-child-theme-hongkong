@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-display: swap;
+  font-weight: normal;
+  src: url('../fonts/Noto_Sans_KR/NotoSansKR-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-display: swap;
+  font-weight: bold;
+  src: url('../fonts/Noto_Sans_KR/NotoSansKR-Medium.otf') format('opentype');
+}
+
+body,
+button,
+.form-caption h1,
+.form-caption p,
+.enform {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* Overrides */
+.card-issue .image h4 {
+  font-size: 31px !important;
+}

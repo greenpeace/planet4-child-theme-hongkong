@@ -79,5 +79,9 @@
       color: white;
       margin-top: 10px !important;
     }
+
+    p {
+      @include title-text;
+    }
   }
 }

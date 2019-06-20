@@ -241,8 +241,8 @@
   }
 
   &.force-mobile p {
-    font-size: 24px;
-    line-height: 36px;
+    // font-size: 24px;
+    font-size: 22px;
     margin: 4px 0;
   }
 
@@ -356,7 +356,7 @@
 
   &.swiper-slide {
     height: 440px;
-    padding-top: 8px;
+    padding-top: 25px;
     padding-bottom: 25px;
     display: flex;
     flex-direction: column;
@@ -434,6 +434,7 @@
 
   .thumbnail {
     height: 50%;
+    padding-top: 0;
     border-radius: 0;
     box-shadow: none;
 
@@ -575,9 +576,6 @@
   }
 
   .status {
-    @include greaterThan('sm') {
-      font-size: 24px;
-      line-height: 36px;
-    }
+    @include text;
   }
 }

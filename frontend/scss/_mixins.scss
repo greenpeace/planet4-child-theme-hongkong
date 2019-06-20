@@ -41,80 +41,82 @@
 }
 
 // Typography
-@mixin title-big {
-  font-size: 34px;
-  line-height: 50px;
+@mixin margins {
   margin-top: 10px;
   margin-bottom: 10px;
 
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-top: 0;
+  }
+
   @include greaterThan('sm') {
-    font-size: 50px;
-    line-height: 70px;
     margin-top: 20px;
-    margin-top: 20px;
+    margin-bottom: 20px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-top: 0;
+    }
+  }
+}
+
+@mixin title-big {
+  font-size: 28px;
+
+  @include greaterThan('sm') {
+    font-size: 38px;
   }
 }
 
 @mixin title-mid {
-  font-size: 24px;
-  line-height: 36px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  font-size: 19px;
 
   @include greaterThan('sm') {
-    font-size: 34px;
-    line-height: 50px;
-    margin-top: 20px;
-    margin-top: 20px;
+    font-size: 30px;
+  }
+}
+
+@mixin title-text {
+  font-size: 18px;
+
+  @include greaterThan('sm') {
+    font-size: 22px;
   }
 }
 
 @mixin subtitle {
-  font-size: 16px;
-  line-height: 21px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  @include title-text;
   color: rgb(95, 95, 95);
-
-  @include greaterThan('sm') {
-    font-size: 24px;
-    line-height: 36px;
-    margin-top: 20px;
-    margin-top: 20px;
-  }
 }
 
 @mixin text {
-  font-size: 18px;
-  line-height: 28px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  font-size: 16px;
 
   @include greaterThan('sm') {
-    font-size: 24px;
-    line-height: 38px;
+    font-size: 18px;
   }
 }
 
 @mixin caption {
   font-size: 14px;
-  line-height: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
 
   @include greaterThan('sm') {
-    font-size: 20px;
-    line-height: 32px;
+    font-size: 16px;
   }
 }
 
 @mixin see-more {
   font-size: 14px;
-  line-height: 20px;
 
   @include greaterThan('sm') {
-    font-size: 20px;
-    line-height: 32px;
+    font-size: 16px;
   }
 }
 

@@ -12,30 +12,30 @@
 
     @include greaterThan('sm') {
       margin-top: 0;
+      margin-bottom: 14px;
     }
 
     &.data {
-      font-size: 16px;
-      line-height: 1.31;
+      @include title-text;
+      font-weight: bold;
       display: flex;
       flex-direction: column;
       margin: 7px 0;
 
       @include greaterThan('sm') {
-        font-size: 21px;
-        margin-top: 4px;
+        margin-top: 0;
         margin-bottom: 12px;
       }
 
       i {
-        font-size: 26px;
-        font-family: Montserrat;
+        // font-size: 26px;
+        // font-family: Montserrat;
         font-style: normal;
-        letter-spacing: -0.5px;
+        // letter-spacing: -0.5px;
         margin-bottom: -5px;
 
         @include greaterThan('sm') {
-          font-size: 32px;
+          // font-size: 28px;
         }
       }
     }
@@ -46,6 +46,14 @@
   .meta-box,
   .mini-tip {
     margin: 7px 0 0;
+  }
+
+  > p:first-child {
+    margin-top: 14px;
+
+    @include greaterThan('sm') {
+      margin-top: 18px;
+    }
   }
 
   .thumbnail {
