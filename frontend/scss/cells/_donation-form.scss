@@ -19,7 +19,7 @@
       font-weight: bold;
       color: #898b92;
 
-      &.active {
+      &.is-active {
         background-color: white;
       }
     }
@@ -44,16 +44,39 @@
 }
 
 .dollar-handles {
-  margin: 0 -12px 10px;
-  display: flex;
+  display: none;
+  margin: 0 -15px 10px;
   justify-content: space-between;
+
+  &.is-active {
+    display: flex;
+  }
+
+  @include greaterThan('sm') {
+    margin: 0 -3px 10px;
+  }
+}
+
+[class^='paragraph-handles__'],
+[class*=' paragraph-handles__'] {
+  display: none;
+  min-height: 43px;
+
+  &.is-active {
+    display: block;
+  }
 }
 
 .dollar-handle {
   @include card;
   position: relative;
-  height: 150px;
+  height: 135px;
   width: 105px;
+  margin: 0 3px;
+
+  @include greaterThan('sm') {
+    height: 150px;
+  }
 
   label,
   input {
@@ -91,9 +114,13 @@
       left: 0;
       right: 0;
       height: 45px;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 45px;
       text-align: center;
+    }
+
+    @include greaterThan('sm') {
+      font-size: 18px;
     }
   }
 
