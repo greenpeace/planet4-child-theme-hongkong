@@ -1,4 +1,6 @@
 .section-text-images {
+  min-height: 300px;
+
   > .ct-container {
     padding-top: 40px;
     padding-bottom: 40px;
@@ -77,6 +79,8 @@
   }
 
   .swiper-wrapper {
+    height: 100%;
+
     .image {
       background-size: cover;
       background-position: center;
