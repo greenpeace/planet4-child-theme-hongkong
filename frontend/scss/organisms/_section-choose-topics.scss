@@ -33,4 +33,13 @@
       margin: 7px 4px;
     }
   }
+
+  .tag-cloud__following {
+      @include greaterThan('sm') {
+        display: flex;
+        justify-content: space-between;
+      }
+  }
+
 }
+

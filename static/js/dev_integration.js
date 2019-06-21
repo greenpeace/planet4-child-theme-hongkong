@@ -36,23 +36,61 @@ $(document).ready(function(){
     }
 
     // set cookies on topic click
-    $('.topic-button').on('click', function(e){
+    $('#topic-submit-button').on('click', function(e){
         e.preventDefault();
-        // var gpea_selected_topic_slug = $(this).data('slug');
-        var gpea_selected_topic_id = $(this).data('id');
-        var gpea_selected_topic_taxonomy = $(this).data('taxonomy');
+        var cookie_name_issues = 'gpea_issues';        
+        var gpea_cookie_issues = Cookies.get(cookie_name_issues) ? Cookies.getJSON(cookie_name_issues) : new Array();
 
-        if ('category' == gpea_selected_topic_taxonomy) {
-            var cookie_name = 'gpea_issues';
-        } else if ('post_tag' == gpea_selected_topic_taxonomy) {
-            var cookie_name = 'gpea_topics';
-        } else return;
+        $('.topic-button[data-taxonomy="category"]').each(function(index) {
+            var gpea_selected_topic_id = $(this).data('engaging');
+            if ($(this).hasClass('active')) {
+                // if ( gpea_cookie_issues.includes(gpea_selected_topic_id) ) return;
+                // else gpea_cookie_issues.push(gpea_selected_topic_id);
+                if ( ! gpea_cookie_issues.includes(gpea_selected_topic_id) ) gpea_cookie_issues.push(gpea_selected_topic_id);
+            } else {
+                var index = gpea_cookie_issues.indexOf(gpea_selected_topic_id);
+                if (index > -1) {
+                    gpea_cookie_issues.splice(index, 1);
+                }
+            }
+        });
+        Cookies.set(cookie_name_issues,gpea_cookie_issues);
 
-        var gpea_topics = Cookies.get(cookie_name) ? Cookies.getJSON(cookie_name) : new Array();
-        if ( gpea_topics.includes(gpea_selected_topic_id) ) return;
-        else gpea_topics.push(gpea_selected_topic_id);
-        Cookies.set(cookie_name,gpea_topics);
+        var cookie_name_topics = 'gpea_topics';
+        var gpea_cookie_topics = Cookies.get(cookie_name_topics) ? Cookies.getJSON(cookie_name_topics) : new Array();
+
+        $('.topic-button[data-taxonomy="post_tag"]').each(function(index) {
+            var gpea_selected_topic_id = $(this).data('engaging');
+            if ($(this).hasClass('active')) {                
+                // if ( gpea_cookie_topics.includes(gpea_selected_topic_id) ) return;
+                // else gpea_cookie_topics.push(gpea_selected_topic_id);
+                if ( ! gpea_cookie_topics.includes(gpea_selected_topic_id) ) gpea_cookie_topics.push(gpea_selected_topic_id);
+            } else {
+                var index = gpea_cookie_topics.indexOf(gpea_selected_topic_id);
+                if (index > -1) {
+                    gpea_cookie_topics.splice(index, 1);
+                }
+            }
+        });
+        Cookies.set(cookie_name_topics,gpea_cookie_topics);        
+
     });
+
+    if ( $('.js-tag-cloud').length ) {
+        var cookie_name_issues = 'gpea_issues';
+        var gpea_cookie_issues = Cookies.get(cookie_name_issues) ? Cookies.getJSON(cookie_name_issues) : new Array();
+        $.each( gpea_cookie_issues, function( key, value ) {
+            $(`.topic-button[data-engaging='${value}']`).addClass('active');
+            $(`.topic-button[data-engaging='${value}']`).show();
+        });
+
+        var cookie_name_topics = 'gpea_topics';
+        var gpea_cookie_topics = Cookies.get(cookie_name_topics) ? Cookies.getJSON(cookie_name_topics) : new Array();
+        $.each( gpea_cookie_topics, function( key, value ) {
+            $(`.topic-button[data-engaging='${value}']`).addClass('active');
+        });
+          
+    }
 
     // ajax function to serve the followed content
     // add condition, for example "if we are in home" ecc.
