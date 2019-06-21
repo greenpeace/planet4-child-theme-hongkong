@@ -7,8 +7,8 @@ jQuery(function($){
   var $search_form = $( '#search_form_inner' );
   var searchRequest;
   var ajaxurl = localizations.ajaxurl; // eslint-disable-line no-undef
-  var results_posts = $('.tmp-ajax-search-posts');
-  var results_terms = $('.tmp-ajax-search-terms');
+  var results_posts = $('#ajax-search-posts');
+  var results_terms = $('#ajax-search-terms');
   var reset_filters = $('#btn_filter_reset');
 
   $('.search-autocomplete').autoComplete({
@@ -38,6 +38,7 @@ jQuery(function($){
           terms = terms.join('<br>');
           terms = terms || 'No terms found';
           results_terms.html(terms);
+            console.log(posts);
          // suggest(res.data);
         }
       );

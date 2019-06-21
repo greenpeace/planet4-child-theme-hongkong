@@ -8,105 +8,106 @@
     {% set expanded  = posts ? true : false %}
     {% set search_label = __( 'Search', 'planet4-child-theme-backend' ) %}
 
-    {{ page_title|e('wp_kses_post')|raw }}</h2>
+    <h2>{{ page_title|e('wp_kses_post')|raw }}</h2>
 
     <!-- No posts found? -->
     {% if ( not posts ) %}
-	{{ exception ?? __( 'Nothing found, sorry.', 'planet4-child-theme-backend' ) }}
+        {{ exception ?? __( 'Nothing found, sorry.', 'planet4-child-theme-backend' ) }}
     {% endif %}
 
     <!-- We also included results for: -->
+    <!-- Does this even work? -->
     {% if ( corrected_term ) %}
-	{{ corrected_term }}
+        {{ corrected_term }}
     {% endif %}
 
     <form id="search_form_inner" role="search" action="{{ data_nav_bar.home_url }}">
         <!-- Main search field -->
-	<input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="{{ search_label }}" value="{{ search_query|e('wp_kses_post')|raw }}">
-	<input type="hidden" name="orderby" value="{{ selected_sort ?? default_sort }}" />
-	<button type="submit">{{ search_label }}</button><br><br>
+        <input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="{{ search_label }}" value="{{ search_query|e('wp_kses_post')|raw }}">
+        <input type="hidden" name="orderby" value="{{ selected_sort ?? default_sort }}" />
+        <button type="submit">{{ search_label }}</button><br><br>
     </form>
 
     <!-- Temporary/debug container for real-time AJAX search results -->
     <!-- See p4ct_search.js for code & integration -->
     <style>
-     .tmp-ajax-search-posts,
-     .tmp-ajax-search-terms,
+     #ajax-search-posts,
+     #ajax-search-terms,
      .tmp-ajax-search-title {
          float: right;
          clear: right;
      }
     </style>
     <h2 class="tmp-ajax-search-title">AJAX post results</h2>
-    <p class="tmp-ajax-search-posts"></p>
+    <p id="ajax-search-posts"></p>
     <h2 class="tmp-ajax-search-title">AJAX term results</h2>
-    <p class="tmp-ajax-search-terms"></p>
+    <p id="ajax-search-terms"></p>
 
     <p>Filters</p>
     {% if ( categories|length > 0 ) %}
         <select form="search_form_inner" class="filter-search" id="f[cat]" name="f[cat]">
             <option disabled selected value> -- None -- </option>
-	    {% for category in categories %}
-		{% if ( category.results > 0 ) %}
+            {% for category in categories %}
+                {% if ( category.results > 0 ) %}
                     <option value="{{ category.term_id }}" {{ category.selected ? 'selected' : '' }}>{{ category.name|e('wp_kses_post')|raw }} ({{ category.results }})</option>
-		{% endif %}
-	    {% endfor %}
+                {% endif %}
+            {% endfor %}
         </select>
     {% endif %}
     {% if ( tags|length > 0 ) %}
         <select form="search_form_inner" class="filter-search" id="f[tag]" name="f[tag]">
             <option disabled selected value> -- None -- </option>
-	    {% for tag in tags %}
-		{% if ( tag.results > 0 ) %}
+            {% for tag in tags %}
+                {% if ( tag.results > 0 ) %}
                     <option value="{{ tag.term_id }}" {{ tag.selected ? 'selected' : '' }}>{{ tag.name|e('wp_kses_post')|raw }} ({{ tag.results }})</option>
-		{% endif %}
-	    {% endfor %}
+                {% endif %}
+            {% endfor %}
         </select>
     {% endif %}
 
     <button id="btn_filter_reset">{{ __( 'Reset Filters', 'planet4-child-theme-backend' ) }}</button><br>
     <label for="select_order">{{ __('Sort by', 'planet4-child-theme-backend' ) }}</label><br>
     <select form="search_form_innerg" class="filter-search" id="select_order" name="select_order">
-	{% for key, sort_option in sort_options %}
-	    {% if key == selected_sort %}
-		<option value="{{ key }}" {{ not search_query and key == '_score' ? 'disabled' : 'selected' }}>{{ __( sort_option.name, 'planet4-child-theme-backend' ) }}</option>
-	    {% else %}
-		<option value="{{ key }}">{{ __( sort_option.name, 'planet4-child-theme-backend' ) }}</option>
-	    {% endif %}
-	{% endfor %}
+        {% for key, sort_option in sort_options %}
+            {% if key == selected_sort %}
+                <option value="{{ key }}" {{ not search_query and key == '_score' ? 'disabled' : 'selected' }}>{{ __( sort_option.name, 'planet4-child-theme-backend' ) }}</option>
+            {% else %}
+                <option value="{{ key }}">{{ __( sort_option.name, 'planet4-child-theme-backend' ) }}</option>
+            {% endif %}
+        {% endfor %}
     </select>
 
     <div class="multiple-search-result">
-	{% if ( load_more.async ) %}
-	    {% set displayed_posts = paged_posts %}
-	{% else %}
-	    {% set displayed_posts = posts %}
-	{% endif %}
-	<ul class="list-unstyled">
-	    {% for post in displayed_posts %}
-		{% include ['tease-search.twig', 'tease-'~post.post_type~'.twig', 'tease.twig'] %}
-	    {% endfor %}
-	</ul>
-	{% if ( load_more and posts|length > paged_posts|length ) %}
-	    <div class="col-lg-12 mb-5 load-more-button-div">
-		<button
-		    class="btn btn-medium btn-small btn-secondary more-btn {{ load_more.async ? 'btn-load-more-async' : '' }} btn-load-more-click-scroll"
-		    data-current_page="{{ current_page }}"
-		    data-total_posts="{{ found_posts }}"
-		    data-posts_per_load="{{ load_more.posts_per_load }}">
-		    {{ load_more.button_text }}
-		</button>
-	    </div>
-	{% endif %}
-	{% if ( pagination ) %}
-	    {{ fn( 'the_posts_pagination', pagination ) }}
-	{% endif %}
+        {% if ( load_more.async ) %}
+            {% set displayed_posts = paged_posts %}
+        {% else %}
+            {% set displayed_posts = posts %}
+        {% endif %}
+        <ul class="list-unstyled">
+            {% for post in displayed_posts %}
+                {% include ['tease-search.twig', 'tease-'~post.post_type~'.twig', 'tease.twig'] %}
+            {% endfor %}
+        </ul>
+        {% if ( load_more and posts|length > paged_posts|length ) %}
+            <div class="col-lg-12 mb-5 load-more-button-div">
+                <button
+                    class="btn btn-medium btn-small btn-secondary more-btn {{ load_more.async ? 'btn-load-more-async' : '' }} btn-load-more-click-scroll"
+                    data-current_page="{{ current_page }}"
+                    data-total_posts="{{ found_posts }}"
+                    data-posts_per_load="{{ load_more.posts_per_load }}">
+                    {{ load_more.button_text }}
+                </button>
+            </div>
+        {% endif %}
+        {% if ( pagination ) %}
+            {{ fn( 'the_posts_pagination', pagination ) }}
+        {% endif %}
     </div>
 
     {% if ( suggestions ) %}
-	{% for suggestion in suggestions %}
+        {% for suggestion in suggestions %}
             <p>{{ suggestion }}</p>
-	{% endfor %}
+        {% endfor %}
     {% endif %}
 
     <!-- <pre>{{ dump() }}</pre> -->
