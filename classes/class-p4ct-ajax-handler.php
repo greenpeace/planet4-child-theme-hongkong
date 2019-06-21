@@ -5,6 +5,9 @@
  * @package P4CT
  */
 
+use P4CT_Site as P4CTSite;
+
+
 /**
  * Class P4CT_AJAX_Handler
  */
@@ -31,6 +34,7 @@ class P4CT_AJAX_Handler {
 	private function hooks() {
 		add_action( 'wp_ajax_supportLauncher', [ $this, 'support_launcher_ajax_handler' ] );
 		add_action( 'wp_ajax_topicsFollowing', [ $this, 'topics_following_ajax_handler' ] );
+		add_action( 'wp_ajax_projectsFollowing', [ $this, 'projects_following_ajax_handler' ] );
 	}
 
 	/**
@@ -66,9 +70,9 @@ class P4CT_AJAX_Handler {
 	}
 
 	/**
-	 * Send mail upon AJAX request from support_launcher module.
+	 * Prepare followeing information and content.
 	 */
-	public function topics_following_ajax_handler() {		
+	public function topics_following_ajax_handler() {
 
 		if ( ( ! isset( $_COOKIE['gpea_issues'] ) ) && ( ! isset( $_COOKIE['gpea_topics'] ) ) ) {
 			return;
@@ -84,54 +88,115 @@ class P4CT_AJAX_Handler {
 		if ( isset( $_COOKIE['gpea_issues'] ) ) {
 			$gpea_issues = json_decode( sanitize_text_field( wp_unslash( $_COOKIE['gpea_issues'] ) ) );
 
-			foreach ( $gpea_issues as $gpea_issue ) {
-				$query = new \WP_Query(
-					array(
-						'cat'            => $gpea_issue,
-						'order'          => 'desc',
-						'orderby'        => 'date',
-						'posts_per_page' => 5,
-					)
-				);
-
-				$posts = $query->posts;
-
-				if ( $posts ) {
-					foreach ( $posts as $post ) {
-						$posts_result[] = array(
-							'title' => $post->post_title,
-							'post_date' => date( 'Y - m - d', strtotime( $post->post_date ) ),
-						);
-					}
-				}
-				// $this->safe_echo( json_encode( $posts_result ) );
-				// return;
-			}
+			$post_results_issue = get_carousel_posts( $gpea_issues, 'cat' );
 		}
 
 		if ( isset( $_COOKIE['gpea_topics'] ) ) {
 			$gpea_topics = json_decode( sanitize_text_field( wp_unslash( $_COOKIE['gpea_topics'] ) ) );
 
-			foreach ( $gpea_topics as $gpea_topic ) {
-				$query = new \WP_Query(
+			$post_results_topic = get_carousel_posts( $gpea_topics, 'tag' );
+
+		}
+
+		$posts_result = array_merge( $post_results_issue, $post_results_topic );
+
+		if ( $posts_result ) $this->safe_echo( json_encode( $posts_result ) );
+		return;
+
+
+	}
+
+	/**
+	 * Prepare followeing information and content.
+	 */
+	public function projects_following_ajax_handler() {
+
+		if ( ! isset( $_COOKIE['gpea_projects'] ) ) {
+			return;
+		}
+
+		$gpea_extra = new P4CTSite();
+		$main_issues = $gpea_extra->gpea_get_main_issue( 866 );
+
+		// if ( ! wp_verify_nonce( $data['_wpnonce'], self::TOPICS_FOLLOWING_NONCE_STRING ) ) {
+		// 	$this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'planet4-child-theme-backend' ) );
+		// 	return;
+		// }
+
+		$posts_result = array();
+
+		if ( isset( $_COOKIE['gpea_projects'] ) ) {
+			$gpea_projects = json_decode( sanitize_text_field( wp_unslash( $_COOKIE['gpea_projects'] ) ) );
+
+			foreach ( $gpea_projects as $gpea_project ) {
+
+				$gpea_project_id = intval( $gpea_project );
+
+				$project_detail = array();
+				$project_detail['title'] = get_the_title( $gpea_project_id );
+				if ( has_post_thumbnail( $gpea_project_id ) ) {
+					$img_id                  = get_post_thumbnail_id( $gpea_project_id );
+					$img_data                = wp_get_attachment_image_src( $img_id, 'medium_large' );
+					$project_detail['image'] = $img_data[0];
+				}
+				$project_meta                         = get_post_meta( $gpea_project_id );
+				$project_detail['start_date']         = $project_meta['p4-gpea_project_start_date'][0] ?? '';
+				$project_detail['localization']       = $project_meta['p4-gpea_project_localization'][0] ?? '';
+				$project_detail['project_percentage'] = $project_meta['p4-gpea_project_percentage'][0] ?? 0;
+				$project_detail['stroke_dashoffset']  = $project_detail['project_percentage'] ? 697.433 * ( ( 100 - $project_detail['project_percentage'] ) / 100 ) : 0;
+
+				$main_issues = $gpea_extra->gpea_get_main_issue( $gpea_project_id );
+				if ( $main_issues ) {
+					$project_detail['main_issue_slug'] = $main_issues->slug;
+					$project_detail['main_issue_name'] = $main_issues->name;
+				}
+
+				// get related posts 
+
+				$the_query = new \WP_Query(
 					array(
-						'tag_id'            => $gpea_topic,
+						'meta_key'       => 'p4_select_project_related',
+						'meta_value'     => $gpea_project_id,
 						'order'          => 'desc',
 						'orderby'        => 'date',
-						'posts_per_page' => 5,
+						'posts_per_page' => 3,
 					)
 				);
 
-				$posts = $query->posts;
+				$project_related = array();
 
-				if ( $posts ) {
-					foreach ( $posts as $post ) {
-						$posts_result[] = array(
-							'title' => $post->post_title,
-							'post_date' => date( 'Y - m - d', strtotime( $post->post_date ) ),
+				while ( $the_query->have_posts() ) :
+
+						$the_query->the_post();
+						$single_update = array(
+							'title'     => get_the_title(),
+							'post_date' => date( 'Y - m - d', strtotime( get_the_date() ) ),
+							'link'      => get_the_permalink( $post->ID ),
 						);
-					}
-				}
+
+						// other info
+						$main_issues = $gpea_extra->gpea_get_main_issue( $post->ID );
+						if ( $main_issues ) {
+							$single_update['main_issue_slug'] = $main_issues->slug;
+							$single_update['main_issue_name'] = $main_issues->name;
+						}
+
+						if ( has_post_thumbnail( $post->ID ) ) {
+							$img_id                  = get_post_thumbnail_id( $post->ID );
+							$img_data                = wp_get_attachment_image_src( $img_id, 'medium_large' );
+							$single_update['image'] = $img_data[0];
+						}
+
+						$project_related[] = $single_update;
+				endwhile;
+
+				$project_detail['related'] = $project_related;
+
+				wp_reset_query();
+				wp_reset_postdata();
+
+				$posts_result[] = $project_detail;
+
 			}
 
 			if ( $posts_result ) $this->safe_echo( json_encode( $posts_result ) );
@@ -140,6 +205,71 @@ class P4CT_AJAX_Handler {
 		}
 
 	}
+
+	/**
+	 * Retrieve posts from array of elements
+	 *
+	 * @tags array $array elements to be queried
+	 * @type can be cat or tag
+	 */
+	private function get_carousel_posts( $tags, $type ) {
+
+		$results = array();
+
+		foreach ( $tags as $tag_id ) {
+
+			$args = array(
+				'order'          => 'desc',
+				'orderby'        => 'date',
+				'posts_per_page' => 5,
+			);
+
+			if ( 'cat' === $type ) {
+				$args['cat'] = $tag_id;
+			}
+
+			if ( 'tag' === $type ) {
+				$args['tag_id'] = $tag_id;
+			}
+
+			$the_query = new \WP_Query(
+
+			while ( $the_query->have_posts() ) :
+
+				$the_query->the_post();
+				$single_update = array(
+					'title'     => get_the_title(),
+					'post_date' => date( 'Y - m - d', strtotime( get_the_date() ) ),
+					'link'      => get_the_permalink( $post->ID ),
+				);
+
+				$single_update['reading_time'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+
+				// other info
+				$main_issues = $gpea_extra->gpea_get_main_issue( $post->ID );
+				if ( $main_issues ) {
+					$single_update['main_issue_slug'] = $main_issues->slug;
+					$single_update['main_issue_name'] = $main_issues->name;
+				}
+
+				if ( has_post_thumbnail( $post->ID ) ) {
+					$img_id                  = get_post_thumbnail_id( $post->ID );
+					$img_data                = wp_get_attachment_image_src( $img_id, 'medium_large' );
+					$single_update['image'] = $img_data[0];
+				}
+
+				$results[] = $single_update;
+			endwhile;
+
+			wp_reset_query();
+			wp_reset_postdata();
+
+			return $results;
+
+		}
+
+	}
+
 
 	/**
 	 * Echo escaped response and stop processing the request.

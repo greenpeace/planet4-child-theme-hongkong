@@ -177,6 +177,11 @@
       }
     }
   }
+
+  &.not-following {
+    display: none;
+  }
+
 }
 
 @keyframes lds-dual-ring {
