@@ -8,7 +8,8 @@
 			<a href="" class="back-button">
 				<span class="icon-chevron-left"></span>
 			</a>
-			<a href="" class="button green">關注</a>
+			<a href="#" data-project='{{ post.id }}' class="js-project-follow button green">關注</a>
+			<a href="#" data-project='{{ post.id }}' class="js-project-unfollow button not-following green">Following</a>
 			</div>
 		</div>
 		<div class="ct-container anchor-bottom">
@@ -16,7 +17,7 @@
 			<h1 class="project-summary-title">{{ post.title|raw }}</h1>
 			<div class="project-summary-details">
 				<!-- TODO: print real issue -->
-				<div class="project-summary-issue issue plastics">塑料</div>
+				<div class="project-summary-issue issue {{ custom_body_classes }}">{{ main_issue_name }}</div>
 				<div class="project-summary-open">
 					<div class="project-summary-open-name">開始</div>
 					{{ start_date }}<!-- 2017年1月 -->

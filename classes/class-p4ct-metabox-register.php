@@ -364,6 +364,17 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_page->add_field(
+			array(
+				'name'             => esc_html__( 'Special html class for the page', 'cmb2' ),
+				'desc'             => esc_html__( 'WARNING: this class is used to apply special style and behaviour, edit with caution...', 'cmb2' ),
+				'id'               => 'p4-gpea_page_special_class',
+				'type'             => 'text',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
+			)
+		);
+
 	}
 
 	/**

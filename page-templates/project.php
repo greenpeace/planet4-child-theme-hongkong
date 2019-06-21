@@ -51,8 +51,12 @@ if ( has_post_thumbnail( $post->ID ) ) {
 $percent_complete = $post->custom['p4-gpea_project_percentage'] ?? 0;
 $percent_complete = preg_match( '/^\d+$/' , $percent_complete ) ? intval( $percent_complete ) : 0;
 
+
 $main_issues = $gpea_extra->gpea_get_main_issue( $post->ID );
-$categories = $main_issues->slug;
+if ( $main_issues ) {
+	$main_issue_slug = $main_issues->slug;
+	$main_issue_name = $main_issues->name;
+}
 
 $context['completion_percentage']       = $percent_complete;
 $context['post']                        = $post;
@@ -63,7 +67,8 @@ $context['header_button_title']         = $page_meta_data['p4_button_title'][0] 
 $context['header_button_link']          = $page_meta_data['p4_button_link'][0] ?? '';
 // $context['header_button_link_checkbox'] = $page_meta_data['p4_button_link_checkbox'];
 $context['background_image']            = wp_get_attachment_url( get_post_meta( get_the_ID(), 'background_image_id', 1 ) );
-$context['custom_body_classes']         = $categories;
+$context['custom_body_classes']         = $main_issue_slug ?? '';
+$context['main_issue_name']             = $main_issue_name ?? '';
 $context['project_percentage']          = $page_meta_data['p4-gpea_project_percentage'][0] ?? 0;
 $context['stroke_dashoffset']           = $context['project_percentage'] ? 697.433 * ( ( 100 - $context['project_percentage'] ) / 100 ) : 0;
 $context['start_date']                  = $page_meta_data['p4-gpea_project_start_date'][0] ?? '';
