@@ -29,7 +29,9 @@ h4 {
 h5,
 h6,
 p,
-blockquote {
+blockquote,
+ul,
+ol {
   @include text;
   @include margins;
 }
@@ -44,6 +46,15 @@ blockquote {
 
 .see-more {
   @include see-more;
+}
+
+ul,
+ol {
+  padding-left: 20px;
+
+  @include greaterThan('sm') {
+    padding-left: 0;
+  }
 }
 
 a {
@@ -86,7 +97,7 @@ h4 {
 }
 
 hr {
-  margin: 0;
+  @include margins;
   border: 0;
   height: 1px;
   background-color: rgba(0, 0, 0, 0.2);
@@ -99,5 +110,17 @@ img.lazy {
   &.error,
   &.loaded {
     opacity: 1;
+  }
+}
+
+@include greaterThan('sm') {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+@include lessThan('sm') {
+  .desktop-only {
+    display: none !important;
   }
 }

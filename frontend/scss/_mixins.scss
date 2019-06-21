@@ -40,6 +40,23 @@
   }
 }
 
+@mixin ct-container-guardian {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include greaterThan('sm') {
+    width: 620px;
+    max-width: none;
+  }
+
+  @include greaterThan('lg') {
+    width: 620px;
+  }
+}
+
 // Typography
 @mixin margins {
   margin-top: 10px;
@@ -123,6 +140,17 @@
 @mixin font-smoothing {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin list-inline {
+  > li {
+    display: inline-block;
+    margin-right: 30px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
 // Layout
