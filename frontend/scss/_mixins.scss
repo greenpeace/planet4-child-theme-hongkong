@@ -125,6 +125,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+@mixin list-inline {
+  > li {
+    display: inline-block;
+    margin-right: 30px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 // Layout
 @mixin card {
   border-radius: 8px;
