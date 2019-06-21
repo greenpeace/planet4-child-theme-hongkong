@@ -3,6 +3,10 @@
   padding-top: 15px;
   padding-bottom: 10px;
 
+  &.ct-container {
+    @include ct-container-guardian;
+  }
+
   .meta-box {
     margin-bottom: 25px;
 
@@ -29,28 +33,71 @@
     margin-top: 25px;
   }
 
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
   blockquote,
+  // .leader,
   .embed-container,
-  .full-width,
-  > p > img {
+  .full-width {
     position: relative;
     width: 100vw;
     left: 50%;
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 80px 0;
     background-color: $color-green;
 
+    @include greaterThan('sm') {
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
     > * {
-      @include ct-container;
+      @include ct-container-guardian;
       width: calc(100% - 40px);
     }
   }
 
-  blockquote {
+  .leader {
+    @include ct-container-guardian;
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    @include greaterThan('sm') {
+      margin-left: -20px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      right: 50%;
+      margin-left: calc(-50vw - 20px);
+      margin-right: -50vw;
+      background-color: $color-green;
+      z-index: -1;
+    }
+  }
+
+  blockquote,
+  .leader {
     padding-top: 35px;
     padding-bottom: 35px;
     color: white;
@@ -67,21 +114,32 @@
       box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
       padding: 0;
       margin: 0 20px;
+      height: 220px;
 
       @include greaterThan('sm') {
         // width: 100%;
-        height: 537px;
+        // height: 537px;
+        height: 370px;
         margin: 0 auto;
       }
 
       @include greaterThan('lg') {
-        height: 680px;
+        // height: 680px;
       }
     }
   }
 
   // images
-  > p > img {
+  img:not(.full-width) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+  }
+
+  img.full-width {
     display: block;
     height: auto;
     padding: 0;
@@ -94,13 +152,12 @@
   }
 
   .wp-caption {
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     max-width: 100%;
 
     @include greaterThan('sm') {
-      margin: 80px auto;
-      max-width: 500px;
+      margin: 40px auto;
     }
 
     img {
@@ -128,6 +185,7 @@
 
   .forests & {
     blockquote,
+    .leader::before,
     .embed-container,
     .full-width {
       background-color: $color-forests;
@@ -135,6 +193,7 @@
   }
   .oceans & {
     blockquote,
+    .leader::before,
     .embed-container,
     .full-width {
       background-color: $color-oceans;
@@ -142,6 +201,7 @@
   }
   .arctic & {
     blockquote,
+    .leader::before,
     .embed-container,
     .full-width {
       background-color: $color-arctic;
@@ -149,6 +209,7 @@
   }
   .climate & {
     blockquote,
+    .leader::before,
     .embed-container,
     .full-width {
       background-color: $color-climate;
@@ -156,6 +217,7 @@
   }
   .plastics & {
     blockquote,
+    .leader::before,
     .embed-container,
     .full-width {
       background-color: $color-plastics;
@@ -163,6 +225,7 @@
   }
   .health & {
     blockquote,
+    .leader::before,
     .embed-container,
     .full-width {
       background-color: $color-health;

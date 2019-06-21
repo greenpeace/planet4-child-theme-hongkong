@@ -48,6 +48,15 @@ ol {
   @include see-more;
 }
 
+ul,
+ol {
+  padding-left: 20px;
+
+  @include greaterThan('sm') {
+    padding-left: 0;
+  }
+}
+
 a {
   color: $color-green;
   text-decoration: none;
