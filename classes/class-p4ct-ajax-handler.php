@@ -73,6 +73,11 @@ class P4CT_AJAX_Handler {
 	 * Prepare followeing information and content.
 	 */
 	public function topics_following_ajax_handler() {
+		
+		$data = $_POST;
+		
+		if ( isset( $data['star'] ) ) $post_preferences = sanitize_text_field( $data['star'] );
+		else $post_preferences = false;
 
 		if ( ( ! isset( $_COOKIE['gpea_issues'] ) ) && ( ! isset( $_COOKIE['gpea_topics'] ) ) ) {
 			return;
@@ -88,13 +93,13 @@ class P4CT_AJAX_Handler {
 		if ( isset( $_COOKIE['gpea_issues'] ) ) {
 			$gpea_issues = json_decode( sanitize_text_field( wp_unslash( $_COOKIE['gpea_issues'] ) ) );
 
-			$post_results_issue = get_carousel_posts( $gpea_issues, 'cat' );
+			$post_results_issue = get_carousel_posts( $gpea_issues, 'cat', $post_preferences );
 		}
 
 		if ( isset( $_COOKIE['gpea_topics'] ) ) {
 			$gpea_topics = json_decode( sanitize_text_field( wp_unslash( $_COOKIE['gpea_topics'] ) ) );
 
-			$post_results_topic = get_carousel_posts( $gpea_topics, 'tag' );
+			$post_results_topic = get_carousel_posts( $gpea_topics, 'tag', $post_preferences );
 
 		}
 
@@ -211,8 +216,9 @@ class P4CT_AJAX_Handler {
 	 *
 	 * @tags array $array elements to be queried
 	 * @type can be cat or tag
+	 * @preferences can be petition
 	 */
-	private function get_carousel_posts( $tags, $type ) {
+	private function get_carousel_posts( $tags, $type, $preferences ) {
 
 		$results = array();
 
@@ -226,13 +232,15 @@ class P4CT_AJAX_Handler {
 
 			if ( 'cat' === $type ) {
 				$args['cat'] = $tag_id;
+				if ( 'petition' === $preferences ) $args['tag'] = 'petition';
 			}
 
 			if ( 'tag' === $type ) {
 				$args['tag_id'] = $tag_id;
+				if ( 'petition' === $preferences ) $args['tag'] = 'petition';
 			}
 
-			$the_query = new \WP_Query(
+			$the_query = new \WP_Query( $args );
 
 			while ( $the_query->have_posts() ) :
 
