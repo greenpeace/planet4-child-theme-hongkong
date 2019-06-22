@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "js-cookie": "^2.2.0",
+    "lodash.template": "^4.4.0",
     "smooth-scroll": "^16.1.0",
     "swiper": "4.5.0",
     "vanilla-lazyload": "12.0.0"

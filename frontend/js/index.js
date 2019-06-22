@@ -10,6 +10,7 @@ import * as Cookies from 'js-cookie';
 
 import petitionThankyou from './petition-thankyou';
 import donation from './donation';
+import p4ct_search from './p4ct_search';
 
 // matches polyfill
 window.Element &&
@@ -370,3 +371,4 @@ connectENForm();
 /* Page specific functionality */
 petitionThankyou();
 donation(Swiper);
+p4ct_search();

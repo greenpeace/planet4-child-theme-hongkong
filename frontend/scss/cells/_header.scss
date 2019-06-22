@@ -161,6 +161,7 @@ header {
       .button {
         background: $color-orange;
         color: white;
+        white-space: nowrap;
 
         &:hover,
         &:focus {
