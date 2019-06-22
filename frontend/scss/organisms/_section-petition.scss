@@ -47,6 +47,11 @@
     display: none;
   }
 
+}
+
+.enform-side-style,
+.tag_cloud_form {
+  
   .caption-overlay {
     display: none;
   }
@@ -358,4 +363,9 @@
       }
     }
   }
+}
+
+
+.tag_cloud_form .signatures {
+  position: relative;
 }

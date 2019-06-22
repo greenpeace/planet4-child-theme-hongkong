@@ -47,11 +47,13 @@ $(document).ready(function(){
                 // if ( gpea_cookie_issues.includes(gpea_selected_topic_id) ) return;
                 // else gpea_cookie_issues.push(gpea_selected_topic_id);
                 if ( ! gpea_cookie_issues.includes(gpea_selected_topic_id) ) gpea_cookie_issues.push(gpea_selected_topic_id);
+                $(`#en__field_supporter_questions_${gpea_selected_topic_id}`).val('Y');
             } else {
                 var index = gpea_cookie_issues.indexOf(gpea_selected_topic_id);
                 if (index > -1) {
                     gpea_cookie_issues.splice(index, 1);
                 }
+                $(`#en__field_supporter_questions_${gpea_selected_topic_id}`).val('');
             }
         });
         Cookies.set(cookie_name_issues,gpea_cookie_issues);
@@ -65,16 +67,19 @@ $(document).ready(function(){
                 // if ( gpea_cookie_topics.includes(gpea_selected_topic_id) ) return;
                 // else gpea_cookie_topics.push(gpea_selected_topic_id);
                 if ( ! gpea_cookie_topics.includes(gpea_selected_topic_id) ) gpea_cookie_topics.push(gpea_selected_topic_id);
+                $(`#en__field_supporter_questions_${gpea_selected_topic_id}`).val('Y');
             } else {
                 var index = gpea_cookie_topics.indexOf(gpea_selected_topic_id);
                 if (index > -1) {
                     gpea_cookie_topics.splice(index, 1);
                 }
+                $(`#en__field_supporter_questions_${gpea_selected_topic_id}`).val('');
             }
         });
         Cookies.set(cookie_name_topics,gpea_cookie_topics);
         
         $('.tag_cloud_form').fadeIn();
+        $('.tag_cloud_form .signatures').addClass('is-open');
 
     });
 
