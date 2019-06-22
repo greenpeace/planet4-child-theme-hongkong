@@ -37,6 +37,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-email:before {
+  content: '\e910';
+}
 .icon-close:before {
   content: '\e90f';
 }

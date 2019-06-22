@@ -1,0 +1,87 @@
+.floating-share {
+  position: fixed !important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-top: 1px solid #000;
+  box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+
+  @include greaterThan('sm') {
+    @include card;
+    left: initial;
+    bottom: initial;
+    top: 50%;
+    transform: translateY(-100%);
+    padding-right: 30px;
+    right: -15px;
+    flex-direction: column;
+    border: none;
+  }
+
+  p {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  ul {
+    @include list-inline;
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 35px;
+
+    @include greaterThan('sm') {
+      flex-direction: column;
+      align-items: center;
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    li {
+      margin: 0;
+
+      @include greaterThan('sm') {
+        & + li {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+
+  &-icon {
+    border-bottom: none !important;
+    transition: color 140ms linear;
+
+    &.tw {
+      color: $color-tw;
+
+      &:focus,
+      &:hover {
+        color: darken($color-tw, 15%);
+      }
+    }
+
+    &.fb {
+      color: $color-fb;
+
+      &:focus,
+      &:hover {
+        color: darken($color-fb, 15%);
+      }
+    }
+
+    &.email {
+      color: $color-grey;
+
+      &:focus,
+      &:hover {
+        color: darken($color-grey, 15%);
+      }
+    }
+  }
+}
