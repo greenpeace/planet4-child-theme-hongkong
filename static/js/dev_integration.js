@@ -72,7 +72,9 @@ $(document).ready(function(){
                 }
             }
         });
-        Cookies.set(cookie_name_topics,gpea_cookie_topics);        
+        Cookies.set(cookie_name_topics,gpea_cookie_topics);
+        
+        $('.tag_cloud_form').fadeIn();
 
     });
 
