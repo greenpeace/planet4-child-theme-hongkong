@@ -84,3 +84,23 @@
     padding-bottom: 135px;
   }
 }
+
+/* newsletter simple */
+
+.enform-wrap.enform-full-width {
+  @extend .ct-container;
+  .enform {
+    background: transparent;
+    color: #000;
+    text-align: center;
+    h2 {
+      color: #000;
+    }
+    form .formblock-flex .en__field {
+      width: 100%;
+    }
+    form .submit {
+      display: block;
+    }
+  }
+}
