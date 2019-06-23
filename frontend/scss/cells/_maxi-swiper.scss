@@ -57,6 +57,7 @@
     font-weight: normal;
     line-height: 1;
     transition: all 140ms ease;
+    cursor: pointer;
 
     &.swiper-slide-active {
       font-size: 32px;

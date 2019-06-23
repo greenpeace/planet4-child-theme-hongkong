@@ -336,13 +336,13 @@
   @include card-tight;
   @include font-smoothing;
   position: relative;
-  padding: 40px 25px 60px;
+  padding: 40px 25px;
   text-align: center;
   background: $color-blue;
   color: white;
 
   @include greaterThan('sm') {
-    padding: 60px 107px 75px;
+    padding: 60px 107px;
   }
 
   .profile {
@@ -352,6 +352,7 @@
 
   p {
     @include caption;
+    margin-bottom: 0;
   }
 
   &.swiper-slide {
@@ -363,8 +364,6 @@
     justify-content: space-between;
 
     .profile {
-      margin-bottom: 0;
-
       img {
         width: 40px;
         height: 40px;
@@ -374,6 +373,10 @@
     p {
       @include text;
       order: -1;
+
+      @include greaterThan('sm') {
+        margin-top: 40px;
+      }
     }
   }
 }

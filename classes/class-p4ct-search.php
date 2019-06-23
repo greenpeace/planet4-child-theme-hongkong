@@ -828,18 +828,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * Load assets only on the search page.
 		 */
 		public function enqueue_public_assets() {
-			wp_enqueue_script( 'search-localizations', get_stylesheet_directory_uri() . '/static/js/search-localizations.js', array(), '0.1', true );
-			wp_localize_script( 'search-localizations', 'localizations', $this->localizations );
-			wp_enqueue_script( 'search-localizations' );
-			// if ( is_search() ) {
-			// 	wp_register_script( 'search_autocomplete', get_stylesheet_directory_uri() . '/static_tmp/js/vendor/jquery.auto-complete.min.js', [ 'jquery' ], '0.1', true );
+			if ( is_search() ) {
+				$js_creation = filectime( get_stylesheet_directory() . '/static/js/search.js' );
 
-			// 	wp_register_script( 'p4ct_search', get_stylesheet_directory_uri() . '/static_tmp/js/p4ct_search.js', [ 'jquery', 'search_autocomplete' ], '0.1', true );
-			// 	wp_localize_script( 'p4ct_search', 'localizations', $this->localizations );
-
-			// 	wp_enqueue_script( 'p4ct_search' );
-			// 	wp_enqueue_script( 'search_autocomplete' );
-			// }
+				wp_register_script( 'search-script', get_stylesheet_directory_uri() . '/static/js/search.js', [], $js_creation, true );
+				wp_localize_script( 'search-script', 'localizations', $this->localizations );
+				wp_enqueue_script( 'search-script' );
+			}
 		}
 	}
 }
