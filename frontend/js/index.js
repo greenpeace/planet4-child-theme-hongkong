@@ -7,9 +7,11 @@ import {
 } from 'swiper/dist/js/swiper.esm.js';
 import LazyLoad from 'vanilla-lazyload';
 import * as Cookies from 'js-cookie';
+import SmoothScroll from 'smooth-scroll';
 
 import petitionThankyou from './petition-thankyou';
 import donation from './donation';
+import p4ct_search from './p4ct_search';
 
 // matches polyfill
 window.Element &&
@@ -40,7 +42,7 @@ window.Element &&
       };
   })(Element.prototype);
 
-Swiper.use([Navigation, Pagination, Scrollbar]);
+Swiper.use([Navigation, Pagination, Scrollbar, Controller]);
 
 new LazyLoad({
   elements_selector: '.lazy',
@@ -66,7 +68,7 @@ new Swiper('.featured-swiper, .projects-swiper, .issues-swiper', {
   },
 });
 
-new Swiper('.cards-swiper', {
+new Swiper('.cards-swiper:not(.controlled)', {
   slidesPerView: 'auto',
   centeredSlides: true,
   pagination: {
@@ -102,9 +104,39 @@ new Swiper('.section-text-images-swiper', {
   },
 });
 
-new Swiper('.label-swiper', {
-  slidesPerView: 'auto',
-  centeredSlides: true,
+// new Swiper('.label-swiper', {
+//   slidesPerView: 'auto',
+//   centeredSlides: true,
+// });
+
+$('.label-swiper').each(function() {
+  const $this = $(this);
+  const $controlled = $($this.data('controls'));
+
+  const controlledSwiper = new Swiper($controlled[0], {
+    slidesPerView: 'auto',
+    centeredSlides: true,
+    pagination: false,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      // when window width is <= 1023px
+      1023: {
+        navigation: false,
+      },
+    },
+  });
+
+  const labelSwiper = new Swiper($this[0], {
+    slidesPerView: 'auto',
+    centeredSlides: true,
+    slideToClickedSlide: true,
+  });
+
+  controlledSwiper.controller.control = labelSwiper;
+  labelSwiper.controller.control = controlledSwiper;
 });
 
 /**
@@ -308,6 +340,13 @@ if (searchExpanderClose)
       searchExpander[0].classList.remove('show');
   });
 
+/**
+ * Functionality for the EN form
+ *
+ * - add signatures bar
+ * - open/close
+ * - add FB button
+ */
 function connectENForm() {
   const form = document.querySelector('#enform');
   if (!form) return;
@@ -332,9 +371,7 @@ function connectENForm() {
   close.innerHTML = '×';
 
   const ctaFacebook = document.createElement('button');
-  ctaFacebook.classList.add('js-sign-facebook');
-  ctaFacebook.classList.add('button__facebook');
-  ctaFacebook.classList.add('btn');
+  ctaFacebook.classList.add('button', 'facebook', 'js-sign-facebook');
   ctaFacebook.innerHTML = 'Facebook';
 
   ctaFacebook.addEventListener('click', e => {
@@ -345,6 +382,7 @@ function connectENForm() {
 
   form.insertBefore(stats, form.firstChild);
   form.insertBefore(close, form.firstChild);
+  form.insertBefore(ctaFacebook, cta);
 
   cta.addEventListener('click', e => {
     if (!form.classList.contains('is-open')) {
@@ -366,6 +404,30 @@ function connectENForm() {
   });
 }
 connectENForm();
+
+/**
+ * Functionality for the dynamic submenu (eg. on page Reports)
+ */
+function connectAnchorMenu() {
+  const container = document.querySelector('.hero-submenu-container');
+  if (!container) return;
+
+  const anchors = document.querySelectorAll('.js-anchor-menu');
+
+  Array.from(anchors).forEach(anchor => {
+    const anchorEl = document.createElement('li');
+    anchorEl.classList.add('hero-submenu-item');
+    anchorEl.innerHTML =
+      '<li class="hero-submenu-item"><a href="#' +
+      anchor.id +
+      '">' +
+      anchor.dataset.labelmenu +
+      '</a></li>';
+    container.appendChild(anchorEl);
+  });
+  new SmoothScroll('a[href*="#"]');
+}
+connectAnchorMenu();
 
 /* Page specific functionality */
 petitionThankyou();

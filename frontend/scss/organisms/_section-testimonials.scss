@@ -3,12 +3,30 @@
   padding: 20px 0;
   background: $color-blue;
   text-align: center;
+  color: white;
 
   .swiper-pagination-bullet {
     background-color: white;
 
     &.swiper-pagination-bullet-active {
       opacity: 1;
+    }
+  }
+
+  &.layout-tiny-carousel {
+    padding: 40px 0;
+    background: white;
+    text-align: left;
+    color: black;
+  }
+
+  &.layout-list .card-testimonial {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+
+    @include greaterThan('sm') {
+      width: 80%;
     }
   }
 }

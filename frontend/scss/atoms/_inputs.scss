@@ -42,8 +42,18 @@ body,
     @include greaterThan('sm') {
       font-size: 20px;
     }
+  }
 
-    .currency + & {
+  .currency {
+    + input[type='email'],
+    + input[type='number'],
+    + input[type='search'],
+    + input[type='text'],
+    + input[type='tel'],
+    + input[type='url'],
+    + input[type='password'],
+    + textarea,
+    + select {
       padding-left: 70px;
     }
   }
@@ -73,10 +83,10 @@ body,
       content: '';
       position: absolute;
       top: 50%;
-      right: 15px;
-      width: 15px;
-      height: 15px;
-      margin-top: -10px;
+      right: 13px;
+      width: 10px;
+      height: 10px;
+      margin-top: -5px;
       border: 3px solid $color-green;
       border-right: 0;
       border-top: 0;
@@ -198,6 +208,35 @@ body,
       height: 33px;
       width: 100px;
       font-size: 14px;
+    }
+  }
+
+  .form-group.search {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+
+    &.fluid {
+      max-width: none;
+    }
+
+    input {
+      height: 40px;
+      margin: 10px -1px 10px 0;
+      min-width: 0;
+      max-width: none;
+      padding-left: 14px;
+      border-top-left-radius: 99px;
+      border-bottom-left-radius: 99px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .button {
+      padding: 0 20px 0 15px;
+      font-size: 16px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
   }
 }

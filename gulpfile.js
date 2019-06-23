@@ -62,6 +62,7 @@ const settings = {
   // it's used only by the 'webpack' task
   jsEntry: {
     script: ['./frontend/js/index.js'],
+    search: ['./frontend/js/search.js'],
   },
 
   // this is a helper for the soucemaps: make sure it matches the above,
@@ -74,6 +75,7 @@ const settings = {
   // here you can tell browserSync which static (PHP, HTML, etc…) files to watch
   watch: [
     '../../plugins/planet4-gpea-plugin-blocks/**/*.twig',
+    './templates/**/*.twig',
     './static/demo/**/*.html',
   ],
 

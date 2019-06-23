@@ -1,54 +1,54 @@
 {% block navigation_bar %}
-    <header>
+	<header>
 	<div class="ct-container">
-	    <div class="content">
+		<div class="content">
 		<div class="mobile-box">
-		    <a href="{{ home_url }}">
+			<a href="{{ home_url }}">
 			<span class="icon-search"></span>
-		    </a>
+			</a>
 		</div>
 		<div class="left-box">
-		    <a href="{{ home_url }}" class="logo" aria-label="Search">
+			<a href="{{ home_url }}" class="logo" aria-label="Search">
 			<span class="icon-greenpeace"></span>
-		    </a>
-		    {% include 'countries.twig' %}
+			</a>
+			{% include 'countries.twig' %}
 		</div>
 		<div class="center-box">
-		    <ul class="menu">
+			<ul class="menu">
 			{% for key,item in navbar_menu.get_items %}
-			    <li class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
+				<li class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
 				<a href="{{ item.get_link }}">
-				    <!-- TODO add icon-globe or icon-people under menu CSS classes -->
-				    <span class="item__menu__icon"></span>
-				    <p>{{ item.title }}</p>
+					<!-- TODO add icon-globe or icon-people under menu CSS classes -->
+					<span class="item__menu__icon"></span>
+					<p>{{ item.title }}</p>
 				</a>
-			    </li>
+				</li>
 			{% endfor %}
-		    </ul>
+			</ul>
 		</div>
 		<div class="right-box">
-		    <a href="" class="search-button" aria-label="Search">
+			<a href="" class="search-button" aria-label="Search">
 			<span class="icon-search"></span>
-		    </a>
-		    <a href="" class="button">有助于</a>
+			</a>
+			<a href="" class="button">有助于</a>
 		</div>
-	    </div>
+		</div>
 	</div>
-    </header>
+	</header>
 
-    <div class="mobile-toolbar">
+	<div class="mobile-toolbar">
 		{% for key,item in navbar_menu.get_items %}
 			{% if (key) < 2 %}
-			<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">				
+			<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
 				<p>{{ item.title }}</p>
 				<span class="item__menu__icon"></span>
 			</a>
 			{% else %}
-			<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">								
+			<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
 				<span class="item__menu__icon"></span>
 				<p>{{ item.title }}</p>
 			</a>
 			{% endif %}
-		{% endfor %}	
-    </div>
+		{% endfor %}
+	</div>
 {% endblock %}

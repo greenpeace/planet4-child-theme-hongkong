@@ -78,6 +78,12 @@ class P4CT_Site {
 			]
 		);
 
+		// Override parent AJAX search functionality.
+		remove_action( 'wp_ajax_get_paged_posts', [ 'P4MT\P4_ElasticSearch', 'get_paged_posts' ] );
+		remove_action( 'wp_ajax_nopriv_get_paged_posts', [ 'P4MT\P4_ElasticSearch', 'get_paged_posts' ] );
+		add_action( 'wp_ajax_get_paged_posts', [ 'P4CT_ElasticSearch', 'get_paged_posts' ] );
+		add_action( 'wp_ajax_nopriv_get_paged_posts', [ 'P4CT_ElasticSearch', 'get_paged_posts' ] );
+
 	}
 
 	/**
@@ -139,6 +145,7 @@ class P4CT_Site {
 		$context['preferences_link'] = isset( $options['gpea_default_preferences'] ) ? get_permalink( $options['gpea_default_preferences'] ) : site_url();
 		$context['commitment_projects_link'] = isset( $options['gpea_default_commitment_projects'] ) ? get_permalink( $options['gpea_default_commitment_projects'] ) : site_url();
 		$context['commitment_issues_link'] = isset( $options['gpea_default_commitment_issues'] ) ? get_permalink( $options['gpea_default_commitment_issues'] ) : site_url();
+		$context['support_link'] = isset( $options['gpea_default_supportus_link'] ) ? get_permalink( $options['gpea_default_supportus_link'] ) : site_url();
 
 		return $context;
 	}
@@ -198,7 +205,7 @@ class P4CT_Site {
 		$css_fonts = gpea_get_option( 'gpea_css_fonts' ) ? gpea_get_option( 'gpea_css_fonts' ) : 'hk-fonts.css';
 		wp_enqueue_style( 'child-style-fonts', get_stylesheet_directory_uri() . '/static/css/' . $css_fonts, [], $css_creation );
 		wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/static/css/style.css', [], $css_creation );
-		wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js', array(), $js_creation, true );
+		wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js',[], $js_creation, true );
 		// to be removed after frontend merge!!
 		wp_enqueue_script( 'child-dev-script', get_stylesheet_directory_uri() . '/static/js/dev_integration.js', array(), $js_creation, true );
 	}

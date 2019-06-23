@@ -2,63 +2,92 @@
 
 {% block content %}
 
-	<article id="post-{{ post.ID }}" class="{{ post_categories }}">
+  <article id="post-{{ post.ID }}" class="{{ post_categories }}">
 
-		<section
-			class="section-hero-top"
-			style="background-image: url('{{ background_image ? background_image : post.thumbnail.src }}')"
-		>
-			<div class="section-hero-shade"></div>
-			<div class="ct-container">
-				<div class="top-bar">
-					<a href="{{ latest_link }}" class="back-button">
-						<span class="icon-chevron-left"></span>
-						<p>返回上一頁</p>
-					</a>
-					<!-- <a href="" class="button light">按照主題</a> -->
-				</div>
-			</div>
-		</section>
+    <section class="section-hero-top" style="background-image: url('{{ background_image ? background_image : post.thumbnail.src }}')">
+      <div class="section-hero-shade"></div>
+      <div class="ct-container">
+        <div class="top-bar">
+          <a href="{{ latest_link }}" class="back-button">
+            <span class="icon-chevron-left"></span>
+            <p>返回上一頁</p>
+          </a>
+          <!-- <a href="" class="button light">按照主題</a> -->
+        </div>
+      </div>
+    </section>
 
-		<section class="section-post-content ct-container">
-			<div class="meta-box">
-				<div>
-					<!-- TODO: agganciare... boh, cos'è questo? -->
-					<span>{{ post.page_types[0].name }}</span>
-					<!-- TODO: agganciare issue name -->
-					<span class="issue {{ main_issue_slug }}">{{ main_issue|raw }}</span>
-				</div>
-				<div>
-					<span><span class="icon-clock"></span> {{ reading_time }} 閱讀</span>
-					<span><time class="single-post-time" pubdate>{{ post.post_date|date }}</time></span>
-				</div>
-			</div>
+    <section class="section-post-content ct-container">
+      <div class="meta-box">
+        <div>
+          <!-- TODO: agganciare... boh, cos'è questo? -->
+          <span>{{ post.page_types[0].name }}</span>
+          <!-- TODO: agganciare issue name -->
+          <span class="issue {{ main_issue_slug }}">{{ main_issue|raw }}</span>
+        </div>
+        <div>
+          <span>
+            <span class="icon-clock"></span>
+            {{ reading_time }}
+            閱讀</span>
+          <span>
+            <time class="single-post-time" pubdate>{{ post.post_date|date }}</time>
+          </span>
+        </div>
+      </div>
 
-			<h1>{{ post.title|raw }}</h1>
+      <h1>{{ post.title|raw }}</h1>
 
-			<div class="meta-box">
-				<span>作者：{{ post.author.name }}</span>
-			</div>
+      <div class="meta-box">
+        <span>作者：{{ post.author.name }}</span>
+      </div>
 
-			{{ post.content|e('wp_kses_post')|raw }}
+      {{ post.content|e('wp_kses_post')|raw }}
 
-		</section>
+      {%if (show_article_donation_launcher=='on') %}
+        <h2>{{ __('Article donation launcher', 'gpea_theme') }}</h2>
+        <p>{{ __('Short intro to donation launcher', 'gpea_theme') }}</p>
+        <a href="{{ support_link }}" class="button primary">{{ __('I want to support', 'gpea_theme') }}</a>
+      {%endif%}
+
+    </section>
+
+  </article>
 
 
-	</article>
+  <section class="section-latest-news">
+    <div class="ct-container">
+      <h2>最新消息</h2>
+      <div class="news-list">
+        {% if ( related_posts ) %}
+          {% for related_post in related_posts %}
+            {% include "blocks/tease-related-post.twig" with {post:related_post} %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>
 
-
-	<section class="section-latest-news">
-		<div class="ct-container">
-			<h2>最新消息</h2>
-			<div class="news-list">
-				{% if ( related_posts ) %}
-					{% for related_post in related_posts %}
-						{% include "blocks/tease-related-post.twig" with {post:related_post} %}
-					{% endfor %}
-				{% endif %}
-			</div>
-		</div>
-	</section>
+  <div class="floating-share">
+    <p>分享</p>
+    <ul>
+      <!-- TODO stampa description (SEO?), url, testo cinese/korean per "share on twitter" ecc. -->
+      <li>
+        <a href="https://twitter.com/intent/tweet?text={{ og_description|e('html_attr')|raw }}&url={{ post.link }}" class="floating-share-icon tw" aria-label="{{ '[Share on Twitter]' }}" target="_blank" rel="noopener noreferrer">
+          <span class="icon-twitter"></span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ post.link }}" class="floating-share-icon fb" aria-label="{{ '[Share on Facebook]' }}" target="_blank" rel="noopener noreferrer">
+          <span class="icon-facebook"></span>
+        </a>
+      </li>
+      <li>
+        <a href="mailto:?subject={{ og_description|e('html_attr')|raw }}&body={{ post.link }}" class="floating-share-icon email" aria-label="{{ '[Share via e-mail]' }}" target="_blank" rel="noopener noreferrer">
+          <span class="icon-email"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
 
 {% endblock %}

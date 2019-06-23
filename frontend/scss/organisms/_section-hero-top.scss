@@ -85,6 +85,7 @@
         line-height: 32px;
         display: inline-block;
         vertical-align: middle;
+        margin-bottom: 0;
       }
     }
   }
@@ -94,9 +95,18 @@
     background: white;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 
+    @include greaterThan('sm') {
+      background: transparent;
+      box-shadow: none;
+    }
+
     .top-bar {
       color: black;
       padding: 9px 0;
+
+      @include greaterThan('sm') {
+        color: white;
+      }
 
       .top-bar-title {
         font-size: 18px;
@@ -106,6 +116,10 @@
 
       .back-button {
         color: black;
+
+        @include greaterThan('sm') {
+          color: white;
+        }
 
         span {
           font-size: 18px;
@@ -133,6 +147,10 @@
 
   .has-hero-submenu & {
     top: 48px;
+
+    @include greaterThan('sm') {
+      top: 0;
+    }
   }
 
   &::before {
@@ -187,14 +205,34 @@
   height: 52px;
   overflow: hidden;
 
+  @include greaterThan('sm') {
+    overflow: visible;
+  }
+
   .hero-submenu-hidebar {
     height: 63px;
     width: 100%;
     overflow-x: auto;
+
+    @include greaterThan('sm') {
+      overflow: visible;
+    }
   }
 
   .hero-submenu-container {
     white-space: nowrap;
+
+    @include greaterThan('sm') {
+      width: 600px;
+      padding: 0;
+      position: relative;
+      top: -69px;
+      text-align: center;
+    }
+
+    @include greaterThan('lg') {
+      width: 800px;
+    }
   }
 
   .hero-submenu-item {
@@ -206,10 +244,17 @@
       padding-left: 0;
     }
 
+    @include greaterThan('sm') {
+      padding: 1em 12px;
+
+      &:first-child {
+        padding-left: 1em;
+      }
+    }
+
     a {
       color: white;
-      text-decoration: none;
-      border: none !important;
+      border-bottom: none;
     }
 
     &.current a {
@@ -235,4 +280,8 @@
       text-align: left;
     }
   }
+}
+
+.section-hero-top.no-image {
+  max-height: 110px;
 }

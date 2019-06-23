@@ -33,4 +33,17 @@
       margin: 7px 4px;
     }
   }
+
+  .tag-cloud__following {
+      @include greaterThan('sm') {
+        display: flex;
+        justify-content: space-between;
+      }
+  }
+
+}
+
+.tag_cloud_form {
+  text-align: center;
+  margin-top: 40px;
 }
