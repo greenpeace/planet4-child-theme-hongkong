@@ -299,6 +299,14 @@ class P4CT_Metabox_Register {
 
 		$cmb_team->add_field(
 			array(
+				'name'             => esc_html__( 'Short bio', 'cmb2' ),
+				'id'               => 'p4-gpea_short_bio',
+				'type'             => 'textarea',
+			)
+		);
+
+		$cmb_team->add_field(
+			array(
 				'name'             => esc_html__( 'Role', 'cmb2' ),
 				'desc'             => esc_html__( 'Role in the staff', 'cmb2' ),
 				'id'               => 'p4-gpea_team_role',
