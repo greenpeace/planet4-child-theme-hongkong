@@ -40,20 +40,12 @@
 	<section class="section-hero-top no-image has-hero-submenu" style="background-color: #000;">
 		<div class="section-hero-shade"></div>
 		<div class="top-bar-wrapper-white">
-				<div class="ct-container">
-			<div class="top-bar">
-				<div class="top-bar-title">
-				<a href="" class="back-button">
-					<span class="icon-close"></span>
-				</a>
-				{{ post.title|raw }}
-				</div>
-			</div>
+				<div class="ct-container">			
 				</div>
 		</div>
 		<div class="hero-submenu">
 				<div class="hero-submenu-hidebar">
-			<ul class="hero-submenu-container ct-container">
+			<ul class="hero-submenu-container ct-container" style="top: 0;">
 				{% for item in about_menu %}
 					<li class="hero-submenu-item {% if (item.ID == post.ID) %}current{% endif %}"><a href="{{ item.link }}">{{ item.post_title }}</a></li>
 				{% endfor %}		    
