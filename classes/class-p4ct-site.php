@@ -74,7 +74,7 @@ class P4CT_Site {
 		add_filter( 'query_vars', [ $this, 'add_query_vars_filter' ], 10, 2 );
 		register_nav_menus(
 			[
-				'navigation-bar-menu' => __( 'Navigation Bar Menu', 'planet4-child-theme-backend' ),
+				'navigation-bar-menu' => __( 'Navigation Bar Menu', 'gpea_theme_backend' ),
 			]
 		);
 
@@ -216,15 +216,15 @@ class P4CT_Site {
 	public function register_taxonomies() {
 
 		$labels = array(
-			'name'              => _x( 'Special attributes', 'taxonomy general name', 'planet4-child-theme-backend' ),
-			'singular_name'     => _x( 'Special attribute', 'taxonomy singular name', 'planet4-child-theme-backend' ),
-			'search_items'      => __( 'Search attributes', 'planet4-child-theme-backend' ),
-			'all_items'         => __( 'All attributes', 'planet4-child-theme-backend' ),
-			'edit_item'         => __( 'Edit attribute', 'planet4-child-theme-backend' ),
-			'update_item'       => __( 'Update attribute', 'planet4-child-theme-backend' ),
-			'add_new_item'      => __( 'Add New attribute', 'planet4-child-theme-backend' ),
-			'new_item_name'     => __( 'New attribute Name', 'planet4-child-theme-backend' ),
-			'menu_name'         => __( 'Attribute', 'planet4-child-theme-backend' ),
+			'name'              => _x( 'Special attributes', 'taxonomy general name', 'gpea_theme_backend' ),
+			'singular_name'     => _x( 'Special attribute', 'taxonomy singular name', 'gpea_theme_backend' ),
+			'search_items'      => __( 'Search attributes', 'gpea_theme_backend' ),
+			'all_items'         => __( 'All attributes', 'gpea_theme_backend' ),
+			'edit_item'         => __( 'Edit attribute', 'gpea_theme_backend' ),
+			'update_item'       => __( 'Update attribute', 'gpea_theme_backend' ),
+			'add_new_item'      => __( 'Add New attribute', 'gpea_theme_backend' ),
+			'new_item_name'     => __( 'New attribute Name', 'gpea_theme_backend' ),
+			'menu_name'         => __( 'Attribute', 'gpea_theme_backend' ),
 		);
 		$args = array(
 			'hierarchical'      => true,

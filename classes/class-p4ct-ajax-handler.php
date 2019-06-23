@@ -56,7 +56,7 @@ class P4CT_AJAX_Handler {
 		$data = $_POST;
 
 		if ( ! wp_verify_nonce( $data['_wpnonce'], self::SUPPORT_LAUNCHER_NONCE_STRING ) ) {
-			$this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'planet4-child-theme-backend' ) );
+			$this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'gpea_theme' ) );
 			return;
 		}
 
@@ -70,11 +70,11 @@ class P4CT_AJAX_Handler {
 
 			wp_mail( $to, $subject, $message, $headers );
 
-			$this->safe_echo( __( 'Message sent.', 'planet4-child-theme-backend' ) );
+			$this->safe_echo( __( 'Message sent.', 'gpea_theme' ) );
 			return;
 
 		} else {
-			$this->safe_echo( __( 'Could not send the message, form fields missing.', 'planet4-child-theme-backend' ) );
+			$this->safe_echo( __( 'Could not send the message, form fields missing.', 'gpea_theme' ) );
 			return;
 		}
 
