@@ -44,8 +44,13 @@
 
       {{ post.content|e('wp_kses_post')|raw }}
 
-    </section>
+      {%if (show_article_donation_launcher=='on') %}
+        <h2>{{ __('Article donation launcher', 'gpea_theme') }}</h2>
+        <p>{{ __('Short intro to donation launcher', 'gpea_theme') }}</p>
+        <a href="{{ support_link }}" class="button primary">{{ __('I want to support', 'gpea_theme') }}</a>
+      {%endif%}
 
+    </section>
 
   </article>
 

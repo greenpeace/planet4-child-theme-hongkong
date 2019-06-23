@@ -335,6 +335,17 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_post->add_field(
+			array(
+				'name'             => esc_html__( 'Show the "Article donation laundher"', 'cmb2' ),
+				'desc'             => esc_html__( 'Show the laundher to support page, below the main content?', 'cmb2' ),
+				'id'               => 'p4-gpea_show_article_donation_launcher',
+				'type'             => 'checkbox',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
+			)
+		);
+
 	}
 
 	/**
