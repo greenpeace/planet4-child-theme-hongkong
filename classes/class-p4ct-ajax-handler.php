@@ -61,12 +61,12 @@ class P4CT_AJAX_Handler {
 		}
 
 		// We assume $data['recipient_email'], $data['subject'] to have correct values.
-		if ( $data['sender_name'] && $data['sender_email'] && $data['message'] ) {
+		if ( $data['name'] && $data['email'] && $data['message'] ) {
 
 			$to = $data['recipient_email'];
 			$subject = $data['subject'];
 			$message = $data['message'];
-			$headers = array( 'From: ' . $data['sender_name'] . ' <' . $data['sender_email'] . '>\r\n' );
+			$headers = array( 'From: ' . $data['name'] . ' <' . $data['email'] . '>\r\n' );
 
 			wp_mail( $to, $subject, $message, $headers );
 
