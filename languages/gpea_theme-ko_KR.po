@@ -1,0 +1,256 @@
+# Copyright (C) 2019 Greenpeace International
+# This file is distributed under the GNU General Public License v3 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Greenpeace Planet 4 Child Theme Hong Kong 0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/planet4-child-theme-hongkong\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-06-24T11:49:21+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.2.0\n"
+"X-Domain: gpea_theme\n"
+
+#. Theme Name of the theme
+msgid "Greenpeace Planet 4 Child Theme Hong Kong"
+msgstr ""
+
+#. Theme URI of the theme
+msgid "https://github.com/greenpeace/planet4-child-theme-hongkong"
+msgstr ""
+
+#. Description of the theme
+msgid "Child theme for the hongkong website in the Planet 4 Wordpress project"
+msgstr ""
+
+#. Author of the theme
+msgid "Greenpeace International"
+msgstr ""
+
+#. Author URI of the theme
+msgid "https://github.com/greenpeace"
+msgstr ""
+
+#: classes/class-p4ct-ajax-handler.php:59
+msgid "Did not save because your form seemed to be invalid. Sorry."
+msgstr ""
+
+#: classes/class-p4ct-ajax-handler.php:73
+msgid "Message sent."
+msgstr ""
+
+#: classes/class-p4ct-ajax-handler.php:77
+msgid "Could not send the message, form fields missing."
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:44
+msgctxt "post type general name"
+msgid "Tips"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:45
+msgctxt "post type singular name"
+msgid "Tip"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:46
+msgctxt "admin menu"
+msgid "Tips"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:47
+msgctxt "add new on admin bar"
+msgid "Tip"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:48
+#: classes/class-p4ct-custom-post-type-register.php:141
+msgctxt "tip"
+msgid "Add New"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:49
+msgid "Add New Tip"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:50
+msgid "New Tip"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:51
+msgid "Edit Tip"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:52
+msgid "View Tip"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:53
+msgid "All Tips"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:54
+msgid "Search Tips"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:55
+msgid "Parent Tips:"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:56
+msgid "No tips found."
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:57
+msgid "No tips found in Trash."
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:62
+#: classes/class-p4ct-custom-post-type-register.php:109
+#: classes/class-p4ct-custom-post-type-register.php:155
+msgid "Description."
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:91
+msgctxt "post type general name"
+msgid "Team Members"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:92
+msgctxt "post type singular name"
+msgid "Team Member"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:93
+msgctxt "admin menu"
+msgid "Team Members"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:94
+msgctxt "add new on admin bar"
+msgid "Team Member"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:95
+msgctxt "team member"
+msgid "Add New"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:96
+msgid "Add New Team Member"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:97
+msgid "New Team Member"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:98
+msgid "Edit Team Member"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:99
+msgid "View Team Member"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:100
+msgid "All Team Members"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:101
+msgid "Search Team Members"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:102
+msgid "Parent Team Members:"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:103
+msgid "No Team Members found."
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:104
+msgid "No Team Members found in Trash."
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:137
+msgctxt "post type general name"
+msgid "User Stories"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:138
+msgctxt "post type singular name"
+msgid "User Story"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:139
+msgctxt "admin menu"
+msgid "User Stories"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:140
+msgctxt "add new on admin bar"
+msgid "User Story"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:142
+msgid "Add New User Story"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:143
+msgid "New User Story"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:144
+msgid "Edit User Story"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:145
+msgid "View User Story"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:146
+msgid "All User Stories"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:147
+msgid "Search User Stories"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:148
+msgid "Parent User Stories:"
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:149
+msgid "No User Stories found."
+msgstr ""
+
+#: classes/class-p4ct-custom-post-type-register.php:150
+msgid "No User Stories found in Trash."
+msgstr ""
+
+#. Template Name of the theme
+msgid "Report"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Project"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Thankyou page for petition"
+msgstr ""
+
+#. Template Name of the theme
+msgid "About"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Petition"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Main Issue"
+msgstr ""
