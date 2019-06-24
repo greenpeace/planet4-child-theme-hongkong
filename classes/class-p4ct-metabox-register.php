@@ -31,6 +31,7 @@ class P4CT_Metabox_Register {
 		add_action( 'cmb2_admin_init', [ $this, 'register_p4_meta_box' ] );
 		add_filter( 'cmb2_show_on', [ $this, 'be_taxonomy_show_on_filter' ], 10, 2 );
 		add_filter( 'cmb2_render_supportus_page_dropdown', [ $this, 'gpea_render_supportus_page_dropdown' ], 10, 2 );
+		add_filter( 'cmb2_render_ugc_page_dropdown', [ $this, 'gpea_render_ugc_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_latest_page_dropdown', [ $this, 'gpea_render_latest_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_make_change_page_dropdown', [ $this, 'gpea_render_make_change_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_press_media_page_dropdown', [ $this, 'gpea_render_press_media_page_dropdown' ], 10, 2 );
@@ -47,6 +48,7 @@ class P4CT_Metabox_Register {
 		$this->register_project_metabox();
 		$this->register_petition_metabox();
 		$this->register_tip_metabox();
+		$this->register_user_story_metabox();
 		$this->register_team_metabox();
 		$this->register_post_metabox();
 		$this->register_page_metabox();
@@ -282,6 +284,52 @@ class P4CT_Metabox_Register {
 	}
 
 	/**
+	 * Registers user story meta box.
+	 */
+	public function register_user_story_metabox() {
+
+		$cmb_user_story = new_cmb2_box(
+			array(
+				'id'           => 'p4-gpea-user-story-box',
+				'title'        => 'User story extra information',
+				'object_types' => array( 'user_story' ), // post type
+				'context'      => 'normal', // 'normal', 'advanced', or 'side'
+				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
+				'show_names'   => true, // Show field names on the left
+				// 'show_on' => array(
+				// 'key' => 'taxonomy',
+				// 'value' => array(
+				// 'p4_post_attribute' => array( 'tip' ),
+				// ),
+				// ),
+			)
+		);
+
+		// add p4_author_override already used for standard posts
+		$cmb_user_story->add_field(
+			array(
+				'name'             => esc_html__( 'Author of the story', 'gpea_theme_backend' ),
+				'id'               => 'p4_author_override',
+				'type'             => 'text',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
+			)
+		);
+
+		$cmb_user_story->add_field(
+			array(
+				'name'             => esc_html__( 'Email address of the author', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'For internal scope, will not be published on the site', 'gpea_theme_backend' ),
+				'id'               => 'p4_author_email_address',
+				'type'             => 'text',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
+			)
+		);
+
+	}
+
+	/**
 	 * Registers team meta box(es).
 	 */
 	public function register_team_metabox() {
@@ -473,6 +521,16 @@ class P4CT_Metabox_Register {
 				'desc'    => esc_html__( 'Support page with all information and links', 'gpea_theme_backend' ),
 				'id'      => 'gpea_default_supportus_link',
 				'type'    => 'supportus_page_dropdown',
+			)
+		);
+
+		/* ugc */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Select the "user generated content" landing page', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Page with form to submit new stories from users', 'gpea_theme_backend' ),
+				'id'      => 'gpea_default_ugc_link',
+				'type'    => 'ugc_page_dropdown',
 			)
 		);
 
@@ -687,6 +745,24 @@ class P4CT_Metabox_Register {
 				'hierarchical'     => true,
 				'selected'         => $value,
 				'name'             => 'gpea_default_supportus_link',
+			]
+		);
+	}
+
+	/**
+	 * Render ugc page dropdown.
+	 *
+	 * @param array  $field_args Field arguments.
+	 * @param string $value Value.
+	 */
+	public function gpea_render_ugc_page_dropdown( $field_args, $value ) {
+		wp_dropdown_pages(
+			[
+				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'hide_empty'       => 0,
+				'hierarchical'     => true,
+				'selected'         => $value,
+				'name'             => 'gpea_default_ugc_link',
 			]
 		);
 	}
