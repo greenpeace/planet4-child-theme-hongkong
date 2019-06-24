@@ -42,6 +42,16 @@ window.Element &&
       };
   })(Element.prototype);
 
+// NodeList.forEach polyfill
+if (window.NodeList && !NodeList.prototype.forEach) {
+  NodeList.prototype.forEach = function(callback, thisArg) {
+    thisArg = thisArg || window;
+    for (var i = 0; i < this.length; i++) {
+      callback.call(thisArg, this[i], i, this);
+    }
+  };
+}
+
 Swiper.use([Navigation, Pagination, Scrollbar, Controller]);
 
 new LazyLoad({
@@ -371,18 +381,12 @@ function connectENForm() {
   close.innerHTML = '×';
 
   const ctaFacebook = document.createElement('button');
-  ctaFacebook.classList.add('button', 'facebook', 'js-sign-facebook');
+  ctaFacebook.classList.add('button', 'fb', 'js-sign-facebook');
   ctaFacebook.innerHTML = 'Facebook';
-
-  ctaFacebook.addEventListener('click', e => {
-    alert('fb connection in progress..');
-  });
-
-  const submitArea = document.querySelector('.submit');
 
   form.insertBefore(stats, form.firstChild);
   form.insertBefore(close, form.firstChild);
-  form.insertBefore(ctaFacebook, cta);
+  cta.parentNode.insertBefore(ctaFacebook, cta);
 
   cta.addEventListener('click', e => {
     if (!form.classList.contains('is-open')) {
@@ -395,6 +399,17 @@ function connectENForm() {
       let fn = document.getElementsByName('supporter.firstName')[0].value;
       thankyouUrl += '?fn=' + fn + '&pet=' + petitionSource;
       form.setAttribute('data-redirect-url', thankyouUrl);
+      // form.querySelector('form').submit()
+    }
+  });
+
+  ctaFacebook.addEventListener('click', e => {
+    if (!form.classList.contains('is-open')) {
+      e.preventDefault();
+      form.classList.add('is-open');
+    } else {
+      // e.preventDefault();
+      alert('fb connection in progress..');
       // form.querySelector('form').submit()
     }
   });

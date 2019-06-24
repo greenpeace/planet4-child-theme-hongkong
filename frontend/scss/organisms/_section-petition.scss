@@ -46,12 +46,10 @@
   &::after {
     display: none;
   }
-
 }
 
 .enform-side-style,
 .tag_cloud_form {
-  
   .caption-overlay {
     display: none;
   }
@@ -256,12 +254,39 @@
     }
 
     form .submit {
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap;
       margin-top: 20px;
       margin-bottom: 135px;
+
+      .button,
+      .btn {
+        min-width: 0;
+        width: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .enform-notice {
+        width: 100%;
+
+        > * {
+          display: block;
+          color: $color-red;
+          margin: 20px 0 0;
+          font-size: 14px;
+        }
+      }
 
       @include greaterThan('sm') {
         margin-bottom: 0;
         margin-top: 0;
+
+        .button,
+        .btn {
+          margin-bottom: 0;
+        }
       }
     }
 
@@ -364,7 +389,6 @@
     }
   }
 }
-
 
 .tag_cloud_form .signatures {
   position: relative;
