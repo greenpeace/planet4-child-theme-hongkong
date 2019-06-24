@@ -630,6 +630,15 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Engaging question for recurring donation', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'question name', 'gpea_theme_backend' ),
+				'id'      => 'gpea_donation_recurring_question',
+				'type'    => 'text',
+			)
+		);
+
 	}
 
 	/**
