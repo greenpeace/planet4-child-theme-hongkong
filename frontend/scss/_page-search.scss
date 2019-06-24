@@ -73,7 +73,7 @@ body.search {
     #ajax-search-posts .results-list,
     .multiple-search-result .results-list {
       display: grid;
-      grid-gap: 30px;
+      grid-column-gap: 30px;
       grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
 
       .card-update.compact:nth-child(2),
