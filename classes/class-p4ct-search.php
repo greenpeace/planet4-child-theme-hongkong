@@ -30,7 +30,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		const POST_TYPES            = [
 			'page',
 			'post',
-			'attachment',
 		];
 		const DOCUMENT_TYPES        = [
 			'application/pdf',
@@ -121,6 +120,20 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		public $current_page;
 
 		/**
+		 * Main issues category id
+		 *
+		 * @var int $main_issues_category_id;
+		 */
+		public $main_issues_category_id;
+
+		/**
+		 * Main issues
+		 *
+		 * @var int $main_issues;
+		 */
+		public $main_issues;
+
+		/**
 		 * P4CT_Search constructor.
 		 */
 		public function __construct() {}
@@ -137,6 +150,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			];
 			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_assets' ] );
 			add_filter( 'posts_where', [ $this, 'edit_search_mime_types' ] );
+			$this->set_main_issues();
 		}
 
 		/**
@@ -197,6 +211,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			$this->search_query = $search_query;
 			$this->context = Timber::get_context();
 			$this->is_ajax_request = true;
+			$this->set_main_issues();
 
 			// Validate user input (sort, filters, etc).
 			if ( $this->validate( $selected_sort, $filters, $this->context ) ) {
@@ -328,7 +343,25 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			// Use Timber's Post instead of WP_Post so that we can make use of Timber within the template.
 			if ( $posts ) {
 				foreach ( $posts as $post ) {
-					$timber_posts[] = new TimberPost( $post->ID );
+					$timber_post = new TimberPost( $post->ID );
+					$timber_post->post_date = date( 'Y-m-d', strtotime( $timber_post->post_date ) );
+					$post_categories = wp_get_post_categories( $post->ID );
+					$main_issue = array_filter(
+						$post_categories, function( $cat ) {
+							return array_key_exists( $cat, $this->main_issues );
+						}
+					);
+					if ( $main_issue ) {
+						$main_issue = $main_issue[0];
+						$timber_post->main_issue = $main_issue ? $this->main_issues[ $main_issue ]->name : 'none';
+						$timber_post->main_issue_slug = $main_issue ? $this->main_issues[ $main_issue ]->slug : 'none';
+						$timber_post->link = get_permalink( $post->ID );
+						$img_url = get_the_post_thumbnail_url( $post->ID, 'thumbnail' );
+						if ( $img_url ) {
+							$timber_post->img_url = $img_url;
+						}
+					}
+					$timber_posts[] = $timber_post;
 				}
 			}
 			return (array) $timber_posts;
@@ -352,8 +385,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				return [];
 			}
 			$this->set_engines_args( $args );
-
 			$posts = ( new WP_Query( $args ) )->posts;
+
 			return (array) $posts;
 		}
 
@@ -372,7 +405,27 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			// Use Timber's Post instead of WP_Post so that we can make use of Timber within the template.
 			if ( $terms ) {
 				foreach ( $terms as $term ) {
-					$timber_terms[] = new TimberTerm( $term->term_id );
+					$timber_term = new TimberTerm( $term->term_id );
+					// Get the main issue page & related data if this term is a main issue & has an associated page.
+					$parent = $timber_term->parent;
+					if ( isset( $this->main_issues_category_id ) && $timber_term->parent === $this->main_issues_category_id ) {
+						$related = ( new WP_Query(
+							[
+								'post_type' => 'page',
+								'category__in' => $timber_term->ID,
+							]
+						) )->posts[0];
+						if ( $related ) {
+							$timber_term->link = get_permalink( $related->ID );
+							$img_url = get_the_post_thumbnail_url( $related->ID, 'thumbnail' );
+							if ( $img_url ) {
+								$timber_term->img_url = $img_url;
+							}
+							$timber_term->post_title = $related->post_title;
+							$timber_term->main_issue_slug = $timber_term->slug;
+						}
+					}
+					$timber_terms[] = $timber_term ;
 				}
 			}
 			return (array) $timber_terms;
@@ -798,7 +851,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					'terms' => array_slice( $this->context['terms'], 0, self::POSTS_PER_LOAD ),
 				)
 			);
-			// return wp_json_encode( array_slice( $this->context['posts'], 0, self::POSTS_PER_LOAD ) );
 		}
 
 		/**
@@ -821,6 +873,27 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					}
 					Timber::render( [ 'tease-search.twig' ], $paged_context, self::DEFAULT_CACHE_TTL, \Timber\Loader::CACHE_OBJECT );
 				}
+			}
+		}
+
+		/**
+		 * Set main issues ID. TODO abstract this ID to main option.
+		 */
+		public function set_main_issues() {
+			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+			if ( $main_issues_category ) {
+				$this->main_issues_category_id = $main_issues_category->term_id;
+				$main_issues = get_categories(
+					[
+						'parent' => $main_issues_category->term_id,
+					]
+				);
+				$main_issues_ids = array_map(
+					function( $issue ) {
+						return $issue->term_id;
+					}, $main_issues
+				);
+				$this->main_issues = array_combine( $main_issues_ids, $main_issues );
 			}
 		}
 
