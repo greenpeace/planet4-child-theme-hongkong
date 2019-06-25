@@ -146,11 +146,13 @@
   .en__field__element--radio {
     display: flex;
     height: 47px;
+    width: auto !important;
     margin-left: -20px;
     margin-right: -20px;
     background-color: #dddddd;
 
     @include greaterThan('sm') {
+      width: auto !important;
       margin-left: -30px;
       margin-right: -30px;
     }
@@ -194,5 +196,4 @@
   footer {
     display: block;
   }
-
 }
