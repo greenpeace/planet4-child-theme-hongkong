@@ -12,13 +12,16 @@
     bottom: initial;
     top: initial;
 
+    .en__field__element {
+      width: 100%;
+    }
+
     @include greaterThan('sm') {
       margin-top: 110px;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
 
       .en__field__element {
-        width: 100%;
         input[type='email'],
         input[type='number'],
         input[type='search'],
@@ -195,5 +198,46 @@
 
   footer {
     display: block;
+  }
+}
+
+.footer-donation .ct-container {
+  @include caption;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  color: $color-green;
+
+  @include greaterThan('sm') {
+    margin-top: -20px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  span {
+    position: relative;
+    display: inline-block;
+    top: 2px;
+    margin-right: 5px;
+    font-size: 20px;
+    color: white;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .transaction-secure span {
+    margin-right: 3px;
   }
 }

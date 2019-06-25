@@ -18,6 +18,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-lock:before {
+  content: '\e911';
+}
+.icon-cc-mastercard:before {
+  content: '\e912';
+}
+.icon-cc-visa:before {
+  content: '\e913';
+}
+.icon-cc-paypal:before {
+  content: '\e914';
+}
 .icon-email:before {
   content: '\e910';
 }

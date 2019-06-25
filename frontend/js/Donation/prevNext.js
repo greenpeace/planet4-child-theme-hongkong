@@ -1,4 +1,8 @@
+import SmoothScroll from 'smooth-scroll';
+
 function prevNext(form, donationSwiper, validateBlock) {
+  const scroll = new SmoothScroll();
+
   // All steps: PREV
   const prevs = form.querySelectorAll('.js-donate-prev');
   Array.from(prevs).forEach(prev => {
@@ -13,6 +17,7 @@ function prevNext(form, donationSwiper, validateBlock) {
       stepPrev.classList.add('is-current');
 
       donationSwiper.slidePrev();
+      scroll.animateScroll(document.querySelector('.form-caption'));
     });
   });
 
@@ -36,6 +41,7 @@ function prevNext(form, donationSwiper, validateBlock) {
       stepDetails.classList.remove('is-todo');
       stepDetails.classList.add('is-current');
       donationSwiper.slideNext();
+      scroll.animateScroll(document.querySelector('.form-caption'));
     } else {
       block.querySelector('.is-invalid').focus();
     }
@@ -52,6 +58,7 @@ function prevNext(form, donationSwiper, validateBlock) {
       stepPayment.classList.remove('is-todo');
       stepPayment.classList.add('is-current');
       donationSwiper.slideNext();
+      scroll.animateScroll(document.querySelector('.form-caption'));
     } else {
       block.querySelector('.is-invalid').focus();
     }
