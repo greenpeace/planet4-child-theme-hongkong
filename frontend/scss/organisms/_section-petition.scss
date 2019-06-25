@@ -54,6 +54,10 @@
     display: none;
   }
 
+  .en__component--column {
+    min-width: 240px;
+  }
+
   // TYPOGRAPHY
   .form-caption h1 {
     @include title-big;
