@@ -387,13 +387,19 @@ function connectENForm() {
     .querySelector('#petition-source')
     .getAttribute('data-petition');
 
+  // const stats = document.createElement('div');
+  // stats.classList.add('signatures');
+  // stats.innerHTML =
+  //   '	<div class="progress-bar"> \
+	// 		<div class="percent" style="width: 90%"></div> \
+	// 	</div> \
+  // 	<div class="stats">已有2,347 名簽署者</div>';
+  
   const stats = document.createElement('div');
   stats.classList.add('signatures');
-  stats.innerHTML =
-    '	<div class="progress-bar"> \
-			<div class="percent" style="width: 90%"></div> \
-		</div> \
-		<div class="stats">已有2,347 名簽署者</div>';
+  stats.innerHTML = document
+  .querySelector('#petition-source')
+  .innerHTML;
 
   const close = document.createElement('div');
   close.classList.add('close');
