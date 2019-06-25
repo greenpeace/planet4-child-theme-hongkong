@@ -78,6 +78,7 @@ $(document).ready(function(){
         });
         Cookies.set(cookie_name_topics,gpea_cookie_topics);
         
+        $(this).hide();
         $('.tag_cloud_form').fadeIn();
         $('.tag_cloud_form .signatures').addClass('is-open');
 
