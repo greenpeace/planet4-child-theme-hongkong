@@ -72,6 +72,14 @@ if ( $main_issues ) {
 	$categories = '';
 }
 
+// get default donation link
+// engaging and other crm integration
+$gpea_options = get_option( 'gpea_options' );
+$context['button_landing_url'] = isset( $gpea_options['gpea_default_donation_link'] ) ? $gpea_options['gpea_default_donation_link'] : '';
+$context['donation_currency'] = isset( $gpea_options['gpea_default_donation_currency'] ) ? $gpea_options['gpea_default_donation_currency'] : 'HK$';
+$context['external_recurring_question'] = isset( $gpea_options['gpea_donation_recurring_question'] ) ? $gpea_options['gpea_donation_recurring_question'] : '';
+
+
 $context['post']                        = $post;
 $context['header_title']                = is_front_page() ? '' : ( $page_meta_data['p4_title'][0] ?? $post->title );
 $context['header_subtitle']             = $page_meta_data['p4_subtitle'][0] ?? '';

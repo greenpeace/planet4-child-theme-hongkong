@@ -10,29 +10,28 @@
     </div>
     <div class="screens">
       <div class="screen-thankyou js-screen-thankyou ct-container">
-        <h2>Thank you for signing,
+        <h2>{{ __('Thank you for signing,', 'gpea-theme') }}
           {{ supporter_name }}.</h2>
         <p>
-          Now, will you share this petition with your friends? The more people
-                                                  			who sign, the more pressure the government will feel.
+            {{ __('Now, will you share this petition with your friends? The more people who sign, the more pressure the government will feel.', 'gpea-theme') }}
         </p>
         <p>
-          <button class="button grey js-no-share">NO</button>
-          <button class="button primary js-yes-share">YES</button>
+          <button class="button grey js-no-share">{{ __('NO', 'gpea-theme') }}</button>
+          <button class="button primary js-yes-share">{{ __('NO', 'gpea-theme') }}</button>
         </p>
       </div>
       <div class="screen-share js-screen-share ct-container">
         <h2>
-          Thank you,
+            {{ __('Thank you,', 'gpea-theme') }}
           {{ supporter_name }}.
         </h2>
         <p>
-          Let's wake more people up to this crisis
+            {{ __('Let\'s wake more people up to this crisis', 'gpea-theme') }}
         </p>
         <p>
           <!-- TODO: link petition URL -->
-          <a class="button fb js-share-fb" href="https://www.facebook.com/sharer/sharer.php?u={{ source_link }}" rel="noopener noreferrer" target="_blank">Share on Facebook</a>
-          <a class="button primary js-share-email" href="mailto:?subject=[subject...]&body=[body no html ...]" rel="noopener noreferrer" target="_blank">Share by Email</a>
+          <a class="button fb js-share-fb" href="https://www.facebook.com/sharer/sharer.php?u={{ source_link }}" rel="noopener noreferrer" target="_blank">{{ __('Share on Facebook', 'gpea-theme') }}</a>
+          <a class="button primary js-share-email" href="mailto:?subject=[subject...]&body=[body no html ...]" rel="noopener noreferrer" target="_blank">{{ __('Share by Email', 'gpea-theme') }}</a>
         </p>
         <!-- TODO: link petition URL -->
         <a class="fake-share-fb js-share-fb" href="https://www.facebook.com/sharer/sharer.php?u={{ source_link }}" rel="noopener noreferrer" target="_blank">
@@ -48,39 +47,37 @@
           </div>
         </a>
         <p>
-          <button class="button small js-skip-share">Skip</button>
+          <button class="button small js-skip-share">{{ __('Skip', 'gpea-theme') }}</button>
         </p>
       </div>
       <div class="screen-donate js-screen-donate ct-container">
         <div class="content">
           <h2>
             {{ supporter_name }}
-            - Greenpeace is urgently campaigning to protect our
-                                                            			planet.
+            {{ __('- Greenpeace is urgently campaigning to protect our planet.', 'gpea-theme') }}
           </h2>
           <p>
-            Our campaigns are 100% funded by individuals like you. Will you
-                                                            			join us as a supporter with a regular amount of 400HKD or more a
-                                                            			month?
+              {{ __('Our campaigns are 100% funded by individuals like you. Will you join us as a supporter with a regular amount of 400HKD or more a month?', 'gpea-theme') }}            
           </p>
         </div>
         <div class="donation-form">
           <div class="tab-bar">
             <div class="tab-item js-tab-item">
-              一次性
+                {{ __('One off', 'gpea-theme') }}
             </div>
             <div class="tab-item js-tab-item is-active">
-              每月一次
+                {{ __('Monthly', 'gpea-theme') }}
             </div>
           </div>
-          <form action="#" method="POST">
-            <input name="frequency" type="hidden" value="每月一次"/>
-            <input name="currency" type="hidden" value="HK$"/>
+          <form action="{{ button_landing_url }}" method="POST" class="js-donation-launcher-form">
+            <input name="frequency" type="hidden" value="Y"/>
+            <input name="currency" type="hidden" value="{{ donation_currency }}"/>
             <div class="form-group">
-              <span class="currency">HK$</span>
-              <input aria-label="HK$" min="1" name="amount" required step="1" type="number"/>
+              <span class="currency">{{ donation_currency }}</span>
+              <input aria-label="{{ donation_currency }}" min="1" name="amount" required step="1" type="number"/>
+              <input type="hidden" name="en_recurring_question" value="{{ external_recurring_question }}" />
             </div>
-            <button class="button primary fluid" type="submit">注哪</button>
+            <button class="button primary fluid" type="submit">{{ __('Donate', 'gpea-theme') }}</button>
           </form>
         </div>
       </div>
