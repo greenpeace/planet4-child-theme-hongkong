@@ -196,8 +196,27 @@ function connectDonationTabs() {
         }
       }
 
-      form.frequency.value = e.target.textContent.trim();
+      // form.frequency.value = e.target.textContent.trim();
+      form.frequency.value = e.target.getAttribute('data-recurring');
     });
+  });
+  // on form submit do redirect to donation pages
+  const form = document.querySelector('.js-donation-launcher-form');
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let donationUrl = new URL( form.action );
+    if ( form.amount ) {
+      donationUrl.searchParams.append('transaction.donationAmt', form.amount.value);
+    } else if ( form['free-amount'] && form['free-amount'].value ) {
+      donationUrl.searchParams.append('transaction.donationAmt', form['free-amount'].value);
+    } else if ( form['dollar-handle'] && form['dollar-handle'].value ) {
+      donationUrl.searchParams.append('transaction.donationAmt', form['dollar-handle'].value);
+    }
+    if ( form['en_recurring_question'] && form['en_recurring_question'].value ) {
+      donationUrl.searchParams.append(form.en_recurring_question.value, form.frequency.value);
+    }      
+    window.location.href = donationUrl;
   });
 }
 connectDonationTabs();
