@@ -24,6 +24,15 @@ $post           = new P4_Post();
 $gpea_extra     = new P4CT_Site();
 $page_meta_data = get_post_meta( $post->ID );
 
+// check if external link is set, and redirect in this case
+$external_link = $page_meta_data['p4-gpea_petition_external_link'][0] ?? '';
+if ( $external_link ) {
+	wp_redirect( $external_link );
+	exit;
+
+}
+
+
 // Set Navigation Issues links.
 $post->set_issues_links();
 
