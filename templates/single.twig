@@ -10,7 +10,7 @@
         <div class="top-bar">
           <a href="{{ latest_link }}" class="back-button">
             <span class="icon-chevron-left"></span>
-            <p>返回上一頁</p>
+            <p>{{ __('Previous page', 'gpea-theme') }}</p>
           </a>
           <!-- <a href="" class="button light">按照主題</a> -->
         </div>
@@ -20,16 +20,15 @@
     <section class="section-post-content ct-container">
       <div class="meta-box">
         <div>
-          <!-- TODO: agganciare... boh, cos'è questo? -->
           <span>{{ post.page_types[0].name }}</span>
-          <!-- TODO: agganciare issue name -->
           <span class="issue {{ main_issue_slug }}">{{ main_issue|raw }}</span>
         </div>
         <div>
           <span>
             <span class="icon-clock"></span>
             {{ reading_time }}
-            閱讀</span>
+            {{ __('Time to read', 'gpea-theme') }}
+          </span>
           <span>
             <time class="single-post-time" pubdate>{{ post.post_date|date }}</time>
           </span>
@@ -39,7 +38,7 @@
       <h1>{{ post.title|raw }}</h1>
 
       <div class="meta-box">
-        <span>作者：{{ post.author.name }}</span>
+        <span>{{ __('Author:', 'gpea-theme') }} {{ post.author.name }}</span>
       </div>
 
       {{ post.content|e('wp_kses_post')|raw }}
@@ -57,7 +56,7 @@
 
   <section class="section-latest-news">
     <div class="ct-container">
-      <h2>最新消息</h2>
+      <h2>{{ __('Related news', 'gpea-theme') }}</h2>
       <div class="news-list">
         {% if ( related_posts ) %}
           {% for related_post in related_posts %}
@@ -69,7 +68,7 @@
   </section>
 
   <div class="floating-share">
-    <p>分享</p>
+    <p>{{ __('Share', 'gpea-theme') }}</p>
     <ul>
       <!-- TODO stampa description (SEO?), url, testo cinese/korean per "share on twitter" ecc. -->
       <li>
