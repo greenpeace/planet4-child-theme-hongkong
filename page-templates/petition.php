@@ -82,7 +82,6 @@ $context['petition_target']             = $page_meta_data['p4-gpea_petition_enga
 if ( $context['engaging_page_id'] ) {
 	global $wp_version;
 	$url = 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $context['engaging_page_id'] . '&contentType=json&resultType=summary';
-	echo $url;
 	$args = array(
 		'timeout'     => 5,
 		'redirection' => 5,
