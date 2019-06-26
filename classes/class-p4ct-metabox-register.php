@@ -31,6 +31,7 @@ class P4CT_Metabox_Register {
 		add_action( 'cmb2_admin_init', [ $this, 'register_p4_meta_box' ] );
 		add_filter( 'cmb2_show_on', [ $this, 'be_taxonomy_show_on_filter' ], 10, 2 );
 		add_filter( 'cmb2_render_supportus_page_dropdown', [ $this, 'gpea_render_supportus_page_dropdown' ], 10, 2 );
+		add_filter( 'cmb2_render_ugc_page_dropdown', [ $this, 'gpea_render_ugc_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_latest_page_dropdown', [ $this, 'gpea_render_latest_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_make_change_page_dropdown', [ $this, 'gpea_render_make_change_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_press_media_page_dropdown', [ $this, 'gpea_render_press_media_page_dropdown' ], 10, 2 );
@@ -47,6 +48,7 @@ class P4CT_Metabox_Register {
 		$this->register_project_metabox();
 		$this->register_petition_metabox();
 		$this->register_tip_metabox();
+		$this->register_user_story_metabox();
 		$this->register_team_metabox();
 		$this->register_post_metabox();
 		$this->register_page_metabox();
@@ -61,7 +63,7 @@ class P4CT_Metabox_Register {
 		$cmb_sidebar = new_cmb2_box(
 			[
 				'id'           => $this->prefix . 'metabox_sidebar',
-				'title'        => __( 'Post extra attributes', 'planet4-child-theme-backend' ),
+				'title'        => __( 'Post extra attributes', 'gpea_theme_backend' ),
 				'object_types' => [ 'post' ], // Post type.
 				// 'show_on' => array(
 				// 'key' => 'taxonomy',
@@ -76,8 +78,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_sidebar->add_field(
 			array(
-				'name'             => esc_html__( 'Project related', 'cmb2' ),
-				'desc'             => esc_html__( 'Select a project connected to this post (optional)', 'cmb2' ),
+				'name'             => esc_html__( 'Project related', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Select a project connected to this post (optional)', 'gpea_theme_backend' ),
 				'id'               => $this->prefix . 'select_project_related',
 				'type'             => 'select',
 				'show_option_none' => true,
@@ -109,8 +111,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_project->add_field(
 			array(
-				'name'             => esc_html__( 'Start date', 'cmb2' ),
-				'desc'             => esc_html__( 'The date the project started (textual)', 'cmb2' ),
+				'name'             => esc_html__( 'Start date', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'The date the project started (textual)', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_project_start_date',
 				'type'             => 'text',
 			// 'sanitization_cb' => 'intval',
@@ -120,8 +122,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_project->add_field(
 			array(
-				'name'             => esc_html__( 'Zone interested', 'cmb2' ),
-				'desc'             => esc_html__( 'Country, city or place involved by the project', 'cmb2' ),
+				'name'             => esc_html__( 'Zone interested', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Country, city or place involved by the project', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_project_localization',
 				'type'             => 'text',
 			// 'sanitization_cb' => 'intval',
@@ -131,8 +133,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_project->add_field(
 			array(
-				'name'             => esc_html__( 'Project percentage', 'cmb2' ),
-				'desc'             => esc_html__( 'Percentage of completition of the project', 'cmb2' ),
+				'name'             => esc_html__( 'Project percentage', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Percentage of completition of the project', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_project_percentage',
 				'type'             => 'text',
 				'attributes' => array(
@@ -168,8 +170,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_petition->add_field(
 			array(
-				'name'    => esc_html__( '"Id" code of Engaging connected petition', 'gpea_theme' ),
-				'desc'    => esc_html__( 'This will be used to retrieve current signature number', 'gpea_theme' ),
+				'name'    => esc_html__( '"Id" code of Engaging connected petition', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'This will be used to retrieve current signature number', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_petition_engaging_pageid',
 				'type'             => 'text',
 			)
@@ -177,8 +179,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_petition->add_field(
 			array(
-				'name'             => esc_html__( 'Petition goal number', 'cmb2' ),
-				'desc'             => esc_html__( 'Number of signatures to be reached by this petition', 'cmb2' ),
+				'name'             => esc_html__( 'Petition goal number', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Number of signatures to be reached by this petition', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_petition_engaging_target',
 				'type'             => 'text',
 				'attributes' => array(
@@ -192,8 +194,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_petition->add_field(
 			array(
-				'name'    => esc_html__( 'External link to redirect petition (optional)', 'gpea_theme' ),
-				'desc'    => esc_html__( 'If set, card on the website will link to this external link instead of internal page', 'gpea_theme' ),
+				'name'    => esc_html__( 'External link to redirect petition (optional)', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'If set, card on the website will link to this external link instead of internal page', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_petition_external_link',
 				'type'             => 'text',
 			)
@@ -225,8 +227,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_tip->add_field(
 			array(
-				'name'             => esc_html__( 'Ask users to engage?', 'cmb2' ),
-				'desc'             => esc_html__( 'If checked, an action for users will be encouraged', 'cmb2' ),
+				'name'             => esc_html__( 'Ask users to engage?', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'If checked, an action for users will be encouraged', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_tip_engage',
 				'type'             => 'checkbox',
 			// 'sanitization_cb' => 'intval',
@@ -236,8 +238,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_tip->add_field(
 			array(
-				'name'             => esc_html__( 'Frequency pledge', 'cmb2' ),
-				'desc'             => esc_html__( 'Will be displayed in the tip card, in the top', 'cmb2' ),
+				'name'             => esc_html__( 'Frequency pledge', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Will be displayed in the tip card, in the top', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_tip_frequency',
 				'type'             => 'text',
 			// 'sanitization_cb' => 'intval',
@@ -247,8 +249,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_tip->add_field(
 			array(
-				'name'             => esc_html__( 'Tip icon', 'cmb2' ),
-				'desc'             => esc_html__( 'Icon/image shown in the card', 'cmb2' ),
+				'name'             => esc_html__( 'Tip icon', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Icon/image shown in the card', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_tip_icon',
 				'type'             => 'file',
 				// Optional.
@@ -267,8 +269,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_tip->add_field(
 			array(
-				'name'             => esc_html__( 'Number of commitments', 'cmb2' ),
-				'desc'             => esc_html__( 'Number of users that clicked on this tip (readonly)', 'cmb2' ),
+				'name'             => esc_html__( 'Number of commitments', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Number of users that clicked on this tip (readonly)', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_tip_commitments',
 				'type'             => 'text',
 				'save_field'  => false, // Otherwise CMB2 will end up removing the value.
@@ -276,6 +278,52 @@ class P4CT_Metabox_Register {
 					'readonly' => 'readonly',
 					'disabled' => 'disabled',
 				),
+			)
+		);
+
+	}
+
+	/**
+	 * Registers user story meta box.
+	 */
+	public function register_user_story_metabox() {
+
+		$cmb_user_story = new_cmb2_box(
+			array(
+				'id'           => 'p4-gpea-user-story-box',
+				'title'        => 'User story extra information',
+				'object_types' => array( 'user_story' ), // post type
+				'context'      => 'normal', // 'normal', 'advanced', or 'side'
+				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
+				'show_names'   => true, // Show field names on the left
+				// 'show_on' => array(
+				// 'key' => 'taxonomy',
+				// 'value' => array(
+				// 'p4_post_attribute' => array( 'tip' ),
+				// ),
+				// ),
+			)
+		);
+
+		// add p4_author_override already used for standard posts
+		$cmb_user_story->add_field(
+			array(
+				'name'             => esc_html__( 'Author of the story', 'gpea_theme_backend' ),
+				'id'               => 'p4_author_override',
+				'type'             => 'text',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
+			)
+		);
+
+		$cmb_user_story->add_field(
+			array(
+				'name'             => esc_html__( 'Email address of the author', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'For internal scope, will not be published on the site', 'gpea_theme_backend' ),
+				'id'               => 'p4_author_email_address',
+				'type'             => 'text',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
 			)
 		);
 
@@ -299,8 +347,16 @@ class P4CT_Metabox_Register {
 
 		$cmb_team->add_field(
 			array(
-				'name'             => esc_html__( 'Role', 'cmb2' ),
-				'desc'             => esc_html__( 'Role in the staff', 'cmb2' ),
+				'name'             => esc_html__( 'Short bio', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_short_bio',
+				'type'             => 'textarea',
+			)
+		);
+
+		$cmb_team->add_field(
+			array(
+				'name'             => esc_html__( 'Role', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Role in the staff', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_team_role',
 				'type'             => 'text',
 			)
@@ -326,8 +382,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_post->add_field(
 			array(
-				'name'             => esc_html__( 'Reading time', 'cmb2' ),
-				'desc'             => esc_html__( 'Specify the time extimated to read the article (i.e. 4 min)', 'cmb2' ),
+				'name'             => esc_html__( 'Reading time', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Specify the time extimated to read the article (i.e. 4 min)', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_post_reading_time',
 				'type'             => 'text',
 			// 'sanitization_cb' => 'intval',
@@ -337,8 +393,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_post->add_field(
 			array(
-				'name'             => esc_html__( 'Show the "Article donation laundher"', 'cmb2' ),
-				'desc'             => esc_html__( 'Show the laundher to support page, below the main content?', 'cmb2' ),
+				'name'             => esc_html__( 'Show the "Article donation laundher"', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Show the laundher to support page, below the main content?', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_show_article_donation_launcher',
 				'type'             => 'checkbox',
 			// 'sanitization_cb' => 'intval',
@@ -366,8 +422,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_page->add_field(
 			array(
-				'name'             => esc_html__( 'Extra content section', 'cmb2' ),
-				'desc'             => esc_html__( 'You can use this extra field to add rich text content below the main section', 'cmb2' ),
+				'name'             => esc_html__( 'Extra content section', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'You can use this extra field to add rich text content below the main section', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_page_extra_content',
 				'type'             => 'wysiwyg',
 			// 'sanitization_cb' => 'intval',
@@ -377,8 +433,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_page->add_field(
 			array(
-				'name'             => esc_html__( 'Special html class for the page', 'cmb2' ),
-				'desc'             => esc_html__( 'WARNING: this class is used to apply special style and behaviour, edit with caution...', 'cmb2' ),
+				'name'             => esc_html__( 'Special html class for the page', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'WARNING: this class is used to apply special style and behaviour, edit with caution...', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_page_special_class',
 				'type'             => 'text',
 			// 'sanitization_cb' => 'intval',
@@ -396,7 +452,7 @@ class P4CT_Metabox_Register {
 		$cmb_options = new_cmb2_box(
 			array(
 				'id'           => 'gpea_main_options_page',
-				'title'        => esc_html__( 'GPEA Options', 'gpea_theme' ),
+				'title'        => esc_html__( 'GPEA Options', 'gpea_theme_backend' ),
 				'object_types' => array( 'options-page' ),
 
 				/*
@@ -424,8 +480,8 @@ class P4CT_Metabox_Register {
 		 */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Background image for "Values" section', 'gpea_theme' ),
-				'desc'    => esc_html__( 'Specify the image to be used as background', 'gpea_theme' ),
+				'name'    => esc_html__( 'Background image for "Values" section', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Specify the image to be used as background', 'gpea_theme_backend' ),
 				'id'      => 'gpea_values_section_bg_image',
 				'type'    => 'file',
 			)
@@ -433,7 +489,7 @@ class P4CT_Metabox_Register {
 
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'css file with fonts specifications (optional)', 'gpea_theme' ),
+				'name'    => esc_html__( 'css file with fonts specifications (optional)', 'gpea_theme_backend' ),
 				'id'      => 'gpea_css_fonts',
 				'type'    => 'text',
 			)
@@ -441,8 +497,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Description text for generic footer', 'gpea_theme' ),
-				'desc'    => esc_html__( 'Description text for generic footer', 'gpea_theme' ),
+				'name'    => esc_html__( 'Description text for generic footer', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Description text for generic footer', 'gpea_theme_backend' ),
 				'id'      => 'gpea_decription_generic_footer_text',
 				'type'    => 'text',
 			)
@@ -451,8 +507,8 @@ class P4CT_Metabox_Register {
 		/* donation default link */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Default external link for donation ', 'gpea_theme' ),
-				'desc'    => esc_html__( 'Parameters and fields of donation box will be sent to this link', 'gpea_theme' ),
+				'name'    => esc_html__( 'Default external link for donation ', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Parameters and fields of donation box will be sent to this link', 'gpea_theme_backend' ),
 				'id'      => 'gpea_default_donation_link',
 				'type'    => 'text',
 			)
@@ -461,18 +517,28 @@ class P4CT_Metabox_Register {
 		/* support us */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Select the "support" landing page', 'gpea_theme' ),
-				'desc'    => esc_html__( 'Support page with all information and links', 'gpea_theme' ),
+				'name'    => esc_html__( 'Select the "support" landing page', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Support page with all information and links', 'gpea_theme_backend' ),
 				'id'      => 'gpea_default_supportus_link',
 				'type'    => 'supportus_page_dropdown',
+			)
+		);
+
+		/* ugc */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Select the "user generated content" landing page', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Page with form to submit new stories from users', 'gpea_theme_backend' ),
+				'id'      => 'gpea_default_ugc_link',
+				'type'    => 'ugc_page_dropdown',
 			)
 		);
 
 		/* latest from the Earth */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Select the "latest from the Earth" page', 'gpea_theme' ),
-				'desc'    => esc_html__( 'Page with latest news', 'gpea_theme' ),
+				'name'    => esc_html__( 'Select the "latest from the Earth" page', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Page with latest news', 'gpea_theme_backend' ),
 				'id'      => 'gpea_default_latest_link',
 				'type'    => 'latest_page_dropdown',
 			)
@@ -481,7 +547,7 @@ class P4CT_Metabox_Register {
 		/* Make a change */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Select the "Make a change" page', 'gpea_theme' ),
+				'name'    => esc_html__( 'Select the "Make a change" page', 'gpea_theme_backend' ),
 				'id'      => 'gpea_default_make_change',
 				'type'    => 'make_change_page_dropdown',
 			)
@@ -490,7 +556,7 @@ class P4CT_Metabox_Register {
 		/* Press & Media link */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Select the "Press&Media" page', 'gpea_theme' ),
+				'name'    => esc_html__( 'Select the "Press&Media" page', 'gpea_theme_backend' ),
 				'id'      => 'gpea_default_press_media',
 				'type'    => 'press_media_page_dropdown',
 			)
@@ -499,7 +565,7 @@ class P4CT_Metabox_Register {
 		/* My preferences */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Select the "User preferences" page', 'gpea_theme' ),
+				'name'    => esc_html__( 'Select the "User preferences" page', 'gpea_theme_backend' ),
 				'id'      => 'gpea_default_preferences',
 				'type'    => 'preferences_page_dropdown',
 			)
@@ -508,7 +574,7 @@ class P4CT_Metabox_Register {
 		/* Our commitment: projects */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Select the page with full list of projects', 'gpea_theme' ),
+				'name'    => esc_html__( 'Select the page with full list of projects', 'gpea_theme_backend' ),
 				'id'      => 'gpea_default_commitment_projects',
 				'type'    => 'commitment_projects_page_dropdown',
 			)
@@ -517,7 +583,7 @@ class P4CT_Metabox_Register {
 		/* Our commitment: issues */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Select the page with full list of issues', 'gpea_theme' ),
+				'name'    => esc_html__( 'Select the page with full list of issues', 'gpea_theme_backend' ),
 				'id'      => 'gpea_default_commitment_issues',
 				'type'    => 'commitment_issues_page_dropdown',
 			)
@@ -526,8 +592,8 @@ class P4CT_Metabox_Register {
 		/* Engaging default newsletter recipient */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( '"Id" code of your Engaging default subscription page', 'gpea_theme' ),
-				'desc'    => esc_html__( 'When user will select one or more topics to follow, he will be able to subscribe to that page', 'gpea_theme' ),
+				'name'    => esc_html__( '"Id" code of your Engaging default subscription page', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'When user will select one or more topics to follow, he will be able to subscribe to that page', 'gpea_theme_backend' ),
 				'id'      => 'gpea_default_en_subscription_page',
 				'type'    => 'text',
 			)
@@ -537,8 +603,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_options->add_field(
 			array(
-				'name'             => esc_html__( 'Select the form for tag cloud subsciption', 'gpea_theme' ),
-				'desc'             => esc_html__( 'Form will be shown below the tag cloud to subscribe to Engaging Newsletter', 'gpea_theme' ),
+				'name'             => esc_html__( 'Select the form for tag cloud subsciption', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Form will be shown below the tag cloud to subscribe to Engaging Newsletter', 'gpea_theme_backend' ),
 				'id'               => 'gpea_tag_cloud_newsletter_form',
 				'type'             => 'select',
 				'show_option_none' => true,
@@ -549,17 +615,26 @@ class P4CT_Metabox_Register {
 		/* Other Engaging newsletter default module */
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Thank you main text, for "topic/issue" newsletter subscribe', 'gpea_theme' ),
-				'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme' ),
+				'name'    => esc_html__( 'Thank you main text, for "topic/issue" newsletter subscribe', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme_backend' ),
 				'id'      => 'gpea_subscription_page_thankyou_title',
 				'type'    => 'text',
 			)
 		);
 		$cmb_options->add_field(
 			array(
-				'name'    => esc_html__( 'Thank you message: second line', 'gpea_theme' ),
-				'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme' ),
+				'name'    => esc_html__( 'Thank you message: second line', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme_backend' ),
 				'id'      => 'gpea_subscription_page_thankyou_subtitle',
+				'type'    => 'text',
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Engaging question for recurring donation', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'question name', 'gpea_theme_backend' ),
+				'id'      => 'gpea_donation_recurring_question',
 				'type'    => 'text',
 			)
 		);
@@ -679,6 +754,24 @@ class P4CT_Metabox_Register {
 				'hierarchical'     => true,
 				'selected'         => $value,
 				'name'             => 'gpea_default_supportus_link',
+			]
+		);
+	}
+
+	/**
+	 * Render ugc page dropdown.
+	 *
+	 * @param array  $field_args Field arguments.
+	 * @param string $value Value.
+	 */
+	public function gpea_render_ugc_page_dropdown( $field_args, $value ) {
+		wp_dropdown_pages(
+			[
+				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'hide_empty'       => 0,
+				'hierarchical'     => true,
+				'selected'         => $value,
+				'name'             => 'gpea_default_ugc_link',
 			]
 		);
 	}

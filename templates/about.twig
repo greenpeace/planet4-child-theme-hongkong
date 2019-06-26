@@ -1,73 +1,77 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	{% if (background_image) %}
-	<section class="section-hero-top has-hero-submenu has-hero-description" style="background-image: url({{ background_image }})">
-	<div class="section-hero-shade"></div>
-	<div class="top-bar-wrapper-white">
-            <div class="ct-container">
-		<div class="top-bar">
-		    <div class="top-bar-title">
-			<a href="" class="back-button">
-			    <span class="icon-close"></span>
-			</a>
-			{{ post.title|raw }}
-		    </div>
-		    <a href="" class="button green">關注</a>
-		</div>
+  {% if (background_image) %}
+    <section class="section-hero-top has-hero-submenu has-hero-description" style="background-image: url({{ background_image }})">
+      <div class="section-hero-shade"></div>
+      <div class="top-bar-wrapper-white">
+        <div class="ct-container">
+          <div class="top-bar">
+            <div class="top-bar-title">
+              <a class="back-button" href="">
+                <span class="icon-close"></span>
+              </a>
+              {{ post.title|raw }}
             </div>
-	</div>
-	<div class="hero-submenu">
-            <div class="hero-submenu-hidebar">
-		<ul class="hero-submenu-container ct-container">
-			{% for item in about_menu %}
-				<li class="hero-submenu-item {% if (item.ID == post.ID) %}current{% endif %}"><a href="{{ item.link }}">{{ item.post_title }}</a></li>
-		    {% endfor %}		    
-		</ul>
-            </div>
-	</div>
-	<div class="ct-container anchor-bottom">
-            <div class="hero-description">
-		<h1>{{ header_title }}</h1>
-		<p>{{ header_subtitle }}</p>
-		<div class="hero-description-link">
-		    <a href="{{ header_button_link }}">{{ header_button_title }}</a>
-		</div>
-            </div>
-	</div>
-	</section>
-	{% else %}
-	<section class="section-hero-top no-image has-hero-submenu" style="background-color: #000;">
-		<div class="section-hero-shade"></div>
-		<div class="top-bar-wrapper-white">
-				<div class="ct-container">
-			<div class="top-bar">
-				<div class="top-bar-title">
-				<a href="" class="back-button">
-					<span class="icon-close"></span>
-				</a>
-				{{ post.title|raw }}
-				</div>
-			</div>
-				</div>
-		</div>
-		<div class="hero-submenu">
-				<div class="hero-submenu-hidebar">
-			<ul class="hero-submenu-container ct-container">
-				{% for item in about_menu %}
-					<li class="hero-submenu-item {% if (item.ID == post.ID) %}current{% endif %}"><a href="{{ item.link }}">{{ item.post_title }}</a></li>
-				{% endfor %}		    
-			</ul>
-				</div>
-		</div>		
-		</section>
-	{% endif %}
-    {{ post.content|raw }}
+            <!-- <a class="button secondary" href="">{{ __('Follow', 'gpea-theme') }}</a> -->
+          </div>
+        </div>
+      </div>
+      <div class="hero-submenu">
+        <div class="hero-submenu-hidebar">
+          <ul class="hero-submenu-container ct-container">
+            {% for item in about_menu %}
+              <li class="hero-submenu-item {% if (item.ID == post.ID) %}current{% endif %}">
+                <a href="{{ item.link }}">{{ item.post_title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="ct-container anchor-bottom">
+        <div class="hero-description">
+          <h1>{{ header_title }}</h1>
+          <p>{{ header_subtitle }}</p>
+          <div class="hero-description-link">
+            <a href="{{ header_button_link }}">{{ header_button_title }}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <section class="section-hero-top no-image">
+      <div class="top-bar-wrapper-white">
+        <div class="hero-submenu">
+          <div class="hero-submenu-hidebar">
+            <ul class="hero-submenu-container ct-container">
+              {% for item in about_menu %}
+                <li class="hero-submenu-item {% if (item.ID == post.ID) %}current{% endif %}">
+                  <a href="{{ item.link }}">{{ item.post_title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {# <div class="ct-container">
+              <div class="top-bar">
+                <ul class="top-bar-links">
+                  {% for item in about_menu %}
+                    <li class="top-bar-links-item {% if (item.ID == post.ID) %}current{% endif %}">
+                      <a href="{{ item.link }}">{{ item.post_title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div> #}
+      </div>
+    </section>
+  {% endif %}
+  {{ post.content|raw }}
 
-	{% if extra_content %}
-		<section class="section-post-content ct-container">
-			{{ extra_content|raw }}
-		</section>
-	{% endif %}
+  {% if extra_content %}
+    <section class="section-post-content ct-container">
+      {{ extra_content|raw }}
+    </section>
+  {% endif %}
 
 {% endblock %}

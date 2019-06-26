@@ -6,12 +6,11 @@ import {
   Controller,
 } from 'swiper/dist/js/swiper.esm.js';
 import LazyLoad from 'vanilla-lazyload';
-import * as Cookies from 'js-cookie';
 import SmoothScroll from 'smooth-scroll';
 
 import petitionThankyou from './petition-thankyou';
 import donation from './donation';
-import p4ct_search from './p4ct_search';
+import followUnfollow from './follow-unfollow';
 
 // matches polyfill
 window.Element &&
@@ -41,6 +40,16 @@ window.Element &&
         return el.matches ? el : null;
       };
   })(Element.prototype);
+
+// NodeList.forEach polyfill
+if (window.NodeList && !NodeList.prototype.forEach) {
+  NodeList.prototype.forEach = function(callback, thisArg) {
+    thisArg = thisArg || window;
+    for (var i = 0; i < this.length; i++) {
+      callback.call(thisArg, this[i], i, this);
+    }
+  };
+}
 
 Swiper.use([Navigation, Pagination, Scrollbar, Controller]);
 
@@ -186,8 +195,41 @@ function connectDonationTabs() {
         }
       }
 
-      form.frequency.value = e.target.textContent.trim();
+      // form.frequency.value = e.target.textContent.trim();
+      form.frequency.value = e.target.getAttribute('data-recurring');
     });
+  });
+  // on form submit do redirect to donation pages
+  const form = document.querySelector('.js-donation-launcher-form');
+  if (!form) return;
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let donationUrl = new URL( form.action );
+    let amountValue = '';
+    let frequencyValue = '';
+
+    if ( form.amount ) {
+      amountValue = form.amount.value;      
+    } else if ( form['free-amount'] && form['free-amount'].value ) {
+      amountValue = form['free-amount'].value;      
+    } else if ( form['dollar-handle'] && form['dollar-handle'].value ) {
+      amountValue = form['dollar-handle'].value;
+    }
+    if ( form['en_recurring_question'] && form['en_recurring_question'].value ) {
+      frequencyValue = form.frequency.value;      
+    }
+
+    if ( 'mrm' == form.en_recurring_question.value ) {
+      if ( 'N' == frequencyValue ) frequencyValue = 'S';
+      else frequencyValue = 'M';
+
+      donationUrl.searchParams.append('donate_amt', frequencyValue + ':' + amountValue );
+    } else {
+      donationUrl.searchParams.append('transaction.donationAmt', amountValue);
+      donationUrl.searchParams.append(form.en_recurring_question.value, frequencyValue);
+    }
+
+    window.location.href = donationUrl;
   });
 }
 connectDonationTabs();
@@ -277,7 +319,7 @@ function connectFollowingTags() {
     };
   }
 }
-connectFollowingTags();
+// connectFollowingTags();
 
 /**
  * Functionality for showing/hiding elements animating their heights, accordion style.
@@ -322,23 +364,23 @@ function connectToggles() {
 }
 connectToggles();
 
-document.querySelectorAll('#search-expander-open').forEach(element => {
-  element.addEventListener('click', e => {
-    e.preventDefault();
-    const searchExpander = document.getElementsByClassName('search-expander');
-    if (searchExpander && searchExpander.length)
-      searchExpander[0].classList.add('show');
-  });
-});
+// document.querySelectorAll('#search-expander-open').forEach(element => {
+//   element.addEventListener('click', e => {
+//     e.preventDefault();
+//     const searchExpander = document.getElementsByClassName('search-expander');
+//     if (searchExpander && searchExpander.length)
+//       searchExpander[0].classList.add('show');
+//   });
+// });
 
-const searchExpanderClose = document.getElementById('search-expander-close');
-if (searchExpanderClose)
-  searchExpanderClose.addEventListener('click', e => {
-    e.preventDefault();
-    const searchExpander = document.getElementsByClassName('search-expander');
-    if (searchExpander && searchExpander.length)
-      searchExpander[0].classList.remove('show');
-  });
+// const searchExpanderClose = document.getElementById('search-expander-close');
+// if (searchExpanderClose)
+//   searchExpanderClose.addEventListener('click', e => {
+//     e.preventDefault();
+//     const searchExpander = document.getElementsByClassName('search-expander');
+//     if (searchExpander && searchExpander.length)
+//       searchExpander[0].classList.remove('show');
+//   });
 
 /**
  * Functionality for the EN form
@@ -349,40 +391,38 @@ if (searchExpanderClose)
  */
 function connectENForm() {
   const form = document.querySelector('#enform');
-  if (!form) return;
 
   const cta = document.querySelector('#p4en_form_save_button');
-  if (!cta) return;
+
+  if (!form || !cta || !document.querySelector('#petition-source')) return;
 
   const petitionSource = document
     .querySelector('#petition-source')
     .getAttribute('data-petition');
 
+  // const stats = document.createElement('div');
+  // stats.classList.add('signatures');
+  // stats.innerHTML =
+  //   '	<div class="progress-bar"> \
+  // 		<div class="percent" style="width: 90%"></div> \
+  // 	</div> \
+  // 	<div class="stats">已有2,347 名簽署者</div>';
+
   const stats = document.createElement('div');
   stats.classList.add('signatures');
-  stats.innerHTML =
-    '	<div class="progress-bar"> \
-			<div class="percent" style="width: 90%"></div> \
-		</div> \
-		<div class="stats">已有2,347 名簽署者</div>';
+  stats.innerHTML = document.querySelector('#petition-source').innerHTML;
 
   const close = document.createElement('div');
   close.classList.add('close');
   close.innerHTML = '×';
 
   const ctaFacebook = document.createElement('button');
-  ctaFacebook.classList.add('button', 'facebook', 'js-sign-facebook');
+  ctaFacebook.classList.add('button', 'fb', 'js-sign-facebook');
   ctaFacebook.innerHTML = 'Facebook';
-
-  ctaFacebook.addEventListener('click', e => {
-    alert('fb connection in progress..');
-  });
-
-  const submitArea = document.querySelector('.submit');
 
   form.insertBefore(stats, form.firstChild);
   form.insertBefore(close, form.firstChild);
-  form.insertBefore(ctaFacebook, cta);
+  cta.parentNode.insertBefore(ctaFacebook, cta);
 
   cta.addEventListener('click', e => {
     if (!form.classList.contains('is-open')) {
@@ -395,6 +435,17 @@ function connectENForm() {
       let fn = document.getElementsByName('supporter.firstName')[0].value;
       thankyouUrl += '?fn=' + fn + '&pet=' + petitionSource;
       form.setAttribute('data-redirect-url', thankyouUrl);
+      // form.querySelector('form').submit()
+    }
+  });
+
+  ctaFacebook.addEventListener('click', e => {
+    if (!form.classList.contains('is-open')) {
+      e.preventDefault();
+      form.classList.add('is-open');
+    } else {
+      // e.preventDefault();
+      alert('fb connection in progress..');
       // form.querySelector('form').submit()
     }
   });
@@ -432,3 +483,4 @@ connectAnchorMenu();
 /* Page specific functionality */
 petitionThankyou();
 donation(Swiper);
+followUnfollow();

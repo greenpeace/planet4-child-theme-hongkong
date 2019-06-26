@@ -12,6 +12,33 @@
   src: url('../fonts/Noto_Sans_TC/NotoSansTC-Medium.otf') format('opentype');
 }
 
+/*
+ * NOTE: Make sure 'Montserrat' and 'icomoon' are declared the same way
+ *      in kr-fonts.css as well!!
+ */
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+  src: url('../fonts/Montserrat/Montserrat-Light.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+  src: url('../fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url('../fonts/icomoon.ttf?8pmnit') format('truetype'),
+    url('../fonts/icomoon.woff?8pmnit') format('woff'),
+    url('../fonts/icomoon.svg?8pmnit#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body,
 button,
 .form-caption h1,

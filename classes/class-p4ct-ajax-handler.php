@@ -56,25 +56,25 @@ class P4CT_AJAX_Handler {
 		$data = $_POST;
 
 		if ( ! wp_verify_nonce( $data['_wpnonce'], self::SUPPORT_LAUNCHER_NONCE_STRING ) ) {
-			$this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'planet4-child-theme-backend' ) );
+			$this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'gpea_theme' ) );
 			return;
 		}
 
 		// We assume $data['recipient_email'], $data['subject'] to have correct values.
-		if ( $data['sender_name'] && $data['sender_email'] && $data['message'] ) {
+		if ( $data['name'] && $data['email'] && $data['message'] ) {
 
 			$to = $data['recipient_email'];
 			$subject = $data['subject'];
 			$message = $data['message'];
-			$headers = array( 'From: ' . $data['sender_name'] . ' <' . $data['sender_email'] . '>\r\n' );
+			$headers = array( 'From: ' . $data['name'] . ' <' . $data['email'] . '>\r\n' );
 
 			wp_mail( $to, $subject, $message, $headers );
 
-			$this->safe_echo( __( 'Message sent.', 'planet4-child-theme-backend' ) );
+			$this->safe_echo( __( 'Message sent.', 'gpea_theme' ) );
 			return;
 
 		} else {
-			$this->safe_echo( __( 'Could not send the message, form fields missing.', 'planet4-child-theme-backend' ) );
+			$this->safe_echo( __( 'Could not send the message, form fields missing.', 'gpea_theme' ) );
 			return;
 		}
 

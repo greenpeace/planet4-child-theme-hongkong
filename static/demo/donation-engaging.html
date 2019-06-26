@@ -9,42 +9,6 @@
 	<link rel="icon" href="../images/icons/favicon.ico" />
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
 
-
-	<style>			
-			
-			body,
-			button,
-			.form-caption h1,
-			.form-caption p,
-			.enform {
-			  font-family: 'Noto Sans TC', sans-serif;
-			}
-	
-			@font-face {
-			  font-family: 'Montserrat';
-			  font-display: swap;
-			  src: url('https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1853/Montserrat-Light.ttf?v=1561214079000') format('truetype');
-			  font-weight: normal;
-			}
-			
-			@font-face {
-			  font-family: 'Montserrat';
-			  font-display: swap;
-			  src: url('https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1853/Montserrat-Medium.ttf?v=1561214082000') format('truetype');
-			  font-weight: bold;
-			}
-			
-			@font-face {
-			  font-family: 'icomoon';
-			  src: url('https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1853/icomoon.ttf?v=1561213529000') format('truetype'),
-				url('https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1853/icomoon.woff?v=1561213530000') format('woff'),
-				url('https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1853/icomoon.svg?v=1561214035000') format('svg');
-			  font-weight: normal;
-			  font-style: normal;
-			}
-	
-		</style>
-
 	<link
 		rel="stylesheet"
 		id="plugin-en-css"
@@ -52,6 +16,7 @@
 		type="text/css"
 		media="all"
 	/>
+	<link rel="stylesheet" type="text/css" href="../css/hk-fonts.css" />
 	<link rel="stylesheet" type="text/css" href="../css/style.css" />
 	<title>GPEA Donation Engaging</title>
 
@@ -60,7 +25,7 @@
 <script src='donation_engaging/pagedata.js?locale=zh-TW'></script>
 <script src='donation_engaging/enPage.js?v=3.52.0'></script>
 
-	
+
 </head>
 <body class="page-template-donation">
     <header>
@@ -94,13 +59,11 @@
             </ul>
           </div>
           <div class="right-box">
-			Scorrimento steps?..
-			<div class="swiper-container label-swiper">
-				<div class="swiper-wrapper">
-					<div class="swiper-slide label-slide">label1</div>
-					<div class="swiper-slide label-slide">label 2</div>
-				</div>
-			</div>
+						<div class="stepper">
+							<div class="step js-step-amount is-current">Amount</div>
+							<div class="step js-step-details is-todo">Details</div>
+							<div class="step js-step-payment is-todo">Payment</div>
+						</div>
           </div>
         </div>
       </div>
@@ -384,23 +347,37 @@
 </div>
 
 <footer>
-	<div class="footer-upper">			
+
+	<div class="footer-donation">
 		<div class="ct-container">
-			
+			<div class="transaction-secure">
+				<span class="icon-lock"></span> Transaction secure
+			</div>
+			<div>
+					<span class="icon-cc-mastercard"></span>
+					<span class="icon-cc-visa"></span>
+					<span class="icon-cc-paypal"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer-upper">
+		<div class="ct-container">
+
 			<div class="footer-greenpeace">
-					
+
 				<p>
 					<span class="icon-greenpeace"></span>
 				</p>
 				<p>綠色和平是獨立的國際環保組織，通過科學研究、政策倡議及和平行動，揭露全球環境問題並提出相應解決方案。我們從不接受任何政府、企業或政治團體的資助，只接受個人的直接捐款，以維持公正獨立。</p>
 			</div>
-			
-			
+
+
 		</div>
 	</div>
 	<div class="footer-lower">
 		<div class="ct-container">
-			
+
 			<ul class="secondary-links">
 									<li><a href="http://www.planet4.test/privacy-and-cookies/">Privacy and Cookies</a></li>
 									<li><a href="http://www.planet4.test/community-policy/">Community Policy</a></li>

@@ -11,7 +11,8 @@
   }
 
   header {
-    position: absolute;
+    position: fixed;
+    top: 0;
     left: 0;
     right: 0;
     z-index: 4;
@@ -38,6 +39,11 @@
     }
   }
 
+  //   -.-
+  &.admin-bar header {
+    top: 32px;
+  }
+
   .mobile-toolbar {
     display: none;
   }
@@ -45,7 +51,10 @@
   .mobile-box {
     display: none !important;
   }
+}
 
+.page-template-petition,
+.page-template-donation {
   .outer_block_container {
     @include ct-container;
     padding-top: 0;
@@ -70,7 +79,6 @@
       }
     }
   }
-
 }
 
 .page-template-petition,
@@ -82,5 +90,35 @@
   footer .bottom-bar {
     height: calc(135px + 52px);
     padding-bottom: 135px;
+  }
+}
+
+@include greaterThan('sm') {
+  .page-template-petition-thankyou,
+  .page-template-donation {
+    header .right-box {
+      display: block;
+      width: 375px;
+    }
+  }
+}
+
+/* newsletter simple */
+
+.enform-wrap.enform-full-width {
+  @include ct-container;
+  .enform {
+    background: transparent;
+    color: #000;
+    text-align: center;
+    h2 {
+      color: #000;
+    }
+    form .formblock-flex .en__field {
+      width: 100%;
+    }
+    form .submit {
+      display: block;
+    }
   }
 }

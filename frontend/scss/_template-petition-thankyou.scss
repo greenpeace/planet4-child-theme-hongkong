@@ -17,11 +17,12 @@
     bottom: 0;
     height: 20vh;
     background-color: #000;
+    z-index: 2;
   }
 }
 
 .section-petition-thankyou {
-  .steps {
+  .screens {
     background: linear-gradient(
       to right,
       rgba(0, 0, 0, 0.65) 0%,
@@ -30,21 +31,21 @@
     color: white;
   }
 
-  [class^='step-'] {
+  [class^='screen-'] {
     min-height: 100vh;
     padding-top: 60px;
     padding-bottom: 20vh;
     overflow: hidden;
   }
 
-  .step-share,
-  .step-donate {
+  .screen-share,
+  .screen-donate {
     display: none;
   }
 
-  .step-thankyou,
-  .step-share.is-visible,
-  .step-donate.is-visible {
+  .screen-thankyou,
+  .screen-share.is-visible,
+  .screen-donate.is-visible {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -63,13 +64,23 @@
     }
   }
 
-  .step-share {
+  .screen-share {
     .button {
       padding: 0 15px;
 
       @include greaterThan('sm') {
         padding: 0 25px;
       }
+    }
+  }
+
+  @include lessThan('sm') {
+    .screen-thankyou .button.primary,
+    .screen-share .button.primary {
+      height: 30px;
+      padding: 0 30px;
+      font-size: 14px;
+      line-height: 29px;
     }
   }
 

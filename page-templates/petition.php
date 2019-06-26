@@ -24,6 +24,19 @@ $post           = new P4_Post();
 $gpea_extra     = new P4CT_Site();
 $page_meta_data = get_post_meta( $post->ID );
 
+// engaging assets
+$engaging_settings = get_option( 'p4en_main_settings' );
+$engaging_token = $engaging_settings['p4en_frontend_public_api'];
+
+// check if external link is set, and redirect in this case
+$external_link = $page_meta_data['p4-gpea_petition_external_link'][0] ?? '';
+if ( $external_link ) {
+	wp_redirect( $external_link );
+	exit;
+
+}
+
+
 // Set Navigation Issues links.
 $post->set_issues_links();
 
@@ -66,5 +79,35 @@ $context['custom_body_classes']         = $categories;
 $context['engaging_page_id']            = $page_meta_data['p4-gpea_petition_engaging_pageid'][0] ?? '';
 $context['petition_target']             = $page_meta_data['p4-gpea_petition_engaging_target'][0] ?? '';
 
+if ( $context['engaging_page_id'] ) {
+	global $wp_version;
+	$url = 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $context['engaging_page_id'] . '&contentType=json&resultType=summary';
+	echo $url;
+	$args = array(
+		'timeout'     => 5,
+		'redirection' => 5,
+		'httpversion' => '1.0',
+		'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),
+		'blocking'    => true,
+		'headers'     => array(),
+		'cookies'     => array(),
+		'body'        => null,
+		'compress'    => false,
+		'decompress'  => true,
+		'sslverify'   => true,
+		'stream'      => false,
+		'filename'    => null,
+	);
+	$result = wp_remote_get( $url, $args );
+	$obj = json_decode( $result['body'], true );
+	$context['signatures'] = $obj['rows'][0]['columns'][4]['value'];
+
+}
+
+if ( $context['petition_target'] && $context['signatures'] ) {
+	$context['percentage'] = intval( intval( $context['signatures'] ) * 100 / intval( $context['petition_target'] ) );
+} else {
+	$context['percentage'] = 100;
+}
 
 Timber::render( [ 'petition.twig' ], $context );

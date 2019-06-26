@@ -8,8 +8,8 @@
 			<a href="" class="back-button">
 				<span class="icon-chevron-left"></span>
 			</a>
-			<a href="#" data-project='{{ post.id }}' class="js-project-follow button green">關注</a>
-			<a href="#" data-project='{{ post.id }}' class="js-project-unfollow button not-following green">Following</a>
+			<a href="#" data-project='{{ post.id }}' class="js-project-follow button secondary">{{ __('Follow', 'gpea-theme') }}</a>
+			<a href="#" data-project='{{ post.id }}' class="js-project-unfollow button not-following secondary">{{ __('Following', 'gpea-theme') }}</a>
 			</div>
 		</div>
 		<div class="ct-container anchor-bottom">
@@ -19,11 +19,11 @@
 				<!-- TODO: print real issue -->
 				<div class="project-summary-issue issue {{ custom_body_classes }}">{{ main_issue_name }}</div>
 				<div class="project-summary-open">
-					<div class="project-summary-open-name">開始</div>
+					<div class="project-summary-open-name">{{ __('Date of start', 'gpea-theme') }}</div>
 					{{ start_date }}<!-- 2017年1月 -->
 				</div>
 				<div class="project-summary-area">
-					<div class="project-summary-area-name">實施領域</div>
+					<div class="project-summary-area-name">{{ __('Zones interested', 'gpea-theme') }}</div>
 					{{ localization }}
 				</div>
 				<div class="project-summary-progress">
