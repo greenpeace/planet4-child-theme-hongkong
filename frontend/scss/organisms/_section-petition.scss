@@ -266,6 +266,7 @@
 
       .button,
       .btn {
+        position: relative;
         min-width: 0;
         width: auto;
         padding-left: 20px;
@@ -275,7 +276,7 @@
       .enform-notice {
         width: 100%;
 
-        > * {
+        .enform-error {
           display: block;
           color: $color-red;
           margin: 20px 0 0;
