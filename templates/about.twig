@@ -13,7 +13,7 @@
               </a>
               {{ post.title|raw }}
             </div>
-            <a class="button secondary" href="">關注</a>
+            <!-- <a class="button secondary" href="">{{ __('Follow', 'gpea-theme') }}</a> -->
           </div>
         </div>
       </div>
@@ -53,16 +53,16 @@
           </div>
         </div>
         {# <div class="ct-container">
-                                  <div class="top-bar">
-                                    <ul class="top-bar-links">
-                                      {% for item in about_menu %}
-                                        <li class="top-bar-links-item {% if (item.ID == post.ID) %}current{% endif %}">
-                                          <a href="{{ item.link }}">{{ item.post_title }}</a>
-                                        </li>
-                                      {% endfor %}
-                                    </ul>
-                                  </div>
-                                </div> #}
+              <div class="top-bar">
+                <ul class="top-bar-links">
+                  {% for item in about_menu %}
+                    <li class="top-bar-links-item {% if (item.ID == post.ID) %}current{% endif %}">
+                      <a href="{{ item.link }}">{{ item.post_title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div> #}
       </div>
     </section>
   {% endif %}
