@@ -11,7 +11,7 @@
   border-radius: 99px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
   font-weight: bold;
-  transition: all 140ms linear;
+  transition: background-color 140ms linear, box-shadow 140ms linear;
   text-decoration: none;
   border: none;
   cursor: pointer;
@@ -144,9 +144,22 @@
     }
   }
 
-  &.loading {
-    position: relative;
+  &.loading,
+  &[disabled] {
     color: rgba(desaturate($color-orange, 40%), 0.2);
+  }
+
+  &.primary {
+    &.loading,
+    &[disabled] {
+      color: rgba(white, 0.2);
+    }
+  }
+
+  &.loading,
+  & .en-spinner {
+    position: relative;
+    // color: rgba(desaturate($color-orange, 40%), 0.2);
 
     &::after {
       content: ' ';
@@ -169,18 +182,45 @@
     }
 
     &.primary {
-      color: rgba(white, 0.2);
+      // color: rgba(white, 0.2);
 
-      &::after {
+      &::after,
+      & .en-spinner {
+        top: 9px;
         border-top-color: white;
         border-bottom-color: white;
+      }
+
+      & .en-spinner {
+        top: 19px;
       }
     }
   }
 
-  &.not-following {
-    display: none;
+  & .en-spinner {
+    position: absolute;
+    color: transparent;
+    top: 14px;
+    left: 50%;
+    margin-left: -11px;
+
+    @include greaterThan('sm') {
+      top: 19px;
+    }
   }
+
+  &.primary .en-spinner {
+    top: 17px;
+
+    &::after {
+      border-top-color: white;
+      border-bottom-color: white;
+    }
+  }
+}
+
+.submit {
+  position: relative;
 }
 
 @keyframes lds-dual-ring {
