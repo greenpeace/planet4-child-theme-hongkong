@@ -9,7 +9,8 @@
 			<a href="" class="back-button">
 			<span class="icon-chevron-left"></span>
 			</a>
-			<a href="" class="button light">關注</a>
+			<a href="#" data-topic='{{ main_issue_id }}' class="js-issue-follow button light">{{ __('Follow', 'gpea-theme') }}</a>
+			<a href="#" data-topic='{{ main_issue_id }}' class="js-issue-unfollow not-following button light">{{ __('Following', 'gpea-theme') }}</a>
 		</div>
 		<div class="hero-issue-title">
 			 <h1>{{ post.title|raw }}</h1>
@@ -24,101 +25,23 @@
 	<section class="section-related-tags">
 		<div class="ct-container">
 			<hr />
-			<h2>關於海洋你要知道的是…</h2>
+			<h2>{{ __('Related to this issue', 'gpea-theme') }}</h2>
 			<div class="tags">
-				<a href="" class="button tag">污染</a>
-				<a href="" class="button tag">塑膠</a>
-				<a href="" class="button tag">動物</a>
-				<a href="" class="button tag">空氣</a>
-				<a href="" class="button tag">電子</a>
+				{% for tag in post.tags %}
+					<a href="" class="button tag">{{ tag.name|raw}}</a>
+				{% endfor %}				
 			</div>
 		</div>
 	</section>
 	<section class="section-latest-news">
 		<div class="ct-container">
-			<h2>最新消息</h2>
+			<h2>{{ __('Related news', 'gpea-theme') }}</h2>
 			<div class="news-list">
-				<a class="card-update compact" href="">
-					<div
-					class="thumbnail lazy"
-					data-bg="url(https://picsum.photos/id/82/200/300)"
-					></div>
-					<div class="box">
-						<div class="meta-box">
-							<div>
-								<!-- TODO: print real issue -->
-								<span class="issue oceans">海洋</span>
-								<!-- TODO: print post type -->
-								<span>新聞</span>
-							</div>
-						</div>
-						<p>
-							在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
-						</p>
-						<div class="meta-box">
-							<div>
-								<!-- TODO: print reading time -->
-								<span> <span class="icon-clock"></span> 4 min 閱讀 </span>
-								<!-- TODO: print real date -->
-								<span>2018-12-07</span>
-							</div>
-						</div>
-					</div>
-				</a>
-				<a class="card-update compact" href="">
-					<div
-					class="thumbnail lazy"
-					data-bg="url(https://picsum.photos/id/82/200/300)"
-					></div>
-					<div class="box">
-						<div class="meta-box">
-							<div>
-								<!-- TODO: print real issue -->
-								<span class="issue oceans">海洋</span>
-								<!-- TODO: print post type -->
-								<span>新聞</span>
-							</div>
-						</div>
-						<p>
-							在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
-						</p>
-						<div class="meta-box">
-							<div>
-								<!-- TODO: print reading time -->
-								<span> <span class="icon-clock"></span> 4 min 閱讀 </span>
-								<!-- TODO: print real date -->
-								<span>2018-12-07</span>
-							</div>
-						</div>
-					</div>
-				</a>
-				<a class="card-update compact" href="">
-					<div
-					class="thumbnail lazy"
-					data-bg="url(https://picsum.photos/id/82/200/300)"
-					></div>
-					<div class="box">
-						<div class="meta-box">
-							<div>
-								<!-- TODO: print real issue -->
-								<span class="issue oceans">海洋</span>
-								<!-- TODO: print post type -->
-								<span>新聞</span>
-							</div>
-						</div>
-						<p>
-							在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。
-						</p>
-						<div class="meta-box">
-							<div>
-								<!-- TODO: print reading time -->
-								<span> <span class="icon-clock"></span> 4 min 閱讀 </span>
-								<!-- TODO: print real date -->
-								<span>2018-12-07</span>
-							</div>
-						</div>
-					</div>
-				</a>
+			{% if ( related_posts ) %}
+				{% for related_post in related_posts %}
+				{% include "blocks/tease-related-post.twig" with {post:related_post} %}
+				{% endfor %}
+			{% endif %}
 			</div>
 		</div>
 	</section>
