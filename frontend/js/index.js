@@ -204,29 +204,31 @@ function connectDonationTabs() {
   if (!form) return;
   form.addEventListener('submit', e => {
     e.preventDefault();
-    let donationUrl = new URL(form.action);
-    if (form.amount) {
-      donationUrl.searchParams.append(
-        'transaction.donationAmt',
-        form.amount.value
-      );
-    } else if (form['free-amount'] && form['free-amount'].value) {
-      donationUrl.searchParams.append(
-        'transaction.donationAmt',
-        form['free-amount'].value
-      );
-    } else if (form['dollar-handle'] && form['dollar-handle'].value) {
-      donationUrl.searchParams.append(
-        'transaction.donationAmt',
-        form['dollar-handle'].value
-      );
+    let donationUrl = new URL( form.action );
+    let amountValue = '';
+    let frequencyValue = '';
+
+    if ( form.amount ) {
+      amountValue = form.amount.value;      
+    } else if ( form['free-amount'] && form['free-amount'].value ) {
+      amountValue = form['free-amount'].value;      
+    } else if ( form['dollar-handle'] && form['dollar-handle'].value ) {
+      amountValue = form['dollar-handle'].value;
     }
-    if (form['en_recurring_question'] && form['en_recurring_question'].value) {
-      donationUrl.searchParams.append(
-        form.en_recurring_question.value,
-        form.frequency.value
-      );
+    if ( form['en_recurring_question'] && form['en_recurring_question'].value ) {
+      frequencyValue = form.frequency.value;      
     }
+
+    if ( 'mrm' == form.en_recurring_question.value ) {
+      if ( 'N' == frequencyValue ) frequencyValue = 'S';
+      else frequencyValue = 'M';
+
+      donationUrl.searchParams.append('donate_amt', frequencyValue + ':' + amountValue );
+    } else {
+      donationUrl.searchParams.append('transaction.donationAmt', amountValue);
+      donationUrl.searchParams.append(form.en_recurring_question.value, frequencyValue);
+    }
+
     window.location.href = donationUrl;
   });
 }
