@@ -75,10 +75,10 @@ $context['start_date']                  = $page_meta_data['p4-gpea_project_start
 $context['localization']                = $page_meta_data['p4-gpea_project_localization'][0] ?? 0;
 
 $context['strings'] = [
-	'follow' => __( 'Follow', 'gpea-theme' ),
-	'following' => __( 'Following', 'gpea-theme' ),
-	'start_date' => __( 'Date of start', 'gpea-theme' ),
-	'zones_interested' => __( 'Zones interested', 'gpea-theme' ),
+	'follow' => __( 'Follow', 'gpea_theme' ),
+	'following' => __( 'Following', 'gpea_theme' ),
+	'start_date' => __( 'Date of start', 'gpea_theme' ),
+	'zones_interested' => __( 'Zones interested', 'gpea_theme' ),
 ];
 
 

@@ -110,7 +110,7 @@ if ( $context['petition_target'] && $context['signatures'] ) {
 
 $context['strings'] = [
 	// translators: placeholder represents the number of signers.
-	'signatures' => $context['signatures'] ? sprintf( __( '%s signers', 'planet4-gpea-blocks' ), $context['signatures'] ) : false,
+	'signatures' => $context['signatures'] ? sprintf( __( '%s signers', 'gpea_theme' ), $context['signatures'] ) : false,
 ];
 
 Timber::render( [ 'petition.twig' ], $context );

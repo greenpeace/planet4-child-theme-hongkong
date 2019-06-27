@@ -52,7 +52,7 @@ $extra_content                          = $page_meta_data['p4-gpea_page_extra_co
 $context['extra_content']               = $extra_content ? wpautop( $extra_content ) : '';
 
 $context['strings'] = [
-	'follow' => __( 'Follow', 'gpea-theme' ),
+	'follow' => __( 'Follow', 'gpea_theme' ),
 ];
 
 /* build about menu */

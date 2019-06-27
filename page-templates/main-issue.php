@@ -68,10 +68,10 @@ $context['main_issue_id']               = $main_issue_id;
 $context['related_posts']               = $gpea_extra->gpea_get_related( $post->ID, 3 );
 
 $context['strings'] = [
-	'follow' => __( 'Follow', 'gpea-theme' ),
-	'following' => __( 'Following', 'gpea-theme' ),
-	'related_issue' => __( 'Related to this issue', 'gpea-theme' ),
-	'related_news' => __( 'Related news', 'gpea-theme' ),
+	'follow' => __( 'Follow', 'gpea_theme' ),
+	'following' => __( 'Following', 'gpea_theme' ),
+	'related_issue' => __( 'Related to this issue', 'gpea_theme' ),
+	'related_news' => __( 'Related news', 'gpea_theme' ),
 ];
 
 Timber::render( [ 'main-issue.twig' ], $context );
