@@ -300,6 +300,58 @@ class P4CT_AJAX_Handler {
 					$single_update['img_url'] = $img_data[0];
 				}
 
+				// news type
+				$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
+				if ( $news_type ) {
+					$single_update['news_type'] = $news_type[0]->name;
+				}
+
+				// check if petition and, if so, retrieve extra information
+				if ( has_term( 'petition', 'post_tag', $post->ID ) ) {
+					if ( 'page-templates/petition.php' === get_post_meta( $post->ID, '_wp_page_template', true ) ) {
+						$single_update['engaging_pageid'] = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_pageid', true );
+						$single_update['engaging_target'] = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_target', true );
+
+						if ( $single_update['engaging_pageid'] ) {
+
+							// get Engaging options:
+							$engaging_settings = get_option( 'p4en_main_settings' );
+							$engaging_token = $engaging_settings['p4en_frontend_public_api'];
+
+							global $wp_version;
+							$url = 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $single_update['engaging_pageid'] . '&contentType=json&resultType=summary';
+							$args = array(
+								'timeout'     => 5,
+								'redirection' => 5,
+								'httpversion' => '1.0',
+								'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),
+								'blocking'    => true,
+								'headers'     => array(),
+								'cookies'     => array(),
+								'body'        => null,
+								'compress'    => false,
+								'decompress'  => true,
+								'sslverify'   => true,
+								'stream'      => false,
+								'filename'    => null,
+							);
+							$result = wp_remote_get( $url, $args );
+							$obj = json_decode( $result['body'], true );
+							$single_update['signatures'] = $obj['rows'][0]['columns'][4]['value'];
+						}
+
+						if ( $single_update['engaging_target'] && $single_update['signatures'] ) {
+							$post->percentage = intval( intval( $single_update['signatures'] ) * 100 / intval( $single_update['engaging_target'] ) );
+						} else {
+							$post->percentage = 100;
+						}
+
+						/* if external link is set, we use that instead of standard one */
+						$external_link = get_post_meta( $post->ID, 'p4-gpea_petition_external_link', true );
+						if ( $external_link ) $single_update['link'] = $external_link;
+					}
+				}
+
 				$results[] = $single_update;
 			endwhile;
 
