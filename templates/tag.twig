@@ -1,0 +1,48 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  {% if (background_image) %}
+    <section class="section-hero-top has-hero-submenu has-hero-description" style="background-image: url({{ background_image }})">
+      <div class="section-hero-shade"></div>
+      <div class="top-bar-wrapper-white">
+        <div class="ct-container">
+          <div class="top-bar">
+            <div class="top-bar-title">
+              <a class="back-button" href="">
+                <span class="icon-close"></span>
+              </a>
+              <!-- {{ tag.name|raw }} -->
+            </div>
+            <!-- <a class="button secondary" href="">{{ strings.follow }}</a> -->
+          </div>
+        </div>
+      </div>      
+      <div class="ct-container anchor-bottom">
+        <div class="hero-description">
+          <h1>{{ tag.name|raw }}</h1>          
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <section class="section-hero-top no-image">
+      <div class="top-bar-wrapper-white">
+        <div class="hero-submenu">                  
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="section-text-images">
+    <div class="boxes">
+      <div class="box ">
+          <div class="ct-container">
+              <p>{{ tag.description|raw }}</p>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  {{ projects|shortcodes|raw }}
+
+  {{ post.content|raw }}
+
+{% endblock %}
