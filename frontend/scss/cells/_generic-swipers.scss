@@ -13,6 +13,9 @@
   overflow: visible;
   padding-top: 15px;
   padding-bottom: 15px;
+  // For debug purposes:
+  // transform: scale(0.1);
+  // transform-origin: left top;
 
   .swiper-slide.first {
     display: none;
@@ -22,14 +25,60 @@
       width: 250px;
     }
   }
-}
 
-.swiper-wrapper {
-  height: auto;
-}
+  .lds-spinner {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 99;
+    margin-top: -32px;
+    margin-left: -32px;
+    transform: scale(0.8);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 140ms linear, visibility 0s linear 140ms;
 
-.swiper-slide {
-  box-sizing: border-box;
+    @include greaterThan('sm') {
+      transform: scale(1);
+    }
+  }
+
+  .swiper-wrapper {
+    height: auto;
+  }
+
+  .swiper-slide {
+    box-sizing: border-box;
+  }
+
+  .swiper-slide,
+  .swiper-pagination,
+  [class^='swiper-button-'] {
+    transition: opacity 140ms linear, filter 140ms linear;
+  }
+
+  &.is-loading {
+    .swiper-wrapper {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .swiper-slide,
+    .swiper-pagination,
+    [class^='swiper-button-'] {
+      opacity: 0.3;
+      filter: saturate(50%);
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .lds-spinner {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 140ms linear, visibility 0s linear 0s;
+    }
+  }
 }
 
 .dark {

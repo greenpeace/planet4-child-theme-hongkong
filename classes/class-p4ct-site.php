@@ -147,6 +147,23 @@ class P4CT_Site {
 		$context['commitment_issues_link'] = isset( $options['gpea_default_commitment_issues'] ) ? get_permalink( $options['gpea_default_commitment_issues'] ) : site_url();
 		$context['support_link'] = isset( $options['gpea_default_supportus_link'] ) ? get_permalink( $options['gpea_default_supportus_link'] ) : site_url();
 
+		$context['strings_navbar'] = [
+			'sign' => __( 'Sign', 'gpea_theme' ),
+			'share' => __( 'Share', 'gpea_theme' ),
+			'donate' => __( 'Donate', 'gpea_theme' ),
+			'support' => __( 'Support us', 'gpea_theme' ),
+		];
+
+		$context['strings_footer'] = [
+			'follow' => __( 'Follow us', 'gpea_theme' ),
+			'our_commitment' => __( 'Our commitment', 'gpea_theme' ),
+			'projects' => __( 'Projects', 'gpea_theme' ),
+			'main_issues' => __( 'Main issues', 'gpea_theme' ),
+			'about_greenpeace' => __( 'About Greenpeace', 'gpea_theme' ),
+			'press_media' => __( 'Press release and media', 'gpea_theme' ),
+			'my_preferences' => __( 'My Preferences', 'gpea_theme' ),
+		];
+
 		return $context;
 	}
 
@@ -246,7 +263,7 @@ class P4CT_Site {
 	 * @param int  $exclude_post_id Id to be excluded, usually the current one.
 	 * @param text $limit limit of related posts to be retrieved, default 3.
 	 */
-	public function gpea_get_related( $exclude_post_id, $limit) {
+	public function gpea_get_related( $exclude_post_id, $limit ) {
 
 		$exclude_post_id = (int) ( $exclude_post_id ?? '' );
 		$limit           = (int) ( $limit ?? '3' );
@@ -304,15 +321,19 @@ class P4CT_Site {
 		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
 		if ( ! $main_issues_category_id ) {
 			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-			if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+			if ( $main_issues_category ) {
+				$main_issues_category_id = $main_issues_category->term_id;
+			}
 		}
 
 		if ( $main_issues_category_id ) {
 			$categories = get_the_category( $post_id );
 			if ( ! empty( $categories ) ) {
-				$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
-					return $cat->category_parent === intval( $main_issues_category_id );
-				});
+				$categories = array_filter(
+					$categories, function( $cat ) use ( $main_issues_category_id ) {
+						return $cat->category_parent === intval( $main_issues_category_id );
+					}
+				);
 				if ( ! empty( $categories ) ) {
 					$first_category = array_values( $categories )[0];
 					return $first_category;
@@ -380,7 +401,7 @@ class P4CT_Site {
  * @param  string $key Options array key.
  * @return mixed Option value.
  */
- function gpea_get_option( $key = '' ) {
+function gpea_get_option( $key = '' ) {
 	if ( function_exists( 'cmb2_get_option' ) ) {
 		return cmb2_get_option( 'gpea_options', $key );
 	} else {

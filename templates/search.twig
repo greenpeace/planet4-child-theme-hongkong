@@ -12,34 +12,32 @@
         <% posts.forEach(post => {
 				console.log(post);
 				%>
-        <a href="<%= post.link %>" class="card-update compact">
-          <div class="thumbnail" style="background-image: url(<%= post.img_url %>);"></div>
-          <div class="box">
-            <div class="meta-box">
-              <div>
-                <span class="issue <%= post.main_issue_slug %>"><%= post.main_issue %></span>
-                <span><%= post.news_type %></span>
-              </div>
-            </div>
-            <p>
-              <%= post.post_title %>
-            </p>
-            <div class="meta-box">
-              <div>
-                <% if (post.reading_time) {
-									%>
-                  <span>
-                    <span class="icon-clock"></span>
-                    <%= post.reading_time %>
-                  </span>
-                <%
-								} %>
-                <span><%= post.post_date %></span>
-              </div>
-            </div>
-          </div>
-        </a>
-      <%
+			<a href="<%= post.link %>" class="card-update compact">
+			<div class="thumbnail" style="background-image: url(<%= post.img_url %>);"></div>
+			<div class="box">
+				<div class="meta-box">
+				<div>
+					<span class="issue <%= post.main_issue_slug %>"><%= post.main_issue %></span>
+					<span><%= post.news_type %></span>
+				</div>
+				</div>
+				<p>
+				<%= post.post_title %>
+				</p>
+				<div class="meta-box">
+				<div>
+					<% if (typeof post.reading_time !== 'undefined' && post.reading_time) { %>
+						<span>
+							<span class="icon-clock"></span>
+							<%= post.reading_time %>
+						</span>
+					<% } %>
+					<span><%= post.post_date %></span>
+				</div>
+				</div>
+			</div>
+			</a>
+		<%
 			}); %>
     </script>
 
@@ -74,7 +72,7 @@
 {% set collapsed = posts ? '' : 'collapsed' %}
 {% set show      = posts ? 'show' : '' %}
 {% set expanded  = posts ? true : false %}
-{% set search_label = __( 'Search', 'planet4-child-theme-backend' ) %}
+{% set search_label = strings.search_label %}
 
 <h2 class="search-title">{{ search_label }}</h2>
 
@@ -149,18 +147,18 @@
       {% endif %}
     </div>
 
-    <button class="button small" id="btn_filter_reset">{{ __( 'Reset Filters', 'planet4-child-theme-backend' ) }}</button>
+    <button class="button small" id="btn_filter_reset">{{ strings.reset_filters }}</button>
   </div>
 
   <div class="sort-by">
-    <label for="select_order">{{ __('Sort by', 'planet4-child-theme-backend' ) }}</label>
+    <label for="select_order">{{ strings.sort_by }}</label>
     <div class="select">
       <select class="filter-search" form="search_form_innerg" id="select_order" name="select_order">
         {% for key, sort_option in sort_options %}
           {% if key == selected_sort %}
-            <option value="{{ key }}" {{ not search_query and key == '_score' ? 'disabled' : 'selected' }}>{{ __( sort_option.name, 'planet4-child-theme-backend' ) }}</option>
+            <option value="{{ key }}" {{ not search_query and key == '_score' ? 'disabled' : 'selected' }}>{{ sort_option.name }}</option>
           {% else %}
-            <option value="{{ key }}">{{ __( sort_option.name, 'planet4-child-theme-backend' ) }}</option>
+            <option value="{{ key }}">{{ sort_option.name }}</option>
           {% endif %}
         {% endfor %}
       </select>
@@ -172,7 +170,7 @@
 {% if ( not posts ) %}
   <p class="nothing-found">
     <i>
-      <small>{{ exception ?? __( 'Nothing found, sorry.', 'planet4-child-theme-backend' ) }}</small>
+      <small>{{ exception ?? strings.nothing_found }}</small>
     </i>
   </p>
 {% endif %}

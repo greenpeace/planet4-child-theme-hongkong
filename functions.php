@@ -13,6 +13,7 @@ $services = [
 	'P4CT_Custom_Post_Type_Register',
 	'P4CT_AJAX_Handler',
 	'P4CT_ElasticSearch',
+	'P4CT_Shortcode',
 ];
 
 new P4CT_Site( $services );

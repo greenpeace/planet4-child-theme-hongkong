@@ -19,8 +19,8 @@ if ( ! class_exists( 'P4CT_ElasticSearch' ) ) {
 		 */
 		public function set_engines_args( &$args ) {
 
-			$args['ep_integrate'] = true;
-
+			// TODO IMPORTANT!! find out why setting ep_integrate = true leads to NO ajax results.
+			// $args['ep_integrate'] = true;
 			// Get only DOCUMENT_TYPES from the attachments.
 			if ( ! $this->search_query && ! $this->filters ) {
 				add_filter(
@@ -37,7 +37,6 @@ if ( ! class_exists( 'P4CT_ElasticSearch' ) ) {
 
 			add_filter( 'ep_formatted_args', [ $this, 'set_full_text_search' ], 19, 1 );
 			add_filter( 'ep_formatted_args', [ $this, 'set_results_weight' ], 20, 1 );
-
 			// Remove from results any Documents that should not be there.
 			// TODO - This is a temp fix until we manage to query ES for only the desired documents.
 			add_filter(

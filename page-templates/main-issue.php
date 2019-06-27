@@ -49,9 +49,9 @@ if ( $main_issues ) {
 }
 
 if ( has_post_thumbnail( $post->ID ) ) {
-    $img_id = get_post_thumbnail_id( $post->ID );
-    $img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-    $post->img_url = $img_data[0];
+	$img_id = get_post_thumbnail_id( $post->ID );
+	$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
+	$post->img_url = $img_data[0];
 }
 
 $context['post']                        = $post;
@@ -66,5 +66,12 @@ $context['custom_body_classes']         = $main_issue_slug;
 $context['main_issue_id']               = $main_issue_id;
 
 $context['related_posts']               = $gpea_extra->gpea_get_related( $post->ID, 3 );
+
+$context['strings'] = [
+	'follow' => __( 'Follow', 'gpea_theme' ),
+	'following' => __( 'Following', 'gpea_theme' ),
+	'related_issue' => __( 'Related to this issue', 'gpea_theme' ),
+	'related_news' => __( 'Related news', 'gpea_theme' ),
+];
 
 Timber::render( [ 'main-issue.twig' ], $context );

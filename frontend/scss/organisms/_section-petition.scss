@@ -395,6 +395,11 @@
   }
 }
 
-.tag_cloud_form .signatures {
-  position: relative;
+.tag_cloud_form {
+  .signatures {
+    position: relative;
+  }
+  .formblock-flex {
+    max-height: none;
+  }
 }

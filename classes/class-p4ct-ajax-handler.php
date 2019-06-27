@@ -28,10 +28,18 @@ class P4CT_AJAX_Handler {
 	const TOPICS_FOLLOWING_NONCE_STRING = 'topics_following';
 
 	/**
+	 * Holds P4CTSite
+	 *
+	 * @var P4CTSite
+	 */
+	private $gpea_extra;
+
+	/**
 	 * P4CT_AJAX_Handler constructor.
 	 */
 	public function __construct() {
 		$this->hooks();
+		$this->gpea_extra = new P4CTSite();
 	}
 
 	/**
@@ -93,30 +101,35 @@ class P4CT_AJAX_Handler {
 			$post_preferences = false;
 		}
 
+		$posts_result = array();
+
 		if ( ( ! isset( $_COOKIE['gpea_issues'] ) ) && ( ! isset( $_COOKIE['gpea_topics'] ) ) ) {
+			$this->safe_echo( json_encode( $posts_result ), false );
 			return;
 		}
 
-		$posts_result = array();
-
+		$post_results_issue = array();
 		if ( isset( $_COOKIE['gpea_issues'] ) ) {
 			$gpea_issues = json_decode( sanitize_text_field( wp_unslash( $_COOKIE['gpea_issues'] ) ) );
 
-			$post_results_issue = get_carousel_posts( $gpea_issues, 'cat', $post_preferences );
+			$post_results_issue = $this->get_carousel_posts( $gpea_issues, 'cat', $post_preferences );
+
 		}
 
+		$post_results_topic = array();
 		if ( isset( $_COOKIE['gpea_topics'] ) ) {
 			$gpea_topics = json_decode( sanitize_text_field( wp_unslash( $_COOKIE['gpea_topics'] ) ) );
 
-			$post_results_topic = get_carousel_posts( $gpea_topics, 'tag', $post_preferences );
+			$post_results_topic = $this->get_carousel_posts( $gpea_topics, 'tag', $post_preferences );
 
 		}
+
 
 		$posts_result = array_merge( $post_results_issue, $post_results_topic );
 
-		if ( $posts_result ) {
-			$this->safe_echo( json_encode( $posts_result ) );
-		}
+		// if ( $posts_result ) {
+			$this->safe_echo( json_encode( $posts_result ), false );
+		// }
 		return;
 
 	}
@@ -130,11 +143,8 @@ class P4CT_AJAX_Handler {
 			return;
 		}
 
-		$gpea_extra = new P4CTSite();
-		$main_issues = $gpea_extra->gpea_get_main_issue( 866 );
-
 		// if ( ! wp_verify_nonce( $data['_wpnonce'], self::TOPICS_FOLLOWING_NONCE_STRING ) ) {
-		// $this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'planet4-child-theme-backend' ) );
+		// $this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'gpea_theme_backend' ) );
 		// return;
 		// }
 		$posts_result = array();
@@ -159,7 +169,7 @@ class P4CT_AJAX_Handler {
 				$project_detail['project_percentage'] = $project_meta['p4-gpea_project_percentage'][0] ?? 0;
 				$project_detail['stroke_dashoffset']  = $project_detail['project_percentage'] ? 697.433 * ( ( 100 - $project_detail['project_percentage'] ) / 100 ) : 0;
 
-				$main_issues = $gpea_extra->gpea_get_main_issue( $gpea_project_id );
+				$main_issues = $this->gpea_extra->gpea_get_main_issue( $gpea_project_id );
 				if ( $main_issues ) {
 					$project_detail['main_issue_slug'] = $main_issues->slug;
 					$project_detail['main_issue_name'] = $main_issues->name;
@@ -188,7 +198,7 @@ class P4CT_AJAX_Handler {
 						);
 
 						// other info
-						$main_issues = $gpea_extra->gpea_get_main_issue( $post->ID );
+						$main_issues = $this->gpea_extra->gpea_get_main_issue( $post->ID );
 					if ( $main_issues ) {
 						$single_update['main_issue_slug'] = $main_issues->slug;
 						$single_update['main_issue_name'] = $main_issues->name;
@@ -212,9 +222,9 @@ class P4CT_AJAX_Handler {
 
 			}
 
-			if ( $posts_result ) {
-				$this->safe_echo( json_encode( $posts_result ) );
-			}
+			// if ( $posts_result ) {
+				$this->safe_echo( json_encode( $posts_result ), false );
+			// }
 			return;
 
 		}
@@ -269,24 +279,77 @@ class P4CT_AJAX_Handler {
 
 				$the_query->the_post();
 				$single_update = array(
-					'title'     => get_the_title(),
-					'post_date' => date( 'Y - m - d', strtotime( get_the_date() ) ),
-					'link'      => get_the_permalink( $post->ID ),
+					'ID'         => get_the_ID(),
+					'post_title' => get_the_title(),
+					'date'       => date( 'Y - m - d', strtotime( get_the_date() ) ),
+					'link'       => get_the_permalink( $post->ID ),
 				);
 
 				$single_update['reading_time'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
 
 				// other info
-				$main_issues = $gpea_extra->gpea_get_main_issue( $post->ID );
+				$main_issues = $this->gpea_extra->gpea_get_main_issue( $post->ID );
 				if ( $main_issues ) {
 					$single_update['main_issue_slug'] = $main_issues->slug;
-					$single_update['main_issue_name'] = $main_issues->name;
+					$single_update['main_issue'] = $main_issues->name;
 				}
 
 				if ( has_post_thumbnail( $post->ID ) ) {
 					$img_id                  = get_post_thumbnail_id( $post->ID );
 					$img_data                = wp_get_attachment_image_src( $img_id, 'medium_large' );
-					$single_update['image'] = $img_data[0];
+					$single_update['img_url'] = $img_data[0];
+				}
+
+				// news type
+				$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
+				if ( $news_type ) {
+					$single_update['news_type'] = $news_type[0]->name;
+				}
+
+				// check if petition and, if so, retrieve extra information
+				if ( has_term( 'petition', 'post_tag', $post->ID ) ) {
+					if ( 'page-templates/petition.php' === get_post_meta( $post->ID, '_wp_page_template', true ) ) {
+						$single_update['engaging_pageid'] = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_pageid', true );
+						$single_update['engaging_target'] = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_target', true );
+
+						if ( $single_update['engaging_pageid'] ) {
+
+							// get Engaging options:
+							$engaging_settings = get_option( 'p4en_main_settings' );
+							$engaging_token = $engaging_settings['p4en_frontend_public_api'];
+
+							global $wp_version;
+							$url = 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $single_update['engaging_pageid'] . '&contentType=json&resultType=summary';
+							$args = array(
+								'timeout'     => 5,
+								'redirection' => 5,
+								'httpversion' => '1.0',
+								'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),
+								'blocking'    => true,
+								'headers'     => array(),
+								'cookies'     => array(),
+								'body'        => null,
+								'compress'    => false,
+								'decompress'  => true,
+								'sslverify'   => true,
+								'stream'      => false,
+								'filename'    => null,
+							);
+							$result = wp_remote_get( $url, $args );
+							$obj = json_decode( $result['body'], true );
+							$single_update['signatures'] = $obj['rows'][0]['columns'][4]['value'];
+						}
+
+						if ( $single_update['engaging_target'] && $single_update['signatures'] ) {
+							$post->percentage = intval( intval( $single_update['signatures'] ) * 100 / intval( $single_update['engaging_target'] ) );
+						} else {
+							$post->percentage = 100;
+						}
+
+						/* if external link is set, we use that instead of standard one */
+						$external_link = get_post_meta( $post->ID, 'p4-gpea_petition_external_link', true );
+						if ( $external_link ) $single_update['link'] = $external_link;
+					}
 				}
 
 				$results[] = $single_update;
@@ -295,9 +358,9 @@ class P4CT_AJAX_Handler {
 			wp_reset_query();
 			wp_reset_postdata();
 
-			return $results;
-
 		}
+
+		return $results;
 
 	}
 

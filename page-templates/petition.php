@@ -12,9 +12,9 @@
  *
  * Methods for TimberHelper can be found in the /lib sub-directory
  *
- * @package	 WordPress
- * @subpackage	Timber
- * @since	 Timber 0.1
+ * @package  WordPress
+ * @subpackage  Timber
+ * @since    Timber 0.1
  */
 
 use Timber\Timber;
@@ -24,11 +24,11 @@ $post           = new P4_Post();
 $gpea_extra     = new P4CT_Site();
 $page_meta_data = get_post_meta( $post->ID );
 
-// engaging assets
+// engaging assets.
 $engaging_settings = get_option( 'p4en_main_settings' );
 $engaging_token = $engaging_settings['p4en_frontend_public_api'];
 
-// check if external link is set, and redirect in this case
+// check if external link is set, and redirect in this case.
 $external_link = $page_meta_data['p4-gpea_petition_external_link'][0] ?? '';
 if ( $external_link ) {
 	wp_redirect( $external_link );
@@ -82,7 +82,6 @@ $context['petition_target']             = $page_meta_data['p4-gpea_petition_enga
 if ( $context['engaging_page_id'] ) {
 	global $wp_version;
 	$url = 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $context['engaging_page_id'] . '&contentType=json&resultType=summary';
-	echo $url;
 	$args = array(
 		'timeout'     => 5,
 		'redirection' => 5,
@@ -101,7 +100,6 @@ if ( $context['engaging_page_id'] ) {
 	$result = wp_remote_get( $url, $args );
 	$obj = json_decode( $result['body'], true );
 	$context['signatures'] = $obj['rows'][0]['columns'][4]['value'];
-
 }
 
 if ( $context['petition_target'] && $context['signatures'] ) {
@@ -109,5 +107,10 @@ if ( $context['petition_target'] && $context['signatures'] ) {
 } else {
 	$context['percentage'] = 100;
 }
+
+$context['strings'] = [
+	// translators: placeholder represents the number of signers.
+	'signatures' => $context['signatures'] ? sprintf( __( '%s signers', 'gpea_theme' ), $context['signatures'] ) : false,
+];
 
 Timber::render( [ 'petition.twig' ], $context );
