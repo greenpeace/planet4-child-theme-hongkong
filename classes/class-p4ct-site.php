@@ -148,20 +148,20 @@ class P4CT_Site {
 		$context['support_link'] = isset( $options['gpea_default_supportus_link'] ) ? get_permalink( $options['gpea_default_supportus_link'] ) : site_url();
 
 		$context['strings_navbar'] = [
-			'sign' => __( 'Sign', 'gpea-theme' ),
-			'share' => __( 'Share', 'gpea-theme' ),
-			'donate' => __( 'Donate', 'gpea-theme' ),
-			'support' => __( 'Support us', 'gpea-theme' ),
+			'sign' => __( 'Sign', 'gpea_theme' ),
+			'share' => __( 'Share', 'gpea_theme' ),
+			'donate' => __( 'Donate', 'gpea_theme' ),
+			'support' => __( 'Support us', 'gpea_theme' ),
 		];
 
 		$context['strings_footer'] = [
-			'follow' => __( 'Follow us', 'gpea-theme' ),
-			'our_commitment' => __( 'Our commitment', 'gpea-theme' ),
-			'projects' => __( 'Projects', 'gpea-theme' ),
-			'main_issues' => __( 'Main issues', 'gpea-theme' ),
-			'about_greenpeace' => __( 'About Greenpeace', 'gpea-theme' ),
-			'press_media' => __( 'Press release and media', 'gpea-theme' ),
-			'my_preferences' => __( 'My Preferences', 'gpea-theme' ),
+			'follow' => __( 'Follow us', 'gpea_theme' ),
+			'our_commitment' => __( 'Our commitment', 'gpea_theme' ),
+			'projects' => __( 'Projects', 'gpea_theme' ),
+			'main_issues' => __( 'Main issues', 'gpea_theme' ),
+			'about_greenpeace' => __( 'About Greenpeace', 'gpea_theme' ),
+			'press_media' => __( 'Press release and media', 'gpea_theme' ),
+			'my_preferences' => __( 'My Preferences', 'gpea_theme' ),
 		];
 
 		return $context;

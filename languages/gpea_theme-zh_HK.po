@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-06-24T11:49:21+02:00\n"
+"POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.2.0\n"
 "X-Domain: gpea_theme\n"
@@ -34,15 +34,124 @@ msgstr ""
 msgid "https://github.com/greenpeace"
 msgstr ""
 
-#: classes/class-p4ct-ajax-handler.php:59
+#: classes/class-p4ct-search.php:574
+msgid "Search Page"
+msgstr ""
+
+#: classes/class-p4ct-search.php:577
+msgid "Most relevant"
+msgstr ""
+
+#: classes/class-p4ct-search.php:581
+msgid "Most recent"
+msgstr ""
+
+#: classes/class-p4ct-search.php:586
+msgid "Search"
+msgstr ""
+
+#: classes/class-p4ct-search.php:587
+msgid "Reset Filters"
+msgstr ""
+
+#: classes/class-p4ct-search.php:588
+msgid "Sort by"
+msgstr ""
+
+#: classes/class-p4ct-search.php:589
+msgid "Nothing found, sorry."
+msgstr ""
+
+#. translators: %1$d = Number of results.
+#: classes/class-p4ct-search.php:595
+msgid "%1$d result for '%2$s'"
+msgid_plural "%1$d results for '%2$s'"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d = Number of results.
+#: classes/class-p4ct-search.php:601
+msgid "%d result"
+msgid_plural "%d results"
+msgstr[0] ""
+msgstr[1] ""
+
+#: classes/class-p4ct-search.php:654
+msgid "Page"
+msgstr ""
+
+#: classes/class-p4ct-search.php:658
+msgid "Post"
+msgstr ""
+
+#: classes/class-p4ct-search.php:724
+msgid "PAGE"
+msgstr ""
+
+#: classes/class-p4ct-search.php:729
+msgid "POST"
+msgstr ""
+
+#. Translators: %s = number of results per page.
+#: classes/class-p4ct-search.php:831
+msgid "SHOW %s MORE RESULTS"
+msgstr ""
+
+#: classes/class-p4ct-site.php:151
+msgid "Sign"
+msgstr ""
+
+#: classes/class-p4ct-site.php:152
+#: single.php:136
+msgid "Share"
+msgstr ""
+
+#: classes/class-p4ct-site.php:153
+#: page-templates/petition-thankyou.php:110
+msgid "Donate"
+msgstr ""
+
+#: classes/class-p4ct-site.php:154
+msgid "Support us"
+msgstr ""
+
+#: classes/class-p4ct-site.php:158
+msgid "Follow us"
+msgstr ""
+
+#: classes/class-p4ct-site.php:159
+msgid "Our commitment"
+msgstr ""
+
+#: classes/class-p4ct-site.php:160
+msgid "Projects"
+msgstr ""
+
+#: classes/class-p4ct-site.php:161
+msgid "Main issues"
+msgstr ""
+
+#: classes/class-p4ct-site.php:162
+msgid "About Greenpeace"
+msgstr ""
+
+#: classes/class-p4ct-site.php:163
+msgid "Press release and media"
+msgstr ""
+
+#: classes/class-p4ct-site.php:164
+msgid "My Preferences"
+msgstr ""
+
+#: classes/class-p4ct-ajax-handler.php:67
 msgid "Did not save because your form seemed to be invalid. Sorry."
 msgstr ""
 
-#: classes/class-p4ct-ajax-handler.php:73
+#: classes/class-p4ct-ajax-handler.php:81
 msgid "Message sent."
 msgstr ""
 
-#: classes/class-p4ct-ajax-handler.php:77
+#: classes/class-p4ct-ajax-handler.php:85
 msgid "Could not send the message, form fields missing."
 msgstr ""
 
@@ -231,16 +340,125 @@ msgstr ""
 msgid "No User Stories found in Trash."
 msgstr ""
 
+#: single.php:37
+msgid "Post page"
+msgstr ""
+
+#: single.php:107
+msgid "Leave Your Reply"
+msgstr ""
+
+#: single.php:129
+msgid "Previous page"
+msgstr ""
+
+#: single.php:130
+msgid "Time to read"
+msgstr ""
+
+#: single.php:131
+msgid "Author:"
+msgstr ""
+
+#: single.php:132
+msgid "Article donation launcher"
+msgstr ""
+
+#: single.php:133
+msgid "Short intro to donation launcher"
+msgstr ""
+
+#: single.php:134
+msgid "I want to support"
+msgstr ""
+
+#: single.php:135
+#: page-templates/main-issue.php:74
+msgid "Related news"
+msgstr ""
+
 #. Template Name of the theme
 msgid "Report"
+msgstr ""
+
+#: page-templates/report.php:55
+#: page-templates/project.php:78
+#: page-templates/about.php:55
+#: page-templates/main-issue.php:71
+msgid "Follow"
 msgstr ""
 
 #. Template Name of the theme
 msgid "Project"
 msgstr ""
 
+#: page-templates/project.php:79
+#: page-templates/main-issue.php:72
+msgid "Following"
+msgstr ""
+
+#: page-templates/project.php:80
+msgid "Date of start"
+msgstr ""
+
+#: page-templates/project.php:81
+msgid "Zones interested"
+msgstr ""
+
 #. Template Name of the theme
 msgid "Thankyou page for petition"
+msgstr ""
+
+#: page-templates/petition-thankyou.php:97
+msgid "Thank you for signing,"
+msgstr ""
+
+#: page-templates/petition-thankyou.php:98
+msgid "Now, will you share this petition with your friends? The more people who sign, the more pressure the government will feel."
+msgstr ""
+
+#: page-templates/petition-thankyou.php:99
+msgid "NO"
+msgstr ""
+
+#: page-templates/petition-thankyou.php:100
+msgid "YES"
+msgstr ""
+
+#: page-templates/petition-thankyou.php:101
+msgid "Thank you,"
+msgstr ""
+
+#: page-templates/petition-thankyou.php:102
+msgid "Let's wake more people up to this crisis"
+msgstr ""
+
+#: page-templates/petition-thankyou.php:103
+msgid "Share on Facebook"
+msgstr ""
+
+#: page-templates/petition-thankyou.php:104
+msgid "Share by Email"
+msgstr ""
+
+#: page-templates/petition-thankyou.php:105
+msgid "Skip"
+msgstr ""
+
+#: page-templates/petition-thankyou.php:106
+msgid "- Greenpeace is urgently campaigning to protect our planet."
+msgstr ""
+
+#: page-templates/petition-thankyou.php:107
+msgid "Our campaigns are 100% funded by individuals like you. Will you join us as a supporter with a regular amount of 400HKD or more a month?"
+msgstr ""
+
+#: page-templates/petition-thankyou.php:108
+msgid "One off"
+msgstr ""
+
+#: page-templates/petition-thankyou.php:109
+msgid "Monthly"
 msgstr ""
 
 #. Template Name of the theme
@@ -251,6 +469,15 @@ msgstr ""
 msgid "Petition"
 msgstr ""
 
+#. translators: placeholder represents the number of signers.
+#: page-templates/petition.php:113
+msgid "%s signers"
+msgstr ""
+
 #. Template Name of the theme
 msgid "Main Issue"
+msgstr ""
+
+#: page-templates/main-issue.php:73
+msgid "Related to this issue"
 msgstr ""

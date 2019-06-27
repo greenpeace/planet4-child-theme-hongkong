@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-06-24T13:11:10+02:00\n"
+"POT-Creation-Date: 2019-06-27T19:01:00+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.2.0\n"
 "X-Domain: gpea_theme_backend\n"
@@ -38,272 +38,315 @@ msgstr ""
 msgid "Navigation Bar Menu"
 msgstr ""
 
-#: classes/class-p4ct-site.php:219
+#: classes/class-p4ct-site.php:236
 msgctxt "taxonomy general name"
 msgid "Special attributes"
 msgstr ""
 
-#: classes/class-p4ct-site.php:220
+#: classes/class-p4ct-site.php:237
 msgctxt "taxonomy singular name"
 msgid "Special attribute"
 msgstr ""
 
-#: classes/class-p4ct-site.php:221
+#: classes/class-p4ct-site.php:238
 msgid "Search attributes"
 msgstr ""
 
-#: classes/class-p4ct-site.php:222
+#: classes/class-p4ct-site.php:239
 msgid "All attributes"
 msgstr ""
 
-#: classes/class-p4ct-site.php:223
+#: classes/class-p4ct-site.php:240
 msgid "Edit attribute"
 msgstr ""
 
-#: classes/class-p4ct-site.php:224
+#: classes/class-p4ct-site.php:241
 msgid "Update attribute"
 msgstr ""
 
-#: classes/class-p4ct-site.php:225
+#: classes/class-p4ct-site.php:242
 msgid "Add New attribute"
 msgstr ""
 
-#: classes/class-p4ct-site.php:226
+#: classes/class-p4ct-site.php:243
 msgid "New attribute Name"
 msgstr ""
 
-#: classes/class-p4ct-site.php:227
+#: classes/class-p4ct-site.php:244
 msgid "Attribute"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:64
+#: classes/class-p4ct-metabox-register.php:66
 msgid "Post extra attributes"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:79
+#: classes/class-p4ct-metabox-register.php:81
 msgid "Project related"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:80
+#: classes/class-p4ct-metabox-register.php:82
 msgid "Select a project connected to this post (optional)"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:112
+#: classes/class-p4ct-metabox-register.php:114
 msgid "Start date"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:113
+#: classes/class-p4ct-metabox-register.php:115
 msgid "The date the project started (textual)"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:123
+#: classes/class-p4ct-metabox-register.php:125
 msgid "Zone interested"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:124
+#: classes/class-p4ct-metabox-register.php:126
 msgid "Country, city or place involved by the project"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:134
+#: classes/class-p4ct-metabox-register.php:136
 msgid "Project percentage"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:135
+#: classes/class-p4ct-metabox-register.php:137
 msgid "Percentage of completition of the project"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:171
+#: classes/class-p4ct-metabox-register.php:173
 msgid "\"Id\" code of Engaging connected petition"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:172
+#: classes/class-p4ct-metabox-register.php:174
 msgid "This will be used to retrieve current signature number"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:180
+#: classes/class-p4ct-metabox-register.php:182
 msgid "Petition goal number"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:181
+#: classes/class-p4ct-metabox-register.php:183
 msgid "Number of signatures to be reached by this petition"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:195
+#: classes/class-p4ct-metabox-register.php:197
 msgid "External link to redirect petition (optional)"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:196
+#: classes/class-p4ct-metabox-register.php:198
 msgid "If set, card on the website will link to this external link instead of internal page"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:228
+#: classes/class-p4ct-metabox-register.php:230
 msgid "Ask users to engage?"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:229
+#: classes/class-p4ct-metabox-register.php:231
 msgid "If checked, an action for users will be encouraged"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:239
+#: classes/class-p4ct-metabox-register.php:241
 msgid "Frequency pledge"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:240
+#: classes/class-p4ct-metabox-register.php:242
 msgid "Will be displayed in the tip card, in the top"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:250
+#: classes/class-p4ct-metabox-register.php:252
 msgid "Tip icon"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:251
+#: classes/class-p4ct-metabox-register.php:253
 msgid "Icon/image shown in the card"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:270
+#: classes/class-p4ct-metabox-register.php:261
+msgid "Add Tip Image"
+msgstr ""
+
+#: classes/class-p4ct-metabox-register.php:272
 msgid "Number of commitments"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:271
+#: classes/class-p4ct-metabox-register.php:273
 msgid "Number of users that clicked on this tip (readonly)"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:302
+#: classes/class-p4ct-metabox-register.php:311
+msgid "Author of the story"
+msgstr ""
+
+#: classes/class-p4ct-metabox-register.php:321
+msgid "Email address of the author"
+msgstr ""
+
+#: classes/class-p4ct-metabox-register.php:322
+msgid "For internal scope, will not be published on the site"
+msgstr ""
+
+#: classes/class-p4ct-metabox-register.php:350
 msgid "Short bio"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:310
+#: classes/class-p4ct-metabox-register.php:358
 msgid "Role"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:311
+#: classes/class-p4ct-metabox-register.php:359
 msgid "Role in the staff"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:337
+#: classes/class-p4ct-metabox-register.php:385
 msgid "Reading time"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:338
+#: classes/class-p4ct-metabox-register.php:386
 msgid "Specify the time extimated to read the article (i.e. 4 min)"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:348
+#: classes/class-p4ct-metabox-register.php:396
 msgid "Show the \"Article donation laundher\""
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:349
+#: classes/class-p4ct-metabox-register.php:397
 msgid "Show the laundher to support page, below the main content?"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:377
+#: classes/class-p4ct-metabox-register.php:425
 msgid "Extra content section"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:378
+#: classes/class-p4ct-metabox-register.php:426
 msgid "You can use this extra field to add rich text content below the main section"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:388
+#: classes/class-p4ct-metabox-register.php:436
 msgid "Special html class for the page"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:389
+#: classes/class-p4ct-metabox-register.php:437
 msgid "WARNING: this class is used to apply special style and behaviour, edit with caution..."
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:407
+#: classes/class-p4ct-metabox-register.php:455
 msgid "GPEA Options"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:435
+#: classes/class-p4ct-metabox-register.php:483
 msgid "Background image for \"Values\" section"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:436
+#: classes/class-p4ct-metabox-register.php:484
 msgid "Specify the image to be used as background"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:444
+#: classes/class-p4ct-metabox-register.php:492
 msgid "css file with fonts specifications (optional)"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:452
-#: classes/class-p4ct-metabox-register.php:453
+#: classes/class-p4ct-metabox-register.php:500
+#: classes/class-p4ct-metabox-register.php:501
 msgid "Description text for generic footer"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:462
+#: classes/class-p4ct-metabox-register.php:510
 msgid "Default external link for donation "
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:463
+#: classes/class-p4ct-metabox-register.php:511
 msgid "Parameters and fields of donation box will be sent to this link"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:472
+#: classes/class-p4ct-metabox-register.php:520
 msgid "Select the \"support\" landing page"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:473
+#: classes/class-p4ct-metabox-register.php:521
 msgid "Support page with all information and links"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:482
+#: classes/class-p4ct-metabox-register.php:530
+msgid "Select the \"user generated content\" landing page"
+msgstr ""
+
+#: classes/class-p4ct-metabox-register.php:531
+msgid "Page with form to submit new stories from users"
+msgstr ""
+
+#: classes/class-p4ct-metabox-register.php:540
 msgid "Select the \"latest from the Earth\" page"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:483
+#: classes/class-p4ct-metabox-register.php:541
 msgid "Page with latest news"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:492
+#: classes/class-p4ct-metabox-register.php:550
 msgid "Select the \"Make a change\" page"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:501
+#: classes/class-p4ct-metabox-register.php:559
 msgid "Select the \"Press&Media\" page"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:510
+#: classes/class-p4ct-metabox-register.php:568
 msgid "Select the \"User preferences\" page"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:519
+#: classes/class-p4ct-metabox-register.php:577
 msgid "Select the page with full list of projects"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:528
+#: classes/class-p4ct-metabox-register.php:586
 msgid "Select the page with full list of issues"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:537
+#: classes/class-p4ct-metabox-register.php:595
 msgid "\"Id\" code of your Engaging default subscription page"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:538
+#: classes/class-p4ct-metabox-register.php:596
 msgid "When user will select one or more topics to follow, he will be able to subscribe to that page"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:548
+#: classes/class-p4ct-metabox-register.php:606
 msgid "Select the form for tag cloud subsciption"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:549
+#: classes/class-p4ct-metabox-register.php:607
 msgid "Form will be shown below the tag cloud to subscribe to Engaging Newsletter"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:560
+#: classes/class-p4ct-metabox-register.php:618
 msgid "Thank you main text, for \"topic/issue\" newsletter subscribe"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:561
-#: classes/class-p4ct-metabox-register.php:569
+#: classes/class-p4ct-metabox-register.php:619
+#: classes/class-p4ct-metabox-register.php:627
 msgid "Show to user after he sign up also to newsletter"
 msgstr ""
 
-#: classes/class-p4ct-metabox-register.php:568
+#: classes/class-p4ct-metabox-register.php:626
 msgid "Thank you message: second line"
+msgstr ""
+
+#: classes/class-p4ct-metabox-register.php:635
+msgid "Engaging question for recurring donation"
+msgstr ""
+
+#: classes/class-p4ct-metabox-register.php:636
+msgid "question name"
+msgstr ""
+
+#: classes/class-p4ct-metabox-register.php:752
+#: classes/class-p4ct-metabox-register.php:770
+#: classes/class-p4ct-metabox-register.php:788
+#: classes/class-p4ct-metabox-register.php:806
+#: classes/class-p4ct-metabox-register.php:824
+#: classes/class-p4ct-metabox-register.php:842
+#: classes/class-p4ct-metabox-register.php:860
+#: classes/class-p4ct-metabox-register.php:879
+msgid "Select Page"
 msgstr ""
 
 #. Template Name of the theme

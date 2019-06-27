@@ -1,4 +1,3 @@
-// Custom code
 import template from 'lodash.template';
 import './vendor/jquery.auto-complete.min.js';
 

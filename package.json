@@ -21,6 +21,7 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "imports-loader": "^0.8.0",
+    "jest": "^24.8.0",
     "node-sass": "^4.12.0",
     "plugin-error": "^1.0.1",
     "promise-polyfill": "^8.1.0",
@@ -37,7 +38,9 @@
   "scripts": {
     "start": "gulp",
     "watch": "gulp watch",
-    "build": "gulp build"
+    "build": "gulp build",
+    "test": "jest",
+    "test-nc": "jest --no-cache"
   },
   "browserslist": [
     "> 1%",

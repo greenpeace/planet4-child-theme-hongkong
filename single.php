@@ -34,7 +34,7 @@ $context['background_image']    = $page_meta_data['p4_background_image_override'
 $take_action_page               = $page_meta_data['p4_take_action_page'][0] ?? '';
 $context['page_type']           = $page_terms_data[0]->name ?? '';
 $context['page_term_id']        = $page_terms_data[0]->term_id ?? '';
-$context['page_category']       = $category->name ?? __( 'Post page', 'planet4-master-theme' );
+$context['page_category']       = $category->name ?? __( 'Post page', 'gpea_theme' );
 $context['page_type_slug']      = $page_terms_data[0]->slug ?? '';
 $context['social_accounts']     = $post->get_social_accounts( $context['footer_social_menu'] );
 $context['og_title']            = $post->get_og_title();
@@ -104,7 +104,7 @@ $comments_args = [
 	'comment_notes_after'  => '',
 	'comment_field'        => Timber::compile( 'comment_form/comment_field.twig' ),
 	'submit_button'        => Timber::compile( 'comment_form/submit_button.twig' ),
-	'title_reply'          => __( 'Leave Your Reply', 'planet4-master-theme' ),
+	'title_reply'          => __( 'Leave Your Reply', 'gpea_theme' ),
 	'fields'               => apply_filters(
 		'comment_form_default_fields',
 		[
@@ -133,7 +133,7 @@ $context['strings'] = [
 	'intro_donation_launcher' => __( 'Short intro to donation launcher', 'gpea_theme' ),
 	'i_support' => __( 'I want to support', 'gpea_theme' ),
 	'related_news' => __( 'Related news', 'gpea_theme' ),
-	'share' => __( 'Share', 'gpea-theme' ),
+	'share' => __( 'Share', 'gpea_theme' ),
 ];
 
 $context['post_tags'] = implode( ', ', $post->tags() );
