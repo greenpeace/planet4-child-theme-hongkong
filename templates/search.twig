@@ -25,14 +25,12 @@
 				</p>
 				<div class="meta-box">
 				<div>
-					<% if (post.reading_time) {
-									%>
-					<span>
-						<span class="icon-clock"></span>
-						<%= post.reading_time %>
-					</span>
-					<%
-								} %>
+					<% if (typeof post.reading_time !== 'undefined' && post.reading_time) { %>
+						<span>
+							<span class="icon-clock"></span>
+							<%= post.reading_time %>
+						</span>
+					<% } %>
 					<span><%= post.post_date %></span>
 				</div>
 				</div>

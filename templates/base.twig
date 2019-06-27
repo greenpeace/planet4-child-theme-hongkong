@@ -15,7 +15,7 @@
 					class="progress-bar">
 					<div class="percent" style="width: <%= percentage %>%"></div>
 				</div>
-				<% if (signatures) { %>
+				<% if (typeof signatures !== 'undefined' && signatures) { %>
 					<div class="stats">{{ __('%s signers', 'planet4-gpea-blocks')|format('<%= signatures %>')|raw }}</div>
 				<% } %>
 				<div class="content">
@@ -34,11 +34,13 @@
 				<div class="meta-box">
 					<div>
 						<span class="issue <%= main_issue_slug %>"><%= main_issue %></span>
-						<span><%= news_type %></span>
+						<% if (typeof news_type !== 'undefined') { %>
+							<span><%= news_type %></span>
+						<% } %>
 					</div>
 					<div>
 						<span>
-							<% if (reading_time) { %>
+							<% if (typeof reading_time !== 'undefined' && reading_time) { %>
 								<span class="icon-clock"></span>
 								<%= reading_time %>
 								{{ __('Reading time', 'planet4-gpea-blocks') }}

@@ -13,8 +13,9 @@
   overflow: visible;
   padding-top: 15px;
   padding-bottom: 15px;
-  transform: scale(0.13);
-  transform-origin: left top;
+  // For debug purposes:
+  // transform: scale(0.1);
+  // transform-origin: left top;
 
   .swiper-slide.first {
     display: none;

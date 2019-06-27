@@ -15,6 +15,28 @@ export const filterDuplicates = function(newPosts, existingPosts) {
   );
 };
 
+/**
+ * Sorts an array of posts, most recent first
+ *
+ * @param {Array} posts The array of posts to sort (by reference)
+ */
+export const sortByRecentFirst = function(posts) {
+  return posts.sort(byRecentDate);
+};
+
+function byRecentDate(a, b) {
+  const aDate = new Date(a.date.replace(/ /g, ''));
+  const bDate = new Date(b.date.replace(/ /g, ''));
+
+  // If both dates are null or invalid, don't change the order
+  if (isNaN(aDate.getTime()) && isNaN(bDate.getTime())) return 0;
+
+  if (isNaN(bDate.getTime()) || aDate > bDate) return -1;
+  if (isNaN(aDate.getTime()) || bDate > aDate) return 1;
+
+  return 0;
+}
+
 const homeFollower = function() {
   if (!$('body').hasClass('js-home-follower')) return;
 
@@ -36,20 +58,24 @@ const homeFollower = function() {
       action: 'topicsFollowing',
     },
     success: function(data) {
-      $featuredSwiper.removeClass('is-loading');
-
-      const swiper = $featuredSwiper[0];
+      const swiper = $featuredSwiper[0].swiper;
       let posts;
 
       try {
         posts = JSON.parse(data);
       } catch (error) {
         console.error(errorThrown);
+        $featuredSwiper.removeClass('is-loading');
         return;
       }
 
-      // Remove existing posts from the returned posts
+      // Remove existing posts from the returned posts, take first 5, sort by recent first
+      // console.log(posts.length + ' posts returned');
       posts = filterDuplicates(posts, existingPosts);
+      posts = posts.slice(0, 5);
+      sortByRecentFirst(posts);
+      // console.log(existingPosts.length + ' existing posts');
+      // console.log(posts.length + ' posts returned');
 
       // Create the HTML element for each new post
 
@@ -66,19 +92,28 @@ const homeFollower = function() {
         }
       });
 
-      // Add the new slides at position 5
-      swiper.addSlide(4, newPostsSlides);
+      // Add the new slides in 6th position (1 first slide + 5 regular slides)
+      swiper.addSlide(6, newPostsSlides);
+      // console.log(
+      //   newPostsSlides.length + ' slides created and added',
+      //   newPostsSlides
+      // );
 
-      // Remove slides beyond 8
+      // Remove slides beyond 11 (1 first slide + 10 regular slides)
       const $slides = $featuredSwiper.find('.swiper-slide');
+      // console.log($slides.length + ' new number of total slides');
       const totalSlides = $slides.length;
-      if (totalSlides > 8) {
+      if (totalSlides > 11) {
         const slidesToRemove = [];
-        for (let i = 8; i < totalSlides; i++) {
+        for (let i = 11; i < totalSlides; i++) {
           slidesToRemove.push(i);
         }
         swiper.removeSlide(slidesToRemove);
+        // console.log(slidesToRemove, 'slides removed');
       }
+
+      // All done
+      $featuredSwiper.removeClass('is-loading');
     },
     error: function(errorThrown) {
       $featuredSwiper.removeClass('is-loading');
