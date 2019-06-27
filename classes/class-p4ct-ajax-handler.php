@@ -28,10 +28,18 @@ class P4CT_AJAX_Handler {
 	const TOPICS_FOLLOWING_NONCE_STRING = 'topics_following';
 
 	/**
+	 * Holds P4CTSite
+	 *
+	 * @var P4CTSite
+	 */
+	private $gpea_extra;
+
+	/**
 	 * P4CT_AJAX_Handler constructor.
 	 */
 	public function __construct() {
 		$this->hooks();
+		$this->gpea_extra = new P4CTSite();
 	}
 
 	/**
@@ -94,29 +102,34 @@ class P4CT_AJAX_Handler {
 		}
 
 		if ( ( ! isset( $_COOKIE['gpea_issues'] ) ) && ( ! isset( $_COOKIE['gpea_topics'] ) ) ) {
+			$this->safe_echo( [], false );
 			return;
 		}
 
 		$posts_result = array();
 
+		$post_results_issue = array();
 		if ( isset( $_COOKIE['gpea_issues'] ) ) {
 			$gpea_issues = json_decode( sanitize_text_field( wp_unslash( $_COOKIE['gpea_issues'] ) ) );
 
-			$post_results_issue = get_carousel_posts( $gpea_issues, 'cat', $post_preferences );
+			$post_results_issue = $this->get_carousel_posts( $gpea_issues, 'cat', $post_preferences );
+
 		}
 
+		$post_results_topic = array();
 		if ( isset( $_COOKIE['gpea_topics'] ) ) {
 			$gpea_topics = json_decode( sanitize_text_field( wp_unslash( $_COOKIE['gpea_topics'] ) ) );
 
-			$post_results_topic = get_carousel_posts( $gpea_topics, 'tag', $post_preferences );
+			$post_results_topic = $this->get_carousel_posts( $gpea_topics, 'tag', $post_preferences );
 
 		}
+
 
 		$posts_result = array_merge( $post_results_issue, $post_results_topic );
 
-		if ( $posts_result ) {
-			$this->safe_echo( json_encode( $posts_result ) );
-		}
+		// if ( $posts_result ) {
+			$this->safe_echo( json_encode( $posts_result ), false );
+		// }
 		return;
 
 	}
@@ -130,8 +143,7 @@ class P4CT_AJAX_Handler {
 			return;
 		}
 
-		$gpea_extra = new P4CTSite();
-		$main_issues = $gpea_extra->gpea_get_main_issue( 866 );
+		$main_issues = $this->gpea_extra->gpea_get_main_issue( 866 );
 
 		// if ( ! wp_verify_nonce( $data['_wpnonce'], self::TOPICS_FOLLOWING_NONCE_STRING ) ) {
 		// $this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'planet4-child-theme-backend' ) );
@@ -159,7 +171,7 @@ class P4CT_AJAX_Handler {
 				$project_detail['project_percentage'] = $project_meta['p4-gpea_project_percentage'][0] ?? 0;
 				$project_detail['stroke_dashoffset']  = $project_detail['project_percentage'] ? 697.433 * ( ( 100 - $project_detail['project_percentage'] ) / 100 ) : 0;
 
-				$main_issues = $gpea_extra->gpea_get_main_issue( $gpea_project_id );
+				$main_issues = $this->gpea_extra->gpea_get_main_issue( $gpea_project_id );
 				if ( $main_issues ) {
 					$project_detail['main_issue_slug'] = $main_issues->slug;
 					$project_detail['main_issue_name'] = $main_issues->name;
@@ -188,7 +200,7 @@ class P4CT_AJAX_Handler {
 						);
 
 						// other info
-						$main_issues = $gpea_extra->gpea_get_main_issue( $post->ID );
+						$main_issues = $this->gpea_extra->gpea_get_main_issue( $post->ID );
 					if ( $main_issues ) {
 						$single_update['main_issue_slug'] = $main_issues->slug;
 						$single_update['main_issue_name'] = $main_issues->name;
@@ -213,7 +225,7 @@ class P4CT_AJAX_Handler {
 			}
 
 			if ( $posts_result ) {
-				$this->safe_echo( json_encode( $posts_result ) );
+				$this->safe_echo( json_encode( $posts_result ), false );
 			}
 			return;
 
@@ -277,7 +289,7 @@ class P4CT_AJAX_Handler {
 				$single_update['reading_time'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
 
 				// other info
-				$main_issues = $gpea_extra->gpea_get_main_issue( $post->ID );
+				$main_issues = $this->gpea_extra->gpea_get_main_issue( $post->ID );
 				if ( $main_issues ) {
 					$single_update['main_issue_slug'] = $main_issues->slug;
 					$single_update['main_issue_name'] = $main_issues->name;
@@ -295,9 +307,9 @@ class P4CT_AJAX_Handler {
 			wp_reset_query();
 			wp_reset_postdata();
 
-			return $results;
-
 		}
+
+		return $results;
 
 	}
 
