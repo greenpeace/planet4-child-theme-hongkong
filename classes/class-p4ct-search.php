@@ -571,28 +571,34 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			$context['default_sort']     = self::DEFAULT_SORT;
 			$context['filters']          = $this->filters;
 			$context['found_posts']      = count( (array) $this->posts );
-			$context['page_category']    = 'Search Page';
+			$context['page_category']    = __( 'Search Page', 'gpea_theme' );
 			$context['sort_options']     = [
 				'_score'    => [
-					'name'  => __( 'Most relevant', 'planet4-master-theme' ),
+					'name'  => __( 'Most relevant', 'gpea_theme' ),
 					'order' => 'DESC',
 				],
 				'post_date' => [
-					'name'  => __( 'Most recent', 'planet4-master-theme' ),
+					'name'  => __( 'Most recent', 'gpea_theme' ),
 					'order' => 'DESC',
 				],
+			];
+			$context['strings'] = [
+				'search_label' => __( 'Search', 'gpea_theme' ),
+				'reset_filters' => __( 'Reset Filters', 'gpea_theme' ),
+				'sort_by' => __( 'Sort by', 'gpea_theme' ),
+				'nothing_found' => __( 'Nothing found, sorry.', 'gpea_theme' ),
 			];
 
 			if ( $this->search_query ) {
 				$context['page_title'] = sprintf(
 					// translators: %1$d = Number of results.
-					_n( '%1$d result for \'%2$s\'', '%1$d results for \'%2$s\'', $context['found_posts'], 'planet4-master-theme' ),
+					_n( '%1$d result for \'%2$s\'', '%1$d results for \'%2$s\'', $context['found_posts'], 'gpea_theme' ),
 					$context['found_posts'],
 					$this->search_query
 				);
 			} else {
 				// translators: %d = Number of results.
-				$context['page_title'] = sprintf( _n( '%d result', '%d results', $context['found_posts'], 'planet4-master-theme' ), $context['found_posts'] );
+				$context['page_title'] = sprintf( _n( '%d result', '%d results', $context['found_posts'], 'gpea_theme' ), $context['found_posts'] );
 			}
 		}
 
@@ -645,11 +651,11 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			}
 
 			$context['content_types']['0'] = [
-				'name'    => __( 'Page', 'planet4-master-theme' ),
+				'name'    => __( 'Page', 'gpea_theme' ),
 				'results' => 0,
 			];
 			$context['content_types']['1'] = [
-				'name'    => __( 'Post', 'planet4-master-theme' ),
+				'name'    => __( 'Post', 'gpea_theme' ),
 				'results' => 0,
 			];
 
@@ -715,12 +721,12 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				// Post Type (+Action) <-> Content Type.
 				switch ( $post->post_type ) {
 					case 'page':
-							$content_type_text = __( 'PAGE', 'planet4-master-theme' );
+							$content_type_text = __( 'PAGE', 'gpea_theme' );
 							$content_type      = 'page';
 							$context['content_types']['0']['results']++;
 						break;
 					case 'post':
-						$content_type_text = __( 'POST', 'planet4-master-theme' );
+						$content_type_text = __( 'POST', 'gpea_theme' );
 						$content_type      = 'post';
 						$context['content_types']['1']['results']++;
 						break;
@@ -822,7 +828,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			$this->context['load_more'] = $args ?? [
 				'posts_per_load' => self::POSTS_PER_LOAD,
 				// Translators: %s = number of results per page.
-				'button_text'    => sprintf( __( 'SHOW %s MORE RESULTS', 'planet4-master-theme' ), self::POSTS_PER_LOAD ),
+				'button_text'    => sprintf( __( 'SHOW %s MORE RESULTS', 'gpea_theme' ), self::POSTS_PER_LOAD ),
 				'async'          => true,
 			];
 		}

@@ -12,9 +12,9 @@
  *
  * Methods for TimberHelper can be found in the /lib sub-directory
  *
- * @package	 WordPress
- * @subpackage	Timber
- * @since	 Timber 0.1
+ * @package  WordPress
+ * @subpackage  Timber
+ * @since    Timber 0.1
  */
 
 use Timber\Timber;
@@ -29,7 +29,7 @@ $post->set_issues_links();
 
 // Get Navigation Campaigns links.
 $page_tags = wp_get_post_tags( $post->ID );
-$tags	   = [];
+$tags      = [];
 
 if ( is_array( $page_tags ) && $page_tags ) {
 	foreach ( $page_tags as $page_tag ) {
@@ -73,6 +73,13 @@ $context['project_percentage']          = $page_meta_data['p4-gpea_project_perce
 $context['stroke_dashoffset']           = $context['project_percentage'] ? 697.433 * ( ( 100 - $context['project_percentage'] ) / 100 ) : 0;
 $context['start_date']                  = $page_meta_data['p4-gpea_project_start_date'][0] ?? '';
 $context['localization']                = $page_meta_data['p4-gpea_project_localization'][0] ?? 0;
+
+$context['strings'] = [
+	'follow' => __( 'Follow', 'gpea_theme' ),
+	'following' => __( 'Following', 'gpea_theme' ),
+	'start_date' => __( 'Date of start', 'gpea_theme' ),
+	'zones_interested' => __( 'Zones interested', 'gpea_theme' ),
+];
 
 
 Timber::render( [ 'project.twig' ], $context );

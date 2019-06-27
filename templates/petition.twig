@@ -5,7 +5,7 @@
 		<div class="progress-bar">
 			<div class="percent" style="width: {{ percentage }}%"></div>
 		</div>
-		{% if signatures %}<div class="stats">{{ __('%s signers', 'planet4-gpea-blocks')|format(signatures)| raw }}</div>{% endif %}
-	</span> 
+		{% if signatures %}<div class="stats">{{ strings.signatures }}</div>{% endif %}
+	</span>
 	{{ post.content|raw }}
 {% endblock %}

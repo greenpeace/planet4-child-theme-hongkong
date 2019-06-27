@@ -34,7 +34,7 @@ $context['background_image']    = $page_meta_data['p4_background_image_override'
 $take_action_page               = $page_meta_data['p4_take_action_page'][0] ?? '';
 $context['page_type']           = $page_terms_data[0]->name ?? '';
 $context['page_term_id']        = $page_terms_data[0]->term_id ?? '';
-$context['page_category']       = $category->name ?? __( 'Post page', 'planet4-master-theme' );
+$context['page_category']       = $category->name ?? __( 'Post page', 'gpea_theme' );
 $context['page_type_slug']      = $page_terms_data[0]->slug ?? '';
 $context['social_accounts']     = $post->get_social_accounts( $context['footer_social_menu'] );
 $context['og_title']            = $post->get_og_title();
@@ -52,26 +52,26 @@ $planet4_options = get_option( 'planet4_options' );
 $main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
 if ( ! $main_issues_category_id ) {
 	$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-	if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+	if ( $main_issues_category ) {
+		$main_issues_category_id = $main_issues_category->term_id;
+	}
 }
 
 $context['post_categories'] = '';
 if ( $post_categories ) {
 	foreach ( $post_categories as $post_category ) {
 		$context['post_categories'] .= $post_category->slug . ' ';
-		if ( ( $main_issues_category_id ) && ( intval($post_category->parent) === intval($main_issues_category_id) ) ) {			
+		if ( ( $main_issues_category_id ) && ( intval( $post_category->parent ) === intval( $main_issues_category_id ) ) ) {
 			$context['main_issue'] = $post_category->name;
 			$context['main_issue_slug'] = $post_category->slug;
 		}
 	}
 }
 
-/* 
-
-
+/*
 /* get useful theme options */
 $options = get_option( 'gpea_options' );
-$context['latest_link'] = isset( $options['gpea_default_latest_link'] ) ? get_page_link($options['gpea_default_latest_link']) : site_url();
+$context['latest_link'] = isset( $options['gpea_default_latest_link'] ) ? get_page_link( $options['gpea_default_latest_link'] ) : site_url();
 
 
 $context['filter_url'] = add_query_arg(
@@ -104,7 +104,7 @@ $comments_args = [
 	'comment_notes_after'  => '',
 	'comment_field'        => Timber::compile( 'comment_form/comment_field.twig' ),
 	'submit_button'        => Timber::compile( 'comment_form/submit_button.twig' ),
-	'title_reply'          => __( 'Leave Your Reply', 'planet4-master-theme' ),
+	'title_reply'          => __( 'Leave Your Reply', 'gpea_theme' ),
 	'fields'               => apply_filters(
 		'comment_form_default_fields',
 		[
@@ -125,10 +125,21 @@ $context['post_comments_count'] = get_comments(
 	]
 );
 
-$context['post_tags'] = implode( ', ', $post->tags() );
-/* for main issue relation we use categories */
-// $context['categories'] = implode( ', ', $post->categories() );
+$context['strings'] = [
+	'previous_page' => __( 'Previous page', 'gpea_theme' ),
+	'time_to_read' => __( 'Time to read', 'gpea_theme' ),
+	'author' => __( 'Author:', 'gpea_theme' ),
+	'article_donation_launcher' => __( 'Article donation launcher', 'gpea_theme' ),
+	'intro_donation_launcher' => __( 'Short intro to donation launcher', 'gpea_theme' ),
+	'i_support' => __( 'I want to support', 'gpea_theme' ),
+	'related_news' => __( 'Related news', 'gpea_theme' ),
+	'share' => __( 'Share', 'gpea_theme' ),
+];
 
+$context['post_tags'] = implode( ', ', $post->tags() );
+/*
+ for main issue relation we use categories */
+// $context['categories'] = implode( ', ', $post->categories() );
 if ( post_password_required( $post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );
 } else {

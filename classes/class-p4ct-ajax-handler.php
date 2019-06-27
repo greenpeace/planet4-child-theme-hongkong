@@ -144,7 +144,7 @@ class P4CT_AJAX_Handler {
 		}
 
 		// if ( ! wp_verify_nonce( $data['_wpnonce'], self::TOPICS_FOLLOWING_NONCE_STRING ) ) {
-		// $this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'planet4-child-theme-backend' ) );
+		// $this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'gpea_theme_backend' ) );
 		// return;
 		// }
 		$posts_result = array();

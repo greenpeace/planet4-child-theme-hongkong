@@ -258,7 +258,7 @@ class P4CT_Metabox_Register {
 					'url' => false,
 				],
 				'text'             => [
-					'add_upload_file_text' => __( 'Add Tip Image', 'planet4-child-theme-backend' ),
+					'add_upload_file_text' => __( 'Add Tip Image', 'gpea_theme_backend' ),
 				],
 				'query_args'       => [
 					'type' => 'image',
@@ -749,7 +749,7 @@ class P4CT_Metabox_Register {
 	public function gpea_render_supportus_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
-				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'show_option_none' => __( 'Select Page', 'gpea_theme_backend' ),
 				'hide_empty'       => 0,
 				'hierarchical'     => true,
 				'selected'         => $value,
@@ -767,7 +767,7 @@ class P4CT_Metabox_Register {
 	public function gpea_render_ugc_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
-				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'show_option_none' => __( 'Select Page', 'gpea_theme_backend' ),
 				'hide_empty'       => 0,
 				'hierarchical'     => true,
 				'selected'         => $value,
@@ -785,7 +785,7 @@ class P4CT_Metabox_Register {
 	public function gpea_render_make_change_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
-				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'show_option_none' => __( 'Select Page', 'gpea_theme_backend' ),
 				'hide_empty'       => 0,
 				'hierarchical'     => true,
 				'selected'         => $value,
@@ -803,7 +803,7 @@ class P4CT_Metabox_Register {
 	public function gpea_render_press_media_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
-				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'show_option_none' => __( 'Select Page', 'gpea_theme_backend' ),
 				'hide_empty'       => 0,
 				'hierarchical'     => true,
 				'selected'         => $value,
@@ -821,7 +821,7 @@ class P4CT_Metabox_Register {
 	public function gpea_render_preferences_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
-				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'show_option_none' => __( 'Select Page', 'gpea_theme_backend' ),
 				'hide_empty'       => 0,
 				'hierarchical'     => true,
 				'selected'         => $value,
@@ -839,7 +839,7 @@ class P4CT_Metabox_Register {
 	public function gpea_render_commitment_projects_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
-				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'show_option_none' => __( 'Select Page', 'gpea_theme_backend' ),
 				'hide_empty'       => 0,
 				'hierarchical'     => true,
 				'selected'         => $value,
@@ -857,7 +857,7 @@ class P4CT_Metabox_Register {
 	public function gpea_render_commitment_issues_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
-				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'show_option_none' => __( 'Select Page', 'gpea_theme_backend' ),
 				'hide_empty'       => 0,
 				'hierarchical'     => true,
 				'selected'         => $value,
@@ -876,7 +876,7 @@ class P4CT_Metabox_Register {
 	public function gpea_render_latest_page_dropdown( $field_args, $value ) {
 		wp_dropdown_pages(
 			[
-				'show_option_none' => __( 'Select Page', 'planet4-child-theme-backend' ),
+				'show_option_none' => __( 'Select Page', 'gpea_theme_backend' ),
 				'hide_empty'       => 0,
 				'hierarchical'     => true,
 				'selected'         => $value,

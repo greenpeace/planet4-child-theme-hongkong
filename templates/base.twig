@@ -70,7 +70,10 @@
 		<!-- End Google Tag Manager (noscript) -->
 	{% endif %}
 
-	{% include 'navigation-bar.twig' with data_nav_bar %}
+	{% include 'navigation-bar.twig' with {
+		data_nav_bar: data_nav_bar,
+		strings: strings_navbar,
+	} %}
 	{% include 'sidebar.twig' with data_nav_bar %}
 	{#% include 'blocks/header.twig' %#}
 
@@ -87,12 +90,12 @@
 	{% endif %}
 
 	{% block footer %}
-		{% include 'footer.twig' %}
-
+		{% include 'footer.twig' with {
+			strings: strings_footer,
+		} %}
 		{#% block cookies %#}
 			{#% include 'cookies.twig' %#}
 		{#% endblock %#}
-
 		{{ function('wp_footer') }}
 	{% endblock %}
 </body>
