@@ -143,8 +143,6 @@ class P4CT_AJAX_Handler {
 			return;
 		}
 
-		$main_issues = $this->gpea_extra->gpea_get_main_issue( 866 );
-
 		// if ( ! wp_verify_nonce( $data['_wpnonce'], self::TOPICS_FOLLOWING_NONCE_STRING ) ) {
 		// $this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'planet4-child-theme-backend' ) );
 		// return;
@@ -224,9 +222,9 @@ class P4CT_AJAX_Handler {
 
 			}
 
-			if ( $posts_result ) {
+			// if ( $posts_result ) {
 				$this->safe_echo( json_encode( $posts_result ), false );
-			}
+			// }
 			return;
 
 		}
@@ -281,9 +279,10 @@ class P4CT_AJAX_Handler {
 
 				$the_query->the_post();
 				$single_update = array(
-					'title'     => get_the_title(),
-					'post_date' => date( 'Y - m - d', strtotime( get_the_date() ) ),
-					'link'      => get_the_permalink( $post->ID ),
+					'ID'         => get_the_ID(),
+					'post_title' => get_the_title(),
+					'date'       => date( 'Y - m - d', strtotime( get_the_date() ) ),
+					'link'       => get_the_permalink( $post->ID ),
 				);
 
 				$single_update['reading_time'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
@@ -292,13 +291,13 @@ class P4CT_AJAX_Handler {
 				$main_issues = $this->gpea_extra->gpea_get_main_issue( $post->ID );
 				if ( $main_issues ) {
 					$single_update['main_issue_slug'] = $main_issues->slug;
-					$single_update['main_issue_name'] = $main_issues->name;
+					$single_update['main_issue'] = $main_issues->name;
 				}
 
 				if ( has_post_thumbnail( $post->ID ) ) {
 					$img_id                  = get_post_thumbnail_id( $post->ID );
 					$img_data                = wp_get_attachment_image_src( $img_id, 'medium_large' );
-					$single_update['image'] = $img_data[0];
+					$single_update['img_url'] = $img_data[0];
 				}
 
 				$results[] = $single_update;
