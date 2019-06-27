@@ -12,9 +12,9 @@
  *
  * Methods for TimberHelper can be found in the /lib sub-directory
  *
- * @package	 WordPress
- * @subpackage	Timber
- * @since	 Timber 0.1
+ * @package  WordPress
+ * @subpackage  Timber
+ * @since    Timber 0.1
  */
 
 use Timber\Timber;
@@ -29,7 +29,7 @@ $post->set_issues_links();
 
 // Get Navigation Campaigns links.
 $page_tags = wp_get_post_tags( $post->ID );
-$tags	   = [];
+$tags      = [];
 
 if ( is_array( $page_tags ) && $page_tags ) {
 	foreach ( $page_tags as $page_tag ) {
@@ -93,5 +93,21 @@ if ( $context['background_image'] ) {
 }
 $context['custom_body_classes']         = $categories;
 
+$context['strings'] = [
+	'thank_you_share' => __( 'Thank you for signing,', 'gpea-theme' ),
+	'share_petition' => __( 'Now, will you share this petition with your friends? The more people who sign, the more pressure the government will feel.', 'gpea-theme' ),
+	'no' => __( 'NO', 'gpea-theme' ),
+	'yes' => __( 'YES', 'gpea-theme' ),
+	'thank_you' => __( 'Thank you,', 'gpea-theme' ),
+	'wake_people' => __( 'Let\'s wake more people up to this crisis', 'gpea-theme' ),
+	'share_social_1' => __( 'Share on Facebook', 'gpea-theme' ),
+	'share_mail' => __( 'Share by Email', 'gpea-theme' ),
+	'skip' => __( 'Skip', 'gpea-theme' ),
+	'urgently_campaigning' => __( '- Greenpeace is urgently campaigning to protect our planet.', 'gpea-theme' ),
+	'prompt_recurring' => __( 'Our campaigns are 100% funded by individuals like you. Will you join us as a supporter with a regular amount of 400HKD or more a month?', 'gpea-theme' ),
+	'one_off' => __( 'One off', 'gpea-theme' ),
+	'monthly' => __( 'Monthly', 'gpea-theme' ),
+	'donate' => __( 'Donate', 'gpea-theme' ),
+];
 
 Timber::render( [ 'petition-thankyou.twig' ], $context );

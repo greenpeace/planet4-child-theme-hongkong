@@ -10,7 +10,7 @@
         <div class="top-bar">
           <a href="{{ latest_link }}" class="back-button">
             <span class="icon-chevron-left"></span>
-            <p>{{ __('Previous page', 'gpea-theme') }}</p>
+            <p>{{ strings.previous_page }}</p>
           </a>
           <!-- <a href="" class="button light">按照主題</a> -->
         </div>
@@ -27,7 +27,7 @@
           <span>
             <span class="icon-clock"></span>
             {{ reading_time }}
-            {{ __('Time to read', 'gpea-theme') }}
+            {{ strings.time_to_read }}
           </span>
           <span>
             <time class="single-post-time" pubdate>{{ post.post_date|date }}</time>
@@ -38,15 +38,15 @@
       <h1>{{ post.title|raw }}</h1>
 
       <div class="meta-box">
-        <span>{{ __('Author:', 'gpea-theme') }} {{ post.author.name }}</span>
+        <span>{{ strings.author }} {{ post.author.name }}</span>
       </div>
 
       {{ post.content|e('wp_kses_post')|raw }}
 
       {%if (show_article_donation_launcher=='on') %}
-        <h2>{{ __('Article donation launcher', 'gpea_theme') }}</h2>
-        <p>{{ __('Short intro to donation launcher', 'gpea_theme') }}</p>
-        <a href="{{ support_link }}" class="button primary">{{ __('I want to support', 'gpea_theme') }}</a>
+        <h2>{{ strings.article_donation_launcher }}</h2>
+        <p>{{ strings.intro_donation_launcher }}</p>
+        <a href="{{ support_link }}" class="button primary">{{ strings.i_support }}</a>
       {%endif%}
 
     </section>
@@ -56,7 +56,7 @@
 
   <section class="section-latest-news">
     <div class="ct-container">
-      <h2>{{ __('Related news', 'gpea-theme') }}</h2>
+      <h2>{{ strings.related_news }}</h2>
       <div class="news-list">
         {% if ( related_posts ) %}
           {% for related_post in related_posts %}
@@ -68,7 +68,7 @@
   </section>
 
   <div class="floating-share">
-    <p>{{ __('Share', 'gpea-theme') }}</p>
+    <p>{{ strings.share }}</p>
     <ul>
       <!-- TODO stampa description (SEO?), url, testo cinese/korean per "share on twitter" ecc. -->
       <li>
