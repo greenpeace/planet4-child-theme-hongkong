@@ -64,7 +64,7 @@ const homeFollower = function() {
       try {
         posts = JSON.parse(data);
       } catch (error) {
-        console.error(errorThrown);
+        console.error(error);
         $featuredSwiper.removeClass('is-loading');
         return;
       }

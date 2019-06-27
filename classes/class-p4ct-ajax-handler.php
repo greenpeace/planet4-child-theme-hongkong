@@ -101,12 +101,12 @@ class P4CT_AJAX_Handler {
 			$post_preferences = false;
 		}
 
+		$posts_result = array();
+
 		if ( ( ! isset( $_COOKIE['gpea_issues'] ) ) && ( ! isset( $_COOKIE['gpea_topics'] ) ) ) {
-			$this->safe_echo( [], false );
+			$this->safe_echo( json_encode( $posts_result ), false );
 			return;
 		}
-
-		$posts_result = array();
 
 		$post_results_issue = array();
 		if ( isset( $_COOKIE['gpea_issues'] ) ) {
