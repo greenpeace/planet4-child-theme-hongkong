@@ -57,7 +57,37 @@ new LazyLoad({
   elements_selector: '.lazy',
 });
 
-new Swiper('.featured-swiper, .projects-swiper, .issues-swiper', {
+$('.featured-swiper, .projects-swiper').each(function(index) {
+  const pagination = $(this)
+    .closest('section')
+    .find('.swiper-pagination')
+    .first()[0];
+
+  setTimeout(() => {
+    new Swiper(this, {
+      slidesPerView: 'auto',
+      simulateTouch: false,
+      pagination: {
+        el: pagination,
+        type: 'bullets',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        // when window width is <= 1023px
+        1023: {
+          pagination: false,
+          // navigation: false,
+        },
+      },
+    });
+  }, 0);
+});
+
+new Swiper('.issues-swiper', {
   slidesPerView: 'auto',
   pagination: {
     el: '.swiper-pagination',
@@ -72,7 +102,7 @@ new Swiper('.featured-swiper, .projects-swiper, .issues-swiper', {
     // when window width is <= 1023px
     1023: {
       pagination: false,
-      navigation: false,
+      // navigation: false,
     },
   },
 });
@@ -204,29 +234,35 @@ function connectDonationTabs() {
   if (!form) return;
   form.addEventListener('submit', e => {
     e.preventDefault();
-    let donationUrl = new URL( form.action );
+    let donationUrl = new URL(form.action);
     let amountValue = '';
     let frequencyValue = '';
 
-    if ( form.amount ) {
-      amountValue = form.amount.value;      
-    } else if ( form['free-amount'] && form['free-amount'].value ) {
-      amountValue = form['free-amount'].value;      
-    } else if ( form['dollar-handle'] && form['dollar-handle'].value ) {
+    if (form.amount) {
+      amountValue = form.amount.value;
+    } else if (form['free-amount'] && form['free-amount'].value) {
+      amountValue = form['free-amount'].value;
+    } else if (form['dollar-handle'] && form['dollar-handle'].value) {
       amountValue = form['dollar-handle'].value;
     }
-    if ( form['en_recurring_question'] && form['en_recurring_question'].value ) {
-      frequencyValue = form.frequency.value;      
+    if (form['en_recurring_question'] && form['en_recurring_question'].value) {
+      frequencyValue = form.frequency.value;
     }
 
-    if ( 'mrm' == form.en_recurring_question.value ) {
-      if ( 'N' == frequencyValue ) frequencyValue = 'S';
+    if ('mrm' == form.en_recurring_question.value) {
+      if ('N' == frequencyValue) frequencyValue = 'S';
       else frequencyValue = 'M';
 
-      donationUrl.searchParams.append('donate_amt', frequencyValue + ':' + amountValue );
+      donationUrl.searchParams.append(
+        'donate_amt',
+        frequencyValue + ':' + amountValue
+      );
     } else {
       donationUrl.searchParams.append('transaction.donationAmt', amountValue);
-      donationUrl.searchParams.append(form.en_recurring_question.value, frequencyValue);
+      donationUrl.searchParams.append(
+        form.en_recurring_question.value,
+        frequencyValue
+      );
     }
 
     window.location.href = donationUrl;

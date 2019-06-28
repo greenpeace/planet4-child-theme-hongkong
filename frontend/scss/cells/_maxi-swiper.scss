@@ -8,8 +8,12 @@
     }
 
     @include greaterThan('sm') {
-      width: 80%;
-      margin-right: 60px;
+      width: 625px;
+      margin-right: 115px;
+    }
+
+    @include greaterThan('lg') {
+      width: 860px;
     }
   }
 
@@ -21,6 +25,24 @@
       width: auto;
       max-width: none;
       margin: 0 20px;
+    }
+  }
+
+  @supports (clip-path: inset(-100vw -100vw -100vw 0)) {
+    @include greaterThan('sm') {
+      .swiper-button-next {
+        right: -45px;
+      }
+
+      .swiper-button-prev {
+        left: -10px;
+      }
+    }
+
+    @include greaterThan('lg') {
+      .swiper-button-next {
+        right: -50px;
+      }
     }
   }
 
