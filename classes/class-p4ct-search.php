@@ -344,13 +344,18 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			if ( $posts ) {
 				foreach ( $posts as $post ) {
 					$timber_post = new TimberPost( $post->ID );
+
 					$timber_post->post_date = date( 'Y-m-d', strtotime( $timber_post->post_date ) );
+					$page_meta_data = get_post_meta( $post->ID );
+
+					$timber_post->reading_time = $page_meta_data['p4-gpea_post_reading_time'][0] ?? '';
 					$post_categories = wp_get_post_categories( $post->ID );
 					$main_issue = array_filter(
 						$post_categories, function( $cat ) {
 							return array_key_exists( $cat, $this->main_issues );
 						}
 					);
+
 					if ( $main_issue ) {
 						$main_issue = $main_issue[0];
 						$timber_post->main_issue = $main_issue ? $this->main_issues[ $main_issue ]->name : 'none';
@@ -361,6 +366,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 							$timber_post->img_url = $img_url;
 						}
 					}
+
 					$timber_posts[] = $timber_post;
 				}
 			}
