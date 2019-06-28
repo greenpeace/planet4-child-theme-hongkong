@@ -407,7 +407,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				foreach ( $terms as $term ) {
 					$timber_term = new TimberTerm( $term->term_id );
 					// Get the main issue page & related data if this term is a main issue & has an associated page.
-					$parent = $timber_term->parent;
 					if ( isset( $this->main_issues_category_id ) && $timber_term->parent === $this->main_issues_category_id ) {
 						$related = ( new WP_Query(
 							[
@@ -610,16 +609,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * @throws UnexpectedValueException When filter type is not recognized.
 		 */
 		protected function set_filters_context( &$context ) {
-			// Retrieve P4CT settings in order to check that we add only categories that are children of the Issues category.
-			$options = get_option( 'planet4_options' );
-			$issues_parent_category = (int) $options['issues_parent_category'];
 
 			// Category <-> Issue.
 			// Consider Issues that have multiple Categories.
 			$categories = get_categories();
 			if ( $categories ) {
 				foreach ( $categories as $category ) {
-					if ( $category->parent === $issues_parent_category ) {
+					if ( $category->parent === $this->main_issues_category_id ) {
 						$context['categories'][ $category->term_id ] = [
 							'term_id' => $category->term_id,
 							'name'    => $category->name,
@@ -743,9 +739,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$categories = get_the_category( $post->ID );
 					if ( $categories ) {
 						foreach ( $categories as $category ) {
-							if ( $category->parent === (int) $options['issues_parent_category'] ) {
-								$context['categories'][ $category->term_id ]['term_id'] = $category->term_id;
-								$context['categories'][ $category->term_id ]['name']    = $category->name;
+							if ( $category->parent === $this->main_issues_category_id ) {
 								$context['categories'][ $category->term_id ]['results']++;
 							}
 						}
@@ -754,7 +748,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$tags = get_the_terms( $post->ID, 'post_tag' );
 					if ( $tags ) {
 						foreach ( (array) $tags as $tag ) {
-							// Get only tags that have an associated Engaging campaign
+							// Get only tags that have an associated Engaging campaign.
 							if ( get_term_meta( $tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true ) ) {
 								// Set tags info for each result item.
 								$context['posts_data'][ $post->ID ]['tags'][] = [
@@ -886,12 +880,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * Set main issues ID. TODO abstract this ID to main option.
 		 */
 		public function set_main_issues() {
-			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-			if ( $main_issues_category ) {
-				$this->main_issues_category_id = $main_issues_category->term_id;
+			$planet4_options = get_option( 'planet4_options' );
+			$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? (int) $planet4_options['issues_parent_category'] : false;
+			if ( $main_issues_category_id ) {
+				$this->main_issues_category_id = $main_issues_category_id;
 				$main_issues = get_categories(
 					[
-						'parent' => $main_issues_category->term_id,
+						'parent' => $main_issues_category_id,
 					]
 				);
 				$main_issues_ids = array_map(
