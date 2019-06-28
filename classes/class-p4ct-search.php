@@ -36,13 +36,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		];
 
 		/**
-		 * Engaging campaign ID meta key.
-		 *
-		 * @const string ENGAGING_CAMPAIGN_ID_META_KEY
-		 */
-		const ENGAGING_CAMPAIGN_ID_META_KEY = 'engaging_campaign_ID';
-
-		/**
 		 * Search Query
 		 *
 		 * @var string $search_query
@@ -640,15 +633,12 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			);
 			if ( $tags ) {
 				foreach ( (array) $tags as $tag ) {
-					// Get only tags that have an associated Engaging campaign.
-					if ( get_term_meta( $tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true ) ) {
-						// Tag filters.
-						$context['tags'][ $tag->term_id ] = [
-							'term_id' => $tag->term_id,
-							'name'    => $tag->name,
-							'results' => 0,
-						];
-					}
+					// Tag filters.
+					$context['tags'][ $tag->term_id ] = [
+						'term_id' => $tag->term_id,
+						'name'    => $tag->name,
+						'results' => 0,
+					];
 				}
 			}
 
@@ -678,7 +668,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			}
 
 			// Sort associative array with filters alphabetically .
-			if ( $context['categories'] ) {
+			if ( isset( $context['categories'] ) && $context['categories'] ) {
 				uasort(
 					$context['categories'],
 					function ( $a, $b ) {
@@ -686,7 +676,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					}
 				);
 			}
-			if ( $context['tags'] ) {
+			if ( isset( $context['tags'] ) && $context['tags'] ) {
 				uasort(
 					$context['tags'],
 					function ( $a, $b ) {
@@ -723,9 +713,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				// Post Type (+Action) <-> Content Type.
 				switch ( $post->post_type ) {
 					case 'page':
-							$content_type_text = __( 'PAGE', 'gpea_theme' );
-							$content_type      = 'page';
-							$context['content_types']['0']['results']++;
+						$content_type_text = __( 'PAGE', 'gpea_theme' );
+						$content_type      = 'page';
+						$context['content_types']['0']['results']++;
 						break;
 					case 'post':
 						$content_type_text = __( 'POST', 'gpea_theme' );
@@ -746,6 +736,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					if ( $categories ) {
 						foreach ( $categories as $category ) {
 							if ( $category->parent === $this->main_issues_category_id ) {
+								$context['categories'][ $category->term_id ]['term_id'] = $category->term_id;
+								$context['categories'][ $category->term_id ]['name']    = $category->name;
 								$context['categories'][ $category->term_id ]['results']++;
 							}
 						}
@@ -754,19 +746,16 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$tags = get_the_terms( $post->ID, 'post_tag' );
 					if ( $tags ) {
 						foreach ( (array) $tags as $tag ) {
-							// Get only tags that have an associated Engaging campaign.
-							if ( get_term_meta( $tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true ) ) {
-								// Set tags info for each result item.
-								$context['posts_data'][ $post->ID ]['tags'][] = [
-									'name' => $tag->name,
-									'link' => get_tag_link( $tag ),
-								];
+							// Set tags info for each result item.
+							$context['posts_data'][ $post->ID ]['tags'][] = [
+								'name' => $tag->name,
+								'link' => get_tag_link( $tag ),
+							];
 
-								// Tag filters.
-								$context['tags'][ $tag->term_id ]['term_id'] = $tag->term_id;
-								$context['tags'][ $tag->term_id ]['name']    = $tag->name;
-								$context['tags'][ $tag->term_id ]['results'] ++;
-							}
+							// Tag filters.
+							$context['tags'][ $tag->term_id ]['term_id'] = $tag->term_id;
+							$context['tags'][ $tag->term_id ]['name']    = $tag->name;
+							$context['tags'][ $tag->term_id ]['results'] ++;
 						}
 					}
 				}
@@ -785,8 +774,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 			$search_action = filter_input( INPUT_GET, 'search-action', FILTER_SANITIZE_STRING );
 
-			if ( ! is_admin() && is_search() ||
-			wp_doing_ajax() && ( 'get_paged_posts' === $search_action ) ) {
+			if ( ( ! is_admin() && is_search() ) || ( wp_doing_ajax() && ( 'get_paged_posts' === $search_action ) ) ) {
 				$mime_types = implode( ',', self::DOCUMENT_TYPES );
 				$where     .= ' AND ' . $wpdb->posts . '.post_mime_type IN("' . $mime_types . '","") ';
 			}
