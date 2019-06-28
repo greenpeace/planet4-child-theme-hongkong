@@ -192,7 +192,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 		/**
 		 * Conducts the actual AJAX search.
-		 * TODO rename without gpea_.
 		 *
 		 * @param string     $search_query The searched term.
 		 * @param string     $selected_sort The selected order_by.
@@ -300,24 +299,21 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 */
 		protected function check_cache( $cache_key, $cache_group ) {
 			$cache_group_terms = $cache_group . '_terms';
-			// TODO IMPORTANT!!! reactivate cache on production.
 			// Get search results from cache and then set the context for those results.
-			// $this->posts = wp_cache_get( $cache_key, $cache_group );
-			// $this->terms = wp_cache_get( $cache_key, $cache_group_terms );
-			$this->posts = false;
-			$this->terms = false;
+			$this->posts = wp_cache_get( $cache_key, $cache_group );
+			$this->terms = wp_cache_get( $cache_key, $cache_group_terms );
 			// If cache key expired then retrieve results once again and re-cache them.
 			if ( false === $this->posts ) {
 				$this->posts = $this->get_timber_posts();
-				// if ( $this->posts ) {
-				// wp_cache_add( $cache_key, $this->posts, $cache_group, self::DEFAULT_CACHE_TTL );
-				// }
+				if ( $this->posts ) {
+					wp_cache_add( $cache_key, $this->posts, $cache_group, self::DEFAULT_CACHE_TTL );
+				}
 			}
 			if ( false === $this->terms ) {
 				$this->terms = $this->get_timber_terms();
-				// if ( $this->terms ) {
-				// wp_cache_add( $cache_key, $this->posts, $cache_group_terms, self::DEFAULT_CACHE_TTL );
-				// }
+				if ( $this->terms ) {
+					wp_cache_add( $cache_key, $this->posts, $cache_group_terms, self::DEFAULT_CACHE_TTL );
+				}
 			}
 		}
 
@@ -827,16 +823,14 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		public function view() {
 			Timber::render(
 				$this->templates,
-				$this->context
-				// TODO Uncomment these to enable search page cache.
-				// ,self::DEFAULT_CACHE_TTL,
-				// \Timber\Loader::CACHE_OBJECT
+				$this->context,
+				self::DEFAULT_CACHE_TTL,
+				\Timber\Loader::CACHE_OBJECT
 			);
 		}
 
 		/**
 		 * Return search results as JSON.
-		 * TODO rename without gpea_.
 		 */
 		public function gpea_view_json() {
 			return wp_json_encode(
@@ -871,7 +865,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		}
 
 		/**
-		 * Set main issues ID. TODO abstract this ID to main option.
+		 * Set main issues ID.
 		 */
 		public function set_main_issues() {
 			$planet4_options = get_option( 'planet4_options' );
