@@ -19,7 +19,6 @@ if ( ! class_exists( 'P4CT_ElasticSearch' ) ) {
 		 */
 		public function set_engines_args( &$args ) {
 
-			// TODO IMPORTANT!! find out why setting ep_integrate = true leads to NO ajax results.
 			 $args['ep_integrate'] = true;
 			// Get only DOCUMENT_TYPES from the attachments.
 			if ( ! $this->search_query && ! $this->filters ) {
