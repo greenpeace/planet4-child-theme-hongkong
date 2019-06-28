@@ -150,20 +150,22 @@
     <button class="button small" id="btn_filter_reset">{{ strings.reset_filters }}</button>
   </div>
 
-  <div class="sort-by">
-    <label for="select_order">{{ strings.sort_by }}</label>
-    <div class="select">
-      <select class="filter-search" form="search_form_innerg" id="select_order" name="select_order">
-        {% for key, sort_option in sort_options %}
-          {% if key == selected_sort %}
-            <option value="{{ key }}" {{ not search_query and key == '_score' ? 'disabled' : 'selected' }}>{{ sort_option.name }}</option>
-          {% else %}
-            <option value="{{ key }}">{{ sort_option.name }}</option>
-          {% endif %}
-        {% endfor %}
-      </select>
-    </div>
-  </div>
+{#  TODO reimplement sort by logic#}
+{#  <div class="sort-by">#}
+{#    <label for="select_order">{{ strings.sort_by }}</label>#}
+{#    <div class="select">#}
+{#      <select class="filter-search" form="search_form_innerg" id="select_order" name="select_order">#}
+{#        {% for key, sort_option in sort_options %}#}
+{#          {% if key == selected_sort %}#}
+{#            <option value="{{ key }}" {{ not search_query and key == '_score' ? 'disabled' : 'selected' }}>{{ sort_option.name }}</option>#}
+{#          {% else %}#}
+{#            <option value="{{ key }}">{{ sort_option.name }}</option>#}
+{#          {% endif %}#}
+{#        {% endfor %}#}
+{#      </select>#}
+{#    </div>#}
+{#  </div>#}
+
 </div>
 
 <!-- No posts found? -->
