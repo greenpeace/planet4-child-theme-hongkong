@@ -5,3 +5,15 @@
     background: $color-blue;
   }
 }
+
+.section-projects-following {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #000;
+  margin-bottom: 50px;
+
+  .posts {
+    margin-bottom: 20px;
+  }
+
+}

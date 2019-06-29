@@ -335,9 +335,14 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$timber_post = new TimberPost( $post->ID );
 
 					$timber_post->post_date = date( 'Y-m-d', strtotime( $timber_post->post_date ) );
-					$page_meta_data = get_post_meta( $post->ID );
 
-					$timber_post->reading_time = $page_meta_data['p4-gpea_post_reading_time'][0] ?? '';
+					$timber_post->reading_time = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+
+					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
+					if ( $news_type ) {
+						$timber_post->news_type = $news_type[0]->name;
+					}
+
 					$post_categories = wp_get_post_categories( $post->ID );
 					$main_issue = array_filter(
 						$post_categories, function( $cat ) {
