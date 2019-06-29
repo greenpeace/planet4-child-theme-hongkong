@@ -224,7 +224,11 @@ class P4CT_Site {
 		wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/static/css/style.css', [], $css_creation );
 		wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js',[], $js_creation, true );
 		// to be removed after frontend merge!!
-		// wp_enqueue_script( 'child-dev-script', get_stylesheet_directory_uri() . '/static/js/dev_integration.js', array(), $js_creation, true );
+		wp_enqueue_script( 'child-dev-script', get_stylesheet_directory_uri() . '/static/js/dev_integration.js', array(), $js_creation, true );
+		wp_localize_script( 'child-dev-script', 'localizations', [
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		]);
+		// END to be removed after frontend merge!!
 	}
 
 	/**
@@ -260,8 +264,10 @@ class P4CT_Site {
 	/**
 	 * Gpea_get_realated gets related posts.
 	 *
-	 * @param int  $exclude_post_id Id to be excluded, usually the current one.
-	 * @param text $limit limit of related posts to be retrieved, default 3.
+	 * @param int $exclude_post_id Id to be excluded, usually the current one.
+	 * @param string $limit limit of related posts to be retrieved, default 3.
+	 *
+	 * @return \Timber\PostQuery
 	 */
 	public function gpea_get_related( $exclude_post_id, $limit ) {
 
@@ -311,6 +317,8 @@ class P4CT_Site {
 	 * Gpea_get_main_issue
 	 *
 	 * @param int $post_id current post Id.
+	 *
+	 * @return bool|WP_Term
 	 */
 	public function gpea_get_main_issue( $post_id ) {
 
@@ -331,7 +339,7 @@ class P4CT_Site {
 			if ( ! empty( $categories ) ) {
 				$categories = array_filter(
 					$categories, function( $cat ) use ( $main_issues_category_id ) {
-						return $cat->category_parent === intval( $main_issues_category_id );
+						return intval( $main_issues_category_id ) === $cat->category_parent;
 					}
 				);
 				if ( ! empty( $categories ) ) {
@@ -369,6 +377,7 @@ class P4CT_Site {
 	 * Allow parameter to be passed to url.
 	 *
 	 * @param text $vars text variable allowed.
+	 * @return array|text
 	 */
 	public function add_query_vars_filter( $vars ) {
 		$vars[] = 'fn';
