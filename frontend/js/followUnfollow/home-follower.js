@@ -43,6 +43,8 @@ const homeFollower = function() {
   const $featuredSwiper = $('.section-featured .swiper-container').first();
   const $existingPosts = $featuredSwiper.find('.swiper-slide');
 
+  const $sectionProjects = $('.section-projects').first();
+
   const existingPosts = $existingPosts
     .toArray()
     .filter(el => 'postid' in el.dataset)
@@ -114,6 +116,76 @@ const homeFollower = function() {
 
       // All done
       $featuredSwiper.removeClass('is-loading');
+    },
+    error: function(errorThrown) {
+      $featuredSwiper.removeClass('is-loading');
+      console.error(errorThrown);
+    },
+  });
+
+  // handle project section here
+
+  $sectionProjects.addClass('is-loading');
+  $.ajax({
+    url: p4_vars.ajaxurl,
+    type: 'post',
+    data: {
+      action: 'projectsFollowing',
+    },
+    success: function(data) {
+
+      let projects;
+
+      try {
+        projects = JSON.parse(data);
+      } catch (error) {
+        console.error(error);
+        $sectionProjects.removeClass('is-loading');
+        return;
+      }
+      // Create the HTML element for each new post
+
+      const projectContainer = $('#template-section-projects-following');
+      const buildContainer = template(projectContainer[0].innerHTML);
+      const projectUpdate = $('#template-project-post-update');
+      const buildUpdate = template(projectUpdate[0].innerHTML);
+      
+
+      // const newPostsSlides = posts.map(post => {
+      //   if (post.engaging_pageid !== undefined) {
+      //     return buildPetition(post);
+      //   } else {
+      //     return buildUpdate(post);
+      //   }
+      // });
+
+      const projectFollowing = projects.map(project => {        
+        let relatedPosts = (project.related).map(post => {
+            return buildUpdate(post);
+            // TODO: da aggiungere in secondo momento anche questa logica
+            // if (post.engaging_pageid !== undefined) {
+            //   return buildPetition(post);
+            // } else {
+            //   return buildUpdate(post);
+            // }
+          })
+          project.related_posts = relatedPosts;
+          let sectionProject = buildContainer(project);
+          return sectionProject;
+      });
+
+      // Add the new slides in 6th position (1 first slide + 5 regular slides)
+      // swiper.addSlide(6, newPostsSlides);
+      // console.log(
+      //   newPostsSlides.length + ' slides created and added',
+      //   newPostsSlides
+      // );
+
+      $sectionProjects.html(projectFollowing);
+
+      // All done
+      $sectionProjects.removeClass('is-loading');
+      $sectionProjects.removeClass('dark');
     },
     error: function(errorThrown) {
       $featuredSwiper.removeClass('is-loading');
