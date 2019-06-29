@@ -47,13 +47,15 @@ class P4CT_AJAX_Handler {
 	 */
 	private function hooks() {
 		add_action( 'wp_ajax_supportLauncher', [ $this, 'support_launcher_ajax_handler' ] );
-		add_action( 'wp_ajax_topicsFollowing', [ $this, 'topics_following_ajax_handler' ] );
 		add_action( 'wp_ajax_nopriv_supportLauncher', [ $this, 'support_launcher_ajax_handler' ] );
+		add_action( 'wp_ajax_topicsFollowing', [ $this, 'topics_following_ajax_handler' ] );
+		add_action( 'wp_ajax_nopriv_topicsFollowing', [ $this, 'topics_following_ajax_handler' ] );
+		add_action( 'wp_ajax_projectsFollowing', [ $this, 'projects_following_ajax_handler' ] );
+		add_action( 'wp_ajax_nopriv_projectsFollowing', [ $this, 'projects_following_ajax_handler' ] );
 
 		// TODO maybe move these ones to P4CT_ElasticSearch class?
 		add_action( 'wp_ajax_p4ct_search_site', [ $this, 'search_posts_ajax' ] );
 		add_action( 'wp_ajax_nopriv_p4ct_search_site', [ $this, 'search_posts_ajax' ] );
-		add_action( 'wp_ajax_projectsFollowing', [ $this, 'projects_following_ajax_handler' ] );
 	}
 
 	/**

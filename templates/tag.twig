@@ -24,24 +24,30 @@
       </div>
     </section>
   {% else %}
-    <section class="section-hero-top no-image">
-      <div class="top-bar-wrapper-white">
-        <div class="hero-submenu">                  
-      </div>
-    </section>
-  {% endif %}
-
-  <section class="section-text-images">
-    <div class="boxes">
-      <div class="box ">
-          <div class="ct-container">
+    <section class="section-post-content ct-container">
+        <h1>{{ tag.name|raw }}</h1>
+        {% if tag.description %}
+          <div class="leader">
               <p>{{ tag.description|raw }}</p>
           </div>
+        {% endif %}
+    </section>
+  {% endif %}  
+
+  {{ projects|shortcodes|raw }}
+
+  <section class="section-latest-news">
+    <div class="ct-container">
+      <h2>{{ strings.latest_news }}</h2>
+      <div class="news-list">
+        {% if ( related_posts ) %}
+          {% for related_post in related_posts %}
+            {% include "blocks/tease-related-post.twig" with {post:related_post} %}
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
   </section>
-
-  {{ projects|shortcodes|raw }}
 
   {{ post.content|raw }}
 

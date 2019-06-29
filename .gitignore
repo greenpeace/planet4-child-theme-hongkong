@@ -9,6 +9,7 @@
 .dir-locals.el
 .ac-php-conf.json
 gulpconfig.js
+/certs
 
 #######
 # NODE

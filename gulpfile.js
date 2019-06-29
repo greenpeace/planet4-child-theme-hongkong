@@ -280,6 +280,17 @@ const watcher = doOpen => {
     files: settings.watch,
   };
 
+  try {
+    if (fs.existsSync('./certs/planet4.test+2.pem')) {
+      config.https = {
+        key: './certs/planet4.test+2-key.pem',
+        cert: './certs/planet4.test+2.pem',
+      };
+    }
+  } catch (err) {
+    // do nothing
+  }
+
   if (settings.proxy) {
     config.proxy = settings.proxy;
   } else {

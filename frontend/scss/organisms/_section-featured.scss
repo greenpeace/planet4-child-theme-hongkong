@@ -10,18 +10,7 @@
     }
   }
 
-  .home & .first,
-  .home & .mobile-top-box {
-    h2 {
-      color: $color-green;
-    }
-
-    // .subtitle {
-    //   color: black;
-    // }
-
-    p {
-      @include title-text;
-    }
+  .home & .big-carousel-description h2 {
+    color: $color-green;
   }
 }
