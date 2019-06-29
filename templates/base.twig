@@ -33,20 +33,24 @@
 			<div class="box">
 				<div class="meta-box">
 					<div>
-						<span class="issue <%= main_issue_slug %>"><%= main_issue %></span>
+						<% if (typeof main_issue_slug !== 'undefined') { %>
+							<span class="issue <%= main_issue_slug %>"><%= main_issue %></span>
+						<% } %>
 						<% if (typeof news_type !== 'undefined') { %>
 							<span><%= news_type %></span>
 						<% } %>
 					</div>
 					<div>
-						<span>
-							<% if (typeof reading_time !== 'undefined' && reading_time) { %>
+						<% if (typeof reading_time !== 'undefined' && reading_time) { %>
+							<span>
 								<span class="icon-clock"></span>
 								<%= reading_time %>
 								{{ __('Reading time', 'planet4-gpea-blocks') }}
-							<% } %>
-						</span>
-						<span><%= date %></span>
+							</span>
+						<% } %>
+						<% if (typeof date !== 'undefined') { %>
+							<span><%= date %></span>
+						<% } %>
 					</div>
 				</div>
 				<p>

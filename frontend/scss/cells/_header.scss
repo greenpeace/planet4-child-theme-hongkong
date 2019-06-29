@@ -8,6 +8,13 @@ header {
   align-items: center;
   z-index: 4;
 
+  @include greaterThan('sm') {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 99;
+  }
+
   p {
     margin-bottom: 0;
   }
@@ -89,16 +96,17 @@ header {
 
     .center-box {
       flex-grow: 1;
-      margin-left: 60px;
+      margin-left: 55px;
 
       .menu {
-        padding: 0;
-        margin: 0;
-        list-style: none;
         display: flex;
+        height: 62px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
 
         .item {
-          margin-right: 60px;
+          margin-right: 50px;
 
           &:last-child {
             margin-right: 0;
@@ -106,6 +114,9 @@ header {
 
           a {
             display: flex;
+            height: 100%;
+            padding-left: 5px;
+            padding-right: 5px;
             align-items: center;
             color: white;
             text-decoration: none;
@@ -124,6 +135,10 @@ header {
               height: 36px;
               display: inline-block;
             }
+          }
+
+          &.active a {
+            border-bottom: 4px solid white;
           }
 
           &.item__latest-news a span {
@@ -230,9 +245,6 @@ header {
     }
 
     &.item__home {
-      p {
-        text-indent: -100000px;
-      }
       span {
         background-image: url('../images/icons/Home-mobile.svg');
       }

@@ -32,7 +32,7 @@
   }
 
   .support-data-left {
-    @include font-smoothing;
+    // @include font-smoothing;
     background-color: $color-blue;
     color: white;
   }

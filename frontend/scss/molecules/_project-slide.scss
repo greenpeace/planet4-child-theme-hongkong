@@ -60,7 +60,7 @@
   }
 
   .dark & {
-    @include font-smoothing;
+    // @include font-smoothing;
     color: white;
   }
 }

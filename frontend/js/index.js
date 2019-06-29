@@ -67,6 +67,8 @@ $('.featured-swiper, .projects-swiper').each(function(index) {
     new Swiper(this, {
       slidesPerView: 'auto',
       simulateTouch: false,
+      loop: true,
+      loopedSlides: 1,
       pagination: {
         el: pagination,
         type: 'bullets',

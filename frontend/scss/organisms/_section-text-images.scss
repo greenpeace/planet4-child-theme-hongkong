@@ -1,10 +1,11 @@
 .section-text-images {
-  min-height: 300px;
+  display: flex;
+  align-items: stretch;
 
-  > .ct-container {
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
+  // > .ct-container {
+  //   padding-top: 40px;
+  //   padding-bottom: 40px;
+  // }
 
   h2 {
     @include title-mid;
@@ -13,6 +14,7 @@
   .boxes {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     @include greaterThan('sm') {
       flex-direction: row;

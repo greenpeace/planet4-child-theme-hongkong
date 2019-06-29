@@ -1,13 +1,10 @@
 .big-carousel-description {
-  margin-bottom: 40px;
-  // > * {
-  //   margin: 10px 0;
-  // }
+  margin-bottom: 20px;
 
   @include greaterThan('sm') {
     position: absolute;
     width: 250px;
-    padding-top: 25px;
+    padding-top: 20px;
   }
 
   .swiper-pagination {
@@ -113,7 +110,7 @@
 }
 
 .dark {
-  @include font-smoothing;
+  // @include font-smoothing;
 
   .big-carousel-description {
     color: white;

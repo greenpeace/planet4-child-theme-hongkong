@@ -1,8 +1,8 @@
 .card-mini {
-  width: 156px;
+  width: 240px;
 
   @include greaterThan('sm') {
-    width: 260px;
+    width: 280px;
   }
 
   h4 {
