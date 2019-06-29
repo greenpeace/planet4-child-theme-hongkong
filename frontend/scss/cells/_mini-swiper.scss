@@ -22,4 +22,18 @@
       border-right: none;
     }
   }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none;
+  }
+
+  @include greaterThan('sm') {
+    &.swiper-container-initialized {
+      .swiper-button-prev,
+      .swiper-button-next {
+        display: block;
+      }
+    }
+  }
 }

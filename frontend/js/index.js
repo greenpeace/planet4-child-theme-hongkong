@@ -8,6 +8,7 @@ import {
 import LazyLoad from 'vanilla-lazyload';
 import SmoothScroll from 'smooth-scroll';
 
+import swipers from './swipers';
 import petitionThankyou from './petition-thankyou';
 import donation from './donation';
 import followUnfollow from './follow-unfollow';
@@ -55,129 +56,6 @@ Swiper.use([Navigation, Pagination, Scrollbar, Controller]);
 
 new LazyLoad({
   elements_selector: '.lazy',
-});
-
-$('.featured-swiper, .projects-swiper').each(function(index) {
-  const pagination = $(this)
-    .closest('section')
-    .find('.swiper-pagination')
-    .first()[0];
-
-  setTimeout(() => {
-    new Swiper(this, {
-      slidesPerView: 'auto',
-      simulateTouch: false,
-      loop: true,
-      loopedSlides: 1,
-      pagination: {
-        el: pagination,
-        type: 'bullets',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      breakpoints: {
-        // when window width is <= 1023px
-        1023: {
-          pagination: false,
-          // navigation: false,
-        },
-      },
-    });
-  }, 0);
-});
-
-new Swiper('.issues-swiper', {
-  slidesPerView: 'auto',
-  pagination: {
-    el: '.swiper-pagination',
-    type: 'bullets',
-    clickable: true,
-  },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  breakpoints: {
-    // when window width is <= 1023px
-    1023: {
-      pagination: false,
-      // navigation: false,
-    },
-  },
-});
-
-new Swiper('.cards-swiper:not(.controlled)', {
-  slidesPerView: 'auto',
-  centeredSlides: true,
-  pagination: {
-    el: '.swiper-pagination',
-    type: 'bullets',
-    clickable: true,
-  },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-  breakpoints: {
-    // when window width is <= 1023px
-    1023: {
-      pagination: false,
-      navigation: false,
-    },
-  },
-});
-
-new Swiper('.mini-swiper', {
-  slidesPerView: 'auto',
-  pagination: false,
-  navigation: false,
-});
-
-new Swiper('.section-text-images-swiper', {
-  slidesPerView: 1,
-  pagination: {
-    el: '.swiper-pagination',
-    type: 'bullets',
-    clickable: true,
-  },
-});
-
-// new Swiper('.label-swiper', {
-//   slidesPerView: 'auto',
-//   centeredSlides: true,
-// });
-
-$('.label-swiper').each(function() {
-  const $this = $(this);
-  const $controlled = $($this.data('controls'));
-
-  const controlledSwiper = new Swiper($controlled[0], {
-    slidesPerView: 'auto',
-    centeredSlides: true,
-    pagination: false,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-      // when window width is <= 1023px
-      1023: {
-        navigation: false,
-      },
-    },
-  });
-
-  const labelSwiper = new Swiper($this[0], {
-    slidesPerView: 'auto',
-    centeredSlides: true,
-    slideToClickedSlide: true,
-  });
-
-  controlledSwiper.controller.control = labelSwiper;
-  labelSwiper.controller.control = controlledSwiper;
 });
 
 /**
@@ -518,7 +396,10 @@ function connectAnchorMenu() {
 }
 connectAnchorMenu();
 
+/* imports */
+swipers(Swiper);
+
 /* Page specific functionality */
 petitionThankyou();
 donation(Swiper);
-followUnfollow();
+setTimeout(followUnfollow, 0);
