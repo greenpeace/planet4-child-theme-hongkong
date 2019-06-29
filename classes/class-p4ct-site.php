@@ -146,6 +146,7 @@ class P4CT_Site {
 		$context['commitment_projects_link'] = isset( $options['gpea_default_commitment_projects'] ) ? get_permalink( $options['gpea_default_commitment_projects'] ) : site_url();
 		$context['commitment_issues_link'] = isset( $options['gpea_default_commitment_issues'] ) ? get_permalink( $options['gpea_default_commitment_issues'] ) : site_url();
 		$context['support_link'] = isset( $options['gpea_default_supportus_link'] ) ? get_permalink( $options['gpea_default_supportus_link'] ) : site_url();
+		$context['home_url'] = site_url();
 
 		$context['strings_navbar'] = [
 			'sign' => __( 'Sign', 'gpea_theme' ),
@@ -262,20 +263,14 @@ class P4CT_Site {
 	 *
 	 * @param int  $exclude_post_id Id to be excluded, usually the current one.
 	 * @param text $limit limit of related posts to be retrieved, default 3.
+	 * @param int $avoid_post_search if 
+	 * @param int $cat_id cat id to use as source.
+	 * @param int $tag_id tag id to use as source
 	 */
-	public function gpea_get_related( $exclude_post_id, $limit ) {
+	public function gpea_get_related( $exclude_post_id, $limit, $avoid_post_search = 0, $cat_id = 0, $tag_id = 0 ) {
 
 		$exclude_post_id = (int) ( $exclude_post_id ?? '' );
-		$limit           = (int) ( $limit ?? '3' );
-
-		// Get page categories.
-		$post_categories   = get_the_category();
-		$category_id_array = [];
-		foreach ( $post_categories as $category ) {
-			$category_id_array[] = $category->term_id;
-		}
-		// Get page/post tags.
-		$post_tags = get_the_tags();
+		$limit           = (int) ( $limit ?? '3' );	
 
 		$post_args = [
 			'orderby'          => 'date',
@@ -285,18 +280,37 @@ class P4CT_Site {
 		];
 
 		/* build other options, category and tags info + exclude post */
-		if ( $category_id_array ) {
-			$post_args['category__in'] = $category_id_array;
-		}
+
 		if ( $exclude_post_id ) {
 			$post_args['post__not_in'] = [ $exclude_post_id ];
 		}
-		if ( $post_tags ) {
-			$tag_id_array = [];
-			foreach ( $post_tags as $tag ) {
-				$tag_id_array[] = $tag->term_id;
+
+		// Get page categories.
+		if ( ! $avoid_post_search ) {
+			$post_categories   = get_the_category();
+			if ( $post_categories ) {
+				$category_id_array = [];
+				foreach ( $post_categories as $category ) {
+					$category_id_array[] = $category->term_id;
+				}
+				$post_args['category__in'] = $category_id_array;
 			}
-			$post_args['tag__in'] = $tag_id_array;
+		} else {
+			$post_args['cat'] = $cat_id ?? false;
+		}
+
+		if ( ! $avoid_post_search ) {
+			// Get page/post tags.
+			$post_tags = get_the_tags();
+			if ( $post_tags ) {
+				$tag_id_array = [];
+				foreach ( $post_tags as $tag ) {
+					$tag_id_array[] = $tag->term_id;
+				}
+				$post_args['tag__in'] = $tag_id_array;
+			}
+		} else {
+			$post_args['tag_id'] = $tag_id ?? false;
 		}
 
 		$templates          = [ 'tease-related-post.twig' ];
