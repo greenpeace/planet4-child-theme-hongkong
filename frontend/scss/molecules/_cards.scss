@@ -37,6 +37,10 @@
 
   @include greaterThan('sm') {
     display: block;
+    height: 460px;
+  }
+
+  @include greaterThan('lg') {
     height: 524px;
   }
 
@@ -46,13 +50,14 @@
     box-shadow: none;
 
     @include greaterThan('sm') {
-      height: 524px;
-      width: 480px;
+      height: 460px;
+      width: 360px;
       padding-top: 0;
       float: left;
     }
 
     @include greaterThan('lg') {
+      height: 524px;
       width: 524px;
     }
   }
@@ -83,7 +88,7 @@
     position: relative;
 
     @include greaterThan('sm') {
-      width: calc(100% - 480px);
+      width: calc(100% - 360px);
       height: 100%;
       float: right;
     }
@@ -214,16 +219,20 @@
 
   &:not(.force-mobile) {
     @include greaterThan('sm') {
+      height: 460px;
+    }
+
+    @include greaterThan('lg') {
       height: 524px;
     }
 
     .box {
       @include greaterThan('sm') {
         float: right;
-        width: calc(100% - 480px);
+        width: calc(100% - 360px);
         height: 100%;
         padding-left: 20px;
-        padding-bottom: 100px;
+        padding-bottom: 80px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -241,14 +250,13 @@
   }
 
   &.force-mobile p {
-    // font-size: 24px;
-    font-size: 22px;
+    font-size: 24px;
     margin: 4px 0;
   }
 
   &:not(.force-mobile) p {
     @include greaterThan('sm') {
-      margin-top: 10px;
+      margin-top: 20px;
     }
   }
 
@@ -279,8 +287,8 @@
 
   &:not(.force-mobile):not(.compact) .thumbnail {
     @include greaterThan('sm') {
-      height: 524px;
-      width: 480px;
+      height: 100%;
+      width: 360px;
       padding-top: 0;
       float: left;
     }
@@ -319,7 +327,7 @@
     }
 
     p {
-      @include caption;
+      @include title-text;
       min-height: 75px;
       display: flex;
       align-items: center;
@@ -334,7 +342,7 @@
 
 .card-testimonial {
   @include card-tight;
-  @include font-smoothing;
+  // @include font-smoothing;
   position: relative;
   padding: 40px 25px;
   text-align: center;
@@ -383,15 +391,19 @@
 
 .card-explainer {
   @include card-tight;
-  height: 440px;
+  height: 500px;
   overflow: hidden;
   background: white;
   color: $color-blue;
 
+  @include greaterThan('sm') {
+    height: 440px;
+  }
+
   .description {
     box-sizing: border-box;
     padding: 20px 25px 10px;
-    height: 50%;
+    height: 60%;
     overflow: hidden;
 
     @include greaterThan('sm') {
@@ -430,13 +442,17 @@
       font-size: 14px;
       font-weight: normal;
       line-height: 1.71;
-      letter-spacing: 9px;
+      letter-spacing: 1px;
       margin: 0 0 10px;
+
+      @include greaterThan('sm') {
+        letter-spacing: 9px;
+      }
     }
   }
 
   .thumbnail {
-    height: 50%;
+    height: 40%;
     padding-top: 0;
     border-radius: 0;
     box-shadow: none;
@@ -450,7 +466,6 @@
 
   &.wide-text {
     .description {
-      height: 100%;
       overflow: hidden;
 
       @include greaterThan('sm') {
@@ -459,8 +474,6 @@
     }
 
     .thumbnail {
-      display: none;
-
       @include greaterThan('sm') {
         display: block;
         width: 50%;

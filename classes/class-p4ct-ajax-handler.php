@@ -47,13 +47,15 @@ class P4CT_AJAX_Handler {
 	 */
 	private function hooks() {
 		add_action( 'wp_ajax_supportLauncher', [ $this, 'support_launcher_ajax_handler' ] );
-		add_action( 'wp_ajax_topicsFollowing', [ $this, 'topics_following_ajax_handler' ] );
 		add_action( 'wp_ajax_nopriv_supportLauncher', [ $this, 'support_launcher_ajax_handler' ] );
+		add_action( 'wp_ajax_topicsFollowing', [ $this, 'topics_following_ajax_handler' ] );
+		add_action( 'wp_ajax_nopriv_topicsFollowing', [ $this, 'topics_following_ajax_handler' ] );
+		add_action( 'wp_ajax_projectsFollowing', [ $this, 'projects_following_ajax_handler' ] );
+		add_action( 'wp_ajax_nopriv_projectsFollowing', [ $this, 'projects_following_ajax_handler' ] );
 
 		// TODO maybe move these ones to P4CT_ElasticSearch class?
 		add_action( 'wp_ajax_p4ct_search_site', [ $this, 'search_posts_ajax' ] );
 		add_action( 'wp_ajax_nopriv_p4ct_search_site', [ $this, 'search_posts_ajax' ] );
-		add_action( 'wp_ajax_projectsFollowing', [ $this, 'projects_following_ajax_handler' ] );
 	}
 
 	/**
@@ -164,6 +166,7 @@ class P4CT_AJAX_Handler {
 					$project_detail['image'] = $img_data[0];
 				}
 				$project_meta                         = get_post_meta( $gpea_project_id );
+				$project_detail['link']               = get_the_permalink( $gpea_project_id );
 				$project_detail['start_date']         = $project_meta['p4-gpea_project_start_date'][0] ?? '';
 				$project_detail['localization']       = $project_meta['p4-gpea_project_localization'][0] ?? '';
 				$project_detail['project_percentage'] = $project_meta['p4-gpea_project_percentage'][0] ?? 0;
@@ -210,7 +213,15 @@ class P4CT_AJAX_Handler {
 						$single_update['image'] = $img_data[0];
 					}
 
-						$project_related[] = $single_update;
+					// news type
+					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
+					if ( $news_type ) {
+						$single_update['news_type'] = $news_type[0]->name;
+					}
+
+					$single_update['reading_time'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+
+					$project_related[] = $single_update;
 				endwhile;
 
 				$project_detail['related'] = $project_related;

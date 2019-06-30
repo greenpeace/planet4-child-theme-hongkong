@@ -17,7 +17,7 @@ const pageIssue = function() {
 
     $('.js-issue-follow').on('click', function(e) {
       e.preventDefault();
-      gpea_issues_followed.push(gpea_issues_followed);
+      gpea_issues_followed.push(current_issue_id);
       Cookies.set('gpea_issues', gpea_issues_followed);
       $('.js-issue-follow').hide();
       $('.js-issue-unfollow').fadeIn();

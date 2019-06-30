@@ -1,8 +1,12 @@
 .card-mini {
-  width: 156px;
+  width: 240px;
 
   @include greaterThan('sm') {
-    width: 260px;
+    width: 215px;
+  }
+
+  @include greaterThan('lg') {
+    width: 280px;
   }
 
   h4 {
@@ -54,6 +58,10 @@
     @include greaterThan('sm') {
       margin-top: 18px;
     }
+  }
+
+  &.mini-update p {
+    @include title-text;
   }
 
   .thumbnail {

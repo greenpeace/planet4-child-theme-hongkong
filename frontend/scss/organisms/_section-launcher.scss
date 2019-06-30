@@ -1,7 +1,36 @@
 .section-launcher {
-  padding: 20px 0;
+  padding-bottom: 0 !important;
+
+  h2 {
+    text-align: center;
+  }
+
+  .action.fluid h2 {
+    text-align: left;
+  }
 
   .action.as-card {
-    margin: 20px auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: white;
+  }
+
+  @include greaterThan('sm') {
+    .launchers {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+    }
+
+    .action.as-card {
+      width: 290px;
+      max-width: none;
+    }
+  }
+
+  @include greaterThan('lg') {
+    .action.as-card {
+      width: 360px;
+    }
   }
 }

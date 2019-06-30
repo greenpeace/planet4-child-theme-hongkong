@@ -1,7 +1,8 @@
 .section-post-content,
 .page-template-petition .outer_block_container {
-  padding-top: 15px;
-  padding-bottom: 10px;
+  padding-top: 15px !important;
+  padding-bottom: 10px !important;
+  background: white !important;
 
   &.ct-container {
     @include ct-container-guardian;
@@ -104,6 +105,10 @@
     display: block;
     text-align: left;
     font-size: 18px;
+
+    &:first-child {
+      margin-top: -15px !important;
+    }
   }
 
   .embed-container {

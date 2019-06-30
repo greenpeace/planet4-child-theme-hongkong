@@ -1,8 +1,15 @@
 .section-featured {
-  padding: 20px 0;
+  padding-top: 30px !important;
+
+  @include greaterThan('sm') {
+    &-tips {
+      padding-top: 60px !important;
+      padding-bottom: 60px !important;
+    }
+  }
 
   .home & {
-    background: $gradient-smoke;
+    background-image: $gradient-smoke;
 
     @include greaterThan('sm') {
       background: url(../images/world.png) left center / auto 100% no-repeat,
@@ -10,18 +17,45 @@
     }
   }
 
-  .home & .first,
-  .home & .mobile-top-box {
-    h2 {
-      color: $color-green;
-    }
+  .home & .big-carousel-description h2 {
+    color: $color-green;
+  }
+}
 
-    // .subtitle {
-    //   color: black;
-    // }
+.page-template-main-issue .section-featured-manual {
+  color: white;
 
-    p {
-      @include title-text;
+  .card-update,
+  .card-update .meta-box,
+  .card-update .issue {
+    color: white !important;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: white;
+    opacity: 0.2;
+
+    &-active {
+      opacity: 1;
     }
   }
+}
+
+.page-template-main-issue.forests .section-featured-manual {
+  background: $color-forests;
+}
+.page-template-main-issue.oceans .section-featured-manual {
+  background: $color-oceans;
+}
+.page-template-main-issue.arctic .section-featured-manual {
+  background: $color-arctic;
+}
+.page-template-main-issue.climate .section-featured-manual {
+  background: $color-climate;
+}
+.page-template-main-issue.plastics .section-featured-manual {
+  background: $color-plastics;
+}
+.page-template-main-issue.health .section-featured-manual {
+  background: $color-health;
 }

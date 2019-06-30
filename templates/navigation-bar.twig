@@ -38,7 +38,7 @@
             <a aria-label="Search" class="search-button" href="">
               <span class="icon-search"></span>
             </a>
-            <a class="button" href="">{{ strings.support }}</a>
+            <a class="button" href="{{ support_link }}">{{ strings.support }}</a>
           {% endif %}
         </div>
       </div>
@@ -49,7 +49,7 @@
     {% for key,item in navbar_menu.get_items %}
       {% if (key) < 2 %}
         <a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
-          <p>{{ item.title }}</p>
+          <p class="{{ key == 1 ? 'visuallyhidden' : '' }}">{{ item.title }}</p>
           <span class="item__menu__icon"></span>
         </a>
       {% else %}

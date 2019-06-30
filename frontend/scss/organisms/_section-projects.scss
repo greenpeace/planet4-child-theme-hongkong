@@ -1,7 +1,28 @@
 .section-projects {
-  padding: 20px 0;
-
   &.dark {
     background: $color-blue;
+  }
+
+  .swiper-container [class^='swiper-button-'] {
+    margin-top: -70px;
+  }
+
+  .swiper-button-next {
+    right: 0;
+  }
+
+  .swiper-button-prev {
+    left: -16px;
+  }
+}
+
+.section-projects-following {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #000;
+  margin-bottom: 50px;
+
+  .posts {
+    margin-bottom: 20px;
   }
 }

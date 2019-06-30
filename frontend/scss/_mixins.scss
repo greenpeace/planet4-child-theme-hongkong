@@ -48,13 +48,13 @@
   padding-right: 20px;
 
   @include greaterThan('sm') {
-    width: 620px;
+    width: 700px;
     max-width: none;
   }
 
-  @include greaterThan('lg') {
-    width: 620px;
-  }
+  // @include greaterThan('lg') {
+  //   width: 620px;
+  // }
 }
 
 // Typography

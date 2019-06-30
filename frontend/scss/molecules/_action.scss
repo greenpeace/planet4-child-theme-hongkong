@@ -36,6 +36,7 @@
         right: 100px;
         bottom: 0;
         max-width: calc(50% - 120px);
+        height: auto;
       }
     }
 
@@ -100,7 +101,6 @@
     }
 
     .thumbnail {
-      flex-grow: 1;
       border-radius: 0;
       box-shadow: none;
       width: 100%;

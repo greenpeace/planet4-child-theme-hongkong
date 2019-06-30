@@ -1,21 +1,21 @@
 .section-slideshow {
   padding: 40px 0;
-  background: $color-lightblue;
+  background: $color-lightblue !important;
 
   > .ct-container {
     text-align: center;
   }
 
   &.layout-dark {
-    background: $color-blue;
+    background: $color-blue !important;
     color: white;
 
-    h2,
-    h3,
-    h4,
-    p {
-      @include font-smoothing;
-    }
+    // h2,
+    // h3,
+    // h4,
+    // p {
+    // @include font-smoothing;
+    // }
   }
 
   h2 {

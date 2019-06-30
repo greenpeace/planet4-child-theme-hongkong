@@ -6,6 +6,7 @@
 }
 
 .swiper-pagination-bullet {
+  margin-right: 5px;
   background-color: $color-grey;
   cursor: pointer;
 
@@ -14,7 +15,8 @@
   }
 }
 
-.slider-inverted {
+.slider-inverted,
+.dark {
   .swiper-pagination-bullet {
     background-color: white;
     opacity: 0.2;

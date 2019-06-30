@@ -17,6 +17,7 @@ use Timber\Timber;
 // use P4BKS\Controllers\Blocks\HappyPoint_Controller as HappyPoint;
 
 $context = Timber::get_context();
+$gpea_extra = new P4CT_Site();
 
 if ( is_tag() ) {
 	$context['tag']  = get_queried_object();
@@ -33,6 +34,12 @@ if ( is_tag() ) {
 
 	} else {
 
+		$context['strings'] = [
+			'our_initiatives' => __( 'Our Initiatives', 'gpea_theme' ),
+			'latest_related_news' => __( 'Latest news about this topic', 'gpea_theme' ),
+			'read_all' => __( 'Read all', 'gpea_theme' ),
+		];
+
 		$context['custom_body_classes'] = 'white-bg page-issue-page';
 
 		$context['background_image']      = get_term_meta( $context['tag']->term_id, 'tag_attachment', true );
@@ -47,11 +54,10 @@ if ( is_tag() ) {
 			$context['og_image_data'] = wp_get_attachment_image_src( $tag_image_id, 'full' );
 		}		
 
+		$context['projects'] = "[shortcake_projects_carousel layout='light' title='".$context['strings']['our_initiatives']."' topic='".$context['tag']->term_id."' /]";
 
-		$strings['our_initiatives'] = __( 'Our Initiatives', 'gpea_theme' );
+		$context['related_posts'] = $gpea_extra->gpea_get_related( false, 6, 1, false, $context['tag']->term_id );
 
-		$context['projects'] = "[shortcake_projects_carousel layout='light' title='".$strings['our_initiatives']."' topic='".$context['tag']->term_id."' /]";
-	
 		//[shortcake_take_action_boxout take_action_page='$take_action_page' /]";
 
 		// $campaign = new P4_Taxonomy_Campaign( $templates, $context );

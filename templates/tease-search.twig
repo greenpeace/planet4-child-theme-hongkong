@@ -3,7 +3,9 @@
   <div class="box">
     <div class="meta-box">
       <div>
-        <span class="issue {{ post.main_issue_slug }}">{{ post.main_issue }}</span>
+	  	{% if post.main_issue_slug %}
+        	<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue }}</span>
+		{% endif %}
         <span>{{ post.news_type }}</span>
       </div>
     </div>

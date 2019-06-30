@@ -36,13 +36,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		];
 
 		/**
-		 * Engaging campaign ID meta key.
-		 *
-		 * @const string ENGAGING_CAMPAIGN_ID_META_KEY
-		 */
-		const ENGAGING_CAMPAIGN_ID_META_KEY = 'engaging_campaign_ID';
-
-		/**
 		 * Search Query
 		 *
 		 * @var string $search_query
@@ -199,7 +192,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 		/**
 		 * Conducts the actual AJAX search.
-		 * TODO rename without gpea_.
 		 *
 		 * @param string     $search_query The searched term.
 		 * @param string     $selected_sort The selected order_by.
@@ -307,24 +299,21 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 */
 		protected function check_cache( $cache_key, $cache_group ) {
 			$cache_group_terms = $cache_group . '_terms';
-			// TODO IMPORTANT!!! reactivate cache on production.
 			// Get search results from cache and then set the context for those results.
-			// $this->posts = wp_cache_get( $cache_key, $cache_group );
-			// $this->terms = wp_cache_get( $cache_key, $cache_group_terms );
-			$this->posts = false;
-			$this->terms = false;
+			$this->posts = wp_cache_get( $cache_key, $cache_group );
+			$this->terms = wp_cache_get( $cache_key, $cache_group_terms );
 			// If cache key expired then retrieve results once again and re-cache them.
 			if ( false === $this->posts ) {
 				$this->posts = $this->get_timber_posts();
-				// if ( $this->posts ) {
-				// wp_cache_add( $cache_key, $this->posts, $cache_group, self::DEFAULT_CACHE_TTL );
-				// }
+				if ( $this->posts ) {
+					wp_cache_add( $cache_key, $this->posts, $cache_group, self::DEFAULT_CACHE_TTL );
+				}
 			}
 			if ( false === $this->terms ) {
 				$this->terms = $this->get_timber_terms();
-				// if ( $this->terms ) {
-				// wp_cache_add( $cache_key, $this->posts, $cache_group_terms, self::DEFAULT_CACHE_TTL );
-				// }
+				if ( $this->terms ) {
+					wp_cache_add( $cache_key, $this->posts, $cache_group_terms, self::DEFAULT_CACHE_TTL );
+				}
 			}
 		}
 
@@ -344,13 +333,23 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			if ( $posts ) {
 				foreach ( $posts as $post ) {
 					$timber_post = new TimberPost( $post->ID );
+
 					$timber_post->post_date = date( 'Y-m-d', strtotime( $timber_post->post_date ) );
+
+					$timber_post->reading_time = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+
+					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
+					if ( $news_type ) {
+						$timber_post->news_type = $news_type[0]->name;
+					}
+
 					$post_categories = wp_get_post_categories( $post->ID );
 					$main_issue = array_filter(
 						$post_categories, function( $cat ) {
 							return array_key_exists( $cat, $this->main_issues );
 						}
 					);
+
 					if ( $main_issue ) {
 						$main_issue = $main_issue[0];
 						$timber_post->main_issue = $main_issue ? $this->main_issues[ $main_issue ]->name : 'none';
@@ -361,6 +360,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 							$timber_post->img_url = $img_url;
 						}
 					}
+
 					$timber_posts[] = $timber_post;
 				}
 			}
@@ -407,7 +407,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				foreach ( $terms as $term ) {
 					$timber_term = new TimberTerm( $term->term_id );
 					// Get the main issue page & related data if this term is a main issue & has an associated page.
-					$parent = $timber_term->parent;
 					if ( isset( $this->main_issues_category_id ) && $timber_term->parent === $this->main_issues_category_id ) {
 						$related = ( new WP_Query(
 							[
@@ -610,16 +609,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * @throws UnexpectedValueException When filter type is not recognized.
 		 */
 		protected function set_filters_context( &$context ) {
-			// Retrieve P4CT settings in order to check that we add only categories that are children of the Issues category.
-			$options = get_option( 'planet4_options' );
-			$issues_parent_category = (int) $options['issues_parent_category'];
 
 			// Category <-> Issue.
 			// Consider Issues that have multiple Categories.
 			$categories = get_categories();
 			if ( $categories ) {
 				foreach ( $categories as $category ) {
-					if ( $category->parent === $issues_parent_category ) {
+					if ( $category->parent === $this->main_issues_category_id ) {
 						$context['categories'][ $category->term_id ] = [
 							'term_id' => $category->term_id,
 							'name'    => $category->name,
@@ -638,15 +634,12 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			);
 			if ( $tags ) {
 				foreach ( (array) $tags as $tag ) {
-					// Get only tags that have an associated Engaging campaign.
-					if ( get_term_meta( $tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true ) ) {
-						// Tag filters.
-						$context['tags'][ $tag->term_id ] = [
-							'term_id' => $tag->term_id,
-							'name'    => $tag->name,
-							'results' => 0,
-						];
-					}
+					// Tag filters.
+					$context['tags'][ $tag->term_id ] = [
+						'term_id' => $tag->term_id,
+						'name'    => $tag->name,
+						'results' => 0,
+					];
 				}
 			}
 
@@ -676,7 +669,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			}
 
 			// Sort associative array with filters alphabetically .
-			if ( $context['categories'] ) {
+			if ( isset( $context['categories'] ) && $context['categories'] ) {
 				uasort(
 					$context['categories'],
 					function ( $a, $b ) {
@@ -684,7 +677,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					}
 				);
 			}
-			if ( $context['tags'] ) {
+			if ( isset( $context['tags'] ) && $context['tags'] ) {
 				uasort(
 					$context['tags'],
 					function ( $a, $b ) {
@@ -721,9 +714,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				// Post Type (+Action) <-> Content Type.
 				switch ( $post->post_type ) {
 					case 'page':
-							$content_type_text = __( 'PAGE', 'gpea_theme' );
-							$content_type      = 'page';
-							$context['content_types']['0']['results']++;
+						$content_type_text = __( 'PAGE', 'gpea_theme' );
+						$content_type      = 'page';
+						$context['content_types']['0']['results']++;
 						break;
 					case 'post':
 						$content_type_text = __( 'POST', 'gpea_theme' );
@@ -743,7 +736,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$categories = get_the_category( $post->ID );
 					if ( $categories ) {
 						foreach ( $categories as $category ) {
-							if ( $category->parent === (int) $options['issues_parent_category'] ) {
+							if ( $category->parent === $this->main_issues_category_id ) {
 								$context['categories'][ $category->term_id ]['term_id'] = $category->term_id;
 								$context['categories'][ $category->term_id ]['name']    = $category->name;
 								$context['categories'][ $category->term_id ]['results']++;
@@ -754,19 +747,16 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$tags = get_the_terms( $post->ID, 'post_tag' );
 					if ( $tags ) {
 						foreach ( (array) $tags as $tag ) {
-							// Get only tags that have an associated Engaging campaign
-							if ( get_term_meta( $tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true ) ) {
-								// Set tags info for each result item.
-								$context['posts_data'][ $post->ID ]['tags'][] = [
-									'name' => $tag->name,
-									'link' => get_tag_link( $tag ),
-								];
+							// Set tags info for each result item.
+							$context['posts_data'][ $post->ID ]['tags'][] = [
+								'name' => $tag->name,
+								'link' => get_tag_link( $tag ),
+							];
 
-								// Tag filters.
-								$context['tags'][ $tag->term_id ]['term_id'] = $tag->term_id;
-								$context['tags'][ $tag->term_id ]['name']    = $tag->name;
-								$context['tags'][ $tag->term_id ]['results'] ++;
-							}
+							// Tag filters.
+							$context['tags'][ $tag->term_id ]['term_id'] = $tag->term_id;
+							$context['tags'][ $tag->term_id ]['name']    = $tag->name;
+							$context['tags'][ $tag->term_id ]['results'] ++;
 						}
 					}
 				}
@@ -785,8 +775,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 			$search_action = filter_input( INPUT_GET, 'search-action', FILTER_SANITIZE_STRING );
 
-			if ( ! is_admin() && is_search() ||
-			wp_doing_ajax() && ( 'get_paged_posts' === $search_action ) ) {
+			if ( ( ! is_admin() && is_search() ) || ( wp_doing_ajax() && ( 'get_paged_posts' === $search_action ) ) ) {
 				$mime_types = implode( ',', self::DOCUMENT_TYPES );
 				$where     .= ' AND ' . $wpdb->posts . '.post_mime_type IN("' . $mime_types . '","") ';
 			}
@@ -839,16 +828,14 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		public function view() {
 			Timber::render(
 				$this->templates,
-				$this->context
-				// TODO Uncomment these to enable search page cache.
-				// ,self::DEFAULT_CACHE_TTL,
-				// \Timber\Loader::CACHE_OBJECT
+				$this->context,
+				self::DEFAULT_CACHE_TTL,
+				\Timber\Loader::CACHE_OBJECT
 			);
 		}
 
 		/**
 		 * Return search results as JSON.
-		 * TODO rename without gpea_.
 		 */
 		public function gpea_view_json() {
 			return wp_json_encode(
@@ -883,15 +870,16 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		}
 
 		/**
-		 * Set main issues ID. TODO abstract this ID to main option.
+		 * Set main issues ID.
 		 */
 		public function set_main_issues() {
-			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-			if ( $main_issues_category ) {
-				$this->main_issues_category_id = $main_issues_category->term_id;
+			$planet4_options = get_option( 'planet4_options' );
+			$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? (int) $planet4_options['issues_parent_category'] : false;
+			if ( $main_issues_category_id ) {
+				$this->main_issues_category_id = $main_issues_category_id;
 				$main_issues = get_categories(
 					[
-						'parent' => $main_issues_category->term_id,
+						'parent' => $main_issues_category_id,
 					]
 				);
 				$main_issues_ids = array_map(

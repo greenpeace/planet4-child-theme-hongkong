@@ -33,20 +33,24 @@
 			<div class="box">
 				<div class="meta-box">
 					<div>
-						<span class="issue <%= main_issue_slug %>"><%= main_issue %></span>
+						<% if (typeof main_issue_slug !== 'undefined') { %>
+							<span class="issue <%= main_issue_slug %>"><%= main_issue %></span>
+						<% } %>
 						<% if (typeof news_type !== 'undefined') { %>
 							<span><%= news_type %></span>
 						<% } %>
 					</div>
 					<div>
-						<span>
-							<% if (typeof reading_time !== 'undefined' && reading_time) { %>
+						<% if (typeof reading_time !== 'undefined' && reading_time) { %>
+							<span>
 								<span class="icon-clock"></span>
 								<%= reading_time %>
 								{{ __('Reading time', 'planet4-gpea-blocks') }}
-							<% } %>
-						</span>
-						<span><%= date %></span>
+							</span>
+						<% } %>
+						<% if (typeof date !== 'undefined') { %>
+							<span><%= date %></span>
+						<% } %>
 					</div>
 				</div>
 				<p>
@@ -54,6 +58,99 @@
 				</p>
 			</div>
 		</a>
+	</script>
+
+	<!-- Project main card followed !!! -->
+	<script id="template-section-projects-following" type="text/template">
+		<section class="section-projects-following">
+			<a href="<%= link %>" class="project-large">
+				<div class="project-large-overflow">
+				<div class="thumbnail" style="background-image: url(<%= image %>);"></div>
+	
+				<div class="project-summary">
+					<h3 class="project-summary-title"><%= title %> <span class="icon-chevron-right"></span></h3>
+					<div class="project-summary-details">
+						<div class="project-summary-issue issue <%= main_issue_slug %>"><%= main_issue_name %></div>
+						<div class="project-summary-open">
+							<div class="project-summary-open-name">{{ __( 'Date of start', 'gpea_theme' ) }}</div>
+							<%= start_date %>
+						</div>
+						<div class="project-summary-area">
+							<div class="project-summary-area-name">{{ __( 'Zones interested', 'gpea_theme' ) }}</div>
+							<%= localization %>
+						</div>
+						<div class="project-summary-progress">
+							<div class="circle-progress-bar">
+								<span><%= project_percentage %>%</span>
+								<svg width="232" height="232" viewBox="0 0 232 232">
+									<circle
+										cx="116"
+										cy="116"
+										r="112"
+										fill="none"
+										stroke="#ffffff"
+										stroke-opacity="0.3"
+										stroke-width="8"
+									/>
+									<!--    Assuming a percentage of 43%:                     -->
+									<!--    stroke-dasharray = 2 * π * r = 697.433             -->
+									<!--    stroke-dashoffset = stroke-dasharray * (1 - 0.43)    -->
+									<circle
+										cx="116"
+										cy="116"
+										r="112"
+										fill="none"
+										stroke="#ffffff"
+										stroke-width="8"
+										stroke-dasharray="697.433"
+										stroke-dashoffset="<%= stroke_dashoffset %>"
+									/>
+								</svg>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+			</a>
+			<div class="posts js-project-related">
+				<%= related_posts %>
+			</div>
+		</section>
+	</script>
+
+
+	<!-- taken from where the sun don't shine -->
+	<script id="template-project-post-update" type="text/template">
+		<a href="<%= link %>" class="card-update compact">
+			<div
+				class="thumbnail lazy"
+				data-bg="url(<%= image %>)"
+			></div>
+			<div class="box">
+				<div class="meta-box">
+					<div>
+						<span class="issue <%= main_issue_slug %>"><%= main_issue_name %></span>
+						<% if (typeof news_type !== 'undefined') { %>
+							<span><%= news_type %></span>
+						<% } %>
+						
+					</div>
+				</div>
+				<p>
+					<%= title %>
+				</p>
+				<div class="meta-box">
+					<div>
+						<% if (typeof reading_time !== 'undefined' && reading_time) { %>
+							<span class="icon-clock"></span>
+							<%= reading_time %>
+							{{ __('Reading time', 'planet4-gpea-blocks') }}
+						<% } %>
+						<span><%= post_date %></span>
+					</div>
+				</div>
+			</div>
+		</a>		
 	</script>
 
 	<!-- <ul class="skip-links">

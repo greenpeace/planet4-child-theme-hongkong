@@ -1,18 +1,32 @@
 .section-text-images {
-  min-height: 300px;
+  padding: 0 !important;
+  display: flex;
+  align-items: stretch;
 
   > .ct-container {
     padding-top: 40px;
-    padding-bottom: 40px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    > * {
+      margin-top: 0;
+    }
   }
 
   h2 {
     @include title-mid;
   }
 
+  .ct-container {
+    text-align: center;
+  }
+
   .boxes {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     @include greaterThan('sm') {
       flex-direction: row;
@@ -22,10 +36,10 @@
   .box {
     flex: 1;
     padding: 40px 20px;
-    text-align: center;
     display: flex;
     justify-content: center;
     min-width: 0;
+    background: white;
 
     &:not(.plain) {
       color: $color-green;
@@ -42,11 +56,27 @@
 
     h2,
     p {
-      width: 70%;
-      margin: 0 auto 10px;
+      margin-top: 0;
 
       &:last-child {
         margin-bottom: 0;
+      }
+    }
+
+    .with-images {
+      h2,
+      p {
+        @include greaterThan('sm') {
+          width: initial;
+          margin-left: calc(((100vw - 960px) / 2) + 20px);
+          margin-right: 80px;
+        }
+
+        @include greaterThan('lg') {
+          width: initial;
+          margin-left: calc(((100vw - 1200px) / 2) + 20px);
+          margin-right: 120px;
+        }
       }
     }
 
@@ -87,19 +117,24 @@
     }
   }
 
-  .swiper-pagination {
+  .section-text-images-swiper .swiper-pagination {
     padding: 0;
     display: flex;
     top: 13px;
   }
 
-  .swiper-pagination-bullet {
+  .section-text-images-swiper .swiper-pagination-bullet {
+    display: inline-block;
     width: auto;
     flex: 1;
     background-color: white;
     opacity: 0.3;
     height: 4px;
     border-radius: 4px;
+
+    &:only-child {
+      display: none;
+    }
 
     &:first-child {
       margin-left: 38px;
@@ -112,6 +147,24 @@
     &.swiper-pagination-bullet-active {
       opacity: 1;
     }
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    position: absolute;
+    top: 30px;
+    bottom: 0;
+    left: 0;
+    width: 30%;
+    height: auto;
+    margin: 0;
+    opacity: 0;
+  }
+
+  .swiper-button-next {
+    left: initial;
+    right: 0;
+    width: 70%;
   }
 }
 

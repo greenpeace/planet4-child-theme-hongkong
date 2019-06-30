@@ -705,8 +705,6 @@ class P4CT_Metabox_Register {
 	 * @return bool  display metabox
 	 */
 	private function generate_post_select( $post_type, $post_attribute, $page_template ) {
-		$post_type_object = get_post_type_object( $post_type );
-		$label = $post_type_object->label;
 
 		$options = array(
 			'post_type'        => $post_type,

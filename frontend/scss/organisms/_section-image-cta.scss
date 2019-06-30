@@ -1,5 +1,5 @@
 .section-image-cta {
-  background: $gradient-smoke-inverted;
+  background-image: $gradient-smoke-inverted !important;
 
   @include lessThan('sm') {
     padding: 30px 0 20px;

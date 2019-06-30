@@ -1,12 +1,9 @@
 .section-report-launcher {
-  padding: 20px 0;
-  background-color: $color-blue;
+  background: $color-blue !important;
   color: white;
-  @include font-smoothing;
+  // @include font-smoothing;
 
   @include greaterThan('sm') {
-    padding: 40px 0;
-
     .ct-container {
       display: flex;
       justify-content: space-between;
