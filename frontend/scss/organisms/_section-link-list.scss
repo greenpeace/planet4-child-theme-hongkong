@@ -1,7 +1,10 @@
 .section-link-list {
-  padding: 20px 0;
-  background-color: $color-blue;
+  background: $color-blue !important;
   color: white;
+
+  .ct-container > * {
+    max-width: 500px;
+  }
 
   h5 {
     margin-bottom: 3px;

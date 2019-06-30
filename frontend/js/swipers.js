@@ -160,7 +160,6 @@ export default function(Swiper) {
     const labelSwiper = new Swiper($this[0], {
       slidesPerView: 'auto',
       centeredSlides: true,
-      simulateTouch: false,
       slideToClickedSlide: true,
     });
 

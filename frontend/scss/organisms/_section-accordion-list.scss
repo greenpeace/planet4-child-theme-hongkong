@@ -1,5 +1,5 @@
 .section-accordion-list {
-  padding: 20px 0;
+  min-height: 0 !important;
 
   h2 {
     color: $color-green;
@@ -8,5 +8,9 @@
     @include greaterThan('sm') {
       margin-bottom: 50px;
     }
+  }
+
+  .ct-container > p {
+    margin-bottom: 0;
   }
 }

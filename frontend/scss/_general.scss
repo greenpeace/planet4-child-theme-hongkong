@@ -133,9 +133,11 @@ img.lazy {
   }
 }
 
-.outer_block_container > section {
-  min-height: 440px;
+.outer_block_container > section,
+.page-template > section {
+  min-height: 400px;
   padding: 40px 0 30px;
+  background-image: $gradient-smoke;
 }
 
 @include greaterThan('sm') {

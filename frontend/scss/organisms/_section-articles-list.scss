@@ -1,6 +1,4 @@
 .section-articles-list {
-  padding: 20px 0;
-
   @include lessThan('sm') {
     .tags {
       white-space: nowrap;

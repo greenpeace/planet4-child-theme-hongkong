@@ -1,8 +1,18 @@
 .section-projects {
-  padding: 20px 0;
-
   &.dark {
     background: $color-blue;
+  }
+
+  .swiper-container [class^='swiper-button-'] {
+    margin-top: -70px;
+  }
+
+  .swiper-button-next {
+    right: 0;
+  }
+
+  .swiper-button-prev {
+    left: -16px;
   }
 }
 
@@ -15,5 +25,4 @@
   .posts {
     margin-bottom: 20px;
   }
-
 }
