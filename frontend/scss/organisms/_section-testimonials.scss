@@ -1,6 +1,5 @@
 .section-testimonials {
   // @include font-smoothing;
-  background: $color-blue !important;
   text-align: center;
   color: white;
 
@@ -10,6 +9,10 @@
     &.swiper-pagination-bullet-active {
       opacity: 1;
     }
+  }
+
+  &.layout-carousel {
+    background: $color-blue !important;
   }
 
   &.layout-tiny-carousel {

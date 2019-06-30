@@ -2,6 +2,7 @@
 .page-template-petition .outer_block_container {
   padding-top: 15px !important;
   padding-bottom: 10px !important;
+  background: white !important;
 
   &.ct-container {
     @include ct-container-guardian;
