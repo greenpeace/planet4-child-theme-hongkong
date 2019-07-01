@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8"><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1123.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);</script>
+	<title>demo petition - Greenpeace</title>
+	<meta name="description" content="Greenpeace">
+
+										<meta name="title" content="demo&#x20;petition&#x20;-&#x20;Greenpeace"/>
+	<meta property="og:title" content="demo&#x20;petition&#x20;-&#x20;Greenpeace" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="https://master.k8s.p4.greenpeace.org/hongkong/demo-petition" />
+			<meta property="og:site_name" content="Greenpeace" />
+
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="Greenpeace" />
+	<meta name="twitter:title" content="demo&#x20;petition&#x20;-&#x20;Greenpeace">
+
+			<meta name="twitter:creator" content="alessandro">
+
+
+
+
+<script type='application/ld+json'>{"@context":"http:\/\/schema.org","@type":"WebSite","url":"https:\/\/master.k8s.p4.greenpeace.org\/hongkong","name":"Greenpeace","alternateName":"Greenpeace","potentialAction":{"@type":"SearchAction","target":"https:\/\/master.k8s.p4.greenpeace.org\/hongkong\/?s={search_term_string}&orderby=_score","query-input":"required name=search_term_string"}}</script>
+<script type='application/ld+json'>{"@context":"http:\/\/schema.org","@type":"Organization","url":"https:\/\/master.k8s.p4.greenpeace.org\/hongkong","sameAs":["https:\/\/www.facebook.com\/greenpeace.international","https:\/\/twitter.com\/greenpeace","https:\/\/www.youtube.com\/greenpeace","https:\/\/www.instagram.com\/greenpeace\/"],"name":"Greenpeace","logo":"https:\/\/master.k8s.p4.greenpeace.org\/hongkong\/wp-content\/themes\/planet4-master-theme\/images\/Greenpeace-logo.png"}</script>
+	<link rel="pingback" href="https://master.k8s.p4.greenpeace.org/hongkong/xmlrpc.php">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="shortcut icon" type="image/ico" href="https://master.k8s.p4.greenpeace.org/hongkong/wp-content/themes/planet4-master-theme/favicon.ico"/>
+	<link rel="dns-prefetch" href="//act.greenpeace.org">
+	<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://master.k8s.p4.greenpeace.org/hongkong/wp-includes/css/dist/block-library/style.min.css?ver=5.2.2' type='text/css' media='all' />
+<link rel='stylesheet' id='plugin-en-css'  href='https://master.k8s.p4.greenpeace.org/hongkong/wp-content/plugins/planet4-plugin-engagingnetworks/style.css?ver=1561984660' type='text/css' media='all' />
+<link rel='stylesheet' id='child-style-fonts-css'  href='https://master.k8s.p4.greenpeace.org/hongkong/wp-content/themes/planet4-child-theme-hongkong/static/css/hk-fonts.css?ver=1561984662' type='text/css' media='all' />
+<link rel='stylesheet' id='child-style-css'  href='/wp-content/themes/planet4-child-theme-hongkong/static/css/style.css' type='text/css' media='all' />
+<link rel='stylesheet' id='elasticpress-facets-css'  href='https://master.k8s.p4.greenpeace.org/hongkong/wp-content/plugins/elasticpress/dist/css/facets.min.css?ver=3.0.3' type='text/css' media='all' />
+<script type='text/javascript' src='https://master.k8s.p4.greenpeace.org/hongkong/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp'></script>
+<script type='text/javascript' src='https://master.k8s.p4.greenpeace.org/hongkong/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<link rel='https://api.w.org/' href='https://master.k8s.p4.greenpeace.org/hongkong/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://master.k8s.p4.greenpeace.org/hongkong/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://master.k8s.p4.greenpeace.org/hongkong/wp-includes/wlwmanifest.xml" />
+<link rel="canonical" href="https://master.k8s.p4.greenpeace.org/hongkong/demo-petition/" />
+<link rel='shortlink' href='https://master.k8s.p4.greenpeace.org/hongkong/?p=2188' />
+<link rel="alternate" type="application/json+oembed" href="https://master.k8s.p4.greenpeace.org/hongkong/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmaster.k8s.p4.greenpeace.org%2Fhongkong%2Fdemo-petition%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://master.k8s.p4.greenpeace.org/hongkong/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmaster.k8s.p4.greenpeace.org%2Fhongkong%2Fdemo-petition%2F&#038;format=xml" />
+<script type="text/javascript">
+(function(url){
+	if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+	var addEvent = function(evt, handler) {
+		if (window.addEventListener) {
+			document.addEventListener(evt, handler, false);
+		} else if (window.attachEvent) {
+			document.attachEvent('on' + evt, handler);
+		}
+	};
+	var removeEvent = function(evt, handler) {
+		if (window.removeEventListener) {
+			document.removeEventListener(evt, handler, false);
+		} else if (window.detachEvent) {
+			document.detachEvent('on' + evt, handler);
+		}
+	};
+	var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+	var logHuman = function() {
+		if (window.wfLogHumanRan) { return; }
+		window.wfLogHumanRan = true;
+		var wfscr = document.createElement('script');
+		wfscr.type = 'text/javascript';
+		wfscr.async = true;
+		wfscr.src = url + '&r=' + Math.random();
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+		for (var i = 0; i < evts.length; i++) {
+			removeEvent(evts[i], logHuman);
+		}
+	};
+	for (var i = 0; i < evts.length; i++) {
+		addEvent(evts[i], logHuman);
+	}
+})('//master.k8s.p4.greenpeace.org/hongkong/?wordfence_lh=1&hid=0F75A52398B92842D384C40435640471');
+</script><link rel="icon" href="https://storage.googleapis.com/planet4-hongkong-stateless-develop/2018/05/913c0158-cropped-5b45d6f2-p4_favicon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://storage.googleapis.com/planet4-hongkong-stateless-develop/2018/05/913c0158-cropped-5b45d6f2-p4_favicon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://storage.googleapis.com/planet4-hongkong-stateless-develop/2018/05/913c0158-cropped-5b45d6f2-p4_favicon-180x180.png" />
+<meta name="msapplication-TileImage" content="https://storage.googleapis.com/planet4-hongkong-stateless-develop/2018/05/913c0158-cropped-5b45d6f2-p4_favicon-270x270.png" />
+
+	</head>
+
+
+<body class="page-template page-template-page-templates page-template-petition page-template-page-templatespetition-php page page-id-2188 arctic" >
+
+	<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+		appId      : '1579566855506544',
+		xfbml      : true,
+		version    : 'v3.3'
+		});
+		// FB.AppEvents.logPageView();
+	};
+
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		// js.src = "https://connect.facebook.net/zh_HK/sdk.js";
+		js.src = "https://connect.facebook.net/en_UK/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<!-- as seen in big_carousel_manual_selection.twig !!! KEEP SYNCRONIZED !!! -->
+	<script id="template-card-petition-big" type="text/template">
+		<div class="swiper-slide card-petition" data-postid="<%= ID %>" data-pageid="<%= engaging_pageid %>" data-target="<%= engaging_target %>">
+			<div class="thumbnail" style="background-image: url(<%= img_url %>)"></div>
+			<div class="box">
+				<div
+					class="progress-bar">
+					<div class="percent" style="width: <%= percentage %>%"></div>
+				</div>
+				<% if (typeof signatures !== 'undefined' && signatures) { %>
+					<div class="stats"><%= signatures %> signers</div>
+				<% } %>
+				<div class="content">
+					<p><%= post_title %></p>
+					<a href="<%= link %>" class="button">Sign now</a>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<!-- as seen in big_carousel_manual_selection.twig !!! KEEP SYNCRONIZED !!! -->
+	<script id="template-card-update-big" type="text/template">
+		<a href="<%= link %>" class="swiper-slide card-update" data-postid="<%= ID %>">
+			<div class="thumbnail" style="background-image: url(<%= img_url %>)"></div>
+			<div class="box">
+				<div class="meta-box">
+					<div>
+						<% if (typeof main_issue_slug !== 'undefined') { %>
+							<span class="issue <%= main_issue_slug %>"><%= main_issue %></span>
+						<% } %>
+						<% if (typeof news_type !== 'undefined') { %>
+							<span><%= news_type %></span>
+						<% } %>
+					</div>
+					<div>
+						<% if (typeof reading_time !== 'undefined' && reading_time) { %>
+							<span>
+								<span class="icon-clock"></span>
+								<%= reading_time %>
+								Reading time
+							</span>
+						<% } %>
+						<% if (typeof date !== 'undefined') { %>
+							<span><%= date %></span>
+						<% } %>
+					</div>
+				</div>
+				<p>
+					<%= post_title %>
+				</p>
+			</div>
+		</a>
+	</script>
+
+	<!-- Project main card followed !!! -->
+	<script id="template-section-projects-following" type="text/template">
+		<section class="section-projects-following">
+			<a href="<%= link %>" class="project-large">
+				<div class="project-large-overflow">
+				<div class="thumbnail" style="background-image: url(<%= image %>);"></div>
+
+				<div class="project-summary">
+					<h3 class="project-summary-title"><%= title %> <span class="icon-chevron-right"></span></h3>
+					<div class="project-summary-details">
+						<div class="project-summary-issue issue <%= main_issue_slug %>"><%= main_issue_name %></div>
+						<div class="project-summary-open">
+							<div class="project-summary-open-name">Date of start</div>
+							<%= start_date %>
+						</div>
+						<div class="project-summary-area">
+							<div class="project-summary-area-name">Zones interested</div>
+							<%= localization %>
+						</div>
+						<div class="project-summary-progress">
+							<div class="circle-progress-bar">
+								<span><%= project_percentage %>%</span>
+								<svg width="232" height="232" viewBox="0 0 232 232">
+									<circle
+										cx="116"
+										cy="116"
+										r="112"
+										fill="none"
+										stroke="#ffffff"
+										stroke-opacity="0.3"
+										stroke-width="8"
+									/>
+									<!--    Assuming a percentage of 43%:                     -->
+									<!--    stroke-dasharray = 2 * π * r = 697.433             -->
+									<!--    stroke-dashoffset = stroke-dasharray * (1 - 0.43)    -->
+									<circle
+										cx="116"
+										cy="116"
+										r="112"
+										fill="none"
+										stroke="#ffffff"
+										stroke-width="8"
+										stroke-dasharray="697.433"
+										stroke-dashoffset="<%= stroke_dashoffset %>"
+									/>
+								</svg>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+			</a>
+			<div class="posts js-project-related">
+				<%= related_posts %>
+			</div>
+		</section>
+	</script>
+
+
+	<!-- taken from where the sun don't shine -->
+	<script id="template-project-post-update" type="text/template">
+		<a href="<%= link %>" class="card-update compact">
+			<div
+				class="thumbnail lazy"
+				data-bg="url(<%= image %>)"
+			></div>
+			<div class="box">
+				<div class="meta-box">
+					<div>
+						<span class="issue <%= main_issue_slug %>"><%= main_issue_name %></span>
+						<% if (typeof news_type !== 'undefined') { %>
+							<span><%= news_type %></span>
+						<% } %>
+
+					</div>
+				</div>
+				<p>
+					<%= title %>
+				</p>
+				<div class="meta-box">
+					<div>
+						<% if (typeof reading_time !== 'undefined' && reading_time) { %>
+							<span class="icon-clock"></span>
+							<%= reading_time %>
+							Reading time
+						<% } %>
+						<span><%= post_date %></span>
+					</div>
+				</div>
+			</div>
+		</a>
+	</script>
+
+	<!-- <ul class="skip-links">
+	 <li><a href="#header">Skip to Navigation</a></li>
+	 <li><a href="#content">Skip to Content</a></li>
+	 <li><a href="#footer">Skip to Footer</a></li>
+	 </ul> -->
+
+
+	  <header>
+    <div class="ct-container">
+      <div class="content">
+        <div class="mobile-box">
+          <a href="https://master.k8s.p4.greenpeace.org/hongkong">
+            <span class="icon-search"></span>
+          </a>
+        </div>
+        <div class="left-box">
+          <a href="https://master.k8s.p4.greenpeace.org/hongkong" class="logo" aria-label="Search">
+            <span class="icon-greenpeace"></span>
+          </a>
+              <div class="dropdown">
+	<button>
+	    <p>HK</p>
+	    <span class="icon-down-arrow"></span>
+	</button>
+	<div class="dropdown-menu">
+	    <a class="dropdown-item" href="#">HK</a>
+	    <a class="dropdown-item" href="#">TW</a>
+	    <a class="dropdown-item" href="#">SK</a>
+	</div>
+    </div>
+        </div>
+        <div class="center-box">
+          <ul class="menu">
+                          <li class="item item__latest-news menu-item menu-item-type-post_type menu-item-object-page menu-item-2164 ">
+                <a
+                  href="https://master.k8s.p4.greenpeace.org/hongkong/from-the-earth/">
+                  <!-- TODO add icon-globe or icon-people under menu CSS classes -->
+                  <span class="item__menu__icon"></span>
+                  <p>最新消息</p>
+                </a>
+              </li>
+                          <li class="item item__home menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-2165 ">
+                <a
+                  href="https://master.k8s.p4.greenpeace.org/hongkong/">
+                  <!-- TODO add icon-globe or icon-people under menu CSS classes -->
+                  <span class="item__menu__icon"></span>
+                  <p>Homepage主頁</p>
+                </a>
+              </li>
+                          <li class="item item__make-change menu-item menu-item-type-post_type menu-item-object-page menu-item-2168 ">
+                <a
+                  href="https://master.k8s.p4.greenpeace.org/hongkong/make-change/">
+                  <!-- TODO add icon-globe or icon-people under menu CSS classes -->
+                  <span class="item__menu__icon"></span>
+                  <p>推動改變</p>
+                </a>
+              </li>
+                      </ul>
+        </div>
+        <div class="right-box">
+                      <div class="stepper">
+              <div class="step is-checked js-step-sign">Sign</div>
+              <div class="step is-disabled js-step-share">Share</div>
+              <div class="step is-disabled js-step-donate">Donate</div>
+            </div>
+                  </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-toolbar">
+                  <a href="https://master.k8s.p4.greenpeace.org/hongkong/from-the-earth/" class="item item__latest-news menu-item menu-item-type-post_type menu-item-object-page menu-item-2164 ">
+          <p class="">最新消息</p>
+          <span class="item__menu__icon"></span>
+        </a>
+                        <a href="https://master.k8s.p4.greenpeace.org/hongkong/" class="item item__home menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-2165 ">
+          <p class="visuallyhidden">Homepage主頁</p>
+          <span class="item__menu__icon"></span>
+        </a>
+                        <a href="https://master.k8s.p4.greenpeace.org/hongkong/make-change/" class="item item__make-change menu-item menu-item-type-post_type menu-item-object-page menu-item-2168 ">
+          <span class="item__menu__icon"></span>
+          <p>推動改變</p>
+        </a>
+            </div>
+
+	<div class="outer_block_container">
+			<span id="petition-source" data-petition="2188">
+		<div class="progress-bar">
+			<div class="percent" style="width: 100%"></div>
+		</div>
+			</span>
+		<div class="enform-wrap enform-side-style block-wide">
+					<picture>
+				<img src="https://storage.googleapis.com/planet4-hongkong-stateless/2019/06/5d69a267-gp04z2l.jpg"
+					 style="object-position:;opacity:;"
+					 border="0"
+					 srcset="https://storage.googleapis.com/planet4-hongkong-stateless/2019/06/5d69a267-gp04z2l.jpg 1200w, https://storage.googleapis.com/planet4-hongkong-stateless/2019/06/5d69a267-gp04z2l-300x200.jpg 300w, https://storage.googleapis.com/planet4-hongkong-stateless/2019/06/5d69a267-gp04z2l-768x512.jpg 768w, https://storage.googleapis.com/planet4-hongkong-stateless/2019/06/5d69a267-gp04z2l-1024x683.jpg 1024w, https://storage.googleapis.com/planet4-hongkong-stateless/2019/06/5d69a267-gp04z2l-510x340.jpg 510w"
+					 sizes=""
+				/>
+			</picture>
+
+		<div class="caption-overlay"></div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+											<div class="form-caption">
+							<h1>守護北極 demo</h1>
+							<p>立即聯署，救救北極熊 demo</p>
+						</div>
+
+					<div class="enform" id="enform" data-redirect-url="https://master.k8s.p4.greenpeace.org/hongkong/petition-thankyou-page/">
+						<div class="title-and-description">
+							<h2>支持環保 demo</h2>
+															<div class="enform-extra-header-placeholder"></div>
+														<p>北極正受到鑽油威脅，請立即行動！demo</p>
+						</div>
+						<div class="form-container">
+							<form id="p4en_form" name="p4en_form" method="post" novalidate>
+								<input type="hidden" id="_wpnonce" name="_wpnonce" value="187f18b6bc" /><input type="hidden" name="_wp_http_referer" value="/hongkong/demo-petition/" />
+								<input type="hidden" name="enblock_submit" value="">
+								<input type="hidden" name="en_page_id" value="9469">
+								<input type="hidden" name="thankyou_title" value="感謝你的支持！demo">
+								<input type="hidden" name="thankyou_subtitle" value="你的力量，xxxx demo">
+								<input type="hidden" name="enform_goal" id="enform_goal" value="Petition Signup">
+
+
+
+								<div class="">
+									<div class="">
+
+
+	<div class="formblock-flex donations-formsection-info">
+
+
+
+
+												<div
+						class="en__field en__field--text en__field--46264 en__field--emailAddress">
+						<div
+							class="en__field__element en__field__element--text form-group" style="display:block;">
+
+															<label class="en__field__top__label">
+									Email
+								</label>
+														<input
+								id="en__field_supporter_emailAddress"
+								name="supporter.emailAddress"
+								type="email"
+								class="en__field__input en__field__input--text form-control"
+								value=""
+								data-errormessage="Please enter a valid e-mail address."
+								data-validate_regex=""
+								data-validate_regex_msg=""
+								data-validate_callback=""
+																required
+								size="40"/>
+						</div>
+					</div>
+
+
+
+												<div
+						class="en__field en__field--text en__field--46269 en__field--firstName">
+						<div
+							class="en__field__element en__field__element--text form-group" style="display:block;">
+
+															<label class="en__field__top__label">
+									First name
+								</label>
+														<input
+								id="en__field_supporter_firstName"
+								name="supporter.firstName"
+								type="text"
+								class="en__field__input en__field__input--text form-control"
+								value=""
+								data-errormessage="This field is required"
+								data-validate_regex=""
+								data-validate_regex_msg=""
+								data-validate_callback=""
+
+								size="40"/>
+						</div>
+					</div>
+
+
+
+												<div
+						class="en__field en__field--text en__field--46275 en__field--phoneNumber">
+						<div
+							class="en__field__element en__field__element--text form-group" style="display:block;">
+
+															<label class="en__field__top__label">
+									Phone
+								</label>
+														<input
+								id="en__field_supporter_phoneNumber"
+								name="supporter.phoneNumber"
+								type="text"
+								class="en__field__input en__field__input--text form-control"
+								value=""
+								data-errormessage="This field is required"
+								data-validate_regex=""
+								data-validate_regex_msg=""
+								data-validate_callback=""
+
+								size="40"/>
+						</div>
+					</div>
+
+
+
+												<div class="en__field en__field--check en__field--7275">
+						<div class="en__field__element en__field__element--check form-group form-check-label-block custom-control p4-custom-control-input">
+							<label class="custom-checkbox">
+								<input
+									id="en__field_supporter_email_ok_hongkong"
+									name="supporter.questions.7275"
+									type="checkbox"
+									class="en__field__input en__field__input--checkbox"
+									value=""
+									data-errormessage="This field is required"
+
+								/>
+								<span class="custom-control-description">
+									我願意收到綠色和平發送的電子通訊，掌握環保工作的最新消息！我並同意綠色和平按照其個人資料政策與我保持聯絡。
+								</span>
+							</label>
+						</div>
+					</div>
+										</div>
+
+									</div>
+
+									<div class=" submit">
+										<button type="submit" form="p4en_form" name="p4en_form_save_button" id="p4en_form_save_button" class="btn btn-primary btn-block " >立即聯署 demo
+											<div class="three-quarters en-spinner" id="spinner" style="display:none;">...</div>
+										</button>
+										<div class="enform-notice"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+																<section class="section-text-images">
+				<div class="boxes">
+					<div class="box plain">
+													<div class="with-images">
+																	<h2>title</h2>
+																<p>text text text</p>
+															</div>
+											</div>
+											<div class="box fit">
+							<!-- TODO verificare HTML sezione -->
+							<div class="swiper-container section-text-images-swiper">
+								<div class="swiper-wrapper">
+																														<div class="swiper-slide image lazy" data-bg="url(https://storage.googleapis.com/planet4-hongkong-stateless/2019/06/2f048977-lhotse6.jpg)"></div>
+																											</div>
+								<div class="swiper-pagination"></div>
+								<div class="swiper-button-next">
+									<span class="icon-chevron-right"></span>
+								</div>
+								<div class="swiper-button-prev">
+									<span class="icon-chevron-right"></span>
+								</div>
+							</div>
+						</div>
+									</div>
+			</section>
+
+
+	</div>
+
+
+			<footer>
+	<div class="footer-upper">
+		<div class="ct-container">
+			<div class="socials mobile-only">
+				<h6>Follow us</h6>
+				<ul class="social-links">
+											<li><a href="https://www.facebook.com/greenpeace.international" aria-label="facebook"><span class="icon-facebook"></span></a></li>
+											<li><a href="https://twitter.com/greenpeace" aria-label="twitter"><span class="icon-twitter"></span></a></li>
+											<li><a href="https://www.youtube.com/greenpeace" aria-label="youtube"><span class="icon-youtube"></span></a></li>
+											<li><a href="https://www.instagram.com/greenpeace/" aria-label="instagram"><span class="icon-instagram"></span></a></li>
+									</ul>
+				<hr />
+			</div>
+			<div class="footer-greenpeace">
+				<p>
+					<span class="icon-greenpeace"></span>
+				</p>
+				<p>綠色和平是獨立的國際環保組織，通過科學研究、政策倡議及和平行動，揭露全球環境問題並提出相應解決方案。我們從不接受任何政府、企業或政治團體的資助，只接受個人的直接捐款，以維持公正獨立。</p>
+			</div>
+			<div hidden>
+				<h5>Our commitment</h5>
+				<ul>
+					<li><a href="https://master.k8s.p4.greenpeace.org/hongkong">Projects</a></li>
+					<li><a href="https://master.k8s.p4.greenpeace.org/hongkong">Main issues</a></li>
+				</ul>
+			</div>
+			<div>
+				<h5>About Greenpeace</h5>
+				<ul>
+											<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/about/overview/">Overview簡介</a></li>
+											<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/about/mission/">Mission核心使命</a></li>
+											<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/about/how-we-act/">How we act行動理念</a></li>
+											<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/about/reports/">Reports報告刊物</a></li>
+											<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/about/people/">People團隊成員</a></li>
+											<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/about/hiring/">Hiring職位空缺</a></li>
+											<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/about/contact/">Contact聯絡我們</a></li>
+											<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/about/faq/">FAQ常見問題</a></li>
+									</ul>
+			</div>
+			<div class="desktop-only">
+				<h5>Follow us</h5>
+				<ul class="social-links">
+											<li><a href="https://www.facebook.com/greenpeace.international" aria-label="facebook"><span class="icon-facebook"></span></a></li>
+											<li><a href="https://twitter.com/greenpeace" aria-label="twitter"><span class="icon-twitter"></span></a></li>
+											<li><a href="https://www.youtube.com/greenpeace" aria-label="youtube"><span class="icon-youtube"></span></a></li>
+											<li><a href="https://www.instagram.com/greenpeace/" aria-label="instagram"><span class="icon-instagram"></span></a></li>
+									</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer-lower">
+		<div class="ct-container">
+			<ul class="press-media-links">
+				<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/press-media/press-releases/">Press release and media</a></li>
+				<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/my-preferences/">My Preferences</a></li>
+			</ul>
+			<hr />
+			<ul class="secondary-links">
+									<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/policies/privacy-and-cookies/">Privacy and cookies</a></li>
+									<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/policies/terms-and-conditions/">Terms and conditions</a></li>
+									<li><a href="https://master.k8s.p4.greenpeace.org/hongkong/policies/our-community-policy/">Our community policy</a></li>
+							</ul>
+		</div>
+	</div>
+</footer>
+
+									<script type='text/javascript' src='https://master.k8s.p4.greenpeace.org/hongkong/wp-content/themes/planet4-master-theme/main.js?ver=1561984663'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js?ver=1.9.0'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js?ver=1.14.3'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js?ver=4.1.1'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js?ver=2.0.8'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var p4_vars = {"ajaxurl":"https:\/\/master.k8s.p4.greenpeace.org\/hongkong\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://master.k8s.p4.greenpeace.org/hongkong/wp-content/plugins/planet4-plugin-blocks/main.js?ver=1561984660'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var en_vars = {"ajaxurl":"https:\/\/master.k8s.p4.greenpeace.org\/hongkong\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://master.k8s.p4.greenpeace.org/hongkong/wp-content/plugins/planet4-plugin-engagingnetworks/main.js?ver=1561984660'></script>
+<script type='text/javascript' src='/wp-content/themes/planet4-child-theme-hongkong/static/js/script.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var localizations = {"ajaxurl":"https:\/\/master.k8s.p4.greenpeace.org\/hongkong\/wp-admin\/admin-ajax.php"};
+var localizations = {"ajaxurl":"https:\/\/master.k8s.p4.greenpeace.org\/hongkong\/wp-admin\/admin-ajax.php"};
+var localizations = {"ajaxurl":"https:\/\/master.k8s.p4.greenpeace.org\/hongkong\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://master.k8s.p4.greenpeace.org/hongkong/wp-content/themes/planet4-child-theme-hongkong/static/js/dev_integration.js?ver=1561984663'></script>
+<script type='text/javascript' src='https://master.k8s.p4.greenpeace.org/hongkong/wp-includes/js/underscore.min.js?ver=1.8.3'></script>
+<script type='text/javascript' src='https://master.k8s.p4.greenpeace.org/hongkong/wp-content/plugins/elasticpress/dist/js/facets.min.js?ver=3.0.3'></script>
+<script type='text/javascript' src='https://master.k8s.p4.greenpeace.org/hongkong/wp-includes/js/wp-embed.min.js?ver=5.2.2'></script>
+
+	<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"a2e9e806c0","applicationID":"129995569","transactionName":"ZQFWZ0FZXBFTVUZbV1xLdVBHUV0MHUZXRlFGDVtd","queueTime":0,"applicationTime":451,"atts":"SUZVEQlDTx8=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>

@@ -1,8 +1,11 @@
-.section-post-content,
-.page-template-petition .outer_block_container {
+.section-post-content {
   padding-top: 15px !important;
   padding-bottom: 10px !important;
-  background: white !important;
+}
+
+.section-post-content,
+.page-template-petition .outer_block_container {
+  background: transparent !important;
 
   &.ct-container {
     @include ct-container-guardian;
