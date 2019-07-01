@@ -62,8 +62,8 @@ $context['header_button_title']         = $page_meta_data['p4_button_title'][0] 
 $context['header_button_link']          = $page_meta_data['p4_button_link'][0] ?? '';
 // $context['header_button_link_checkbox'] = $page_meta_data['p4_button_link_checkbox'];
 $context['background_image']            = wp_get_attachment_url( get_post_meta( get_the_ID(), 'background_image_id', 1 ) );
-$context['custom_body_classes']         = $main_issue_slug;
-$context['main_issue_id']               = $main_issue_id;
+$context['main_issue_id']               = $main_issue_id ?? '';
+$context['custom_body_classes']         = $main_issue_slug ?? '';
 
 $context['related_posts']               = $gpea_extra->gpea_get_related( $post->ID, 3 );
 
