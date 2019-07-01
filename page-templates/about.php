@@ -64,6 +64,7 @@ if ( $parent_id ) {
 		'numberposts' => 20,
 		'post_status' => 'publish',
 		'orderby'     => 'menu_order',
+		'order'       => 'ASC',
 	);
 	$about_menu = get_children( $about_menu_args );
 	if ( ! empty( $about_menu ) ) {
