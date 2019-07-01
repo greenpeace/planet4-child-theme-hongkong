@@ -336,6 +336,8 @@ function connectENForm() {
   ctaFacebook.classList.add('button', 'fb', 'js-sign-facebook');
   ctaFacebook.innerHTML = 'Facebook';
 
+  const checkboxCheckall = document.querySelector('#en__field_supporter_all_check');
+
   form.insertBefore(stats, form.firstChild);
   form.insertBefore(close, form.firstChild);
   cta.parentNode.insertBefore(ctaFacebook, cta);
@@ -369,6 +371,17 @@ function connectENForm() {
   close.addEventListener('click', e => {
     form.classList.remove('is-open');
   });
+
+  // required by korea: if checkbox with "check_all" feature present
+  if ( checkboxCheckall ) {
+    checkboxCheckall.addEventListener('click', e => {
+      let privacyOptions = document.querySelectorAll("[type=checkbox]");
+      for (var i = 0, elementOption; elementOption = privacyOptions[i++];) {
+        elementOption.checked = checkboxCheckall.checked;
+      }
+    });
+  }  
+
 }
 connectENForm();
 
