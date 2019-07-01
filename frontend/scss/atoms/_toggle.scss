@@ -92,6 +92,10 @@
       padding-top: 20px;
     }
 
+    > * {
+      min-width: 700px;
+    }
+
     @include greaterThan('sm') {
       padding-left: 45px;
     }
