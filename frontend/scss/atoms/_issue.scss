@@ -18,3 +18,25 @@
     color: $color-health;
   }
 }
+
+a.issue:hover,
+a.issue:focus {
+  &.forests {
+    border-bottom-color: $color-forests;
+  }
+  &.oceans {
+    border-bottom-color: $color-oceans;
+  }
+  &.arctic {
+    border-bottom-color: $color-arctic;
+  }
+  &.climate {
+    border-bottom-color: $color-climate;
+  }
+  &.plastics {
+    border-bottom-color: $color-plastics;
+  }
+  &.health {
+    border-bottom-color: $color-health;
+  }
+}

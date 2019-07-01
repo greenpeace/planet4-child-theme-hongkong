@@ -85,7 +85,7 @@ $context['filter_url'] = add_query_arg(
 
 
 // Build the shortcode for articles block.
-if ( 'yes' === $post->include_articles ) {
+if ( 'no' !== $post->include_articles ) {
 	// $post->articles = "[shortcake_articles exclude_post_id='" . $post->ID . "' /]"; !
 	$gpea_extra = new P4CT_Site();
 	$context['related_posts'] = $gpea_extra->gpea_get_related( $post->ID, 3 );

@@ -13,6 +13,8 @@ import petitionThankyou from './petition-thankyou';
 import donation from './donation';
 import followUnfollow from './follow-unfollow';
 
+import { setFacebookUserInfo } from './facebook';
+
 // matches polyfill
 window.Element &&
   (function(ElementPrototype) {
@@ -336,6 +338,10 @@ function connectENForm() {
   ctaFacebook.classList.add('button', 'fb', 'js-sign-facebook');
   ctaFacebook.innerHTML = 'Facebook';
 
+  const checkboxCheckall = document.querySelector(
+    '#en__field_supporter_all_check'
+  );
+
   form.insertBefore(stats, form.firstChild);
   form.insertBefore(close, form.firstChild);
   cta.parentNode.insertBefore(ctaFacebook, cta);
@@ -344,6 +350,7 @@ function connectENForm() {
     if (!form.classList.contains('is-open')) {
       e.preventDefault();
       form.classList.add('is-open');
+      document.body.classList.add('has-open-form');
       // submitArea.append(ctaFacebook);
     } else {
       // e.preventDefault();
@@ -356,19 +363,47 @@ function connectENForm() {
   });
 
   ctaFacebook.addEventListener('click', e => {
+    e.preventDefault();
+
+    if (
+      FB &&
+      (!form.querySelector('[name="supporter.emailAddress"]').value ||
+        form.classList.contains('is-open'))
+    ) {
+      FB.login(
+        function(response) {
+          if (response.status === 'connected') {
+            setFacebookUserInfo(form);
+          } else {
+            console.error('User cancelled login or did not fully authorize.');
+            // social login interrupted
+          }
+          // }, { scope: 'email,user_birthday' });
+        },
+        { scope: 'email' }
+      );
+    }
+
     if (!form.classList.contains('is-open')) {
-      e.preventDefault();
       form.classList.add('is-open');
-    } else {
-      // e.preventDefault();
-      alert('fb connection in progress..');
-      // form.querySelector('form').submit()
+      document.body.classList.add('has-open-form');
     }
   });
 
   close.addEventListener('click', e => {
     form.classList.remove('is-open');
+    document.body.classList.remove('has-open-form');
   });
+
+  // required by korea: if checkbox with "check_all" feature present
+  if (checkboxCheckall) {
+    checkboxCheckall.addEventListener('click', e => {
+      let privacyOptions = document.querySelectorAll('[type=checkbox]');
+      for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {
+        elementOption.checked = checkboxCheckall.checked;
+      }
+    });
+  }
 }
 connectENForm();
 

@@ -39,9 +39,17 @@ header {
       align-items: center;
 
       .logo {
-        color: white;
-        font-size: 32px;
         text-decoration: none;
+        margin-top: 4px;
+      }
+
+      .logo-greenpeace {
+        display: inline-block;
+        height: 20px;
+        width: 185px;
+        background-size: contain;
+        background-position: left center;
+        background-repeat: no-repeat;
       }
 
       .dropdown {
@@ -274,7 +282,12 @@ header {
 
       .left-box {
         .logo {
-          font-size: 22px;
+          margin-left: 5px;
+        }
+
+        .logo-greenpeace {
+          height: 16px;
+          width: 148px;
         }
       }
 

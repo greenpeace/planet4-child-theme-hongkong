@@ -37,13 +37,24 @@ function byRecentDate(a, b) {
   return 0;
 }
 
-const homeFollower = function() {
-  if (!$('body').hasClass('js-home-follower')) return;
+
+export const sortByRecentUnixtime = function(posts) {
+  return posts.sort(byRecentDateUnixtime);
+};
+
+function byRecentDateUnixtime(a, b) {
+   if (a[1] < b[1]) return -1;
+   if (a[1] > b[1]) return 1;
+   return 0;
+ }
+
+const latestFollower = function() {
+  if (!$('body').hasClass('js-latest-earth')) return;
 
   const $featuredSwiper = $('.section-featured .swiper-container').first();
   const $existingPosts = $featuredSwiper.find('.swiper-slide');
 
-  const $sectionProjects = $('.section-projects').first();
+  const $trendingCollections = $('.section-article-row');
 
   const existingPosts = $existingPosts
     .toArray()
@@ -74,7 +85,7 @@ const homeFollower = function() {
       }
 
       followingResults.map(postsTag => {        
-        let followingResultsPosts = postsTag.posts;
+        followingResultsPosts = postsTag.posts;
         posts = posts.concat(followingResultsPosts);
       });
 
@@ -82,7 +93,7 @@ const homeFollower = function() {
       // console.log(posts.length + ' posts returned');
       posts = filterDuplicates(posts, existingPosts);
       sortByRecentFirst(posts);
-      posts = posts.slice(0, 5);      
+      posts = posts.slice(0, 5);
       // console.log(existingPosts.length + ' existing posts');
       // console.log(posts.length + ' posts returned');
 
@@ -123,62 +134,26 @@ const homeFollower = function() {
 
       // All done
       $featuredSwiper.removeClass('is-loading');
-    },
-    error: function(errorThrown) {
-      $featuredSwiper.removeClass('is-loading');
-      console.error(errorThrown);
-    },
-  });
 
-  // handle project section here
 
-  $sectionProjects.addClass('is-loading');
-  $.ajax({
-    url: p4_vars.ajaxurl,
-    type: 'post',
-    data: {
-      action: 'projectsFollowing',
-    },
-    success: function(data) {
-
-      let projects;
-
-      try {
-        projects = JSON.parse(data);
-      } catch (error) {
-        console.error(error);
-        $sectionProjects.removeClass('is-loading');
-        return;
-      }
+      // handle here also trending collections, same ajax call
       // Create the HTML element for each new post
-
-      const projectContainer = $('#template-section-projects-following');
-      const buildContainer = template(projectContainer[0].innerHTML);
-      const projectUpdate = $('#template-project-post-update');
-      const buildUpdate = template(projectUpdate[0].innerHTML);
       
+      sortByRecentUnixtime(followingResults);
+      followingResults = followingResults.slice(0, 3);
 
-      // const newPostsSlides = posts.map(post => {
-      //   if (post.engaging_pageid !== undefined) {
-      //     return buildPetition(post);
-      //   } else {
-      //     return buildUpdate(post);
-      //   }
-      // });
+      const articleRowContainer = $('#template-article-row-container');
+      const buildArticleRowContainer = template(articleRowContainer[0].innerHTML);
+      const articleRowPost = $('#template-article-row');
+      const buildArticleRowPost = template(articleRowPost[0].innerHTML);
 
-      const projectFollowing = projects.map(project => {        
-        let relatedPosts = (project.related).map(post => {
-            return buildUpdate(post);
-            // TODO: da aggiungere in secondo momento anche questa logica
-            // if (post.engaging_pageid !== undefined) {
-            //   return buildPetition(post);
-            // } else {
-            //   return buildUpdate(post);
-            // }
+      const trendingCollectionsDynamic = followingResults.map(collection => {        
+        let rowPosts = (collection.posts).map(post => {
+            return buildArticleRowPost(post);            
           })
-          project.related_posts = relatedPosts;
-          let sectionProject = buildContainer(project);
-          return sectionProject;
+          collection.row_posts = rowPosts;
+          let trendingCollectionsContainer = buildArticleRowContainer(collection);
+          return trendingCollectionsContainer;
       });
 
       // Add the new slides in 6th position (1 first slide + 5 regular slides)
@@ -188,17 +163,17 @@ const homeFollower = function() {
       //   newPostsSlides
       // );
 
-      $sectionProjects.html(projectFollowing);
+      // da sistemare per mostrare anche 2 trending attuali
+      $trendingCollections.html(trendingCollectionsDynamic);     
 
-      // All done
-      $sectionProjects.removeClass('is-loading');
-      $sectionProjects.removeClass('dark');
+
     },
     error: function(errorThrown) {
       $featuredSwiper.removeClass('is-loading');
       console.error(errorThrown);
     },
   });
+
   // $.ajax({
   //   url: p4_vars.ajaxurl,
   //   type: 'post',
@@ -216,4 +191,4 @@ const homeFollower = function() {
   // });
 };
 
-export default homeFollower;
+export default latestFollower;

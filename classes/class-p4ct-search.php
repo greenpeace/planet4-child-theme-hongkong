@@ -18,7 +18,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 		const POSTS_LIMIT           = 300;
 		const POSTS_PER_PAGE        = 10;
-		const POSTS_PER_LOAD        = 5;
+		const POSTS_PER_LOAD        = 6;
 		const SHOW_SCROLL_TIMES     = 2;
 		const DEFAULT_SORT          = '_score';
 		const DEFAULT_MIN_WEIGHT    = 1;
@@ -312,7 +312,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			if ( false === $this->terms ) {
 				$this->terms = $this->get_timber_terms();
 				if ( $this->terms ) {
-					wp_cache_add( $cache_key, $this->posts, $cache_group_terms, self::DEFAULT_CACHE_TTL );
+					wp_cache_add( $cache_key, $this->terms, $cache_group_terms, self::DEFAULT_CACHE_TTL );
 				}
 			}
 		}
@@ -816,8 +816,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		public function add_load_more( $args = null ) {
 			$this->context['load_more'] = $args ?? [
 				'posts_per_load' => self::POSTS_PER_LOAD,
-				// Translators: %s = number of results per page.
-				'button_text'    => sprintf( __( 'SHOW %s MORE RESULTS', 'gpea_theme' ), self::POSTS_PER_LOAD ),
+				'button_text'    => __( 'SHOW MORE RESULTS', 'gpea_theme' ),
 				'async'          => true,
 			];
 		}
