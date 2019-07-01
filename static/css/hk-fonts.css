@@ -46,3 +46,7 @@ button,
 .enform {
   font-family: 'Noto Sans TC', sans-serif;
 }
+
+.logo-greenpeace {
+  background-image: url('../images/logo_zh.svg');
+}

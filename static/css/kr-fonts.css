@@ -47,6 +47,10 @@ button,
   font-family: 'Noto Sans KR', sans-serif;
 }
 
+.logo-greenpeace {
+  background-image: url('../images/logo_ko.svg');
+}
+
 /* Overrides */
 .card-issue .image h4 {
   font-size: 31px !important;

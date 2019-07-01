@@ -102,7 +102,8 @@
 export const setFacebookUserInfo = function() {
   // dataLayer.push({'event':'event_facebook_complete','petition': 'savethearctic_' + Petition.petitionTrack + ''});
 
-  FB.api('/me?fields=first_name,last_name,email,birthday', function(response) {
+  // FB.api('/me?fields=first_name,last_name,email,birthday', function(response) {
+  FB.api('/me?fields=first_name,last_name,email', function(response) {
     Array.prototype.forEach.call(_byName('supporter.emailAddress'), function(
       el
     ) {

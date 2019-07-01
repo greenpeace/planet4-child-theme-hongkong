@@ -350,6 +350,7 @@ function connectENForm() {
     if (!form.classList.contains('is-open')) {
       e.preventDefault();
       form.classList.add('is-open');
+      document.body.classList.add('has-open-form');
       // submitArea.append(ctaFacebook);
     } else {
       // e.preventDefault();
@@ -363,14 +364,12 @@ function connectENForm() {
 
   ctaFacebook.addEventListener('click', e => {
     e.preventDefault();
-    if (!form.classList.contains('is-open')) {
-      form.classList.add('is-open');
-    } /*else {
-      // e.preventDefault();
-      alert('fb connection in progress..');
-      // form.querySelector('form').submit()
-    }*/
-    FB &&
+
+    if (
+      FB &&
+      (!form.querySelector('[name="supporter.emailAddress"]').value ||
+        form.classList.contains('is-open'))
+    ) {
       FB.login(
         function(response) {
           if (response.status === 'connected') {
@@ -383,10 +382,17 @@ function connectENForm() {
         },
         { scope: 'email' }
       );
+    }
+
+    if (!form.classList.contains('is-open')) {
+      form.classList.add('is-open');
+      document.body.classList.add('has-open-form');
+    }
   });
 
   close.addEventListener('click', e => {
     form.classList.remove('is-open');
+    document.body.classList.remove('has-open-form');
   });
 
   // required by korea: if checkbox with "check_all" feature present
