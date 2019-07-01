@@ -71,7 +71,6 @@ const latestFollower = function() {
       action: 'topicsFollowing',
     },
     success: function(data) {
-      console.log(data);
       const swiper = $featuredSwiper[0].swiper;
       let followingResults;
       let followingResultsPosts;
@@ -152,8 +151,8 @@ const latestFollower = function() {
         let rowPosts = (collection.posts).map(post => {
             return buildArticleRowPost(post);            
           })
-          project.row_posts = rowPosts;
-          let trendingCollectionsContainer = buildContainer(buildArticleRowContainer);
+          collection.row_posts = rowPosts;
+          let trendingCollectionsContainer = buildArticleRowContainer(collection);
           return trendingCollectionsContainer;
       });
 
