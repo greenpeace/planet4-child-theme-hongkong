@@ -13,6 +13,8 @@ import petitionThankyou from './petition-thankyou';
 import donation from './donation';
 import followUnfollow from './follow-unfollow';
 
+import { setFacebookUserInfo } from './facebook';
+
 // matches polyfill
 window.Element &&
   (function(ElementPrototype) {
@@ -336,7 +338,9 @@ function connectENForm() {
   ctaFacebook.classList.add('button', 'fb', 'js-sign-facebook');
   ctaFacebook.innerHTML = 'Facebook';
 
-  const checkboxCheckall = document.querySelector('#en__field_supporter_all_check');
+  const checkboxCheckall = document.querySelector(
+    '#en__field_supporter_all_check'
+  );
 
   form.insertBefore(stats, form.firstChild);
   form.insertBefore(close, form.firstChild);
@@ -358,14 +362,27 @@ function connectENForm() {
   });
 
   ctaFacebook.addEventListener('click', e => {
+    e.preventDefault();
     if (!form.classList.contains('is-open')) {
-      e.preventDefault();
       form.classList.add('is-open');
-    } else {
+    } /*else {
       // e.preventDefault();
       alert('fb connection in progress..');
       // form.querySelector('form').submit()
-    }
+    }*/
+    FB &&
+      FB.login(
+        function(response) {
+          if (response.status === 'connected') {
+            setFacebookUserInfo(form);
+          } else {
+            console.error('User cancelled login or did not fully authorize.');
+            // social login interrupted
+          }
+          // }, { scope: 'email,user_birthday' });
+        },
+        { scope: 'email' }
+      );
   });
 
   close.addEventListener('click', e => {
@@ -373,15 +390,14 @@ function connectENForm() {
   });
 
   // required by korea: if checkbox with "check_all" feature present
-  if ( checkboxCheckall ) {
+  if (checkboxCheckall) {
     checkboxCheckall.addEventListener('click', e => {
-      let privacyOptions = document.querySelectorAll("[type=checkbox]");
-      for (var i = 0, elementOption; elementOption = privacyOptions[i++];) {
+      let privacyOptions = document.querySelectorAll('[type=checkbox]');
+      for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {
         elementOption.checked = checkboxCheckall.checked;
       }
     });
-  }  
-
+  }
 }
 connectENForm();
 

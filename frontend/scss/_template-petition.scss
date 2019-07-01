@@ -66,16 +66,42 @@
 
     @include greaterThan('sm') {
       > p,
-      blockquote p {
-        padding-right: 450px;
+      .wp-caption {
+        padding-right: 400px;
       }
 
-      > p > img {
-        transform: translateX(225px);
+      blockquote p {
+        @include ct-container;
+        padding-right: 440px;
+      }
+
+      .embed-container > *,
+      .full-width > * {
+        max-width: 520px;
+        transform: translateX(-200px);
       }
 
       .wp-caption {
         margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    @include greaterThan('lg') {
+      > p,
+      .wp-caption {
+        padding-right: 450px;
+      }
+
+      blockquote p {
+        @include ct-container;
+        padding-right: 490px;
+      }
+
+      .embed-container > *,
+      .full-width > * {
+        max-width: 710px;
+        transform: translateX(-225px);
       }
     }
   }

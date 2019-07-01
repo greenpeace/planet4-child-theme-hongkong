@@ -8,16 +8,22 @@
  * DONATION PAGE AS WELL!
  */
 
-.enform-side-style,
-.enform-side-style .container,
-.enform-side-style .row,
-.enform-side-style .col-md-12 {
-  min-height: 100%;
+@include lessThan('sm') {
+  .enform-side-style,
+  .enform-side-style .container,
+  .enform-side-style .row,
+  .enform-side-style .col-md-12 {
+    min-height: 100%;
+  }
 }
 
 .outer_block_container > * {
   position: relative;
   z-index: 2;
+}
+
+#petition-source {
+  display: none;
 }
 
 .enform-side-style {
@@ -119,7 +125,7 @@
     transform: translateX(-50%);
 
     @include greaterThan('sm') {
-      min-height: 100vh;
+      // height: 90vh;
     }
 
     img {
@@ -148,6 +154,10 @@
   > .container {
     position: relative;
     height: 100%;
+
+    @include greaterThan('sm') {
+      height: 100vh;
+    }
   }
 
   @include greaterThan('sm') {
@@ -392,6 +402,12 @@
         margin-bottom: 30px;
       }
     }
+  }
+}
+
+@include greaterThan('sm') {
+  .admin-bar .enform-side-style .enform {
+    top: 80px;
   }
 }
 

@@ -6,6 +6,25 @@
 
 <body class="{{ body_class }} {{ custom_body_classes|default("") }}" {{ body_extra_info|raw }}>
 
+	<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+		appId      : '1579566855506544',
+		xfbml      : true,
+		version    : 'v3.3'
+		});
+		// FB.AppEvents.logPageView();
+	};
+
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "https://connect.facebook.net/zh_HK/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+
 	<!-- as seen in big_carousel_manual_selection.twig !!! KEEP SYNCRONIZED !!! -->
 	<script id="template-card-petition-big" type="text/template">
 		<div class="swiper-slide card-petition" data-postid="<%= ID %>" data-pageid="<%= engaging_pageid %>" data-target="<%= engaging_target %>">
@@ -66,7 +85,7 @@
 			<a href="<%= link %>" class="project-large">
 				<div class="project-large-overflow">
 				<div class="thumbnail" style="background-image: url(<%= image %>);"></div>
-	
+
 				<div class="project-summary">
 					<h3 class="project-summary-title"><%= title %> <span class="icon-chevron-right"></span></h3>
 					<div class="project-summary-details">
@@ -133,7 +152,7 @@
 						<% if (typeof news_type !== 'undefined') { %>
 							<span><%= news_type %></span>
 						<% } %>
-						
+
 					</div>
 				</div>
 				<p>
@@ -150,7 +169,7 @@
 					</div>
 				</div>
 			</div>
-		</a>		
+		</a>
 	</script>
 
 	<!-- <ul class="skip-links">
