@@ -312,7 +312,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			if ( false === $this->terms ) {
 				$this->terms = $this->get_timber_terms();
 				if ( $this->terms ) {
-					wp_cache_add( $cache_key, $this->posts, $cache_group_terms, self::DEFAULT_CACHE_TTL );
+					wp_cache_add( $cache_key, $this->terms, $cache_group_terms, self::DEFAULT_CACHE_TTL );
 				}
 			}
 		}
