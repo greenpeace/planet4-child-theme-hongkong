@@ -272,6 +272,8 @@ class P4CT_AJAX_Handler {
 
 			if ( 'cat' === $type ) {
 				$args['cat'] = $tag_id;
+				$term_info   = get_term( $tag_id, 'category' );
+
 				if ( 'petition' === $preferences ) {
 					$args['tag'] = 'petition';
 				}
@@ -279,12 +281,16 @@ class P4CT_AJAX_Handler {
 
 			if ( 'tag' === $type ) {
 				$args['tag_id'] = $tag_id;
+				$term_info   = get_term( $tag_id, 'post_tag' );
+
 				if ( 'petition' === $preferences ) {
 					$args['tag'] = 'petition';
 				}
 			}
 
 			$the_query = new \WP_Query( $args );
+
+			$most_recent = 0;
 
 			while ( $the_query->have_posts() ) :
 
@@ -295,6 +301,9 @@ class P4CT_AJAX_Handler {
 					'date'       => date( 'Y - m - d', strtotime( get_the_date() ) ),
 					'link'       => get_the_permalink( $post->ID ),
 				);
+
+				// update the most recent date
+				$most_recent = ( strtotime( get_the_date() ) > $most_recent ) ? strtotime( get_the_date() ) : $most_recent;
 
 				$single_update['reading_time'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
 
@@ -363,7 +372,15 @@ class P4CT_AJAX_Handler {
 					}
 				}
 
-				$results[] = $single_update;
+				if ( $term_info ) {
+					$results[ $tag_id ]['name']    = $term_info->name;
+					$results[ $tag_id ]['slug']    = $term_info->slug;
+					$results[ $tag_id ]['term_id'] = $term_info->term_id;
+				}
+				$results[ $tag_id ]['most_recent'] = $most_recent;
+
+				$results[ $tag_id ]['posts'][] = $single_update;
+
 			endwhile;
 
 			wp_reset_query();

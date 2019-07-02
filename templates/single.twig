@@ -36,7 +36,7 @@
       </div>
 
       <h1>{{ post.title|raw }}</h1>
-
+      {%if (post.subtitle) %}<h2>{{ post.subtitle|raw }}</h2>{%endif%}
       <div class="meta-box">
         <span>{{ strings.author }} {{ post.author.name }}</span>
       </div>

@@ -38,13 +38,14 @@ $context['page_category']       = $category->name ?? __( 'Post page', 'gpea_them
 $context['page_type_slug']      = $page_terms_data[0]->slug ?? '';
 $context['social_accounts']     = $post->get_social_accounts( $context['footer_social_menu'] );
 $context['og_title']            = $post->get_og_title();
-$context['og_description']      = $post->get_og_description();
+$context['og_description']      = strip_tags( $post->get_og_description() );
 $context['og_image_data']       = $post->get_og_image();
 $context['custom_body_classes'] = 'white-bg';
 $context['show_article_donation_launcher']    = $page_meta_data['p4-gpea_show_article_donation_launcher'][0] ?? '';
 
 // reading time and categories info!
 $context['reading_time']        = $page_meta_data['p4-gpea_post_reading_time'][0] ?? '';
+$post->subtitle                 = $page_meta_data['p4-gpea_post_subtitle'][0] ?? '';
 $post_categories     = get_the_terms( $post, 'category' );
 
 $planet4_options = get_option( 'planet4_options' );

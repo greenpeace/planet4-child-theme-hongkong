@@ -43,7 +43,7 @@
 				</div>
 			</div>
 		</div>
-	</script>
+	</script>	
 
 	<!-- as seen in big_carousel_manual_selection.twig !!! KEEP SYNCRONIZED !!! -->
 	<script id="template-card-update-big" type="text/template">
@@ -77,7 +77,7 @@
 				</p>
 			</div>
 		</a>
-	</script>
+	</script>	
 
 	<!-- Project main card followed !!! -->
 	<script id="template-section-projects-following" type="text/template">
@@ -135,8 +135,7 @@
 				<%= related_posts %>
 			</div>
 		</section>
-	</script>
-
+	</script>	
 
 	<!-- taken from where the sun don't shine -->
 	<script id="template-project-post-update" type="text/template">
@@ -170,6 +169,50 @@
 				</div>
 			</div>
 		</a>
+	</script>
+
+	<!-- as seen in article_row.twig !!! KEEP SYNCRONIZED !!! -->
+	<script id="template-article-row" type="text/template">
+		<a href="<%= link %>" class="swiper-slide card-mini mini-update">
+			<% if (typeof img_url !== 'undefined' && img_url) { %>
+				<div
+					class="thumbnail lazy"
+					data-bg="url(<%= img_url %>)"
+				></div>
+			<% } %>
+			<div class="meta-box">
+				<div>
+					<% if (typeof date !== 'undefined') { %>
+						<span><%= date %></span>
+					<% } %>
+				</div>
+				<div>
+					<% if (typeof news_type !== 'undefined') { %>
+						<span><%= news_type %></span>
+					<% } %>
+				</div>
+			</div>
+			<p><%= post_title %></p>
+		</a>		
+	</script>
+	
+	<script id="template-article-row-container" type="text/template">
+		<section class="section-article-row">
+			<div class="ct-container">
+				<h2><a href="/?s&tag_id=<%= term_id %>"><%= name %><span class="icon-chevron-right"></span></a></h2>
+				<div class="swiper-container mini-swiper">
+					<div class="swiper-wrapper">
+						<%= row_posts %>						
+					</div>
+					<div class="swiper-button-next">
+						<span class="icon-chevron-right"></span>
+					</div>
+					<div class="swiper-button-prev">
+						<span class="icon-chevron-right"></span>
+					</div>
+				</div>
+			</div>
+		</section>		
 	</script>
 
 	<!-- <ul class="skip-links">
