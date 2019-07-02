@@ -85,13 +85,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		protected $localizations;
 
 		/**
-		 * AJAX request flag
-		 *
-		 * @var bool $is_ajax_request
-		 */
-		protected $is_ajax_request = false;
-
-		/**
 		 * Templates
 		 *
 		 * @var array $templates
@@ -157,7 +150,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 */
 		public function load( $search_query, $selected_sort = self::DEFAULT_SORT, $filters = [], $templates = [ 'search.twig', 'archive.twig', 'index.twig' ], $context = null ) {
 
-			$this->is_ajax_request = false;
+			// TODO Shouldn't we check for a nonce, both here and on AJAX?
 			$this->initialize();
 			$this->search_query = $search_query;
 			$this->templates    = $templates;
@@ -202,7 +195,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 			$this->search_query = $search_query;
 			$this->context = Timber::get_context();
-			$this->is_ajax_request = true;
 			$this->set_main_issues();
 
 			// Validate user input (sort, filters, etc).
@@ -309,6 +301,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					wp_cache_add( $cache_key, $this->posts, $cache_group, self::DEFAULT_CACHE_TTL );
 				}
 			}
+			// TODO check if we only want to fetch posts if this is an AJAX request.
+			// if ( false === $this->terms && wp_doing_ajax() ) {
 			if ( false === $this->terms ) {
 				$this->terms = $this->get_timber_terms();
 				if ( $this->terms ) {
@@ -332,6 +326,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			// Use Timber's Post instead of WP_Post so that we can make use of Timber within the template.
 			if ( $posts ) {
 				foreach ( $posts as $post ) {
+					// TODO we don't really need the TimberPost overhead here. Could just use $post.
 					$timber_post = new TimberPost( $post->ID );
 
 					$timber_post->post_date = date( 'Y-m-d', strtotime( $timber_post->post_date ) );
@@ -408,13 +403,21 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$timber_term = new TimberTerm( $term->term_id );
 					// Get the main issue page & related data if this term is a main issue & has an associated page.
 					if ( isset( $this->main_issues_category_id ) && $timber_term->parent === $this->main_issues_category_id ) {
+						// TODO cache this query.
 						$related = ( new WP_Query(
 							[
 								'post_type' => 'page',
 								'category__in' => $timber_term->ID,
+								'meta_query' => [
+									[
+										'key'   => '_wp_page_template',
+										'value' => 'page-templates/main-issue.php',
+									],
+								],
 							]
-						) )->posts[0];
-						if ( $related ) {
+						) )->posts;
+						if ( count( $related ) ) {
+							$related = $related[0];
 							$timber_term->link = get_permalink( $related->ID );
 							$img_url = get_the_post_thumbnail_url( $related->ID, 'thumbnail' );
 							if ( $img_url ) {
