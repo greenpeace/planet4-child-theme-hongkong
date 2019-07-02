@@ -1,5 +1,7 @@
 import * as Cookies from 'js-cookie';
 
+const $ = jQuery;
+
 const pageIssue = function() {
   // check main issue following and update cookies
   if ($('body').hasClass('page-template-main-issue')) {

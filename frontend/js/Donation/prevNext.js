@@ -1,7 +1,11 @@
 import SmoothScroll from 'smooth-scroll';
 
 function prevNext(form, donationSwiper, validateBlock) {
-  const scroll = new SmoothScroll();
+  const scroll = new SmoothScroll('a[href*="#"]', {
+    header: 'body > header',
+    offset: 40,
+    updateURL: false,
+  });
 
   // All steps: PREV
   const prevs = form.querySelectorAll('.js-donate-prev');
@@ -31,7 +35,7 @@ function prevNext(form, donationSwiper, validateBlock) {
     const block = e.target.closest('.en__component.en__component--formblock');
     const amount = document.getElementById('en__field_transaction_donationAmt');
     const reminders = form.querySelectorAll('.js-reminder-amount');
-    const valid = validateBlock(block);
+    const valid = validateBlock(block, 'amount');
     if (valid) {
       Array.from(reminders).forEach(reminder => {
         reminder.textContent = amount.value;
@@ -43,6 +47,7 @@ function prevNext(form, donationSwiper, validateBlock) {
       donationSwiper.slideNext();
       scroll.animateScroll(document.querySelector('.form-caption'));
     } else {
+      scroll.animateScroll(block.querySelector('.is-invalid'));
       block.querySelector('.is-invalid').focus();
     }
   });
@@ -51,7 +56,7 @@ function prevNext(form, donationSwiper, validateBlock) {
   form.querySelector('.js-to-payment').addEventListener('click', e => {
     e.preventDefault();
     const block = e.target.closest('.en__component.en__component--formblock');
-    const valid = validateBlock(block);
+    const valid = validateBlock(block, 'data');
     if (valid) {
       stepDetails.classList.remove('is-current');
       stepDetails.classList.add('is-done');
@@ -60,6 +65,7 @@ function prevNext(form, donationSwiper, validateBlock) {
       donationSwiper.slideNext();
       scroll.animateScroll(document.querySelector('.form-caption'));
     } else {
+      scroll.animateScroll(block.querySelector('.is-invalid'));
       block.querySelector('.is-invalid').focus();
     }
   });

@@ -1,5 +1,7 @@
 import { debounce } from 'debounce';
 
+const $ = jQuery;
+
 export default function(Swiper) {
   $('.featured-swiper, .projects-swiper, .tips-swiper').each(function(index) {
     const pagination = $(this)

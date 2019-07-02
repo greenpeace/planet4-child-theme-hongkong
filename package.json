@@ -30,10 +30,12 @@
     "whatwg-fetch": "^3.0.0"
   },
   "dependencies": {
+    "cleave.js": "^1.5.2",
     "js-cookie": "^2.2.0",
     "lodash.template": "^4.4.0",
     "smooth-scroll": "^16.1.0",
     "swiper": "4.5.0",
+    "validate.js": "^0.13.1",
     "vanilla-lazyload": "12.0.0"
   },
   "scripts": {

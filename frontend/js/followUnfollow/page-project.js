@@ -1,5 +1,7 @@
 import * as Cookies from 'js-cookie';
 
+const $ = jQuery;
+
 const pageProject = function() {
   // check project following and update cookies
   if ($('body').hasClass('page-template-project')) {
