@@ -1,4 +1,7 @@
 .section-support-data {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+
   @include greaterThan('sm') {
     display: flex;
   }

@@ -1,5 +1,6 @@
 .section-support-launcher {
   @include ct-container;
+  background: white !important;
 
   @include greaterThan('sm') {
     display: flex;

@@ -51,7 +51,42 @@ button,
   background-image: url('../images/logo_ko.svg');
 }
 
+.page-template-petition .logo-greenpeace,
+.page-template-donation .logo-greenpeace {
+  background-image: url('../images/logo_ko_green.svg');
+}
+
 /* Overrides */
 .card-issue .image h4 {
-  font-size: 31px !important;
+  font-size: 22px !important;
+  line-height: 27px !important;
+}
+
+@media (min-width: 1280px) {
+  .card-issue .image h4 {
+    font-size: 31px !important;
+    line-height: 38px !important;
+  }
+}
+
+.card-explainer .description {
+  padding: 40px 30px;
+}
+
+.card-explainer h4 {
+  font-size: 30px;
+  line-height: 40px;
+}
+
+.card-explainer h4,
+.card-explainer p {
+  text-align: left;
+}
+
+.card-explainer p.subtitle {
+  letter-spacing: 1px;
+}
+
+.card-explainer .description p:not(.subtitle) {
+  color: #292f47;
 }

@@ -43,7 +43,7 @@
 				</div>
 			</div>
 		</div>
-	</script>	
+	</script>
 
 	<!-- as seen in big_carousel_manual_selection.twig !!! KEEP SYNCRONIZED !!! -->
 	<script id="template-card-update-big" type="text/template">
@@ -77,7 +77,7 @@
 				</p>
 			</div>
 		</a>
-	</script>	
+	</script>
 
 	<!-- Project main card followed !!! -->
 	<script id="template-section-projects-following" type="text/template">
@@ -135,7 +135,7 @@
 				<%= related_posts %>
 			</div>
 		</section>
-	</script>	
+	</script>
 
 	<!-- taken from where the sun don't shine -->
 	<script id="template-project-post-update" type="text/template">
@@ -193,16 +193,16 @@
 				</div>
 			</div>
 			<p><%= post_title %></p>
-		</a>		
+		</a>
 	</script>
-	
+
 	<script id="template-article-row-container" type="text/template">
 		<section class="section-article-row">
 			<div class="ct-container">
 				<h2><a href="/?s&tag_id=<%= term_id %>"><%= name %><span class="icon-chevron-right"></span></a></h2>
 				<div class="swiper-container mini-swiper">
 					<div class="swiper-wrapper">
-						<%= row_posts %>						
+						<%= row_posts %>
 					</div>
 					<div class="swiper-button-next">
 						<span class="icon-chevron-right"></span>
@@ -212,7 +212,7 @@
 					</div>
 				</div>
 			</div>
-		</section>		
+		</section>
 	</script>
 
 	<!-- <ul class="skip-links">
@@ -257,5 +257,21 @@
 		{#% endblock %#}
 		{{ function('wp_footer') }}
 	{% endblock %}
+	<div class="body-spinner">
+		<div class="lds-spinner">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</div>
 </body>
 </html>
