@@ -412,9 +412,16 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 							[
 								'post_type' => 'page',
 								'category__in' => $timber_term->ID,
+								'meta_query' => [
+									[
+										'key'   => '_wp_page_template',
+										'value' => 'page-templates/main-issue.php',
+									],
+								],
 							]
-						) )->posts[0];
-						if ( $related ) {
+						) )->posts;
+						if ( count( $related ) ) {
+							$related = $related[0];
 							$timber_term->link = get_permalink( $related->ID );
 							$img_url = get_the_post_thumbnail_url( $related->ID, 'thumbnail' );
 							if ( $img_url ) {
