@@ -382,6 +382,17 @@ class P4CT_Metabox_Register {
 
 		$cmb_post->add_field(
 			array(
+				'name'             => esc_html__( 'Subtitle', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'will be shown below the title', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_post_subtitle',
+				'type'             => 'text',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
+			)
+		);
+
+		$cmb_post->add_field(
+			array(
 				'name'             => esc_html__( 'Reading time', 'gpea_theme_backend' ),
 				'desc'             => esc_html__( 'Specify the time extimated to read the article (i.e. 4 min)', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_post_reading_time',
