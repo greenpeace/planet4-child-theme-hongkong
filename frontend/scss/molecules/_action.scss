@@ -35,8 +35,9 @@
         top: auto;
         right: 100px;
         bottom: 0;
-        max-width: calc(50% - 120px);
         height: auto;
+        max-width: calc(50% - 120px);
+        max-height: 400px;
       }
     }
 
@@ -53,7 +54,7 @@
 
     @include greaterThan('sm') {
       position: relative;
-      height: 450px;
+      height: 400px;
       display: flex;
       flex-direction: column;
       justify-content: center;

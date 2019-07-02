@@ -120,6 +120,7 @@ export default function(Swiper) {
     new Swiper(this, {
       slidesPerView: 1,
       simulateTouch: false,
+      autoplay: true,
       pagination: {
         el: $this.find('.swiper-pagination'),
         type: 'bullets',

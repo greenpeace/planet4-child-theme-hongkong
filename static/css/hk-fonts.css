@@ -50,3 +50,8 @@ button,
 .logo-greenpeace {
   background-image: url('../images/logo_zh.svg');
 }
+
+.page-template-petition .logo-greenpeace,
+.page-template-donation .logo-greenpeace {
+  background-image: url('../images/logo_zh_green.svg');
+}

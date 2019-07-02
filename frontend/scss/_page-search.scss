@@ -9,7 +9,40 @@ body.search {
   }
 
   .live-search {
-    background-color: $color-lightblue;
+    background: $color-lightblue;
+    min-height: 200px;
+
+    form {
+      .lds-spinner {
+        display: block;
+        position: absolute;
+        transform: scale(0.5);
+        transform-origin: left top;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 140ms linear, visibility 0s linear 140ms;
+      }
+
+      &.is-loading .lds-spinner {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 140ms linear, visibility 0s linear 0s;
+      }
+    }
+  }
+
+  #ajax-search-issues,
+  #ajax-search-topics,
+  #ajax-search-posts {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 140ms linear, visibility 0s linear 0s;
+
+    &.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 140ms linear, visibility 0s linear 140ms;
+    }
   }
 
   .search-title span {

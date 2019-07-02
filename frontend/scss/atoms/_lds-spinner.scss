@@ -9,7 +9,7 @@
   transform-origin: 32px 32px;
   animation: lds-spinner 1.2s linear infinite;
 }
-.lds-spinner div:after {
+.lds-spinner div::after {
   content: ' ';
   display: block;
   position: absolute;
