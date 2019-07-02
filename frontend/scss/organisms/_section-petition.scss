@@ -87,14 +87,15 @@
     margin-bottom: 10px;
   }
 
-  .enform .invalid-feedback {
+  .enform .invalid-feedback,
+  .enform .en__field__error {
     margin-top: 0;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 20px;
     color: $color-red;
     font-weight: normal;
     position: absolute;
-    display: inline-block;
+    display: none;
     padding: 0 8px;
     left: 10px;
     top: 34px;
@@ -107,6 +108,31 @@
   .form-container .en__field__element select.is-invalid {
     border-color: $color-red !important;
     margin-bottom: 0;
+
+    + .invalid-feedback {
+      display: inline-block;
+    }
+  }
+
+  .en__field--validationFailed > .en__field__error {
+    display: block;
+    z-index: 2;
+  }
+
+  .en__field--validationFailed .invalid-feedback {
+    display: none !important;
+  }
+
+  .form-container .en__field__element input[type='radio'].is-invalid,
+  .form-container .en__field__element input[type='checkbox'].is-invalid {
+    margin-top: 30px;
+
+    + .invalid-feedback {
+      display: inline-block;
+      top: 4px;
+      left: 0;
+      padding-left: 0;
+    }
   }
 
   .form-container .en__field__element.en__field__element--select {

@@ -362,6 +362,15 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_team->add_field(
+			array(
+				'name'             => esc_html__( 'Code', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'used for example for street fundraisers', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_team_code',
+				'type'             => 'text',
+			)
+		);
+
 	}
 
 	/**
@@ -377,6 +386,17 @@ class P4CT_Metabox_Register {
 				'context'      => 'normal', // 'normal', 'advanced', or 'side'
 				'priority'     => 'high',  // 'high', 'core', 'default' or 'low'
 				'show_names'   => true, // Show field names on the left
+			)
+		);
+
+		$cmb_post->add_field(
+			array(
+				'name'             => esc_html__( 'Subtitle', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'will be shown below the title', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_post_subtitle',
+				'type'             => 'text',
+			// 'sanitization_cb' => 'intval',
+			// 'escape_cb'       => 'intval',
 			)
 		);
 

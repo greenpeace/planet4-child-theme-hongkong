@@ -73,7 +73,7 @@
 
     @include greaterThan('sm') {
       justify-content: space-between;
-      max-width: 450px;
+      max-width: 400px;
       margin-bottom: 0;
     }
 
@@ -81,6 +81,7 @@
     p {
       color: white;
       margin-top: 10px !important;
+      text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.59);
     }
 
     p {

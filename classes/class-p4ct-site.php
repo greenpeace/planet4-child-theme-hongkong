@@ -260,6 +260,29 @@ class P4CT_Site {
 		);
 		register_taxonomy( 'p4_post_attribute', array( 'post', 'page' ), $args );
 
+		$labels_members = array(
+			'name'              => _x( 'Team category', 'taxonomy general name', 'gpea_theme_backend' ),
+			'singular_name'     => _x( 'Team category', 'taxonomy singular name', 'gpea_theme_backend' ),
+			'search_items'      => __( 'Search team category', 'gpea_theme_backend' ),
+			'all_items'         => __( 'All Team categories', 'gpea_theme_backend' ),
+			'edit_item'         => __( 'Edit team category', 'gpea_theme_backend' ),
+			'update_item'       => __( 'Update team category', 'gpea_theme_backend' ),
+			'add_new_item'      => __( 'Add New team category', 'gpea_theme_backend' ),
+			'new_item_name'     => __( 'New Team category Name', 'gpea_theme_backend' ),
+			'menu_name'         => __( 'Team category', 'gpea_theme_backend' ),
+		);
+		$args_members = array(
+			'hierarchical'      => true,
+			'labels'            => $labels_members,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => array(
+				'slug' => 'team_category',
+			),
+		);
+		register_taxonomy( 'p4_gpea_team_category', array( 'team' ), $args_members );
+
 	}
 
 	/**

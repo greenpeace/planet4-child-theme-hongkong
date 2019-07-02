@@ -1,5 +1,7 @@
 import * as Cookies from 'js-cookie';
 
+const $ = jQuery;
+
 const tagCloud = function() {
   // For each tag, mark it as "active" if followed by the user; and make sure it's shown.
   if ($('.js-tag-cloud').length) {

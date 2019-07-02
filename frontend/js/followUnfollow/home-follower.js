@@ -1,5 +1,7 @@
 import template from 'lodash.template';
 
+const $ = jQuery;
+
 /**
  * Takes the posts returned by the AJAX call and filters out posts already existing.
  * Elements in both arrays must have a property "ID"
@@ -140,7 +142,6 @@ const homeFollower = function() {
       action: 'projectsFollowing',
     },
     success: function(data) {
-
       let projects;
 
       try {
@@ -156,7 +157,6 @@ const homeFollower = function() {
       const buildContainer = template(projectContainer[0].innerHTML);
       const projectUpdate = $('#template-project-post-update');
       const buildUpdate = template(projectUpdate[0].innerHTML);
-      
 
       // const newPostsSlides = posts.map(post => {
       //   if (post.engaging_pageid !== undefined) {
@@ -166,19 +166,19 @@ const homeFollower = function() {
       //   }
       // });
 
-      const projectFollowing = projects.map(project => {        
-        let relatedPosts = (project.related).map(post => {
-            return buildUpdate(post);
-            // TODO: da aggiungere in secondo momento anche questa logica
-            // if (post.engaging_pageid !== undefined) {
-            //   return buildPetition(post);
-            // } else {
-            //   return buildUpdate(post);
-            // }
-          })
-          project.related_posts = relatedPosts;
-          let sectionProject = buildContainer(project);
-          return sectionProject;
+      const projectFollowing = projects.map(project => {
+        let relatedPosts = project.related.map(post => {
+          return buildUpdate(post);
+          // TODO: da aggiungere in secondo momento anche questa logica
+          // if (post.engaging_pageid !== undefined) {
+          //   return buildPetition(post);
+          // } else {
+          //   return buildUpdate(post);
+          // }
+        });
+        project.related_posts = relatedPosts;
+        let sectionProject = buildContainer(project);
+        return sectionProject;
       });
 
       // Add the new slides in 6th position (1 first slide + 5 regular slides)

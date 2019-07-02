@@ -4,15 +4,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenpeace Planet 4 Child Theme Hong Kong 0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/planet4-child-theme-hongkong\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.2.0\n"
+"PO-Revision-Date: 2019-07-01 10:57+0900\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Domain: gpea_theme\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ko_KR\n"
 
 #. Theme Name of the theme
 msgid "Greenpeace Planet 4 Child Theme Hong Kong"
@@ -36,430 +38,422 @@ msgstr ""
 
 #: classes/class-p4ct-search.php:574
 msgid "Search Page"
-msgstr ""
+msgstr "검색 페이지"
 
 #: classes/class-p4ct-search.php:577
 msgid "Most relevant"
-msgstr ""
+msgstr "관련성"
 
 #: classes/class-p4ct-search.php:581
 msgid "Most recent"
-msgstr ""
+msgstr "최신순"
 
 #: classes/class-p4ct-search.php:586
 msgid "Search"
-msgstr ""
+msgstr "검색"
 
 #: classes/class-p4ct-search.php:587
 msgid "Reset Filters"
-msgstr ""
+msgstr "필터 초기화"
 
 #: classes/class-p4ct-search.php:588
 msgid "Sort by"
-msgstr ""
+msgstr "정렬"
 
 #: classes/class-p4ct-search.php:589
 msgid "Nothing found, sorry."
-msgstr ""
+msgstr "죄송합니다. 검색결과가 없습니다."
 
 #. translators: %1$d = Number of results.
 #: classes/class-p4ct-search.php:595
 msgid "%1$d result for '%2$s'"
 msgid_plural "%1$d results for '%2$s'"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "?"
 
 #. translators: %d = Number of results.
 #: classes/class-p4ct-search.php:601
 msgid "%d result"
 msgid_plural "%d results"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d 결과"
 
 #: classes/class-p4ct-search.php:654
 msgid "Page"
-msgstr ""
+msgstr "페이지"
 
 #: classes/class-p4ct-search.php:658
 msgid "Post"
-msgstr ""
+msgstr "포스트"
 
 #: classes/class-p4ct-search.php:724
 msgid "PAGE"
-msgstr ""
+msgstr "페이지"
 
 #: classes/class-p4ct-search.php:729
 msgid "POST"
-msgstr ""
+msgstr "포스트"
 
 #. Translators: %s = number of results per page.
 #: classes/class-p4ct-search.php:831
 msgid "SHOW %s MORE RESULTS"
-msgstr ""
+msgstr "검색결과 더보기"
 
 #: classes/class-p4ct-site.php:151
 msgid "Sign"
-msgstr ""
+msgstr "회원가입"
 
-#: classes/class-p4ct-site.php:152
-#: single.php:136
+#: classes/class-p4ct-site.php:152 single.php:136
 msgid "Share"
-msgstr ""
+msgstr "공유"
 
-#: classes/class-p4ct-site.php:153
-#: page-templates/petition-thankyou.php:110
+#: classes/class-p4ct-site.php:153 page-templates/petition-thankyou.php:110
 msgid "Donate"
-msgstr ""
+msgstr "후원하기"
 
 #: classes/class-p4ct-site.php:154
 msgid "Support us"
-msgstr ""
+msgstr "참여하기"
 
 #: classes/class-p4ct-site.php:158
 msgid "Follow us"
-msgstr ""
+msgstr "팔로우하기"
 
 #: classes/class-p4ct-site.php:159
 msgid "Our commitment"
-msgstr ""
+msgstr "우리의 약속"
 
 #: classes/class-p4ct-site.php:160
 msgid "Projects"
-msgstr ""
+msgstr "프로젝트"
 
 #: classes/class-p4ct-site.php:161
 msgid "Main issues"
-msgstr ""
+msgstr "메인이슈"
 
 #: classes/class-p4ct-site.php:162
 msgid "About Greenpeace"
-msgstr ""
+msgstr "그린피스 소개"
 
 #: classes/class-p4ct-site.php:163
 msgid "Press release and media"
-msgstr ""
+msgstr "보도자료와 미디어"
 
 #: classes/class-p4ct-site.php:164
 msgid "My Preferences"
-msgstr ""
+msgstr "관심정보"
 
 #: classes/class-p4ct-ajax-handler.php:67
 msgid "Did not save because your form seemed to be invalid. Sorry."
-msgstr ""
+msgstr "요청을 저장할 수 없습니다. 다시 시도해주세요."
 
 #: classes/class-p4ct-ajax-handler.php:81
 msgid "Message sent."
-msgstr ""
+msgstr "메시지 발송"
 
 #: classes/class-p4ct-ajax-handler.php:85
 msgid "Could not send the message, form fields missing."
-msgstr ""
+msgstr "정보가 부족하여 메시지를 보낼 수 없습니다. "
 
 #: classes/class-p4ct-custom-post-type-register.php:44
 msgctxt "post type general name"
 msgid "Tips"
-msgstr ""
+msgstr "팁들"
 
 #: classes/class-p4ct-custom-post-type-register.php:45
 msgctxt "post type singular name"
 msgid "Tip"
-msgstr ""
+msgstr "팁"
 
 #: classes/class-p4ct-custom-post-type-register.php:46
 msgctxt "admin menu"
 msgid "Tips"
-msgstr ""
+msgstr "팁들"
 
 #: classes/class-p4ct-custom-post-type-register.php:47
 msgctxt "add new on admin bar"
 msgid "Tip"
-msgstr ""
+msgstr "팁"
 
 #: classes/class-p4ct-custom-post-type-register.php:48
 #: classes/class-p4ct-custom-post-type-register.php:141
 msgctxt "tip"
 msgid "Add New"
-msgstr ""
+msgstr "추가"
 
 #: classes/class-p4ct-custom-post-type-register.php:49
 msgid "Add New Tip"
-msgstr ""
+msgstr "팁 추가하기"
 
 #: classes/class-p4ct-custom-post-type-register.php:50
 msgid "New Tip"
-msgstr ""
+msgstr "새로운 팁"
 
 #: classes/class-p4ct-custom-post-type-register.php:51
 msgid "Edit Tip"
-msgstr ""
+msgstr "팁 편집"
 
 #: classes/class-p4ct-custom-post-type-register.php:52
 msgid "View Tip"
-msgstr ""
+msgstr "팁 보기"
 
 #: classes/class-p4ct-custom-post-type-register.php:53
 msgid "All Tips"
-msgstr ""
+msgstr "모든 팁"
 
 #: classes/class-p4ct-custom-post-type-register.php:54
 msgid "Search Tips"
-msgstr ""
+msgstr "팁 찾기"
 
 #: classes/class-p4ct-custom-post-type-register.php:55
 msgid "Parent Tips:"
-msgstr ""
+msgstr "상위팁"
 
 #: classes/class-p4ct-custom-post-type-register.php:56
 msgid "No tips found."
-msgstr ""
+msgstr "팁을 찾을 수 없습니다."
 
 #: classes/class-p4ct-custom-post-type-register.php:57
 msgid "No tips found in Trash."
-msgstr ""
+msgstr "휴지통에서 팁을 찾을 수 없습니다."
 
 #: classes/class-p4ct-custom-post-type-register.php:62
 #: classes/class-p4ct-custom-post-type-register.php:109
 #: classes/class-p4ct-custom-post-type-register.php:155
 msgid "Description."
-msgstr ""
+msgstr "설명"
 
 #: classes/class-p4ct-custom-post-type-register.php:91
 msgctxt "post type general name"
 msgid "Team Members"
-msgstr ""
+msgstr "팀멤버들"
 
 #: classes/class-p4ct-custom-post-type-register.php:92
 msgctxt "post type singular name"
 msgid "Team Member"
-msgstr ""
+msgstr "팀멤버"
 
 #: classes/class-p4ct-custom-post-type-register.php:93
 msgctxt "admin menu"
 msgid "Team Members"
-msgstr ""
+msgstr "팀멤버들"
 
 #: classes/class-p4ct-custom-post-type-register.php:94
 msgctxt "add new on admin bar"
 msgid "Team Member"
-msgstr ""
+msgstr "팀멤버"
 
 #: classes/class-p4ct-custom-post-type-register.php:95
 msgctxt "team member"
 msgid "Add New"
-msgstr ""
+msgstr "추가하기"
 
 #: classes/class-p4ct-custom-post-type-register.php:96
 msgid "Add New Team Member"
-msgstr ""
+msgstr "팀멤버 추가"
 
 #: classes/class-p4ct-custom-post-type-register.php:97
 msgid "New Team Member"
-msgstr ""
+msgstr "신규 팀멤버"
 
 #: classes/class-p4ct-custom-post-type-register.php:98
 msgid "Edit Team Member"
-msgstr ""
+msgstr "팀멤버 수정"
 
 #: classes/class-p4ct-custom-post-type-register.php:99
 msgid "View Team Member"
-msgstr ""
+msgstr "팀멤버 보기"
 
 #: classes/class-p4ct-custom-post-type-register.php:100
 msgid "All Team Members"
-msgstr ""
+msgstr "모든 팀멤버"
 
 #: classes/class-p4ct-custom-post-type-register.php:101
 msgid "Search Team Members"
-msgstr ""
+msgstr "팀멤버 찾기"
 
 #: classes/class-p4ct-custom-post-type-register.php:102
 msgid "Parent Team Members:"
-msgstr ""
+msgstr "상위 팀 멤버"
 
 #: classes/class-p4ct-custom-post-type-register.php:103
 msgid "No Team Members found."
-msgstr ""
+msgstr "팀멤버를 찾을 수 없습니다"
 
 #: classes/class-p4ct-custom-post-type-register.php:104
 msgid "No Team Members found in Trash."
-msgstr ""
+msgstr "휴지통에서 팀멤버를 찾을 수 없습니다"
 
 #: classes/class-p4ct-custom-post-type-register.php:137
 msgctxt "post type general name"
 msgid "User Stories"
-msgstr ""
+msgstr "사용자 스토리들"
 
 #: classes/class-p4ct-custom-post-type-register.php:138
 msgctxt "post type singular name"
 msgid "User Story"
-msgstr ""
+msgstr "사용자 스토리"
 
 #: classes/class-p4ct-custom-post-type-register.php:139
 msgctxt "admin menu"
 msgid "User Stories"
-msgstr ""
+msgstr "사용자 스토리들"
 
 #: classes/class-p4ct-custom-post-type-register.php:140
 msgctxt "add new on admin bar"
 msgid "User Story"
-msgstr ""
+msgstr "사용자 스토리"
 
 #: classes/class-p4ct-custom-post-type-register.php:142
 msgid "Add New User Story"
-msgstr ""
+msgstr "사용자 스토리 추가"
 
 #: classes/class-p4ct-custom-post-type-register.php:143
 msgid "New User Story"
-msgstr ""
+msgstr "신규 사용자 스토리"
 
 #: classes/class-p4ct-custom-post-type-register.php:144
 msgid "Edit User Story"
-msgstr ""
+msgstr "사용자 스토리 수정"
 
 #: classes/class-p4ct-custom-post-type-register.php:145
 msgid "View User Story"
-msgstr ""
+msgstr "사용자 스토리 보기"
 
 #: classes/class-p4ct-custom-post-type-register.php:146
 msgid "All User Stories"
-msgstr ""
+msgstr "전체 사용자 스토리"
 
 #: classes/class-p4ct-custom-post-type-register.php:147
 msgid "Search User Stories"
-msgstr ""
+msgstr "사용자 스토리 검색"
 
 #: classes/class-p4ct-custom-post-type-register.php:148
 msgid "Parent User Stories:"
-msgstr ""
+msgstr "상위 사용자 스토리"
 
 #: classes/class-p4ct-custom-post-type-register.php:149
 msgid "No User Stories found."
-msgstr ""
+msgstr "사용자 스토리를 찾을 수 없습니다."
 
 #: classes/class-p4ct-custom-post-type-register.php:150
 msgid "No User Stories found in Trash."
-msgstr ""
+msgstr "휴지통에서 사용자 스토리를 찾을 수 없습니다."
 
 #: single.php:37
 msgid "Post page"
-msgstr ""
+msgstr "포스트 페이지"
 
 #: single.php:107
 msgid "Leave Your Reply"
-msgstr ""
+msgstr "답변을 남겨주세요."
 
 #: single.php:129
 msgid "Previous page"
-msgstr ""
+msgstr "이전 페이지"
 
 #: single.php:130
 msgid "Time to read"
-msgstr ""
+msgstr "읽는 시간"
 
 #: single.php:131
 msgid "Author:"
-msgstr ""
+msgstr "저자:"
 
 #: single.php:132
 msgid "Article donation launcher"
-msgstr ""
+msgstr "후원권유 기사"
 
 #: single.php:133
 msgid "Short intro to donation launcher"
-msgstr ""
+msgstr "후원권유 소개"
 
 #: single.php:134
 msgid "I want to support"
-msgstr ""
+msgstr "후원하고 싶습니다."
 
-#: single.php:135
-#: page-templates/main-issue.php:74
+#: single.php:135 page-templates/main-issue.php:74
 msgid "Related news"
-msgstr ""
+msgstr "관련 뉴스"
 
 #. Template Name of the theme
 msgid "Report"
-msgstr ""
+msgstr "리포트"
 
-#: page-templates/report.php:55
-#: page-templates/project.php:78
-#: page-templates/about.php:55
-#: page-templates/main-issue.php:71
+#: page-templates/report.php:55 page-templates/project.php:78
+#: page-templates/about.php:55 page-templates/main-issue.php:71
 msgid "Follow"
-msgstr ""
+msgstr "팔로우"
 
 #. Template Name of the theme
 msgid "Project"
-msgstr ""
+msgstr "프로젝트"
 
-#: page-templates/project.php:79
-#: page-templates/main-issue.php:72
+#: page-templates/project.php:79 page-templates/main-issue.php:72
 msgid "Following"
-msgstr ""
+msgstr "팔로우"
 
 #: page-templates/project.php:80
 msgid "Date of start"
-msgstr ""
+msgstr "시작일"
 
 #: page-templates/project.php:81
 msgid "Zones interested"
-msgstr ""
+msgstr "관심지역"
 
 #. Template Name of the theme
 msgid "Thankyou page for petition"
-msgstr ""
+msgstr "서명감사 페이지"
 
 #: page-templates/petition-thankyou.php:97
 msgid "Thank you for signing,"
-msgstr ""
+msgstr "서명해주셔서 감사합니다."
 
 #: page-templates/petition-thankyou.php:98
 msgid "Now, will you share this petition with your friends? The more people who sign, the more pressure the government will feel."
-msgstr ""
+msgstr "서명페이지를 친구들과 공유하시겠습니까?"
 
 #: page-templates/petition-thankyou.php:99
 msgid "NO"
-msgstr ""
+msgstr "아니오"
 
 #: page-templates/petition-thankyou.php:100
 msgid "YES"
-msgstr ""
+msgstr "예"
 
 #: page-templates/petition-thankyou.php:101
 msgid "Thank you,"
-msgstr ""
+msgstr "감사합니다,"
 
 #: page-templates/petition-thankyou.php:102
 msgid "Let's wake more people up to this crisis"
-msgstr ""
+msgstr "이 문제에 대해 널리 알립시다."
 
 #: page-templates/petition-thankyou.php:103
 msgid "Share on Facebook"
-msgstr ""
+msgstr "페이스북에서 공유하기"
 
 #: page-templates/petition-thankyou.php:104
 msgid "Share by Email"
-msgstr ""
+msgstr "이메일로 공유하기"
 
 #: page-templates/petition-thankyou.php:105
 msgid "Skip"
-msgstr ""
+msgstr "건너뛰기"
 
 #: page-templates/petition-thankyou.php:106
 msgid "- Greenpeace is urgently campaigning to protect our planet."
-msgstr ""
+msgstr "그린피스는 지구를 보호하기 위해 긴급 캠페인을 진행 중입니다."
 
 #: page-templates/petition-thankyou.php:107
 msgid "Our campaigns are 100% funded by individuals like you. Will you join us as a supporter with a regular amount of 400HKD or more a month?"
-msgstr ""
+msgstr "우리 캠페인은 100% 개인후원으로만 진행됩니다. 정기후원 월 #만원으로 시작 하시겠습니까?"
 
 #: page-templates/petition-thankyou.php:108
 msgid "One off"
-msgstr ""
+msgstr "일시후원"
 
 #: page-templates/petition-thankyou.php:109
 msgid "Monthly"
-msgstr ""
+msgstr "정기후원"
 
 #. Template Name of the theme
 msgid "About"
@@ -467,17 +461,17 @@ msgstr ""
 
 #. Template Name of the theme
 msgid "Petition"
-msgstr ""
+msgstr "서명"
 
 #. translators: placeholder represents the number of signers.
 #: page-templates/petition.php:113
 msgid "%s signers"
-msgstr ""
+msgstr "% 서명인들"
 
 #. Template Name of the theme
 msgid "Main Issue"
-msgstr ""
+msgstr "주요 이슈"
 
 #: page-templates/main-issue.php:73
 msgid "Related to this issue"
-msgstr ""
+msgstr "관련 이슈"

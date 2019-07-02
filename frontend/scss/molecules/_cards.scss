@@ -371,12 +371,12 @@
     flex-direction: column;
     justify-content: space-between;
 
-    .profile {
-      img {
-        width: 40px;
-        height: 40px;
-      }
-    }
+    // .profile {
+    //   img {
+    //     width: 40px;
+    //     height: 40px;
+    //   }
+    // }
 
     p {
       @include text;
