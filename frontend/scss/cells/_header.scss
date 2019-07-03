@@ -56,6 +56,7 @@ header {
         position: relative;
 
         button {
+          height: 43px;
           background-color: transparent;
           border: none;
           outline: none;
@@ -78,11 +79,18 @@ header {
         .dropdown-menu {
           display: none;
           position: absolute;
+          left: -180px;
+          width: 300px;
           background-color: white;
           border-radius: 3px;
           box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28);
           flex-direction: column;
           padding: 10px 20px;
+
+          @include greaterThan('sm') {
+            left: -185px;
+            width: 900px;
+          }
 
           a {
             text-decoration: none;
