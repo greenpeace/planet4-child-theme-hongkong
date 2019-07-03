@@ -519,8 +519,8 @@ class P4CT_Metabox_Register {
 			array(
 				'name'    => esc_html__( 'Description text for generic footer', 'gpea_theme_backend' ),
 				'desc'    => esc_html__( 'Description text for generic footer', 'gpea_theme_backend' ),
-				'id'      => 'gpea_decription_generic_footer_text',
-				'type'    => 'text',
+				'id'      => 'gpea_description_generic_footer_text',
+				'type'    => 'textarea',
 			)
 		);
 
