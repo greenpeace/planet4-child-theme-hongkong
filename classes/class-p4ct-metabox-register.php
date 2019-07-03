@@ -509,6 +509,14 @@ class P4CT_Metabox_Register {
 
 		$cmb_options->add_field(
 			array(
+				'name'    => esc_html__( 'Country title, to show next to the logo', 'gpea_theme_backend' ),
+				'id'      => 'gpea_current_country',
+				'type'    => 'text',
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
 				'name'    => esc_html__( 'css file with fonts specifications (optional)', 'gpea_theme_backend' ),
 				'id'      => 'gpea_css_fonts',
 				'type'    => 'text',

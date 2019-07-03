@@ -43,4 +43,9 @@
 .tag_cloud_form {
   text-align: center;
   margin-top: 40px;
+  max-width: 450px;
+}
+
+.section-choose-topics .tag_cloud_form .formblock-flex {
+  height: auto;
 }

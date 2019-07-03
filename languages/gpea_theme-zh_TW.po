@@ -4,480 +4,479 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Greenpeace Planet 4 Child Theme Hong Kong 0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/planet4-child-theme-hongkong\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.2.0\n"
+"PO-Revision-Date: 2019-07-03 21:58+0800\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Domain: gpea_theme\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_HK\n"
 
 #. Theme Name of the theme
 msgid "Greenpeace Planet 4 Child Theme Hong Kong"
-msgstr ""
+msgstr "Greenpeace Planet 4 Child Theme Hong Kong"
 
 #. Theme URI of the theme
 msgid "https://github.com/greenpeace/planet4-child-theme-hongkong"
-msgstr ""
+msgstr "https://github.com/greenpeace/planet4-child-theme-hongkong"
 
 #. Description of the theme
 msgid "Child theme for the hongkong website in the Planet 4 Wordpress project"
-msgstr ""
+msgstr "Child theme for the hongkong website in the Planet 4 Wordpress project"
 
 #. Author of the theme
 msgid "Greenpeace International"
-msgstr ""
+msgstr "綠色和平國際總部"
 
 #. Author URI of the theme
 msgid "https://github.com/greenpeace"
-msgstr ""
+msgstr "https://github.com/greenpeace"
 
 #: classes/class-p4ct-search.php:574
 msgid "Search Page"
-msgstr ""
+msgstr "搜索頁面"
 
 #: classes/class-p4ct-search.php:577
 msgid "Most relevant"
-msgstr ""
+msgstr "最相關"
 
 #: classes/class-p4ct-search.php:581
 msgid "Most recent"
-msgstr ""
+msgstr "最新"
 
 #: classes/class-p4ct-search.php:586
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 #: classes/class-p4ct-search.php:587
 msgid "Reset Filters"
-msgstr ""
+msgstr "重設"
 
 #: classes/class-p4ct-search.php:588
 msgid "Sort by"
-msgstr ""
+msgstr "排列方式"
 
 #: classes/class-p4ct-search.php:589
 msgid "Nothing found, sorry."
-msgstr ""
+msgstr "没有找到相關结果"
 
 #. translators: %1$d = Number of results.
 #: classes/class-p4ct-search.php:595
 msgid "%1$d result for '%2$s'"
 msgid_plural "%1$d results for '%2$s'"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "搜索 '%2$s' 所得的 %1$d 結果"
 
 #. translators: %d = Number of results.
 #: classes/class-p4ct-search.php:601
 msgid "%d result"
 msgid_plural "%d results"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "結果 %d"
 
 #: classes/class-p4ct-search.php:654
 msgid "Page"
-msgstr ""
+msgstr "頁面"
 
 #: classes/class-p4ct-search.php:658
 msgid "Post"
-msgstr ""
+msgstr "文章"
 
 #: classes/class-p4ct-search.php:724
 msgid "PAGE"
-msgstr ""
+msgstr "頁面"
 
 #: classes/class-p4ct-search.php:729
 msgid "POST"
-msgstr ""
+msgstr "文章"
 
 #. Translators: %s = number of results per page.
 #: classes/class-p4ct-search.php:831
 msgid "SHOW %s MORE RESULTS"
-msgstr ""
+msgstr "顯示往後 %s 個搜索結果"
 
 #: classes/class-p4ct-site.php:151
 msgid "Sign"
-msgstr ""
+msgstr "立即連署"
 
-#: classes/class-p4ct-site.php:152
-#: single.php:136
+#: classes/class-p4ct-site.php:152 single.php:136
 msgid "Share"
-msgstr ""
+msgstr "分享"
 
-#: classes/class-p4ct-site.php:153
-#: page-templates/petition-thankyou.php:110
+#: classes/class-p4ct-site.php:153 page-templates/petition-thankyou.php:110
 msgid "Donate"
-msgstr ""
+msgstr "捐款支持"
 
 #: classes/class-p4ct-site.php:154
 msgid "Support us"
-msgstr ""
+msgstr "捐助支持"
 
 #: classes/class-p4ct-site.php:158
 msgid "Follow us"
-msgstr ""
+msgstr "追蹤我們"
 
 #: classes/class-p4ct-site.php:159
 msgid "Our commitment"
-msgstr ""
+msgstr "我們的承諾"
 
 #: classes/class-p4ct-site.php:160
 msgid "Projects"
-msgstr ""
+msgstr "項目"
 
 #: classes/class-p4ct-site.php:161
 msgid "Main issues"
-msgstr ""
+msgstr "環境議題"
 
 #: classes/class-p4ct-site.php:162
 msgid "About Greenpeace"
-msgstr ""
+msgstr "我們的故事"
 
 #: classes/class-p4ct-site.php:163
 msgid "Press release and media"
-msgstr ""
+msgstr "新聞中心"
 
 #: classes/class-p4ct-site.php:164
 msgid "My Preferences"
-msgstr ""
+msgstr "我的喜好"
 
 #: classes/class-p4ct-ajax-handler.php:67
 msgid "Did not save because your form seemed to be invalid. Sorry."
-msgstr ""
+msgstr "您的表格未能成功提交，請填寫正確內容。"
 
 #: classes/class-p4ct-ajax-handler.php:81
 msgid "Message sent."
-msgstr ""
+msgstr "表格成功提交！"
 
 #: classes/class-p4ct-ajax-handler.php:85
 msgid "Could not send the message, form fields missing."
-msgstr ""
+msgstr "您的表格未能成功提交，請填寫所有必填內容。"
 
 #: classes/class-p4ct-custom-post-type-register.php:44
 msgctxt "post type general name"
 msgid "Tips"
-msgstr ""
+msgstr "日常環保方案"
 
 #: classes/class-p4ct-custom-post-type-register.php:45
 msgctxt "post type singular name"
 msgid "Tip"
-msgstr ""
+msgstr "日常環保方案"
 
 #: classes/class-p4ct-custom-post-type-register.php:46
 msgctxt "admin menu"
 msgid "Tips"
-msgstr ""
+msgstr "日常環保方案"
 
 #: classes/class-p4ct-custom-post-type-register.php:47
 msgctxt "add new on admin bar"
 msgid "Tip"
-msgstr ""
+msgstr "日常環保方案"
 
 #: classes/class-p4ct-custom-post-type-register.php:48
 #: classes/class-p4ct-custom-post-type-register.php:141
 msgctxt "tip"
 msgid "Add New"
-msgstr ""
+msgstr "Add New"
 
 #: classes/class-p4ct-custom-post-type-register.php:49
 msgid "Add New Tip"
-msgstr ""
+msgstr "Add New Tip"
 
 #: classes/class-p4ct-custom-post-type-register.php:50
 msgid "New Tip"
-msgstr ""
+msgstr "New Tip"
 
 #: classes/class-p4ct-custom-post-type-register.php:51
 msgid "Edit Tip"
-msgstr ""
+msgstr "Edit Tip"
 
 #: classes/class-p4ct-custom-post-type-register.php:52
 msgid "View Tip"
-msgstr ""
+msgstr "View Tip"
 
 #: classes/class-p4ct-custom-post-type-register.php:53
 msgid "All Tips"
-msgstr ""
+msgstr "查看所有環保方案"
 
 #: classes/class-p4ct-custom-post-type-register.php:54
 msgid "Search Tips"
-msgstr ""
+msgstr "搜索日常環保方案"
 
 #: classes/class-p4ct-custom-post-type-register.php:55
 msgid "Parent Tips:"
-msgstr ""
+msgstr "Parent Tips:"
 
 #: classes/class-p4ct-custom-post-type-register.php:56
 msgid "No tips found."
-msgstr ""
+msgstr "找不到任何貼士"
 
 #: classes/class-p4ct-custom-post-type-register.php:57
 msgid "No tips found in Trash."
-msgstr ""
+msgstr "No tips found in Trash."
 
 #: classes/class-p4ct-custom-post-type-register.php:62
 #: classes/class-p4ct-custom-post-type-register.php:109
 #: classes/class-p4ct-custom-post-type-register.php:155
 msgid "Description."
-msgstr ""
+msgstr "內文"
 
 #: classes/class-p4ct-custom-post-type-register.php:91
 msgctxt "post type general name"
 msgid "Team Members"
-msgstr ""
+msgstr "團隊成員"
 
 #: classes/class-p4ct-custom-post-type-register.php:92
 msgctxt "post type singular name"
 msgid "Team Member"
-msgstr ""
+msgstr "團隊成員"
 
 #: classes/class-p4ct-custom-post-type-register.php:93
 msgctxt "admin menu"
 msgid "Team Members"
-msgstr ""
+msgstr "團隊成員"
 
 #: classes/class-p4ct-custom-post-type-register.php:94
 msgctxt "add new on admin bar"
 msgid "Team Member"
-msgstr ""
+msgstr "團隊成員"
 
 #: classes/class-p4ct-custom-post-type-register.php:95
 msgctxt "team member"
 msgid "Add New"
-msgstr ""
+msgstr "Add New"
 
 #: classes/class-p4ct-custom-post-type-register.php:96
 msgid "Add New Team Member"
-msgstr ""
+msgstr "Add New Team Member"
 
 #: classes/class-p4ct-custom-post-type-register.php:97
 msgid "New Team Member"
-msgstr ""
+msgstr "New Team Member"
 
 #: classes/class-p4ct-custom-post-type-register.php:98
 msgid "Edit Team Member"
-msgstr ""
+msgstr "Edit Team Member"
 
 #: classes/class-p4ct-custom-post-type-register.php:99
 msgid "View Team Member"
-msgstr ""
+msgstr "View Team Member"
 
 #: classes/class-p4ct-custom-post-type-register.php:100
 msgid "All Team Members"
-msgstr ""
+msgstr "All Team Members"
 
 #: classes/class-p4ct-custom-post-type-register.php:101
 msgid "Search Team Members"
-msgstr ""
+msgstr "Search Team Members"
 
 #: classes/class-p4ct-custom-post-type-register.php:102
 msgid "Parent Team Members:"
-msgstr ""
+msgstr "Parent Team Members:"
 
 #: classes/class-p4ct-custom-post-type-register.php:103
 msgid "No Team Members found."
-msgstr ""
+msgstr "找不到任何團隊成員"
 
 #: classes/class-p4ct-custom-post-type-register.php:104
 msgid "No Team Members found in Trash."
-msgstr ""
+msgstr "No Team Members found in Trash."
 
 #: classes/class-p4ct-custom-post-type-register.php:137
 msgctxt "post type general name"
 msgid "User Stories"
-msgstr ""
+msgstr "人物故事"
 
 #: classes/class-p4ct-custom-post-type-register.php:138
 msgctxt "post type singular name"
 msgid "User Story"
-msgstr ""
+msgstr "人物故事"
 
 #: classes/class-p4ct-custom-post-type-register.php:139
 msgctxt "admin menu"
 msgid "User Stories"
-msgstr ""
+msgstr "人物故事"
 
 #: classes/class-p4ct-custom-post-type-register.php:140
 msgctxt "add new on admin bar"
 msgid "User Story"
-msgstr ""
+msgstr "人物故事"
 
 #: classes/class-p4ct-custom-post-type-register.php:142
 msgid "Add New User Story"
-msgstr ""
+msgstr "Add New User Story"
 
 #: classes/class-p4ct-custom-post-type-register.php:143
 msgid "New User Story"
-msgstr ""
+msgstr "New User Story"
 
 #: classes/class-p4ct-custom-post-type-register.php:144
 msgid "Edit User Story"
-msgstr ""
+msgstr "Edit User Story"
 
 #: classes/class-p4ct-custom-post-type-register.php:145
 msgid "View User Story"
-msgstr ""
+msgstr "View User Story"
 
 #: classes/class-p4ct-custom-post-type-register.php:146
 msgid "All User Stories"
-msgstr ""
+msgstr "查看所有故事"
 
 #: classes/class-p4ct-custom-post-type-register.php:147
 msgid "Search User Stories"
-msgstr ""
+msgstr "搜尋人物故事"
 
 #: classes/class-p4ct-custom-post-type-register.php:148
 msgid "Parent User Stories:"
-msgstr ""
+msgstr "Parent User Stories:"
 
 #: classes/class-p4ct-custom-post-type-register.php:149
 msgid "No User Stories found."
-msgstr ""
+msgstr "No User Stories found."
 
 #: classes/class-p4ct-custom-post-type-register.php:150
 msgid "No User Stories found in Trash."
-msgstr ""
+msgstr "No User Stories found in Trash."
 
 #: single.php:37
 msgid "Post page"
-msgstr ""
+msgstr "文章頁面"
 
 #: single.php:107
 msgid "Leave Your Reply"
-msgstr ""
+msgstr "分享您的故事"
 
 #: single.php:129
 msgid "Previous page"
-msgstr ""
+msgstr "上一頁"
 
 #: single.php:130
 msgid "Time to read"
-msgstr ""
+msgstr "閱讀時間"
 
 #: single.php:131
 msgid "Author:"
-msgstr ""
+msgstr "作者："
 
 #: single.php:132
 msgid "Article donation launcher"
-msgstr ""
+msgstr "很多香港人，像您一樣…"
 
 #: single.php:133
 msgid "Short intro to donation launcher"
 msgstr ""
+"關注地球環境，因為這與您、我、每一個人，都息息相關。面對眾多環境問題，綠色和平致力提供解決方案，讓您我能夠與慷慨的大地共生。\n"
+"為確保獨立與公正，我們從不接受來自政府或企業的捐款。所有推動環境工作的資源，都來自熱心公眾，因此您的支持對我們無比重要。很多像您一樣的民眾，願意以行動帶來改變，才造就過去眾多的環保成就。\n"
+"您願意以小額捐助，以月捐方式支持我們的工作嗎？\n"
+"我們承諾謹慎使用每分資源，並力行資訊公開透明，以接受公眾、會員及監管機構的監督。\n"
+"您願意加入我們，以幾分鐘的時間登記，以及每天$2的金額，共同守護我們唯一家園嗎？"
 
 #: single.php:134
 msgid "I want to support"
-msgstr ""
+msgstr "我願意"
 
-#: single.php:135
-#: page-templates/main-issue.php:74
+#: single.php:135 page-templates/main-issue.php:74
 msgid "Related news"
-msgstr ""
+msgstr "相關文章"
 
 #. Template Name of the theme
 msgid "Report"
-msgstr ""
+msgstr "報告刊物"
 
-#: page-templates/report.php:55
-#: page-templates/project.php:78
-#: page-templates/about.php:55
-#: page-templates/main-issue.php:71
+#: page-templates/report.php:55 page-templates/project.php:78
+#: page-templates/about.php:55 page-templates/main-issue.php:71
 msgid "Follow"
-msgstr ""
+msgstr "立即關注"
 
 #. Template Name of the theme
 msgid "Project"
-msgstr ""
+msgstr "重點項目"
 
-#: page-templates/project.php:79
-#: page-templates/main-issue.php:72
+#: page-templates/project.php:79 page-templates/main-issue.php:72
 msgid "Following"
-msgstr ""
+msgstr "您正在關注"
 
 #: page-templates/project.php:80
 msgid "Date of start"
-msgstr ""
+msgstr "開始"
 
 #: page-templates/project.php:81
 msgid "Zones interested"
-msgstr ""
+msgstr "實施領域"
 
 #. Template Name of the theme
 msgid "Thankyou page for petition"
-msgstr ""
+msgstr "Thankyou page for petition"
 
 #: page-templates/petition-thankyou.php:97
 msgid "Thank you for signing,"
-msgstr ""
+msgstr "感謝您加入連署！"
 
 #: page-templates/petition-thankyou.php:98
 msgid "Now, will you share this petition with your friends? The more people who sign, the more pressure the government will feel."
-msgstr ""
+msgstr "集合群眾力量，我們能夠成就更多！您願意邀請親友加入連署，向政府及企業施壓，以守護珍貴的地球嗎？"
 
 #: page-templates/petition-thankyou.php:99
 msgid "NO"
-msgstr ""
+msgstr "不，謝謝"
 
 #: page-templates/petition-thankyou.php:100
 msgid "YES"
-msgstr ""
+msgstr "我願意"
 
 #: page-templates/petition-thankyou.php:101
 msgid "Thank you,"
-msgstr ""
+msgstr "感謝您！"
 
 #: page-templates/petition-thankyou.php:102
 msgid "Let's wake more people up to this crisis"
-msgstr ""
+msgstr "喚醒更多的人，一同參與連署！"
 
 #: page-templates/petition-thankyou.php:103
 msgid "Share on Facebook"
-msgstr ""
+msgstr "透過Facebook分享"
 
 #: page-templates/petition-thankyou.php:104
 msgid "Share by Email"
-msgstr ""
+msgstr "透過電郵分享"
 
 #: page-templates/petition-thankyou.php:105
 msgid "Skip"
-msgstr ""
+msgstr "跳過"
 
 #: page-templates/petition-thankyou.php:106
 msgid "- Greenpeace is urgently campaigning to protect our planet."
-msgstr ""
+msgstr "- 綠色和平致力確保地球維持孕育多元生命的能力，對抗現今最急切的環境危機。"
 
 #: page-templates/petition-thankyou.php:107
 msgid "Our campaigns are 100% funded by individuals like you. Will you join us as a supporter with a regular amount of 400HKD or more a month?"
-msgstr ""
+msgstr "我們從不接受來自政府或企業的捐款，以確保100%獨立。您願意以月捐NT$400支持我們的環保項目嗎？"
 
 #: page-templates/petition-thankyou.php:108
 msgid "One off"
-msgstr ""
+msgstr "一次性捐款"
 
 #: page-templates/petition-thankyou.php:109
 msgid "Monthly"
-msgstr ""
+msgstr "每月捐款"
 
 #. Template Name of the theme
 msgid "About"
-msgstr ""
+msgstr "我們的故事"
 
 #. Template Name of the theme
 msgid "Petition"
-msgstr ""
+msgstr "連署"
 
 #. translators: placeholder represents the number of signers.
 #: page-templates/petition.php:113
 msgid "%s signers"
-msgstr ""
+msgstr "連署人數"
 
 #. Template Name of the theme
 msgid "Main Issue"
-msgstr ""
+msgstr "環境議題"
 
 #: page-templates/main-issue.php:73
 msgid "Related to this issue"
-msgstr ""
+msgstr "相關文章"
