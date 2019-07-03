@@ -252,26 +252,33 @@
 		{% include 'footer.twig' with {
 			strings: strings_footer,
 		} %}
-		{#% block cookies %#}
-			{#% include 'cookies.twig' %#}
-		{#% endblock %#}
+
+		<div class="body-spinner">
+			<div class="lds-spinner">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+
+		{% set master_countries = "#{ fn( 'get_template_directory' ) }/templates/countries.json" %}
+		{% if( fn('file_exists', master_countries) ) %}
+			<script id="countries_script" type="application/json">{% include master_countries %}</script>
+		{% else  %}
+			<script id="countries_script" type="application/json">{% include "countries.json" %}</script>
+		{% endif %}
+
 		{{ function('wp_footer') }}
 	{% endblock %}
-	<div class="body-spinner">
-		<div class="lds-spinner">
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
-	</div>
+
 </body>
 </html>

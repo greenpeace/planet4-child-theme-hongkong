@@ -60,8 +60,9 @@ class P4CT_Custom_Post_Type_Register {
 		$args = array(
 			'labels'              => $labels,
 			'description'         => __( 'Description.', 'gpea_theme' ),
+			'public'              => true,
 			'exclude_from_search' => true,
-			'publicly_queryable'  => false,
+			'publicly_queryable'  => true,
 			'show_ui'             => true,
 			'show_in_nav_menus'   => false,
 			'rewrite'             => array(

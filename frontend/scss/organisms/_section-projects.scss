@@ -14,6 +14,35 @@
   .swiper-button-prev {
     left: -16px;
   }
+
+  .projects-list {
+    [class^='swiper-button-'] {
+      display: none;
+    }
+
+    .swiper-wrapper {
+      flex-wrap: wrap;
+    }
+
+    .swiper-slide {
+      width: auto;
+      margin-bottom: 40px;
+
+      @include greaterThan('sm') {
+        width: 50%;
+      }
+
+      @include greaterThan('lg') {
+        width: 33%;
+      }
+    }
+  }
+
+  &.has-projects-list {
+    .see-more {
+      display: none;
+    }
+  }
 }
 
 .section-projects-following {

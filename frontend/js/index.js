@@ -9,6 +9,7 @@ import {
 import LazyLoad from 'vanilla-lazyload';
 import SmoothScroll from 'smooth-scroll';
 
+import countriesMenu from './countries-menu';
 import swipers from './swipers';
 import petitionThankyou from './petition-thankyou';
 import donation from './donation';
@@ -433,6 +434,7 @@ function connectAnchorMenu() {
 connectAnchorMenu();
 
 /* imports */
+countriesMenu();
 swipers(Swiper);
 
 /* Page specific functionality */

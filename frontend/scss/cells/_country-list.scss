@@ -1,0 +1,92 @@
+.country-list {
+  display: none;
+  text-transform: none;
+  // background: $color-blue;
+  line-height: 1.5;
+  padding: 1.4em 0;
+  overflow-y: hidden;
+
+  &.open {
+    display: block;
+    overflow-y: scroll !important;
+  }
+
+  a {
+    // display: block;
+    color: black;
+  }
+
+  a:hover,
+  a:focus,
+  .active a {
+    border-bottom-color: black;
+  }
+
+  .country-group-letter {
+    font-size: 1rem;
+    position: absolute;
+    line-height: 1.5;
+    font-weight: bold;
+    color: $color-grey;
+    margin-left: -25px;
+  }
+
+  > ul {
+    padding: 0;
+    margin-top: 1.5em;
+    margin-bottom: 0;
+  }
+
+  > a,
+  li {
+    position: relative;
+    list-style: none;
+    padding-left: 50px;
+    font-size: 1rem;
+    break-inside: avoid;
+
+    @include greaterThan('sm') {
+      padding-left: 2em;
+    }
+
+    ul {
+      break-inside: avoid;
+      padding: 0;
+      margin: 0 1em 1.2em 0;
+    }
+
+    li {
+      padding-left: 0;
+      list-style: none;
+      // width: 300px;
+    }
+  }
+
+  > a {
+    padding-left: 0;
+    margin-left: 50px;
+
+    @include greaterThan('sm') {
+      padding-left: 0;
+      margin-left: 2em;
+    }
+  }
+
+  @include greaterThan('sm') {
+    // position: absolute;
+    height: 344px;
+    overflow-x: hidden;
+    overflow-y: hidden !important;
+    max-height: 344px;
+    max-height: calc(100vh - 50px);
+    padding: 1em 2em 2em;
+
+    .admin-bar & {
+      max-height: calc(100vh - 50px - 32px);
+    }
+
+    > ul {
+      column-count: 3;
+    }
+  }
+}
