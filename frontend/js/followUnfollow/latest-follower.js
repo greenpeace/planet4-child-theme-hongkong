@@ -1,5 +1,7 @@
 import template from 'lodash.template';
 
+const $ = jQuery;
+
 /**
  * Takes the posts returned by the AJAX call and filters out posts already existing.
  * Elements in both arrays must have a property "ID"
