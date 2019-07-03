@@ -1,6 +1,6 @@
 header {
   position: relative;
-  height: 62px;
+  height: 50px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
   background-color: $color-green;
   color: white;
@@ -108,7 +108,7 @@ header {
 
       .menu {
         display: flex;
-        height: 62px;
+        height: 50px;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -185,6 +185,8 @@ header {
         background: $color-orange;
         color: white;
         white-space: nowrap;
+        height: 34px;
+        line-height: 33px;
 
         &:hover,
         &:focus {

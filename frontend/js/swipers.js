@@ -1,5 +1,7 @@
 import { debounce } from 'debounce';
 
+const $ = jQuery;
+
 export default function(Swiper) {
   $('.featured-swiper, .projects-swiper, .tips-swiper').each(function(index) {
     const pagination = $(this)
@@ -118,6 +120,7 @@ export default function(Swiper) {
     new Swiper(this, {
       slidesPerView: 1,
       simulateTouch: false,
+      autoplay: true,
       pagination: {
         el: $this.find('.swiper-pagination'),
         type: 'bullets',

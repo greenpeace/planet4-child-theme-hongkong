@@ -4,8 +4,7 @@
 
     <section class="live-search">
 
-        <div
-                class="ct-container">
+        <div class="ct-container">
 
             <!-- as seen in e.g. achievements_list.twig -->
             <script id="template-posts" type="text/template">
@@ -90,21 +89,36 @@
                     <input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="Start typing..." value="{{ search_query|e('wp_kses_post')|raw }}">
                     <button class="button primary" type="submit">{{ search_label }}</button>
                 </div>
+
+				<div class="lds-spinner">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
             </form>
 
-            <div hidden id="ajax-search-issues">
+            <div hidden id="ajax-search-issues" class="fade-out">
                 <h5>
                     Issue
                 </h5>
                 <div class="results-list"></div>
             </div>
 
-            <div hidden id="ajax-search-topics">
+            <div hidden id="ajax-search-topics" class="fade-out">
                 <h5>Topics</h5>
                 <div class="results-list"></div>
             </div>
 
-            <div hidden id="ajax-search-posts">
+            <div hidden id="ajax-search-posts" class="fade-out">
                 <h5>Posts</h5>
                 <div class="results-list"></div>
             </div></div></section><section class="advanced-search"><div class="ct-container">

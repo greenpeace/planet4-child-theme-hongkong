@@ -4,6 +4,7 @@ import {
   Pagination,
   Scrollbar,
   Controller,
+  Autoplay,
 } from 'swiper/dist/js/swiper.esm.js';
 import LazyLoad from 'vanilla-lazyload';
 import SmoothScroll from 'smooth-scroll';
@@ -54,7 +55,7 @@ if (window.NodeList && !NodeList.prototype.forEach) {
   };
 }
 
-Swiper.use([Navigation, Pagination, Scrollbar, Controller]);
+Swiper.use([Navigation, Pagination, Scrollbar, Controller, Autoplay]);
 
 new LazyLoad({
   elements_selector: '.lazy',

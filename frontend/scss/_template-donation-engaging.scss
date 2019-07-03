@@ -3,6 +3,13 @@
 .page-template-donation .enform-side-style {
   padding-bottom: 20px;
 
+  @include greaterThan('sm') {
+    > .container {
+      height: auto;
+      min-height: 90vh;
+    }
+  }
+
   .enform {
     position: relative;
     height: auto;
@@ -16,24 +23,24 @@
       width: 100%;
     }
 
+    .en__field__element {
+      input[type='email'],
+      input[type='number'],
+      input[type='search'],
+      input[type='text'],
+      input[type='tel'],
+      input[type='url'],
+      input[type='password'],
+      textarea,
+      select {
+        margin-bottom: 20px;
+      }
+    }
+
     @include greaterThan('sm') {
       margin-top: 110px;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
-
-      .en__field__element {
-        input[type='email'],
-        input[type='number'],
-        input[type='search'],
-        input[type='text'],
-        input[type='tel'],
-        input[type='url'],
-        input[type='password'],
-        textarea,
-        select {
-          margin-bottom: 20px;
-        }
-      }
     }
   }
 
@@ -129,20 +136,6 @@
 
   .is-invalid {
     margin-bottom: 20px !important;
-  }
-
-  .invalid-feedback {
-    margin-top: 0;
-    font-size: 14px;
-    line-height: 20px;
-    color: $color-red;
-    font-weight: normal;
-    position: absolute;
-    display: inline-block;
-    padding: 0 8px;
-    left: 10px;
-    top: 34px;
-    background-color: white;
   }
 
   // TABS

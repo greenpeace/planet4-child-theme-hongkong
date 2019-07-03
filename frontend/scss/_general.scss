@@ -151,3 +151,35 @@ img.lazy {
     padding-top: 62px;
   }
 }
+
+.body-spinner {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 140ms linear, visibility 140ms linear 140ms;
+  z-index: 98;
+}
+
+body.is-loading .body-spinner {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: initial;
+  transition: opacity 140ms linear, visibility 140ms linear 0s;
+
+  .lds-spinner {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -32px;
+    margin-left: -32px;
+  }
+}

@@ -67,14 +67,16 @@ body,
   input[type='url'],
   input[type='password'],
   textarea,
-  .select select {
+  .select select,
+  .en__field__element--select select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
   }
 
   /* Stylish select */
-  .select {
+  .select,
+  .en__field__element--select {
     position: relative;
     width: 100%;
     max-width: 400px;
@@ -102,6 +104,14 @@ body,
     & select {
       padding-right: 30px;
       cursor: pointer;
+    }
+  }
+
+  .en__field__element--select {
+    margin-bottom: 0 !important;
+
+    &::after {
+      top: 23px;
     }
   }
 

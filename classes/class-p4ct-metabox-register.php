@@ -362,6 +362,15 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_team->add_field(
+			array(
+				'name'             => esc_html__( 'Code', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'used for example for street fundraisers', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_team_code',
+				'type'             => 'text',
+			)
+		);
+
 	}
 
 	/**

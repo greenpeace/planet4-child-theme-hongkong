@@ -31,6 +31,11 @@ const p4ct_search = function() {
         searchRequest.abort();
       } catch (e) {} // eslint-disable-line no-empty
 
+      $search_form.addClass('is-loading');
+      resultsPosts.addClass('fade-out');
+      resultsIssues.addClass('fade-out');
+      resultsTopics.addClass('fade-out');
+
       searchRequest = $.post(
         ajaxurl,
         {
@@ -39,6 +44,7 @@ const p4ct_search = function() {
         },
         function(res) {
           $('.nothing-found').remove();
+          $search_form.removeClass('is-loading');
           // Frontend TODO: integrate
           res = JSON.parse(res);
           // window.res = res;
@@ -48,13 +54,13 @@ const p4ct_search = function() {
           const issues = terms.filter(term => term.taxonomy === 'category');
           const topics = terms.filter(term => term.taxonomy === 'post_tag');
 
-          if (posts.length) resultsPosts.show();
+          if (posts.length) resultsPosts.show().removeClass('fade-out');
           else resultsPosts.hide();
 
-          if (issues.length) resultsIssues.show();
+          if (issues.length) resultsIssues.show().removeClass('fade-out');
           else resultsIssues.hide();
 
-          if (topics.length) resultsTopics.show();
+          if (topics.length) resultsTopics.show().removeClass('fade-out');
           else resultsTopics.hide();
 
           // posts = posts.map(post => post.post_title);
@@ -81,6 +87,10 @@ const p4ct_search = function() {
   });
 
   var filters_search = $('.filter-search');
+
+  $search_form.on('submit', function() {
+    $(document.body).addClass('is-loading');
+  });
 
   filters_search.change(function(ev) {
     $search_form.submit();
