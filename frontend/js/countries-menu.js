@@ -1,9 +1,9 @@
 export default function() {
+  const $ = jQuery;
+
   // Get Countries List from <script> data block.
   let $countries_script = $('#countries_script');
-  console.log($countries_script);
   if (!$countries_script.length) return;
-  console.log('menu');
 
   let countries_json;
   try {
