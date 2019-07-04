@@ -29,7 +29,7 @@ if ( is_category() ) {
 		$redirect_page               = get_post( $redirect_id );
 		$wp_query->queried_object    = $redirect_page;
 		$wp_query->queried_object_id = $redirect_page->ID;
-		include 'page.php';
+		include 'page-templates/main-issue.php';
 
 	} else {
 
