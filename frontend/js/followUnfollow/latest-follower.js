@@ -166,7 +166,10 @@ const latestFollower = function() {
       // );
 
       // da sistemare per mostrare anche 2 trending attuali
-      $trendingCollections.html(trendingCollectionsDynamic);     
+      $trendingCollections.prepend(trendingCollectionsDynamic);
+
+      // brutality take first 5...
+      $( ".section-article-row" ).hide().slice( 0, 5 ).show();
 
 
     },
