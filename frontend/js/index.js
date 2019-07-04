@@ -399,6 +399,15 @@ document.addEventListener('DOMContentLoaded', function(event) {
       }
     });
 
+    // move email field "above the fold" and open form on focus
+    const emailField = form.querySelector('.en__field--emailAddress');
+    const formBlock = form.querySelector('.formblock-flex');
+    formBlock.parentNode.insertBefore(emailField, formBlock);
+    emailField.querySelector('input').addEventListener('focus', () => {
+      form.classList.add('is-open');
+      document.body.classList.add('has-open-form');
+    });
+
     close.addEventListener('click', e => {
       form.classList.remove('is-open');
       document.body.classList.remove('has-open-form');
