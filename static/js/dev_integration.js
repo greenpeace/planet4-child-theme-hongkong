@@ -125,6 +125,9 @@ $(document).ready(function() {
       query.year = year;
     }
     query.paged = reset_container ? 1 : 2;
+    let container = $('#articles_list_post_container');
+    let messages = $('#articles_list_messages');
+    let btn = $('#articles_list_load_more_btn');
     $.ajax({
       url: window.localizations.ajaxurl,
       type: 'POST',
@@ -135,11 +138,25 @@ $(document).ready(function() {
       dataType: 'html',
     })
       .done(function(response) {
-        try {
-          console.log(JSON.parse(response).map(p => p.post_title));
-        } catch (e) {
-          console.log(response);
-        }
+          response = JSON.parse(response);
+          let html_data = response.html_data,
+              posts_found = parseInt(response.posts_found);
+          messages.html('');
+          if(reset_container) {
+            container.html('');
+            btn.attr('disabled', false);
+          } else {
+            btn.attr('disabled', true);
+          }
+          if(posts_found) {
+            container.append(html_data);
+          } else {
+            messages.append(html_data);
+            btn.attr('disabled', true);
+          }
+          if(posts_found < 4) {
+            btn.attr('disabled', true);
+          }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
         console.log(errorThrown); // eslint-disable-line no-console

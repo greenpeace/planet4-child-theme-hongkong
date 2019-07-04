@@ -55,6 +55,7 @@
   }
 
   > .ct-container {
+    position: relative;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -93,6 +94,12 @@
 
     p {
       @include title-text;
+    }
+  }
+
+  &.has-dollar-handle .content {
+    @include lessThan('sm') {
+      margin-bottom: 80px;
     }
   }
 

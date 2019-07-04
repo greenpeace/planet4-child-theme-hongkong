@@ -31,9 +31,14 @@
 
 .card-petition {
   @include card;
+  @include link-as-block;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  &:hover {
+    @include hover-card;
+  }
 
   @include greaterThan('sm') {
     display: block;
@@ -277,6 +282,18 @@
       @include card;
       margin-bottom: 6px;
     }
+
+    &:hover .thumbnail {
+      @include hover-card;
+    }
+  }
+
+  .thumbnail {
+    transition: box-shadow 140ms linear;
+  }
+
+  &:hover .thumbnail {
+    @include hover-card;
   }
 
   &.force-mobile .thumbnail {
@@ -575,6 +592,10 @@
         background-color: $color-health;
       }
     }
+  }
+
+  &:hover .image {
+    @include hover-card;
   }
 
   p {

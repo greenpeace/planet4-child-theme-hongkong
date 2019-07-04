@@ -63,9 +63,20 @@ class P4CT_AJAX_Handler {
 	 */
 	public function support_launcher_ajax_handler() {
 
-		$data = $_POST;
+		$args = [
+			'action' => FILTER_SANITIZE_STRING,
+			'recipient_email' => FILTER_SANITIZE_EMAIL,
+			'subject' => FILTER_SANITIZE_STRING,
+			'send_to' => FILTER_SANITIZE_URL,
+			'name' => FILTER_SANITIZE_STRING,
+			'email' => FILTER_SANITIZE_EMAIL,
+			'message' => FILTER_SANITIZE_STRING,
+			'_wpnonce' => FILTER_SANITIZE_STRING,
+			'_wp_http_referer' => FILTER_SANITIZE_STRING,
+		];
+		$data = filter_input_array( INPUT_POST , $args , false );
 
-		if ( ! wp_verify_nonce( $data['_wpnonce'], self::SUPPORT_LAUNCHER_NONCE_STRING ) ) {
+		if ( ! ( $data && wp_verify_nonce( $data['_wpnonce'], self::SUPPORT_LAUNCHER_NONCE_STRING ) ) ) {
 			$this->safe_echo( __( 'Did not save because your form seemed to be invalid. Sorry.', 'gpea_theme' ) );
 			return;
 		}
@@ -76,7 +87,7 @@ class P4CT_AJAX_Handler {
 			$to = $data['recipient_email'];
 			$subject = $data['subject'];
 			$message = $data['message'];
-			$headers = array( 'From: ' . $data['name'] . ' <' . $data['email'] . '>\r\n' );
+			$headers = [ "From: $data[name] <$data[email]>\n" ];
 
 			wp_mail( $to, $subject, $message, $headers );
 
