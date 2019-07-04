@@ -4,36 +4,33 @@ import prevNext from './Donation/prevNext';
 import mask from './Donation/masks';
 
 function donation(Swiper) {
-  // TODO: add here event listener in case we load the script in the head?
-  // document.addEventListener("DOMContentLoaded", function(event) {
-    // Quit if we aren't in a donation page
-    if (!document.querySelector('.page-template-donation')) return;
+  // Quit if we aren't in a donation page
+  if (!document.querySelector('.page-template-donation')) return;
 
-    // Activate swiper
-    const donationSwiper = swiper(Swiper);
+  // Activate swiper
+  const donationSwiper = swiper(Swiper);
 
-    // Init mask/validation logic
-    const form = document.querySelector('#enform form');
-    mask(form);
-    const validateBlock = validation(form);
+  // Init mask/validation logic
+  const form = document.querySelector('#enform form');
+  mask(form);
+  const validateBlock = validation(form);
 
-    // Activate prev/next buttons
-    prevNext(form, donationSwiper, validateBlock);
+  // Activate prev/next buttons
+  prevNext(form, donationSwiper, validateBlock);
 
-    // Submit safeguard
-    form.addEventListener('submit', e => {
-      if (
-        !validateBlock(block, 'amount') ||
-        !validateBlock(block, 'data') ||
-        !validateBlock(block, 'payment')
-      ) {
-        scroll.animateScroll(block.querySelector('.is-invalid'));
-        // block.querySelector('.is-invalid').focus();
-        e.preventDefault();
-        return false;
-      }
-    });
-  // });
+  // Submit safeguard
+  form.addEventListener('submit', e => {
+    if (
+      !validateBlock(block, 'amount') ||
+      !validateBlock(block, 'data') ||
+      !validateBlock(block, 'payment')
+    ) {
+      scroll.animateScroll(block.querySelector('.is-invalid'));
+      // block.querySelector('.is-invalid').focus();
+      e.preventDefault();
+      return false;
+    }
+  });
 }
 
 export default donation;

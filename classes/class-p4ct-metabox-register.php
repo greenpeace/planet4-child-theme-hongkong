@@ -31,6 +31,7 @@ class P4CT_Metabox_Register {
 		add_action( 'cmb2_admin_init', [ $this, 'register_p4_meta_box' ] );
 		add_filter( 'cmb2_show_on', [ $this, 'be_taxonomy_show_on_filter' ], 10, 2 );
 		add_filter( 'cmb2_render_supportus_page_dropdown', [ $this, 'gpea_render_supportus_page_dropdown' ], 10, 2 );
+		add_filter( 'cmb2_render_mainissue_page_dropdown', [ $this, 'gpea_render_mainissue_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_ugc_page_dropdown', [ $this, 'gpea_render_ugc_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_latest_page_dropdown', [ $this, 'gpea_render_latest_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_make_change_page_dropdown', [ $this, 'gpea_render_make_change_page_dropdown' ], 10, 2 );
@@ -50,6 +51,7 @@ class P4CT_Metabox_Register {
 		$this->register_tip_metabox();
 		$this->register_user_story_metabox();
 		$this->register_team_metabox();
+		$this->register_category_metabox();
 		$this->register_post_metabox();
 		$this->register_page_metabox();
 		$this->register_main_options_metabox();
@@ -372,6 +374,34 @@ class P4CT_Metabox_Register {
 		);
 
 	}
+
+	/**
+	 * Registers category meta box(es).
+	 */
+	public function register_category_metabox() {
+
+		$cmb_category = new_cmb2_box(
+			array(
+				'id'           => 'p4-gpea-category-box',
+				'title'        => 'Main issue extra info',
+				'object_types' => array( 'term' ),
+				'taxonomies'       => array( 'category' ),
+				'context'      => 'normal',
+				'priority'     => 'high',
+				'show_names'   => true,
+			)
+		);
+
+		$cmb_category->add_field(
+			array(
+				'name'             => esc_html__( 'Main issue page to redirect to:', 'gpea_theme_backend' ),
+				'id'               => 'gpea_mainissue_page',
+				'type'             => 'mainissue_page_dropdown',
+			)
+		);
+
+	}
+
 
 	/**
 	 * Registers post meta box(es).
@@ -907,6 +937,24 @@ class P4CT_Metabox_Register {
 				'hierarchical'     => true,
 				'selected'         => $value,
 				'name'             => 'gpea_default_latest_link',
+			]
+		);
+	}
+
+	/**
+	 * Render pages for main issue page dropdown in category.
+	 *
+	 * @param array  $field_args Field arguments.
+	 * @param string $value Value.
+	 */
+	public function gpea_render_mainissue_page_dropdown( $field_args, $value ) {
+		wp_dropdown_pages(
+			[
+				'show_option_none' => __( 'Select Page', 'gpea_theme_backend' ),
+				'hide_empty'       => 0,
+				'hierarchical'     => true,
+				'selected'         => $value,
+				'name'             => 'gpea_mainissue_page',
 			]
 		);
 	}

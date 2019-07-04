@@ -90,3 +90,23 @@ button,
 .card-explainer .description p:not(.subtitle) {
   color: #292f47 !important;
 }
+
+@media (min-width: 1024px) {
+  .section-post-content {
+    width: 800px !important;
+  }
+
+  .section-post-content .leader,
+  .page-template-petition .outer_block_container .leader {
+    width: 800px !important;
+  }
+
+  .section-post-content blockquote > *,
+  .section-post-content .embed-container > *,
+  .section-post-content .full-width > *,
+  .page-template-petition .outer_block_container blockquote > *,
+  .page-template-petition .outer_block_container .embed-container > *,
+  .page-template-petition .outer_block_container .full-width > * {
+    width: 800px !important;
+  }
+}

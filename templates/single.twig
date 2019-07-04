@@ -21,13 +21,13 @@
       <div class="meta-box">
         <div>
           <span>{{ post.page_types[0].name }}</span>
-          <span class="issue {{ main_issue_slug }}">{{ main_issue|raw }}</span>
+          <a href="/?s&f[cat]={{ main_issue_id }}"><span class="issue {{ main_issue_slug }}">{{ main_issue|raw }}</span></a>
         </div>
         <div>
           <span>
             <span class="icon-clock"></span>
             {{ reading_time }}
-            {{ strings.time_to_read }}
+            {# { strings.time_to_read } #}
           </span>
           <span>
             <time class="single-post-time" pubdate>{{ post.post_date|date }}</time>
@@ -60,7 +60,7 @@
       <div class="news-list">
         {% if ( related_posts ) %}
           {% for related_post in related_posts %}
-            {% include "blocks/tease-related-post.twig" with {post:related_post} %}
+            {% include "blocks/tease-related-post-big.twig" with {post:related_post} %}
           {% endfor %}
         {% endif %}
       </div>

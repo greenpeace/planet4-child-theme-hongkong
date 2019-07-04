@@ -158,24 +158,30 @@
   border-radius: 8px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
   overflow: hidden;
+  transition: box-shadow 140ms linear;
+}
+
+@mixin hover-card {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
 }
 
 @mixin card-tight {
   border-radius: 4px;
   box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
   overflow: hidden;
+  transition: box-shadow 140ms linear;
 }
 
 @mixin link-as-block {
   display: block;
   text-decoration: none !important;
   border-bottom: none !important;
-  transition: opacity 0.2s;
+  // transition: opacity 0.2s;
   color: black;
 
-  &:hover {
-    opacity: 0.9;
-  }
+  // &:hover {
+  //   opacity: 0.9;
+  // }
 }
 
 @mixin profile {

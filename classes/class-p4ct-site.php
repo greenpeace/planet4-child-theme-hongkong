@@ -77,6 +77,7 @@ class P4CT_Site {
 				'navigation-bar-menu' => __( 'Navigation Bar Menu', 'gpea_theme_backend' ),
 			]
 		);
+		add_filter( 'locale', [ $this, 'gpea_setlocale' ] );
 
 		// Override parent AJAX search functionality.
 		remove_action( 'wp_ajax_get_paged_posts', [ 'P4MT\P4_ElasticSearch', 'get_paged_posts' ] );
@@ -181,6 +182,19 @@ class P4CT_Site {
 		// $twig->addExtension( new Twig_Scappella_Destra() );
 		// $twig->addFilter( new Twig_Filtra_Scappella( 'svgicon', [ $this, 'svgicon' ] ) );
 		return $twig;
+	}
+
+	/**
+	 * Force english in backend
+	 *
+	 * @param string $locale string.
+	 */
+	public function gpea_setlocale( $locale ) {
+		if ( is_admin() ) {
+			return 'en_US';
+		}
+
+		return $locale;
 	}
 
 	/**
@@ -295,8 +309,9 @@ class P4CT_Site {
 	 * @param int $avoid_post_search if
 	 * @param int $cat_id cat id to use as source.
 	 * @param int $tag_id tag id to use as source
+	 * @param text layout to differentiate
 	 */
-	public function gpea_get_related( $exclude_post_id, $limit, $avoid_post_search = 0, $cat_id = 0, $tag_id = 0 ) {
+	public function gpea_get_related( $exclude_post_id, $limit, $avoid_post_search = 0, $cat_id = 0, $tag_id = 0, $layout = false ) {
 
 		$exclude_post_id = (int) ( $exclude_post_id ?? '' );
 		$limit           = (int) ( $limit ?? '3' );
@@ -342,7 +357,12 @@ class P4CT_Site {
 			$post_args['tag_id'] = $tag_id ?? false;
 		}
 
-		$templates          = [ 'tease-related-post.twig' ];
+		if ( 'big' === $layout ) {
+			$templates          = [ 'tease-related-post-big.twig' ];
+		} else {
+			$templates          = [ 'tease-related-post.twig' ];
+		}
+
 		$pagetype_posts     = new \Timber\PostQuery( $post_args, 'P4_Post' );
 
 		return $pagetype_posts;
