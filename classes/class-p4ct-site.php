@@ -77,6 +77,7 @@ class P4CT_Site {
 				'navigation-bar-menu' => __( 'Navigation Bar Menu', 'gpea_theme_backend' ),
 			]
 		);
+		add_filter( 'locale', [ $this, 'gpea_setlocale' ] );
 
 		// Override parent AJAX search functionality.
 		remove_action( 'wp_ajax_get_paged_posts', [ 'P4MT\P4_ElasticSearch', 'get_paged_posts' ] );
@@ -181,6 +182,19 @@ class P4CT_Site {
 		// $twig->addExtension( new Twig_Scappella_Destra() );
 		// $twig->addFilter( new Twig_Filtra_Scappella( 'svgicon', [ $this, 'svgicon' ] ) );
 		return $twig;
+	}
+
+	/**
+	 * Force english in backend
+	 *
+	 * @param string $locale string.
+	 */
+	public function gpea_setlocale( $locale ) {
+		if ( is_admin() ) {
+			return 'en_US';
+		}
+
+		return $locale;
 	}
 
 	/**
