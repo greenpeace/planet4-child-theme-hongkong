@@ -64,7 +64,9 @@ if ( $post_categories ) {
 		$context['post_categories'] .= $post_category->slug . ' ';
 		if ( ( $main_issues_category_id ) && ( intval( $post_category->parent ) === intval( $main_issues_category_id ) ) ) {
 			$context['main_issue'] = $post_category->name;
+			$context['main_issue_id'] = $post_category->term_id;
 			$context['main_issue_slug'] = $post_category->slug;
+			$context['main_issue_url'] = get_category_link( $post_category->term_id );
 		}
 	}
 }
@@ -89,7 +91,7 @@ $context['filter_url'] = add_query_arg(
 if ( 'no' !== $post->include_articles ) {
 	// $post->articles = "[shortcake_articles exclude_post_id='" . $post->ID . "' /]"; !
 	$gpea_extra = new P4CT_Site();
-	$context['related_posts'] = $gpea_extra->gpea_get_related( $post->ID, 3 );
+	$context['related_posts'] = $gpea_extra->gpea_get_related( $post->ID, 4, false, false, false, 'big' );
 }
 
 // Build the shortcode for take action boxout block

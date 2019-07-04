@@ -295,8 +295,9 @@ class P4CT_Site {
 	 * @param int $avoid_post_search if
 	 * @param int $cat_id cat id to use as source.
 	 * @param int $tag_id tag id to use as source
+	 * @param text layout to differentiate
 	 */
-	public function gpea_get_related( $exclude_post_id, $limit, $avoid_post_search = 0, $cat_id = 0, $tag_id = 0 ) {
+	public function gpea_get_related( $exclude_post_id, $limit, $avoid_post_search = 0, $cat_id = 0, $tag_id = 0, $layout = false ) {
 
 		$exclude_post_id = (int) ( $exclude_post_id ?? '' );
 		$limit           = (int) ( $limit ?? '3' );
@@ -342,7 +343,12 @@ class P4CT_Site {
 			$post_args['tag_id'] = $tag_id ?? false;
 		}
 
-		$templates          = [ 'tease-related-post.twig' ];
+		if ( 'big' === $layout ) {
+			$templates          = [ 'tease-related-post-big.twig' ];
+		} else {
+			$templates          = [ 'tease-related-post.twig' ];
+		}
+
 		$pagetype_posts     = new \Timber\PostQuery( $post_args, 'P4_Post' );
 
 		return $pagetype_posts;
