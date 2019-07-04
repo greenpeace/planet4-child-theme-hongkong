@@ -5,6 +5,12 @@
   background-position: center;
   position: relative;
 
+  .post-template-default & {
+    @include lessThan('sm') {
+      height: 90vw;
+    }
+  }
+
   // @include greaterThan('sm') {
   //   height: 578px;
   // }
