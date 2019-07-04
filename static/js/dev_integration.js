@@ -140,7 +140,7 @@ $(document).ready(function() {
       .done(function(response) {
           response = JSON.parse(response);
           let html_data = response.html_data,
-              posts_found = response.posts_found;
+              posts_found = parseInt(response.posts_found);
           messages.html('');
           if(reset_container) {
             container.html('');
@@ -154,7 +154,9 @@ $(document).ready(function() {
             messages.append(html_data);
             btn.attr('disabled', true);
           }
-
+          if(posts_found < 4) {
+            btn.attr('disabled', true);
+          }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
         console.log(errorThrown); // eslint-disable-line no-console
