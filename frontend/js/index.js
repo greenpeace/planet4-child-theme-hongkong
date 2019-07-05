@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
       let donationUrl = new URL(form.action);
       let amountValue = '';
       let frequencyValue = '';
+      let recurrfreq = '';
 
       if (form.amount) {
         amountValue = form.amount.value;
@@ -137,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
         form['en_recurring_question'].value
       ) {
         frequencyValue = form.frequency.value;
+        recurrfreq = ( 'Y' === form.frequency.value ) ? '12' : '0';
       }
 
       if ('mrm' == form.en_recurring_question.value) {
@@ -153,6 +155,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
           form.en_recurring_question.value,
           frequencyValue
         );
+        donationUrl.searchParams.append('transaction.recurrfreq', recurrfreq);
       }
 
       window.location.href = donationUrl;

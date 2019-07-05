@@ -139,6 +139,12 @@ img.lazy {
   }
 }
 
+@include lessThan('sm') {
+  .outer_block_container {
+    overflow-x: hidden;
+  }
+}
+
 .outer_block_container > section,
 .page-template > section {
   min-height: 400px;
