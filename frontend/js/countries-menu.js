@@ -40,7 +40,7 @@ export default function() {
         $('.countries_sublist', countries_sublist).append(
           '<li>' +
             '<a href="' +
-            country.url +
+            country.lang[0].url +
             '">' +
             country.name +
             '</a>' +
