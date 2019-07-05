@@ -37,10 +37,11 @@ export default function() {
       );
       $('.countries_list', countries_html).append(countries_sublist);
       $.each(element, function(index, country) {
+        const url = country.url ? country.url : country.lang[0].url;
         $('.countries_sublist', countries_sublist).append(
           '<li>' +
             '<a href="' +
-            country.lang[0].url +
+            country.url +
             '">' +
             country.name +
             '</a>' +

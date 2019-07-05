@@ -1,16 +1,5 @@
-import SmoothScroll from 'smooth-scroll';
-
-function petitionThankyou() {
+function petitionThankyou(Scroll) {
   if (!document.querySelector('.page-template-petition-thankyou')) return;
-  console.log('init');
-
-  const state = {
-    sign: true,
-    share: null,
-    donate: null,
-  };
-
-  const scroll = new SmoothScroll();
 
   const stepSign = document.querySelector('.js-step-sign');
   const stepShare = document.querySelector('.js-step-share');
@@ -26,7 +15,7 @@ function petitionThankyou() {
     stepShare.classList.remove('is-disabled');
     stepShare.classList.remove('is-crossed');
 
-    scroll.animateScroll(screenShare);
+    Scroll.animateScroll(screenShare);
   });
 
   // If I choose NO on "Will you share?"
@@ -39,7 +28,7 @@ function petitionThankyou() {
       stepShare.classList.add('is-crossed');
     }
 
-    scroll.animateScroll(screenDonate);
+    Scroll.animateScroll(screenDonate);
   });
 
   // If I choose SKIP on the sharing screen
@@ -51,7 +40,7 @@ function petitionThankyou() {
       stepShare.classList.add('is-crossed');
     }
 
-    scroll.animateScroll(screenDonate);
+    Scroll.animateScroll(screenDonate);
   });
 
   // If I click any share thing on the sharing screen
