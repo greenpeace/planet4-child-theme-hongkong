@@ -110,3 +110,13 @@ button,
     width: 800px !important;
   }
 }
+
+@media only screen and (min-width: 1024px) {
+  .floating-share {
+    left: -150px !important;
+  }
+
+  .floating-share.is-fixed {
+    left: -500px !important;
+  }
+}

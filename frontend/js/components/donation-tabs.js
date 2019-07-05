@@ -12,6 +12,12 @@ export default function() {
       const siblings = tabBar.children;
       const form = tabBar.parentElement.querySelector('form');
       const handles = tabBar.parentElement.querySelectorAll('.dollar-handles');
+      const handlesOnce = tabBar.parentElement.querySelectorAll(
+        '.dollar-handles__once .dollar-handle'
+      );
+      const handlesRecurring = tabBar.parentElement.querySelectorAll(
+        '.dollar-handles__recurring .dollar-handle'
+      );
       const paragraphs = tabBar.parentElement.querySelectorAll(
         "[class^='paragraph-handles__'], [class*=' paragraph-handles__']"
       );
@@ -22,6 +28,9 @@ export default function() {
       e.target.classList.add('is-active');
 
       if (handles.length) {
+        const changeEvent = document.createEvent('HTMLEvents');
+        changeEvent.initEvent('change', false, true);
+
         Array.from(handles).forEach(handle => {
           handle.classList.remove('is-active');
         });
@@ -35,6 +44,8 @@ export default function() {
           form
             .querySelector('.paragraph-handles__once')
             .classList.add('is-active');
+          handlesOnce[1].querySelector('input').checked = true;
+          handlesOnce[1].querySelector('input').dispatchEvent(changeEvent);
         } else if (e.target.classList.contains('tab-item__recurring')) {
           form
             .querySelector('.dollar-handles__recurring')
@@ -42,6 +53,8 @@ export default function() {
           form
             .querySelector('.paragraph-handles__recurring')
             .classList.add('is-active');
+          handlesRecurring[1].querySelector('input').checked = true;
+          handlesRecurring[1].querySelector('input').dispatchEvent(changeEvent);
         }
       }
 

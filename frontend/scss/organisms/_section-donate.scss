@@ -99,7 +99,7 @@
 
   &.has-dollar-handle .content {
     @include lessThan('sm') {
-      margin-bottom: 80px;
+      margin-bottom: 0;
     }
   }
 
