@@ -68,6 +68,10 @@
     padding-top: 50%;
   }
 
+  &:hover .thumbnail {
+    @include hover-thumbnail;
+  }
+
   @include greaterThan('sm') {
     .meta-box:first-child {
       font-size: 16px;

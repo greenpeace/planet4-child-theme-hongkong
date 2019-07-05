@@ -6,6 +6,7 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  transition: box-shadow 140ms linear;
 
   @include greaterThan('sm') {
     height: 95px;
