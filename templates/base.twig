@@ -81,7 +81,7 @@
 
 	<!-- Project main card followed !!! -->
 	<script id="template-section-projects-following" type="text/template">
-		<section class="section-projects-following">
+		<section class="section-projects-following ct-container">
 			<a href="<%= link %>" class="project-large">
 				<div class="project-large-overflow">
 				<div class="thumbnail" style="background-image: url(<%= image %>);"></div>
@@ -131,8 +131,19 @@
 				</div>
 				</div>
 			</a>
-			<div class="posts js-project-related">
+			<div class="posts js-project-related desktop-only">
 				<%= related_posts %>
+			</div>
+			<div class="swiper-container mini-swiper mobile-only">
+				<div class="swiper-wrapper">
+					<%= related_posts_mobile %>
+				</div>
+				<div class="swiper-button-next">
+					<span class="icon-chevron-right"></span>
+				</div>
+				<div class="swiper-button-prev">
+					<span class="icon-chevron-right"></span>
+				</div>
 			</div>
 		</section>
 	</script>
@@ -140,9 +151,8 @@
 	<!-- taken from where the sun don't shine -->
 	<script id="template-project-post-update" type="text/template">
 		<a href="<%= link %>" class="card-update compact">
-			<div
+			<div style="background-image: url('<%= image %>');"
 				class="thumbnail lazy"
-				data-bg="url(<%= image %>)"
 			></div>
 			<div class="box">
 				<div class="meta-box">
@@ -172,12 +182,35 @@
 	</script>
 
 	<!-- as seen in article_row.twig !!! KEEP SYNCRONIZED !!! -->
+	<script id="template-project-post-update-small" type="text/template">
+		<a href="<%= link %>" class="swiper-slide card-mini mini-update">
+			<% if (typeof image !== 'undefined' && image) { %>
+				<div style="background-image: url('<%= image %>');"
+					class="thumbnail lazy"
+				></div>
+			<% } %>
+			<div class="meta-box">
+				<div>
+					<% if (typeof post_date !== 'undefined') { %>
+						<span><%= post_date %></span>
+					<% } %>
+				</div>
+				<div>
+					<% if (typeof news_type !== 'undefined') { %>
+						<span><%= news_type %></span>
+					<% } %>
+				</div>
+			</div>
+			<p><%= title %></p>
+		</a>
+	</script>
+
+	<!-- as seen in article_row.twig !!! KEEP SYNCRONIZED !!! -->
 	<script id="template-article-row" type="text/template">
 		<a href="<%= link %>" class="swiper-slide card-mini mini-update">
 			<% if (typeof img_url !== 'undefined' && img_url) { %>
-				<div
+				<div style="background-image: url('<%= img_url %>');"
 					class="thumbnail lazy"
-					data-bg="url(<%= img_url %>)"
 				></div>
 			<% } %>
 			<div class="meta-box">

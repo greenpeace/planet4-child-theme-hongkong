@@ -168,6 +168,9 @@ const latestFollower = function() {
       // da sistemare per mostrare anche 2 trending attuali
       $trendingCollections.prepend(trendingCollectionsDynamic);
 
+      let resizeEvent = new Event('resize');
+      window.dispatchEvent(resizeEvent);
+
       // brutality take first 5...
       $( ".section-article-row" ).hide().slice( 0, 5 ).show();
 
