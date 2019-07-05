@@ -65,5 +65,28 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   petitionThankyou(Scroll);
 
+  /**
+   * Functionality for set dynamic back link (aka "navigation of Francesco")
+   */
+  function createBackLink() {
+    const backLink = document.querySelector('.js-back-button');
+    if (!backLink) return;
+
+    backLink.addEventListener('click', e => {
+      e.preventDefault();
+      let previousLink = document.referrer;
+      let sourceLink = document.createElement('a');
+      sourceLink.href = previousLink;
+      if (sourceLink.hostname === window.location.hostname) {
+        window.history.back();
+        return false;
+      } else {
+        window.location.href = backLink.href;
+        return;
+      }
+    });
+  }
+  createBackLink();
+
   // donationPage(Swiper, Scroll);
 });

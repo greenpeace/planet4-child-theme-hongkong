@@ -39,13 +39,11 @@ function byRecentDate(a, b) {
   return 0;
 }
 
-const homeFollower = function() {
-  if (!$('body').hasClass('js-home-follower')) return;
+const makechangeFollower = function() {
+  if (!$('body').hasClass('js-makechange-follower')) return;
 
   const $featuredSwiper = $('.section-featured .swiper-container').first();
   const $existingPosts = $featuredSwiper.find('.swiper-slide');
-
-  const $sectionProjects = $('.section-projects').first();
 
   const existingPosts = $existingPosts
     .toArray()
@@ -60,6 +58,7 @@ const homeFollower = function() {
     type: 'post',
     data: {
       action: 'topicsFollowing',
+      star: 'petition',
     },
     success: function(data) {
       const swiper = $featuredSwiper[0].swiper;
@@ -130,90 +129,7 @@ const homeFollower = function() {
       $featuredSwiper.removeClass('is-loading');
       console.error(errorThrown);
     },
-  });
-
-  // handle project section here
-
-  $sectionProjects.addClass('is-loading');
-  $.ajax({
-    url: p4_vars.ajaxurl,
-    type: 'post',
-    data: {
-      action: 'projectsFollowing',
-    },
-    success: function(data) {
-      let projects;
-
-      try {
-        projects = JSON.parse(data);
-      } catch (error) {
-        console.error(error);
-        $sectionProjects.removeClass('is-loading');
-        return;
-      }
-      // Create the HTML element for each new post
-
-      const projectContainer = $('#template-section-projects-following');
-      const buildContainer = template(projectContainer[0].innerHTML);
-      const projectUpdate = $('#template-project-post-update');
-      const buildUpdate = template(projectUpdate[0].innerHTML);
-      const projectUpdateMobile = $('#template-project-post-update-small');
-      const buildUpdateMobile = template(projectUpdateMobile[0].innerHTML);
-
-      // const newPostsSlides = posts.map(post => {
-      //   if (post.engaging_pageid !== undefined) {
-      //     return buildPetition(post);
-      //   } else {
-      //     return buildUpdate(post);
-      //   }
-      // });
-
-      if (projects) {
-        const projectFollowing = projects.map(project => {
-          let relatedPosts = project.related.map(post => {
-            return buildUpdate(post);          
-          });
-          project.related_posts = relatedPosts;
-          
-          let relatedPostsMobile = project.related.map(post => {
-            return buildUpdateMobile(post);          
-          });
-          project.related_posts_mobile = relatedPostsMobile;
-          
-          let sectionProject = buildContainer(project);
-          return sectionProject;
-        });
-  
-        $sectionProjects.html(projectFollowing);
-
-        let resizeEvent = new Event('resize');
-        window.dispatchEvent(resizeEvent);
-      }
-
-      // All done
-      $sectionProjects.removeClass('is-loading');
-      $sectionProjects.removeClass('dark');
-    },
-    error: function(errorThrown) {
-      $featuredSwiper.removeClass('is-loading');
-      console.error(errorThrown);
-    },
-  });
-  // $.ajax({
-  //   url: p4_vars.ajaxurl,
-  //   type: 'post',
-  //   data: {
-  //     action: 'projectsFollowing',
-  //   },
-  //   success: function(data) {
-  //     // This outputs the result of the ajax request
-  //     console.log(data);
-  //   },
-  //   error: function(errorThrown) {
-  //     //alert(errorThrown);
-  //     console.log(errorThrown);
-  //   },
-  // });
+  });  
 };
 
-export default homeFollower;
+export default makechangeFollower;

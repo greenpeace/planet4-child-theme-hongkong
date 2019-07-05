@@ -560,17 +560,7 @@ class P4CT_Metabox_Register {
 				'id'      => 'gpea_description_generic_footer_text',
 				'type'    => 'textarea',
 			)
-		);
-
-		/* donation default link */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Default external link for donation ', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Parameters and fields of donation box will be sent to this link', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_donation_link',
-				'type'    => 'text',
-			)
-		);
+		);		
 
 		/* support us */
 		$cmb_options->add_field(
@@ -688,6 +678,16 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		/* donation default link */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Default external link for donation ', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Parameters and fields of donation box will be sent to this link', 'gpea_theme_backend' ),
+				'id'      => 'gpea_default_donation_link',
+				'type'    => 'text',
+			)
+		);
+
 		$cmb_options->add_field(
 			array(
 				'name'    => esc_html__( 'Engaging question for recurring donation', 'gpea_theme_backend' ),
@@ -697,6 +697,61 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Donation: minimum amount for one-off', 'gpea_theme_backend' ),
+				'id'      => 'gpea_donation_minimum-oneoff',
+				'type' => 'text',
+				'attributes' => array(
+					'type'    => 'number',
+					'pattern' => '\d*',
+				),
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Donation: minimum amount for regular', 'gpea_theme_backend' ),
+				'id'      => 'gpea_donation_minimum-regular',
+				'type' => 'text',
+				'attributes' => array(
+					'type'    => 'number',
+					'pattern' => '\d*',
+				),
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Donation: suggested amount for one-off', 'gpea_theme_backend' ),
+				'id'      => 'gpea_donation_suggested-oneoff',
+				'type' => 'text',
+				'attributes' => array(
+					'type'    => 'number',
+					'pattern' => '\d*',
+				),
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Donation: suggested amount for regular', 'gpea_theme_backend' ),
+				'id'      => 'gpea_donation_suggested-regular',
+				'type' => 'text',
+				'attributes' => array(
+					'type'    => 'number',
+					'pattern' => '\d*',
+				),
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Donation: error message in case of lower to minimum', 'gpea_theme_backend' ),
+				'id'      => 'gpea_donation_minimum-error-message',
+				'type'    => 'text',
+			)
+		);
 	}
 
 	/**

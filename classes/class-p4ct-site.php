@@ -77,7 +77,7 @@ class P4CT_Site {
 				'navigation-bar-menu' => __( 'Navigation Bar Menu', 'gpea_theme_backend' ),
 			]
 		);
-		add_filter( 'locale', [ $this, 'gpea_setlocale' ] );
+		add_action( 'after_setup_theme', [ $this, 'gpea_child_theme_setup' ] );
 
 		// Override parent AJAX search functionality.
 		remove_action( 'wp_ajax_get_paged_posts', [ 'P4MT\P4_ElasticSearch', 'get_paged_posts' ] );
@@ -185,16 +185,19 @@ class P4CT_Site {
 	}
 
 	/**
-	 * Force english in backend
-	 *
-	 * @param string $locale string.
+	 * Load translations for master theme
 	 */
-	public function gpea_setlocale( $locale ) {
-		if ( is_admin() ) {
-			return 'en_US';
-		}
+	public function gpea_child_theme_setup() {
+		$domains = [
+			'gpea_theme',
+			'gpea_theme_backend',
+		];
+		$locale  = is_admin() ? get_user_locale() : get_locale();
 
-		return $locale;
+		foreach ( $domains as $domain ) {
+			$mofile = get_stylesheet_directory() . '/languages/' . $domain . '-' . $locale . '.mo';
+			load_textdomain( $domain, $mofile );
+		}
 	}
 
 	/**
