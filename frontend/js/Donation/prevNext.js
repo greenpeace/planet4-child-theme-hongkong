@@ -1,10 +1,12 @@
-import SmoothScroll from 'smooth-scroll';
-
-function prevNext(form, donationSwiper, validateBlock) {
-  const scroll = new SmoothScroll('a[href*="#"]', {
-    header: 'body > header',
-    offset: 40,
-    updateURL: false,
+function prevNext(form, donationSwiper, validateBlock, Scroll) {
+  // Focus and up
+  donationSwiper.on('slideChangeTransitionEnd', function() {
+    // console.log('slide changed');
+    Scroll.animateScroll(
+      donationSwiper.slides[donationSwiper.activeIndex].querySelectorAll(
+        'input, select'
+      )[0]
+    );
   });
 
   // All steps: PREV
@@ -21,7 +23,7 @@ function prevNext(form, donationSwiper, validateBlock) {
       stepPrev.classList.add('is-current');
 
       donationSwiper.slidePrev();
-      scroll.animateScroll(document.querySelector('.form-caption'));
+      // scroll.animateScroll(document.querySelector('.form-caption'));
     });
   });
 
@@ -45,9 +47,10 @@ function prevNext(form, donationSwiper, validateBlock) {
       stepDetails.classList.remove('is-todo');
       stepDetails.classList.add('is-current');
       donationSwiper.slideNext();
-      scroll.animateScroll(document.querySelector('.form-caption'));
+      // Scroll.animateScroll(document.querySelector('.form-caption'));
+      // donationSwiper.slides[1].querySelectorAll('input, select')[0].focus();
     } else {
-      scroll.animateScroll(block.querySelector('.is-invalid'));
+      Scroll.animateScroll(block.querySelector('.is-invalid'));
       block.querySelector('.is-invalid').focus();
     }
   });
@@ -63,9 +66,10 @@ function prevNext(form, donationSwiper, validateBlock) {
       stepPayment.classList.remove('is-todo');
       stepPayment.classList.add('is-current');
       donationSwiper.slideNext();
-      scroll.animateScroll(document.querySelector('.form-caption'));
+      // donationSwiper.slides[2].querySelectorAll('input, select')[0].focus();
+      // Scroll.animateScroll(document.querySelector('.form-caption'));
     } else {
-      scroll.animateScroll(block.querySelector('.is-invalid'));
+      Scroll.animateScroll(block.querySelector('.is-invalid'));
       block.querySelector('.is-invalid').focus();
     }
   });

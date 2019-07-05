@@ -276,6 +276,7 @@ class P4CT_AJAX_Handler {
 		foreach ( $tags as $tag_id ) {
 
 			$args = array(
+				'post_type'      => array( 'page', 'post' ),
 				'order'          => 'desc',
 				'orderby'        => 'date',
 				'posts_per_page' => 5,
@@ -291,11 +292,11 @@ class P4CT_AJAX_Handler {
 			}
 
 			if ( 'tag' === $type ) {
-				$args['tag_id'] = $tag_id;
 				$term_info   = get_term( $tag_id, 'post_tag' );
-
 				if ( 'petition' === $preferences ) {
-					$args['tag'] = 'petition';
+					$args['tag_slug__and'] = array( 'petition', $term_info->slug );
+				} else {
+					$args['tag_id'] = $tag_id;
 				}
 			}
 

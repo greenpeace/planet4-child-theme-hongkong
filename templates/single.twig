@@ -18,10 +18,32 @@
     </section>
 
     <section class="section-post-content ct-container">
+		<div class="floating-share" data-fix-from-top="80" data-unfix-with-scroll="9999">
+			<p>{{ strings.share }}</p>
+			<ul>
+			<!-- TODO stampa description (SEO?), url, testo cinese/korean per "share on twitter" ecc. -->
+			<li>
+				<a href="https://twitter.com/intent/tweet?text={{ og_description|e('html_attr')|raw }}&url={{ post.link }}" class="floating-share-icon tw" aria-label="{{ '[Share on Twitter]' }}" target="_blank" rel="noopener noreferrer">
+				<span class="icon-twitter"></span>
+				</a>
+			</li>
+			<li>
+				<a href="https://www.facebook.com/sharer/sharer.php?u={{ post.link }}" class="floating-share-icon fb" aria-label="{{ '[Share on Facebook]' }}" target="_blank" rel="noopener noreferrer">
+				<span class="icon-facebook"></span>
+				</a>
+			</li>
+			<li>
+				<a href="mailto:?subject={{ og_description|e('html_attr')|raw }}&body={{ post.link }}" class="floating-share-icon email" aria-label="{{ '[Share via e-mail]' }}" target="_blank" rel="noopener noreferrer">
+				<span class="icon-email"></span>
+				</a>
+			</li>
+			</ul>
+		</div>
+
       <div class="meta-box">
         <div>
           <span>{{ post.page_types[0].name }}</span>
-          <a href="/?s&f[cat]={{ main_issue_id }}"><span class="issue {{ main_issue_slug }}">{{ main_issue|raw }}</span></a>
+          <a href="{{ main_issue_url }}"><span class="issue {{ main_issue_slug }}">{{ main_issue|raw }}</span></a>
         </div>
         <div>
           <span>
@@ -66,27 +88,5 @@
       </div>
     </div>
   </section>
-
-  <div class="floating-share">
-    <p>{{ strings.share }}</p>
-    <ul>
-      <!-- TODO stampa description (SEO?), url, testo cinese/korean per "share on twitter" ecc. -->
-      <li>
-        <a href="https://twitter.com/intent/tweet?text={{ og_description|e('html_attr')|raw }}&url={{ post.link }}" class="floating-share-icon tw" aria-label="{{ '[Share on Twitter]' }}" target="_blank" rel="noopener noreferrer">
-          <span class="icon-twitter"></span>
-        </a>
-      </li>
-      <li>
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{ post.link }}" class="floating-share-icon fb" aria-label="{{ '[Share on Facebook]' }}" target="_blank" rel="noopener noreferrer">
-          <span class="icon-facebook"></span>
-        </a>
-      </li>
-      <li>
-        <a href="mailto:?subject={{ og_description|e('html_attr')|raw }}&body={{ post.link }}" class="floating-share-icon email" aria-label="{{ '[Share via e-mail]' }}" target="_blank" rel="noopener noreferrer">
-          <span class="icon-email"></span>
-        </a>
-      </li>
-    </ul>
-  </div>
 
 {% endblock %}

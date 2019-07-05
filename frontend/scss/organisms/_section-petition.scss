@@ -260,6 +260,7 @@
     overflow: auto;
     margin-left: 0 !important;
     margin-right: 0 !important;
+    padding: 28px 30px 24px;
     transition: all 300ms ease;
     -webkit-overflow-scrolling: touch;
 
@@ -281,10 +282,6 @@
       }
     }
 
-    @include lessThan('sm') {
-      padding-top: 10px;
-    }
-
     @include greaterThan('sm') {
       bottom: initial;
       left: initial;
@@ -293,26 +290,13 @@
       width: 375px;
       margin-top: 0;
       height: auto;
+      align-self: flex-start;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
 
     @include greaterThan('lg') {
       right: calc(50vw - 600px);
-    }
-
-    .en__field--emailAddress {
-      margin-top: 20px;
-
-      @include lessThan('sm') {
-        .form-group {
-          margin-bottom: 0;
-        }
-      }
-
-      @include greaterThan('sm') {
-        margin-right: 5px;
-      }
     }
 
     form .submit {
@@ -471,6 +455,26 @@
         margin-top: 10px;
         margin-bottom: 30px;
       }
+    }
+  }
+}
+
+.page-template-petition .enform {
+  @include lessThan('sm') {
+    padding-top: 10px;
+  }
+
+  .en__field--emailAddress {
+    margin-top: 20px;
+
+    @include lessThan('sm') {
+      .form-group {
+        margin-bottom: 0;
+      }
+    }
+
+    @include greaterThan('sm') {
+      margin-right: 5px;
     }
   }
 }
