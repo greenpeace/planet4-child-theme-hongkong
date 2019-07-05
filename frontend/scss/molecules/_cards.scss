@@ -284,16 +284,12 @@
     }
 
     &:hover .thumbnail {
-      @include hover-card;
+      @include hover-thumbnail;
     }
   }
 
-  .thumbnail {
-    transition: box-shadow 140ms linear;
-  }
-
   &:hover .thumbnail {
-    @include hover-card;
+    @include hover-thumbnail;
   }
 
   &.force-mobile .thumbnail {
