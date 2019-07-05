@@ -92,6 +92,41 @@ function initDonation(Swiper, Scroll) {
   });
 }
 
+function getUrlParameters(parameter, staticURL, decode){
+  /*
+   Function: getUrlParameters
+   Description: Get the value of URL parameters either from 
+                current URL or static URL
+   Author: Tirumal
+   URL: www.code-tricks.com
+  */
+  const currLocation = (staticURL.length)? staticURL : window.location.search;
+  if (currLocation.indexOf('?') == -1) return false;
+  
+  let parArr = currLocation.split("?")[1].split("&"),
+      returnBool = true;
+  
+  for(var i = 0; i < parArr.length; i++){
+       let parr = parArr[i].split("=");
+       if(parr[0] == parameter){
+           return (decode) ? decodeURIComponent(parr[1]) : parr[1];
+           returnBool = true;
+       }else{
+           returnBool = false;            
+       }
+  }
+  
+  if(!returnBool) return false;  
+}
+
+function checkUrlParameters() {
+  let amountValue = getUrlParameters("transaction.donationAmt", "", true);
+	if (amountValue) {
+    console.log('sss');
+    document.querySelector('button.js-amount-next').click();
+	}
+}
+
 document.addEventListener('DOMContentLoaded', function(event) {
   const Scroll = new SmoothScroll('a[href*="#"]', {
     header: 'body > header',
@@ -102,6 +137,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
   });
 
   initDonation(Swiper, Scroll);
+
+  checkUrlParameters();
 
   countriesMenu();
 });
