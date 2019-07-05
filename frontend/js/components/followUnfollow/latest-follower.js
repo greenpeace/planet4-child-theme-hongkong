@@ -153,7 +153,7 @@ const latestFollower = function() {
         let rowPosts = (collection.posts).map(post => {
             return buildArticleRowPost(post);            
           })
-          collection.row_posts = rowPosts;
+          collection.row_posts = rowPosts.join('');
           let trendingCollectionsContainer = buildArticleRowContainer(collection);
           return trendingCollectionsContainer;
       });

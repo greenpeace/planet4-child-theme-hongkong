@@ -173,12 +173,12 @@ const homeFollower = function() {
           let relatedPosts = project.related.map(post => {
             return buildUpdate(post);          
           });
-          project.related_posts = relatedPosts;
+          project.related_posts = relatedPosts.join('');
           
           let relatedPostsMobile = project.related.map(post => {
             return buildUpdateMobile(post);          
           });
-          project.related_posts_mobile = relatedPostsMobile;
+          project.related_posts_mobile = relatedPostsMobile.join('');
           
           let sectionProject = buildContainer(project);
           return sectionProject;
