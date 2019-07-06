@@ -59,6 +59,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    z-index: 2;
 
     @include greaterThan('sm') {
       flex-direction: row;
@@ -99,7 +100,7 @@
 
   &.has-dollar-handle .content {
     @include lessThan('sm') {
-      margin-bottom: 0;
+      margin-bottom: 15px;
     }
   }
 
