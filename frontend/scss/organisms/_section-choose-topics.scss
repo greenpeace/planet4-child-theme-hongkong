@@ -8,6 +8,15 @@
     + p {
       margin-bottom: 24px;
     }
+
+    &.thankyou {
+      text-align: center;
+      margin-top: 100px;
+      span.thankyou-subtitle {
+        font-size: 24px;
+      }
+    }
+
   }
 
   @include greaterThan('sm') {
