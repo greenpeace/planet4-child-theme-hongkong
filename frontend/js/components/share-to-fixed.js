@@ -1,5 +1,7 @@
 export default function() {
   const share = document.querySelector('.floating-share');
+  if (!share) return;
+
   const fixFromTop = 80;
   let unfixWithScroll = 50 + window.innerHeight * 0.7 + 15;
   let left = share.getBoundingClientRect().left;

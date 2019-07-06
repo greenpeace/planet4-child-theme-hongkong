@@ -141,7 +141,7 @@ img.lazy {
 
 @include lessThan('sm') {
   .outer_block_container {
-    overflow-x: visible;
+    overflow-x: hidden;
   }
 }
 
