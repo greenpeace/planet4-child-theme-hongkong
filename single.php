@@ -76,6 +76,9 @@ if ( $post_categories ) {
 $options = get_option( 'gpea_options' );
 $context['latest_link'] = isset( $options['gpea_default_latest_link'] ) ? get_page_link( $options['gpea_default_latest_link'] ) : site_url();
 
+// sharing options
+$context['share_options'] = isset( $options['gpea_sharing_options'] ) ? $options['gpea_sharing_options'] : '';
+
 
 $context['filter_url'] = add_query_arg(
 	[

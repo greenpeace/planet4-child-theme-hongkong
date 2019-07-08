@@ -752,6 +752,24 @@ class P4CT_Metabox_Register {
 				'type'    => 'text',
 			)
 		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Sharing options', 'gpea_theme_backend' ),
+				'id'      => 'gpea_sharing_options',
+				'type'    => 'multicheck',
+				'options' => array(
+					'email'    => 'Email',
+					'facebook' => 'Facebook',
+					'twitter'  => 'Twitter',
+					'whatsapp' => 'Whatsapp',
+					'line'     => 'Line',
+					'wechat'   => 'WeChat',
+					'web_api'  => 'Web API Navigator',
+				),
+			)
+		);
+
 	}
 
 	/**

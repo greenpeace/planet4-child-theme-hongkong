@@ -55,7 +55,12 @@ export default function() {
     } else {
       // e.preventDefault();
       let thankyouUrl = form.getAttribute('data-redirect-url');
-      let fn = document.getElementsByName('supporter.firstName')[0].value;
+      let fn = '';
+      if ( document.getElementsByName('supporter.firstName').lenght ) fn = document.getElementsByName('supporter.firstName')[0].value;
+      else if ( document.getElementsByName('supporter.NOT_TAGGED_4').lenght ) {
+        // this is a special condition for korea... move to options?..
+        fn = document.getElementsByName('supporter.NOT_TAGGED_4')[0].value;
+      }
       thankyouUrl += '?fn=' + fn + '&pet=' + petitionSource;
       form.setAttribute('data-redirect-url', thankyouUrl);
       // form.querySelector('form').submit()

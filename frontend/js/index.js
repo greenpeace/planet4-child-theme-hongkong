@@ -21,6 +21,7 @@ import countriesMenu from './components/countries-menu';
 import swipers from './components/swipers';
 import followUnfollow from './components/follow-unfollow';
 import shareToFixed from './components/share-to-fixed';
+import tips from './components/tips';
 
 import petitionThankyou from './petition-thankyou';
 
@@ -63,6 +64,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
   setTimeout(followUnfollow, 0);
 
   shareToFixed();
+
+  tips();
 
   /* Page specific functionality */
 

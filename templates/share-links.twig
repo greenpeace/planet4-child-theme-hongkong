@@ -1,0 +1,58 @@
+{% block share_links %}  
+  {% for key,item in share_options %}
+      {% if item == 'facebook' %}
+        <li>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ post.link }}" class="floating-share-icon fb" aria-label="{{ '[Share on Facebook]' }}" target="_blank" rel="noopener noreferrer">
+          <span class="icon-facebook"></span>
+          </a>
+        </li>
+      {% elseif item == 'twitter' %}
+        <li>
+          <a href="https://twitter.com/intent/tweet?text={{ og_description|e('html_attr')|raw }}&url={{ post.link }}" class="floating-share-icon tw" aria-label="{{ '[Share on Twitter]' }}" target="_blank" rel="noopener noreferrer">
+          <span class="icon-twitter"></span>
+          </a>
+        </li> 
+      {% elseif item == 'email' %}
+        <li>
+          <a href="mailto:?subject={{ og_description|e('html_attr')|raw }}&body={{ post.link }}" class="floating-share-icon email" aria-label="{{ '[Share via e-mail]' }}" target="_blank" rel="noopener noreferrer">
+          <span class="icon-email"></span>
+          </a>
+        </li>
+      {% elseif item == 'whatsapp' %}
+        <li>
+          <a href="whatsapp://send?text={{ post.link }}" class="floating-share-icon whatsapp" aria-label="{{ '[Share via whatsapp]' }}" target="_blank" rel="noopener noreferrer">
+          <span class="icon-whatsapp"></span>
+          </a>
+        </li>
+      {% elseif item == 'line' %}
+        <li>
+          <a href="https://social-plugins.line.me/lineit/share?url={{ post.link }}" class="floating-share-icon line" aria-label="{{ '[Share via Line]' }}" target="_blank" rel="noopener noreferrer">
+          <span class="icon-line"></span>
+          </a>
+        </li>
+      {% elseif item == 'wechat' %}
+        <li>
+          <a href="weixin://dl/posts?url={{ post.link }}" class="floating-share-icon line" aria-label="{{ '[Share via WeChat]' }}" target="_blank" rel="noopener noreferrer">
+          <span class="icon-wechat"></span>
+          </a>
+        </li>
+        {#
+          {% elseif item == 'web_api' %}
+        <li>
+          <script>
+            if (navigator.share) {
+            navigator.share({
+                title: "{{ og_title|e('html_attr')|raw }}",
+                text: "{{ og_description|e('html_attr')|raw }}",
+                url: "{{ post.link }}",
+            })
+              .then(() => console.log('Successful share'))
+              .catch((error) => console.log('Error sharing', error));
+          }
+          </script>          
+        </li>
+        #}
+      {% endif %}
+  {% endfor %}
+  {# <!-- TODO stampa description (SEO?), url, testo cinese/korean per "share on twitter" ecc. --> #}
+{% endblock %}
