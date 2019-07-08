@@ -108,32 +108,32 @@
 
             <div hidden id="ajax-search-issues" class="fade-out">
                 <h5>
-                    Issue
+                    {{ strings.issue }}
                 </h5>
                 <div class="results-list"></div>
             </div>
 
             <div hidden id="ajax-search-topics" class="fade-out">
-                <h5>Topics</h5>
+                <h5>{{ strings.topic }}</h5>
                 <div class="results-list"></div>
             </div>
 
             <div hidden id="ajax-search-posts" class="fade-out">
-                <h5>Posts</h5>
+                <h5>{{ strings.posts }}</h5>
                 <div class="results-list"></div>
             </div></div></section><section class="advanced-search"><div class="ct-container">
 
-        <h3>Advanced search</h3>
+        <h3>{{ strings.advanced_search }}</h3>
 
         <div class="advanced-wrapper">
             <div class="filters">
-                <label>Filters</label>
+                <label>{{ strings.filters }}</label>
                 <div class="filters-selects">
                     {% if ( categories|length > 0 ) %}
                         <div class="select">
                             <select class="filter-search" form="search_form_inner" id="f[cat]" name="f[cat]">
                                 <option disabled selected value>
-                                    -- None --
+                                    -- {{ strings.none }} --
                                 </option>
                                 {% for category in categories %}
                                     {% if ( category.results > 0 ) %}
@@ -148,7 +148,7 @@
                         <div class="select">
                             <select class="filter-search" form="search_form_inner" id="f[tag]" name="f[tag]">
                                 <option disabled selected value>
-                                    -- None --
+                                    -- {{ strings.none }} --
                                 </option>
                                 {% for tag in tags %}
                                     {% if ( tag.results > 0 ) %}
