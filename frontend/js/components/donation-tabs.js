@@ -110,8 +110,15 @@ export default function() {
 
     window.location.href = donationUrl;
   });
-  // remove option to set suggested if amount has been changed  
-  form.amount.addEventListener('input', e => {
+  // prepare field for error
+  const feedback = document.createElement('p');
+  feedback.classList.add('invalid-feedback');
+  feedback.innerHTML = form.getAttribute('data-minimum-error');
+  if (form.amount) form.amount.parentNode.insertBefore(feedback, form.amount.nextSibling);
+  else if (form['free-amount']) form['free-amount'].parentNode.insertBefore(feedback, form['free-amount'].nextSibling);
+
+  // remove option to set suggested if amount has been changed + check minimum
+  form.addEventListener('input', e => {
     let minimumValue = 0;
     // if user change suggested input we stop suggesting...
     if ( form.classList.contains('js-donation-basic') ) form.classList.remove('js-donation-basic');
@@ -121,17 +128,26 @@ export default function() {
       if ( form.frequency.value == 'Y' ) minimumValue = form.getAttribute('data-minimum-regular');
       else minimumValue = form.getAttribute('data-minimum-oneoff');
       
+      console.log(minimumValue);
+
       const invalid = validate.single(
-        e.value,
+        e.target.value,
         {
           numericality: {
             onlyInteger: true,
-            greaterThan: minimumValue,
+            greaterThanOrEqualTo: parseInt(minimumValue),
           }
         }
       );
-      console.log(invalid);
+
+      if (invalid) {
+        e.target.classList.add('is-invalid');
+      } else {
+        e.target.classList.remove('is-invalid');
+      }
+
     }
   });
+
 
 }

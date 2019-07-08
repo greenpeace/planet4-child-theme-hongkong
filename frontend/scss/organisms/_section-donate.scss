@@ -156,4 +156,34 @@
       width: 400px;
     }
   }
+
+  .form-group .invalid-feedback {
+    margin-top: 0;
+    font-size: 12px;
+    line-height: 20px;
+    color: $color-red;
+    font-weight: normal;
+    position: absolute;
+    display: none;
+    padding: 0 8px;
+    left: 10px;
+    top: 34px;
+    background-color: white;
+  }
+
+  .form-group input.is-invalid {
+    border-color: $color-red !important;
+    margin-bottom: 0;
+
+    + .invalid-feedback {
+      display: inline-block;
+    }
+  }
+
+  .form-group.small .invalid-feedback {
+    left: auto;
+    right: 10px;
+    top: 28px;
+  }
+
 }
