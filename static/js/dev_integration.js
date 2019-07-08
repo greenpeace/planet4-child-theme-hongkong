@@ -138,25 +138,25 @@ $(document).ready(function() {
       dataType: 'html',
     })
       .done(function(response) {
-          response = JSON.parse(response);
-          let html_data = response.html_data,
-              posts_found = parseInt(response.posts_found);
-          messages.html('');
-          if(reset_container) {
-            container.html('');
-            btn.attr('disabled', false);
-          } else {
-            btn.attr('disabled', true);
-          }
-          if(posts_found) {
-            container.append(html_data);
-          } else {
-            messages.append(html_data);
-            btn.attr('disabled', true);
-          }
-          if(posts_found < 4) {
-            btn.attr('disabled', true);
-          }
+        response = JSON.parse(response);
+        let html_data = response.html_data,
+          posts_found = parseInt(response.posts_found);
+        messages.html('');
+        if (reset_container) {
+          container.html('');
+          btn.attr('disabled', false);
+        } else {
+          btn.attr('disabled', true);
+        }
+        if (posts_found) {
+          container.append(html_data);
+        } else {
+          messages.append(html_data);
+          btn.attr('disabled', true);
+        }
+        if (posts_found < 4) {
+          btn.attr('disabled', true);
+        }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
         console.log(errorThrown); // eslint-disable-line no-console
@@ -174,52 +174,4 @@ $(document).ready(function() {
     fetchArticles.bind(null, true)
   );
   // END ARTICLES LIST.
-  // TIPS.
-  const COOKIE_ID = 'gpea_tip_pledge_ids';
-  let submitted_tips_ids = Cookies.getJSON(COOKIE_ID) || [];
-  $('.tip_engage').each(function() {
-    let form = $(this);
-    let pid = form.find('input[name=pid]');
-    if (pid.length && submitted_tips_ids.includes(pid.val())) {
-      form.find(':submit').attr('disabled', 'disabled');
-    }
-  });
-  $('.tip_engage').on('submit', function(ev) {
-    ev.preventDefault();
-    let form = $(this);
-    let query = form
-      .children()
-      .serializeArray()
-      .reduce(function(acc, el) {
-        return Object.assign(acc, { [el.name]: el.value });
-      }, {});
-    if (query.pid) {
-      let counter = $('#post_commitments_post_' + query.pid);
-      counter.html(parseInt(counter.html()) + 1);
-      submitted_tips_ids.push(query.pid);
-      Cookies.set(COOKIE_ID, submitted_tips_ids, { expires: 365 });
-      form.find(':submit').attr('disabled', 'disabled');
-    }
-    $.ajax({
-      url: window.localizations.ajaxurl,
-      type: 'POST',
-      data: {
-        action: 'gpea_tips_pledge',
-        query: query,
-      },
-      dataType: 'html',
-    })
-      .done(function(response) {
-        try {
-          console.log(JSON.parse(response).map(p => p.post_title));
-        } catch (e) {
-          console.log(response);
-        }
-      })
-      .fail(function(jqXHR, textStatus, errorThrown) {
-        console.log(errorThrown); // eslint-disable-line no-console
-      });
-    return false;
-  });
-  // END TIPS.
 });
