@@ -98,3 +98,25 @@
     color: #65ca05;
   }
 }
+
+.tip-action-buttons {
+  height: 60px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+
+  .social-box,
+  .tip-engage {
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transition: transform 200ms ease;
+  }
+
+  &:not(.has-committed):not(.is-static) {
+    .social-box,
+    .tip-engage {
+      transform: translateY(-60px);
+    }
+  }
+}
