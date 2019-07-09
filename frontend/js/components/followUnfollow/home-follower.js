@@ -68,14 +68,14 @@ const homeFollower = function() {
       let posts = [];
 
       try {
-        followingResults = JSON.parse(data);        
+        followingResults = JSON.parse(data);
       } catch (error) {
         console.error(error);
         $featuredSwiper.removeClass('is-loading');
         return;
       }
 
-      followingResults.map(postsTag => {        
+      followingResults.map(postsTag => {
         let followingResultsPosts = postsTag.posts;
         posts = posts.concat(followingResultsPosts);
       });
@@ -84,7 +84,7 @@ const homeFollower = function() {
       // console.log(posts.length + ' posts returned');
       posts = filterDuplicates(posts, existingPosts);
       sortByRecentFirst(posts);
-      posts = posts.slice(0, 5);      
+      posts = posts.slice(0, 5);
       // console.log(existingPosts.length + ' existing posts');
       // console.log(posts.length + ' posts returned');
 
@@ -149,6 +149,7 @@ const homeFollower = function() {
       } catch (error) {
         console.error(error);
         $sectionProjects.removeClass('is-loading');
+        $sectionProjects.addClass('is-loaded');
         return;
       }
       // Create the HTML element for each new post
@@ -171,31 +172,34 @@ const homeFollower = function() {
       if (projects) {
         const projectFollowing = projects.map(project => {
           let relatedPosts = project.related.map(post => {
-            return buildUpdate(post);          
+            return buildUpdate(post);
           });
           project.related_posts = relatedPosts.join('');
-          
+
           let relatedPostsMobile = project.related.map(post => {
-            return buildUpdateMobile(post);          
+            return buildUpdateMobile(post);
           });
           project.related_posts_mobile = relatedPostsMobile.join('');
-          
+
           let sectionProject = buildContainer(project);
           return sectionProject;
         });
-  
+
         $sectionProjects.html(projectFollowing);
 
         let resizeEvent = new Event('resize');
         window.dispatchEvent(resizeEvent);
+
+        $sectionProjects.removeClass('dark');
       }
 
       // All done
       $sectionProjects.removeClass('is-loading');
-      $sectionProjects.removeClass('dark');
+      $sectionProjects.addClass('is-loaded');
     },
     error: function(errorThrown) {
-      $featuredSwiper.removeClass('is-loading');
+      $sectionProjects.removeClass('is-loading');
+      $sectionProjects.addClass('is-loaded');
       console.error(errorThrown);
     },
   });
