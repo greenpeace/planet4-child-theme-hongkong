@@ -71,7 +71,7 @@
     padding-right: 20px;
   }
 
-  &:last-child {
+  &:last-of-type {
     margin-bottom: -30px;
     border-bottom: none;
   }
@@ -103,7 +103,7 @@ body:not(.js-home-follower) .section-projects,
 }
 
 .js-home-follower .section-projects {
-  &:not(.is-loaded) > * {
+  &:not(.is-loaded) > :not(.lds-spinner) {
     opacity: 0;
     visibility: hidden;
     transition: opacity 140ms linear, visibility 0s linear 140ms;
@@ -115,7 +115,7 @@ body:not(.js-home-follower) .section-projects,
     }
   }
 
-  &.is-loaded > * {
+  &.is-loaded > :not(.lds-spinner) {
     opacity: 1;
     visibility: visible;
     transition: opacity 140ms linear, visibility 0s linear 0s;

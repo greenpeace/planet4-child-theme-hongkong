@@ -185,7 +185,9 @@ const homeFollower = function() {
           return sectionProject;
         });
 
-        $sectionProjects.html(projectFollowing);
+        const $oldContent = $sectionProjects.find('> .ct-container');
+        $oldContent.remove();
+        $sectionProjects.prepend(projectFollowing);
 
         let resizeEvent = new Event('resize');
         window.dispatchEvent(resizeEvent);
