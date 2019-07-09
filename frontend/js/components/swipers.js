@@ -1,4 +1,4 @@
-import { debounce } from 'debounce';
+import { debounce } from 'throttle-debounce';
 
 const $ = jQuery;
 
@@ -112,7 +112,7 @@ export default function(Swiper) {
     });
   }
   miniSwipers();
-  window.addEventListener('resize', debounce(miniSwipers, 200));
+  window.addEventListener('resize', debounce(200, miniSwipers));
 
   $('.section-text-images-swiper').each(function() {
     const $this = $(this);

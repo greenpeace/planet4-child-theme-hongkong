@@ -23,14 +23,14 @@
 			<ul>
         {% include 'share-links.twig' with {
           share_options: share_options,
-        } %}			
+        } %}
 			</ul>
 		</div>
 
       <div class="meta-box">
         <div>
           <span>{{ post.page_types[0].name }}</span>
-          <a href="{{ main_issue_url }}"><span class="issue {{ main_issue_slug }}">{{ main_issue|raw }}</span></a>
+          <a href="{{ main_issue_url }}" class="issue {{ main_issue_slug }}">{{ main_issue|raw }}</a>
         </div>
         <div>
           <span>

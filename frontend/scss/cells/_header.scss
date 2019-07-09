@@ -103,8 +103,7 @@ header {
           }
         }
 
-        button:hover ~ .dropdown-menu,
-        .dropdown-menu:hover {
+        &.is-open .dropdown-menu {
           display: flex;
         }
       }
