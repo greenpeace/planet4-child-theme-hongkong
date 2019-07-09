@@ -23,26 +23,32 @@ const amountConstraints = {
 const dataConstraints = {
   ['en__field--firstName']: {
     presence: required,
+	length: {maximum: 255},
   },
   ['en__field--lastName']: {
     presence: required,
+	length: {maximum: 255},
   },
   ['en__field--emailAddress']: {
     presence: required,
+	length: {maximum: 255},	
     email: {
       message: invalidMessage,
     },
   },
   ['en__field--phoneNumber']: {
-    presence: required,
+	numericality: {
+      onlyInteger: true,
+	},
+	length: {is: 8},
     // the validation should happen with the masking, so no other rule required here
   },
   ['en__field--country']: {
     presence: required,
-    inclusion: {
-      within: ['HK', 'TW', 'KR'],
-      message: countryMessage,
-    },
+    // inclusion: {
+      // within: ['HK', 'TW', 'KR'],
+      // message: countryMessage,
+    // },
   },
   ['en__field--region']: {
     presence: required,
@@ -52,6 +58,10 @@ const dataConstraints = {
   },
   ['en__field--address1']: {
     presence: required,
+	length: {maximum: 255},	
+  },
+  ['supporter.NOT_TAGGED_33']: {
+	length: {maximum: 10},	
   },
 };
 
