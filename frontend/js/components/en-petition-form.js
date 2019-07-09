@@ -1,3 +1,5 @@
+import { throttle } from 'throttle-debounce';
+
 import { setFacebookUserInfo } from './facebook';
 
 /**
@@ -56,8 +58,9 @@ export default function() {
       // e.preventDefault();
       let thankyouUrl = form.getAttribute('data-redirect-url');
       let fn = '';
-      if ( document.getElementsByName('supporter.firstName').lenght ) fn = document.getElementsByName('supporter.firstName')[0].value;
-      else if ( document.getElementsByName('supporter.NOT_TAGGED_4').lenght ) {
+      if (document.getElementsByName('supporter.firstName').lenght)
+        fn = document.getElementsByName('supporter.firstName')[0].value;
+      else if (document.getElementsByName('supporter.NOT_TAGGED_4').lenght) {
         // this is a special condition for korea... move to options?..
         fn = document.getElementsByName('supporter.NOT_TAGGED_4')[0].value;
       }
@@ -106,10 +109,31 @@ export default function() {
     });
   }
 
+  // close form
   close.addEventListener('click', e => {
     form.classList.remove('is-open');
     document.body.classList.remove('has-open-form');
   });
+
+  // compact the form if I scroll down
+  let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  // element should be replaced with the actual target element on which you have applied scroll, use window in case of no target element.
+  window.addEventListener(
+    'scroll',
+    throttle(100, function() {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+      if (scrollTop > lastScrollTop) {
+        // downscroll code
+        form.classList.add('is-compact');
+      } else {
+        // upscroll code
+        form.classList.remove('is-compact');
+      }
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+    }),
+    false
+  );
 
   // required by korea: if checkbox with "check_all" feature present
   if (checkboxCheckall) {

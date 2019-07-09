@@ -1,6 +1,12 @@
 .section-link-list {
+  min-height: 0 !important;
+  padding: 60px 0 40px !important;
   background: $color-blue !important;
   color: white;
+
+  + .section-link-list {
+    padding-top: 0 !important;
+  }
 
   .ct-container > * {
     max-width: 500px;
@@ -30,5 +36,6 @@
 
   .link-list {
     overflow: hidden;
+    margin-bottom: 20px;
   }
 }

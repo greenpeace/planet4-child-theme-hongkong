@@ -1,8 +1,9 @@
 footer {
-  // @include font-smoothing;
+  position: relative;
   padding-top: 20px;
   background-color: $color-blue;
   color: white;
+  z-index: 2;
 
   @include greaterThan('sm') {
     padding-top: 60px;
@@ -31,10 +32,14 @@ footer {
     margin-bottom: 4px;
   }
 
-  a {
+  a,
+  a [class^='icon-']::before,
+  a [class*=' icon-']::before {
     color: white;
     transition: color 140ms linear;
+  }
 
+  a {
     &:focus,
     &:hover {
       color: $color-green;
@@ -97,6 +102,11 @@ footer {
         &:focus,
         &:hover {
           color: darken(white, 20%);
+
+          [class^='icon-']::before,
+          [class*=' icon-']::before {
+            color: darken(white, 20%);
+          }
         }
       }
     }

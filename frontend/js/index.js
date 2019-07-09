@@ -67,6 +67,20 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   tips();
 
+  /**
+   * Open/close country offices megamenu (not even putting it in a separate module)
+   */
+  const $countryOfficesDropdown = $('header .dropdown');
+  $countryOfficesDropdown.on('click', function(e) {
+    e.stopPropagation();
+  });
+  $countryOfficesDropdown.children('button').on('click', function() {
+    $countryOfficesDropdown.toggleClass('is-open');
+  });
+  $(window).click(function() {
+    $countryOfficesDropdown.removeClass('is-open');
+  });
+
   /* Page specific functionality */
 
   petitionThankyou(Scroll);
