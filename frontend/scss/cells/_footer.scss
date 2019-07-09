@@ -109,6 +109,12 @@ footer {
       width: 50%;
 
       p {
+        width: 60%;
+      }
+    }
+
+    @include greaterThan('lg') {
+      p {
         width: 45%;
       }
     }
@@ -145,6 +151,27 @@ footer {
 
     @include greaterThan('sm') {
       margin-left: 0;
+    }
+  }
+
+  .footer-greenpeace + .footer-disclaimer {
+    width: initial;
+    float: none;
+    padding-top: 20px;
+    border-top: 1px solid rgba(white, 0.1);
+
+    @include greaterThan('sm') {
+      width: 50%;
+      padding-top: 0; // 62px;
+      border-top: none;
+    }
+
+    p {
+      font-size: 11px;
+
+      @include greaterThan('sm') {
+        font-size: 13px;
+      }
     }
   }
 

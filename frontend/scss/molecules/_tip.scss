@@ -70,8 +70,9 @@
     display: inline-block;
     height: 40px;
     width: 40px;
-    line-height: 40px;
+    line-height: 42px;
     text-align: center;
+    font-size: 28px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 50%;
     margin: 0 4px;
@@ -85,17 +86,13 @@
     }
 
     span {
-      line-height: 40px;
+      padding-left: 1px;
     }
   }
 
-  .icon-facebook {
-    color: #0091e2;
-  }
-
   .icon-whatsapp {
-    font-size: 25px;
-    color: #65ca05;
+    display: inline-block;
+    transform: scale(0.92) translate(1px, -1px);
   }
 }
 
