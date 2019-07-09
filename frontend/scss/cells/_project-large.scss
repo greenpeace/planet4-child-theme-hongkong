@@ -8,7 +8,7 @@
   }
 
   @include greaterThan('sm') {
-    width: 50%;
+    width: 55%;
     overflow: visible;
 
     .project-large-overflow {
@@ -17,6 +17,17 @@
       width: calc(100% + 200px);
       margin-left: -100px;
       overflow: hidden;
+    }
+  }
+
+  @include greaterThan('lg') {
+    width: calc(55% + 100px);
+    height: 480px;
+    margin-left: -100px;
+    overflow: visible;
+
+    .project-large-overflow {
+      height: 480px;
     }
   }
 
@@ -34,6 +45,18 @@
       height: 500px;
       margin-left: -250px;
     }
+
+    @include greaterThan('sm') {
+      width: 540px;
+      height: 540px;
+      margin-left: -270px;
+    }
+
+    @include greaterThan('lg') {
+      width: 600px;
+      height: 600px;
+      margin-left: -300px;
+    }
   }
 
   .project-summary {
@@ -41,13 +64,13 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 0 20px 20px;
+    padding: 0 20px;
 
     @include lessThan('sm') {
       background: linear-gradient(
         to top,
         rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 1) 30%,
+        rgba(255, 255, 255, 1) 15%,
         rgba(255, 255, 255, 0) 100%
       );
 
@@ -64,6 +87,7 @@
     }
 
     @include greaterThan('sm') {
+      padding-bottom: 20px;
       padding-left: 140px;
       padding-right: 140px;
 
@@ -73,19 +97,8 @@
     }
 
     @include greaterThan('lg') {
-      padding-left: 220px;
-      padding-right: 220px;
+      padding-left: 240px;
+      padding-right: 240px;
     }
-  }
-}
-
-.project-large + hr {
-  margin: 0;
-  border: 0;
-  height: 1px;
-  background: black;
-
-  @include lessThan('sm') {
-    display: none;
   }
 }
