@@ -169,7 +169,7 @@ const homeFollower = function() {
       //   }
       // });
 
-      if (projects) {
+      if (projects.length) {
         const projectFollowing = projects.map(project => {
           let relatedPosts = project.related.map(post => {
             return buildUpdate(post);
