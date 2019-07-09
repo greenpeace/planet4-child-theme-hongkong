@@ -64,124 +64,127 @@ const latestFollower = function() {
     .map(el => ({
       ID: el.dataset.postid,
     }));
+	
+  let gpea_topics_followed = Cookies.get('gpea_topics');
+  if (typeof gpea_topics_followed !== 'undefined' && gpea_topics_followed.length > 0) {
 
-  $featuredSwiper.addClass('is-loading');
-  $.ajax({
-    url: p4_vars.ajaxurl,
-    type: 'post',
-    data: {
-      action: 'topicsFollowing',
-    },
-    success: function(data) {
-      const swiper = $featuredSwiper[0].swiper;
-      let followingResults;
-      let followingResultsPosts;
-      let posts = [];
+	  $featuredSwiper.addClass('is-loading');
+	  $.ajax({
+		url: p4_vars.ajaxurl,
+		type: 'post',
+		data: {
+		  action: 'topicsFollowing',
+		},
+		success: function(data) {
+		  const swiper = $featuredSwiper[0].swiper;
+		  let followingResults;
+		  let followingResultsPosts;
+		  let posts = [];
 
-      try {
-        followingResults = JSON.parse(data);        
-      } catch (error) {
-        console.error(error);
-        $featuredSwiper.removeClass('is-loading');
-        return;
-      }
+		  try {
+			followingResults = JSON.parse(data);        
+		  } catch (error) {
+			console.error(error);
+			$featuredSwiper.removeClass('is-loading');
+			return;
+		  }
 
-      followingResults.map(postsTag => {        
-        followingResultsPosts = postsTag.posts;
-        posts = posts.concat(followingResultsPosts);
-      });
+		  followingResults.map(postsTag => {        
+			followingResultsPosts = postsTag.posts;
+			posts = posts.concat(followingResultsPosts);
+		  });
 
-      // Remove existing posts from the returned posts, take first 5, sort by recent first
-      // console.log(posts.length + ' posts returned');
-      posts = filterDuplicates(posts, existingPosts);
-      sortByRecentFirst(posts);
-      posts = posts.slice(0, 5);
-      // console.log(existingPosts.length + ' existing posts');
-      // console.log(posts.length + ' posts returned');
+		  // Remove existing posts from the returned posts, take first 5, sort by recent first
+		  // console.log(posts.length + ' posts returned');
+		  posts = filterDuplicates(posts, existingPosts);
+		  sortByRecentFirst(posts);
+		  posts = posts.slice(0, 5);
+		  // console.log(existingPosts.length + ' existing posts');
+		  // console.log(posts.length + ' posts returned');
 
-      // Create the HTML element for each new post
+		  // Create the HTML element for each new post
 
-      const petitionTemplate = $('#template-card-petition-big');
-      const buildPetition = template(petitionTemplate[0].innerHTML);
-      const updateTemplate = $('#template-card-update-big');
-      const buildUpdate = template(updateTemplate[0].innerHTML);
+		  const petitionTemplate = $('#template-card-petition-big');
+		  const buildPetition = template(petitionTemplate[0].innerHTML);
+		  const updateTemplate = $('#template-card-update-big');
+		  const buildUpdate = template(updateTemplate[0].innerHTML);
 
-      const newPostsSlides = posts.map(post => {
-        if (post.engaging_pageid !== undefined) {
-          return buildPetition(post);
-        } else {
-          return buildUpdate(post);
-        }
-      });
+		  const newPostsSlides = posts.map(post => {
+			if (post.engaging_pageid !== undefined) {
+			  return buildPetition(post);
+			} else {
+			  return buildUpdate(post);
+			}
+		  });
 
-      // Add the new slides in 6th position (1 first slide + 5 regular slides)
-      swiper.addSlide(6, newPostsSlides);
-      // console.log(
-      //   newPostsSlides.length + ' slides created and added',
-      //   newPostsSlides
-      // );
+		  // Add the new slides in 6th position (1 first slide + 5 regular slides)
+		  swiper.addSlide(6, newPostsSlides);
+		  // console.log(
+		  //   newPostsSlides.length + ' slides created and added',
+		  //   newPostsSlides
+		  // );
 
-      // Remove slides beyond 11 (1 first slide + 10 regular slides)
-      const $slides = $featuredSwiper.find('.swiper-slide');
-      // console.log($slides.length + ' new number of total slides');
-      const totalSlides = $slides.length;
-      if (totalSlides > 11) {
-        const slidesToRemove = [];
-        for (let i = 11; i < totalSlides; i++) {
-          slidesToRemove.push(i);
-        }
-        swiper.removeSlide(slidesToRemove);
-        // console.log(slidesToRemove, 'slides removed');
-      }
+		  // Remove slides beyond 11 (1 first slide + 10 regular slides)
+		  const $slides = $featuredSwiper.find('.swiper-slide');
+		  // console.log($slides.length + ' new number of total slides');
+		  const totalSlides = $slides.length;
+		  if (totalSlides > 11) {
+			const slidesToRemove = [];
+			for (let i = 11; i < totalSlides; i++) {
+			  slidesToRemove.push(i);
+			}
+			swiper.removeSlide(slidesToRemove);
+			// console.log(slidesToRemove, 'slides removed');
+		  }
 
-      // All done
-      $featuredSwiper.removeClass('is-loading');
-
-
-      // handle here also trending collections, same ajax call
-      // Create the HTML element for each new post
-      
-      sortByRecentUnixtime(followingResults);
-      followingResults = followingResults.slice(0, 3);
-
-      const articleRowContainer = $('#template-article-row-container');
-      const buildArticleRowContainer = template(articleRowContainer[0].innerHTML);
-      const articleRowPost = $('#template-article-row');
-      const buildArticleRowPost = template(articleRowPost[0].innerHTML);
-
-      const trendingCollectionsDynamic = followingResults.map(collection => {        
-        let rowPosts = (collection.posts).map(post => {
-            return buildArticleRowPost(post);            
-          })
-          collection.row_posts = rowPosts.join('');
-          let trendingCollectionsContainer = buildArticleRowContainer(collection);
-          return trendingCollectionsContainer;
-      });
-
-      // Add the new slides in 6th position (1 first slide + 5 regular slides)
-      // swiper.addSlide(6, newPostsSlides);
-      // console.log(
-      //   newPostsSlides.length + ' slides created and added',
-      //   newPostsSlides
-      // );
-
-      // da sistemare per mostrare anche 2 trending attuali
-      $trendingCollections.prepend(trendingCollectionsDynamic);
-
-      let resizeEvent = new Event('resize');
-      window.dispatchEvent(resizeEvent);
-
-      // brutality take first 5...
-      $( ".section-article-row" ).hide().slice( 0, 5 ).show();
+		  // All done
+		  $featuredSwiper.removeClass('is-loading');
 
 
-    },
-    error: function(errorThrown) {
-      $featuredSwiper.removeClass('is-loading');
-      console.error(errorThrown);
-    },
-  });
+		  // handle here also trending collections, same ajax call
+		  // Create the HTML element for each new post
+		  
+		  sortByRecentUnixtime(followingResults);
+		  followingResults = followingResults.slice(0, 3);
 
+		  const articleRowContainer = $('#template-article-row-container');
+		  const buildArticleRowContainer = template(articleRowContainer[0].innerHTML);
+		  const articleRowPost = $('#template-article-row');
+		  const buildArticleRowPost = template(articleRowPost[0].innerHTML);
+
+		  const trendingCollectionsDynamic = followingResults.map(collection => {        
+			let rowPosts = (collection.posts).map(post => {
+				return buildArticleRowPost(post);            
+			  })
+			  collection.row_posts = rowPosts.join('');
+			  let trendingCollectionsContainer = buildArticleRowContainer(collection);
+			  return trendingCollectionsContainer;
+		  });
+
+		  // Add the new slides in 6th position (1 first slide + 5 regular slides)
+		  // swiper.addSlide(6, newPostsSlides);
+		  // console.log(
+		  //   newPostsSlides.length + ' slides created and added',
+		  //   newPostsSlides
+		  // );
+
+		  // da sistemare per mostrare anche 2 trending attuali
+		  $trendingCollections.prepend(trendingCollectionsDynamic);
+
+		  let resizeEvent = new Event('resize');
+		  window.dispatchEvent(resizeEvent);
+
+		  // brutality take first 5...
+		  $( ".section-article-row" ).hide().slice( 0, 5 ).show();
+
+
+		},
+		error: function(errorThrown) {
+		  $featuredSwiper.removeClass('is-loading');
+		  console.error(errorThrown);
+		},
+	  });
+	}
   // $.ajax({
   //   url: p4_vars.ajaxurl,
   //   type: 'post',

@@ -51,10 +51,6 @@
     width: 700px;
     max-width: none;
   }
-
-  // @include greaterThan('lg') {
-  //   width: 620px;
-  // }
 }
 
 // Typography
@@ -180,12 +176,7 @@
   display: block;
   text-decoration: none !important;
   border-bottom: none !important;
-  // transition: opacity 0.2s;
   color: black;
-
-  // &:hover {
-  //   opacity: 0.9;
-  // }
 }
 
 @mixin profile {
@@ -198,6 +189,12 @@
     margin: 0 auto 8px;
     object-fit: cover;
     border-radius: 99px;
+
+    @include greaterThan('sm') {
+      height: 110px;
+      width: 110px;
+      margin-bottom: 12px;
+    }
   }
 
   .name {

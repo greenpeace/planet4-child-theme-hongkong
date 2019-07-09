@@ -403,19 +403,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$timber_term = new TimberTerm( $term->term_id );
 					// Get the main issue page & related data if this term is a main issue & has an associated page.
 					if ( isset( $this->main_issues_category_id ) && $timber_term->parent === $this->main_issues_category_id ) {
-						// TODO cache this query.
-						$related = ( new WP_Query(
-							[
-								'post_type' => 'page',
-								'category__in' => $timber_term->ID,
-								'meta_query' => [
-									[
-										'key'   => '_wp_page_template',
-										'value' => 'page-templates/main-issue.php',
-									],
-								],
-							]
-						) )->posts;
+						$related = $this->get_cached_main_issue_pages( $timber_term->ID );
 						if ( count( $related ) ) {
 							$related = $related[0];
 							$timber_term->link = get_permalink( $related->ID );
@@ -431,6 +419,35 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				}
 			}
 			return (array) $timber_terms;
+		}
+
+		/**
+		 * Gets cached terms
+		 *
+		 * @param int $term_id The term ID.
+		 *
+		 * @return array The cached terms.
+		 */
+		protected function get_cached_main_issue_pages( $term_id ) : array {
+			$cache_key = $term_id;
+			$cache_group = 'main_issue_related_page';
+			$related = wp_cache_get( $cache_key, $cache_group );
+			if ( false === $related ) {
+				$related = ( new WP_Query(
+					[
+						'post_type' => 'page',
+						'category__in' => $term_id,
+						'meta_query' => [
+							[
+								'key'   => '_wp_page_template',
+								'value' => 'page-templates/main-issue.php',
+							],
+						],
+					]
+				) )->posts;
+				wp_cache_add( $cache_key, $related, $cache_group, self::DEFAULT_CACHE_TTL );
+			}
+			return $related;
 		}
 
 		/**

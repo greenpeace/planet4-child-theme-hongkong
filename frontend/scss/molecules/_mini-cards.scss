@@ -64,6 +64,11 @@
     @include title-text;
   }
 
+  &.mini-launcher {
+    text-align: center;
+    margin-top: 10px;
+  }
+
   .thumbnail {
     padding-top: 50%;
   }

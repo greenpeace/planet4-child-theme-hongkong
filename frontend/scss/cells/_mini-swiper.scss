@@ -32,7 +32,7 @@
     &.swiper-container-initialized {
       .swiper-button-prev,
       .swiper-button-next {
-        display: block;
+        display: flex;
       }
     }
   }

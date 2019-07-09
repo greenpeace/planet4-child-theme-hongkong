@@ -23,35 +23,42 @@ const amountConstraints = {
 const dataConstraints = {
   ['en__field--firstName']: {
     presence: required,
+	length: {maximum: 255},
   },
   ['en__field--lastName']: {
     presence: required,
+	length: {maximum: 255},
   },
   ['en__field--emailAddress']: {
     presence: required,
+	length: {maximum: 255},	
     email: {
       message: invalidMessage,
     },
   },
   ['en__field--phoneNumber']: {
-    presence: required,
+	numericality: {
+      onlyInteger: true,
+	},
+	length: {is: 8},
     // the validation should happen with the masking, so no other rule required here
   },
-  ['en__field--country']: {
-    presence: required,
-    inclusion: {
-      within: ['HK', 'TW', 'KR'],
-      message: countryMessage,
-    },
-  },
-  ['en__field--region']: {
-    presence: required,
-  },
-  ['en__field--city']: {
-    presence: required,
-  },
+  // ['en__field--country']: {
+    // presence: required,
+    // // inclusion: {
+      // // within: ['HK', 'TW', 'KR'],
+      // // message: countryMessage,
+    // // },
+  // },
+  // ['en__field--region']: {
+    // presence: required,
+  // },
+  // ['en__field--city']: {
+    // presence: required,
+  // },
   ['en__field--address1']: {
     presence: required,
+	length: {maximum: 255},	
   },
 };
 
@@ -140,7 +147,8 @@ export default function(form) {
         const feedback = block.querySelector(
           '[data-gpea-constraint-name="' + name + '"] + .invalid-feedback'
         );
-        input.classList.add('is-invalid');
+		console.log(name);
+        if (input) input.classList.add('is-invalid');
         feedback.textContent = message;
       }
     }

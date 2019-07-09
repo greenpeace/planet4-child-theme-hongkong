@@ -158,6 +158,10 @@ img.lazy {
   }
 }
 
+body .icon-facebook::before {
+  color: $color-fb;
+}
+
 .body-spinner {
   display: block;
   position: fixed;

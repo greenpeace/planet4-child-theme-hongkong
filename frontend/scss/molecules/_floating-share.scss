@@ -56,7 +56,7 @@
     }
 
     li {
-      margin: 0 0 0 25px;
+      margin: 0 0 0 15px;
 
       @include greaterThan('sm') {
         margin: 10px 0 0 0;
@@ -70,33 +70,15 @@
 
   &-icon {
     border-bottom: none !important;
-    transition: color 140ms linear;
+    transition: filter 140ms linear;
 
-    &.tw {
-      color: $color-tw;
-
-      &:focus,
-      &:hover {
-        color: darken($color-tw, 15%);
-      }
-    }
-
-    &.fb {
-      color: $color-fb;
-
-      &:focus,
-      &:hover {
-        color: darken($color-fb, 15%);
-      }
+    &:focus,
+    &:hover {
+      filter: brightness(80%);
     }
 
     &.email {
       color: $color-grey;
-
-      &:focus,
-      &:hover {
-        color: darken($color-grey, 15%);
-      }
     }
   }
 }
