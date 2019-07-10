@@ -37,28 +37,32 @@ export default function() {
       );
       $('.countries_list', countries_html).append(countries_sublist);
       $.each(element, function(index, country) {
-        const url = country.url ? country.url : country.lang[0].url;
-        $('.countries_sublist', countries_sublist).append(
-          '<li>' +
-            '<a href="' +
-            country.url +
-            '">' +
-            country.name +
-            '</a>' +
-            '</li>'
-        );
-        // $.each(country, function(index, lang) {
-        //   console.log(lang);
-        //   $('.countries_sublist', countries_sublist).append(
-        //     '<li>' +
-        //       '<a href="' +
-        //       lang.url +
-        //       '">' +
-        //       lang.name +
-        //       '</a>' +
-        //       '</li>'
-        //   );
-        // });
+        // Deal with two different JSON structures...
+        if (country.url) {
+          $('.countries_sublist', countries_sublist).append(
+            '<li>' +
+              '<a href="' +
+              country.url +
+              '">' +
+              country.name +
+              '</a>' +
+              '</li>'
+          );
+        } else {
+          $.each(country.lang, function(index, lang) {
+            $('.countries_sublist', countries_sublist).append(
+              '<li>' +
+                '<a href="' +
+                lang.url +
+                '">' +
+                country.name +
+                ' | ' +
+                lang.name +
+                '</a>' +
+                '</li>'
+            );
+          });
+        }
       });
     }
   });

@@ -144,8 +144,12 @@ class P4CT_Site {
 		$context['press_media_link'] = isset( $options['gpea_default_press_media'] ) ? get_permalink( $options['gpea_default_press_media'] ) : site_url();
 		$context['make_change_link'] = isset( $options['gpea_default_make_change'] ) ? get_permalink( $options['gpea_default_make_change'] ) : site_url();
 		$context['preferences_link'] = isset( $options['gpea_default_preferences'] ) ? get_permalink( $options['gpea_default_preferences'] ) : site_url();
+		
 		$context['commitment_projects_link'] = isset( $options['gpea_default_commitment_projects'] ) ? get_permalink( $options['gpea_default_commitment_projects'] ) : site_url();
 		$context['commitment_issues_link'] = isset( $options['gpea_default_commitment_issues'] ) ? get_permalink( $options['gpea_default_commitment_issues'] ) : site_url();
+		$context['commitment_projects_link_label'] = isset( $options['gpea_default_commitment_projects'] ) ? get_the_title( $options['gpea_default_commitment_projects'] ) : '';
+		$context['commitment_issues_link_label'] = isset( $options['gpea_default_commitment_issues'] ) ? get_the_title( $options['gpea_default_commitment_issues'] ) : '';
+		
 		$context['support_link'] = isset( $options['gpea_default_supportus_link'] ) ? get_permalink( $options['gpea_default_supportus_link'] ) : site_url();
 		$context['generic_footer_text'] = isset( $options['gpea_description_generic_footer_text'] ) ? $options['gpea_description_generic_footer_text'] : '';
 		$context['current_country'] = isset( $options['gpea_current_country'] ) ? $options['gpea_current_country'] : 'HK';

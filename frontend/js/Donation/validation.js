@@ -43,19 +43,19 @@ const dataConstraints = {
 	length: {is: 8},
     // the validation should happen with the masking, so no other rule required here
   },
-  // ['en__field--country']: {
-    // presence: required,
-    // // inclusion: {
-      // // within: ['HK', 'TW', 'KR'],
-      // // message: countryMessage,
-    // // },
-  // },
-  // ['en__field--region']: {
-    // presence: required,
-  // },
-  // ['en__field--city']: {
-    // presence: required,
-  // },
+  ['en__field--country']: {
+    presence: required,
+    // inclusion: {
+      // within: ['HK', 'TW', 'KR'],
+      // message: countryMessage,
+    // },
+  },
+  ['en__field--region']: {
+    presence: required,
+  },
+  ['en__field--city']: {
+    presence: required,
+  },
   ['en__field--address1']: {
     presence: required,
 	length: {maximum: 255},	
@@ -86,7 +86,8 @@ function prepareFormForValidation(form) {
   for (const name in allConstraints) {
     if (allConstraints.hasOwnProperty(name)) {
       // const options = allConstraints[name];
-      const input = form.querySelector('.' + name + ' input');
+      let input = form.querySelector('.' + name + ' input');
+	  if (!input) input = form.querySelector('.' + name + ' select');
       if (!input) continue;
       input.setAttribute('data-gpea-constraint-name', name);
       const feedback = document.createElement('span');
