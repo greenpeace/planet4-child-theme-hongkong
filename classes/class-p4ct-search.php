@@ -30,6 +30,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		const POST_TYPES            = [
 			'page',
 			'post',
+			'user_story',
 		];
 		const DOCUMENT_TYPES        = [
 			'application/pdf',
