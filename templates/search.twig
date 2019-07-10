@@ -84,7 +84,6 @@
             <form
                     id="search_form_inner" role="search" action="{{ data_nav_bar.home_url }}">
                 <!-- Main search field -->
-                <input type="hidden" name="orderby" value="{{ selected_sort ?? default_sort }}"/>
                 <div class="form-group search fluid">
                     <input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="Start typing..." value="{{ search_query|e('wp_kses_post')|raw }}">
                     <button class="button primary" type="submit">{{ search_label }}</button>
@@ -132,14 +131,9 @@
                     {% if ( categories|length > 0 ) %}
                         <div class="select">
                             <select class="filter-search" form="search_form_inner" id="f[cat]" name="f[cat]">
-                                <option disabled selected value>
-                                    -- {{ strings.none }} --
-                                </option>
+                                <option value="0">-- {{ strings.any }}  --</option>
                                 {% for category in categories %}
-                                    {% if ( category.results > 0 ) %}
-                                        <option value="{{ category.term_id }}" {{ category.selected ? 'selected' : '' }}>{{ category.name|e('wp_kses_post')|raw }}
-                                            ({{ category.results }})</option>
-                                    {% endif %}
+                                    <option value="{{ category.term_id }}" {{ category.selected ? 'selected' : '' }}>{{ category.name|e('wp_kses_post')|raw }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -147,14 +141,9 @@
                     {% if ( tags|length > 0 ) %}
                         <div class="select">
                             <select class="filter-search" form="search_form_inner" id="f[tag]" name="f[tag]">
-                                <option disabled selected value>
-                                    -- {{ strings.none }} --
-                                </option>
+                                <option value="0">-- {{ strings.any }} --</option>
                                 {% for tag in tags %}
-                                    {% if ( tag.results > 0 ) %}
-                                        <option value="{{ tag.term_id }}" {{ tag.selected ? 'selected' : '' }}>{{ tag.name|e('wp_kses_post')|raw }}
-                                            ({{ tag.results }})</option>
-                                    {% endif %}
+                                    <option value="{{ tag.term_id }}" {{ tag.selected ? 'selected' : '' }}>{{ tag.name|e('wp_kses_post')|raw }}</option>
                                 {% endfor %}
                             </select>
                         </div>
