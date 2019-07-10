@@ -116,7 +116,8 @@ body,
   }
 
   textarea {
-    min-height: 65px;
+    height: auto;
+    min-height: 100px;
     padding-top: 6px;
     padding-bottom: 6px;
   }

@@ -1,9 +1,9 @@
 .section-project-phases {
   padding-bottom: 20px !important;
+}
 
-  // > img {
-  //   margin-top: 0;
-  // }
+body:not(.page-template-project) .section-project-phases {
+  min-height: 250px !important;
 }
 
 .project-phase {
