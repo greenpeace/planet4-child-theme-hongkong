@@ -1,16 +1,14 @@
 // Returns TRUE if the previous (referrer) page is from a different website
 const isFirstSessionPage = function() {
-  console.log(document.referrer);
   const referrerHost = document.referrer
     .replace(/^https?:\/\//, '')
     .split('/')[0];
-  console.log(referrerHost, window.location.host);
   return referrerHost !== window.location.host;
 };
 
 // Returns TRUE if it's the Home, Make a Change or Latest from the Earth page
 const isMainPage = function() {
-  const regex = /\/(make-a-change|from-the-earth)\//;
+  const regex = /\/(make-change|make-a-change|from-the-earth)\//;
   return (
     document.body.classList.contains('home') ||
     window.location.href.match(regex) !== null
@@ -30,6 +28,7 @@ const backLink = function() {
   const latestMainPage = window.localStorage.getItem('latest-main-page');
   if (latestMainPage) link.href = latestMainPage;
 
+  /* keep it commented in case we want to re-add it later
   link.addEventListener('mouseenter', function() {
     document.body.style.willChange = 'opacity, transform';
   });
@@ -40,7 +39,7 @@ const backLink = function() {
 
   link.addEventListener('click', function() {
     document.body.classList.add('is-backing');
-  });
+  }); */
 };
 
 const closeLink = function() {
@@ -50,6 +49,7 @@ const closeLink = function() {
   const latestPage = window.localStorage.getItem('latest-page');
   if (latestPage) link.href = latestPage;
 
+  /* keep it commented in case we want to re-add it later
   link.addEventListener('mouseenter', function() {
     document.body.style.willChange = 'opacity, transform';
   });
@@ -60,7 +60,7 @@ const closeLink = function() {
 
   link.addEventListener('click', function() {
     document.body.classList.add('is-exiting');
-  });
+  }); */
 };
 
 /**
