@@ -22,6 +22,7 @@ import swipers from './components/swipers';
 import followUnfollow from './components/follow-unfollow';
 import shareToFixed from './components/share-to-fixed';
 import tips from './components/tips';
+import backLinks from './components/back-links';
 
 import petitionThankyou from './petition-thankyou';
 
@@ -67,6 +68,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   tips();
 
+  backLinks();
+
   /**
    * Open/close country offices megamenu (not even putting it in a separate module)
    */
@@ -84,29 +87,4 @@ document.addEventListener('DOMContentLoaded', function(event) {
   /* Page specific functionality */
 
   petitionThankyou(Scroll);
-
-  /**
-   * Functionality for set dynamic back link (aka "navigation of Francesco")
-   */
-  function createBackLink() {
-    const backLink = document.querySelector('.js-back-button');
-    if (!backLink) return;
-
-    backLink.addEventListener('click', e => {
-      e.preventDefault();
-      let previousLink = document.referrer;
-      let sourceLink = document.createElement('a');
-      sourceLink.href = previousLink;
-      if (sourceLink.hostname === window.location.hostname) {
-        window.history.back();
-        return false;
-      } else {
-        window.location.href = backLink.href;
-        return;
-      }
-    });
-  }
-  createBackLink();
-
-  // donationPage(Swiper, Scroll);
 });

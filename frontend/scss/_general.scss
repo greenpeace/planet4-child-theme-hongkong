@@ -2,6 +2,11 @@ html {
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 *,
 *::before,
 *::after {
@@ -9,10 +14,21 @@ html {
 }
 
 body {
+  @include font-smoothing;
   margin: 0;
   overflow-x: hidden;
   line-height: 1.35;
-  @include font-smoothing;
+  transition: opacity 250ms ease, transform 250ms ease;
+
+  &.is-backing {
+    opacity: 0;
+    transform: translateX(2%);
+  }
+
+  &.is-exiting {
+    opacity: 0;
+    transform: scale(0.99);
+  }
 
   @include lessThan('sm') {
     &.has-open-form {
