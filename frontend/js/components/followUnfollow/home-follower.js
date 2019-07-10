@@ -138,7 +138,6 @@ const homeFollower = function() {
   // handle project section here
   let gpea_projects_followed = Cookies.get('gpea_projects');
   if (typeof gpea_projects_followed !== 'undefined' && gpea_projects_followed.length > 0) {
-
 	  $sectionProjects.addClass('is-loading');
 	  $.ajax({
 		url: p4_vars.ajaxurl,
@@ -210,6 +209,9 @@ const homeFollower = function() {
 		  console.error(errorThrown);
 		},
 	  });
+  } else {
+	$sectionProjects.removeClass('is-loading');
+	$sectionProjects.addClass('is-loaded');
   }
   // $.ajax({
   //   url: p4_vars.ajaxurl,
