@@ -13,6 +13,8 @@ import polyfills from './components/polyfills';
 import trapFocus from './components/trap-focus';
 import donationTabs from './components/donation-tabs';
 
+import setLexicon from './Donation/lexicon';
+
 import geoSelect from './Donation/geo-select';
 
 import countriesMenu from './components/countries-menu';
@@ -32,10 +34,13 @@ function initDonation(Swiper, Scroll) {
 
   // Activate radio-to-tabs
   donationTabs();
+
+  // lexiconise.
+  const donationLexicon = setLexicon();
   
   // populate select with country ecc.
-  geoSelect();
-
+  geoSelect(donationLexicon);
+  
   // Activate swiper
   const donationSwiper = swiper(Swiper);
 
