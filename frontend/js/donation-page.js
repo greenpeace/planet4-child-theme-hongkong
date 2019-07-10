@@ -12,6 +12,9 @@ import polyfills from './components/polyfills';
 
 import trapFocus from './components/trap-focus';
 import donationTabs from './components/donation-tabs';
+
+import geoSelect from './Donation/geo-select';
+
 import countriesMenu from './components/countries-menu';
 
 import swiper from './Donation/swiper';
@@ -29,6 +32,9 @@ function initDonation(Swiper, Scroll) {
 
   // Activate radio-to-tabs
   donationTabs();
+  
+  // populate select with country ecc.
+  geoSelect();
 
   // Activate swiper
   const donationSwiper = swiper(Swiper);

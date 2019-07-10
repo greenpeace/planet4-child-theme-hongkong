@@ -60,9 +60,6 @@ const dataConstraints = {
     presence: required,
 	length: {maximum: 255},	
   },
-  ['supporter.NOT_TAGGED_33']: {
-	length: {maximum: 10},	
-  },
 };
 
 const paymentConstraints = {
@@ -89,7 +86,8 @@ function prepareFormForValidation(form) {
   for (const name in allConstraints) {
     if (allConstraints.hasOwnProperty(name)) {
       // const options = allConstraints[name];
-      const input = form.querySelector('.' + name + ' input');
+      let input = form.querySelector('.' + name + ' input');
+	  if (!input) input = form.querySelector('.' + name + ' select');
       if (!input) continue;
       input.setAttribute('data-gpea-constraint-name', name);
       const feedback = document.createElement('span');
@@ -150,7 +148,8 @@ export default function(form) {
         const feedback = block.querySelector(
           '[data-gpea-constraint-name="' + name + '"] + .invalid-feedback'
         );
-        input.classList.add('is-invalid');
+		console.log(name);
+        if (input) input.classList.add('is-invalid');
         feedback.textContent = message;
       }
     }
