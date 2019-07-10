@@ -759,13 +759,14 @@ class P4CT_Metabox_Register {
 				'id'      => 'gpea_sharing_options',
 				'type'    => 'multicheck',
 				'options' => array(
-					'email'    => 'Email',
-					'facebook' => 'Facebook',
-					'twitter'  => 'Twitter',
-					'whatsapp' => 'Whatsapp',
-					'line'     => 'Line',
-					'wechat'   => 'WeChat',
-					'web_api'  => 'Web API Navigator',
+					'email'     => 'Email',
+					'facebook'  => 'Facebook',
+					'twitter'   => 'Twitter',
+					'whatsapp'  => 'Whatsapp',
+					'line'      => 'Line',
+					'kakaotalk' => 'KakaoTalk',
+					'wechat'    => 'WeChat',
+					'web_api'   => 'Web API Navigator',
 				),
 			)
 		);
