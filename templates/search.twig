@@ -136,10 +136,7 @@
                                     -- {{ strings.none }} --
                                 </option>
                                 {% for category in categories %}
-                                    {% if ( category.results > 0 ) %}
-                                        <option value="{{ category.term_id }}" {{ category.selected ? 'selected' : '' }}>{{ category.name|e('wp_kses_post')|raw }}
-                                            ({{ category.results }})</option>
-                                    {% endif %}
+                                    <option value="{{ category.term_id }}" {{ category.selected ? 'selected' : '' }}>{{ category.name|e('wp_kses_post')|raw }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -151,10 +148,7 @@
                                     -- {{ strings.none }} --
                                 </option>
                                 {% for tag in tags %}
-                                    {% if ( tag.results > 0 ) %}
-                                        <option value="{{ tag.term_id }}" {{ tag.selected ? 'selected' : '' }}>{{ tag.name|e('wp_kses_post')|raw }}
-                                            ({{ tag.results }})</option>
-                                    {% endif %}
+                                    <option value="{{ tag.term_id }}" {{ tag.selected ? 'selected' : '' }}>{{ tag.name|e('wp_kses_post')|raw }}</option>
                                 {% endfor %}
                             </select>
                         </div>
