@@ -108,7 +108,37 @@ function initDonation(Swiper, Scroll) {
       Scroll.animateScroll(block.querySelector('.is-invalid'));
       // block.querySelector('.is-invalid').focus();
       return false;
-    } 
+    }
+
+
+    // e.preventDefault();
+    // let data = jQuery(form).serialize();
+
+    // jQuery.ajax({
+    //   url: '2',
+    //   method: 'POST',
+    //   data: data,
+    //   dataType: 'html',
+    //   done: function(data) {
+    //     console.log(data);
+    //     // var i=y.a.parseHTML(t, !0), s=y()(i).find(".en__errorHeader"), a=y()(i).find(".en__errorList"), n=y()(i).find("#thankyou-copy");
+    //     // if(e.pageFn.btnState="next", e.pageFn.isPaymentProceeding=!1, s.length>0)e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
+    //     // else {
+    //     //     e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
+    //     //         value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
+    //     //     }
+    //     //     ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
+    //     //     for(var r in e.fields)delete e.fields[r];
+    //     //     delete e.temp.card_number, delete e.temp.card_expiration_date
+    //     // }      
+    //   },
+    //   error: function(errorThrown) {
+    //     console.error(errorThrown);
+    //   },
+    // });
+
+    return false;
+
   });
 }
 
