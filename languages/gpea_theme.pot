@@ -481,3 +481,28 @@ msgstr ""
 #: page-templates/main-issue.php:73
 msgid "Related to this issue"
 msgstr ""
+
+#: search
+msgid "issue"
+msgstr ""
+
+msgid "topic"
+msgstr ""
+
+msgid "posts"
+msgstr ""
+
+msgid "advanced_search"
+msgstr ""
+
+msgid "filters"
+msgstr ""
+
+msgid "none"
+msgstr ""
+
+msgid "SHOW MORE RESULTS"
+msgstr ""
+
+msgid "Any"
+msgstr ""
