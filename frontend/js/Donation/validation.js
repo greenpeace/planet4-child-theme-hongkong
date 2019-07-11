@@ -15,7 +15,9 @@ const amountConstraintsRecurring = {
     numericality: {
       onlyInteger: true,
       strict: true,
-	  greaterThanOrEqualTo: parseInt(window.NRO_PROPERTIES[NRO].min_amt_recurring),
+      greaterThanOrEqualTo: parseInt(
+        window.NRO_PROPERTIES[NRO].min_amt_recurring
+      ),
       message: window.NRO_PROPERTIES[NRO].validation.min_amt_recurring,
     },
   },
@@ -27,7 +29,7 @@ const amountConstraintsSingle = {
     numericality: {
       onlyInteger: true,
       strict: true,
-	  greaterThanOrEqualTo: parseInt(window.NRO_PROPERTIES[NRO].min_amt_single),
+      greaterThanOrEqualTo: parseInt(window.NRO_PROPERTIES[NRO].min_amt_single),
       message: window.NRO_PROPERTIES[NRO].validation.min_amt_single,
     },
   },
@@ -36,42 +38,42 @@ const amountConstraintsSingle = {
 const dataConstraints = {
   ['en__field--firstName']: {
     presence: required,
-	length: {maximum: 255},
+    length: { maximum: 255 },
   },
   ['en__field--lastName']: {
     presence: required,
-	length: {maximum: 255},
+    length: { maximum: 255 },
   },
   ['en__field--emailAddress']: {
     presence: required,
-	length: {maximum: 255},	
+    length: { maximum: 255 },
     email: {
       message: invalidMessage,
     },
   },
   ['en__field--phoneNumber']: {
-	// numericality: {
-      // onlyInteger: true,
-	// },
-	length: {is: 8},
+    // numericality: {
+    // onlyInteger: true,
+    // },
+    length: { is: 8 },
     // the validation should happen with the masking, so no other rule required here
   },
-  // ['en__field--country']: {
-    // presence: true,
+  ['en__field--country']: {
+    presence: required,
     // // inclusion: {
-      // // within: ['HK', 'TW', 'KR'],
-      // // message: countryMessage,
+    // // within: ['HK', 'TW', 'KR'],
+    // // message: countryMessage,
     // // },
-  // },
-  // ['en__field--region']: {
-    // presence: required,
-  // },
-  // ['en__field--city']: {
-    // presence: required,
-  // },
+  },
+  ['en__field--region']: {
+    presence: required,
+  },
+  ['en__field--city']: {
+    presence: required,
+  },
   ['en__field--address1']: {
     presence: required,
-	length: {maximum: 255},	
+    length: { maximum: 255 },
   },
 };
 
@@ -101,7 +103,7 @@ function prepareFormForValidation(form) {
     if (allConstraints.hasOwnProperty(name)) {
       // const options = allConstraints[name];
       let input = form.querySelector('.' + name + ' input');
-	  if (!input) input = form.querySelector('.' + name + ' select');
+      if (!input) input = form.querySelector('.' + name + ' select');
       if (!input) continue;
       input.setAttribute('data-gpea-constraint-name', name);
       const feedback = document.createElement('span');
@@ -112,7 +114,6 @@ function prepareFormForValidation(form) {
 }
 
 export default function(form, donationLexicon) {
-
   prepareFormForValidation(form);
 
   const constrained = form.querySelectorAll(
@@ -121,7 +122,7 @@ export default function(form, donationLexicon) {
 
   Array.from(constrained).forEach(input => {
     input.addEventListener('change', e => {
-		console.log(input.value);
+      console.log(input.value);
       const invalid = validate.single(
         input.value,
         allConstraints[input.dataset.gpeaConstraintName]
@@ -139,14 +140,13 @@ export default function(form, donationLexicon) {
     const constraints =
       step === 'amountRecurring'
         ? amountConstraintsRecurring
-		: step === 'amountSingle'
+        : step === 'amountSingle'
         ? amountConstraintsSingle
         : step === 'payment'
         ? paymentConstraints
         : dataConstraints;
     const constrained = block.querySelectorAll(
-      'input[data-gpea-constraint-name]',
-      'select[data-gpea-constraint-name]'
+      'input[data-gpea-constraint-name], select[data-gpea-constraint-name]'
     );
     const values = {};
 
@@ -166,7 +166,7 @@ export default function(form, donationLexicon) {
         const feedback = block.querySelector(
           '[data-gpea-constraint-name="' + name + '"] + .invalid-feedback'
         );
-		console.log(name);
+        console.log(name);
         if (input) input.classList.add('is-invalid');
         feedback.textContent = message;
       }
