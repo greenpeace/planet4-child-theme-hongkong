@@ -37,7 +37,11 @@ export default function() {
       dataType: 'html',
     })
       .done(function(response) {
-        counter && counter.text(parseInt(counter.text(), 10) + 1);
+        if (counter) {
+          let currentCount = parseInt(counter.text(), 10);
+          if (isNaN(currentCount)) currentCount = 0;
+          counter.text(currentCount + 1);
+        }
         form.find(':submit').removeClass('loading');
         form.find(':submit').attr('disabled', 'disabled');
         form.closest('.tip-action-buttons').addClass('has-committed');

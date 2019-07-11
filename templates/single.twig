@@ -4,7 +4,8 @@
 
   <article id="post-{{ post.ID }}" class="{{ post_categories }}">
 
-    <section class="section-hero-top" style="background-image: url('{{ background_image ? background_image : post.thumbnail.src }}')">
+    <section class="section-hero-top">
+		<div class="background js-parallax-me" data-from-top="true" style="background-image: url({{ background_image ? background_image : post.thumbnail.src }})"></div>
       <div class="section-hero-shade"></div>
       <div class="ct-container">
         <div class="top-bar">
