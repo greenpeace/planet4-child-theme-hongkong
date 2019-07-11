@@ -121,13 +121,14 @@ $(document).ready(function() {
       query.miid = main_issue_id;
     }
     let year = $('#articles_list_load_more_year').val();
-    if (year) {
-      query.year = year;
-    }
-    query.paged = reset_container ? 1 : 2;
     let container = $('#articles_list_post_container');
     let messages = $('#articles_list_messages');
     let btn = $('#articles_list_load_more_btn');
+    if (year) {
+      query.year = year;
+    }
+    query.paged = reset_container ? 1 : btn.data('paged');
+    btn.data('paged', query.paged + 1);
     $.ajax({
       url: window.localizations.ajaxurl,
       type: 'POST',
@@ -145,8 +146,6 @@ $(document).ready(function() {
         if (reset_container) {
           container.html('');
           btn.attr('disabled', false);
-        } else {
-          btn.attr('disabled', true);
         }
         if (posts_found) {
           container.append(html_data);
