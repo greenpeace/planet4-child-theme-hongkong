@@ -108,8 +108,6 @@ $(document).ready(function() {
   // ARTICLES LIST.
   function fetchArticles(reset_container, ev) {
     ev.preventDefault();
-    // TODO Manu usa questo per capire se resettare o aggiornare i post
-    console.log('Reset?', reset_container);
     let query = $('#articles_list_load_more')
       .children()
       .serializeArray()
@@ -141,7 +139,8 @@ $(document).ready(function() {
       .done(function(response) {
         response = JSON.parse(response);
         let html_data = response.html_data,
-          posts_found = parseInt(response.posts_found);
+          posts_found = parseInt(response.posts_found),
+          has_more_posts = response.has_more_posts;
         messages.html('');
         if (reset_container) {
           container.html('');
@@ -153,7 +152,7 @@ $(document).ready(function() {
           messages.append(html_data);
           btn.attr('disabled', true);
         }
-        if (posts_found < 4) {
+        if (!has_more_posts) {
           btn.attr('disabled', true);
         }
       })
