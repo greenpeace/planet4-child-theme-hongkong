@@ -2,7 +2,7 @@ export default function() {
 
 	// console.log(NRO);
 	
-	console.log(window.NRO_PROPERTIES[NRO]);
+	// console.log(window.NRO_PROPERTIES[NRO]);
 	
 	// console.log(window.NRO_PROPERTIES[NRO].form.labels.country);
 	
@@ -20,6 +20,9 @@ export default function() {
 	jQuery('label[for="en__field_supporter_NOT_TAGGED_6"]').html(window.NRO_PROPERTIES[NRO].form.labels.dob);
 	jQuery('label[for="en__field_supporter_address1"]').html(window.NRO_PROPERTIES[NRO].form.labels.address);
 	jQuery('label[for="en__field_supporter_NOT_TAGGED_33"]').html(window.NRO_PROPERTIES[NRO].form.labels.ddc_recruiter_id);
+	jQuery('label[for="en__field_transaction_donationAmt"]').html(window.NRO_PROPERTIES[NRO].form.others.other_amt);
+	jQuery('label[for="en__field_supporter_NOT_TAGGED_310"]').html(window.NRO_PROPERTIES[NRO].gift.type.recurring);
+	jQuery('label[for="en__field_supporter_NOT_TAGGED_311"]').html(window.NRO_PROPERTIES[NRO].gift.type.single);
   
 	return donationLexicon;
 }
