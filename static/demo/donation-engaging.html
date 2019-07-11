@@ -1158,6 +1158,13 @@ if (amountParam) {
   }
 } 
 
+jQuery(window).load(function(){
+  let alreadySubmitted = getUrlParameters("val", "", true);
+  if ( alreadySubmitted ) {
+    jQuery('.js-to-payment').trigger('click');
+  }
+});
+
 
 </script>
 
