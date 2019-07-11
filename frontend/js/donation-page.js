@@ -98,6 +98,7 @@ function initDonation(Swiper, Scroll) {
 	// first assign the credit card type based upon number
 	let ccNumber = form.querySelector("input[name='transaction.ccnumber']");
 	if (ccNumber) {
+    form.querySelector("input[name='transaction.ccnumber']").value = ccNumber.value.replace(/\s/g, '');
 		let ccType = form.querySelector("input[name='transaction.paymenttype']");
 		if (ccType) ccType.value = detectCardType(ccNumber.value.replace(/\s/g, ''));
 	}
