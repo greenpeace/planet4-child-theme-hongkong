@@ -51,18 +51,24 @@ function swiper(Swiper) {
     '<div class="donate-navigation"> \
 			<div class="reminder-amount">每月捐款<br /><span class="js-reminder-amount"></span></div> \
 			<div> \
-				<button type="button" class="button small js-donate-prev">Back</button> \
+				<button type="button" class="button small js-donate-prev">'+window.NRO_PROPERTIES[NRO].form.others.back+'</button> \
 				<button type="button" class="button primary js-to-payment">Next</button> \
 			</div> \
     </div>';
 
   const submitButton = formblocks[2].querySelector('.en__submit button');
   submitButton.classList.add('primary');
+  
+  
+  // add credit cards icons   
+  formblocks[2].insertAdjacentHTML("afterbegin", '<div class="credit-card__row"><div class="credit-card__item-1 credit-card__item--logos"><div class="credit-card__logo credit-card__logo--visa"></div><div class="credit-card__logo credit-card__logo--mc"></div><div class="credit-card__logo credit-card__logo--amex"></div><!----><!----></div></div>');
+
+  
   formblocks[2].innerHTML +=
     '<div class="donate-navigation"> \
 			<div class="reminder-amount">每月捐款<br /><span class="js-reminder-amount"></span></div> \
 			<div> \
-				<button type="button" class="button small js-donate-prev">Back</button> \
+				<button type="button" class="button small js-donate-prev">'+window.NRO_PROPERTIES[NRO].form.others.back+'</button> \
 			</div> \
 		</div>';
   formblocks[2]

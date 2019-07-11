@@ -475,3 +475,28 @@ msgstr "주요 이슈"
 #: page-templates/main-issue.php:73
 msgid "Related to this issue"
 msgstr "관련 이슈"
+
+#: search
+msgid "issue"
+msgstr "캠페인"
+
+msgid "topic"
+msgstr "주제"
+
+msgid "posts"
+msgstr "포스트"
+
+msgid "advanced_search"
+msgstr "상세 검색"
+
+msgid "filters"
+msgstr "필터"
+
+msgid "none"
+msgstr "선택안함"
+
+msgid "SHOW MORE RESULTS"
+msgstr ""
+
+msgid "Any"
+msgstr "모두 선택"

@@ -1,6 +1,6 @@
 import validate from 'validate.js'; // lightweight validation library: http://validatejs.org/
 
-const requiredMessage = 'This field is required';
+const requiredMessage = window.NRO_PROPERTIES[NRO].validation.required;
 const invalidMessage = 'Please check the format of this field';
 const countryMessage = 'Should be one of "HK", "TW", "KR"';
 
@@ -9,13 +9,26 @@ const required = {
   message: requiredMessage,
 };
 
-const amountConstraints = {
+const amountConstraintsRecurring = {
   ['en__field--donationAmt']: {
     presence: required,
     numericality: {
       onlyInteger: true,
       strict: true,
-      message: invalidMessage,
+	  greaterThanOrEqualTo: parseInt(window.NRO_PROPERTIES[NRO].min_amt_recurring),
+      message: window.NRO_PROPERTIES[NRO].validation.min_amt_recurring,
+    },
+  },
+};
+
+const amountConstraintsSingle = {
+  ['en__field--donationAmt']: {
+    presence: required,
+    numericality: {
+      onlyInteger: true,
+      strict: true,
+	  greaterThanOrEqualTo: parseInt(window.NRO_PROPERTIES[NRO].min_amt_single),
+      message: window.NRO_PROPERTIES[NRO].validation.min_amt_single,
     },
   },
 };
@@ -37,25 +50,25 @@ const dataConstraints = {
     },
   },
   ['en__field--phoneNumber']: {
-	numericality: {
-      onlyInteger: true,
-	},
+	// numericality: {
+      // onlyInteger: true,
+	// },
 	length: {is: 8},
     // the validation should happen with the masking, so no other rule required here
   },
-  ['en__field--country']: {
-    presence: required,
-    // inclusion: {
-      // within: ['HK', 'TW', 'KR'],
-      // message: countryMessage,
-    // },
-  },
-  ['en__field--region']: {
-    presence: required,
-  },
-  ['en__field--city']: {
-    presence: required,
-  },
+  // ['en__field--country']: {
+    // presence: true,
+    // // inclusion: {
+      // // within: ['HK', 'TW', 'KR'],
+      // // message: countryMessage,
+    // // },
+  // },
+  // ['en__field--region']: {
+    // presence: required,
+  // },
+  // ['en__field--city']: {
+    // presence: required,
+  // },
   ['en__field--address1']: {
     presence: required,
 	length: {maximum: 255},	
@@ -77,7 +90,8 @@ const paymentConstraints = {
 
 const allConstraints = Object.assign(
   {},
-  amountConstraints,
+  amountConstraintsRecurring,
+  amountConstraintsSingle,
   dataConstraints,
   paymentConstraints
 );
@@ -97,7 +111,8 @@ function prepareFormForValidation(form) {
   }
 }
 
-export default function(form) {
+export default function(form, donationLexicon) {
+
   prepareFormForValidation(form);
 
   const constrained = form.querySelectorAll(
@@ -106,6 +121,7 @@ export default function(form) {
 
   Array.from(constrained).forEach(input => {
     input.addEventListener('change', e => {
+		console.log(input.value);
       const invalid = validate.single(
         input.value,
         allConstraints[input.dataset.gpeaConstraintName]
@@ -121,8 +137,10 @@ export default function(form) {
 
   const validateBlock = function(block, step) {
     const constraints =
-      step === 'amount'
-        ? amountConstraints
+      step === 'amountRecurring'
+        ? amountConstraintsRecurring
+		: step === 'amountSingle'
+        ? amountConstraintsSingle
         : step === 'payment'
         ? paymentConstraints
         : dataConstraints;

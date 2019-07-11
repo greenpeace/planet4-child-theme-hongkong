@@ -480,3 +480,28 @@ msgstr "環境議題"
 #: page-templates/main-issue.php:73
 msgid "Related to this issue"
 msgstr "相關文章"
+
+#: search
+msgid "issue"
+msgstr "環保議題"
+
+msgid "topic"
+msgstr "主題"
+
+msgid "posts"
+msgstr "文章"
+
+msgid "advanced_search"
+msgstr "進階搜索"
+
+msgid "filters"
+msgstr "類別"
+
+msgid "none"
+msgstr "沒有結果"
+
+msgid "SHOW MORE RESULTS"
+msgstr "顯示更多"
+
+msgid "Any"
+msgstr "所有"

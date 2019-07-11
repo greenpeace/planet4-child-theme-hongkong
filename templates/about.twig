@@ -8,7 +8,7 @@
         <div class="ct-container">
           <div class="top-bar">
             <div class="top-bar-title">
-              <a class="back-button js-back-button" href="{{ home_url }}">
+              <a class="back-button js-close-button" href="{{ home_url }}">
                 <span class="icon-close"></span>
               </a>
               {{ post.title|raw }}
@@ -67,11 +67,5 @@
     </section>
   {% endif %}
   {{ post.content|raw }}
-
-  {% if extra_content %}
-    <section class="section-post-content ct-container">
-      {{ extra_content|raw }}
-    </section>
-  {% endif %}
 
 {% endblock %}

@@ -70,6 +70,9 @@ $context['og_description']          = $post->get_og_description();
 $context['og_image_data']           = $post->get_og_image();
 $context['custom_body_classes']     = 'brown-bg';
 
+$extra_content                      = $page_meta_data['p4-gpea_page_extra_content'][0] ?? '';
+$context['extra_content']               = $extra_content ? wpautop( $extra_content ) : '';
+
 $page_special_class = $page_meta_data['p4-gpea_page_special_class'][0] ?? '';
 if ( $page_special_class ) {
 	$context['custom_body_classes'] .= ' ' . $page_special_class;

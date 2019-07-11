@@ -1,5 +1,5 @@
-export default function() {
-  
+export default function(donationLexicon) {
+	
   // populate country and regions
 var geo_data = {
 	countryData: {
@@ -930,7 +930,7 @@ var geo_data = {
 
 var countrySelect = jQuery(document.createElement('div'));
 countrySelect.addClass('en__field__element en__field__element--select en__field--country');
-countrySelect.html('<label for="en__field_supporter_country_html" class="en__field__label" style="">Country</label>');
+countrySelect.html('<label for="en__field_supporter_country_html" class="en__field__label" style="">' + donationLexicon.countryLabel + '</label>');
 var countrySelectOptions = jQuery(document.createElement('select'));
 jQuery(countrySelectOptions).addClass('js-country-select en__field__input en__field__input--select');
 jQuery.each( geo_data.countryData.chi, function( i, item ) {
@@ -947,8 +947,10 @@ jQuery(countrySelect).insertBefore('input[name="supporter.country"]');
 jQuery(document).on('change',".js-country-select", function(){
 	jQuery('input[name="supporter.country"]').val(this.value);
 	if ( this.value == 'HK' ) {
-		var o = new Option('Please select', '');
-		jQuery(o).html('Please select');
+		jQuery('.en__field--city').show();
+		jQuery('.en__field--region').show();
+		var o = new Option(donationLexicon.cityLabel, '');
+		jQuery(o).html(donationLexicon.cityLabel);
 		jQuery('.js-city-select').html(o);
 		jQuery.each( geo_data.hkData, function( i, item ) {
 			var o = new Option(item.chi, i);
@@ -957,17 +959,36 @@ jQuery(document).on('change',".js-country-select", function(){
 		});
 		// citySelect.append(citySelectOptions);
 
+	} else if ( this.value == 'TW' ) {
+		jQuery('.en__field--city').show();
+		jQuery('.en__field--region').show();
+		var o = new Option(donationLexicon.cityLabel, '');
+		jQuery(o).html(donationLexicon.cityLabel);
+		jQuery('.js-city-select').html(o);
+		jQuery.each( geo_data.twData.chi, function( i, item ) {
+			var o = new Option(i, i);
+			jQuery(o).html(i);
+			jQuery('.js-city-select').append(o);
+		});
+		// citySelect.append(citySelectOptions);
+
+	} else {
+		jQuery('input[name="supporter.city"]').val('-');
+		jQuery('input[name="supporter.region"]').val('-');
+		jQuery('input[name="supporter.postcode"]').val('00000');
+		jQuery('.en__field--city').hide();
+		jQuery('.en__field--region').hide();
 	}
 });  
 
 
 var citySelect = jQuery(document.createElement('div'));
 citySelect.addClass('en__field__element en__field__element--select en__field--city');
-citySelect.html('<label for="en__field_supporter_region_html" class="en__field__label" style="">City</label>');
+citySelect.html('<label for="en__field_supporter_region_html" class="en__field__label" style="">' + donationLexicon.cityLabel + '</label>');
 var citySelectOptions = jQuery(document.createElement('select'));
 jQuery(citySelectOptions).addClass('js-city-select en__field__input en__field__input--select');
-var o = new Option('Please select', '');
-jQuery(o).html('Please select');
+var o = new Option(donationLexicon.cityLabel, '');
+jQuery(o).html(donationLexicon.cityLabel);
 citySelectOptions.append(o);
 
 jQuery.each( geo_data.hkData, function( i, item ) {
@@ -985,26 +1006,40 @@ jQuery(document).on('change',".js-city-select", function(){
 		var indexCity = this.value;
 		jQuery('input[name="supporter.city"]').val(this.value);
 		// console.log(indexCity);
-		var o = new Option('Please select', '');
-		jQuery(o).html('Please select');
+		var o = new Option(donationLexicon.cityLabel, '');
+		jQuery(o).html(donationLexicon.regionLabel);
 		jQuery('.js-region-select').html(o);
-		jQuery.each( geo_data.hkData[indexCity].data, function( i, item ) {
-			console.log(i);
-			console.log(item);
-			var o = new Option(item, i);
-			jQuery(o).html(item);
-			jQuery('.js-region-select').append(o);
-		});
-		// citySelect.append(citySelectOptions);
+		
+		if (jQuery('.js-country-select').val() == 'HK' ) {
+		
+			jQuery.each( geo_data.hkData[indexCity].data, function( i, item ) {
+				// console.log(i);
+				// console.log(item);
+				var o = new Option(item, i);
+				jQuery(o).html(item);
+				jQuery('.js-region-select').append(o);
+			});
+			// citySelect.append(citySelectOptions);
+		} else if (jQuery('.js-country-select').val() == 'TW' ) {
+		
+			jQuery.each( geo_data.twData.chi[indexCity], function( i, item ) {
+				// console.log(i);
+				// console.log(item);
+				var o = new Option(i, i);
+				jQuery(o).html(i);
+				jQuery('.js-region-select').append(o);
+			});
+			// citySelect.append(citySelectOptions);
+		} 
 });
 
 var regionSelect = jQuery(document.createElement('div'));
 regionSelect.addClass('en__field__element en__field__element--select en__field--region');
-regionSelect.html('<label for="en__field_supporter_region_html" class="en__field__label" style="">Region</label>');
+regionSelect.html('<label for="en__field_supporter_region_html" class="en__field__label" style="">' + donationLexicon.regionLabel + '</label>');
 var regionSelectOptions = jQuery(document.createElement('select'));
 jQuery(regionSelectOptions).addClass('js-region-select en__field__input en__field__input--select');
-var o = new Option('Please select', '');
-jQuery(o).html('Please select');
+var o = new Option(donationLexicon.regionLabel, '');
+jQuery(o).html(donationLexicon.regionLabel);
 regionSelectOptions.append(o);
 /*
 jQuery.each( geo_data.hkData, function( i, item ) {
@@ -1020,6 +1055,13 @@ jQuery(regionSelect).insertBefore('input[name="supporter.country"]');
 
 jQuery(document).on('change',".js-region-select", function(){
 	jQuery('input[name="supporter.region"]').val(this.value);
+	if (jQuery('.js-country-select').val() == 'TW' ) {
+		var indexCity = jQuery('.js-city-select').val();
+		var indexRegion = this.value;
+		jQuery('input[name="supporter.postcode"]').val(geo_data.twData.chi[indexCity][indexRegion]);
+	} else {
+		jQuery('input[name="supporter.postcode"]').val('00000');
+	}
 });
   
   

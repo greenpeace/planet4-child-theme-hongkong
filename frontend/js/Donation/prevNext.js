@@ -34,10 +34,14 @@ function prevNext(form, donationSwiper, validateBlock, Scroll) {
   // Step 1: NEXT
   form.querySelector('.js-amount-next').addEventListener('click', e => {
     e.preventDefault();
+	let recurring = document.querySelector('input[name="supporter.NOT_TAGGED_31"]:checked').value;
+	let amountType = '';
+	amountType = ('Y' == recurring) ? 'amountRecurring' : 'amountSingle';
+		
     const block = e.target.closest('.en__component.en__component--formblock');
     const amount = document.getElementById('en__field_transaction_donationAmt');
     const reminders = form.querySelectorAll('.js-reminder-amount');
-    const valid = validateBlock(block, 'amount');
+    const valid = validateBlock(block, amountType);
     if (valid) {
       Array.from(reminders).forEach(reminder => {
         reminder.textContent = amount.value;

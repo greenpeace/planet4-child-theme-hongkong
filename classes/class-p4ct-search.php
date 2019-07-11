@@ -30,6 +30,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		const POST_TYPES            = [
 			'page',
 			'post',
+			'user_story',
 		];
 		const DOCUMENT_TYPES        = [
 			'application/pdf',
@@ -536,23 +537,25 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		public function set_filters_args( &$args ) {
 			if ( $this->filters ) {
 				foreach ( $this->filters as $type => $id ) {
-					switch ( $type ) {
-						case 'cat':
-							$args['tax_query'][] = [
-								'taxonomy' => 'category',
-								'field'    => 'term_id',
-								'terms'    => $id,
-							];
-							break;
-						case 'tag':
-							$args['tax_query'][] = [
-								'taxonomy' => 'post_tag',
-								'field'    => 'term_id',
-								'terms'    => $id,
-							];
-							break;
-						default:
-							throw new UnexpectedValueException( 'Unexpected filter!' );
+					if ( $id ) {
+						switch ( $type ) {
+							case 'cat':
+								$args['tax_query'][] = [
+									'taxonomy' => 'category',
+									'field'    => 'term_id',
+									'terms'    => $id,
+								];
+								break;
+							case 'tag':
+								$args['tax_query'][] = [
+									'taxonomy' => 'post_tag',
+									'field'    => 'term_id',
+									'terms'    => $id,
+								];
+								break;
+							default:
+								throw new UnexpectedValueException( 'Unexpected filter!' );
+						}
 					}
 				}
 			}
@@ -602,10 +605,11 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				],
 			];
 			$context['strings'] = [
-				'search_label' => __( 'Search', 'gpea_theme' ),
+				'search_label'  => __( 'Search', 'gpea_theme' ),
 				'reset_filters' => __( 'Reset Filters', 'gpea_theme' ),
-				'sort_by' => __( 'Sort by', 'gpea_theme' ),
+				'sort_by'       => __( 'Sort by', 'gpea_theme' ),
 				'nothing_found' => __( 'Nothing found, sorry.', 'gpea_theme' ),
+				'any'           => __( 'Any', 'gpea_theme' ),
 			];
 
 			if ( $this->search_query ) {
@@ -674,16 +678,18 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 			// Keep track of which filters are already checked.
 			if ( $this->filters ) {
-				foreach ( $this->filters as $type => $filter ) {
-					switch ( $type ) {
-						case 'cat':
-							$context['categories'][ $filter ]['selected'] = true;
-							break;
-						case 'tag':
-							$context['tags'][ $filter ]['selected'] = true;
-							break;
-						default:
-							throw new UnexpectedValueException( 'Unexpected filter!' );
+				foreach ( $this->filters as $type => $id ) {
+					if ( $id ) {
+						switch ( $type ) {
+							case 'cat':
+								$context['categories'][ $id ]['selected'] = true;
+								break;
+							case 'tag':
+								$context['tags'][ $id ]['selected'] = true;
+								break;
+							default:
+								throw new UnexpectedValueException( 'Unexpected filter!' );
+						}
 					}
 				}
 			}
