@@ -2,6 +2,7 @@
   position: relative;
   min-height: 600px !important;
   background: transparent !important;
+  overflow: hidden;
 
   @include greaterThan('sm') {
     display: flex;
@@ -15,8 +16,8 @@
     display: block;
     top: 0;
     left: 0;
-    height: 100%;
-    width: 100%;
+    right: 0;
+    bottom: 0;
     background-position: center;
     background-size: cover;
     z-index: -1;
@@ -185,5 +186,4 @@
     right: 10px;
     top: 28px;
   }
-
 }
