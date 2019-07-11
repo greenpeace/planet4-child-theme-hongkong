@@ -1143,18 +1143,27 @@ if (recurringPayment == 'Y') {
 }
 
 let amountParam = getUrlParameters("donate_amt", "", true);
-let amountParamMultiple = amountParam.split(":");
-if ( ('s' == amountParamMultiple[0]) || ('single' == amountParamMultiple[0]) || ('oneoff' == amountParamMultiple[0]) ) {
-	jQuery('input[name="supporter.NOT_TAGGED_17"]').val('0');
-	jQuery('input[name="supporter.NOT_TAGGED_31"]').val('N');
-	jQuery('#en__field_supporter_NOT_TAGGED_310').trigger('click');
-	if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
-} else if ( ('m' == amountParamMultiple[0]) || ('monthly' == amountParamMultiple[0]) || ('recurring' == amountParamMultiple[0]) ) {
-	jQuery('input[name="supporter.NOT_TAGGED_17"]').val('12');
-	jQuery('input[name="supporter.NOT_TAGGED_31"]').val('Y');
-	jQuery('#en__field_supporter_NOT_TAGGED_311').trigger('click');
-	if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
+if (amountParam) {
+  let amountParamMultiple = amountParam.split(":");
+  if ( ('s' == amountParamMultiple[0]) || ('single' == amountParamMultiple[0]) || ('oneoff' == amountParamMultiple[0]) ) {
+    jQuery('input[name="supporter.NOT_TAGGED_17"]').val('0');
+    jQuery('input[name="supporter.NOT_TAGGED_31"]').val('N');
+    jQuery('#en__field_supporter_NOT_TAGGED_310').trigger('click');
+    if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
+  } else if ( ('m' == amountParamMultiple[0]) || ('monthly' == amountParamMultiple[0]) || ('recurring' == amountParamMultiple[0]) ) {
+    jQuery('input[name="supporter.NOT_TAGGED_17"]').val('12');
+    jQuery('input[name="supporter.NOT_TAGGED_31"]').val('Y');
+    jQuery('#en__field_supporter_NOT_TAGGED_311').trigger('click');
+    if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
+  }
 } 
+
+jQuery(window).load(function(){
+  let alreadySubmitted = getUrlParameters("val", "", true);
+  if ( alreadySubmitted ) {
+    jQuery('.js-to-payment').trigger('click');
+  }
+});
 
 
 </script>

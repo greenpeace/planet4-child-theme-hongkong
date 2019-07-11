@@ -23,6 +23,7 @@ import followUnfollow from './components/follow-unfollow';
 import shareToFixed from './components/share-to-fixed';
 import tips from './components/tips';
 import backLinks from './components/back-links';
+import parallax from './components/parallax';
 
 import petitionThankyou from './petition-thankyou';
 
@@ -35,7 +36,7 @@ polyfills();
 document.addEventListener('DOMContentLoaded', function(event) {
   new LazyLoad({
     elements_selector: '.lazy',
-    threshold: 800,
+    threshold: 400,
   });
 
   const Scroll = new SmoothScroll('a[href*="#"]', {
@@ -69,6 +70,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
   tips();
 
   backLinks();
+
+  parallax();
 
   /**
    * Open/close country offices megamenu (not even putting it in a separate module)

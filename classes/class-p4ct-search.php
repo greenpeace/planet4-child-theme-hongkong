@@ -334,6 +334,11 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 					$timber_post->reading_time = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
 
+					$img_url = get_the_post_thumbnail_url( $post->ID, 'thumbnail' );
+					if ( $img_url ) {
+						$timber_post->img_url = $img_url;
+					}
+
 					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
 					if ( $news_type ) {
 						$timber_post->news_type = $news_type[0]->name;
@@ -351,10 +356,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 						$timber_post->main_issue = $main_issue ? $this->main_issues[ $main_issue ]->name : 'none';
 						$timber_post->main_issue_slug = $main_issue ? $this->main_issues[ $main_issue ]->slug : 'none';
 						$timber_post->link = get_permalink( $post->ID );
-						$img_url = get_the_post_thumbnail_url( $post->ID, 'thumbnail' );
-						if ( $img_url ) {
-							$timber_post->img_url = $img_url;
-						}
 					}
 
 					$timber_posts[] = $timber_post;
