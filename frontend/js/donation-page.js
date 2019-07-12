@@ -115,6 +115,8 @@ function initDonation(Swiper, Scroll) {
 
 
     e.preventDefault();
+    jQuery('button').prop('disabled',true);
+
     let data = jQuery(form).serialize();
 
     jQuery.ajax({
@@ -123,17 +125,41 @@ function initDonation(Swiper, Scroll) {
       data: data,
       dataType: 'html',
     }).done(function(t) {
-        console.log(t);
-              // var i=y.a.parseHTML(t, !0), s=y()(i).find(".en__errorHeader"), a=y()(i).find(".en__errorList"), n=y()(i).find("#thankyou-copy");
-              //   if(e.pageFn.btnState="next", e.pageFn.isPaymentProceeding=!1, s.length>0)e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
-              //   else {
-              //       e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
-              //           value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
-              //       }
-              //       ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
-              //       for(var r in e.fields)delete e.fields[r];
-              //       delete e.temp.card_number, delete e.temp.card_expiration_date
-              //   }
+        jQuery('button').prop('disabled',false);
+        // console.log(t);
+        var i = jQuery.parseHTML(t, !0);
+        var s = jQuery(i).find(".en__errorHeader");
+        var a = jQuery(i).find(".en__errorList");
+        var n = jQuery(i).find("#thankyou-copy");
+
+          if(s.length>0) {
+            // console.log(s);
+            // console.log(a);
+            jQuery('.en__errorHeader').remove();
+            jQuery('.en__errorList').remove();
+            jQuery('.credit-card__row').prepend(s[0].outerHTML+a[0].outerHTML);
+            jQuery('#enform').css('padding-bottom','100px');
+            // e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
+          } else {
+            jQuery('.en__component--column').html(n);
+
+              // e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
+              //     value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
+              // }
+              // ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
+              // for(var r in e.fields)delete e.fields[r];
+              // delete e.temp.card_number, delete e.temp.card_expiration_date
+          }
+
+          // if(e.pageFn.btnState="next", e.pageFn.isPaymentProceeding=!1, s.length>0)e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
+          // else {
+          //     e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
+          //         value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
+          //     }
+          //     ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
+          //     for(var r in e.fields)delete e.fields[r];
+          //     delete e.temp.card_number, delete e.temp.card_expiration_date
+          // }
 
         //console.log(data);
         
