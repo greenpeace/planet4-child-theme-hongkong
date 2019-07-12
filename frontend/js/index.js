@@ -8,6 +8,7 @@ import {
 } from 'swiper/dist/js/swiper.esm.js';
 import LazyLoad from 'vanilla-lazyload';
 import SmoothScroll from 'smooth-scroll';
+import AOS from 'aos';
 
 import polyfills from './components/polyfills';
 
@@ -34,6 +35,12 @@ Swiper.use([Navigation, Pagination, Scrollbar, Controller, Autoplay]);
 polyfills();
 
 document.addEventListener('DOMContentLoaded', function(event) {
+  AOS.init({
+    easing: 'ease-in-out-cubic',
+    once: true,
+    disable: 'phone',
+  });
+
   new LazyLoad({
     elements_selector: '.lazy',
     threshold: 400,

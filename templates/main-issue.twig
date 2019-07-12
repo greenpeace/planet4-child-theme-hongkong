@@ -1,8 +1,8 @@
 {% extends "base.twig" %}
 
 {% block content %}
-	<section class="section-hero-top">
-		<div class="background js-parallax-me" data-from-top="true" style="background-image: url({{ background_image }})"></div>
+	<section class="section-hero-top" data-aos="fade" data-aos-delay="200" data-aos-duration="600">
+		<div class="background js-parallax-me" data-prlx-from-top="true" style="background-image: url({{ background_image }})"></div>
 		<div class="section-hero-shade"></div>
 		<div class="ct-container">
 			<div class="content">
@@ -13,7 +13,7 @@
 				<a href="#" data-topic='{{ main_issue_id }}' class="js-issue-follow button light">{{ strings.follow }}</a>
 				<a href="#" data-topic='{{ main_issue_id }}' class="js-issue-unfollow not-following button light">{{ strings.following }}</a>
 			</div>
-			<div class="hero-issue-title">
+			<div class="hero-issue-title" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
 				<h1>{{ post.title|raw }}</h1>
 				<p>{{ custom_body_classes|default("") }}</p>
 				</div>

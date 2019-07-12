@@ -29,6 +29,7 @@
     "whatwg-fetch": "^3.0.0"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "cleave.js": "^1.5.2",
     "js-cookie": "^2.2.0",
     "lodash.template": "^4.4.0",

@@ -162,6 +162,7 @@ const scss = isProduction => {
   const config = {
     sass: {
       outputStyle,
+      includePaths: ['node_modules'],
     },
   };
 
