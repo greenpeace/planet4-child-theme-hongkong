@@ -1100,8 +1100,6 @@ function debounce(func, wait, immediate) {
 });
 
 
-let regexPhone = window.NRO_PROPERTIES[NRO].regex.phone;
-
 /*
 <div class="en__field en__field--select en__field--withOther">
 	<label for="en__field_supporter_country_html" class="en__field__label" style="">Country</label>
@@ -1125,6 +1123,9 @@ let regexPhone = window.NRO_PROPERTIES[NRO].regex.phone;
 <!-- suggested_amt_recurring: 550, -->
 
 //jQuery('[name="supporter.NOT_TAGGED_31"]').on('change', function(){
+
+
+  let regexPhone = window.NRO_PROPERTIES[NRO].regex.phone;
 
 </script>
 
@@ -1155,7 +1156,8 @@ if (recurringPayment == 'Y') {
 jQuery(window).load(function(){
   let alreadySubmitted = getUrlParameters("val", "", true);
   if ( alreadySubmitted ) {
-    jQuery('.js-to-payment').trigger('click');
+    // console.log(donationSwiper);
+    // jQuery('.js-to-payment').trigger('click');
   }
 
   let amountParam = getUrlParameters("donate_amt", "", true);
