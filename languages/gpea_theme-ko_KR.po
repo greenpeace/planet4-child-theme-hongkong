@@ -500,3 +500,6 @@ msgstr ""
 
 msgid "Any"
 msgstr "모두 선택"
+
+msgid "Start typing"
+msgstr ""

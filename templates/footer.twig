@@ -54,7 +54,12 @@
 					<li><a href="{{ item.url }}">{{ item.title }}</a></li>
 				{% endfor %}
 			</ul>
+<<<<<<< HEAD
 			<a class="latte-logo mobile-only" target="_blank" rel="noopener noreferrer" href="https://www.lattecreative.com" title="Designed with Latte Creative"></a>
+=======
+			{% if (copyright_text_line1) %}<p class="footer-legal footer-legal__line1">{{ copyright_text_line1|e('wp_kses_post')|raw }}</p>{% endif %}
+			{% if (copyright_text_line2) %}<p class="footer-legal footer-legal__line2">{{ copyright_text_line2|e('wp_kses_post')|raw }}</p>{% endif %}
+>>>>>>> 73ccdd20a86d9be84c9d95a00cb34ceabaa7f356
 		</div>
 	</div>
 </footer>

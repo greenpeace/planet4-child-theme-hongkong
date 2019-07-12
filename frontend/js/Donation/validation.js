@@ -4,6 +4,10 @@ const requiredMessage = window.NRO_PROPERTIES[NRO].validation.required;
 const invalidMessage = 'Please check the format of this field';
 const countryMessage = 'Should be one of "HK", "TW", "KR"';
 
+const invalidePhone = window.NRO_PROPERTIES[NRO].validation.format_phone;
+
+let regexPhoneSet = regexPhone;
+
 const required = {
   allowEmpty: false,
   message: requiredMessage,
@@ -55,7 +59,11 @@ const dataConstraints = {
     // numericality: {
     // onlyInteger: true,
     // },
-    length: { is: 8 },
+    // length: { is: 8 },
+      format: {
+        pattern: regexPhoneSet,
+        message: invalidePhone
+      }
     // the validation should happen with the masking, so no other rule required here
   },
   ['en__field--country']: {

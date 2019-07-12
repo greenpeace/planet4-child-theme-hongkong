@@ -505,3 +505,6 @@ msgstr "顯示更多"
 
 msgid "Any"
 msgstr "所有"
+
+msgid "Start typing"
+msgstr "請輸入關鍵字"

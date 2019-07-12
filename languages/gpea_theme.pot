@@ -506,3 +506,6 @@ msgstr ""
 
 msgid "Any"
 msgstr ""
+
+msgid "Start typing"
+msgstr ""
