@@ -31,13 +31,14 @@
 					{% endfor %}
 				</ul>
 			</div>
-			<div class="desktop-only">
+			<div class="desktop-only has-social-links">
 				<h5>{{ strings.follow }}</h5>
 				<ul class="social-links">
 					{% for item in footer_social_menu %}
 						<li><a href="{{ item.url }}" aria-label="{{ item.title|lower }}"><span class="icon-{{ item.title|lower }}"></span></a></li>
 					{% endfor %}
 				</ul>
+				<a class="latte-logo" target="_blank" rel="noopener noreferrer" href="https://www.lattecreative.com" title="Designed with Latte Creative"></a>
 			</div>
 		</div>
 	</div>
@@ -53,6 +54,7 @@
 					<li><a href="{{ item.url }}">{{ item.title }}</a></li>
 				{% endfor %}
 			</ul>
+			<a class="latte-logo mobile-only" target="_blank" rel="noopener noreferrer" href="https://www.lattecreative.com" title="Designed with Latte Creative"></a>
 		</div>
 	</div>
 </footer>
