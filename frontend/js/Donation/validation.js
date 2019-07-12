@@ -39,7 +39,7 @@ const amountConstraintsSingle = {
   },
 };
 
-const dataConstraints = {
+let dataConstraints = {
   ['en__field--firstName']: {
     presence: required,
     length: { maximum: 255 },

@@ -20,6 +20,12 @@ export default function(
         event.preventDefault();
         firstFocusableEl.focus();
       }
+    } else if (event.keyCode === 13) {
+      if (preventFrontExit) {
+        console.log('focus front exit prevented');
+        event.preventDefault();
+        lastFocusableEl.click();
+      }
     }
   });
 }

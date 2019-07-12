@@ -42,12 +42,12 @@ function initDonation(Swiper, Scroll) {
   geoSelect(donationLexicon);
   
   // Activate swiper
-  const donationSwiper = swiper(Swiper);
+  const donationSwiper = swiper(Swiper);  
 
   // Init mask/validation logic
   const form = document.querySelector('#enform form');
   mask(form);
-  const validateBlock = validation(form, donationLexicon);
+  let validateBlock = validation(form, donationLexicon);
 
   // Trap focus
   trapFocus(
@@ -74,6 +74,9 @@ function initDonation(Swiper, Scroll) {
 
   // Activate prev/next buttons
   prevNext(form, donationSwiper, validateBlock, Scroll);
+
+
+  checkUrlParameters(donationSwiper);
 
   // Submit safeguard
   form.addEventListener('submit', e => {
@@ -210,16 +213,29 @@ function getUrlParameters(parameter, staticURL, decode){
   if(!returnBool) return false;  
 }
 
-function checkUrlParameters() {
+function checkUrlParameters(donationSwiper) {
 	
   // let campaignActive = getUrlParameters("campaign", "", true);
   // if (window.NRO_PROPERTIES[NRO].backgroundStyle.campaignActive.image.backgroundImage) ;
 	
   let amountValue = getUrlParameters("transaction.donationAmt", "", true);
-	if (amountValue) {
-    console.log('sss');
+	if (amountValue) {    
     document.querySelector('button.js-amount-next').click();
-	}
+  }
+  
+  let alreadySubmitted = getUrlParameters("val", "", true);
+  if ( alreadySubmitted ) {
+    donationSwiper.slideTo(1);
+    const stepAmount = document.querySelector('.js-step-amount');
+    const stepDetails = document.querySelector('.js-step-details');
+    const stepPayment = document.querySelector('.js-step-payment');
+    stepAmount.classList.remove('is-current');
+    stepAmount.classList.add('is-done');
+    stepDetails.classList.remove('is-done');
+    stepDetails.classList.add('is-current');
+    // stepPayment.classList.add('is-current');
+  }
+
 }
 
 
@@ -233,9 +249,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     speedAsDuration: true,
   });
 
-  initDonation(Swiper, Scroll);
-
-  checkUrlParameters();
+  initDonation(Swiper, Scroll);  
 
   countriesMenu();
 });
