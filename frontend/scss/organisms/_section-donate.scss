@@ -187,3 +187,11 @@
     top: 28px;
   }
 }
+
+.section-mixed-content-row + .section-donate.upper-fade {
+  margin-top: 0;
+
+  &::after {
+    background: linear-gradient(to bottom, #eee, #fff0);
+  }
+}
