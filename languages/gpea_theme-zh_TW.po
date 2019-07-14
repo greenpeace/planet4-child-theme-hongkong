@@ -131,7 +131,7 @@ msgstr "環境議題"
 
 #: classes/class-p4ct-site.php:162
 msgid "About Greenpeace"
-msgstr "我們的故事"
+msgstr "關於綠色和平"
 
 #: classes/class-p4ct-site.php:163
 msgid "Press release and media"
@@ -483,28 +483,28 @@ msgstr "相關文章"
 
 #: search
 msgid "issue"
-msgstr ""
+msgstr "環境議題"
 
 msgid "topic"
-msgstr ""
+msgstr "主題"
 
 msgid "posts"
-msgstr ""
+msgstr "文章"
 
 msgid "advanced_search"
-msgstr ""
+msgstr "進階搜尋"
 
 msgid "filters"
-msgstr ""
+msgstr "類別"
 
 msgid "none"
-msgstr ""
+msgstr "無搜尋結果"
 
 msgid "SHOW MORE RESULTS"
-msgstr ""
+msgstr "顯示更多"
 
 msgid "Any"
-msgstr ""
+msgstr "所有"
 
 msgid "Start typing"
 msgstr "請輸入關鍵字"

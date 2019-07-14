@@ -507,4 +507,4 @@ msgid "Any"
 msgstr "所有"
 
 msgid "Start typing"
-msgstr "請輸入關鍵字"
+msgstr "輸入關鍵字…"

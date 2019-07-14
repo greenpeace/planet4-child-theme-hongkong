@@ -4,6 +4,8 @@ const requiredMessage = window.NRO_PROPERTIES[NRO].validation.required;
 const invalidMessage = 'Please check the format of this field';
 const countryMessage = 'Should be one of "HK", "TW", "KR"';
 
+const invalidePhone = window.NRO_PROPERTIES[NRO].validation.format_phone;
+
 const required = {
   allowEmpty: false,
   message: requiredMessage,
@@ -55,7 +57,11 @@ const dataConstraints = {
     // numericality: {
     // onlyInteger: true,
     // },
-    length: { is: 8 },
+    // length: { is: 8 },
+      format: {
+        pattern: regexPhone,
+        message: invalidePhone
+      }
     // the validation should happen with the masking, so no other rule required here
   },
   ['en__field--country']: {
@@ -114,7 +120,7 @@ function prepareFormForValidation(form) {
 }
 
 export default function(form, donationLexicon) {
-  prepareFormForValidation(form);
+  prepareFormForValidation(form);  
 
   const constrained = form.querySelectorAll(
     'input[data-gpea-constraint-name], select[data-gpea-constraint-name]'
@@ -122,11 +128,22 @@ export default function(form, donationLexicon) {
 
   Array.from(constrained).forEach(input => {
     input.addEventListener('change', e => {
-      console.log(input.value);
+
+      // update phone rules for dynamic regex
+      if (input.dataset.gpeaConstraintName) {
+        allConstraints['en__field--phoneNumber'] = {
+          format: {
+            pattern: regexPhone,
+            message: invalidePhone
+          }
+        }
+      }
+
       const invalid = validate.single(
         input.value,
         allConstraints[input.dataset.gpeaConstraintName]
       );
+      
       if (invalid && invalid.length) {
         input.parentNode.querySelector('.invalid-feedback').textContent =
           invalid[0];
@@ -153,6 +170,14 @@ export default function(form, donationLexicon) {
     Array.from(constrained).forEach(input => {
       values[input.dataset.gpeaConstraintName] = input.value;
     });
+    
+    // update phone regex since it's dynamic
+    constraints['en__field--phoneNumber'] = {
+      format: {
+        pattern: regexPhone,
+        message: invalidePhone
+      }
+    }
 
     const invalid = validate(values, constraints, { fullMessages: false });
 
@@ -166,7 +191,6 @@ export default function(form, donationLexicon) {
         const feedback = block.querySelector(
           '[data-gpea-constraint-name="' + name + '"] + .invalid-feedback'
         );
-        console.log(name);
         if (input) input.classList.add('is-invalid');
         feedback.textContent = message;
       }

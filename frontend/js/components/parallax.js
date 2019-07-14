@@ -4,33 +4,39 @@ export default function() {
   const els = document.querySelectorAll('.js-parallax-me');
 
   Array.from(els).forEach(el => {
-    if (el.hasAttribute('data-from-top')) {
+    const speed = el.hasAttribute('data-prlx-speed')
+      ? parseInt(el.dataset.prlxSpeed, 10)
+      : 1;
+    if (el.hasAttribute('data-prlx-from-top')) {
       // el.style.transform = 'translateY(0px)';
-      el.style.top = '0px';
-      el.style.bottom = '-' + delta + 'px';
+      el.style.top = '-' + (delta * speed) / 3 + 'px';
+      el.style.bottom = '-' + delta * speed + 'px';
     } else {
       // el.style.transform = 'translateY(' + delta / 2 + 'px)';
-      el.style.top = '-' + delta / 2 + 'px';
-      el.style.bottom = '-' + delta / 2 + 'px';
+      el.style.top = '-' + (delta * speed) / 2 + 'px';
+      el.style.bottom = '-' + (delta * speed) / 2 + 'px';
     }
   });
 
   function translate(e) {
     const innerHeight = window.innerHeight;
     Array.from(els).forEach(el => {
+      const speed = el.hasAttribute('data-prlx-speed')
+        ? parseInt(el.dataset.prlxSpeed, 10)
+        : 1;
       const elementTop = el.getBoundingClientRect().top;
       const parentHeight = el.parentElement.getBoundingClientRect().height;
       if (elementTop + parentHeight < 0 || elementTop > innerHeight) return;
-      if (el.hasAttribute('data-from-top')) {
+      if (el.hasAttribute('data-prlx-from-top')) {
         const inFor = 1 - (elementTop + parentHeight) / parentHeight;
-        const deltaVariation = inFor * delta;
+        const deltaVariation = inFor * (delta * speed);
         el.style.transform = 'translateY(' + -deltaVariation + 'px)';
       } else {
         const inFor =
           1 - (elementTop + parentHeight) / (innerHeight + parentHeight);
-        const deltaVariation = inFor * delta;
+        const deltaVariation = inFor * (delta * speed);
         el.style.transform =
-          'translateY(' + (-deltaVariation + delta / 2) + 'px)';
+          'translateY(' + (-deltaVariation + (delta * speed) / 2) + 'px)';
       }
     });
   }

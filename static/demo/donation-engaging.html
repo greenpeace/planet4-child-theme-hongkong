@@ -131,7 +131,7 @@
 <div class="enform-wrap enform-side-style block-wide" style="margin-left: 0px;">
 	<picture>
 		<img
-			src="donation_engaging/GP04Z2L_High_res.jpg"
+			data-src="donation_engaging/GP04Z2L_High_res.jpg"
 			style="height: 334px;"
 			srcset=""
 			sizes=""
@@ -144,8 +144,8 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-caption">
-					<h1>加入我们</h1>
-					<p>你的礼物将会对我们 <br />
+					<h1 id="main_title">加入我们</h1>
+					<p id="main_subtitle">你的礼物将会对我们 <br />
 当地的环保项目和 <br />
 全球运动的工作有直接的影响！</p>
 				</div>
@@ -170,9 +170,6 @@
 	<input type="hidden" name="stripepk" value="">
 	
 	
-	<ul class="en__errorList">
-	</ul>
-
 		<div class="en__component en__component--row en__component--row--1">
 		<div class="en__component en__component en__component--column">
 		<div class="en__component en__component--formblock" style="">
@@ -442,30 +439,38 @@ function debounce(func, wait, immediate) {
 //
     function init() {
     
-	var pageTheme = getUrlParameters('campaign', '', true);
-	var pageBg = document.querySelector("#main_background_image");
-	switch (pageTheme) {
-		case 'oceans':
-		pageBg.src =
-			  "https://api.greenpeace.org.hk/donate/iats/static/img/oceans-main.jpg";
-			  break;
-	  case 'antarctic':
-		pageBg.src =
-			  "https://api.greenpeace.org.hk/donate/iats/static/img/antarctic-main.jpg";
-		break;
-	  case 'countrypark':
-		pageBg.src =
-			  "https://api.greenpeace.org.hk/donate/iats/static/img/cphk-bg.jpg";
-		break;
-	  case 'airpollution':
-		pageBg.src =
-			  "https://api.greenpeace.org.hk/donate/iats/static/img/airpollution.background.jpg";
-		break;
-	  case 'raymond':
-		pageBg.src =
-			  "https://api.greenpeace.org.hk/donate/iats/static/img/raymond-main.jpg";
-	}
-	}
+      var pageTheme = getUrlParameters('campaign', '', true);
+      var pageBg = document.querySelector("#main_background_image");
+      var titleId = document.querySelector("#main_title");
+      var subtitleId = document.querySelector("#main_subtitle");
+      switch (pageTheme) {
+        case 'oceans':
+        pageBg.src =
+            "https://api.greenpeace.org.hk/donate/iats/static/img/oceans-main.jpg";        
+            break;
+        case 'antarctic':
+        pageBg.src =
+            "https://api.greenpeace.org.hk/donate/iats/static/img/antarctic-main.jpg";
+        break;
+        case 'countrypark':
+        pageBg.src =
+            "https://api.greenpeace.org.hk/donate/iats/static/img/cphk-bg.jpg";
+        break;
+        case 'airpollution':
+        pageBg.src =
+            "https://api.greenpeace.org.hk/donate/iats/static/img/airpollution.background.jpg";
+        break;
+        case 'raymond':
+        pageBg.src =
+            "https://api.greenpeace.org.hk/donate/iats/static/img/raymond-main.jpg";
+        default:
+        let defaultImg = pageBg.dataset.src;
+        pageBg.src =
+            defaultImg;
+      }
+      titleId.innerHTML = NRO_PROPERTIES[NRO].main.home[pageTheme].title;
+      subtitleId.innerHTML = NRO_PROPERTIES[NRO].main.home[pageTheme].subtitle;
+    }
 	//
 	<!-- const singleAmountRegex = /^(s|single|oneoff|[s:]\d+)/; -->
 	<!-- const monthlyAmountRegex = /^(m|monthly|recurring|[m:]\d+)/; -->
@@ -1093,6 +1098,8 @@ function debounce(func, wait, immediate) {
     },
   }
 });
+
+
 /*
 <div class="en__field en__field--select en__field--withOther">
 	<label for="en__field_supporter_country_html" class="en__field__label" style="">Country</label>
@@ -1117,11 +1124,15 @@ function debounce(func, wait, immediate) {
 
 //jQuery('[name="supporter.NOT_TAGGED_31"]').on('change', function(){
 
+
+  let regexPhone = window.NRO_PROPERTIES[NRO].regex.phone;
+
 </script>
 
 <script src="../js/donation.js?v=1562174208002"></script>
 
-<script>
+<script>  
+
 	jQuery(document).on('change','[name="supporter.NOT_TAGGED_31"]', function(){
 		if ( 'Y' == this.value ) {
 			jQuery('[name="supporter.NOT_TAGGED_17"]').val('12');
@@ -1142,27 +1153,30 @@ if (recurringPayment == 'Y') {
 	jQuery('input[name="supporter.NOT_TAGGED_17"]').val('0');
 }
 
-let amountParam = getUrlParameters("donate_amt", "", true);
-if (amountParam) {
-  let amountParamMultiple = amountParam.split(":");
-  if ( ('s' == amountParamMultiple[0]) || ('single' == amountParamMultiple[0]) || ('oneoff' == amountParamMultiple[0]) ) {
-    jQuery('input[name="supporter.NOT_TAGGED_17"]').val('0');
-    jQuery('input[name="supporter.NOT_TAGGED_31"]').val('N');
-    jQuery('#en__field_supporter_NOT_TAGGED_310').trigger('click');
-    if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
-  } else if ( ('m' == amountParamMultiple[0]) || ('monthly' == amountParamMultiple[0]) || ('recurring' == amountParamMultiple[0]) ) {
-    jQuery('input[name="supporter.NOT_TAGGED_17"]').val('12');
-    jQuery('input[name="supporter.NOT_TAGGED_31"]').val('Y');
-    jQuery('#en__field_supporter_NOT_TAGGED_311').trigger('click');
-    if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
-  }
-} 
-
 jQuery(window).load(function(){
   let alreadySubmitted = getUrlParameters("val", "", true);
   if ( alreadySubmitted ) {
-    jQuery('.js-to-payment').trigger('click');
+    // console.log(donationSwiper);
+    // jQuery('.js-to-payment').trigger('click');
   }
+
+  let amountParam = getUrlParameters("donate_amt", "", true);
+  if (amountParam) {  
+    let amountParamMultiple = amountParam.split(":");  
+    if ( ('s' == amountParamMultiple[0]) || ('single' == amountParamMultiple[0]) || ('oneoff' == amountParamMultiple[0]) ) {
+      jQuery('input[name="supporter.NOT_TAGGED_17"]').val('0');
+      jQuery('input[name="supporter.NOT_TAGGED_31"]').val('N');
+      jQuery('label[for="en__field_supporter_NOT_TAGGED_311"]').trigger('click');
+      if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
+    } else if ( ('m' == amountParamMultiple[0]) || ('monthly' == amountParamMultiple[0]) || ('recurring' == amountParamMultiple[0]) ) {
+      jQuery('input[name="supporter.NOT_TAGGED_17"]').val('12');
+      jQuery('input[name="supporter.NOT_TAGGED_31"]').val('Y');
+      jQuery('label[for="en__field_supporter_NOT_TAGGED_310"]').trigger('click');
+      if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
+    }
+  } 
+
+
 });
 
 

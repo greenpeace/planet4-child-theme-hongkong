@@ -17,6 +17,7 @@ $context['strings'] = [
 	'advanced_search' => __( 'Advanced search', 'gpea_theme' ),
 	'filters'         => __( 'Filters', 'gpea_theme' ),
 	'none'            => __( 'None', 'gpea_theme' ),
+	'start_typing'    => __( 'Start typing', 'gpea_theme' ),
 ];
 
 /**

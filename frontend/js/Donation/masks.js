@@ -19,27 +19,27 @@ export default function(form) {
     emailInput.type = 'email';
   }
 
-  if (phoneInput) {
-    if (window.NRO && window.NRO === 'TW') {
-      phoneInput.placeholder = '0123456789';
-      new Cleave(phoneInput, {
-        phone: true,
-        phoneRegionCode: 'TW',
-      });
-    } else if (window.NRO && window.NRO === 'HK') {
-      phoneInput.placeholder = '23456789';
-      new Cleave(phoneInput, {
-        phone: true,
-        phoneRegionCode: 'HK',
-      });
-    } else if (window.NRO && window.NRO === 'KR') {
-      // phoneInput.placeholder = '?';
-      new Cleave(phoneInput, {
-        phone: true,
-        phoneRegionCode: 'KR',
-      });
-    }
-  }
+  // if (phoneInput) {
+  //   if (window.NRO && window.NRO === 'TW') {
+  //     phoneInput.placeholder = '0123456789';
+  //     new Cleave(phoneInput, {
+  //       phone: true,
+  //       phoneRegionCode: 'TW',
+  //     });
+  //   } else if (window.NRO && window.NRO === 'HK') {
+  //     phoneInput.placeholder = '23456789';
+  //     new Cleave(phoneInput, {
+  //       phone: true,
+  //       phoneRegionCode: 'HK',
+  //     });
+  //   } else if (window.NRO && window.NRO === 'KR') {
+  //     // phoneInput.placeholder = '?';
+  //     new Cleave(phoneInput, {
+  //       phone: true,
+  //       phoneRegionCode: 'KR',
+  //     });
+  //   }
+  // }
 
   if (birthDateInput) {
     birthDateInput.placeholder = 'mm/dd/yyyy';

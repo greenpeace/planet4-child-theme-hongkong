@@ -31,13 +31,14 @@
 					{% endfor %}
 				</ul>
 			</div>
-			<div class="desktop-only">
+			<div class="desktop-only has-social-links">
 				<h5>{{ strings.follow }}</h5>
 				<ul class="social-links">
 					{% for item in footer_social_menu %}
 						<li><a href="{{ item.url }}" aria-label="{{ item.title|lower }}"><span class="icon-{{ item.title|lower }}"></span></a></li>
 					{% endfor %}
 				</ul>
+				<a class="latte-logo" target="_blank" rel="noopener noreferrer" href="https://www.lattecreative.com" title="Designed with Latte Creative"></a>
 			</div>
 		</div>
 	</div>
@@ -55,6 +56,7 @@
 			</ul>
 			{% if (copyright_text_line1) %}<p class="footer-legal footer-legal__line1">{{ copyright_text_line1|e('wp_kses_post')|raw }}</p>{% endif %}
 			{% if (copyright_text_line2) %}<p class="footer-legal footer-legal__line2">{{ copyright_text_line2|e('wp_kses_post')|raw }}</p>{% endif %}
+			<a class="latte-logo mobile-only" target="_blank" rel="noopener noreferrer" href="https://www.lattecreative.com" title="Designed with Latte Creative"></a>
 		</div>
 	</div>
 </footer>

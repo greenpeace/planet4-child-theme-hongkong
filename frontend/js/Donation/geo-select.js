@@ -957,6 +957,7 @@ jQuery(document).on('change',".js-country-select", function(){
 			jQuery(o).html(item.chi);
 			jQuery('.js-city-select').append(o);
 		});
+		regexPhone = window.NRO_PROPERTIES['HK'].regex.phone;
 		// citySelect.append(citySelectOptions);
 
 	} else if ( this.value == 'TW' ) {
@@ -970,6 +971,7 @@ jQuery(document).on('change',".js-country-select", function(){
 			jQuery(o).html(i);
 			jQuery('.js-city-select').append(o);
 		});
+		regexPhone = window.NRO_PROPERTIES['TW'].regex.phone;
 		// citySelect.append(citySelectOptions);
 
 	} else {
@@ -978,6 +980,14 @@ jQuery(document).on('change',".js-country-select", function(){
 		jQuery('input[name="supporter.postcode"]').val('00000');
 		jQuery('.en__field--city').hide();
 		jQuery('.en__field--region').hide();
+		var o = new Option('-', '-', true, true);
+		jQuery(o).html('-');
+		jQuery('.js-city-select').html(o);
+
+		var o2 = new Option('-', '-', true, true);
+		jQuery(o2).html('-');
+		jQuery('.js-region-select').html(o2);
+		regexPhone = window.NRO_PROPERTIES[NRO].regex.phone_general;
 	}
 });  
 

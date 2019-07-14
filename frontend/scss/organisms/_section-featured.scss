@@ -1,5 +1,7 @@
 .section-featured {
+  position: relative;
   padding-top: 30px !important;
+  overflow: hidden;
 
   @include greaterThan('sm') {
     &-tips {
@@ -10,10 +12,17 @@
 
   .home & {
     background-image: $gradient-smoke;
+  }
 
-    @include greaterThan('sm') {
-      background: url(../images/world.png) left center / auto 100% no-repeat,
-        $gradient-smoke;
+  @include greaterThan('sm') {
+    .section-featured-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url(../images/world.png) left center / auto 100% no-repeat;
+      transition: transform 100ms ease-out;
     }
   }
 
