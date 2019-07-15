@@ -18,6 +18,21 @@ export const filterDuplicates = function(newPosts, existingPosts) {
 };
 
 /**
+ * Takes the collections returned by the AJAX call and filters out collections already existing.
+ * Elements in both arrays must have a property "source"
+ *
+ * @param {Array} newCollections An array containing the new posts as returned by the call
+ * @param {Array} existingCollections An array of existing posts in the carousel
+ */
+export const filterDuplicatesCollections = function(newCollections, existingCollections) {
+	return newCollections.filter(
+		newCollection =>
+		existingCollections.find(existingCollection => existingCollection.slug == newCollection.slug) ===
+		undefined
+	);
+  };
+
+/**
  * Sorts an array of posts, most recent first
  *
  * @param {Array} posts The array of posts to sort (by reference)
@@ -54,16 +69,23 @@ const latestFollower = function() {
   if (!$('body').hasClass('js-latest-earth')) return;
 
   const $featuredSwiper = $('.section-featured .swiper-container').first();
-  const $existingPosts = $featuredSwiper.find('.swiper-slide');
-
-  const $trendingCollections = $('.section-article-row');
+  const $existingPosts = $featuredSwiper.find('.swiper-slide');  
 
   const existingPosts = $existingPosts
     .toArray()
     .filter(el => 'postid' in el.dataset)
     .map(el => ({
       ID: el.dataset.postid,
-    }));
+	}));
+	
+  const $trendingCollections = $('.section-article-row');
+
+  const existingCollections = $trendingCollections
+    .toArray()
+    .filter(el => 'source' in el.dataset)
+    .map(el => ({
+      slug: el.dataset.source,
+	}));
 	
   let gpea_topics_followed = Cookies.get('gpea_topics');
   if (typeof gpea_topics_followed !== 'undefined' && gpea_topics_followed.length > 0) {
@@ -76,6 +98,7 @@ const latestFollower = function() {
 		  action: 'topicsFollowing',
 		},
 		success: function(data) {
+		  // console.log(data);
 		  const swiper = $featuredSwiper[0].swiper;
 		  let followingResults;
 		  let followingResultsPosts;
@@ -144,6 +167,7 @@ const latestFollower = function() {
 		  // handle here also trending collections, same ajax call
 		  // Create the HTML element for each new post
 		  
+		  followingResults = filterDuplicatesCollections(followingResults, existingCollections);
 		  sortByRecentUnixtime(followingResults);
 		  followingResults = followingResults.slice(0, 3);
 
@@ -161,6 +185,7 @@ const latestFollower = function() {
 			  return trendingCollectionsContainer;
 		  });
 
+
 		  // Add the new slides in 6th position (1 first slide + 5 regular slides)
 		  // swiper.addSlide(6, newPostsSlides);
 		  // console.log(
@@ -169,7 +194,7 @@ const latestFollower = function() {
 		  // );
 
 		  // da sistemare per mostrare anche 2 trending attuali
-		  $trendingCollections.prepend(trendingCollectionsDynamic);
+		  $trendingCollections.first().prepend(trendingCollectionsDynamic);
 
 		  let resizeEvent = new Event('resize');
 		  window.dispatchEvent(resizeEvent);
