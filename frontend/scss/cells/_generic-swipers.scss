@@ -76,7 +76,7 @@
   .swiper-pagination,
   [class^='swiper-button-'] {
     transition: box-shadow 140ms linear, opacity 140ms linear,
-      filter 140ms linear;
+      filter 140ms linear, transform 140ms linear;
   }
 
   &.is-loading {

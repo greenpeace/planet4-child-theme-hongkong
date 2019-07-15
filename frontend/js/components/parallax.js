@@ -30,13 +30,15 @@ export default function() {
       if (el.hasAttribute('data-prlx-from-top')) {
         const inFor = 1 - (elementTop + parentHeight) / parentHeight;
         const deltaVariation = inFor * (delta * speed);
-        el.style.transform = 'translateY(' + -deltaVariation + 'px)';
+        el.style.transform = 'translate3D(0, ' + -deltaVariation + 'px, 0)';
       } else {
         const inFor =
           1 - (elementTop + parentHeight) / (innerHeight + parentHeight);
         const deltaVariation = inFor * (delta * speed);
         el.style.transform =
-          'translateY(' + (-deltaVariation + (delta * speed) / 2) + 'px)';
+          'translate3D(0, ' +
+          (-deltaVariation + (delta * speed) / 2) +
+          'px, 0)';
       }
     });
   }

@@ -293,6 +293,7 @@ header {
     height: 96px;
     transform: translateY(0);
     transition: transform 350ms ease;
+    will-change: transform;
 
     > .ct-container {
       height: 50px;

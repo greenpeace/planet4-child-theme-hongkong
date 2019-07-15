@@ -36,12 +36,6 @@ Swiper.use([Navigation, Pagination, Scrollbar, Controller, Autoplay]);
 polyfills();
 
 document.addEventListener('DOMContentLoaded', function(event) {
-  AOS.init({
-    easing: 'ease-in-out-cubic',
-    once: true,
-    disable: 'phone',
-  });
-
   new LazyLoad({
     elements_selector: '.lazy',
     threshold: 400,
@@ -82,6 +76,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
   parallax();
 
   scrollWay();
+
+  AOS.init({
+    easing: 'ease-in-out-cubic',
+    once: true,
+    disable: 'phone',
+  });
 
   /**
    * Open/close country offices megamenu (not even putting it in a separate module)
