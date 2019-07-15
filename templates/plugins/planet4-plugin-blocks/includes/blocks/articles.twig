@@ -1,0 +1,37 @@
+{% block articles %}
+    {% if ( recent_posts ) %}
+	<section class="section-latest-news">
+		{{ fn( 'wp_nonce_field', nonce_action, '_wpnonce', true, false )|raw }}	    
+		<div class="ct-container">
+			<h2>最新消息</h2>	    
+		    {% for recent_post in recent_posts %}
+			<a class="post" href="">
+			    <div class="info-box">
+				<div class="top">
+				    {% if (recent_post.tags) %}
+						<div class="tag">{{ recent_post.tags|first.name|e('wp_kses_post')|raw }}</div>
+				    {% endif %}
+				    <p class="type">TODO 成就</p>
+				</div>
+				<div class="name">
+				    {{ recent_post.post_title }}
+				    <!-- - TODO or recent_post.post_excerpt? -->
+				</div>
+				<div class="bottom">
+				    <div class="time">
+					<span class="icon-clock"></span>
+					<p>{{ fn( 'get_post_meta', recent_post.ID, 'p4-gpea_post_reading_time', true)|raw }}</p>
+				    </div>
+				    <div class="number">{{ recent_post.post_date|date }}</div>
+				</div>
+			    </div>
+			    <div
+				class="thumbnail lazy"
+				data-bg="url({{ fn('get_the_post_thumbnail_url', recent_post.ID, 'articles-medium-large' ) }})"
+			    ></div>
+			</a>
+		    {% endfor %}
+		</div>		
+	</section>
+    {% endif %}
+{% endblock %}

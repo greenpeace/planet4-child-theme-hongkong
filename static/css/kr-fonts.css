@@ -1,0 +1,122 @@
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-display: swap;
+  font-weight: normal;
+  src: url('../fonts/Noto_Sans_KR/NotoSansKR-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  font-display: swap;
+  font-weight: bold;
+  src: url('../fonts/Noto_Sans_KR/NotoSansKR-Medium.otf') format('opentype');
+}
+
+/*
+ * NOTE: Make sure 'Montserrat' and 'icomoon' are declared the same way
+ *      in hk-fonts.css as well!!
+ */
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+  src: url('../fonts/Montserrat/Montserrat-Light.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+  src: url('../fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url('../fonts/icomoon.ttf?fj2zg5') format('truetype'),
+    url('../fonts/icomoon.woff?fj2zg5') format('woff'),
+    url('../fonts/icomoon.svg?fj2zg5#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body,
+button,
+.form-caption h1,
+.form-caption p,
+.enform {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.logo-greenpeace {
+  background-image: url('../images/logo_ko.svg');
+}
+
+.page-template-petition .logo-greenpeace,
+.page-template-donation .logo-greenpeace {
+  background-image: url('../images/logo_ko_green.svg');
+}
+
+/* Overrides */
+.card-issue .image h4 {
+  font-size: 22px !important;
+  line-height: 27px !important;
+}
+
+@media (min-width: 1280px) {
+  .card-issue .image h4 {
+    font-size: 31px !important;
+    line-height: 38px !important;
+  }
+}
+
+.card-explainer .description {
+  padding: 40px 30px !important;
+}
+
+.card-explainer h4 {
+  font-size: 30px !important;
+  line-height: 40px !important;
+}
+
+.card-explainer h4,
+.card-explainer p {
+  text-align: left !important;
+}
+
+.card-explainer p.subtitle {
+  letter-spacing: 1px !important;
+}
+
+.card-explainer .description p:not(.subtitle) {
+  color: #292f47 !important;
+}
+
+@media (min-width: 1024px) {
+  .section-post-content {
+    width: 800px !important;
+  }
+
+  .section-post-content .leader,
+  .page-template-petition .outer_block_container .leader {
+    width: 800px !important;
+  }
+
+  .section-post-content blockquote > *,
+  .section-post-content .embed-container > *,
+  .section-post-content .full-width > *,
+  .page-template-petition .outer_block_container blockquote > *,
+  .page-template-petition .outer_block_container .embed-container > *,
+  .page-template-petition .outer_block_container .full-width > * {
+    width: 800px !important;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .floating-share {
+    left: -150px !important;
+  }
+
+  .floating-share.is-fixed {
+    left: -500px !important;
+  }
+}

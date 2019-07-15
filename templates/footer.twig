@@ -1,0 +1,113 @@
+<footer>
+	<div class="footer-upper">
+		<div class="ct-container">
+			<div class="socials mobile-only">
+				<h6>{{ strings.follow }}</h6>
+				<ul class="social-links">
+					{% for item in footer_social_menu %}
+						<li><a href="{{ item.url }}" aria-label="{{ item.title|lower }}"><span class="icon-{{ item.title|lower }}"></span></a></li>
+					{% endfor %}
+				</ul>
+				<hr />
+			</div>
+			<div class="footer-greenpeace">
+				<p>
+					<span class="icon-greenpeace"></span>
+				</p>
+				<p>{{ generic_footer_text ? generic_footer_text : '綠色和平是獨立的國際環保組織，通過科學研究、政策倡議及和平行動，揭露全球環境問題並提出相應解決方案。我們從不接受任何政府、企業或政治團體的資助，只接受個人的直接捐款，以維持公正獨立。' }}</p>
+			</div>
+			<div>
+				<h5>{{ strings.our_commitment }}</h5>
+				<ul>
+					<li><a href="{{ commitment_projects_link }}">{{ commitment_projects_link_label }}</a></li>
+					<li><a href="{{ commitment_issues_link }}">{{ commitment_issues_link_label }}</a></li>
+				</ul>
+			</div>
+			<div>
+				<h5>{{ strings.about_greenpeace }}</h5>
+				<ul>
+					{% for item in footer_primary_menu %}
+						<li><a href="{{ item.url }}">{{ item.title }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="desktop-only has-social-links">
+				<h5>{{ strings.follow }}</h5>
+				<ul class="social-links">
+					{% for item in footer_social_menu %}
+						<li><a href="{{ item.url }}" aria-label="{{ item.title|lower }}"><span class="icon-{{ item.title|lower }}"></span></a></li>
+					{% endfor %}
+				</ul>
+				<a class="latte-logo" target="_blank" rel="noopener noreferrer" href="https://www.lattecreative.com" title="Designed with Latte Creative"></a>
+			</div>
+		</div>
+	</div>
+	<div class="footer-lower">
+		<div class="ct-container">
+			<ul class="press-media-links">
+				<li><a href="{{ press_media_link }}">{{ strings.press_media }}</a></li>
+				<li><a href="{{ preferences_link }}">{{ strings.my_preferences }}</a></li>
+			</ul>
+			<hr />
+			<ul class="secondary-links">
+				{% for item in footer_secondary_menu %}
+					<li><a href="{{ item.url }}">{{ item.title }}</a></li>
+				{% endfor %}
+			</ul>
+			{% if (copyright_text_line1) %}<p class="footer-legal footer-legal__line1">{{ copyright_text_line1|e('wp_kses_post')|raw }}</p>{% endif %}
+			{% if (copyright_text_line2) %}<p class="footer-legal footer-legal__line2">{{ copyright_text_line2|e('wp_kses_post')|raw }}</p>{% endif %}
+			<a class="latte-logo mobile-only" target="_blank" rel="noopener noreferrer" href="https://www.lattecreative.com" title="Designed with Latte Creative"></a>
+		</div>
+	</div>
+</footer>
+
+{# <div class="content">
+    <div class="first-box">
+        <div class="socials">
+            <p class="text small semi-bold">{{ strings.follow }}</p>
+            {% for item in footer_social_menu %}
+                <a href="{{ item.url }}" aria-label="{{ item.title|lower }}"><span class="icon-{{ item.title|lower }}"></span></a>
+            {% endfor %}
+        </div>
+        <div class="links text bold">
+            <a href="{{ press_media_link }}">{{ strings.press_media }}</a>
+            <a href="{{ preferences_link }}">{{ strings.my_preferences }}</a>
+        </div>
+    </div>
+        <div class="box-group">
+            <div class="box">
+                <p class="title text huge light">
+                        {{ strings.our_commitment }}
+                </p>
+                <ul class="text bold">
+                    <li><a href="{{ commitment_projects_link }}">{{ commitment_projects_link_label }}</a></li>
+					<li><a href="{{ commitment_issues_link }}">{{ commitment_issues_link_label }}</a></li>
+                </ul>
+            </div>
+            <div class="box">
+                <p class="title text huge light">
+                        {{ strings.about_greenpeace }}
+                </p>
+                <ul class="text bold">
+                {% for item in footer_primary_menu %}
+                    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bottom-bar">
+<div class="ct-container">
+        <div class="mobile-links">
+    <a href="{{ press_media_link }}">{{ strings.press_media }}</a>
+    <a href="{{ preferences_link }}">{{ strings.my_preferences }}</a>
+        </div>
+        <div class="bottom-content">
+    {% for item in footer_secondary_menu %}
+        <a href="{{ item.url }}">{{ item.title }}</a>
+    {% endfor %}
+        </div>
+</div>
+</div>
+</footer> #}

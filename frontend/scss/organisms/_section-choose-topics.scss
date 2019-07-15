@@ -1,0 +1,60 @@
+.section-choose-topics {
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
+  background: white !important;
+
+  h2 {
+    @include title-mid;
+
+    + p {
+      margin-bottom: 24px;
+    }
+
+    &.thankyou {
+      text-align: center;
+      margin-top: 100px;
+      span.thankyou-subtitle {
+        font-size: 24px;
+      }
+    }
+
+  }
+
+  @include greaterThan('sm') {
+    padding: 35px 0;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .tags {
+      display: flex;
+      max-width: 760px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      margin: 7px 4px;
+    }
+  }
+
+  .tag-cloud__following {
+    @include greaterThan('sm') {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.tag_cloud_form {
+  text-align: center;
+  margin-top: 40px;
+  max-width: 450px;
+}
+
+.section-choose-topics .tag_cloud_form .formblock-flex {
+  height: auto;
+}

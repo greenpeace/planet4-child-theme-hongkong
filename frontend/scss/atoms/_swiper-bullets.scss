@@ -1,0 +1,39 @@
+.swiper-pagination {
+  bottom: inherit !important;
+  top: 0;
+  display: flex;
+  // padding: 0 128px;
+}
+
+.swiper-pagination-bullet {
+  margin-right: 5px;
+  background-color: $color-grey;
+  cursor: pointer;
+
+  &.swiper-pagination-bullet-active {
+    background-color: $color-blue;
+  }
+}
+
+.slider-inverted,
+.dark {
+  .swiper-pagination-bullet {
+    background-color: white;
+    opacity: 0.2;
+
+    &.swiper-pagination-bullet-active {
+      background-color: white;
+      opacity: 1;
+    }
+  }
+}
+
+.swiper-pagination-bullet:only-child {
+  display: none;
+}
+
+@include lessThan('sm') {
+  .swiper-pagination-bullet {
+    display: none;
+  }
+}

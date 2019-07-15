@@ -1,0 +1,11 @@
+.section-image-cta {
+  background-image: $gradient-smoke-inverted !important;
+
+  @include lessThan('sm') {
+    padding: 30px 0 20px;
+
+    .action.fluid h2 {
+      margin-bottom: 20px;
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  {% if (background_image) %}
+    <section class="section-hero-top has-hero-submenu has-hero-description">
+		<div class="background js-parallax-me" data-prlx-from-top="true" style="background-image: url({{ background_image }})"></div>
+      <div class="section-hero-shade"></div>
+      <div class="top-bar-wrapper-white">
+        <div class="ct-container">
+          <div class="top-bar">
+            <div class="top-bar-title">
+              <a class="back-button js-close-button" href="{{ home_url }}">
+                <span class="icon-close"></span>
+              </a>
+              {{ post.title|raw }}
+            </div>
+            <!-- <a class="button secondary" href="">{{ strings.follow }}</a> -->
+          </div>
+        </div>
+      </div>
+      <div class="hero-submenu">
+        <div class="hero-submenu-hidebar">
+          <ul class="hero-submenu-container ct-container">
+            {% for item in about_menu %}
+              <li class="hero-submenu-item {% if (item.ID == post.ID) %}current{% endif %}">
+                <a href="{{ item.link }}">{{ item.post_title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="ct-container anchor-bottom">
+        <div class="hero-description">
+          <h1>{{ header_title }}</h1>
+          <p>{{ header_subtitle }}</p>
+          <div class="hero-description-link">
+            <a href="{{ header_button_link }}">{{ header_button_title }}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <section class="section-hero-top no-image">
+      <div class="top-bar-wrapper-white">
+        <div class="hero-submenu">
+          <div class="hero-submenu-hidebar">
+            <ul class="hero-submenu-container ct-container">
+              {% for item in about_menu %}
+                <li class="hero-submenu-item {% if (item.ID == post.ID) %}current{% endif %}">
+                  <a href="{{ item.link }}">{{ item.post_title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {# <div class="ct-container">
+              <div class="top-bar">
+                <ul class="top-bar-links">
+                  {% for item in about_menu %}
+                    <li class="top-bar-links-item {% if (item.ID == post.ID) %}current{% endif %}">
+                      <a href="{{ item.link }}">{{ item.post_title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div> #}
+      </div>
+    </section>
+  {% endif %}
+  {{ post.content|raw }}
+
+{% endblock %}

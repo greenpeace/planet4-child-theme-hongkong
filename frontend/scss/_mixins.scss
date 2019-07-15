@@ -1,0 +1,211 @@
+// Breakpoints
+@mixin greaterThan($point) {
+  @if $point == 'lg' {
+    @media only screen and (min-width: $bs-lg) {
+      @content;
+    }
+  } @else if $point == 'sm' {
+    @media only screen and (min-width: $bs-sm) {
+      @content;
+    }
+  }
+}
+
+@mixin lessThan($point) {
+  @if $point == 'lg' {
+    @media only screen and (max-width: ($bs-lg - 1px)) {
+      @content;
+    }
+  } @else if $point == 'sm' {
+    @media only screen and (max-width: ($bs-sm - 1px)) {
+      @content;
+    }
+  }
+}
+
+@mixin ct-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include greaterThan('sm') {
+    width: 960px;
+    max-width: none;
+  }
+
+  @include greaterThan('lg') {
+    width: 1200px;
+  }
+}
+
+@mixin ct-container-guardian {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include greaterThan('sm') {
+    width: 700px;
+    max-width: none;
+  }
+}
+
+// Typography
+@mixin margins {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-top: 0;
+  }
+
+  @include greaterThan('sm') {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-top: 0;
+    }
+  }
+}
+
+@mixin title-big {
+  font-size: 28px;
+
+  @include greaterThan('sm') {
+    font-size: 38px;
+  }
+}
+
+@mixin title-mid {
+  font-size: 19px;
+
+  @include greaterThan('sm') {
+    font-size: 30px;
+  }
+}
+
+@mixin title-text {
+  font-size: 18px;
+
+  @include greaterThan('sm') {
+    font-size: 22px;
+  }
+}
+
+@mixin subtitle {
+  @include title-text;
+  color: rgb(95, 95, 95);
+}
+
+@mixin text {
+  font-size: 16px;
+
+  @include greaterThan('sm') {
+    font-size: 18px;
+  }
+}
+
+@mixin caption {
+  font-size: 14px;
+
+  @include greaterThan('sm') {
+    font-size: 16px;
+  }
+}
+
+@mixin see-more {
+  font-size: 14px;
+
+  @include greaterThan('sm') {
+    font-size: 16px;
+  }
+}
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin list-inline {
+  > li {
+    display: inline-block;
+    margin-right: 30px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+// Layout
+@mixin card {
+  border-radius: 8px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: box-shadow 140ms linear;
+}
+
+@mixin hover-card {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+@mixin card-tight {
+  border-radius: 4px;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  transition: box-shadow 140ms linear;
+}
+
+@mixin hover-thumbnail {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+@mixin link-as-block {
+  display: block;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  color: black;
+}
+
+@mixin profile {
+  text-align: center;
+
+  img {
+    display: block;
+    height: 100px;
+    width: 100px;
+    margin: 0 auto 8px;
+    object-fit: cover;
+    border-radius: 99px;
+
+    @include greaterThan('sm') {
+      height: 110px;
+      width: 110px;
+      margin-bottom: 12px;
+    }
+  }
+
+  .name {
+    font: bold 16px/21px Montserrat, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .position {
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 21px;
+  }
+}

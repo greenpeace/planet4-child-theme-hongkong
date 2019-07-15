@@ -1,0 +1,80 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+  <article id="post-{{ post.ID }}" class="{{ post_categories }}">
+
+    <section class="section-hero-top">
+		<div class="background js-parallax-me" data-prlx-from-top="true" style="background-image: url({{ background_image ? background_image : post.thumbnail.src }})"></div>
+      <div class="section-hero-shade"></div>
+      <div class="ct-container">
+        <div class="top-bar">
+          <a href="{{ latest_link }}" class="back-button js-back-button">
+            <span class="icon-chevron-left"></span>
+            <p>{{ strings.previous_page }}</p>
+          </a>
+          <!-- <a href="" class="button light">按照主題</a> -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section-post-content ct-container">
+		<div class="floating-share" data-fix-from-top="80" data-unfix-with-scroll="9999">
+			<p>{{ strings.share }}</p>
+			<ul>
+        {% include 'share-links.twig' with {
+          share_options: share_options,
+        } %}
+			</ul>
+		</div>
+
+      <div class="meta-box">
+        <div>
+          <span>{{ post.page_types[0].name }}</span>
+          <a href="{{ main_issue_url }}" class="issue {{ main_issue_slug }}">{{ main_issue|raw }}</a>
+        </div>
+        <div>
+          <span>
+            <span class="icon-clock"></span>
+            {{ reading_time }}
+            {# { strings.time_to_read } #}
+          </span>
+          <span>
+            <time class="single-post-time" pubdate>{{ post.post_date|date }}</time>
+          </span>
+        </div>
+      </div>
+
+      <h1>{{ post.title|raw }}</h1>
+      {%if (post.subtitle) %}<h2>{{ post.subtitle|raw }}</h2>{%endif%}
+      <div class="meta-box">
+        <span>{{ strings.author }} {{ post.author.name }}</span>
+      </div>
+
+      {{ post.content|e('wp_kses_post')|raw }}
+
+      {%if (show_article_donation_launcher=='on') %}
+        <h2>{{ strings.article_donation_launcher }}</h2>
+        <p>{{ strings.intro_donation_launcher }}</p>
+        <a href="{{ support_link }}" class="button primary">{{ strings.i_support }}</a>
+      {%endif%}
+
+    </section>
+
+  </article>
+
+
+  <section class="section-latest-news">
+    <div class="ct-container">
+      <h2>{{ strings.related_news }}</h2>
+      <div class="news-list">
+        {% if ( related_posts ) %}
+          {% for related_post in related_posts %}
+            {% include "blocks/tease-related-post-big.twig" with {post:related_post} %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

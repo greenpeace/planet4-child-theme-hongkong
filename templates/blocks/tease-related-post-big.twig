@@ -1,0 +1,20 @@
+{% if (loop.index == 5) %} 
+</div>
+<div class="news-list">
+{% endif %}
+<a href="{{ post.link }}" class="swiper-slide card-mini mini-update" data-index="{{ loop.index }}">	
+	<div
+		class="thumbnail lazy"
+		data-bg="url({{ fn('get_the_post_thumbnail_url', recent_post.ID, 'articles-medium-large' ) }})"
+	></div>	
+	<div class="meta-box">
+		<div>
+			<span>{{ post.post_date|date }}</span>
+		</div>
+		<div>
+			<span class="issue {{ post.categories[0].slug }}">{{ post.categories[0]|raw }}</span>
+			<span>{{ post.page_types[0].name }}</span>
+		</div>
+	</div>
+	<p>{{ post.post_title }}</p>
+</a>

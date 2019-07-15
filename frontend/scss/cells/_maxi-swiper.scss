@@ -1,0 +1,98 @@
+.maxi-swiper {
+  .swiper-slide {
+    width: 90%;
+    margin-right: 6%;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    @include greaterThan('sm') {
+      width: 625px;
+      margin-right: 115px;
+    }
+
+    @include greaterThan('lg') {
+      width: 860px;
+    }
+  }
+
+  &.tips-swiper .swiper-slide {
+    width: 80vw;
+    max-width: 300px;
+
+    @include greaterThan('sm') {
+      width: auto;
+      max-width: none;
+      margin: 0 20px;
+    }
+  }
+
+  @supports (clip-path: inset(-100vw -100vw -100vw 0)) {
+    &:not(.maxi-swiper-centered) {
+      @include greaterThan('sm') {
+        .swiper-button-next {
+          right: -45px;
+        }
+
+        .swiper-button-prev {
+          left: -10px;
+        }
+      }
+
+      @include greaterThan('lg') {
+        .swiper-button-next {
+          right: -50px;
+        }
+      }
+    }
+  }
+
+  &-centered {
+    .swiper-slide {
+      margin: 0 3%;
+    }
+
+    @include greaterThan('sm') {
+      padding-top: 30px;
+      padding-bottom: 30px;
+
+      .swiper-wrapper {
+        width: 100%;
+      }
+
+      .swiper-slide {
+        width: calc(100% - 200px);
+        margin: 0 100px;
+      }
+
+      .swiper-pagination {
+        top: 5px;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.label-swiper {
+  height: 20px;
+
+  .label-slide {
+    width: 90px;
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 1;
+    transition: all 140ms ease;
+    cursor: pointer;
+
+    &.swiper-slide-active {
+      font-size: 32px;
+      font-weight: bold;
+      line-height: 0.63;
+      position: relative;
+      top: -3px;
+    }
+  }
+}

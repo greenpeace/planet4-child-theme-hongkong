@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Noto Sans TC';
+  font-display: swap;
+  font-weight: normal;
+  src: url('../fonts/Noto_Sans_TC/NotoSansTC-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Noto Sans TC';
+  font-display: swap;
+  font-weight: bold;
+  src: url('../fonts/Noto_Sans_TC/NotoSansTC-Medium.otf') format('opentype');
+}
+
+/*
+ * NOTE: Make sure 'Montserrat' and 'icomoon' are declared the same way
+ *      in kr-fonts.css as well!!
+ */
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+  src: url('../fonts/Montserrat/Montserrat-Light.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+  src: url('../fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url('../fonts/icomoon.ttf?fj2zg5') format('truetype'),
+    url('../fonts/icomoon.woff?fj2zg5') format('woff'),
+    url('../fonts/icomoon.svg?fj2zg5#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body,
+button,
+.form-caption h1,
+.form-caption p,
+.enform {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.logo-greenpeace {
+  background-image: url('../images/logo_zh.svg');
+}
+
+.page-template-petition .logo-greenpeace,
+.page-template-donation .logo-greenpeace {
+  background-image: url('../images/logo_zh_green.svg');
+}

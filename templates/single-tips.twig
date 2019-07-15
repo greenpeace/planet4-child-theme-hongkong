@@ -1,0 +1,19 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+  <article id="post-{{ post.ID }}" class="{{ post_categories }}">    
+
+      <h1>{{ post.title|raw }}</h1>
+      
+      {{ post.content|e('wp_kses_post')|raw }}      
+
+    </section>
+
+  </article>
+
+  <script>
+    window.location.href = "{{ make_change_link }}";
+  </script>
+
+{% endblock %}

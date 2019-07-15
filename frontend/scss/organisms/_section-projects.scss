@@ -1,0 +1,129 @@
+.section-projects {
+  position: relative;
+
+  .lds-spinner {
+    display: block;
+    position: absolute;
+    top: 225px;
+    left: 50%;
+    margin-top: -32px;
+    margin-left: -32px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 140ms linear, visibility 0s linear 140ms;
+  }
+
+  .swiper-container [class^='swiper-button-'] {
+    margin-top: -70px;
+  }
+
+  .swiper-button-next {
+    right: 0;
+  }
+
+  .swiper-button-prev {
+    left: -16px;
+  }
+
+  .projects-list {
+    [class^='swiper-button-'] {
+      display: none;
+    }
+
+    .swiper-wrapper {
+      flex-wrap: wrap;
+    }
+
+    .swiper-slide {
+      width: auto;
+      margin-bottom: 40px;
+
+      @include greaterThan('sm') {
+        width: 50%;
+      }
+
+      @include greaterThan('lg') {
+        width: 33%;
+      }
+    }
+  }
+
+  &.has-projects-list {
+    .see-more {
+      display: none;
+    }
+  }
+}
+
+.section-projects-following {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+  padding-left: 0;
+  padding-right: 0;
+
+  @include greaterThan('sm') {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid #000;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  &:last-of-type {
+    margin-bottom: -30px;
+    border-bottom: none;
+  }
+
+  .posts {
+    width: 40%;
+  }
+
+  .card-update.compact {
+    width: 100%;
+    padding: 20px 0;
+
+    + .card-update.compact {
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .swiper-container {
+    width: 100%;
+    padding: 20px 20px 30px;
+  }
+}
+
+body:not(.js-home-follower) .section-projects,
+.js-home-follower .section-projects.is-loaded {
+  &.dark {
+    background: $color-blue;
+  }
+}
+
+.js-home-follower .section-projects {
+  &:not(.is-loaded) > :not(.lds-spinner) {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 140ms linear, visibility 0s linear 140ms;
+  }
+
+  @include lessThan('sm') {
+    &.is-loaded {
+      background: white;
+    }
+  }
+
+  &.is-loaded > :not(.lds-spinner) {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 140ms linear, visibility 0s linear 0s;
+  }
+
+  &.is-loading .lds-spinner {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 140ms linear, visibility 0s linear 0s;
+  }
+}

@@ -1,0 +1,52 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<section class="section-hero-top" data-aos="fade" data-aos-delay="200" data-aos-duration="600">
+		<div class="background js-parallax-me" data-prlx-from-top="true" style="background-image: url({{ background_image }})"></div>
+		<div class="section-hero-shade"></div>
+		<div class="ct-container">
+			<div class="content">
+			<div class="top-bar">
+				<a href="{{ make_change_link }}" class="back-button js-back-button">
+				<span class="icon-chevron-left"></span>
+				</a>
+				<a href="#" data-topic='{{ main_issue_id }}' class="js-issue-follow button light">{{ strings.follow }}</a>
+				<a href="#" data-topic='{{ main_issue_id }}' class="js-issue-unfollow not-following button light">{{ strings.following }}</a>
+			</div>
+			<div class="hero-issue-title" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
+				<h1>{{ post.title|raw }}</h1>
+				<p>{{ custom_body_classes|default("") }}</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	{{ post.content|raw }}
+
+	{#
+	<section class="section-related-tags">
+		<div class="ct-container">
+			<hr />
+			<h2>{{ strings.related_issue }}</h2>
+			<div class="tags">
+				{% for tag in post.tags %}
+					<a href="" class="button tag">{{ tag.name|raw}}</a>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+	#}
+	<section class="section-latest-news">
+		<div class="ct-container">
+			<h2>{{ strings.related_news }}</h2>
+			<div class="news-list">
+			{% if ( related_posts ) %}
+				{% for related_post in related_posts %}
+				{% include "blocks/tease-related-post.twig" with {post:related_post} %}
+				{% endfor %}
+			{% endif %}
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

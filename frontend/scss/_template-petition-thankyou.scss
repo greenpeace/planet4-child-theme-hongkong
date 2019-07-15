@@ -1,0 +1,151 @@
+// NOTE: the header is defined in ./_template-petition.scss
+
+.page-template-petition-thankyou {
+  position: relative;
+  height: 100vh;
+  overflow: visible;
+  overflow-y: scroll;
+  background-position: center -15%;
+  background-size: cover;
+  background-attachment: fixed;
+
+  &::after {
+    content: '';
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 20vh;
+    background-color: #000;
+    z-index: 2;
+  }
+}
+
+.section-petition-thankyou {
+  .screens {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    color: white;
+  }
+
+  [class^='screen-'] {
+    min-height: 100vh;
+    padding-top: 60px;
+    padding-bottom: 20vh;
+    overflow: hidden;
+  }
+
+  .screen-share,
+  .screen-donate {
+    display: none;
+  }
+
+  .screen-thankyou,
+  .screen-share.is-visible,
+  .screen-donate.is-visible {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    @include greaterThan('sm') {
+      justify-content: center;
+      > * {
+        width: 50%;
+      }
+    }
+
+    @include greaterThan('lg') {
+      > * {
+        width: 40%;
+      }
+    }
+  }
+
+  .screen-share {
+    .button {
+      padding: 0 15px;
+
+      @include greaterThan('sm') {
+        padding: 0 25px;
+      }
+    }
+  }
+
+  @include lessThan('sm') {
+    .screen-thankyou .button.primary,
+    .screen-share .button.primary {
+      height: 30px;
+      padding: 0 30px;
+      font-size: 14px;
+      line-height: 29px;
+    }
+  }
+
+  .fake-share-fb {
+    display: inline-block;
+    margin: 30px 0 5px;
+    padding-bottom: 10px;
+    background: #f2f3f5;
+    border: 1px solid #dddfe2;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    &-website {
+      margin: 0 12px 5px;
+      color: #606770;
+      font-size: 12px;
+      line-height: 11px;
+      text-transform: uppercase;
+    }
+
+    &-title {
+      margin: 0 12px 3px;
+      color: #1d2129;
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: bold;
+    }
+
+    &-description {
+      margin: 0 12px;
+      color: #606770;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    @include lessThan('sm') {
+      display: none;
+    }
+  }
+
+  .donation-form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.page-template-petition-thankyou.forests::after {
+  background-color: $color-forests;
+}
+.page-template-petition-thankyou.oceans::after {
+  background-color: $color-oceans;
+}
+.page-template-petition-thankyou.arctic::after {
+  background-color: $color-arctic;
+}
+.page-template-petition-thankyou.climate::after {
+  background-color: $color-climate;
+}
+.page-template-petition-thankyou.plastics::after {
+  background-color: $color-plastics;
+}
+.page-template-petition-thankyou.health::after {
+  background-color: $color-health;
+}

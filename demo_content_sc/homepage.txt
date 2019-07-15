@@ -1,0 +1,13 @@
+[shortcake_big_carousel_manual_selection title="行動帶來改變" subtitle="加入守護環境的行列" paragraph="由於新興的全球動態，東亞現在在塑造世界未來和保護我們的寶貴性質方面發揮著越來越重要的作用。 在綠色和平組織東亞，我們解決當地和區域的環境威脅，同時將我們的全球視野提升到新的水平。" carousel_item_ids="234,583,587,577,585,9,568,11" /]
+
+[shortcake_projects_carousel layout="dark" title="現有項目" paragraph="我們持續關注本地及全球環保議題，以不同項目跟進和推動實際改變，歡迎你瀏覽以了解更多。" carousel_item_ids="553,761" see_more_label="see more" see_more_link="http" /]
+
+[shortcake_achievements_list title="成就縱覽" bg_img="835" achievements_item_ids="781,256,263,260" see_more_label="see more" see_more_link="see more" /]
+
+[shortcake_tag_cloud title="你最關注哪些議題？" subtitle="關注有興趣的議題，並接收最新消息！" /]
+
+[shortcake_main_issues title="全球議題" subtitle="了解我們的環保工作" /]
+
+[shortcake_mixed_content_row layout="grey_grey" title="核心價值" subtitle="關於我們" image="838" title_titleandtext_1="實際改變" textblock_titleandtext_1="我們致力提倡具體可行的解決方法，實現更綠色、和平的未來。" titlea_twolinetitleandtext_2="100%" titleb_twolinetitleandtext_2="財政獨立" textblock_twolinetitleandtext_2="我們致力提倡具體可行的解決方法，實現更綠色、和平的未來。" title_titleandtext_3="微看宏觀" textblock_titleandtext_3="綠色和平致力關注全球環保議題，同時以本地角度出發，解決地區環境問題，推動更大的的環保成就。" title_titleandtext_4="和平行動" textblock_titleandtext_4="綠色和平致力關注全球環保議題，同時以本地角度出發，解決地區環境問題，推動更大的的環保成就。" /]
+
+[shortcake_donation_basic title="環保成就全因有您" label_donate_once="一次性" label_donate_monthly="每月一次" currency_code="HKD" button_label="我要支持" bg_img="839" /]

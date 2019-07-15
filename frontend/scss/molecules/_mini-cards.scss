@@ -1,0 +1,104 @@
+.card-mini {
+  width: 240px;
+
+  @include greaterThan('sm') {
+    width: 215px;
+  }
+
+  @include greaterThan('lg') {
+    width: 280px;
+  }
+
+  h4 {
+    @include title-big;
+    color: #5f5f5f;
+    margin: 10px 0;
+
+    @include greaterThan('sm') {
+      margin-top: 0;
+      margin-bottom: 14px;
+    }
+
+    &.data {
+      @include title-text;
+      font-weight: bold;
+      display: flex;
+      flex-direction: column;
+      margin: 7px 0;
+
+      @include greaterThan('sm') {
+        margin-top: 0;
+        margin-bottom: 12px;
+      }
+
+      i {
+        // font-size: 26px;
+        // font-family: Montserrat;
+        font-style: normal;
+        // letter-spacing: -0.5px;
+        margin-bottom: -5px;
+
+        @include greaterThan('sm') {
+          // font-size: 28px;
+        }
+      }
+    }
+  }
+
+  p,
+  .thumbnail,
+  .meta-box,
+  .mini-tip {
+    margin: 7px 0 0;
+  }
+
+  > p:first-child {
+    margin-top: 14px;
+
+    @include greaterThan('sm') {
+      margin-top: 18px;
+    }
+  }
+
+  &.mini-update p {
+    @include title-text;
+  }
+
+  &.mini-launcher {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .thumbnail {
+    padding-top: 50%;
+  }
+
+  &:hover .thumbnail {
+    @include hover-thumbnail;
+  }
+
+  @include greaterThan('sm') {
+    .meta-box:first-child {
+      font-size: 16px;
+    }
+
+    .thumbnail + .meta-box {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &.has-profile,
+  &.has-tip {
+    width: auto;
+    max-width: 260px;
+  }
+
+  .profile {
+    @include profile;
+  }
+}
+
+a.card-mini {
+  @include link-as-block;
+}

@@ -1,0 +1,16 @@
+.section-people-list {
+  h2 {
+    @include title-mid;
+    color: $color-green;
+  }
+
+  @include greaterThan('sm') {
+    .subtitle {
+      margin-top: 10px;
+    }
+  }
+
+  .mini-swiper {
+    margin-top: 20px;
+  }
+}

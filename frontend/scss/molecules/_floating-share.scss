@@ -1,0 +1,93 @@
+.floating-share {
+  position: fixed !important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-top: 1px solid #000;
+  box-shadow: inset 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+
+  @include greaterThan('sm') {
+    @include card;
+    position: absolute !important;
+    left: -100px;
+    bottom: initial;
+    top: 15px;
+    right: initial;
+    flex-direction: column;
+    border: none;
+  }
+
+  p {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: -25px;
+
+    @include greaterThan('sm') {
+      margin-top: 10px !important;
+      margin-bottom: 15px !important;
+      margin-left: 0;
+    }
+  }
+
+  ul {
+    @include list-inline;
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 30px;
+    padding-left: 0;
+
+    @include greaterThan('sm') {
+      flex-grow: 1;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 5px !important;
+      margin-bottom: 5px !important;
+      font-size: 25px;
+    }
+
+    li {
+      margin: 0 0 0 15px;
+
+      @include greaterThan('sm') {
+        margin: 10px 0 0 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  &-icon {
+    border-bottom: none !important;
+    transition: filter 140ms linear;
+
+    &:focus,
+    &:hover {
+      filter: brightness(80%);
+    }
+
+    &.email {
+      color: $color-grey;
+    }
+  }
+}
+
+@include greaterThan('sm') {
+  .floating-share.is-fixed {
+    position: fixed !important;
+    top: 80px;
+    left: 50vw;
+    margin-left: -450px;
+  }
+}

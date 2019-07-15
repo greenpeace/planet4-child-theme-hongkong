@@ -1,0 +1,11 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<span id="petition-source" data-petition="{{ post.id }}">
+		<div class="progress-bar">
+			<div class="percent" style="width: {{ percentage }}%"></div>
+		</div>
+		{% if signatures %}<div class="stats">{{ strings.signatures }}</div>{% endif %}
+	</span>
+	{{ post.content|raw }}
+{% endblock %}

@@ -1,0 +1,61 @@
+.step {
+  position: relative;
+  font-size: 14px;
+  line-height: 20px;
+  padding-left: 24px;
+  color: black;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -7px;
+    width: 16px;
+    height: 16px;
+    overflow: hidden;
+    color: white;
+    font-size: 10px;
+    line-height: 15px;
+    text-align: center;
+    border: 1px solid #979797;
+    border-radius: 99px;
+    background-size: 16px 16px;
+  }
+
+  &.is-disabled {
+    color: $color-grey;
+  }
+
+  &.is-checked::before {
+    border: none;
+    background-image: url('../images/icons/step-checked.svg');
+  }
+
+  &.is-crossed::before {
+    border: none;
+    background-image: url('../images/icons/step-crossed.svg');
+  }
+
+  &.is-done::before {
+    counter-increment: stepper;
+    content: counter(stepper);
+    border: none;
+    background-color: $color-green;
+  }
+
+  &.is-current::before {
+    counter-increment: stepper;
+    content: counter(stepper);
+    border: none;
+    background-color: #5f5f5f;
+  }
+
+  &.is-todo::before {
+    counter-increment: stepper;
+    content: counter(stepper);
+    border: none;
+    background-color: #dddddd;
+  }
+}

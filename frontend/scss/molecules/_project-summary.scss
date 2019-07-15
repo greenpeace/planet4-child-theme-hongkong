@@ -1,0 +1,48 @@
+.project-summary {
+  // @include font-smoothing;
+  text-align: center;
+
+  .project-summary-title {
+    border-bottom: 1px solid rgba(41, 47, 71, 0.5);
+    margin-bottom: 10px;
+    color: white;
+  }
+
+  .project-summary-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .project-summary-issue {
+    height: 46px;
+    width: 46px;
+    background: white;
+    border-radius: 99px;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .project-summary-open,
+  .project-summary-area {
+    color: white;
+    text-align: center;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-name {
+      font-size: 12px;
+    }
+  }
+
+  .circle-progress-bar svg {
+    height: 46px;
+    width: 46px;
+  }
+}

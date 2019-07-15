@@ -1,0 +1,325 @@
+{% block html_head_container %}
+
+{% include 'html-header.twig' %}
+
+{% endblock %}
+
+<body class="{{ body_class }} {{ custom_body_classes|default("") }}" {{ body_extra_info|raw }}>
+
+	<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+		appId      : '1579566855506544',
+		xfbml      : true,
+		version    : 'v3.3'
+		});
+		// FB.AppEvents.logPageView();
+	};
+
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "https://connect.facebook.net/zh_HK/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<!-- as seen in big_carousel_manual_selection.twig !!! KEEP SYNCRONIZED !!! -->
+	<script id="template-card-petition-big" type="text/template">
+		<% let image = (typeof img_url !== 'undefined' && img_url) ? img_url : '' %>
+		<div class="swiper-slide card-petition" data-postid="<%= ID %>" data-pageid="<%= engaging_pageid %>" data-target="<%= engaging_target %>">
+			<div class="thumbnail" style="background-image: url(<%= image %>)"></div>
+			<div class="box">
+				<div
+					class="progress-bar">
+					<div class="percent" style="width: <%= percentage %>%"></div>
+				</div>
+				<% if (typeof signatures !== 'undefined' && signatures) { %>
+					<div class="stats">{{ __('%s signers', 'planet4-gpea-blocks')|format('<%= signatures %>')|raw }}</div>
+				<% } %>
+				<div class="content">
+					<p><%= post_title %></p>
+					<a href="<%= link %>" class="button">{{ __('Sign now', 'planet4-gpea-blocks') }}</a>
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<!-- as seen in big_carousel_manual_selection.twig !!! KEEP SYNCRONIZED !!! -->
+	<script id="template-card-update-big" type="text/template">
+		<% let image = (typeof img_url !== 'undefined' && img_url) ? img_url : '' %>
+		<a href="<%= link %>" class="swiper-slide card-update" data-postid="<%= ID %>">
+			<div class="thumbnail" style="background-image: url(<%= image %>)"></div>
+			<div class="box">
+				<div class="meta-box">
+					<div>
+						<% if (typeof main_issue_slug !== 'undefined') { %>
+							<span class="issue <%= main_issue_slug %>"><%= main_issue %></span>
+						<% } %>
+						<% if (typeof news_type !== 'undefined') { %>
+							<span><%= news_type %></span>
+						<% } %>
+					</div>
+					<div>
+						<% if (typeof reading_time !== 'undefined' && reading_time) { %>
+							<span>
+								<span class="icon-clock"></span>
+								<%= reading_time %>
+								{{ __('Reading time', 'planet4-gpea-blocks') }}
+							</span>
+						<% } %>
+						<% if (typeof date !== 'undefined') { %>
+							<span><%= date %></span>
+						<% } %>
+					</div>
+				</div>
+				<p>
+					<%= post_title %>
+				</p>
+			</div>
+		</a>
+	</script>
+
+	<!-- Project main card followed !!! -->
+	<script id="template-section-projects-following" type="text/template">
+		<section class="section-projects-following ct-container slim">
+			<a href="<%= link %>" class="project-large">
+				<div class="project-large-overflow">
+				<div class="thumbnail" style="background-image: url(<%= image %>);"></div>
+
+				<div class="project-summary">
+					<h3 class="project-summary-title"><%= title %> <span class="icon-chevron-right"></span></h3>
+					<div class="project-summary-details">
+						<div class="project-summary-issue issue <%= main_issue_slug %>"><%= main_issue_name %></div>
+						<div class="project-summary-open">
+							<div class="project-summary-open-name">{{ __( 'Date of start', 'gpea_theme' ) }}</div>
+							<%= start_date %>
+						</div>
+						<div class="project-summary-area">
+							<div class="project-summary-area-name">{{ __( 'Zones interested', 'gpea_theme' ) }}</div>
+							<%= localization %>
+						</div>
+						<div class="project-summary-progress">
+							<div class="circle-progress-bar">
+								<span><%= project_percentage %>%</span>
+								<svg width="232" height="232" viewBox="0 0 232 232">
+									<circle
+										cx="116"
+										cy="116"
+										r="112"
+										fill="none"
+										stroke="#ffffff"
+										stroke-opacity="0.3"
+										stroke-width="8"
+									/>
+									<!--    Assuming a percentage of 43%:                     -->
+									<!--    stroke-dasharray = 2 * π * r = 697.433             -->
+									<!--    stroke-dashoffset = stroke-dasharray * (1 - 0.43)    -->
+									<circle
+										cx="116"
+										cy="116"
+										r="112"
+										fill="none"
+										stroke="#ffffff"
+										stroke-width="8"
+										stroke-dasharray="697.433"
+										stroke-dashoffset="<%= stroke_dashoffset %>"
+									/>
+								</svg>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+			</a>
+			<div class="posts js-project-related desktop-only">
+				<%= related_posts %>
+			</div>
+			<div class="swiper-container mini-swiper mobile-only">
+				<div class="swiper-wrapper">
+					<%= related_posts_mobile %>
+				</div>
+				<div class="swiper-button-next">
+					<span class="icon-chevron-right"></span>
+				</div>
+				<div class="swiper-button-prev">
+					<span class="icon-chevron-right"></span>
+				</div>
+			</div>
+		</section>
+	</script>
+
+	<!-- taken from where the sun don't shine -->
+	<script id="template-project-post-update" type="text/template">
+		<a href="<%= link %>" class="card-update compact">
+			<div style="background-image: url('<%= image %>');"
+				class="thumbnail lazy"
+			></div>
+			<div class="box">
+				<div class="meta-box">
+					<div>
+						<span class="issue <%= main_issue_slug %>"><%= main_issue_name %></span>
+						<% if (typeof news_type !== 'undefined') { %>
+							<span><%= news_type %></span>
+						<% } %>
+
+					</div>
+				</div>
+				<p>
+					<%= title %>
+				</p>
+				<div class="meta-box">
+					<div>
+						<% if (typeof reading_time !== 'undefined' && reading_time) { %>
+							<span class="icon-clock"></span>
+							<%= reading_time %>
+							{{ __('Reading time', 'planet4-gpea-blocks') }}
+						<% } %>
+						<span><%= post_date %></span>
+					</div>
+				</div>
+			</div>
+		</a>
+	</script>
+
+	<!-- as seen in article_row.twig !!! KEEP SYNCRONIZED !!! -->
+	<script id="template-project-post-update-small" type="text/template">
+		<a href="<%= link %>" class="swiper-slide card-mini mini-update">
+			<% if (typeof image !== 'undefined' && image) { %>
+				<div style="background-image: url('<%= image %>');"
+					class="thumbnail lazy"
+				></div>
+			<% } %>
+			<div class="meta-box">
+				<div>
+					<% if (typeof post_date !== 'undefined') { %>
+						<span><%= post_date %></span>
+					<% } %>
+				</div>
+				<div>
+					<% if (typeof news_type !== 'undefined') { %>
+						<span><%= news_type %></span>
+					<% } %>
+				</div>
+			</div>
+			<p><%= title %></p>
+		</a>
+	</script>
+
+	<!-- as seen in article_row.twig !!! KEEP SYNCRONIZED !!! -->
+	<script id="template-article-row" type="text/template">
+		<a href="<%= link %>" class="swiper-slide card-mini mini-update">
+			<% if (typeof img_url !== 'undefined' && img_url) { %>
+				<div style="background-image: url('<%= img_url %>');"
+					class="thumbnail lazy"
+				></div>
+			<% } %>
+			<div class="meta-box">
+				<div>
+					<% if (typeof date !== 'undefined') { %>
+						<span><%= date %></span>
+					<% } %>
+				</div>
+				<div>
+					<% if (typeof news_type !== 'undefined') { %>
+						<span><%= news_type %></span>
+					<% } %>
+				</div>
+			</div>
+			<p><%= post_title %></p>
+		</a>
+	</script>
+
+	<script id="template-article-row-container" type="text/template">
+		<section class="section-article-row">
+			<div class="ct-container">
+				<h2><a href="/?s&tag_id=<%= term_id %>"><%= name %><span class="icon-chevron-right"></span></a></h2>
+				<div class="swiper-container mini-swiper">
+					<div class="swiper-wrapper">
+						<%= row_posts %>
+					</div>
+					<div class="swiper-button-next">
+						<span class="icon-chevron-right"></span>
+					</div>
+					<div class="swiper-button-prev">
+						<span class="icon-chevron-right"></span>
+					</div>
+				</div>
+			</div>
+		</section>
+	</script>
+
+	<!-- <ul class="skip-links">
+	 <li><a href="#header">{{ __( 'Skip to Navigation', 'planet4-master-theme' ) }}</a></li>
+	 <li><a href="#content">{{ __( 'Skip to Content', 'planet4-master-theme' ) }}</a></li>
+	 <li><a href="#footer">{{ __( 'Skip to Footer', 'planet4-master-theme' ) }}</a></li>
+	 </ul> -->
+
+	{% if google_tag_value %}
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ google_tag_value }}"
+				  height="0" width="0" style="display:none;visibility:hidden"></iframe>
+		</noscript>
+		<!-- End Google Tag Manager (noscript) -->
+	{% endif %}
+
+	{% include 'navigation-bar.twig' with {
+		data_nav_bar: data_nav_bar,
+		strings: strings_navbar,
+	} %}
+	{% include 'sidebar.twig' with data_nav_bar %}
+	{#% include 'blocks/header.twig' %#}
+
+	<div class="outer_block_container">
+		{% block content %}
+		Sorry, no content
+		{% endblock %}
+	</div>
+	
+	{% if extra_content %}
+		<section class="section-post-content ct-container">
+			{{ extra_content|e('wp_kses_post')|raw }}
+		</section>
+    {% endif %}
+
+	{% if sidebar %}
+		<aside class="layout-sidebar">
+			{{sidebar}}
+		</aside>
+	{% endif %}
+
+	{% block footer %}
+		{% include 'footer.twig' with {
+			strings: strings_footer,
+		} %}
+
+		<div class="body-spinner">
+			<div class="lds-spinner">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+
+		{% set master_countries = "#{ fn( 'get_template_directory' ) }/templates/countries.json" %}
+		{% if( fn('file_exists', master_countries) ) %}
+			<script id="countries_script" type="application/json">{% include master_countries %}</script>
+		{% else  %}
+			<script id="countries_script" type="application/json">{% include "countries.json" %}</script>
+		{% endif %}
+
+		{{ function('wp_footer') }}
+	{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+.section-updates {
+  padding-bottom: 20px !important;
+  background: $color-lightblue !important;
+
+  @include lessThan('sm') {
+    .first p,
+    .first img,
+    .force-mobile {
+      display: none;
+    }
+
+    .mobile-bottom-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      img {
+        width: 35%;
+        position: relative;
+        top: 20px;
+      }
+
+      p {
+        text-align: right;
+      }
+    }
+  }
+
+  @include greaterThan('sm') {
+    > div {
+      display: flex;
+      justify-content: space-between;
+
+      > * {
+        width: 31%;
+      }
+    }
+
+    .first {
+      position: relative;
+
+      img {
+        position: absolute;
+        width: 100%;
+        bottom: -20px;
+      }
+    }
+
+    .mobile-bottom-box {
+      display: none;
+    }
+
+    .posts > :first-child {
+      display: none;
+    }
+  }
+
+  .card-update.compact {
+    width: 100%;
+    padding: 20px 0;
+
+    + .card-update.compact {
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    &:nth-child(2) {
+      border-top: none !important;
+      padding-top: 0;
+    }
+  }
+}

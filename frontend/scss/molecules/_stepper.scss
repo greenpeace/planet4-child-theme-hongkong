@@ -1,0 +1,6 @@
+.stepper {
+  counter-reset: stepper;
+  display: flex;
+  justify-content: space-around;
+  max-width: 400px;
+}

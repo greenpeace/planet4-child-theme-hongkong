@@ -1,0 +1,83 @@
+.section-articles-list {
+  @include lessThan('sm') {
+    .tags {
+      white-space: nowrap;
+      overflow-x: auto;
+      margin-right: -20px;
+      margin-left: -20px;
+      padding-right: 20px;
+      padding-left: 20px;
+
+      .tag:first-child {
+        margin-left: 0;
+      }
+
+      .tag:last-child {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .tags {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .dropdowns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    > * {
+      width: 47%;
+    }
+  }
+
+  .card-update.compact {
+    width: 100%;
+    padding: 20px 0;
+
+    + .card-update.compact {
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @include greaterThan('sm') {
+    .ct-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .content {
+      width: 31%;
+    }
+
+    .tags {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .button.tag {
+      margin-bottom: 0;
+    }
+
+    .posts {
+      width: 65%;
+      display: grid;
+      grid-column-gap: 30px;
+      grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+      // display: flex;
+      // justify-content: space-between;
+      // flex-wrap: wrap;
+
+      .card-update.compact {
+        // width: 44%;
+
+        &:nth-child(2) {
+          border-top: none;
+        }
+      }
+    }
+  }
+}

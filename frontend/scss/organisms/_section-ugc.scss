@@ -1,0 +1,27 @@
+.section-ugc {
+  min-height: 60vh !important;
+
+  @include greaterThan('sm') {
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+  }
+
+  > .ct-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin-bottom: 40px;
+  }
+
+  form .button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+  }
+}

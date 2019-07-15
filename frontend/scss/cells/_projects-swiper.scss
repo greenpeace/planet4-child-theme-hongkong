@@ -1,0 +1,14 @@
+.projects-swiper {
+  .swiper-slide {
+    width: auto;
+    margin-right: 60px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    @include greaterThan('sm') {
+      margin-right: 60px;
+    }
+  }
+}

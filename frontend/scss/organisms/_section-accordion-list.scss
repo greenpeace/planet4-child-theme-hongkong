@@ -1,0 +1,16 @@
+.section-accordion-list {
+  min-height: 0 !important;
+
+  h2 {
+    color: $color-green;
+    margin-bottom: 35px;
+
+    @include greaterThan('sm') {
+      margin-bottom: 50px;
+    }
+  }
+
+  .ct-container > p {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,272 @@
+// NOTE: the header is defined in ./_template-petition.scss
+
+.page-template-donation .enform-side-style {
+  padding-bottom: 20px;
+
+  @include greaterThan('sm') {
+    > .container {
+      height: auto;
+      min-height: 90vh;
+    }
+  }
+
+  .enform {
+    position: relative;
+    height: auto;
+    overflow: hidden;
+    left: initial;
+    right: initial;
+    bottom: initial;
+    top: initial;
+
+    .en__field__element {
+      width: 100%;
+    }
+
+    .en__field__element {
+      input[type='email'],
+      input[type='number'],
+      input[type='search'],
+      input[type='text'],
+      input[type='tel'],
+      input[type='url'],
+      input[type='password'],
+      textarea,
+      select {
+        margin-bottom: 20px;
+      }
+    }
+
+    @include greaterThan('sm') {
+      margin-top: 110px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+  }
+
+  .en__errorList {
+    // display: none;    
+    font-size: 12px;
+    color: $color-red;
+    li {
+      margin-top: 0px;
+      margin-bottom: 40px;
+    }
+  }
+
+  .swiper-container {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .swiper-slide:first-child .en__field--radio:first-child {
+    position: relative;
+    top: -28px;
+
+    > label {
+      display: none;
+    }
+  }
+
+  .en__field {
+    position: relative;
+    padding-bottom: 0;
+  }
+
+  button {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .donate-navigation {
+    display: flex;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    transform: translateY(20px);
+
+    @include greaterThan('sm') {
+      margin-left: -30px;
+      margin-right: -30px;
+      padding: 30px;
+      transform: translateY(24px);
+    }
+
+    .reminder-amount {
+      color: #5f5f5f;
+      font-size: 12px;
+
+      span {
+        font-size: 16px;
+      }
+    }
+
+    button {
+      min-width: 0;
+      vertical-align: middle;
+    }
+  }
+
+  .en__submit button {
+    display: none;
+  }
+
+  .en__field__label:not(.en__field__label--item) {
+    position: absolute;
+    top: -0.6rem;
+    background: #fff;
+    left: 10px;
+    padding: 0 8px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    z-index: 1;
+    width: auto;
+  }
+
+  .en__field--checkbox {
+    margin-bottom: 10px;
+
+    > .en__field__label {
+      display: none;
+    }
+
+    label.en__field__label--item {
+      display: inline;
+      font-weight: normal;
+      cursor: pointer;
+    }
+  }
+
+  .is-invalid {
+    margin-bottom: 20px !important;
+  }
+
+  // TABS
+  .en__field__element--radio {
+    display: flex;
+    height: 47px;
+    width: auto !important;
+    margin-left: -20px;
+    margin-right: -20px;
+    background-color: #dddddd;
+
+    @include greaterThan('sm') {
+      width: auto !important;
+      margin-left: -30px;
+      margin-right: -30px;
+    }
+
+    .en__field__item {
+      flex: 1;
+      position: relative;
+    }
+
+    label:not(.custom-checkbox) {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      color: #898b92;
+    }
+
+    input[type='radio'] {
+      position: absolute;
+      left: -9999px;
+    }
+
+    input[type='radio']:checked + label {
+      background-color: white;
+    }
+
+    input[type='radio']:focus + label {
+      box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+    }
+  }
+
+  footer {
+    display: block;
+  }
+}
+
+.footer-donation .ct-container {
+  @include caption;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  color: $color-green;
+
+  @include greaterThan('sm') {
+    margin-top: -20px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  span {
+    position: relative;
+    display: inline-block;
+    top: 2px;
+    margin-right: 5px;
+    font-size: 20px;
+    color: white;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .transaction-secure span {
+    margin-right: 3px;
+  }
+}
+
+.credit-card__row {
+  margin-bottom: 20px;
+
+  .credit-card__logo {
+    display: inline-block;
+    width: 48px;
+    height: 30px;
+    margin-right: 5px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    opacity: 1;
+  }
+  .credit-card__logo--visa {
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIxLjAuMiwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyMDAuNyAxMjUuNCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjAwLjcgMTI1LjQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHRpdGxlPmNyZWRpdC1jYXJkLXZpc2EtZGFyazwvdGl0bGU+CjxnIGlkPSJMYXllcl8yIj4KCTxnIGlkPSJMYXllcl8xLTIiPgoJCTxnPgoJCQk8ZGVmcz4KCQkJCTxwYXRoIGlkPSJTVkdJRF8xXyIgZD0iTTcsMC4yaDE4Ni43YzMuNywwLDYuNywzLDYuNyw2Ljd2MTExLjdjMCwzLjctMyw2LjctNi43LDYuN0g3Yy0zLjcsMC02LjctMy02LjctNi43VjYuOQoJCQkJCUMwLjMsMy4yLDMuMywwLjIsNywwLjJ6Ii8+CgkJCTwvZGVmcz4KCQkJPGNsaXBQYXRoIGlkPSJTVkdJRF8yXyI+CgkJCQk8dXNlIHhsaW5rOmhyZWY9IiNTVkdJRF8xXyIgIHN0eWxlPSJvdmVyZmxvdzp2aXNpYmxlOyIvPgoJCQk8L2NsaXBQYXRoPgoJCQk8ZyBzdHlsZT0iY2xpcC1wYXRoOnVybCgjU1ZHSURfMl8pOyI+CgkJCQk8cGF0aCBzdHlsZT0iZmlsbDojMzk1N0E3OyIgZD0iTTYuNywwSDE5NGMzLjcsMCw2LjcsMyw2LjcsNi43djExMmMwLDMuNy0zLDYuNy02LjcsNi43SDYuN2MtMy43LDAtNi43LTMtNi43LTYuN1Y2LjcKCQkJCQlDMCwzLDMsMCw2LjcsMHoiLz4KCQkJCTxwYXRoIHN0eWxlPSJmaWxsOiNGRkZGRkY7IiBkPSJNOTIuMyw4MS41aC05LjhsNi4xLTM3LjdoOS44TDkyLjMsODEuNXogTTc0LjMsNDMuOUw2NSw2OS44bC0xLjEtNS42bC0zLjMtMTYuOQoJCQkJCWMwLDAtMC40LTMuNC00LjctMy40SDQwLjVsLTAuMiwwLjZjMy42LDAuOSw3LjEsMi40LDEwLjIsNC4zTDU5LDgxLjVoMTAuMmwxNS42LTM3LjdINzQuM3ogTTE1MS40LDgxLjVoOWwtNy44LTM3LjdoLTcuOQoJCQkJCWMtMi0wLjItMy44LDEtNC41LDIuOGwtMTQuNiwzNC44aDEwLjJsMi01LjZoMTIuNUwxNTEuNCw4MS41eiBNMTQwLjYsNjguMmw1LjEtMTQuMWwyLjksMTQuMUgxNDAuNnogTTEyNi4zLDUzbDEuNC04LjEKCQkJCQljLTIuOC0xLTUuOC0xLjYtOC44LTEuNmMtNC45LDAtMTYuNCwyLjEtMTYuNCwxMi41YzAsOS43LDEzLjYsOS45LDEzLjYsMTVzLTEyLjIsNC4yLTE2LjIsMWwtMS41LDguNGMzLjUsMS41LDcuMywyLjIsMTEuMSwyLjEKCQkJCQljNi43LDAsMTYuOC0zLjUsMTYuOC0xMi45YzAtOS44LTEzLjctMTAuNy0xMy43LTE1UzEyMi4xLDUwLjYsMTI2LjMsNTN6Ii8+CgkJCQk8cGF0aCBzdHlsZT0iZmlsbDojRjlBNTMzOyIgZD0iTTYzLjgsNjQuMmwtMy4zLTE2LjljMCwwLTAuNC0zLjQtNC43LTMuNEg0MC41bC0wLjIsMC42YzUuMywxLjQsMTAuMywzLjgsMTQuNSw3LjMKCQkJCQlDNTguOSw1NS4xLDYyLDU5LjQsNjMuOCw2NC4yeiIvPgoJCQk8L2c+CgkJPC9nPgoJPC9nPgo8L2c+Cjwvc3ZnPgo=);
+  }
+  .credit-card__logo--mc {
+    background-image: url(https://api.greenpeace.org.hk/donate/iats/static/img/credit-card-mc-dark.850159c.svg);
+  }
+  .credit-card__logo--amex,
+  .credit-card__logo--discover,
+  .credit-card__logo--jcb {
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIxLjAuMiwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAyMDAuNyAxMjUuNCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjAwLjcgMTI1LjQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHRpdGxlPmNyZWRpdC1jYXJkLWFlLWRhcms8L3RpdGxlPgo8ZyBpZD0iTGF5ZXJfMiI+Cgk8ZyBpZD0iTGF5ZXJfMS0yIj4KCQk8Zz4KCQkJPGRlZnM+CgkJCQk8cGF0aCBpZD0iU1ZHSURfMV8iIGQ9Ik03LDAuMmgxODYuN2MzLjcsMCw2LjcsMyw2LjcsNi43djExMS43YzAsMy43LTMsNi43LTYuNyw2LjdIN2MtMy43LDAtNi43LTMtNi43LTYuN1Y2LjkKCQkJCQlDMC4zLDMuMiwzLjMsMC4yLDcsMC4yeiIvPgoJCQk8L2RlZnM+CgkJCTxjbGlwUGF0aCBpZD0iU1ZHSURfMl8iPgoJCQkJPHVzZSB4bGluazpocmVmPSIjU1ZHSURfMV8iICBzdHlsZT0ib3ZlcmZsb3c6dmlzaWJsZTsiLz4KCQkJPC9jbGlwUGF0aD4KCQkJPGcgc3R5bGU9ImNsaXAtcGF0aDp1cmwoI1NWR0lEXzJfKTsiPgoJCQkJPHBhdGggc3R5bGU9ImZpbGw6IzAwNzhBOTsiIGQ9Ik02LjcsMEgxOTRjMy43LDAsNi43LDMsNi43LDYuN3YxMTJjMCwzLjctMyw2LjctNi43LDYuN0g2LjdjLTMuNywwLTYuNy0zLTYuNy02LjdWNi43CgkJCQkJQzAsMywzLDAsNi43LDB6Ii8+CgkJCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZGRkZGOyIgZD0iTTYyLjMsNTkuOHYtMmwtMSwySDUzbC0xLTIuMnYyLjJIMzYuNGwtMS44LTQuM2gtMy4xbC0xLjksNC4zaC04VjQ2LjdsNS45LTEzLjNoMTEuM2wxLjYsMy44CgkJCQkJdi0zLjhoMTMuOGwzLDYuNGwzLTYuNGg0My42YzEuMywwLDIuNiwwLjMsMy44LDF2LTFoMTF2MS41YzEuNS0wLjksMy4yLTEuNSw0LjktMS41aDE5LjRsMS43LDMuOHYtMy44aDEyLjRsMi4zLDMuOHYtMy44aDExLjkKCQkJCQl2MjYuNWgtMTIuMmwtMi45LTQuNnY0LjZoLTE1LjJsLTIuMS00LjdoLTNsLTIsNC43aC05LjJjLTIuMS0wLjEtNC4yLTAuNy02LTEuOXYxLjloLTE4LjN2LTYuMmMwLTAuOS0wLjctMC44LTAuNy0wLjhoLTAuN3Y3CgkJCQkJTDYyLjMsNTkuOHogTTUzLjEsNjUuNWgyNGwzLjUsMy45bDMuNi0zLjloMTguNWMxLjIsMC4xLDIuMywwLjQsMy40LDAuOXYtMC45aDE2LjVjMS4zLDAsMi43LDAuNCwzLjgsMXYtMWgyMS4xdjEKCQkJCQljMS4xLTAuNiwyLjMtMSwzLjUtMWgxMy44djFjMS4xLTAuNiwyLjMtMC45LDMuNi0xaDEwLjh2MjVjLTEuMiwxLjEtMi43LDEuNy00LjQsMS42aC0xNC4ydi0wLjhjLTEuMSwwLjUtMi4yLDAuOC0zLjQsMC44CgkJCQkJaC0zNy45di02LjVjMC0wLjYtMC4zLTAuOC0wLjgtMC44aC0wLjV2Ny4ySDEwNlY4NWMtMS4xLDAuNS0yLjMsMC43LTMuNSwwLjdoLTQuMnY2LjRIODMuN2wtMy4zLTRsLTMuNiw0SDUzLjFWNjUuNXoiLz4KCQkJCTxwYXRoIHN0eWxlPSJmaWxsOiMwMDc4QTk7IiBkPSJNMTI4LjksNjkuNWgxNS4xdjRoLTEwLjVWNzdoMTAuMnYzLjZoLTEwLjJ2My43aDEwLjV2My45aC0xNS4xVjY5LjV6IE0xNzMuMSw3Ni44CgkJCQkJYzUuNywwLjMsNi4xLDMuMSw2LjEsNi4xYzAsMy41LTIuOSw1LjQtNS45LDUuNGgtOS43di00aDcuNmMxLjMsMCwzLjIsMCwzLjItMS44YzAtMC45LTAuMy0xLjQtMS43LTEuNgoJCQkJCWMtMC42LTAuMS0yLjktMC4yLTMuMi0wLjJjLTUuMS0wLjEtNi4zLTIuNy02LjMtNS44Yy0wLjItMi45LDItNS4zLDQuOS01LjVjMC4yLDAsMC40LDAsMC42LDBoOS43djRoLTcuMQoJCQkJCWMtMS42LDAtMy40LTAuMi0zLjQsMS42YzAsMS4yLDAuOSwxLjQsMS45LDEuNUMxNzAuMiw3Ni43LDE3Mi43LDc2LjgsMTczLjEsNzYuOEwxNzMuMSw3Ni44eiBNMTU1LjcsNzYuOAoJCQkJCWM1LjcsMC4zLDYuMSwzLjEsNi4xLDYuMWMwLDMuNS0yLjksNS40LTUuOSw1LjRoLTkuN3YtNGg3LjZjMS4zLDAsMy4yLDAsMy4yLTEuOGMwLTAuOS0wLjMtMS40LTEuNy0xLjYKCQkJCQljLTAuNi0wLjEtMi45LTAuMi0zLjItMC4yYy01LjEtMC4xLTYuMy0yLjctNi4zLTUuOGMtMC4yLTIuOSwyLTUuMyw0LjktNS41YzAuMiwwLDAuNCwwLDAuNiwwaDkuN3Y0aC03LjEKCQkJCQljLTEuNiwwLTMuNC0wLjItMy40LDEuNmMwLDEuMiwwLjksMS40LDIsMS41TDE1NS43LDc2LjhMMTU1LjcsNzYuOHogTTEwMSw2OS41SDg0LjhsLTUuMyw1LjhsLTUuMS01LjlINTYuM3YxOC44aDE3LjZsNS41LTYuMgoJCQkJCWw1LjQsNi4yaDguOFY4Mmg2LjJjMi40LDAsNi44LTAuMSw2LjgtNi43QzEwNi42LDcwLjYsMTAzLjMsNjkuNSwxMDEsNjkuNUwxMDEsNjkuNXogTTcxLjQsODQuM0g2MC44di0zLjdINzF2LTMuNkg2MC44di0zLjUKCQkJCQlINzJsNC41LDUuMUw3MS40LDg0LjN6IE04OSw4Ni41bC02LjYtNy44bDYuNi03LjNWODYuNXogTTk5LjQsNzguMWgtNS43di00LjVoNS44YzEuOSwwLDIuNSwxLjIsMi41LDIuMgoJCQkJCWMwLjEsMS4yLTAuOSwyLjMtMi4xLDIuNEM5OS44LDc4LjEsOTkuNiw3OC4xLDk5LjQsNzguMUw5OS40LDc4LjF6IE0xMjMuMiw3OS44YzIuMS0wLjgsMy40LTMsMy4yLTUuMmMwLTQtMy4zLTUtNS41LTVIMTA5CgkJCQkJdjE4LjhoNC42di02LjZoNmMxLjYsMCwyLjIsMS42LDIuMywzLjJsMC4xLDMuNGg0LjVsLTAuMi0zLjlDMTI2LjMsODEuNSwxMjUuNSw4MCwxMjMuMiw3OS44TDEyMy4yLDc5Ljh6IE0xMTkuMiw3Ny44aC01LjcKCQkJCQl2LTQuM2g1LjhjMS45LDAsMi41LDEuMiwyLjUsMi4yQzEyMS44LDc3LDEyMS4xLDc3LjgsMTE5LjIsNzcuOEwxMTkuMiw3Ny44eiBNMTEwLjgsMzcuMWg0LjZ2MTguOGgtNC42VjM3LjF6IE03My4xLDM3LjFoMTUuMQoJCQkJCXY0SDc3Ljd2My41aDEwLjJ2My42SDc3LjdWNTJoMTAuNXYzLjlINzMuMVYzNy4xeiBNMTA1LjIsNDcuM2MyLjEtMC44LDMuNC0zLDMuMi01LjJjMC00LTMuMy01LTUuNS01aC0xMnYxOC44aDQuNnYtNi42aDYKCQkJCQljMS42LDAsMi4yLDEuNiwyLjMsMy4ybDAuMSwzLjRoNC41bC0wLjItMy45QzEwOC4yLDQ5LDEwNy40LDQ3LjYsMTA1LjIsNDcuM0wxMDUuMiw0Ny4zeiBNMTAxLjIsNDUuNGgtNS43di00LjNoNS44CgkJCQkJYzEuMi0wLjIsMi4zLDAuNywyLjUsMS45YzAsMC4xLDAsMC4yLDAsMC4zQzEwMy44LDQ0LjUsMTAzLjEsNDUuNCwxMDEuMiw0NS40TDEwMS4yLDQ1LjR6IE02Mi40LDM3LjFsLTUuNywxMi42bC01LjYtMTIuNmgtNy4yCgkJCQkJdjE4LjFsLTgtMTguMWgtNi4xbC04LjIsMTguOGg0LjlsMS44LTQuMmg5LjJsMS44LDQuMmg5LjNWNDJsNi4yLDEzLjloNC4ybDYuMy0xMy43djEzLjdoNC42VjM3LjFINjIuNHogTTI5LjksNDcuNmwyLjctNi42CgkJCQkJbDIuOSw2LjZIMjkuOXogTTE2MywzNy4xdjEzbC03LjgtMTNoLTYuOHYxNy42bC03LjktMTcuNmgtNi4xbC02LjQsMTQuNWMwLDAtMi43LDAtMy0wLjFjLTEuMS0wLjItMi44LTEtMi45LTQuM3YtMS40CgkJCQkJYzAtNC40LDIuNC00LjcsNS41LTQuN2gyLjl2LTQuMWgtNmMtMi4xLDAtNi43LDEuNi02LjgsOS4zYy0wLjEsNS4yLDIuMiw5LjUsNy4zLDkuNWg2LjFsMS44LTQuMmg5LjJsMS44LDQuMmg5LjFWNDIuMQoJCQkJCWw4LjMsMTMuOGg2LjNWMzcuMUgxNjN6IE0xMzQuNyw0Ny43bDIuOC02LjZsMi45LDYuNkgxMzQuN3oiLz4KCQkJPC9nPgoJCTwvZz4KCTwvZz4KPC9nPgo8L3N2Zz4K);
+  }
+}
+
+.en__errorHeader {
+  margin-bottom: 20px;
+}

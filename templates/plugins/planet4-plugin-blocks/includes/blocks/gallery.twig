@@ -1,0 +1,26 @@
+{% block gallery %}
+    {% if ( images ) %}
+
+	<section class="section-text-images">
+	    <div class="boxes">
+			<div class="box dark">
+				<h2>{{ title }}</h2>
+				<p>{{ description|e('wp_kses_post')|raw }}</p>
+			</div>
+		<div class="box fit">
+		    <div class="swiper-container section-text-images-swiper">
+			<div class="swiper-wrapper">
+			    {% if images|length > 1 %}
+				{% for key,single_image in images %}
+				    <div class="swiper-slide image lazy" data-bg="url({{ single_image.image_src }})"></div>
+				{% endfor %}
+			    {% endif %}
+			</div>
+			<div class="swiper-pagination"></div>
+		    </div>
+		</div>
+	    </div>
+	</section>
+
+    {% endif %}
+{% endblock %}

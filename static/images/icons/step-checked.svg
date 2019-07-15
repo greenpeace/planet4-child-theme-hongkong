@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <polygon id="step-v-a" points="16.775 6.857 18.857 8.737 9.783 17.143 5.143 12.844 7.225 10.964 9.783 13.334"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="24" height="24" fill="#6C0" rx="12"/>
+    <use fill="#FFF" fill-rule="nonzero" xlink:href="#step-v-a"/>
+  </g>
+</svg>

@@ -1,0 +1,16 @@
+.section-issues {
+  background: transparent !important;
+  text-align: center;
+
+  @include greaterThan('sm') {
+    padding: 40px 0;
+  }
+
+  .issues-list .swiper-wrapper {
+    flex-wrap: wrap;
+
+    .card-issue {
+      margin-bottom: 20px;
+    }
+  }
+}

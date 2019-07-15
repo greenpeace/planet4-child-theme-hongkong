@@ -1,0 +1,135 @@
+body.search {
+  .live-search,
+  .advanced-search {
+    padding: 20px 0;
+
+    @include greaterThan('sm') {
+      padding: 40px 0;
+    }
+  }
+
+  .live-search {
+    background: $color-lightblue;
+    min-height: 200px;
+
+    form {
+      .lds-spinner {
+        display: block;
+        position: absolute;
+        transform: scale(0.5);
+        transform-origin: left top;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 140ms linear, visibility 0s linear 140ms;
+      }
+
+      &.is-loading .lds-spinner {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 140ms linear, visibility 0s linear 0s;
+      }
+    }
+  }
+
+  #ajax-search-issues,
+  #ajax-search-topics,
+  #ajax-search-posts {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 140ms linear, visibility 0s linear 0s;
+
+    &.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 140ms linear, visibility 0s linear 140ms;
+    }
+  }
+
+  .search-title span {
+    @include text;
+    position: relative;
+    top: 13px;
+
+    @include greaterThan('sm') {
+      top: 22px;
+    }
+  }
+
+  .results-list {
+    margin-bottom: 40px;
+  }
+
+  .card-update.compact {
+    width: 100%;
+    padding: 20px 0;
+
+    + .card-update.compact {
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .card-issue {
+    margin-left: 0;
+  }
+
+  .filters {
+    margin: 20px 0;
+
+    .button {
+      float: right;
+    }
+  }
+
+  .results-no {
+    margin-top: 40px;
+  }
+
+  .filters-selects {
+    display: flex;
+    justify-content: space-between;
+
+    .select + .select {
+      margin-left: 10px;
+    }
+  }
+
+  .sort-by {
+    clear: both;
+    margin: 20px 0;
+  }
+
+  .load-more {
+    text-align: center;
+  }
+
+  @include greaterThan('sm') {
+    #ajax-search-posts .results-list,
+    .multiple-search-result .results-list {
+      display: grid;
+      grid-column-gap: 30px;
+      grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+
+      .card-update.compact:nth-child(2),
+      .card-update.compact:nth-child(3) {
+        border-top: none;
+      }
+    }
+
+    .advanced-wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      > div {
+        width: 48%;
+      }
+
+      .sort-by {
+        text-align: right;
+
+        .select {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+.section-link-list {
+  min-height: 0 !important;
+  padding: 60px 0 40px !important;
+  background: $color-blue !important;
+  color: white;
+
+  + .section-link-list {
+    padding-top: 0 !important;
+  }
+
+  .ct-container > * {
+    max-width: 500px;
+  }
+
+  h5 {
+    margin-bottom: 3px;
+  }
+
+  h5 + p {
+    margin-top: 3px;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid white;
+
+    @include greaterThan('sm') {
+      margin-bottom: 20px;
+      padding-bottom: 30px;
+    }
+  }
+
+  .caption + p {
+    @include greaterThan('sm') {
+      margin-bottom: 20px;
+    }
+  }
+
+  .link-list {
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+}

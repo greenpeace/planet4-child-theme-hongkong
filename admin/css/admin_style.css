@@ -1,0 +1,7 @@
+button.shortcake_main_issues-remove-element[disabled] {
+	display: none;
+}
+
+.select2-container.select2-container--default.select2-container--open {
+    z-index: 1000000;
+}

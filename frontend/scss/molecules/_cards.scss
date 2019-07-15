@@ -1,0 +1,614 @@
+/* Generic card styles (for when they are used as standalone */
+[class^='card-'],
+[class*=' card-'] {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include greaterThan('sm') {
+    width: 100%;
+  }
+}
+
+// Used in petition cards
+.progress-bar {
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  .percent {
+    background-color: #ff8100;
+    height: 100%;
+  }
+}
+
+// Used in petition cards
+.stats {
+  font-size: 12px;
+  color: #ff8100;
+  font-weight: 500;
+  text-align: left;
+}
+
+.card-petition {
+  @include card;
+  @include link-as-block;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    @include hover-card;
+  }
+
+  @include greaterThan('sm') {
+    display: block;
+    height: 460px;
+  }
+
+  @include greaterThan('lg') {
+    height: 524px;
+  }
+
+  .thumbnail {
+    flex-grow: 1;
+    border-radius: 0;
+    box-shadow: none;
+
+    @include greaterThan('sm') {
+      height: 460px;
+      width: 360px;
+      padding-top: 0;
+      float: left;
+    }
+
+    @include greaterThan('lg') {
+      height: 524px;
+      width: 524px;
+    }
+  }
+
+  .progress-bar {
+    @include greaterThan('sm') {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  .stats {
+    margin-left: 15px;
+    margin-top: 6px;
+
+    @include greaterThan('sm') {
+      position: absolute;
+      top: 18px;
+      margin-top: 0;
+    }
+  }
+
+  .box {
+    width: 100%;
+    background-color: white;
+    position: relative;
+
+    @include greaterThan('sm') {
+      width: calc(100% - 360px);
+      height: 100%;
+      float: right;
+    }
+
+    @include greaterThan('lg') {
+      width: calc(100% - 524px);
+    }
+
+    .content {
+      padding: 8px 20px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @include greaterThan('sm') {
+        height: 100%;
+        padding-top: 60px;
+        justify-content: space-evenly;
+
+        p {
+          flex-grow: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+
+    p {
+      @include title-mid;
+      margin: 0 0 4px;
+      text-align: center;
+    }
+  }
+
+  &.compact {
+    height: 110px;
+    flex-direction: row;
+
+    @include greaterThan('sm') {
+      display: flex;
+    }
+
+    .thumbnail {
+      height: 110px;
+      width: 110px;
+      padding-top: 0;
+      flex-shrink: 0;
+
+      @include greaterThan('sm') {
+        float: none;
+      }
+    }
+
+    .box {
+      @include greaterThan('sm') {
+        width: 100%;
+        height: auto;
+        float: none;
+      }
+    }
+
+    .content {
+      align-items: flex-start;
+      padding: 10px 15px;
+    }
+
+    p {
+      @include caption;
+      text-align: left;
+      margin-top: 0;
+    }
+
+    .extras > * {
+      display: inline-block;
+      margin-top: 10px;
+      margin-bottom: 0;
+      line-height: 25px;
+    }
+
+    .stats {
+      margin-left: 5px;
+
+      @include greaterThan('sm') {
+        position: static;
+      }
+    }
+
+    .button {
+      height: 25px;
+      padding: 0 20px;
+      line-height: 25px;
+      font-size: 14px;
+    }
+  }
+}
+
+.mini-petition {
+  @include card;
+  margin: 10px 0;
+
+  p {
+    margin-top: 0 !important;
+    padding: 12px 15px 15px;
+    color: $color-blue;
+    background-color: rgba(175, 170, 145, 0.1);
+  }
+
+  .stats {
+    padding: 0 15px 3px;
+    text-align: center;
+    background-color: rgba(175, 170, 145, 0.1);
+  }
+
+  .progress-bar {
+    height: 3px;
+  }
+
+  .button {
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
+
+.card-update {
+  @include link-as-block;
+
+  &:not(.force-mobile) {
+    @include greaterThan('sm') {
+      height: 460px;
+    }
+
+    @include greaterThan('lg') {
+      height: 524px;
+    }
+
+    .box {
+      @include greaterThan('sm') {
+        float: right;
+        width: calc(100% - 360px);
+        height: 100%;
+        padding-left: 20px;
+        padding-bottom: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      @include greaterThan('lg') {
+        width: calc(100% - 524px);
+      }
+    }
+  }
+
+  p {
+    @include title-mid;
+    margin: 4px 0;
+  }
+
+  &.force-mobile p {
+    font-size: 24px;
+    margin: 4px 0;
+  }
+
+  &:not(.force-mobile) p {
+    @include greaterThan('sm') {
+      margin-top: 20px;
+    }
+  }
+
+  &.force-mobile .meta-box {
+    @include greaterThan('sm') {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      > div {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &:not(.compact) {
+    .thumbnail {
+      @include card;
+      margin-bottom: 6px;
+    }
+
+    &:hover .thumbnail {
+      @include hover-thumbnail;
+    }
+  }
+
+  &:hover .thumbnail {
+    @include hover-thumbnail;
+  }
+
+  &.force-mobile .thumbnail {
+    width: 100%;
+    height: 0;
+    padding-top: 100%;
+  }
+
+  &:not(.force-mobile):not(.compact) .thumbnail {
+    @include greaterThan('sm') {
+      height: 100%;
+      width: 360px;
+      padding-top: 0;
+      float: left;
+    }
+
+    @include greaterThan('lg') {
+      width: 524px;
+    }
+  }
+
+  &.compact {
+    clear: both;
+
+    @include greaterThan('sm') {
+      height: auto;
+    }
+
+    .thumbnail {
+      float: right;
+      margin-left: 20px;
+      margin-top: 20px;
+    }
+
+    .box {
+      @include greaterThan('sm') {
+        display: block;
+        width: auto;
+        height: auto;
+        float: none;
+        padding-bottom: 0;
+        padding-left: 0;
+
+        .meta-box > div {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    p {
+      @include title-text;
+      min-height: 75px;
+      display: flex;
+      align-items: center;
+      margin: 0;
+
+      @include greaterThan('sm') {
+        min-height: 85px;
+      }
+    }
+  }
+}
+
+.card-testimonial {
+  @include card-tight;
+  // @include font-smoothing;
+  position: relative;
+  padding: 40px 25px;
+  text-align: center;
+  background: $color-blue;
+  color: white;
+
+  @include greaterThan('sm') {
+    padding: 60px 107px;
+  }
+
+  .profile {
+    margin-bottom: 25px;
+    @include profile;
+  }
+
+  p {
+    @include caption;
+    margin-bottom: 0;
+  }
+
+  &.swiper-slide {
+    height: 440px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    // .profile {
+    //   img {
+    //     width: 40px;
+    //     height: 40px;
+    //   }
+    // }
+
+    p {
+      @include text;
+      order: -1;
+
+      @include greaterThan('sm') {
+        margin-top: 40px;
+      }
+    }
+  }
+}
+
+.card-explainer {
+  @include card-tight;
+  height: 500px;
+  overflow: hidden;
+  background: white;
+  color: $color-blue;
+
+  @include greaterThan('sm') {
+    height: 440px;
+  }
+
+  .description {
+    box-sizing: border-box;
+    padding: 20px 25px 10px;
+    height: 60%;
+    overflow: hidden;
+
+    @include greaterThan('sm') {
+      padding: 40px;
+      width: 280px;
+      height: 100%;
+      float: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      p:not(.subtitle) {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  h4 {
+    text-align: center;
+    font-size: 40px;
+    line-height: 59px;
+    margin: 0;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center;
+    color: $color-blue;
+
+    &.subtitle {
+      text-transform: uppercase;
+      font-family: Montserrat, sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 1.71;
+      letter-spacing: 1px;
+      margin: 0 0 10px;
+
+      @include greaterThan('sm') {
+        letter-spacing: 9px;
+      }
+    }
+  }
+
+  .thumbnail {
+    height: 40%;
+    padding-top: 0;
+    border-radius: 0;
+    box-shadow: none;
+
+    @include greaterThan('sm') {
+      width: calc(100% - 280px);
+      height: 100%;
+      float: right;
+    }
+  }
+
+  &.wide-text {
+    .description {
+      overflow: hidden;
+
+      @include greaterThan('sm') {
+        width: 50%;
+      }
+    }
+
+    .thumbnail {
+      @include greaterThan('sm') {
+        display: block;
+        width: 50%;
+        height: 100%;
+        float: right;
+      }
+    }
+  }
+
+  &.history,
+  &.wide-text {
+    color: $color-green;
+
+    p {
+      color: $color-green;
+    }
+  }
+}
+
+.card-issue {
+  @include link-as-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 145px;
+
+  @include greaterThan('lg') {
+    width: 180px;
+  }
+
+  .image {
+    @include card;
+    height: 190px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    margin-bottom: 6px;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+
+    @include greaterThan('lg') {
+      height: 245px;
+    }
+
+    h4 {
+      margin: 0;
+      padding-bottom: 10px;
+      font-size: 44px;
+      line-height: 65px;
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.85) 100%
+      );
+
+      @include greaterThan('lg') {
+        font-size: 60px;
+        line-height: 89px;
+      }
+    }
+
+    .issue {
+      height: 30px;
+      font-family: Montserrat, sans-serif;
+      font-size: 12px;
+      line-height: 30px;
+      color: white !important;
+      background-color: $color-blue;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+
+      @include greaterThan('lg') {
+        height: 39px;
+        font-size: 16px;
+        line-height: 39px;
+        letter-spacing: 8px;
+      }
+
+      &.forests {
+        background-color: $color-forests;
+      }
+      &.oceans {
+        background-color: $color-oceans;
+      }
+      &.arctic {
+        background-color: $color-arctic;
+      }
+      &.climate {
+        background-color: $color-climate;
+      }
+      &.plastics {
+        background-color: $color-plastics;
+      }
+      &.health {
+        background-color: $color-health;
+      }
+    }
+  }
+
+  &:hover .image {
+    @include hover-card;
+  }
+
+  p {
+    display: none;
+
+    @include greaterThan('sm') {
+      display: block;
+      margin: 8px 0 6px;
+      padding: 0 10px;
+      font-size: 16px;
+      line-height: 20px;
+      color: #5f5f5f;
+      text-align: center;
+    }
+  }
+
+  .status {
+    @include text;
+  }
+}

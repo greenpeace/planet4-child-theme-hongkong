@@ -1,0 +1,55 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  {% if (background_image) %}
+    <section class="section-hero-top has-hero-submenu has-hero-description" style="background-image: url({{ background_image }})">
+	<div class="background js-parallax-me" data-prlx-from-top="true" style="background-image: url({{ background_image }})"></div>
+      <div class="section-hero-shade"></div>
+      <div class="top-bar-wrapper-white">
+        <div class="ct-container">
+          <div class="top-bar">
+            <div class="top-bar-title">
+              <a class="back-button" href="">
+                <span class="icon-close"></span>
+              </a>
+              <!-- {{ tag.name|raw }} -->
+            </div>
+            <!-- <a class="button secondary" href="">{{ strings.follow }}</a> -->
+          </div>
+        </div>
+      </div>
+      <div class="ct-container anchor-bottom">
+        <div class="hero-description">
+          <h1>{{ tag.name|raw }}</h1>
+        </div>
+      </div>
+    </section>
+  {% else %}
+    <section class="section-post-content ct-container">
+        <h1>{{ tag.name|raw }}</h1>
+        {% if tag.description %}
+          <div class="leader">
+              <p>{{ tag.description|raw }}</p>
+          </div>
+        {% endif %}
+    </section>
+  {% endif %}
+
+  {{ projects|shortcodes|raw }}
+
+  <section class="section-latest-news">
+    <div class="ct-container">
+      <h2>{{ strings.latest_news }}</h2>
+      <div class="news-list">
+        {% if ( related_posts ) %}
+          {% for related_post in related_posts %}
+            {% include "blocks/tease-related-post.twig" with {post:related_post} %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  {{ post.content|raw }}
+
+{% endblock %}

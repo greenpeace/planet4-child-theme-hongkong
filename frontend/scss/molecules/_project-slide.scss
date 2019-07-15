@@ -1,0 +1,71 @@
+.project-slide {
+  @include link-as-block;
+
+  @include lessThan('sm') {
+    display: flex !important;
+    align-items: center;
+  }
+
+  .thumbnail {
+    width: 117px;
+    height: 117px;
+    padding-top: 0;
+    border-radius: 999px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
+    transition: box-shadow 140ms linear;
+
+    @include greaterThan('sm') {
+      width: 244px;
+      height: 244px;
+      margin: 0 auto 15px;
+    }
+  }
+
+  &:hover .thumbnail {
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.9);
+  }
+
+  @include lessThan('sm') {
+    .circle-progress-bar svg {
+      width: 111px;
+      height: 111px;
+    }
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @include greaterThan('sm') {
+      align-items: center;
+
+      .meta-box {
+        align-items: center;
+      }
+    }
+  }
+
+  h4 {
+    margin: 0;
+  }
+
+  .issue {
+    margin-right: 5px;
+    font-size: 15px;
+
+    @include greaterThan('sm') {
+      margin-right: 0;
+      margin-bottom: 4px;
+    }
+  }
+
+  .dark & {
+    // @include font-smoothing;
+    color: white;
+  }
+}

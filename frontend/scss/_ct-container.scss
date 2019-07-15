@@ -1,0 +1,29 @@
+.ct-container {
+  @include ct-container;
+
+  &.anchor-bottom {
+    position: absolute;
+    bottom: 22px;
+    height: auto !important;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.anchor-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  @include greaterThan('sm') {
+    &.slim {
+      padding-left: 120px;
+      padding-right: 120px;
+
+      .swiper-container {
+        margin-left: -100px;
+        margin-right: -100px;
+      }
+    }
+  }
+}

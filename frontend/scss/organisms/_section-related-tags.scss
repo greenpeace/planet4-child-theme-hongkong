@@ -1,0 +1,12 @@
+.section-related-tags {
+  background: white !important;
+  text-align: center;
+
+  hr {
+    margin-bottom: 60px;
+  }
+
+  h2 {
+    @include caption;
+  }
+}
