@@ -41,6 +41,7 @@ header {
       .logo {
         text-decoration: none;
         margin-top: 4px;
+        margin-right: 15px;
       }
 
       .logo-greenpeace {
@@ -68,6 +69,7 @@ header {
           p {
             font-size: 14px;
             font-weight: bold;
+            white-space: nowrap;
           }
 
           span {
@@ -205,13 +207,11 @@ header {
 }
 
 .mobile-toolbar {
-  position: relative;
   display: none;
   height: 48px;
   background-color: white;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 10px -10px inset rgba(0, 0, 0, 0.4);
   justify-content: center;
-  z-index: 3;
 
   p {
     margin-bottom: 0;
@@ -280,23 +280,46 @@ header {
 }
 
 @include lessThan('sm') {
+  body {
+    padding-top: 96px;
+  }
+
   header {
-    height: 50px;
+    position: fixed;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 96px;
+    transform: translateY(0);
+    transition: transform 350ms ease;
+    will-change: transform;
+
+    > .ct-container {
+      height: 50px;
+    }
 
     .content {
+      // justify-content: flex-start;
+
       .mobile-box {
-        width: 70px;
         display: block;
       }
 
       .left-box {
         .logo {
           margin-left: 5px;
+          margin-right: 0;
         }
 
         .logo-greenpeace {
           height: 16px;
           width: 148px;
+
+          @media only screen and (min-width: 400px) {
+            margin-left: 10px;
+            margin-right: 10px;
+          }
         }
       }
 
@@ -305,6 +328,8 @@ header {
       }
 
       .right-box {
+        // margin-left: auto;
+
         .search-button {
           display: none;
         }
@@ -318,5 +343,10 @@ header {
 
   .mobile-toolbar {
     display: flex;
+  }
+
+  .is-scrolling-down header {
+    transform: translateY(-110px);
+    transition: transform 500ms ease 200ms;
   }
 }

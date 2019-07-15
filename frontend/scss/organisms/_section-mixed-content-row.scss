@@ -1,11 +1,11 @@
 .section-mixed-content-row {
   min-height: 0 !important;
   position: relative;
-  padding: 40px 0 30px;
+  padding: 70px 0 !important;
   overflow: hidden;
 
   .content {
-    margin-bottom: 40px;
+    // margin-bottom: 40px;
   }
 
   h2 {
@@ -26,7 +26,7 @@
   }
 
   &.has-bg-image {
-    padding: 60px 0 20px;
+    padding: 60px 0 20px !important;
 
     @include greaterThan('sm') {
       padding: 100px 0 40px;

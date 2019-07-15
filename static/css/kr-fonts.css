@@ -47,8 +47,16 @@ button,
   font-family: 'Noto Sans KR', sans-serif;
 }
 
+/* Overrides */
 .logo-greenpeace {
   background-image: url('../images/logo_ko.svg');
+  width: 120px !important;
+}
+
+@media (max-width: 1023px) {
+  .logo-greenpeace {
+    width: 100px !important;
+  }
 }
 
 .page-template-petition .logo-greenpeace,
@@ -56,7 +64,6 @@ button,
   background-image: url('../images/logo_ko_green.svg');
 }
 
-/* Overrides */
 .card-issue .image h4 {
   font-size: 22px !important;
   line-height: 27px !important;

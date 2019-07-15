@@ -115,6 +115,8 @@ export default function() {
     document.body.classList.remove('has-open-form');
   });
 
+  /* THIS HAS BEEN GENERALIZED IN ./scroll-way.js  --v
+
   // compact the form if I scroll down
   let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
   // element should be replaced with the actual target element on which you have applied scroll, use window in case of no target element.
@@ -134,6 +136,8 @@ export default function() {
     }),
     false
   );
+
+  */
 
   // required by korea: if checkbox with "check_all" feature present
   if (checkboxCheckall) {

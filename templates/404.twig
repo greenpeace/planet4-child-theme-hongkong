@@ -1,0 +1,39 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<section class="section-hero-top has-hero-submenu has-hero-description">
+	  <div class="background js-parallax-me" data-prlx-from-top="true" style="background-image: url({{ page_notfound_image }})"></div>
+      <div class="section-hero-shade"></div>
+      <div class="top-bar-wrapper-white">
+        <div class="ct-container">
+          <div class="top-bar">
+            <div class="top-bar-title">              
+              
+            </div>
+          </div>
+        </div>
+	  </div>
+		<div class="ct-container anchor-bottom">
+			<div class="hero-description">
+				{{ page_notfound_text|raw }}
+
+			</div>
+		</div>
+	</section>
+
+
+	<section class="section-text-images">
+		<div class="ct-container slim">
+			{{ page_notfound_help }}
+
+			<form class="form search-form" action="{{ data_nav_bar.home_url }}">
+				<div class="form-group search fluid">
+					<input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="{{ strings.start_typing }}" value="{{ search_query|e('wp_kses_post')|raw }}">
+					<button class="button primary" type="submit">{{ search_label }}</button>
+				</div>
+			</form>
+			
+		</div>
+	</section>
+	
+{% endblock %}

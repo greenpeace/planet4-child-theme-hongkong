@@ -7,6 +7,13 @@
       margin-right: 0;
     }
 
+    @include lessThan('sm') {
+      &:only-child {
+        margin-right: auto;
+        margin-left: auto;
+      }
+    }
+
     @include greaterThan('sm') {
       width: 625px;
       margin-right: 115px;
@@ -20,6 +27,8 @@
   &.tips-swiper .swiper-slide {
     width: 80vw;
     max-width: 300px;
+    margin-right: 10vw;
+    margin-bottom: 20px;
 
     @include greaterThan('sm') {
       width: auto;
