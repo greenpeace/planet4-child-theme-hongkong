@@ -42,18 +42,20 @@ const tagCloud = function() {
 
     $('.topic-button[data-taxonomy="category"]').each(function(index) {
       var gpea_selected_topic_id = $(this).data('topic');
+      var gpea_selected_question_engaging_id = $(this).data('engaging');
       if ($(this).hasClass('active')) {
         // if ( gpea_cookie_issues.includes(gpea_selected_topic_id) ) return;
         // else gpea_cookie_issues.push(gpea_selected_topic_id);
-        if (!gpea_cookie_issues.includes(gpea_selected_topic_id))
+        if (!gpea_cookie_issues.includes(gpea_selected_topic_id)) {
           gpea_cookie_issues.push(gpea_selected_topic_id);
-        $(`#en__field_supporter_questions_${gpea_selected_topic_id}`).val('Y');
+        }
+        $(`#en__field_supporter_questions_${gpea_selected_question_engaging_id}`).val('Y');
       } else {
         var index = gpea_cookie_issues.indexOf(gpea_selected_topic_id);
         if (index > -1) {
           gpea_cookie_issues.splice(index, 1);
         }
-        $(`#en__field_supporter_questions_${gpea_selected_topic_id}`).val('');
+        $(`#en__field_supporter_questions_${gpea_selected_question_engaging_id}`).val('');
       }
     });
     Cookies.set(cookie_name_issues, gpea_cookie_issues);
@@ -65,18 +67,20 @@ const tagCloud = function() {
 
     $('.topic-button[data-taxonomy="post_tag"]').each(function(index) {
       var gpea_selected_topic_id = $(this).data('topic');
+      var gpea_selected_question_engaging_id = $(this).data('engaging');
       if ($(this).hasClass('active')) {
         // if ( gpea_cookie_topics.includes(gpea_selected_topic_id) ) return;
         // else gpea_cookie_topics.push(gpea_selected_topic_id);
-        if (!gpea_cookie_topics.includes(gpea_selected_topic_id))
+        if (!gpea_cookie_topics.includes(gpea_selected_topic_id)) {
           gpea_cookie_topics.push(gpea_selected_topic_id);
-        $(`#en__field_supporter_questions_${gpea_selected_topic_id}`).val('Y');
+        }          
+        $(`#en__field_supporter_questions_${gpea_selected_question_engaging_id}`).val('Y');
       } else {
         var index = gpea_cookie_topics.indexOf(gpea_selected_topic_id);
         if (index > -1) {
           gpea_cookie_topics.splice(index, 1);
         }
-        $(`#en__field_supporter_questions_${gpea_selected_topic_id}`).val('');
+        $(`#en__field_supporter_questions_${gpea_selected_question_engaging_id}`).val('');
       }
     });
     Cookies.set(cookie_name_topics, gpea_cookie_topics);
