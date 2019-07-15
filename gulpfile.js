@@ -64,6 +64,7 @@ const settings = {
     script: ['./frontend/js/index.js'],
     search: ['./frontend/js/search-page.js'],
     donation: ['./frontend/js/donation-page.js'],
+    world: ['./frontend/js/world.js'],
   },
 
   // this is a helper for the soucemaps: make sure it matches the above,
@@ -234,7 +235,7 @@ const jsPack = (isProduction, doWatch) => {
     plugins: [
       new webpack.ProvidePlugin({
         Promise: 'promise-polyfill',
-        fetch: 'exports-loader?self.fetch!whatwg-fetch',
+        // fetch: 'exports-loader?self.fetch!whatwg-fetch',
       }),
     ],
   };
