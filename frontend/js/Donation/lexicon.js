@@ -21,8 +21,8 @@ export default function() {
 	jQuery('label[for="en__field_supporter_address1"]').html(window.NRO_PROPERTIES[NRO].form.labels.address);
 	jQuery('label[for="en__field_supporter_NOT_TAGGED_33"]').html(window.NRO_PROPERTIES[NRO].form.labels.ddc_recruiter_id);
 	jQuery('label[for="en__field_transaction_donationAmt"]').html(window.NRO_PROPERTIES[NRO].form.others.other_amt);
-	jQuery('label[for="en__field_supporter_NOT_TAGGED_310"]').html(window.NRO_PROPERTIES[NRO].gift.type.recurring);
-	jQuery('label[for="en__field_supporter_NOT_TAGGED_311"]').html(window.NRO_PROPERTIES[NRO].gift.type.single);
+	jQuery('label[for="en__field_supporter_NOT_TAGGED_311"]').html(window.NRO_PROPERTIES[NRO].gift.type.recurring);
+	jQuery('label[for="en__field_supporter_NOT_TAGGED_310"]').html(window.NRO_PROPERTIES[NRO].gift.type.single);
 
 	jQuery('label[for="en__field_transaction_ccnumber"]').html(window.NRO_PROPERTIES[NRO].form.labels.card_number);
 	jQuery('label[for="en__field_transaction_ccexpire"]').html(window.NRO_PROPERTIES[NRO].form.labels.expiry);
