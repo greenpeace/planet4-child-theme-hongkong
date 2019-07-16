@@ -94,6 +94,14 @@ footer {
     > li {
       margin-right: 5px;
 
+      @include greaterThan('sm') {
+        margin-right: 0;
+      }
+
+      @include greaterThan('lg') {
+        margin-right: 5px;
+      }
+
       a {
         padding-left: 5px;
         padding-right: 5px;

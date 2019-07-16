@@ -64,7 +64,7 @@
 	        display: none;
 	    }
 	</style>
-	
+
 
 <meta name="title" content="捐助支持綠色和平 | 綠色和平"/>
 <meta property="og:title" content="捐助支持綠色和平 | 綠色和平"/>
@@ -172,25 +172,25 @@
 							<!--   inserimento   slide show steps donation   -->
 
 							<section class="section-donation-steps">
-							
+
 
 <form method="post" action="/page/36555/donate/2" class="en__component en__component--page">
 	<input type="hidden" name="hidden" class="en__hiddenFields" value="">
 	<input type="hidden" name="sessionId" value="ec91de944680416091732dfdfb3abfe5-server10228">
 	<input type="hidden" name="ccjwt" value="">
 	<input type="hidden" name="stripepk" value="">
-	
-	
+
+
 		<div class="en__component en__component--row en__component--row--1">
 		<div class="en__component en__component en__component--column">
 		<div class="en__component en__component--formblock" style="">
-	
-	
+
+
 			<div class="en__field en__field--radio en__field--460004 en__field--NOT_TAGGED_31 en__mandatory">
 	<label for="en__field_supporter_NOT_TAGGED_31" class="en__field__label" style="">recurring_payment_sf</label>
 	<div class="en__field__element en__field__element--radio
 " >
-		
+
 		<div class="en__field__item">
 			<input id="en__field_supporter_NOT_TAGGED_311" type="radio" class="en__field__input en__field__input--radio" value="N" name="supporter.NOT_TAGGED_31" />
 			<label for="en__field_supporter_NOT_TAGGED_311" class="en__field__label en__field__label--item" >Oneoff</label>
@@ -210,13 +210,13 @@
 		<input id="en__field_transaction_donationAmt" type="text" class="en__field__input en__field__input--text" name="transaction.donationAmt" value="250" />
 	 </div>
 </div>
-	
-	
-	
+
+
+
 </div>
 		<div class="en__component en__component--formblock" style="">
-	
-	
+
+
 			<div class="en__field en__field--text en__field--358083 en__field--firstName en__mandatory">
 	<label for="en__field_supporter_firstName" class="en__field__label" style="">First Name</label>
 	<div class="en__field__element en__field__element--text">
@@ -297,12 +297,12 @@
 		</div>
 	</div>
 </div>
-	
-	
-	
+
+
+
 </div>
 		<div class="en__component en__component--formblock" style="">
-	
+
 	<input type="hidden" name="transaction.paymenttype" />
 
 
@@ -324,13 +324,13 @@
 		<input id="en__field_transaction_ccvv" type="text" class="en__field__input en__field__input--text" name="transaction.ccvv" value="" />
 	 </div>
 </div>
-	
+
 	<div class="en__submit"><button style="">SUBMIT</button></div>
-	
+
 </div>
 </div>
 </div>
-</form>	
+</form>
 
 							</section>
 
@@ -388,16 +388,16 @@
 		</div>
 	</div>
 	<div class="footer-lower">
-		<div class="ct-container js-footer-dynamic">            
+		<div class="ct-container js-footer-dynamic">
 		</div>
 	</div>
 </footer>
 
-<div class="payment-questions" style="display: none;">
+<div class="payment-questions">
   <div class="payment-questions--cvv">
-    <button type="button" class="cvv-close"></button> 
-    <img src="https://api.greenpeace.org.hk/donate/iats/static/img/cvv.47b500a.svg" alt="What is CVV?" class="cvv-img"> 
-    <div class="cvv-text">      
+    <button type="button" class="cvv-close"></button>
+    <img src="https://api.greenpeace.org.hk/donate/iats/static/img/cvv.47b500a.svg" alt="What is CVV?" class="cvv-img">
+    <div class="cvv-text">
     </div>
   </div>
 </div>
@@ -409,28 +409,28 @@
 function getUrlParameters(parameter, staticURL, decode){
   /*
    Function: getUrlParameters
-   Description: Get the value of URL parameters either from 
+   Description: Get the value of URL parameters either from
                 current URL or static URL
    Author: Tirumal
    URL: www.code-tricks.com
   */
   const currLocation = (staticURL.length)? staticURL : window.location.search;
   if (currLocation.indexOf('?') == -1) return false;
-  
+
   let parArr = currLocation.split("?")[1].split("&"),
       returnBool = true;
-  
+
   for(var i = 0; i < parArr.length; i++){
        let parr = parArr[i].split("=");
        if(parr[0] == parameter){
            return (decode) ? decodeURIComponent(parr[1]) : parr[1];
            returnBool = true;
        }else{
-           returnBool = false;            
+           returnBool = false;
        }
   }
-  
-  if(!returnBool) return false;  
+
+  if(!returnBool) return false;
 }
 
 
@@ -451,7 +451,7 @@ function debounce(func, wait, immediate) {
 };
 //
     function init() {
-    
+
       var pageTheme = getUrlParameters('campaign', '', true);
       var pageBg = document.querySelector("#main_background_image");
       var titleId = document.querySelector("#main_title");
@@ -462,10 +462,10 @@ function debounce(func, wait, immediate) {
       } else {
         pageBg.src = NRO_PROPERTIES[NRO].backgroundStyle.general.image.desktop.backgroundImage;
       }
-      if ( pageTheme && NRO_PROPERTIES[NRO].main.home[pageTheme].title) { 
+      if ( pageTheme && NRO_PROPERTIES[NRO].main.home[pageTheme].title) {
         titleId.innerHTML = NRO_PROPERTIES[NRO].main.home[pageTheme].title;
       }
-      if ( pageTheme && NRO_PROPERTIES[NRO].main.home[pageTheme].subtitle) { 
+      if ( pageTheme && NRO_PROPERTIES[NRO].main.home[pageTheme].subtitle) {
         subtitleId.innerHTML = NRO_PROPERTIES[NRO].main.home[pageTheme].subtitle;
       }
     }
@@ -1254,7 +1254,7 @@ value: {
 
 <script src="../js/donation.js?v=1562174208002"></script>
 
-<script>  
+<script>
 
 	jQuery(document).on('change','[name="supporter.NOT_TAGGED_31"]', function(){
 		if ( 'Y' == this.value ) {
@@ -1284,8 +1284,8 @@ jQuery(window).load(function(){
   }
 
   let amountParam = getUrlParameters("donate_amt", "", true);
-  if (amountParam) {  
-    let amountParamMultiple = amountParam.split(":");  
+  if (amountParam) {
+    let amountParamMultiple = amountParam.split(":");
     if ( ('s' == amountParamMultiple[0]) || ('single' == amountParamMultiple[0]) || ('oneoff' == amountParamMultiple[0]) ) {
       jQuery('input[name="supporter.NOT_TAGGED_17"]').val('0');
       jQuery('input[name="supporter.NOT_TAGGED_31"]').val('N');
@@ -1297,7 +1297,7 @@ jQuery(window).load(function(){
       jQuery('label[for="en__field_supporter_NOT_TAGGED_310"]').trigger('click');
       if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
     }
-  } 
+  }
 
 
 });

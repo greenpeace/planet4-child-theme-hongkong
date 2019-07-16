@@ -15,7 +15,7 @@
     justify-content: space-around;
   }
 
-  @include greaterThan('sm') {
+  @include greaterThan('lg') {
     &.slim {
       padding-left: 120px;
       padding-right: 120px;
