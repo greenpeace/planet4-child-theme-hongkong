@@ -6,7 +6,7 @@ var geo_data = {
 		"chi": {
 			"HK": "香港",
 			"TW": "臺灣",
-			"CN": "中國",
+			"CN": "中國大陸",
 			"MO": "澳門",
 			"JP": "日本",
 			"KR": "韓國",
@@ -893,34 +893,34 @@ var geo_data = {
 		"Hong Kong Island": {
 			"chi": "香港島",
 			"data": {
-				"Central and Western": "中西",
-				"Wan Chai": "灣仔",
-				"Eastern": "東",
-				"Southern": "南"
+				"Central and Western": "中西區",
+				"Wan Chai": "灣仔區",
+				"Eastern": "東區",
+				"Southern": "南區"
 			}
 		},
 		"Kowloon": {
 			"chi": "九龍",
 			"data": {
-				"Yau Tsim Mong": "油尖旺",
-				"Sham Shui Po": "深水埗",
-				"Kowloon City": "九龍城",
-				"Wong Tai Sin": "黃大仙",
-				"Kwun Tong": "觀塘"
+				"Yau Tsim Mong": "油尖旺區",
+				"Sham Shui Po": "深水埗區",
+				"Kowloon City": "九龍城區",
+				"Wong Tai Sin": "黃大仙區",
+				"Kwun Tong": "觀塘區"
 			}
 		},
 		"New Territories": {
 			"chi": "新界",
 			"data": {
-				"Kwai Tsing": "葵青",
-				"Tsuen Wan": "荃灣",
-				"Tuen Mun": "屯門",
-				"Yuen Long": "元朗",
-				"North": "北",
-				"Tai Po": "大埔",
-				"Sha Tin": "沙田",
-				"Sai Kung": "西貢",
-				"Islands": "離島"
+				"Kwai Tsing": "葵青區",
+				"Tsuen Wan": "荃灣區",
+				"Tuen Mun": "屯門區",
+				"Yuen Long": "元朗區",
+				"North": "北區",
+				"Tai Po": "大埔區",
+				"Sha Tin": "沙田區",
+				"Sai Kung": "西貢區",
+				"Islands": "離島區"
 			}
 		}
 	}
@@ -958,6 +958,7 @@ jQuery(document).on('change',".js-country-select", function(){
 			jQuery('.js-city-select').append(o);
 		});
 		regexPhone = window.NRO_PROPERTIES['HK'].regex.phone;
+		regexPhoneMessage = window.NRO_PROPERTIES['HK'].validation.format_phone;
 		// citySelect.append(citySelectOptions);
 
 	} else if ( this.value == 'TW' ) {
@@ -972,6 +973,7 @@ jQuery(document).on('change',".js-country-select", function(){
 			jQuery('.js-city-select').append(o);
 		});
 		regexPhone = window.NRO_PROPERTIES['TW'].regex.phone;
+		regexPhoneMessage = window.NRO_PROPERTIES['TW'].validation.format_phone;
 		// citySelect.append(citySelectOptions);
 
 	} else {
@@ -988,6 +990,7 @@ jQuery(document).on('change',".js-country-select", function(){
 		jQuery(o2).html('-');
 		jQuery('.js-region-select').html(o2);
 		regexPhone = window.NRO_PROPERTIES[NRO].regex.phone_general;
+		regexPhoneMessage = window.NRO_PROPERTIES[NRO].validation.format_phone_general;
 	}
 });  
 

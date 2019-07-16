@@ -49,6 +49,28 @@ function initDonation(Swiper, Scroll) {
   mask(form);
   let validateBlock = validation(form, donationLexicon);
 
+  // add question mark for cvv label
+  const labelCCVV = document.querySelectorAll('.en__field--ccvv .en__field__label');
+  const ccvvOpener = document.createElement('span');
+  const ccvvInfoBox = document.querySelectorAll('.payment-questions');
+  const ccvvCloseButton = document.querySelectorAll('.payment-questions .cvv-close');
+  ccvvOpener.classList.add('label-question-icon', 'js-open-ccvv-info');
+
+  //labelCCVV[0].insertAdjacentHTML('beforeend', ccvvOpener);
+  labelCCVV[0].append(ccvvOpener);
+  
+  if (ccvvInfoBox) {
+    ccvvOpener.addEventListener('click', e => {    
+      ccvvInfoBox[0].style.display = 'block';  
+    });
+
+    if (ccvvCloseButton) {
+      ccvvCloseButton[0].addEventListener('click', e => {
+        ccvvInfoBox[0].style.display = 'none';
+      });  
+    }
+  }
+
   // Trap focus
   trapFocus(
     donationSwiper.slides[0],
@@ -142,6 +164,8 @@ function initDonation(Swiper, Scroll) {
             // e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
           } else {
             jQuery('.en__component--column').html(n);
+            jQuery('.js-step-payment').removeClass('is-todo');
+            jQuery('.js-step-payment').addClass('is-done');
 
               // e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
               //     value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign

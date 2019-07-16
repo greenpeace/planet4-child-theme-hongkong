@@ -4,7 +4,7 @@ const requiredMessage = window.NRO_PROPERTIES[NRO].validation.required;
 const invalidMessage = 'Please check the format of this field';
 const countryMessage = 'Should be one of "HK", "TW", "KR"';
 
-const invalidePhone = window.NRO_PROPERTIES[NRO].validation.format_phone;
+// const invalidePhone = window.NRO_PROPERTIES[NRO].validation.format_phone;
 
 const required = {
   allowEmpty: false,
@@ -60,7 +60,7 @@ const dataConstraints = {
     // length: { is: 8 },
       format: {
         pattern: regexPhone,
-        message: invalidePhone
+        message: regexPhoneMessage
       }
     // the validation should happen with the masking, so no other rule required here
   },
@@ -134,7 +134,7 @@ export default function(form, donationLexicon) {
         allConstraints['en__field--phoneNumber'] = {
           format: {
             pattern: regexPhone,
-            message: invalidePhone
+            message: regexPhoneMessage
           }
         }
       }
@@ -175,7 +175,7 @@ export default function(form, donationLexicon) {
     constraints['en__field--phoneNumber'] = {
       format: {
         pattern: regexPhone,
-        message: invalidePhone
+        message: regexPhoneMessage
       }
     }
 

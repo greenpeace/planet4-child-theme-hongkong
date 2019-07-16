@@ -41,10 +41,19 @@ function prevNext(form, donationSwiper, validateBlock, Scroll) {
     const block = e.target.closest('.en__component.en__component--formblock');
     const amount = document.getElementById('en__field_transaction_donationAmt');
     const reminders = form.querySelectorAll('.js-reminder-amount');
+    const remindersRecurring = form.querySelectorAll('.js-reminder-recurring');
     const valid = validateBlock(block, amountType);
     if (valid) {
       Array.from(reminders).forEach(reminder => {
-        reminder.textContent = amount.value;
+        reminder.textContent = window.NRO_PROPERTIES[NRO].currency + ' ' + amount.value;
+      });
+      Array.from(remindersRecurring).forEach(reminderRecurring => {
+        if (amountType == 'amountRecurring') {
+          reminderRecurring.textContent = window.NRO_PROPERTIES[NRO].gift.type.recurring;
+        }
+        else {
+          reminderRecurring.textContent = window.NRO_PROPERTIES[NRO].gift.type.single;
+        }
       });
       stepAmount.classList.remove('is-current');
       stepAmount.classList.add('is-done');
