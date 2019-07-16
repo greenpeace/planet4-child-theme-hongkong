@@ -503,3 +503,9 @@ msgstr "모두 선택"
 
 msgid "Start typing"
 msgstr ""
+
+msgid "Any issue"
+msgstr "모두 선택"
+
+msgid "Any topic"
+msgstr "모두 선택"

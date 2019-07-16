@@ -45,16 +45,21 @@ function swiper(Swiper) {
 
   // 2. Add prev/next button to each slide
   formblocks[0].innerHTML +=
-    '<button type="button" class="button primary fluid js-amount-next">Donate</button>';
+    '<button type="button" class="button primary fluid js-amount-next">'+window.NRO_PROPERTIES[NRO].form.others.donate+'</button>';
 
   formblocks[1].innerHTML +=
     '<div class="donate-navigation"> \
-			<div class="reminder-amount">每月捐款<br /><span class="js-reminder-amount"></span></div> \
+			<div class="reminder-amount"><span class="js-reminder-recurring"></span><br /><span class="js-reminder-amount"></span></div> \
 			<div> \
 				<button type="button" class="button small js-donate-prev">'+window.NRO_PROPERTIES[NRO].form.others.back+'</button> \
-				<button type="button" class="button primary js-to-payment">Next</button> \
+				<button type="button" class="button primary js-to-payment">'+window.NRO_PROPERTIES[NRO].form.others.next+'</button> \
 			</div> \
     </div>';
+
+    formblocks[1].insertAdjacentHTML('afterbegin', 
+    '<div class="donate-navigation-top"> \
+			<div class="reminder-amount"><span class="js-reminder-recurring"></span> <span class="js-reminder-amount"></span></div> \
+    </div>');
 
   const submitButton = formblocks[2].querySelector('.en__submit button');
   submitButton.classList.add('primary');
@@ -66,7 +71,7 @@ function swiper(Swiper) {
   
   formblocks[2].innerHTML +=
     '<div class="donate-navigation"> \
-			<div class="reminder-amount">每月捐款<br /><span class="js-reminder-amount"></span></div> \
+			<div class="reminder-amount"><span class="js-reminder-recurring"></span><br /><span class="js-reminder-amount"></span></div> \
 			<div> \
 				<button type="button" class="button small js-donate-prev">'+window.NRO_PROPERTIES[NRO].form.others.back+'</button> \
 			</div> \
@@ -74,6 +79,11 @@ function swiper(Swiper) {
   formblocks[2]
     .querySelector('.donate-navigation > div:last-child')
     .appendChild(submitButton);
+
+  formblocks[2].insertAdjacentHTML('afterbegin', 
+    '<div class="donate-navigation-top"> \
+			<div class="reminder-amount"><span class="js-reminder-recurring"></span> <span class="js-reminder-amount"></span></div> \
+    </div>');
 
   // 3. Activate swiper
   return new Swiper('.form-swiper', {

@@ -37,17 +37,45 @@ function initDonation(Swiper, Scroll) {
 
   // lexiconise.
   const donationLexicon = setLexicon();
-  
+
   // populate select with country ecc.
   geoSelect(donationLexicon);
-  
+
   // Activate swiper
-  const donationSwiper = swiper(Swiper);  
+  const donationSwiper = swiper(Swiper);
 
   // Init mask/validation logic
   const form = document.querySelector('#enform form');
   mask(form);
   let validateBlock = validation(form, donationLexicon);
+
+  // add question mark for cvv label
+  const labelCCVV = document.querySelectorAll(
+    '.en__field--ccvv .en__field__label'
+  );
+  const ccvvOpener = document.createElement('span');
+  const ccvvInfoBox = document.querySelectorAll('.payment-questions');
+  const ccvvCloseButton = document.querySelectorAll(
+    '.payment-questions .cvv-close'
+  );
+  ccvvOpener.classList.add('label-question-icon', 'js-open-ccvv-info');
+
+  //labelCCVV[0].insertAdjacentHTML('beforeend', ccvvOpener);
+  labelCCVV[0].append(ccvvOpener);
+
+  if (ccvvInfoBox) {
+    ccvvOpener.addEventListener('click', e => {
+      // ccvvInfoBox[0].style.display = 'block';
+      ccvvInfoBox[0].classList.add('is-visible');
+    });
+
+    if (ccvvCloseButton) {
+      ccvvCloseButton[0].addEventListener('click', e => {
+        // ccvvInfoBox[0].style.display = 'none';
+        ccvvInfoBox[0].classList.remove('is-visible');
+      });
+    }
+  }
 
   // Trap focus
   trapFocus(
@@ -75,7 +103,6 @@ function initDonation(Swiper, Scroll) {
   // Activate prev/next buttons
   prevNext(form, donationSwiper, validateBlock, Scroll);
 
-
   checkUrlParameters(donationSwiper);
 
   // Submit safeguard
@@ -87,8 +114,8 @@ function initDonation(Swiper, Scroll) {
 
     // Are we on step 1 or 2? Click on the "NEXT" button instead of submitting the form
     if (donationSwiper.activeIndex === 0) {
-      e.preventDefault();	  
-	  
+      e.preventDefault();
+
       form.querySelector('.js-amount-next').click();
       return false;
     } else if (donationSwiper.activeIndex === 1) {
@@ -98,14 +125,17 @@ function initDonation(Swiper, Scroll) {
     }
 
     // We are on the final step. Validate the payment slide and proceed.
-	// first assign the credit card type based upon number
-	let ccNumber = form.querySelector("input[name='transaction.ccnumber']");
-	if (ccNumber) {
-    form.querySelector("input[name='transaction.ccnumber']").value = ccNumber.value.replace(/\s/g, '');
-		let ccType = form.querySelector("input[name='transaction.paymenttype']");
-		if (ccType) ccType.value = detectCardType(ccNumber.value.replace(/\s/g, ''));
-	}
-	
+    // first assign the credit card type based upon number
+    let ccNumber = form.querySelector("input[name='transaction.ccnumber']");
+    if (ccNumber) {
+      form.querySelector(
+        "input[name='transaction.ccnumber']"
+      ).value = ccNumber.value.replace(/\s/g, '');
+      let ccType = form.querySelector("input[name='transaction.paymenttype']");
+      if (ccType)
+        ccType.value = detectCardType(ccNumber.value.replace(/\s/g, ''));
+    }
+
     if (!validateBlock(block, 'payment')) {
       e.preventDefault();
       Scroll.animateScroll(block.querySelector('.is-invalid'));
@@ -113,56 +143,62 @@ function initDonation(Swiper, Scroll) {
       return false;
     }
 
-
     e.preventDefault();
-    jQuery('button').prop('disabled',true);
+    jQuery('button').prop('disabled', true);
 
     let data = jQuery(form).serialize();
 
-    jQuery.ajax({
-      url: '2',
-      method: 'POST',
-      data: data,
-      dataType: 'html',
-    }).done(function(t) {
-        jQuery('button').prop('disabled',false);
+    jQuery
+      .ajax({
+        url: '2',
+        method: 'POST',
+        data: data,
+        dataType: 'html',
+      })
+      .done(function(t) {
+        jQuery('button').prop('disabled', false);
+
+        // CODE CHANGED TO REFLECT CURRENT FLOW 
+
         // console.log(t);
         var i = jQuery.parseHTML(t, !0);
-        var s = jQuery(i).find(".en__errorHeader");
-        var a = jQuery(i).find(".en__errorList");
-        var n = jQuery(i).find("#thankyou-copy");
+        var s = jQuery(i).find('.en__errorHeader');
+        var a = jQuery(i).find('.en__errorList');
+        var n = jQuery(i).find('#thankyou-copy');
 
-          if(s.length>0) {
-            // console.log(s);
-            // console.log(a);
-            jQuery('.en__errorHeader').remove();
-            jQuery('.en__errorList').remove();
-            jQuery('.credit-card__row').prepend(s[0].outerHTML+a[0].outerHTML);
-            jQuery('#enform').css('padding-bottom','100px');
-            // e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
-          } else {
-            jQuery('.en__component--column').html(n);
+        if (s.length > 0) {
+          // console.log(s);
+          // console.log(a);
+          jQuery('.en__errorHeader').remove();
+          jQuery('.en__errorList').remove();
+          jQuery('.credit-card__row').prepend(s[0].outerHTML + a[0].outerHTML);
+          jQuery('#enform').css('padding-bottom', '100px');
+          // e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
+        } else {
+          jQuery('.en__component--column').html(n);
+          jQuery('.js-step-payment').removeClass('is-todo');
+          jQuery('.js-step-payment').addClass('is-done');
 
-              // e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
-              //     value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
-              // }
-              // ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
-              // for(var r in e.fields)delete e.fields[r];
-              // delete e.temp.card_number, delete e.temp.card_expiration_date
-          }
-
-          // if(e.pageFn.btnState="next", e.pageFn.isPaymentProceeding=!1, s.length>0)e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
-          // else {
-          //     e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
-          //         value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
-          //     }
-          //     ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
-          //     for(var r in e.fields)delete e.fields[r];
-          //     delete e.temp.card_number, delete e.temp.card_expiration_date
+          // e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
+          //     value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
           // }
+          // ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
+          // for(var r in e.fields)delete e.fields[r];
+          // delete e.temp.card_number, delete e.temp.card_expiration_date
+        }
+
+        // if(e.pageFn.btnState="next", e.pageFn.isPaymentProceeding=!1, s.length>0)e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
+        // else {
+        //     e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
+        //         value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
+        //     }
+        //     ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
+        //     for(var r in e.fields)delete e.fields[r];
+        //     delete e.temp.card_number, delete e.temp.card_expiration_date
+        // }
 
         //console.log(data);
-        
+
         //   if(this.validateCreditCard(!0)) {
         //     this.pageFn.isPaymentPageError=!1, this.pageFn.btnState="loading", this.pageFn.isPaymentProceeding=!0, ""!=this.pageProps.ga_tracking_id&&ga("send", "event", "donations", "form_interaction", "submit:"+this.pageFn.retrySubmissionCount);
         //     var e=this;
@@ -184,97 +220,94 @@ function initDonation(Swiper, Scroll) {
         //     )
         // }
         // else this.pageFn.isPaymentPageError=!0
-
-      }).fail(function(errorThrown) {
+      })
+      .fail(function(errorThrown) {
         console.log(errorThrown);
       });
-    
 
     return false;
-
   });
 }
 
 function detectCardType(number) {
-    var re = {
-        electron: /^(4026|417500|4405|4508|4844|4913|4917)\d+$/,
-        maestro: /^(5018|5020|5038|5612|5893|6304|6759|6761|6762|6763|0604|6390)\d+$/,
-        dankort: /^(5019)\d+$/,
-        interpayment: /^(636)\d+$/,
-        unionpay: /^(62|88)\d+$/,
-        visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
-        mastercard: /^5[1-5][0-9]{14}$/,
-        amex: /^3[47][0-9]{13}$/,
-        diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
-        discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
-        jcb: /^(?:2131|1800|35\d{3})\d{11}$/
-    };
-    if (re.electron.test(number)) {
-        return 'ELECTRON';
-    } else if (re.maestro.test(number)) {
-        return 'MAESTRO';
-    } else if (re.dankort.test(number)) {
-        return 'DANKORT';
-    } else if (re.interpayment.test(number)) {
-        return 'INTERPAYMENT';
-    } else if (re.unionpay.test(number)) {
-        return 'UNIONPAY';
-    } else if (re.visa.test(number)) {
-        return 'VISA';
-    } else if (re.mastercard.test(number)) {
-        return 'MASTERCARD';
-    } else if (re.amex.test(number)) {
-        return 'AMEX';
-    } else if (re.diners.test(number)) {
-        return 'DINERS';
-    } else if (re.discover.test(number)) {
-        return 'DISCOVER';
-    } else if (re.jcb.test(number)) {
-        return 'JCB';
-    } else {
-        return undefined;
-    }
+  var re = {
+    electron: /^(4026|417500|4405|4508|4844|4913|4917)\d+$/,
+    maestro: /^(5018|5020|5038|5612|5893|6304|6759|6761|6762|6763|0604|6390)\d+$/,
+    dankort: /^(5019)\d+$/,
+    interpayment: /^(636)\d+$/,
+    unionpay: /^(62|88)\d+$/,
+    visa: /^4[0-9]{12}(?:[0-9]{3})?$/,
+    mastercard: /^5[1-5][0-9]{14}$/,
+    amex: /^3[47][0-9]{13}$/,
+    diners: /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/,
+    discover: /^6(?:011|5[0-9]{2})[0-9]{12}$/,
+    jcb: /^(?:2131|1800|35\d{3})\d{11}$/,
+  };
+  if (re.electron.test(number)) {
+    return 'ELECTRON';
+  } else if (re.maestro.test(number)) {
+    return 'MAESTRO';
+  } else if (re.dankort.test(number)) {
+    return 'DANKORT';
+  } else if (re.interpayment.test(number)) {
+    return 'INTERPAYMENT';
+  } else if (re.unionpay.test(number)) {
+    return 'UNIONPAY';
+  } else if (re.visa.test(number)) {
+    return 'VISA';
+  } else if (re.mastercard.test(number)) {
+    return 'MASTERCARD';
+  } else if (re.amex.test(number)) {
+    return 'AMEX';
+  } else if (re.diners.test(number)) {
+    return 'DINERS';
+  } else if (re.discover.test(number)) {
+    return 'DISCOVER';
+  } else if (re.jcb.test(number)) {
+    return 'JCB';
+  } else {
+    return undefined;
+  }
 }
 
-function getUrlParameters(parameter, staticURL, decode){
+function getUrlParameters(parameter, staticURL, decode) {
   /*
    Function: getUrlParameters
-   Description: Get the value of URL parameters either from 
+   Description: Get the value of URL parameters either from
                 current URL or static URL
    Author: Tirumal
    URL: www.code-tricks.com
   */
-  const currLocation = (staticURL.length)? staticURL : window.location.search;
+  const currLocation = staticURL.length ? staticURL : window.location.search;
   if (currLocation.indexOf('?') == -1) return false;
-  
-  let parArr = currLocation.split("?")[1].split("&"),
+
+  let parArr = currLocation.split('?')[1].split('&'),
+    returnBool = true;
+
+  for (var i = 0; i < parArr.length; i++) {
+    let parr = parArr[i].split('=');
+    if (parr[0] == parameter) {
+      return decode ? decodeURIComponent(parr[1]) : parr[1];
       returnBool = true;
-  
-  for(var i = 0; i < parArr.length; i++){
-       let parr = parArr[i].split("=");
-       if(parr[0] == parameter){
-           return (decode) ? decodeURIComponent(parr[1]) : parr[1];
-           returnBool = true;
-       }else{
-           returnBool = false;            
-       }
+    } else {
+      returnBool = false;
+    }
   }
-  
-  if(!returnBool) return false;  
+
+  if (!returnBool) return false;
 }
 
 function checkUrlParameters(donationSwiper) {
-	
   // let campaignActive = getUrlParameters("campaign", "", true);
   // if (window.NRO_PROPERTIES[NRO].backgroundStyle.campaignActive.image.backgroundImage) ;
-	
-  let amountValue = getUrlParameters("transaction.donationAmt", "", true);
-	if (amountValue) {    
+
+  let amountValue = getUrlParameters('transaction.donationAmt', '', true);
+  if (amountValue) {
     document.querySelector('button.js-amount-next').click();
   }
-  
-  let alreadySubmitted = getUrlParameters("val", "", true);
-  if ( alreadySubmitted ) {
+
+  let alreadySubmitted = getUrlParameters('val', '', true);
+  if (alreadySubmitted) {
     donationSwiper.slideTo(1);
     const stepAmount = document.querySelector('.js-step-amount');
     const stepDetails = document.querySelector('.js-step-details');
@@ -285,10 +318,7 @@ function checkUrlParameters(donationSwiper) {
     stepDetails.classList.add('is-current');
     // stepPayment.classList.add('is-current');
   }
-
 }
-
-
 
 document.addEventListener('DOMContentLoaded', function(event) {
   const Scroll = new SmoothScroll('a[href*="#"]', {
@@ -299,7 +329,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     speedAsDuration: true,
   });
 
-  initDonation(Swiper, Scroll);  
+  initDonation(Swiper, Scroll);
 
   countriesMenu();
 });

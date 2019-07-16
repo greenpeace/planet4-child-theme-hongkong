@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: 2019-07-03 20:36+0800\n"
+"PO-Revision-Date: 2019-07-15 11:20+0200\n"
 "X-Generator: Poedit 2.2.3\n"
 "X-Domain: gpea_theme\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -74,7 +74,7 @@ msgstr[0] "搜索 '%2$s' 所得的 %1$d 結果"
 #: classes/class-p4ct-search.php:601
 msgid "%d result"
 msgid_plural "%d results"
-msgstr[0] "結果 %d"
+msgstr[0] "%d 個搜索結果"
 
 #: classes/class-p4ct-search.php:654
 msgid "Page"
@@ -507,4 +507,10 @@ msgid "Any"
 msgstr "所有"
 
 msgid "Start typing"
-msgstr "輸入關鍵字…"
+msgstr "輸入關鍵字"
+
+msgid "Any issue"
+msgstr "所有主題"
+
+msgid "Any topic"
+msgstr "所有議題"

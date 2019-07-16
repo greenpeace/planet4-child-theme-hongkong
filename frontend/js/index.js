@@ -25,6 +25,7 @@ import shareToFixed from './components/share-to-fixed';
 import tips from './components/tips';
 import backLinks from './components/back-links';
 import parallax from './components/parallax';
+import scrollWay from './components/scroll-way';
 
 import petitionThankyou from './petition-thankyou';
 
@@ -35,12 +36,6 @@ Swiper.use([Navigation, Pagination, Scrollbar, Controller, Autoplay]);
 polyfills();
 
 document.addEventListener('DOMContentLoaded', function(event) {
-  AOS.init({
-    easing: 'ease-in-out-cubic',
-    once: true,
-    disable: 'phone',
-  });
-
   new LazyLoad({
     elements_selector: '.lazy',
     threshold: 400,
@@ -79,6 +74,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
   backLinks();
 
   parallax();
+
+  scrollWay();
+
+  AOS.init({
+    easing: 'ease-in-out-cubic',
+    once: true,
+    disable: 'phone',
+  });
 
   /**
    * Open/close country offices megamenu (not even putting it in a separate module)

@@ -31,11 +31,13 @@
   "dependencies": {
     "aos": "^2.3.4",
     "cleave.js": "^1.5.2",
+    "d3": "^5.9.7",
     "js-cookie": "^2.2.0",
     "lodash.template": "^4.4.0",
     "smooth-scroll": "^16.1.0",
     "swiper": "4.5.0",
     "throttle-debounce": "^2.1.0",
+    "topojson": "^3.0.2",
     "validate.js": "^0.13.1",
     "vanilla-lazyload": "12.0.0"
   },

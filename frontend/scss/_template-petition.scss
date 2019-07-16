@@ -6,6 +6,8 @@
 .page-template-petition,
 .page-template-petition-thankyou,
 .page-template-donation {
+  padding-top: 48px;
+
   @include greaterThan('sm') {
     min-height: 100vh;
   }

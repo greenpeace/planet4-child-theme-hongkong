@@ -1,7 +1,10 @@
 .section-report-launcher {
   background: $color-blue !important;
   color: white;
-  // @include font-smoothing;
+
+  @include greaterThan('sm') {
+    padding-bottom: 40px !important;
+  }
 
   @include greaterThan('sm') {
     .ct-container {
@@ -12,6 +15,13 @@
 
     .content {
       margin-right: 80px;
+      width: 50%;
+    }
+  }
+
+  @include greaterThan('lg') {
+    .content {
+      width: 100%;
     }
   }
 
@@ -26,10 +36,14 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+
+    @include greaterThan('sm') {
+      align-items: center;
+    }
 
     > img {
-      flex-shrink: 99;
+      width: 50%;
       max-width: 280px;
     }
 

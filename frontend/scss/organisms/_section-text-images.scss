@@ -39,6 +39,7 @@
     display: flex;
     justify-content: center;
     min-width: 0;
+    min-height: 300px;
     background: white;
 
     &:not(.plain) {
@@ -47,6 +48,7 @@
 
     @include greaterThan('sm') {
       padding: 70px 0;
+      min-height: 500px;
     }
 
     &:first-child {
@@ -91,14 +93,13 @@
     }
 
     &.fit {
-      height: 264px;
-      // I don't know why, but min-height is needed or it will disappear
-      min-height: 264px;
+      height: 300px;
+      min-height: 300px; // for some reason we need this
       padding: 0;
 
       @include greaterThan('sm') {
         height: auto;
-        min-height: 0;
+        min-height: 500px;
       }
     }
   }

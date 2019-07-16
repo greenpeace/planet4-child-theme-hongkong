@@ -85,7 +85,7 @@
                     id="search_form_inner" role="search" action="{{ data_nav_bar.home_url }}">
                 <!-- Main search field -->
                 <div class="form-group search fluid">
-                    <input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="Start typing..." value="{{ search_query|e('wp_kses_post')|raw }}">
+                    <input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="{{ strings.start_typing }}" value="{{ search_query|e('wp_kses_post')|raw }}">
                     <button class="button primary" type="submit">{{ search_label }}</button>
                 </div>
 

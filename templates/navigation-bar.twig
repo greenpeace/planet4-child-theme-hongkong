@@ -42,22 +42,22 @@
           {% endif %}
         </div>
       </div>
-    </div>
-  </header>
+	</div>
 
-  <div class="mobile-toolbar">
-    {% for key,item in navbar_menu.get_items %}
-      {% if (key) < 2 %}
-        <a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
-          <p class="{{ key == 1 ? 'visuallyhidden' : '' }}">{{ item.title }}</p>
-          <span class="item__menu__icon"></span>
-        </a>
-      {% else %}
-        <a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
-          <span class="item__menu__icon"></span>
-          <p>{{ item.title }}</p>
-        </a>
-      {% endif %}
-    {% endfor %}
-  </div>
+	<div class="mobile-toolbar">
+		{% for key,item in navbar_menu.get_items %}
+		{% if (key) < 2 %}
+			<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
+			<p class="{{ key == 1 ? 'visuallyhidden' : '' }}">{{ item.title }}</p>
+			<span class="item__menu__icon"></span>
+			</a>
+		{% else %}
+			<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
+			<span class="item__menu__icon"></span>
+			<p>{{ item.title }}</p>
+			</a>
+		{% endif %}
+		{% endfor %}
+	</div>
+  </header>
 {% endblock %}
