@@ -74,7 +74,7 @@ msgstr[0] "搜索 '%2$s' 所得的 %1$d 結果"
 #: classes/class-p4ct-search.php:601
 msgid "%d result"
 msgid_plural "%d results"
-msgstr[0] "結果 %d"
+msgstr[0] "%d 個搜索結果"
 
 #: classes/class-p4ct-search.php:654
 msgid "Page"
@@ -508,3 +508,9 @@ msgstr "所有"
 
 msgid "Start typing"
 msgstr "輸入關鍵字"
+
+msgid "Any issue"
+msgstr "所有主題"
+
+msgid "Any topic"
+msgstr "所有議題"

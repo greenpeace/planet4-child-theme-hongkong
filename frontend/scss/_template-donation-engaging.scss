@@ -45,7 +45,7 @@
   }
 
   .en__errorList {
-    // display: none;    
+    // display: none;
     font-size: 12px;
     color: $color-red;
     li {
@@ -86,7 +86,7 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
-    transform: translateY(20px);
+    transform: translateY(24px);
 
     @include greaterThan('sm') {
       margin-left: -30px;
@@ -98,10 +98,15 @@
     .reminder-amount {
       color: #5f5f5f;
       font-size: 12px;
+      width: 30%;
 
       span {
         font-size: 16px;
       }
+    }
+
+    > div:not(.reminder-amount) {
+      white-space: nowrap;
     }
 
     button {
@@ -114,6 +119,7 @@
     display: none;
   }
 
+  .en__field__element .en__field__label:not(.en__field__label--item),
   .en__field__label:not(.en__field__label--item) {
     position: absolute;
     top: -0.6rem;
@@ -198,6 +204,63 @@
   footer {
     display: block;
   }
+
+  // currency added
+  span.donation__amount__currency {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: $color-grey;
+    font-size: 14px;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  #en__field_transaction_donationAmt {
+    padding-left: 60px;
+  }
+
+  .donate-navigation-top {
+    text-align: right;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.1);
+    margin-left: -30px;
+    margin-right: -30px;
+    padding-right: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    font-size: 14px;
+    color: $color-grey;
+  }
+}
+
+/* steps visible here */
+
+.page-template-donation header {
+  height: 80px;
+
+  .content {
+    flex-direction: column;
+  }
+
+  .right-box {
+    display: flex;
+  }
+
+  .step {
+    margin-right: 10px;
+  }
+
+  @include greaterThan('sm') {
+    height: 48px;
+
+    .content {
+      flex-direction: row;
+    }
+    .right-box {
+      display: block;
+    }
+  }
 }
 
 .footer-donation .ct-container {
@@ -269,4 +332,88 @@
 
 .en__errorHeader {
   margin-bottom: 20px;
+}
+
+.payment-questions {
+  visibility: hidden; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  padding: 20px;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  opacity: 0;
+  transition: opacity 200ms ease, visibility 0ms linear 200ms;
+
+  &.is-visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 200ms ease, visibility 0ms linear 0ms;
+  }
+
+  .payment-questions--cvv {
+    @include card;
+    background-color: #fff;
+    margin: 100px auto;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    position: relative;
+
+    @include greaterThan('sm') {
+      flex-direction: row;
+    }
+
+    .cvv-text {
+      @include greaterThan('sm') {
+        margin-left: 20px;
+      }
+
+      h3 {
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 14px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+    img {
+      max-width: 200px;
+      margin: 0 0 40px;
+    }
+    button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 16px;
+      height: 16px;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNTcgMzU3Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2RkZDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmNsZWFyLWdyYXk8L3RpdGxlPjxnIGlkPSJMYXllcl8yIiBkYXRhLW5hbWU9IkxheWVyIDIiPjxnIGlkPSJDYXBhXzEiIGRhdGEtbmFtZT0iQ2FwYSAxIj48ZyBpZD0iY2xlYXIiPjxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIzNTcgMzUuNyAzMjEuMyAwIDE3OC41IDE0Mi44IDM1LjcgMCAwIDM1LjcgMTQyLjggMTc4LjUgMCAzMjEuMyAzNS43IDM1NyAxNzguNSAyMTQuMiAzMjEuMyAzNTcgMzU3IDMyMS4zIDIxNC4yIDE3OC41IDM1NyAzNS43Ii8+PC9nPjwvZz48L2c+PC9zdmc+);
+      background-repeat: no-repeat;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
+
+span.label-question-icon {
+  height: 16px;
+  width: 16px;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 3px;
+  padding: 0;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjQgMzY0Ij48dGl0bGU+cXVlc3Rpb24tZ3JheTwvdGl0bGU+PGcgaWQ9IkxheWVyXzIiIGRhdGEtbmFtZT0iTGF5ZXIgMiI+PGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxIj48cGF0aCBkPSJNMTgyLDBBMTgyLDE4MiwwLDEsMCwzNjQsMTgyLDE4MiwxODIsMCwwLDAsMTgyLDBabTIxLjg5LDI4NS44MUgxNjIuMnYtNDAuM2g0MS42OVpNMjQzLjY2LDE2OC40cS01LjI4LDcuNTMtMjAuMywxOS4yNGwtOS44Nyw3LjY3cS04LjA3LDYuMjctMTAuNzEsMTQuNjQtMS42Nyw1LjMtMS44MSwxNi40NUgxNjMuMThxLjgzLTIzLjU2LDQuNDUtMzIuNTZ0MTguNjMtMjAuNzFsMTAuMTUtNy45NWEzNS41MywzNS41MywwLDAsMCw4LjA2LTguMjNBMjguMTEsMjguMTEsMCwwLDAsMjEwLDE0MC4xYTMyLjYsMzIuNiwwLDAsMC02LjE5LTE5LjMxcS02LjE5LTguNzEtMjIuNi04LjcyLTE2LjE0LDAtMjIuODksMTAuNzRhNDEuMzcsNDEuMzcsMCwwLDAtNi43NSwyMi4zMUgxMTEuM3ExLjY3LTM5Ljc0LDI3Ljc1LTU2LjMzLDE2LjQ1LTEwLjYsNDAuNDQtMTAuNiwzMS41MSwwLDUyLjM2LDE1LjA2dDIwLjg1LDQ0LjYyUTI1Mi43LDE1NiwyNDMuNjYsMTY4LjRaIiBzdHlsZT0iZmlsbDojZGRkIi8+PC9nPjwvZz48L3N2Zz4=);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }

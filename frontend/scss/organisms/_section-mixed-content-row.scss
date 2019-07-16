@@ -29,7 +29,7 @@
     padding: 60px 0 20px !important;
 
     @include greaterThan('sm') {
-      padding: 100px 0 40px;
+      padding: 100px 0 40px !important;
     }
 
     .content {
