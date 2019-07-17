@@ -862,9 +862,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		public function view() {
 			Timber::render(
 				$this->templates,
-				$this->context
-//				self::DEFAULT_CACHE_TTL,
-//				\Timber\Loader::CACHE_OBJECT
+				$this->context,
+				self::DEFAULT_CACHE_TTL,
+				\Timber\Loader::CACHE_OBJECT
 			);
 		}
 
