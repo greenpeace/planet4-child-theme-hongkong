@@ -10,16 +10,6 @@
  */
 
 
-$context['strings'] = [
-	'issue'           => __( 'Issue', 'gpea_theme' ),
-	'topic'           => __( 'Topic', 'gpea_theme' ),
-	'posts'           => __( 'Posts', 'gpea_theme' ),
-	'advanced_search' => __( 'Advanced search', 'gpea_theme' ),
-	'filters'         => __( 'Filters', 'gpea_theme' ),
-	'none'            => __( 'None', 'gpea_theme' ),
-	'start_typing'    => __( 'Start typing', 'gpea_theme' ),
-];
-
 /**
  * Planet4 Child Theme - Search functionality.
  */
