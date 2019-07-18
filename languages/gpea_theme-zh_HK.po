@@ -119,7 +119,7 @@ msgstr "追蹤我們"
 
 #: classes/class-p4ct-site.php:159
 msgid "Our commitment"
-msgstr "我們的承諾"
+msgstr "我們的工作"
 
 #: classes/class-p4ct-site.php:160
 msgid "Projects"

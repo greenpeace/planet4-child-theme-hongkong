@@ -330,6 +330,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					// TODO we don't really need the TimberPost overhead here. Could just use $post.
 					$timber_post = new TimberPost( $post->ID );
 
+					$timber_post->link = get_permalink( $post->ID );
+
 					$timber_post->post_date = date( 'Y-m-d', strtotime( $timber_post->post_date ) );
 
 					$timber_post->reading_time = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
@@ -355,7 +357,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 						$main_issue = $main_issue[0];
 						$timber_post->main_issue = $main_issue ? $this->main_issues[ $main_issue ]->name : 'none';
 						$timber_post->main_issue_slug = $main_issue ? $this->main_issues[ $main_issue ]->slug : 'none';
-						$timber_post->link = get_permalink( $post->ID );
 					}
 
 					$timber_posts[] = $timber_post;
@@ -605,7 +606,15 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					'order' => 'DESC',
 				],
 			];
+
 			$context['strings'] = [
+				'issue'           => __( 'Issue', 'gpea_theme' ),
+				'topic'           => __( 'Topic', 'gpea_theme' ),
+				'posts'           => __( 'Posts', 'gpea_theme' ),
+				'advanced_search' => __( 'Advanced search', 'gpea_theme' ),
+				'filters'         => __( 'Filters', 'gpea_theme' ),
+				'none'            => __( 'None', 'gpea_theme' ),
+				'start_typing'    => __( 'Start typing', 'gpea_theme' ),
 				'search_label'  => __( 'Search', 'gpea_theme' ),
 				'reset_filters' => __( 'Reset Filters', 'gpea_theme' ),
 				'sort_by'       => __( 'Sort by', 'gpea_theme' ),

@@ -18,7 +18,7 @@ export default function() {
         ? form.querySelector('.paragraph-handles__once')
         : form.querySelector('.paragraph-handles__recurring');
       const freeAmount = form['free-amount'];
-      paragraph.textContent = radio.dataset.paragraph;
+      paragraph.innerHTML = radio.dataset.paragraph;
       paragraphOther.textContent = '';
       freeAmount.value = '';
     });
