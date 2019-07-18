@@ -3,6 +3,13 @@
 .page-template-donation .enform-side-style {
   padding-bottom: 20px;
 
+  .form-caption {
+    padding-top: 60px;
+    @include greaterThan('sm') {
+      padding-top: 100px;
+    }
+  }
+
   @include greaterThan('sm') {
     > .container {
       height: auto;
@@ -248,7 +255,7 @@
   }
 
   .step {
-    margin-right: 10px;
+    margin-right: 3px;
   }
 
   @include greaterThan('sm') {
@@ -259,6 +266,9 @@
     }
     .right-box {
       display: block;
+    }
+    .step {
+      margin-right: 10px;
     }
   }
 }
@@ -416,4 +426,16 @@ span.label-question-icon {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+/* other elements with css original overwritten */
+
+.page-template-donation {
+  .form-caption {
+    padding-bottom: 20px;
+
+    h1 {
+      margin-bottom: 16px;
+    }
+  }
 }

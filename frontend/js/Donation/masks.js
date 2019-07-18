@@ -42,10 +42,10 @@ export default function(form) {
   // }
 
   if (birthDateInput) {
-    birthDateInput.placeholder = 'mm/dd/yyyy';
+    birthDateInput.placeholder = 'dd/mm/yyyy';
     new Cleave(birthDateInput, {
       date: true,
-      datePattern: ['m', 'd', 'Y'],
+      datePattern: ['d', 'm', 'Y'],
     });
   }
 
