@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'icomoon';
   src:
-    url('fonts/icomoon.ttf?fj2zg5') format('truetype'),
-    url('fonts/icomoon.woff?fj2zg5') format('woff'),
-    url('fonts/icomoon.svg?fj2zg5#icomoon') format('svg');
+    url('fonts/icomoon.ttf?d6fawk') format('truetype'),
+    url('fonts/icomoon.woff?d6fawk') format('woff'),
+    url('fonts/icomoon.svg?d6fawk#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -23,6 +23,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-kakaotalk:before {
+  content: "\e91c";
+  color: #fd0;
+}
 .icon-youtube:before {
   content: "\e915";
   color: #f00;
