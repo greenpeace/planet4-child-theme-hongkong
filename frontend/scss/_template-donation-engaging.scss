@@ -119,6 +119,7 @@
     display: none;
   }
 
+  .en__field__element .en__field__label:not(.en__field__label--item),
   .en__field__label:not(.en__field__label--item) {
     position: absolute;
     top: -0.6rem;

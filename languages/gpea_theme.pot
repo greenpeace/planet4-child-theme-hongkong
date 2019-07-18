@@ -509,3 +509,9 @@ msgstr ""
 
 msgid "Start typing"
 msgstr ""
+
+msgid "Any issue"
+msgstr ""
+
+msgid "Any topic"
+msgstr ""

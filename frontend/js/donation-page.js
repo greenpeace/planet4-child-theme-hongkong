@@ -157,6 +157,9 @@ function initDonation(Swiper, Scroll) {
       })
       .done(function(t) {
         jQuery('button').prop('disabled', false);
+
+        // CODE CHANGED TO REFLECT CURRENT FLOW 
+
         // console.log(t);
         var i = jQuery.parseHTML(t, !0);
         var s = jQuery(i).find('.en__errorHeader');

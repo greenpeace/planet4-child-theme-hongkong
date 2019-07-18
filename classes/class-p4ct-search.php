@@ -605,7 +605,15 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					'order' => 'DESC',
 				],
 			];
+
 			$context['strings'] = [
+				'issue'           => __( 'Issue', 'gpea_theme' ),
+				'topic'           => __( 'Topic', 'gpea_theme' ),
+				'posts'           => __( 'Posts', 'gpea_theme' ),
+				'advanced_search' => __( 'Advanced search', 'gpea_theme' ),
+				'filters'         => __( 'Filters', 'gpea_theme' ),
+				'none'            => __( 'None', 'gpea_theme' ),
+				'start_typing'    => __( 'Start typing', 'gpea_theme' ),
 				'search_label'  => __( 'Search', 'gpea_theme' ),
 				'reset_filters' => __( 'Reset Filters', 'gpea_theme' ),
 				'sort_by'       => __( 'Sort by', 'gpea_theme' ),
