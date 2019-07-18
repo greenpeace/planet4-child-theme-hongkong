@@ -51,6 +51,13 @@ button,
   background-image: url('../images/logo_zh.svg');
 }
 
+@media (max-width: 359px) {
+  .logo-greenpeace {
+    background-image: url('../images/logo_ko.svg');
+    width: 100px !important;
+  }
+}
+
 .page-template-petition .logo-greenpeace,
 .page-template-donation .logo-greenpeace {
   background-image: url('../images/logo_zh_green.svg');

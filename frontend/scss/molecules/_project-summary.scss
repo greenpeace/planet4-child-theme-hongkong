@@ -5,7 +5,12 @@
   .project-summary-title {
     border-bottom: 1px solid rgba(41, 47, 71, 0.5);
     margin-bottom: 10px;
+    padding-bottom: 10px;
     color: white;
+
+    @include lessThan('sm') {
+      font-size: 28px;
+    }
   }
 
   .project-summary-details {
