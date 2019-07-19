@@ -88,6 +88,13 @@ const p4ct_search = function() {
 
   var filters_search = $('.filter-search');
 
+  // Submit form on Sort change event.
+  $( '#select_order' ).off( 'change' ).on( 'change', function() {
+    $( '#orderby', $search_form ).val( $( this ).val() );
+    $search_form.submit();
+    return false;
+  });
+
   $search_form.on('submit', function() {
     $(document.body).addClass('is-loading');
   });

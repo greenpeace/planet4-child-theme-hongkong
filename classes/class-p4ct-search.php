@@ -151,7 +151,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 */
 		public function load( $search_query, $selected_sort = self::DEFAULT_SORT, $filters = [], $templates = [ 'search.twig', 'archive.twig', 'index.twig' ], $context = null ) {
 
-			// TODO Shouldn't we check for a nonce, both here and on AJAX?
 			$this->initialize();
 			$this->search_query = $search_query;
 			$this->templates    = $templates;
@@ -488,10 +487,21 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			if ( $this->search_query ) {
 				$args['s'] = $this->search_query;
 			} else {
-				// If we search for everything then order by 'post_date'.
+				// If we search for everything then order first by 'weight' and then by 'post_date'.
 				$args2 = [
-					'orderby'    => 'date',
-					'order'      => 'DESC',
+					'orderby'    => 'meta_value date',
+					'order'      => 'DESC DESC',
+					'meta_query' => [
+						'relation' => 'OR',
+						[
+							'key'     => 'weight',
+							'compare' => 'NOT EXISTS',
+						],
+						[
+							'key'     => 'weight',
+							'compare' => 'EXISTS',
+						],
+					],
 				];
 				$args  = array_merge( $args, $args2 );
 			}

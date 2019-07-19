@@ -77,15 +77,16 @@
 
             <!-- We also included results for: -->
             <!-- Does this even work? -->
-            {% if ( corrected_term ) %}
-                {{ corrected_term }}
-            {% endif %}
+{#            {% if ( corrected_term ) %}#}
+{#                {{ corrected_term }}#}
+{#            {% endif %}#}
 
             <form
                     id="search_form_inner" role="search" action="{{ data_nav_bar.home_url }}">
                 <!-- Main search field -->
                 <div class="form-group search fluid">
                     <input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="{{ strings.start_typing }}" value="{{ search_query|e('wp_kses_post')|raw }}">
+{#                    <input type="hidden" name="orderby" value="{{ selected_sort ?? default_sort }}" />#}
                     <button class="button primary" type="submit">{{ search_label }}</button>
                 </div>
 
@@ -153,21 +154,22 @@
                 <button class="button small" id="btn_filter_reset">{{ strings.reset_filters }}</button>
             </div>
 
-            {#  TODO reimplement sort by logic#}
-            {#  <div class="sort-by">#}
-            {#    <label for="select_order">{{ strings.sort_by }}</label>#}
-            {#    <div class="select">#}
-            {#      <select class="filter-search" form="search_form_innerg" id="select_order" name="select_order">#}
-            {#        {% for key, sort_option in sort_options %}#}
-            {#          {% if key == selected_sort %}#}
-            {#            <option value="{{ key }}" {{ not search_query and key == '_score' ? 'disabled' : 'selected' }}>{{ sort_option.name }}</option>#}
-            {#          {% else %}#}
-            {#            <option value="{{ key }}">{{ sort_option.name }}</option>#}
-            {#          {% endif %}#}
-            {#        {% endfor %}#}
-            {#      </select>#}
-            {#    </div>#}
-            {#  </div>#}
+            {# TODO reimplement sort by logic #}
+            <div class="sort-by">
+                <label for="select_order">{{ strings.sort_by }}</label>
+                <div class="select">
+{#                    <select id="select_order" name="select_order">#}
+                    <select class="filter-search" form="search_form_inner" id="orderby" name="orderby">
+                        {% for key, sort_option in sort_options %}
+                            {% if key == selected_sort %}
+                                <option value="{{ key }}" {{ not search_query and key == '_score' ? 'disabled' : 'selected' }}>{{ sort_option.name }}</option>
+                            {% else %}
+                                <option value="{{ key }}">{{ sort_option.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
 
         </div>
 
