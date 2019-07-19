@@ -471,7 +471,7 @@ msgstr "聯署"
 #. translators: placeholder represents the number of signers.
 #: page-templates/petition.php:113
 msgid "%s signers"
-msgstr "聯署人數"
+msgstr "%s 聯署人數"
 
 #. Template Name of the theme
 msgid "Main Issue"
