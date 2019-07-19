@@ -192,9 +192,9 @@ const latestFollower = function() {
 		  const articleRowPost = $('#template-article-row');
 		  const buildArticleRowPost = template(articleRowPost[0].innerHTML);
 
-		  const trendingCollectionsDynamic = followingResults.map(collection => {        
+		  let trendingCollectionsDynamic = followingResults.map(collection => {
 			let rowPosts = (collection.posts).map(post => {
-				return buildArticleRowPost(post);            
+				return buildArticleRowPost(post);
 			  })
 			  collection.row_posts = rowPosts.join('');
 			  let trendingCollectionsContainer = buildArticleRowContainer(collection);
@@ -210,7 +210,9 @@ const latestFollower = function() {
 		  // );
 
 		  // da sistemare per mostrare anche 2 trending attuali
-		  $trendingCollections.first().prepend(trendingCollectionsDynamic);
+		  trendingCollectionsDynamic = trendingCollectionsDynamic.join('');
+		  $(trendingCollectionsDynamic).insertBefore($('.section-article-row').eq(0));
+		  // $trendingCollections.first().prepend(trendingCollectionsDynamic);
 
 		  let resizeEvent = new Event('resize');
 		  window.dispatchEvent(resizeEvent);
