@@ -59,6 +59,15 @@ function prevNext(form, donationSwiper, validateBlock, Scroll) {
       stepAmount.classList.add('is-done');
       stepDetails.classList.remove('is-todo');
       stepDetails.classList.add('is-current');
+
+      // add ga event
+      dataLayer.push({
+        'event' : 'donationEvent',
+        'eventCategory' : 'donations',
+        'eventAction' : 'form_interaction',
+        'eventLabel' : 'completed:amount',
+      });             
+
       donationSwiper.slideNext();
       // Scroll.animateScroll(document.querySelector('.form-caption'));
       // donationSwiper.slides[1].querySelectorAll('input, select')[0].focus();
@@ -78,6 +87,22 @@ function prevNext(form, donationSwiper, validateBlock, Scroll) {
       stepDetails.classList.add('is-done');
       stepPayment.classList.remove('is-todo');
       stepPayment.classList.add('is-current');
+
+      // ga event
+      dataLayer.push({
+        'event' : 'donationEvent',
+        'eventCategory' : 'donations',
+        'eventAction' : 'form_interaction',
+        'eventLabel' : 'completed:personal_details',
+      });
+
+      if(typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {
+          content_name: campaignName
+        });
+      }
+      
+
       donationSwiper.slideNext();
       // donationSwiper.slides[2].querySelectorAll('input, select')[0].focus();
       // Scroll.animateScroll(document.querySelector('.form-caption'));

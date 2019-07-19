@@ -1,19 +1,102 @@
-{% extends "base.twig" %}
+<!DOCTYPE html>
+<html {{ fn('language_attributes', 'html') }}>
+<head>
+	<meta charset="{{ site.charset }}">
+	<title>{% if wp_title %}{{ wp_title|e('esc_html')|raw }} - {{ site.name }}{% else %}{{ site.name }}{% endif %}</title>
+	<meta name="description" content="{{ site.description }}">
 
-{% block content %}
+	{% if not (og_title is defined)  %}
+		{% if (wp_title) %}
+			{% set og_title = wp_title|raw~' - '~site.name %}
+		{% else %}
+			{% set og_title = site.name %}
+		{% endif %}
+	{% endif %}
 
-  <article id="post-{{ post.ID }}" class="{{ post_categories }}">    
+	<meta property="og:title" content="{{ og_title|e('html_attr')|raw }}" />
+	<meta property="og:type" content="article" />
+	<meta property="og:url" content="{{ current_url }}" />
+	{% if (og_description)  %}
+		<meta property="og:description" content="{{ og_description|e('html_attr')|raw }}" />
+	{% endif %}
+	{% if (og_image_data) %}
+		<meta property="og:image" content="{{ og_image_data[0] }}" />
+		<meta property="og:image:width" content="{{ og_image_data[1] }}" />
+		<meta property="og:image:height" content="{{ og_image_data[2] }}" />
+	{% endif %}
+	<meta property="og:site_name" content="{{ site.name }}" />
 
-      <h1>{{ post.title|raw }}</h1>
-      
-      {{ post.content|e('wp_kses_post')|raw }}      
+	{% if facebook_page_id %}
+		<meta property="fb:pages" content="{{ facebook_page_id }}" />
+	{% endif %}
 
-    </section>
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="{{ site.name }}" />
+	<meta name="twitter:title" content="{{ og_title|e('html_attr')|raw }}">
+	{% if (og_description) %}
+		<meta name="twitter:description" content="{{ og_description|e('html_attr')|raw }}">
+	{% endif %}
 
-  </article>
+	{% if (post.author is not null) %}
+		<meta name="twitter:creator" content="{{ post.author.name }}">
+	{% endif %}
+
+	{% if (og_image_data) %}
+		<meta name="twitter:image" content="{{ og_image_data[0] }}" />
+	{% endif %}
+
+	{% if google_tag_value %}
+	<script>
+          var cookie_consent = document.cookie.split(';').filter(function(c) {return c.indexOf('greenpeace=2') >= 0}).length;
+          var google_tag_value = '{{ google_tag_value }}';
+          var enforce_cookies_policy = '{{ enforce_cookies_policy }}';
+
+          if ( enforce_cookies_policy && 1 !== parseInt( cookie_consent ) ) {
+            google_tag_value = '';
+          }
+
+          if ( google_tag_value ) {
+			window.dataLayer = window.dataLayer || [];
+			dataLayer.push({
+				'pageType' : '{{ page_category }}',
+				'signedIn' : 'false',
+				'visitorType' : '',
+				'userID' : '',
+				'post_tags': '{{ post_tags }}'
+			});
+          }
+        </script>
+        <script>
+          if ( google_tag_value ) {
+                (function (w, d, s, l, i) {
+                    w[l] = w[l] || [];
+                    w[l].push({
+                        'gtm.start':
+                            new Date().getTime(), event: 'gtm.js'
+                    });
+                    var f = d.getElementsByTagName(s)[0],
+                        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+                    j.async = true;
+                    j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                    f.parentNode.insertBefore(j, f);
+                })(window, document, 'script', 'dataLayer', google_tag_value);
+          }
+        </script>
+	{% endif %}
+
+	{% include 'blocks/p4_structured_data.twig' %}
+
+	<link rel="shortcut icon" type="image/ico" href="{{ theme.uri }}/favicon.ico"/>
+	<link rel="dns-prefetch" href="//act.greenpeace.org">
 
   <script>
     window.location.href = "{{ make_change_link }}";
   </script>
 
-{% endblock %}
+</head>
+
+<body>
+
+</body>
+</html>

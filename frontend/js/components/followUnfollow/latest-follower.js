@@ -18,6 +18,19 @@ export const filterDuplicates = function(newPosts, existingPosts) {
 };
 
 /**
+ * create array with univoque post id
+ *
+ * @param {Array} posts An array containing the new posts as returned by the call
+ */
+export const getUnique = function(posts) {
+	const final = [ ];
+	posts.map((e,i)=> 
+		!final.find(final => final.ID == e.ID) && final.push(e) 
+	)
+	return final;
+  };
+
+/**
  * Takes the collections returned by the AJAX call and filters out collections already existing.
  * Elements in both arrays must have a property "source"
  *
@@ -120,6 +133,7 @@ const latestFollower = function() {
 		  // Remove existing posts from the returned posts, take first 5, sort by recent first
 		  // console.log(posts.length + ' posts returned');
 		  posts = filterDuplicates(posts, existingPosts);
+		  posts = getUnique(posts);
 		  sortByRecentFirst(posts);
 		  posts = posts.slice(0, 5);
 		  // console.log(existingPosts.length + ' existing posts');
@@ -141,7 +155,9 @@ const latestFollower = function() {
 		  });
 
 		  // Add the new slides in 6th position (1 first slide + 5 regular slides)
-		  swiper.addSlide(6, newPostsSlides);
+		  swiper.addSlide(0, newPostsSlides);
+		  // move to the first slide
+		  swiper.slideTo(0);
 		  // console.log(
 		  //   newPostsSlides.length + ' slides created and added',
 		  //   newPostsSlides

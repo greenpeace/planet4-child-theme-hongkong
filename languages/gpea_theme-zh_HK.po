@@ -119,7 +119,7 @@ msgstr "追蹤我們"
 
 #: classes/class-p4ct-site.php:159
 msgid "Our commitment"
-msgstr "我們的承諾"
+msgstr "我們的工作"
 
 #: classes/class-p4ct-site.php:160
 msgid "Projects"
@@ -471,7 +471,7 @@ msgstr "聯署"
 #. translators: placeholder represents the number of signers.
 #: page-templates/petition.php:113
 msgid "%s signers"
-msgstr "聯署人數"
+msgstr "%s 聯署人數"
 
 #. Template Name of the theme
 msgid "Main Issue"
