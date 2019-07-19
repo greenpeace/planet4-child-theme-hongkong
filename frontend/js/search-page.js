@@ -118,6 +118,7 @@ const p4ct_search = function() {
       var $load_more_button = $('.btn-load-more-click-scroll');
       var load_more_count = 0;
       var loaded_more = false;
+      $load_more_button.addClass('loading');
       $.ajax({
         url: window.localizations.ajaxurl,
         type: 'GET',
@@ -133,8 +134,9 @@ const p4ct_search = function() {
         dataType: 'html',
       })
         .done(function(response) {
-          console.log(response);
+          // console.log(response);
           // Append the response at the bottom of the results and then show it.
+          $load_more_button.removeClass('loading');
           $('.multiple-search-result .results-list').append(response);
           $('.row-hidden:last')
             .removeClass('row-hidden')
@@ -144,6 +146,7 @@ const p4ct_search = function() {
           }
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
+          $load_more_button.removeClass('loading');
           console.log(errorThrown); //eslint-disable-line no-console
         });
     } else {
