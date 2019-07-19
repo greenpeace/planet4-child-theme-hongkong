@@ -20,7 +20,7 @@ const pageIssue = function() {
     $('.js-issue-follow').on('click', function(e) {
       e.preventDefault();
       gpea_issues_followed.push(current_issue_id);
-      Cookies.set('gpea_issues', gpea_issues_followed);
+      Cookies.set('gpea_issues', gpea_issues_followed, { expires: 3650 });
       $('.js-issue-follow').hide();
       $('.js-issue-unfollow').fadeIn();
     });
@@ -31,7 +31,7 @@ const pageIssue = function() {
       if (index > -1) {
         gpea_issues_followed.splice(index, 1);
       }
-      Cookies.set('gpea_issues', gpea_issues_followed);
+      Cookies.set('gpea_issues', gpea_issues_followed, { expires: 3650 });
       $('.js-issue-follow').fadeIn();
       $('.js-issue-unfollow').hide();
     });

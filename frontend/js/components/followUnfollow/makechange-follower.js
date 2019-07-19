@@ -18,6 +18,20 @@ export const filterDuplicates = function(newPosts, existingPosts) {
 };
 
 /**
+ * create array with univoque post id
+ *
+ * @param {Array} posts An array containing the new posts as returned by the call
+ */
+export const getUnique = function(posts) {
+	const final = [ ];
+	posts.map((e,i)=> 
+		!final.find(final => final.ID == e.ID) && final.push(e) 
+	)
+	return final;
+  };
+
+
+/**
  * Sorts an array of posts, most recent first
  *
  * @param {Array} posts The array of posts to sort (by reference)
@@ -85,6 +99,7 @@ const makechangeFollower = function() {
 		  // Remove existing posts from the returned posts, take first 5, sort by recent first
 		  // console.log(posts.length + ' posts returned');
 		  posts = filterDuplicates(posts, existingPosts);
+		  posts = getUnique(posts);
 		  sortByRecentFirst(posts);
 		  posts = posts.slice(0, 5);      
 		  // console.log(existingPosts.length + ' existing posts');
@@ -106,7 +121,9 @@ const makechangeFollower = function() {
 		  });
 
 		  // Add the new slides in 6th position (1 first slide + 5 regular slides)
-		  swiper.addSlide(6, newPostsSlides);
+		  swiper.addSlide(0, newPostsSlides);
+		  // move to the first slide
+		  swiper.slideTo(0);
 		  // console.log(
 		  //   newPostsSlides.length + ' slides created and added',
 		  //   newPostsSlides
