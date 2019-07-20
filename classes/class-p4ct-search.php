@@ -608,9 +608,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			];
 
 			$context['strings'] = [
-				'issue'           => __( 'Issue', 'gpea_theme' ),
+				'issue'           => __( 'issue', 'gpea_theme' ),
 				'topic'           => __( 'Topic', 'gpea_theme' ),
-				'posts'           => __( 'Posts', 'gpea_theme' ),
+				'posts'           => __( 'posts', 'gpea_theme' ),
 				'advanced_search' => __( 'advanced_search', 'gpea_theme' ),
 				'filters'         => __( 'filters', 'gpea_theme' ),
 				'none'            => __( 'None', 'gpea_theme' ),
