@@ -54,6 +54,9 @@ function byRecentDate(a, b) {
 }
 
 const makechangeFollower = function() {
+
+  // disabled for this first step, to check content ecc.
+  return;
   if (!$('body').hasClass('js-makechange-follower')) return;
 
   const $featuredSwiper = $('.section-featured .swiper-container').first();
