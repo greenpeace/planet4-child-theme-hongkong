@@ -608,11 +608,11 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			];
 
 			$context['strings'] = [
-				'issue'           => __( 'Issue', 'gpea_theme' ),
+				'issue'           => __( 'issue', 'gpea_theme' ),
 				'topic'           => __( 'Topic', 'gpea_theme' ),
-				'posts'           => __( 'Posts', 'gpea_theme' ),
-				'advanced_search' => __( 'Advanced search', 'gpea_theme' ),
-				'filters'         => __( 'Filters', 'gpea_theme' ),
+				'posts'           => __( 'posts', 'gpea_theme' ),
+				'advanced_search' => __( 'advanced_search', 'gpea_theme' ),
+				'filters'         => __( 'filters', 'gpea_theme' ),
 				'none'            => __( 'None', 'gpea_theme' ),
 				'start_typing'    => __( 'Start typing', 'gpea_theme' ),
 				'search_label'  => __( 'Search', 'gpea_theme' ),
@@ -620,6 +620,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				'sort_by'       => __( 'Sort by', 'gpea_theme' ),
 				'nothing_found' => __( 'Nothing found, sorry.', 'gpea_theme' ),
 				'any'           => __( 'Any', 'gpea_theme' ),
+				'any_issue'     => __( 'Any issue', 'gpea_theme' ),
+				'any_topic'     => __( 'Any topic', 'gpea_theme' ),
 			];
 
 			if ( $this->search_query ) {

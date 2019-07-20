@@ -407,6 +407,9 @@
 
 <script>
 
+var campaignName = '';
+var pageJsonReplicated;
+
 function getUrlParameters(parameter, staticURL, decode){
   /*
    Function: getUrlParameters
@@ -453,22 +456,25 @@ function debounce(func, wait, immediate) {
 //
     function init() {
 
-      var pageTheme = getUrlParameters('campaign', '', true);
+	  campaignName = getUrlParameters('campaign', '', true) ? getUrlParameters('campaign', '', true) : 'general';
       var pageBg = document.querySelector("#main_background_image");
       var titleId = document.querySelector("#main_title");
       var subtitleId = document.querySelector("#main_subtitle");
-      if ( pageTheme && NRO_PROPERTIES[NRO].backgroundStyle[pageTheme].image.backgroundImage) {
-        console.log(NRO_PROPERTIES[NRO].backgroundStyle[pageTheme].image.backgroundImage);
-        pageBg.src = NRO_PROPERTIES[NRO].backgroundStyle[pageTheme].image.backgroundImage;
+      if ( campaignName && NRO_PROPERTIES[NRO].backgroundStyle[campaignName].image.backgroundImage) {
+        console.log(NRO_PROPERTIES[NRO].backgroundStyle[campaignName].image.backgroundImage);
+        pageBg.src = NRO_PROPERTIES[NRO].backgroundStyle[campaignName].image.backgroundImage;
       } else {
         pageBg.src = NRO_PROPERTIES[NRO].backgroundStyle.general.image.desktop.backgroundImage;
       }
-      if ( pageTheme && NRO_PROPERTIES[NRO].main.home[pageTheme].title) {
-        titleId.innerHTML = NRO_PROPERTIES[NRO].main.home[pageTheme].title;
+      if ( campaignName && NRO_PROPERTIES[NRO].main.home[campaignName].title) {
+        titleId.innerHTML = NRO_PROPERTIES[NRO].main.home[campaignName].title;
       }
-      if ( pageTheme && NRO_PROPERTIES[NRO].main.home[pageTheme].subtitle) {
-        subtitleId.innerHTML = NRO_PROPERTIES[NRO].main.home[pageTheme].subtitle;
-      }
+      if ( campaignName && NRO_PROPERTIES[NRO].main.home[campaignName].subtitle) {
+        subtitleId.innerHTML = NRO_PROPERTIES[NRO].main.home[campaignName].subtitle;
+	  }
+	  
+	  pageJsonReplicated = pageJson;
+
     }
 	//
 	<!-- const singleAmountRegex = /^(s|single|oneoff|[s:]\d+)/; -->

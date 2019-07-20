@@ -181,6 +181,19 @@ class P4CT_Metabox_Register {
 
 		$cmb_petition->add_field(
 			array(
+				'name'    => esc_html__( 'Number of signatures (manually specified!)', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'In case you specify this value the Engaging connection will be ignored and this value will be shown', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_petition_current_signatures',
+				'type'             => 'text',
+				'attributes' => array(
+					'type' => 'number',
+					'pattern' => '\d*',
+				),
+			)
+		);
+
+		$cmb_petition->add_field(
+			array(
 				'name'             => esc_html__( 'Petition goal number', 'gpea_theme_backend' ),
 				'desc'             => esc_html__( 'Number of signatures to be reached by this petition', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_petition_engaging_target',

@@ -78,8 +78,10 @@ $context['background_image']            = wp_get_attachment_url( get_post_meta( 
 $context['custom_body_classes']         = $categories;
 $context['engaging_page_id']            = $page_meta_data['p4-gpea_petition_engaging_pageid'][0] ?? '';
 $context['petition_target']             = $page_meta_data['p4-gpea_petition_engaging_target'][0] ?? '';
+$context['signatures']                  = $page_meta_data['p4-gpea_petition_current_signatures'][0] ?? '';
 
-if ( $context['engaging_page_id'] ) {
+
+if ( $context['engaging_page_id'] && ! $context['signatures'] ) {
 	global $wp_version;
 	$url = 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $context['engaging_page_id'] . '&contentType=json&resultType=summary';
 	$args = array(
