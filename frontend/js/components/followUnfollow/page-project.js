@@ -10,6 +10,9 @@ const pageProject = function() {
       : new Array();
     var current_project_id = $('.js-project-follow').data('project');
 
+    // in case of malformed array, reset it
+    if (!Array.isArray(gpea_projects_followed)) gpea_projects_followed = new Array();
+
     // if already following
     if (gpea_projects_followed.includes(current_project_id)) {
       $('.js-project-unfollow').show();
