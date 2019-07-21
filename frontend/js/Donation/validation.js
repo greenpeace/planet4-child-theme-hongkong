@@ -50,7 +50,7 @@ const dataConstraints = {
     presence: required,
     length: { maximum: 255 },
     email: {
-      message: invalidMessage,
+      message: window.NRO_PROPERTIES[NRO].validation.format_email,
     },
   },
   ['en__field--phoneNumber']: {
@@ -81,15 +81,51 @@ const dataConstraints = {
     presence: required,
     length: { maximum: 255 },
   },
+  // ['en__field--NOT_TAGGED_33']: {
+  //   presence: false,
+  //   format: {
+  //     pattern: window.NRO_PROPERTIES[NRO].regex.national_id,
+  //     message: window.NRO_PROPERTIES[NRO].validation.format_id
+  //   },
+  // },
 };
 
 const paymentConstraints = {
   // the format should be taken care by the masking
   ['en__field--ccnumber']: {
     presence: required,
+    // format: {
+    //   pattern: /^(34|37|4|5[1-5]).*$/,
+    //   message: function(value, attribute, validatorOptions, attributes, globalOptions) {
+    //     return validate.format("^%{num} " + window.NRO_PROPERTIES[NRO].invalid_card, {
+    //       num: value
+    //     });
+    //   }
+    // },
+    // length: function(value, attributes, attributeName, options, constraints) {
+    //   if (value) {
+    //     let valueStrip = value.replace(/\s/g, '');
+    //     console.log(valueStrip);
+    //     // Amex
+    //     if ((/^(34|37).*$/).test(valueStrip)) return {is: 15};
+    //     // Visa, Mastercard
+    //     if ((/^(4|5[1-5]).*$/).test(valueStrip)) return {is: 16};
+    //   }
+    //   // Unknown card, don't validate length
+    //   return false;
+    // }
   },
   ['en__field--ccexpire']: {
     presence: required,
+    // ccexpire: function(value, options, key, attributes) {
+    //   let dateInfo = value.split("/");
+    //   let today = new Date();
+    //   let cardDate = new Date();
+    //   cardDate.setFullYear(dateInfo[1], dateInfo[0], 1);
+    //   if (cardDate < today) {
+    //     return window.NRO_PROPERTIES[NRO].validation.invalid_mm_yy;
+    //  }
+    // }
   },
   ['en__field--ccvv']: {
     presence: required,
