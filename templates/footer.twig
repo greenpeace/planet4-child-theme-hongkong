@@ -111,3 +111,37 @@
 </div>
 </div>
 </footer> #}
+
+{% if (kakao_app_id) %}
+<script src="https://secured-static.greenpeace.org/korea/Global/korea/DD/170519_DDpage/js/kakao.min.js"></script>
+<script type='text/javascript'>
+    Kakao.init('{{ kakao_app_id }}');
+    Kakao.Link.createScrapButton({
+      container: '#kakao-link-btn',
+      requestUrl: '{{ home_url }}'
+    });
+</script>
+{% endif %}
+<script>
+if (navigator.share) {
+	navigator.share({
+		title: "{{ og_title|e('html_attr')|raw }}",
+		text: "{{ og_description|e('html_attr')|raw }}",
+		url: "{{ post.link }}",
+	})
+	.then(() => console.log('Successful share'))
+	.catch((error) => console.log('Error sharing', error));
+
+	var shareButton = document.querySelectorAll('.floating-share-icon.navigator');
+
+	shareButton[0].addEventListener("click", async () => {
+		try {
+			await navigator.share({ title: "Example Page", url: "" });
+			console.log("Data was shared successfully");
+		} catch (err) {
+			console.error("Share failed:", err.message);
+		}
+	});
+
+}
+</script>    

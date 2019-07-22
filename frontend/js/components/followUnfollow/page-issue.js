@@ -10,6 +10,8 @@ const pageIssue = function() {
       : new Array();
     var current_issue_id = $('.js-issue-follow').data('topic');
 
+    if (!Array.isArray(gpea_issues_followed)) gpea_issues_followed = new Array();
+
     // if already following
     if (gpea_issues_followed.includes(current_issue_id)) {
       $('.js-issue-unfollow').show();

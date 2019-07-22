@@ -113,13 +113,16 @@ export default function() {
     }
 
     if ('mrm' == form.en_recurring_question.value) {
-      if ('N' == frequencyValue) frequencyValue = 'S';
-      else frequencyValue = 'M';
+      if ('N' == frequencyValue) frequencyValue = 's';
+      else frequencyValue = 'm';
+      
+      // donationUrl.searchParams.append(
+      //   'donate_amt',
+      //   frequencyValue + ':' + amountValue
+      // );
 
-      donationUrl.searchParams.append(
-        'donate_amt',
-        frequencyValue + ':' + amountValue
-      );
+      donationUrl = donationUrl + '?donate_amt=' + frequencyValue + ':' + amountValue;
+
     } else {
       donationUrl.searchParams.append('transaction.donationAmt', amountValue);
       donationUrl.searchParams.append(

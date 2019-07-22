@@ -91,6 +91,7 @@ function swiper(Swiper) {
     spaceBetween: 60,
     pagination: false,
     navigation: false,
+    preventClicks: false,
     autoHeight: true,
     allowTouchMove: false,
   });

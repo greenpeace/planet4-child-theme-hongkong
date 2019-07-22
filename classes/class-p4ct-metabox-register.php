@@ -784,6 +784,14 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'KakaoTalk app id', 'gpea_theme_backend' ),
+				'id'      => 'gpea_kakao_app_id',
+				'type'    => 'text',
+			)
+		);
+
 	}
 
 	/**
