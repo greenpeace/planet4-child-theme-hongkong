@@ -97,6 +97,17 @@ const tagCloud = function() {
     $('.tag_cloud_form').fadeIn();
     // $('.tag_cloud_form .signatures').addClass('is-open');
   });
+
+  
+  const p4en_form_tag_cloud = document.querySelector('.section-choose-topics #p4en_form');
+  // general, for all donation we check all checkbox... yes sir
+  if (p4en_form_tag_cloud && ( 'ko-KR' != document.documentElement.lang ) ) {
+    let privacyOptions = document.querySelectorAll('#p4en_form [type=checkbox]');
+    for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {
+      elementOption.checked = true;
+    }
+  }  
+
 };
 
 export default tagCloud;

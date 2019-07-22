@@ -65,8 +65,9 @@
           margin-top: 0;
         }
 
-        &.share__kakaotalk,
-        &.share__wechat {
+        &.floating-share-icon.kakaotalk,
+        &.floating-share-icon.wechat,
+        &.floating-share-icon.navigator {
           display: none;
         }
 

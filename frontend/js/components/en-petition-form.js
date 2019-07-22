@@ -148,4 +148,14 @@ export default function() {
       }
     });
   }
+
+  // general, for all donation we check all checkbox... yes sir
+  if ( 'ko-KR' != document.documentElement.lang ) {
+    let privacyOptions = document.querySelectorAll('[type=checkbox]');
+    for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {
+      elementOption.checked = true;
+    }
+  }  
+
+
 }
