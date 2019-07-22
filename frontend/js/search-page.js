@@ -90,7 +90,7 @@ const p4ct_search = function() {
 
   // Submit form on Sort change event.
   $( '#select_order' ).off( 'change' ).on( 'change', function() {
-    $( '#orderby', $search_form ).val( $( this ).val() );
+    $( '#search-orderby').val( $( this ).val() );
     $search_form.submit();
     return false;
   });
