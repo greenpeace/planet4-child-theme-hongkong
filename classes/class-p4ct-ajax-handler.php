@@ -220,7 +220,8 @@ class P4CT_AJAX_Handler {
 						$the_query->the_post();
 						$single_update = array(
 							'title'     => get_the_title(),
-							'post_date' => date( 'Y - m - d', strtotime( get_the_date() ) ),
+							//'post_date' => date( 'Y - m - d', strtotime( get_the_date() ) ),
+							'post_date'       => get_the_date(),
 							'link'      => get_the_permalink( $post->ID ),
 						);
 
@@ -344,7 +345,8 @@ class P4CT_AJAX_Handler {
 					$single_update = array(
 						'ID'         => get_the_ID(),
 						'post_title' => get_the_title(),
-						'date'       => date( 'Y - m - d', strtotime( get_the_date() ) ),
+						//'date'       => date( 'Y - m - d', strtotime( get_the_date() ) ),
+						'date'       => get_the_date(),
 						'link'       => get_the_permalink( $post->ID ),
 					);
 
