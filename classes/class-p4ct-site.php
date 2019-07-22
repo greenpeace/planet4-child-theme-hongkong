@@ -72,6 +72,9 @@ class P4CT_Site {
 		// add_action( 'save_post', [ $this, 'p4_auto_generate_excerpt' ], 10, 2 );
 		add_action( 'save_post', [ $this, 'gpea_auto_set_tag' ], 10, 2 );
 		add_filter( 'query_vars', [ $this, 'add_query_vars_filter' ], 10, 2 );
+		// avoid apostrofi
+		add_filter( 'run_wptexturize', '__return_false' );
+
 		register_nav_menus(
 			[
 				'navigation-bar-menu' => __( 'Navigation Bar Menu', 'gpea_theme_backend' ),
