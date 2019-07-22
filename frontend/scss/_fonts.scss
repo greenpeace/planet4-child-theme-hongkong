@@ -18,6 +18,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-navigator:before {
+  content: '\e91d';
+}
 .icon-kakaotalk:before {
   content: '\e91c';
   color: #fd0;
