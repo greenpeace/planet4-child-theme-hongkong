@@ -500,24 +500,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			} else {
 				// If we search for everything then order first by 'weight' and then by 'post_date'.
 				$args2 = [
-					'orderby'    => 'meta_value date',
+					'orderby'    => 'meta_value_num date',
 					'order'      => 'DESC DESC',
-					'meta_query' => [
-						'relation' => 'OR',
-						[
-							'key'     => 'weight',
-							'compare' => 'NOT EXISTS',
-						],
-						[
-							'key'     => 'weight',
-							'compare' => 'EXISTS',
-						],
-					],
+					'meta_key'   => 'weight',
 				];
 				$args  = array_merge( $args, $args2 );
 			}
 
-			$args['s'] = $this->search_query;
 			// Add sort by date.
 			$selected_sort = filter_input( INPUT_GET, 'orderby', FILTER_SANITIZE_STRING );
 			$selected_sort = sanitize_sql_orderby( $selected_sort );
