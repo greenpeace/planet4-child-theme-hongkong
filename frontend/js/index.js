@@ -1,3 +1,4 @@
+import 'remove-focus-outline';
 import {
   Swiper,
   Navigation,

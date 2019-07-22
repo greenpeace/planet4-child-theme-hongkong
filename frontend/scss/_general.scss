@@ -92,6 +92,7 @@ a {
 
   &:hover,
   &:focus {
+    // outline: none;
     border-bottom-color: $color-green;
   }
 }
