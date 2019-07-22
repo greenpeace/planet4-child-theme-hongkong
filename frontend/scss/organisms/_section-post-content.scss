@@ -115,6 +115,13 @@
     }
   }
 
+  .embed-container > .embed-container {
+    position: static;
+    margin: initial;
+    width: initial;
+    padding: initial;
+  }
+
   // @include lessThan('sm') {
   .leader {
     position: relative;
