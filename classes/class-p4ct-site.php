@@ -72,6 +72,9 @@ class P4CT_Site {
 		// add_action( 'save_post', [ $this, 'p4_auto_generate_excerpt' ], 10, 2 );
 		add_action( 'save_post', [ $this, 'gpea_auto_set_tag' ], 10, 2 );
 		add_filter( 'query_vars', [ $this, 'add_query_vars_filter' ], 10, 2 );
+		// avoid apostrofi
+		add_filter( 'run_wptexturize', '__return_false' );
+
 		register_nav_menus(
 			[
 				'navigation-bar-menu' => __( 'Navigation Bar Menu', 'gpea_theme_backend' ),
@@ -144,16 +147,17 @@ class P4CT_Site {
 		$context['press_media_link'] = isset( $options['gpea_default_press_media'] ) ? get_permalink( $options['gpea_default_press_media'] ) : site_url();
 		$context['make_change_link'] = isset( $options['gpea_default_make_change'] ) ? get_permalink( $options['gpea_default_make_change'] ) : site_url();
 		$context['preferences_link'] = isset( $options['gpea_default_preferences'] ) ? get_permalink( $options['gpea_default_preferences'] ) : site_url();
-		
+
 		$context['commitment_projects_link'] = isset( $options['gpea_default_commitment_projects'] ) ? get_permalink( $options['gpea_default_commitment_projects'] ) : site_url();
 		$context['commitment_issues_link'] = isset( $options['gpea_default_commitment_issues'] ) ? get_permalink( $options['gpea_default_commitment_issues'] ) : site_url();
 		$context['commitment_projects_link_label'] = isset( $options['gpea_default_commitment_projects'] ) ? get_the_title( $options['gpea_default_commitment_projects'] ) : '';
 		$context['commitment_issues_link_label'] = isset( $options['gpea_default_commitment_issues'] ) ? get_the_title( $options['gpea_default_commitment_issues'] ) : '';
-		
+
 		$context['support_link'] = isset( $options['gpea_default_supportus_link'] ) ? get_permalink( $options['gpea_default_supportus_link'] ) : site_url();
 		$context['generic_footer_text'] = isset( $options['gpea_description_generic_footer_text'] ) ? $options['gpea_description_generic_footer_text'] : '';
 		$context['current_country'] = isset( $options['gpea_current_country'] ) ? $options['gpea_current_country'] : 'HK';
 		$context['home_url'] = site_url();
+		$context['kakao_app_id'] = isset( $options['gpea_kakao_app_id'] ) ? $options['gpea_kakao_app_id'] : '';
 
 		$context['strings_navbar'] = [
 			'sign' => __( 'Sign', 'gpea_theme' ),
@@ -247,12 +251,9 @@ class P4CT_Site {
 		wp_enqueue_style( 'child-style-fonts', get_stylesheet_directory_uri() . '/static/css/' . $css_fonts, [], $css_creation );
 		wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/static/css/style.css', [], $css_creation );
 		wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js',[], $js_creation, true );
-		// to be removed after frontend merge!!
-		wp_enqueue_script( 'child-dev-script', get_stylesheet_directory_uri() . '/static/js/dev_integration.js', array(), $js_creation, true );
-		wp_localize_script( 'child-dev-script', 'localizations', [
+		wp_localize_script( 'child-script', 'localizations', [
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 		]);
-		// END to be removed after frontend merge!!
 	}
 
 	/**

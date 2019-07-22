@@ -65,8 +65,8 @@ function prevNext(form, donationSwiper, validateBlock, Scroll) {
         'event' : 'donationEvent',
         'eventCategory' : 'donations',
         'eventAction' : 'form_interaction',
-        'eventLabel' : 'completed amount',
-      });
+        'eventLabel' : 'completed:amount',
+      });             
 
       donationSwiper.slideNext();
       // Scroll.animateScroll(document.querySelector('.form-caption'));
@@ -95,6 +95,13 @@ function prevNext(form, donationSwiper, validateBlock, Scroll) {
         'eventAction' : 'form_interaction',
         'eventLabel' : 'completed:personal_details',
       });
+
+      if(typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {
+          content_name: campaignName
+        });
+      }
+      
 
       donationSwiper.slideNext();
       // donationSwiper.slides[2].querySelectorAll('input, select')[0].focus();

@@ -211,7 +211,7 @@ const jsPack = (isProduction, doWatch) => {
 				}, */
         {
           test: /\.jsx?$/,
-          exclude: /node_modules\/(?!foundation)/,
+          exclude: /node_modules\/(?!swiper|dom7)/,
           loader: 'babel-loader',
           query: { presets: ['@babel/preset-env', '@babel/preset-react'] },
         },

@@ -1,11 +1,16 @@
 .section-launcher {
   padding-bottom: 0 !important;
 
+  .launchers {
+    padding-bottom: 20px;
+  }
+
   h2 {
     text-align: center;
   }
 
-  .action.fluid h2 {
+  .action.fluid h2,
+  .action.fluid p {
     text-align: left;
   }
 

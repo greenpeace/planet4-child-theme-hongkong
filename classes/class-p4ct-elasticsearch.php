@@ -103,14 +103,14 @@ if ( ! class_exists( 'P4CT_ElasticSearch' ) ) {
 					],
 					'weight' => self::DEFAULT_PAGE_WEIGHT,
 				],
-				[
-					'filter' => [
-						'term' => [
-							'post_parent' => esc_sql( $options['act_page'] ),
-						],
-					],
-					'weight' => self::DEFAULT_ACTION_WEIGHT,
-				],
+				// [
+				// 	'filter' => [
+				// 		'term' => [
+				// 			'post_parent' => esc_sql( $options['act_page'] ),
+				// 		],
+				// 	],
+				// 	'weight' => self::DEFAULT_ACTION_WEIGHT,
+				// ],
 			];
 
 			// Specify how the computed scores are combined.

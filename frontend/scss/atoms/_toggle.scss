@@ -5,7 +5,7 @@
 
   &:active {
     outline: none;
-  }
+  }  
 
   &:not(.accordion) {
     @include see-more;
@@ -81,6 +81,10 @@
   padding-left: 10px;
   padding-right: 10px;
   transition: height 800ms ease;
+
+  p {
+    @include caption;
+  }
 
   &.accordion {
     padding-left: 35px;

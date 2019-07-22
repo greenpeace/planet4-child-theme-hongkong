@@ -26,6 +26,7 @@
 
   &:hover,
   &:focus {
+    // outline: none;
     background-color: darken(white, 2%);
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   }
@@ -190,27 +191,27 @@
         border-top-color: white;
         border-bottom-color: white;
       }
-
-      & .en-spinner {
-        top: 19px;
-      }
     }
   }
 
   & .en-spinner {
     position: absolute;
     color: transparent;
-    top: 14px;
+    top: 11px;
     left: 50%;
     margin-left: -11px;
 
     @include greaterThan('sm') {
-      top: 19px;
+      top: 12px;
     }
   }
 
   &.primary .en-spinner {
-    top: 17px;
+    top: 16px;
+
+    @include greaterThan('sm') {
+      top: 12px;
+    }
 
     &::after {
       border-top-color: white;
