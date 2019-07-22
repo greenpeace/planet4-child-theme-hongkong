@@ -2,42 +2,42 @@
   {% for key,item in share_options %}
       {% if item == 'facebook' %}
         <li>
-          <a href="https://www.facebook.com/sharer/sharer.php?u={{ post.link }}" class="floating-share-icon fb" aria-label="{{ '[Share on Facebook]' }}" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ post.link }}" class="floating-share-icon fb" aria-label="{{ '[Share on Facebook]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Facebook', 'eventLabel': '{{ post.link }}'});">
           <span class="icon-facebook"></span>
           </a>
         </li>
       {% elseif item == 'twitter' %}
         <li>
-          <a href="https://twitter.com/intent/tweet?text={{ og_description|e('html_attr')|raw }}&url={{ post.link }}" class="floating-share-icon tw" aria-label="{{ '[Share on Twitter]' }}" target="_blank" rel="noopener noreferrer">
+          <a href="https://twitter.com/intent/tweet?text={{ og_description|e('html_attr')|raw }}&url={{ post.link }}" class="floating-share-icon tw" aria-label="{{ '[Share on Twitter]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Twitter', 'eventLabel': '{{ post.link }}'});">
           <span class="icon-twitter"></span>
           </a>
         </li> 
       {% elseif item == 'email' %}
         <li>
-          <a href="mailto:?subject={{ og_description|e('html_attr')|raw }}&body={{ post.link }}" class="floating-share-icon email" aria-label="{{ '[Share via e-mail]' }}" target="_blank" rel="noopener noreferrer">
+          <a href="mailto:?subject={{ og_description|e('html_attr')|raw }}&body={{ post.link }}" class="floating-share-icon email" aria-label="{{ '[Share via e-mail]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Email', 'eventLabel': '{{ post.link }}'});">
           <span class="icon-email"></span>
           </a>
         </li>
       {% elseif item == 'whatsapp' %}
         <li>
-          <a href="whatsapp://send?text={{ post.link }}" class="floating-share-icon whatsapp" aria-label="{{ '[Share via whatsapp]' }}" target="_blank" rel="noopener noreferrer">
+          <a href="whatsapp://send?text={{ post.link }}" class="floating-share-icon whatsapp" aria-label="{{ '[Share via whatsapp]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Whatsapp', 'eventLabel': '{{ post.link }}'});">
           <span class="icon-whatsapp"></span>
           </a>
         </li>
       {% elseif item == 'line' %}
-        <li>
-          <a href="https://social-plugins.line.me/lineit/share?url={{ post.link }}" class="floating-share-icon line" aria-label="{{ '[Share via Line]' }}" target="_blank" rel="noopener noreferrer">
+        <li class="share__line">
+          <a href="https://social-plugins.line.me/lineit/share?url={{ post.link }}" class="floating-share-icon line" aria-label="{{ '[Share via Line]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Line', 'eventLabel': '{{ post.link }}'});">
           <span class="icon-line"></span>
           </a>
         </li>
 	  {% elseif item == 'kakaotalk' %}
-        <li>
-          <a href="https://story.kakao.com/s/share?url={{ post.link }}&text={{ og_description|e('html_attr')|raw }}" class="floating-share-icon line" aria-label="{{ '[Share via KakaoTalk]' }}" target="_blank" rel="noopener noreferrer">
+        <li class="share__kakaotalk">
+          <a id="kakao-link-btn" href="javascript:;" class="floating-share-icon line" aria-label="{{ '[Share via KakaoTalk]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Kakao', 'eventLabel': '{{ post.link }}'});">
           <span class="icon-kakaotalk"></span>
           </a>
         </li>
       {% elseif item == 'wechat' %}
-        <li>
+        <li class="share__wechat">
           <a href="weixin://dl/posts?url={{ post.link }}" class="floating-share-icon line" aria-label="{{ '[Share via WeChat]' }}" target="_blank" rel="noopener noreferrer">
           <span class="icon-wechat"></span>
           </a>
