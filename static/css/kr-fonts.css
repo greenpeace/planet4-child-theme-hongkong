@@ -120,10 +120,11 @@ button,
 
 @media only screen and (min-width: 1024px) {
   .floating-share {
-    left: -150px !important;
+    left: -100px !important;
   }
 
   .floating-share.is-fixed {
-    left: -500px !important;
+    left: 50vw !important;
+    margin-left: -500px !important;
   }
 }
