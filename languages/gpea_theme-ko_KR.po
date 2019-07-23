@@ -356,7 +356,7 @@ msgstr "읽는 시간"
 
 #: single.php:131
 msgid "Author:"
-msgstr "저자:"
+msgstr "글:"
 
 #: single.php:132
 msgid "Article donation launcher"
