@@ -153,11 +153,18 @@ class P4CT_Site {
 		$context['commitment_projects_link_label'] = isset( $options['gpea_default_commitment_projects'] ) ? get_the_title( $options['gpea_default_commitment_projects'] ) : '';
 		$context['commitment_issues_link_label'] = isset( $options['gpea_default_commitment_issues'] ) ? get_the_title( $options['gpea_default_commitment_issues'] ) : '';
 
-		$context['support_link'] = isset( $options['gpea_default_supportus_link'] ) ? get_permalink( $options['gpea_default_supportus_link'] ) : site_url();
+		if ( isset( $options['gpea_default_supportus_link_external'] ) && ( '' !== $options['gpea_default_supportus_link_external'] ) ) {
+			$context['support_link'] = 	$options['gpea_default_supportus_link_external'];
+		} else {
+			$context['support_link'] = isset( $options['gpea_default_supportus_link'] ) ? get_permalink( $options['gpea_default_supportus_link'] ) : site_url();
+		}
+
 		$context['generic_footer_text'] = isset( $options['gpea_description_generic_footer_text'] ) ? $options['gpea_description_generic_footer_text'] : '';
 		$context['current_country'] = isset( $options['gpea_current_country'] ) ? $options['gpea_current_country'] : 'HK';
 		$context['home_url'] = site_url();
 		$context['kakao_app_id'] = isset( $options['gpea_kakao_app_id'] ) ? $options['gpea_kakao_app_id'] : '';
+
+		// footer extra link
 
 		$context['strings_navbar'] = [
 			'sign' => __( 'Sign', 'gpea_theme' ),
