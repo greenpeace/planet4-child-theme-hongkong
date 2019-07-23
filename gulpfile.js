@@ -213,7 +213,21 @@ const jsPack = (isProduction, doWatch) => {
           test: /\.jsx?$/,
           exclude: /node_modules\/(?!swiper|dom7)/,
           loader: 'babel-loader',
-          query: { presets: ['@babel/preset-env', '@babel/preset-react'] },
+          query: {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'usage',
+                  corejs: 3,
+                  targets: {
+                    ie: 11,
+                  },
+                },
+              ],
+              '@babel/preset-react',
+            ],
+          },
         },
         // {
         //   enforce: 'pre',
