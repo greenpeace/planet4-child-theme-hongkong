@@ -42,10 +42,10 @@ export default function() {
 
       // set error messages for minimum amount
       if ( form.classList.contains('js-donation-launcher-form') ) {
-        if ( ( e.target.classList.contains('tab-item__once') ) && form.getAttribute('data-suggested-oneoff') ) {
+        if ( e.target.classList.contains('tab-item__once') ) {
           // set corresponding error message
           if (invalidFeedback.length) invalidFeedback[0].innerHTML = form.getAttribute('data-minimum-single-error');          
-        } else if ( ( e.target.classList.contains('tab-item__recurring') ) && form.getAttribute('data-suggested-regular') ) {
+        } else if ( e.target.classList.contains('tab-item__recurring') ) {
           // set corresponding error message
           if (invalidFeedback.length) invalidFeedback[0].innerHTML = form.getAttribute('data-minimum-recurring-error');
         }
@@ -106,7 +106,7 @@ export default function() {
     if ( form.frequency.value == 'Y' ) minimumValue = form.getAttribute('data-minimum-regular');
     else minimumValue = form.getAttribute('data-minimum-oneoff');
 
-    if (amountValue < minimumValue) return false;
+    if ( parseInt(amountValue) < parseInt(minimumValue) ) return false;
     
     if (form['en_recurring_question'] && form['en_recurring_question'].value) {
       frequencyValue = form.frequency.value;
