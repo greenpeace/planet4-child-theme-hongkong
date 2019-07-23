@@ -124,24 +124,16 @@
 {% endif %}
 <script>
 if (navigator.share) {
-	navigator.share({
-		title: "{{ og_title|e('html_attr')|raw }}",
-		text: "{{ og_description|e('html_attr')|raw }}",
-		url: "{{ post.link }}",
-	})
-	.then(() => console.log('Successful share'))
-	.catch((error) => console.log('Error sharing', error));
 
 	var shareButton = document.querySelectorAll('.floating-share-icon.navigator');
 
-	shareButton[0].addEventListener("click", async () => {
-		try {
-			await navigator.share({ title: "Example Page", url: "" });
-			console.log("Data was shared successfully");
-		} catch (err) {
-			console.error("Share failed:", err.message);
-		}
-	});
+	shareButton[0].addEventListener("click", function(){
+		navigator.share({
+			title: "{{ og_title|e('html_attr')|raw }}",
+			text: "{{ og_description|e('html_attr')|raw }}",
+			url: "{{ post.link }}",
+		});
+	});	
 
 }
 </script>    

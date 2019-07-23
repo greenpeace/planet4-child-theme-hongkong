@@ -42,7 +42,7 @@
 			<div class="news-list">
 			{% if ( related_posts ) %}
 				{% for related_post in related_posts %}
-				{% include "blocks/tease-related-post.twig" with {post:related_post} %}
+				{% include "blocks/tease-related-post.twig" with {post:related_post, main_issue_name:main_issue_name, main_issue_slug:main_issue_slug  } %}
 				{% endfor %}
 			{% endif %}
 			</div>
