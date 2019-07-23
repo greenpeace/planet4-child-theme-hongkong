@@ -10,13 +10,12 @@
 	<div class="box">
 		<div class="meta-box">
 			<div>
-				<span class="issue {{ post.categories[0].slug }}">{{ post.categories[0]|raw }}</span>
+				<span class="issue {%if (main_issue_slug) %} {{ main_issue_slug }} {% else %} {{ post.categories[0].slug }} {% endif %}">{%if (main_issue_name) %} {{ main_issue_name }} {% else %} {{ post.categories[0]|raw }} {% endif %}</span>
 				<span>{{ post.page_types[0].name }}</span>
 			</div>
 		</div>
 		<p>
 			{{ post.post_title }}
-			<!-- - TODO or recent_post.post_excerpt? -->
 		</p>
 		<div class="meta-box">
 			<div>

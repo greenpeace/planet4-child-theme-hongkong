@@ -74,7 +74,7 @@ msgstr[0] "?"
 #: classes/class-p4ct-search.php:601
 msgid "%d result"
 msgid_plural "%d results"
-msgstr[0] "%d 결과"
+msgstr[0] "%d 검색필터"
 
 #: classes/class-p4ct-search.php:654
 msgid "Page"
@@ -99,7 +99,7 @@ msgstr "검색결과 더보기"
 
 #: classes/class-p4ct-site.php:151
 msgid "Sign"
-msgstr "회원가입"
+msgstr "지금 서명하기"
 
 #: classes/class-p4ct-site.php:152 single.php:136
 msgid "Share"
@@ -111,7 +111,7 @@ msgstr "후원하기"
 
 #: classes/class-p4ct-site.php:154
 msgid "Support us"
-msgstr "참여하기"
+msgstr "후원하기"
 
 #: classes/class-p4ct-site.php:158
 msgid "Follow us"
@@ -119,7 +119,7 @@ msgstr "팔로우하기"
 
 #: classes/class-p4ct-site.php:159
 msgid "Our commitment"
-msgstr "우리의 약속"
+msgstr "우리의 활동 "
 
 #: classes/class-p4ct-site.php:160
 msgid "Projects"
@@ -466,7 +466,7 @@ msgstr "서명"
 #. translators: placeholder represents the number of signers.
 #: page-templates/petition.php:113
 msgid "%s signers"
-msgstr "% 서명인들"
+msgstr "% 명 서명"
 
 #. Template Name of the theme
 msgid "Main Issue"
@@ -496,13 +496,13 @@ msgid "none"
 msgstr "선택안함"
 
 msgid "SHOW MORE RESULTS"
-msgstr ""
+msgstr "더보기 "
 
 msgid "Any"
 msgstr "모두 선택"
 
 msgid "Start typing"
-msgstr ""
+msgstr "검색어를 입력해 주세요 "
 
 msgid "Any issue"
 msgstr "모두 선택"
