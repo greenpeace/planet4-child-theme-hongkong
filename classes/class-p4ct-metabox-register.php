@@ -573,7 +573,24 @@ class P4CT_Metabox_Register {
 				'id'      => 'gpea_description_generic_footer_text',
 				'type'    => 'textarea',
 			)
-		);		
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Footer additional link', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Will be placed in the right corner, same row of other green links in footer', 'gpea_theme_backend' ),
+				'id'      => 'gpea_footer_extra_link',
+				'type'    => 'text',
+			)
+		);
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Footer additional link label', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Label of above link, if present', 'gpea_theme_backend' ),
+				'id'      => 'gpea_footer_extra_link_label',
+				'type'    => 'text',
+			)
+		);
 
 		/* support us */
 		$cmb_options->add_field(
@@ -582,6 +599,16 @@ class P4CT_Metabox_Register {
 				'desc'    => esc_html__( 'Support page with all information and links', 'gpea_theme_backend' ),
 				'id'      => 'gpea_default_supportus_link',
 				'type'    => 'supportus_page_dropdown',
+			)
+		);
+
+		/* support us external */
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Specify an external "support" page', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'If specified, the button in the top right of the screen will bring out of the site!', 'gpea_theme_backend' ),
+				'id'      => 'gpea_default_supportus_link_external',
+				'type'    => 'text',
 			)
 		);
 
