@@ -25,21 +25,11 @@ const backLink = function() {
   const link = document.querySelector('.js-back-button');
   if (!link) return;
 
-  const latestMainPage = window.localStorage.getItem('latest-main-page');
-  if (latestMainPage) link.href = latestMainPage;
+  // const latestMainPage = window.localStorage.getItem('latest-main-page');
+  // if (latestMainPage) link.href = latestMainPage;
 
-  /* keep it commented in case we want to re-add it later
-  link.addEventListener('mouseenter', function() {
-    document.body.style.willChange = 'opacity, transform';
-  });
-
-  link.addEventListener('mouseleave', function() {
-    document.body.style.willChange = null;
-  });
-
-  link.addEventListener('click', function() {
-    document.body.classList.add('is-backing');
-  }); */
+  const latestAnyPage = window.localStorage.getItem('latest-any-page');
+  if (latestAnyPage) link.href = latestAnyPage;
 };
 
 const closeLink = function() {
@@ -48,19 +38,6 @@ const closeLink = function() {
 
   const latestPage = window.localStorage.getItem('latest-page');
   if (latestPage) link.href = latestPage;
-
-  /* keep it commented in case we want to re-add it later
-  link.addEventListener('mouseenter', function() {
-    document.body.style.willChange = 'opacity, transform';
-  });
-
-  link.addEventListener('mouseleave', function() {
-    document.body.style.willChange = null;
-  });
-
-  link.addEventListener('click', function() {
-    document.body.classList.add('is-exiting');
-  }); */
 };
 
 /**
@@ -71,6 +48,7 @@ export default function() {
   if (isFirstSessionPage()) {
     window.localStorage.setItem('latest-main-page', '');
     window.localStorage.setItem('latest-page', '');
+    window.localStorage.setItem('latest-any-page', '');
   }
 
   // Attach back link functionality (the one in Main Issue, Project, Report, Post pages)
@@ -88,4 +66,7 @@ export default function() {
   if (!isAbout()) {
     window.localStorage.setItem('latest-page', window.location.href);
   }
+
+  // Save any page
+  window.localStorage.setItem('latest-any-page', window.location.href);
 }

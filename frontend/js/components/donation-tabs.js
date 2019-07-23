@@ -27,16 +27,29 @@ export default function() {
       Array.from(siblings).forEach(sibling => {
         sibling.classList.remove('is-active');
       });
-      e.target.classList.add('is-active');
+      e.target.classList.add('is-active');      
+
+      let invalidFeedback = document.querySelectorAll('.invalid-feedback');      
 
       // handle donation suggested for basic form
       if ( form.classList.contains('js-donation-basic') ) {
         if ( ( e.target.classList.contains('tab-item__once') ) && form.getAttribute('data-suggested-oneoff') ) {
-          form.amount.value = form.getAttribute('data-suggested-oneoff');
+          form.amount.value = form.getAttribute('data-suggested-oneoff');          
         } else if ( ( e.target.classList.contains('tab-item__recurring') ) && form.getAttribute('data-suggested-regular') ) {
           form.amount.value = form.getAttribute('data-suggested-regular');
-        }        
+        }
       }
+
+      // set error messages for minimum amount
+      if ( form.classList.contains('js-donation-launcher-form') ) {
+        if ( ( e.target.classList.contains('tab-item__once') ) && form.getAttribute('data-suggested-oneoff') ) {
+          // set corresponding error message
+          if (invalidFeedback.length) invalidFeedback[0].innerHTML = form.getAttribute('data-minimum-single-error');          
+        } else if ( ( e.target.classList.contains('tab-item__recurring') ) && form.getAttribute('data-suggested-regular') ) {
+          // set corresponding error message
+          if (invalidFeedback.length) invalidFeedback[0].innerHTML = form.getAttribute('data-minimum-recurring-error');
+        }
+      }      
 
       if (handles.length) {
         const changeEvent = document.createEvent('HTMLEvents');
@@ -88,18 +101,28 @@ export default function() {
     } else if (form['dollar-handle'] && form['dollar-handle'].value) {
       amountValue = form['dollar-handle'].value;
     }
+
+    let minimumValue;
+    if ( form.frequency.value == 'Y' ) minimumValue = form.getAttribute('data-minimum-regular');
+    else minimumValue = form.getAttribute('data-minimum-oneoff');
+
+    if (amountValue < minimumValue) return false;
+    
     if (form['en_recurring_question'] && form['en_recurring_question'].value) {
       frequencyValue = form.frequency.value;
     }
 
     if ('mrm' == form.en_recurring_question.value) {
-      if ('N' == frequencyValue) frequencyValue = 'S';
-      else frequencyValue = 'M';
+      if ('N' == frequencyValue) frequencyValue = 's';
+      else frequencyValue = 'm';
+      
+      // donationUrl.searchParams.append(
+      //   'donate_amt',
+      //   frequencyValue + ':' + amountValue
+      // );
 
-      donationUrl.searchParams.append(
-        'donate_amt',
-        frequencyValue + ':' + amountValue
-      );
+      donationUrl = donationUrl + '?donate_amt=' + frequencyValue + ':' + amountValue;
+
     } else {
       donationUrl.searchParams.append('transaction.donationAmt', amountValue);
       donationUrl.searchParams.append(
@@ -113,7 +136,7 @@ export default function() {
   // prepare field for error
   const feedback = document.createElement('p');
   feedback.classList.add('invalid-feedback');
-  feedback.innerHTML = form.getAttribute('data-minimum-error');
+  feedback.innerHTML = form.getAttribute('data-minimum-recurring-error');
   if (form.amount) form.amount.parentNode.insertBefore(feedback, form.amount.nextSibling);
   else if (form['free-amount']) form['free-amount'].parentNode.insertBefore(feedback, form['free-amount'].nextSibling);
 
@@ -128,7 +151,7 @@ export default function() {
       if ( form.frequency.value == 'Y' ) minimumValue = form.getAttribute('data-minimum-regular');
       else minimumValue = form.getAttribute('data-minimum-oneoff');
       
-      console.log(minimumValue);
+      // console.log(minimumValue);
 
       const invalid = validate.single(
         e.target.value,

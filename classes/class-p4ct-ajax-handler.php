@@ -169,6 +169,18 @@ class P4CT_AJAX_Handler {
 
 				$gpea_project_id = intval( $gpea_project );
 
+				// we cache single tag and category request, then combine cached results
+				$cache_key = 'following_' . $gpea_project_id . '_project';
+				$cache_group = 'following';
+
+				$cached_result = wp_cache_get( $cache_key, $cache_group );
+
+				if ( false !== $cached_result ) {
+					$posts_result[] = $cached_result;
+					// if in cache we set the results corresponding value and continue to next project id
+					continue;
+				}
+
 				$project_detail = array();
 				$project_detail['title'] = get_the_title( $gpea_project_id );
 				if ( has_post_thumbnail( $gpea_project_id ) ) {
@@ -202,12 +214,14 @@ class P4CT_AJAX_Handler {
 
 				$project_related = array();
 
-				while ( $the_query->have_posts() ) :
+				if ( $the_query->have_posts() ) {
+					while ( $the_query->have_posts() ) :
 
 						$the_query->the_post();
 						$single_update = array(
 							'title'     => get_the_title(),
-							'post_date' => date( 'Y - m - d', strtotime( get_the_date() ) ),
+							//'post_date' => date( 'Y - m - d', strtotime( get_the_date() ) ),
+							'post_date'       => get_the_date(),
 							'link'      => get_the_permalink( $post->ID ),
 						);
 
@@ -234,11 +248,15 @@ class P4CT_AJAX_Handler {
 
 					$project_related[] = $single_update;
 				endwhile;
+				}
 
 				$project_detail['related'] = $project_related;
 
 				wp_reset_query();
 				wp_reset_postdata();
+
+				// store in cache 
+				wp_cache_add( $cache_key, $project_detail, $cache_group );
 
 				$posts_result[] = $project_detail;
 
@@ -270,11 +288,21 @@ class P4CT_AJAX_Handler {
 	 * @preferences can be petition
 	 */
 	private function get_carousel_posts( $tags, $type, $preferences ) {
-
 		$results = array();
 
 		foreach ( $tags as $tag_id ) {
 
+			// we cache single tag and category request, then combine cached results
+			$cache_key = 'following_' . $tag_id . '_' . $type . '_' . ( $preferences ? $preferences : 'none' );
+			$cache_group = 'following';
+
+			$cached_result = wp_cache_get( $cache_key, $cache_group );
+
+			if ( false !== $cached_result ) {
+				$results[ $tag_id ] = $cached_result;
+				// if in cache we set the results corresponding value and continue to next tag_id
+				continue;
+			}
 			$args = array(
 				'post_type'      => array( 'page', 'post' ),
 				'order'          => 'desc',
@@ -302,101 +330,108 @@ class P4CT_AJAX_Handler {
 
 			$the_query = new \WP_Query( $args );
 
-			$most_recent = 0;
-
-			while ( $the_query->have_posts() ) :
-
-				$the_query->the_post();
-				$single_update = array(
-					'ID'         => get_the_ID(),
-					'post_title' => get_the_title(),
-					'date'       => date( 'Y - m - d', strtotime( get_the_date() ) ),
-					'link'       => get_the_permalink( $post->ID ),
-				);
-
-				// update the most recent date
-				$most_recent = ( strtotime( get_the_date() ) > $most_recent ) ? strtotime( get_the_date() ) : $most_recent;
-
-				$single_update['reading_time'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
-
-				// other info
-				$main_issues = $this->gpea_extra->gpea_get_main_issue( $post->ID );
-				if ( $main_issues ) {
-					$single_update['main_issue_slug'] = $main_issues->slug;
-					$single_update['main_issue'] = $main_issues->name;
-				}
-
-				if ( has_post_thumbnail( $post->ID ) ) {
-					$img_id                  = get_post_thumbnail_id( $post->ID );
-					$img_data                = wp_get_attachment_image_src( $img_id, 'medium_large' );
-					$single_update['img_url'] = $img_data[0];
-				}
-
-				// news type
-				$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
-				if ( $news_type ) {
-					$single_update['news_type'] = $news_type[0]->name;
-				}
-
-				// check if petition and, if so, retrieve extra information
-				if ( has_term( 'petition', 'post_tag', $post->ID ) ) {
-					if ( 'page-templates/petition.php' === get_post_meta( $post->ID, '_wp_page_template', true ) ) {
-						$single_update['engaging_pageid'] = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_pageid', true );
-						$single_update['engaging_target'] = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_target', true );
-
-						if ( $single_update['engaging_pageid'] ) {
-
-							// get Engaging options:
-							$engaging_settings = get_option( 'p4en_main_settings' );
-							$engaging_token = $engaging_settings['p4en_frontend_public_api'];
-
-							global $wp_version;
-							$url = 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $single_update['engaging_pageid'] . '&contentType=json&resultType=summary';
-							$args = array(
-								'timeout'     => 5,
-								'redirection' => 5,
-								'httpversion' => '1.0',
-								'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),
-								'blocking'    => true,
-								'headers'     => array(),
-								'cookies'     => array(),
-								'body'        => null,
-								'compress'    => false,
-								'decompress'  => true,
-								'sslverify'   => true,
-								'stream'      => false,
-								'filename'    => null,
-							);
-							$result = wp_remote_get( $url, $args );
-							$obj = json_decode( $result['body'], true );
-							$single_update['signatures'] = $obj['rows'][0]['columns'][4]['value'];
-						}
-
-						if ( $single_update['engaging_target'] && $single_update['signatures'] ) {
-							$post->percentage = intval( intval( $single_update['signatures'] ) * 100 / intval( $single_update['engaging_target'] ) );
-						} else {
-							$post->percentage = 100;
-						}
-
-						/* if external link is set, we use that instead of standard one */
-						$external_link = get_post_meta( $post->ID, 'p4-gpea_petition_external_link', true );
-						if ( $external_link ) $single_update['link'] = $external_link;
-					}
-				}
+			if ( $the_query->have_posts() ) {
+				$most_recent = 0;
 
 				if ( $term_info ) {
 					$results[ $tag_id ]['name']    = $term_info->name;
 					$results[ $tag_id ]['slug']    = $term_info->slug;
 					$results[ $tag_id ]['term_id'] = $term_info->term_id;
 				}
-				$results[ $tag_id ]['most_recent'] = $most_recent;
 
-				$results[ $tag_id ]['posts'][] = $single_update;
+				while ( $the_query->have_posts() ) :
 
-			endwhile;
+					$the_query->the_post();
+					$single_update = array(
+						'ID'         => get_the_ID(),
+						'post_title' => get_the_title(),
+						//'date'       => date( 'Y - m - d', strtotime( get_the_date() ) ),
+						'date'       => get_the_date(),
+						'link'       => get_the_permalink( $post->ID ),
+					);
+
+					// update the most recent date
+					$most_recent = ( strtotime( get_the_date() ) > $most_recent ) ? strtotime( get_the_date() ) : $most_recent;
+
+					$single_update['reading_time'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+
+					// other info
+					$main_issues = $this->gpea_extra->gpea_get_main_issue( $post->ID );
+					if ( $main_issues ) {
+						$single_update['main_issue_slug'] = $main_issues->slug;
+						$single_update['main_issue'] = $main_issues->name;
+					}
+
+					if ( has_post_thumbnail( $post->ID ) ) {
+						$img_id                  = get_post_thumbnail_id( $post->ID );
+						$img_data                = wp_get_attachment_image_src( $img_id, 'medium_large' );
+						$single_update['img_url'] = $img_data[0];
+					}
+
+					// news type
+					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
+					if ( $news_type ) {
+						$single_update['news_type'] = $news_type[0]->name;
+					}
+
+					// check if petition and, if so, retrieve extra information
+					if ( has_term( 'petition', 'post_tag', $post->ID ) ) {
+						if ( 'page-templates/petition.php' === get_post_meta( $post->ID, '_wp_page_template', true ) ) {
+							$single_update['engaging_pageid'] = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_pageid', true );
+							$single_update['engaging_target'] = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_target', true );
+
+							if ( $single_update['engaging_pageid'] ) {
+
+								// get Engaging options:
+								$engaging_settings = get_option( 'p4en_main_settings' );
+								$engaging_token = $engaging_settings['p4en_frontend_public_api'];
+
+								global $wp_version;
+								$url = 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $single_update['engaging_pageid'] . '&contentType=json&resultType=summary';
+								$args = array(
+									'timeout'     => 5,
+									'redirection' => 5,
+									'httpversion' => '1.0',
+									'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),
+									'blocking'    => true,
+									'headers'     => array(),
+									'cookies'     => array(),
+									'body'        => null,
+									'compress'    => false,
+									'decompress'  => true,
+									'sslverify'   => true,
+									'stream'      => false,
+									'filename'    => null,
+								);
+								$result = wp_remote_get( $url, $args );
+								$obj = json_decode( $result['body'], true );
+								$single_update['signatures'] = $obj['rows'][0]['columns'][4]['value'];
+							}
+
+							if ( $single_update['engaging_target'] && $single_update['signatures'] ) {
+								$post->percentage = intval( intval( $single_update['signatures'] ) * 100 / intval( $single_update['engaging_target'] ) );
+							} else {
+								$post->percentage = 100;
+							}
+
+							/* if external link is set, we use that instead of standard one */
+							$external_link = get_post_meta( $post->ID, 'p4-gpea_petition_external_link', true );
+							if ( $external_link ) $single_update['link'] = $external_link;
+						}
+					}
+
+					$results[ $tag_id ]['most_recent'] = $most_recent;
+
+					$results[ $tag_id ]['posts'][] = $single_update;
+
+				endwhile;
+			}
 
 			wp_reset_query();
 			wp_reset_postdata();
+
+			// store in cache 
+			wp_cache_add( $cache_key, $results[ $tag_id ], $cache_group );
 
 		}
 

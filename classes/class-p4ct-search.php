@@ -341,9 +341,20 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 						$timber_post->img_url = $img_url;
 					}
 
-					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
-					if ( $news_type ) {
-						$timber_post->news_type = $news_type[0]->name;
+					if ( 'post' === $post->post_type ) {
+						$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
+						if ( $news_type ) {
+							$timber_post->news_type = $news_type[0]->name;
+						}
+					} else if ( 'page' === $post->post_type ) {
+						$page_template = get_post_meta( $post->ID, '_wp_page_template', true );
+						if ( 'page-templates/petition.php' === $page_template ) {
+							$timber_post->news_type = __( 'Petition', 'gpea_theme' );
+						} else if ( 'page-templates/project.php' === $page_template ) {
+							$timber_post->news_type = __( 'Project', 'gpea_theme' );
+						} else if ( 'page-templates/main-issue.php' === $page_template ) {
+							$timber_post->news_type = __( 'Main Issue', 'gpea_theme' );
+						}
 					}
 
 					$post_categories = wp_get_post_categories( $post->ID );

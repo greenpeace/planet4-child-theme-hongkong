@@ -1,3 +1,5 @@
+import * as Cookies from 'js-cookie';
+
 export default function() {
   const COOKIE_ID = 'gpea_tip_pledge_ids';
   let submitted_tips_ids = Cookies.getJSON(COOKIE_ID) || [];

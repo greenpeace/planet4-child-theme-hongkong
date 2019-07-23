@@ -1,3 +1,4 @@
+import 'remove-focus-outline';
 import {
   Swiper,
   Navigation,
@@ -26,6 +27,8 @@ import tips from './components/tips';
 import backLinks from './components/back-links';
 import parallax from './components/parallax';
 import scrollWay from './components/scroll-way';
+import articleList from './components/article-list';
+import facebookVideo from './components/facebook-video';
 
 import petitionThankyou from './petition-thankyou';
 
@@ -76,6 +79,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
   parallax();
 
   scrollWay();
+
+  articleList();
+
+  facebookVideo();
 
   AOS.init({
     easing: 'ease-in-out-cubic',

@@ -1,5 +1,14 @@
 import Globalicious from './Globalicious';
 
+function mID(lat, long) {
+  return (
+    'glbl-marker_' +
+    lat.toString().replace('.', '♥') +
+    '_' +
+    long.toString().replace('.', '♥')
+  );
+}
+
 document.addEventListener('DOMContentLoaded', function(event) {
   const globe = document.getElementById('history-globe');
   if (!globe) return;
@@ -59,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     gridUnder: false,
     land: '#fff',
     data: world_vars.templateUrl + '/static/js/world-110m.json',
-    goToDuration: 500,
-    goToEasing: 'easeOutQuart',
+    goToDuration: 1000,
+    goToEasing: 'easeInOutQuart',
   });
 
   /** Let's do the rest after Load, to give the page time to breath
@@ -74,9 +83,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
       window.Earth.mark(marker.lat, marker.long, pin);
     });
 
+    /** Save markers
+     ******************************************************************************************/
+    const markerEls = document.querySelectorAll('g.glbl-marker');
+
     /** Go to the first location
      ******************************************************************************************/
     window.Earth.goTo(markers[0].lat - 60, markers[0].long);
+    if (document.getElementById(mID(markers[0].lat, markers[0].long))) {
+      document
+        .getElementById(mID(markers[0].lat, markers[0].long))
+        .classList.add('is-current');
+    }
 
     /** Hook up to the slide change
      ******************************************************************************************/
@@ -85,6 +103,21 @@ document.addEventListener('DOMContentLoaded', function(event) {
         markers[this.activeIndex].lat - 60,
         markers[this.activeIndex].long
       );
+
+      Array.from(markerEls).forEach(function(markerEl) {
+        markerEl.classList.remove('is-current');
+      });
+      if (
+        document.getElementById(
+          mID(markers[this.activeIndex].lat, markers[this.activeIndex].long)
+        )
+      ) {
+        document
+          .getElementById(
+            mID(markers[this.activeIndex].lat, markers[this.activeIndex].long)
+          )
+          .classList.add('is-current');
+      }
     });
   });
 });

@@ -13,3 +13,11 @@
 [data-aos='fade-down'] {
   transform: translate3d(0, -10%, 0);
 }
+
+// IE <= 11
+@media (min-width: 0\0) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

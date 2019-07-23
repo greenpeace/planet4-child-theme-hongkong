@@ -10,6 +10,9 @@ const pageProject = function() {
       : new Array();
     var current_project_id = $('.js-project-follow').data('project');
 
+    // in case of malformed array, reset it
+    if (!Array.isArray(gpea_projects_followed)) gpea_projects_followed = new Array();
+
     // if already following
     if (gpea_projects_followed.includes(current_project_id)) {
       $('.js-project-unfollow').show();
@@ -20,7 +23,7 @@ const pageProject = function() {
     $('.js-project-follow').on('click', function(e) {
       e.preventDefault();
       gpea_projects_followed.push(current_project_id);
-      Cookies.set('gpea_projects', gpea_projects_followed);
+      Cookies.set('gpea_projects', gpea_projects_followed, { expires: 3650 });
       $('.js-project-follow').hide();
       $('.js-project-unfollow').fadeIn();
     });
@@ -31,7 +34,7 @@ const pageProject = function() {
       if (index > -1) {
         gpea_projects_followed.splice(index, 1);
       }
-      Cookies.set('gpea_projects', gpea_projects_followed);
+      Cookies.set('gpea_projects', gpea_projects_followed, { expires: 3650 });
       $('.js-project-follow').fadeIn();
       $('.js-project-unfollow').hide();
     });

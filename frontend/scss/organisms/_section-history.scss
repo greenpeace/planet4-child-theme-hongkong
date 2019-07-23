@@ -72,10 +72,11 @@
 }
 
 .glbl-marker {
-  transition: opacity 100ms linear;
-}
-
-.glbl-marker.is-hidden {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 300ms linear 300ms;
+}
+
+.glbl-marker.is-current {
+  opacity: 1;
 }

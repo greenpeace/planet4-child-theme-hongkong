@@ -934,14 +934,18 @@ countrySelect.html('<label for="en__field_supporter_country_html" class="en__fie
 var countrySelectOptions = jQuery(document.createElement('select'));
 jQuery(countrySelectOptions).addClass('js-country-select en__field__input en__field__input--select');
 jQuery.each( geo_data.countryData.chi, function( i, item ) {
-	 //console.log(i);
-	 //console.log(item);
-	var o = new Option(item, i);
+	
+	if ( NRO && 'TW' == NRO && i == 'TW' ) var o = new Option(item, i, true);
+	else if ( NRO && 'HK' == NRO && i == 'HK' ) var o = new Option(item, i, true);
+	else var o = new Option(item, i);
 	/// jquerify the DOM object 'o' so we can use the html method
 	jQuery(o).html(item);
+
+	// if ( NRO && 'TW' == NRO ) jQuery(o).prop('selected', true);
 	countrySelectOptions.append(o);
 });
 countrySelect.append(countrySelectOptions);
+
 jQuery(countrySelect).insertBefore('input[name="supporter.country"]');
 
 jQuery(document).on('change',".js-country-select", function(){
@@ -1004,13 +1008,21 @@ var o = new Option(donationLexicon.cityLabel, '');
 jQuery(o).html(donationLexicon.cityLabel);
 citySelectOptions.append(o);
 
-jQuery.each( geo_data.hkData, function( i, item ) {
-	// console.log(i);
-	// console.log(item);
-	var o = new Option(item.chi, i);
-	jQuery(o).html(item.chi);
-	citySelectOptions.append(o);
-});
+if ( NRO && 'TW' == NRO ) {
+	jQuery.each( geo_data.twData.chi, function( i, item ) {
+		var o = new Option(i, i);
+		jQuery(o).html(i);
+		citySelectOptions.append(o);
+	});
+} else if ( NRO && 'HK' == NRO ) {
+	jQuery.each( geo_data.hkData, function( i, item ) {
+		// console.log(i);
+		// console.log(item);
+		var o = new Option(item.chi, i);
+		jQuery(o).html(item.chi);
+		citySelectOptions.append(o);
+	});
+}
 
 citySelect.append(citySelectOptions);
 jQuery(citySelect).insertBefore('input[name="supporter.country"]');
@@ -1076,6 +1088,5 @@ jQuery(document).on('change',".js-region-select", function(){
 		jQuery('input[name="supporter.postcode"]').val('00000');
 	}
 });
-  
   
 }
