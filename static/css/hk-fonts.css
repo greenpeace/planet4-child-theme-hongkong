@@ -62,3 +62,11 @@ button,
 .page-template-donation .logo-greenpeace {
   background-image: url('../images/logo_zh_green.svg');
 }
+
+.tip .tip-actions .tip-action-buttons .social-box a.tip-share-twitter {
+  display: none;
+}
+
+html:lang(zh-TW) .tip .tip-actions .tip-action-buttons .social-box a.tip-share-whatsapp {
+  display: none;
+}

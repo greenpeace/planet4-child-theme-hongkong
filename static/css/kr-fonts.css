@@ -128,3 +128,7 @@ button,
     margin-left: -500px !important;
   }
 }
+
+.tip .tip-actions .tip-action-buttons .social-box a.tip-share-whatsapp {
+  display: none;
+}

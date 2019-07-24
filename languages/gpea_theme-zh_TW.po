@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: 2019-07-03 21:58+0800\n"
+"PO-Revision-Date: 2019-07-24 21:41+0900\n"
 "X-Generator: Poedit 2.2.3\n"
 "X-Domain: gpea_theme\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -50,7 +50,7 @@ msgstr "最新"
 
 #: classes/class-p4ct-search.php:586
 msgid "Search"
-msgstr "搜索"
+msgstr "搜尋"
 
 #: classes/class-p4ct-search.php:587
 msgid "Reset Filters"
@@ -390,7 +390,7 @@ msgstr "立即關注"
 
 #. Template Name of the theme
 msgid "Project"
-msgstr "重點項目"
+msgstr "重點專案"
 
 #: page-templates/project.php:79 page-templates/main-issue.php:72
 msgid "Following"
