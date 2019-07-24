@@ -403,6 +403,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     speedAsDuration: true,
   });
 
+  document.getElementById("enform").style.opacity = "1";
+
   initDonation(Swiper, Scroll);
 
   countriesMenu();
