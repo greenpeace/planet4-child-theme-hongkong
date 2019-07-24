@@ -74,7 +74,7 @@ msgstr[0] "搜索 '%2$s' 所得的 %1$d 結果"
 #: classes/class-p4ct-search.php:601
 msgid "%d result"
 msgid_plural "%d results"
-msgstr[0] "結果 %d"
+msgstr[0] "%d 個搜尋結果"
 
 #: classes/class-p4ct-search.php:654
 msgid "Page"
@@ -471,7 +471,7 @@ msgstr "連署"
 #. translators: placeholder represents the number of signers.
 #: page-templates/petition.php:113
 msgid "%s signers"
-msgstr "連署人數"
+msgstr "連署人"
 
 #. Template Name of the theme
 msgid "Main Issue"
@@ -510,7 +510,7 @@ msgid "Start typing"
 msgstr "請輸入關鍵字"
 
 msgid "Any issue"
-msgstr "所有"
+msgstr "所有議題"
 
 msgid "Any topic"
-msgstr "所有"
+msgstr "所有主題"
