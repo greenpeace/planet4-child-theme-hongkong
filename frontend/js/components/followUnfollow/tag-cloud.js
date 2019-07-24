@@ -100,12 +100,25 @@ const tagCloud = function() {
 
   
   const p4en_form_tag_cloud = document.querySelector('.section-choose-topics #p4en_form');
-  // general, for all donation we check all checkbox... yes sir
+  // general, for all donation we check all checkbox... yes sir, this probably can be avoided in a couple of weeks, using new feature of official plugin
+  // specific for korea: assign a value to checkbox, otherwise "required" is never satisfied, and also assign required "programmatically", since plugin won't allow to set required to an input
   if (p4en_form_tag_cloud && ( 'ko-KR' != document.documentElement.lang ) ) {
     let privacyOptions = document.querySelectorAll('#p4en_form [type=checkbox]');
     for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {
       elementOption.checked = true;
     }
+  } else if (p4en_form_tag_cloud && ( 'ko-KR' == document.documentElement.lang ) ) {
+    let privacyOptions = document.querySelectorAll('#p4en_form [type=checkbox]');
+    for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {
+      if ( 'en__field_supporter_all_check' != elementOption.id ) elementOption.required = true;
+      elementOption.addEventListener( 'change', (e) => {
+        if(e.target.checked) {
+          e.target.value = 'Y';
+        } else {
+          e.target.value = '';
+        }
+      });
+    }      
   }  
 
 };

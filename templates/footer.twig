@@ -116,11 +116,13 @@
 {% if (kakao_app_id) %}
 <script src="https://secured-static.greenpeace.org/korea/Global/korea/DD/170519_DDpage/js/kakao.min.js"></script>
 <script type='text/javascript'>
-    Kakao.init('{{ kakao_app_id }}');
-    Kakao.Link.createScrapButton({
-      container: '#kakao-link-btn',
-      requestUrl: '{{ home_url }}'
-    });
+	Kakao.init('{{ kakao_app_id }}');
+	if (document.getElementById('kakao-link-btn')) {
+		Kakao.Link.createScrapButton({
+			container: '#kakao-link-btn',
+			requestUrl: '{{ home_url }}'
+		});
+	}    
 </script>
 {% endif %}
 <script>
