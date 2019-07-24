@@ -74,7 +74,7 @@ msgstr[0] "?"
 #: classes/class-p4ct-search.php:601
 msgid "%d result"
 msgid_plural "%d results"
-msgstr[0] "%d 검색필터"
+msgstr[0] "%d 개의 검색결과"
 
 #: classes/class-p4ct-search.php:654
 msgid "Page"
@@ -490,7 +490,7 @@ msgid "advanced_search"
 msgstr "상세 검색"
 
 msgid "filters"
-msgstr "필터"
+msgstr "검색필터"
 
 msgid "none"
 msgstr "선택안함"
