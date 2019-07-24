@@ -61,7 +61,8 @@ function initDonation(Swiper, Scroll) {
   ccvvOpener.classList.add('label-question-icon', 'js-open-ccvv-info');
 
   //labelCCVV[0].insertAdjacentHTML('beforeend', ccvvOpener);
-  labelCCVV[0].append(ccvvOpener);
+  // labelCCVV[0].append(ccvvOpener);
+  jQuery(labelCCVV[0]).append(ccvvOpener);
 
   if (ccvvInfoBox) {
     ccvvOpener.addEventListener('click', e => {
@@ -401,6 +402,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
     speed: 400,
     speedAsDuration: true,
   });
+
+  document.getElementById("enform").style.opacity = "1";
 
   initDonation(Swiper, Scroll);
 

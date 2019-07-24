@@ -40,8 +40,11 @@ function swiper(Swiper) {
     block.classList.add('swiper-slide');
   });
 
-  wrapAll(formblocks, swiperWrapper);
-  wrapAll([swiperWrapper], swiperContainer);
+  // wrapAll(formblocks, swiperWrapper);
+  // wrapAll([swiperWrapper], swiperContainer);
+
+  jQuery( ".en__component.en__component--formblock" ).wrapAll( "<div class='swiper-wrapper' />");
+  jQuery( ".swiper-wrapper" ).wrap( "<div class='swiper-container form-swiper' />");
 
   // 2. Add prev/next button to each slide
   formblocks[0].innerHTML +=

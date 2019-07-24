@@ -25,6 +25,11 @@
     right: initial;
     bottom: initial;
     top: initial;
+    opacity: 0;
+    transition-property: opacity;
+	  transition-duration: 0.5s;
+	  transition-delay: .1s;
+	  transition-timing-function: linear;
 
     .en__field__element {
       width: 100%;
@@ -437,5 +442,11 @@ span.label-question-icon {
     h1 {
       margin-bottom: 16px;
     }
+  }
+}
+
+#en__pagebuilder.page-template-donation .enform-side-style {
+  .enform {
+    opacity: 1.0;
   }
 }

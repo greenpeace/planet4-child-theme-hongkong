@@ -47,6 +47,7 @@
 			<ul class="press-media-links">
 				<li><a href="{{ press_media_link }}">{{ strings.press_media }}</a></li>
 				<li><a href="{{ preferences_link }}">{{ strings.my_preferences }}</a></li>
+				{% if (footer_extra_link) %}<li class="press-media-links__last"><a href="{{ footer_extra_link }}">{{ footer_extra_link_label }}</a></li>{% endif %}
 			</ul>
 			<hr />
 			<ul class="secondary-links">
@@ -129,9 +130,9 @@ if (navigator.share) {
 
 	shareButton[0].addEventListener("click", function(){
 		navigator.share({
-			title: "{{ og_title|e('html_attr')|raw }}",
-			text: "{{ og_description|e('html_attr')|raw }}",
-			url: "{{ post.link }}",
+			title: "{{ og_title|raw }}",
+			text: "{{ og_description|e('esc_js')|raw }}",
+			url: "{{ post.link|e('esc_url') }}",
 		});
 	});	
 
