@@ -216,6 +216,11 @@ footer {
         border-bottom-color: $color-green;
       }
     }
+    
+    li.press-media-links__last {
+      float: right;
+    }
+
   }
 
   .secondary-links {

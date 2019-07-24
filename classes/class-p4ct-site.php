@@ -154,10 +154,14 @@ class P4CT_Site {
 		$context['commitment_issues_link_label'] = isset( $options['gpea_default_commitment_issues'] ) ? get_the_title( $options['gpea_default_commitment_issues'] ) : '';
 
 		if ( isset( $options['gpea_default_supportus_link_external'] ) && ( '' !== $options['gpea_default_supportus_link_external'] ) ) {
-			$context['support_link'] = 	$options['gpea_default_supportus_link_external'];
+			$context['support_link'] = $options['gpea_default_supportus_link_external'];
 		} else {
 			$context['support_link'] = isset( $options['gpea_default_supportus_link'] ) ? get_permalink( $options['gpea_default_supportus_link'] ) : site_url();
 		}
+
+		// special third link
+		$context['footer_extra_link'] = $options['gpea_footer_extra_link'] ?? '';
+		$context['footer_extra_link_label'] = $options['gpea_footer_extra_link_label'] ?? '';
 
 		$context['generic_footer_text'] = isset( $options['gpea_description_generic_footer_text'] ) ? $options['gpea_description_generic_footer_text'] : '';
 		$context['current_country'] = isset( $options['gpea_current_country'] ) ? $options['gpea_current_country'] : 'HK';
