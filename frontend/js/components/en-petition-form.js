@@ -14,7 +14,44 @@ export default function() {
 
   const cta = document.querySelector('#p4en_form_save_button');
 
-  if (!form || !cta || !document.querySelector('#petition-source')) return;
+  const checkboxCheckall = document.querySelector(
+    '#en__field_supporter_all_check'
+  );
+
+  if (!form || !cta) return;
+
+  // required by korea: if checkbox with "check_all" feature present
+  if (checkboxCheckall) {
+    checkboxCheckall.addEventListener('click', e => {
+      let privacyOptions = document.querySelectorAll('[type=checkbox]');
+      for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {
+        elementOption.checked = checkboxCheckall.checked;
+      }
+    });
+  }
+
+  // general, for all donation we check all checkbox... yes sir, this probably can be avoided in a couple of weeks, using new feature of official plugin
+  // specific for korea: assign a value to checkbox, otherwise "required" is never satisfied, and also assign required "programmatically", since plugin won't allow to set required to an input
+  if ( 'ko-KR' != document.documentElement.lang ) {
+    let privacyOptions = document.querySelectorAll('[type=checkbox]');
+    for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {
+      elementOption.checked = true;
+    }
+  } else if ( 'ko-KR' == document.documentElement.lang ) {
+    let privacyOptions = document.querySelectorAll('[type=checkbox]');
+    for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {      
+      if ( 'en__field_supporter_all_check' != elementOption.id ) elementOption.required = true;
+      elementOption.addEventListener( 'change', (e) => {
+        if(e.target.checked) {
+          e.target.value = 'Y';
+        } else {
+          e.target.value = '';
+        }
+      });
+    }
+  }
+
+  if (!document.querySelector('#petition-source')) return;
 
   const petitionSource = document
     .querySelector('#petition-source')
@@ -38,11 +75,7 @@ export default function() {
 
   const ctaFacebook = document.createElement('button');
   ctaFacebook.classList.add('button', 'fb', 'js-sign-facebook');
-  ctaFacebook.innerHTML = 'Facebook';
-
-  const checkboxCheckall = document.querySelector(
-    '#en__field_supporter_all_check'
-  );
+  ctaFacebook.innerHTML = 'Facebook';  
 
   form.insertBefore(stats, form.firstChild);
   form.insertBefore(close, form.firstChild);
@@ -137,38 +170,6 @@ export default function() {
     false
   );
 
-  */
-
-  // required by korea: if checkbox with "check_all" feature present
-  if (checkboxCheckall) {
-    checkboxCheckall.addEventListener('click', e => {
-      let privacyOptions = document.querySelectorAll('[type=checkbox]');
-      for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {
-        elementOption.checked = checkboxCheckall.checked;
-      }
-    });
-  }
-
-  // general, for all donation we check all checkbox... yes sir, this probably can be avoided in a couple of weeks, using new feature of official plugin
-  // specific for korea: assign a value to checkbox, otherwise "required" is never satisfied, and also assign required "programmatically", since plugin won't allow to set required to an input
-  if ( 'ko-KR' != document.documentElement.lang ) {
-    let privacyOptions = document.querySelectorAll('[type=checkbox]');
-    for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {
-      elementOption.checked = true;
-    }
-  } else if ( 'ko-KR' == document.documentElement.lang ) {
-    let privacyOptions = document.querySelectorAll('[type=checkbox]');
-    for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {      
-      if ( 'en__field_supporter_all_check' != elementOption.id ) elementOption.required = true;
-      elementOption.addEventListener( 'change', (e) => {
-        if(e.target.checked) {
-          e.target.value = 'Y';
-        } else {
-          e.target.value = '';
-        }
-      });
-    }
-  }  
-
+  */ 
 
 }

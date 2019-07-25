@@ -54,8 +54,27 @@
   }
 }
 
+.enform-full-width .enform {
+  max-width: 400px;
+  margin: 0 auto;
+  .en__field__element {
+    input[type='email'],
+    input[type='number'],
+    input[type='search'],
+    input[type='text'],
+    input[type='tel'],
+    input[type='url'],
+    input[type='password'],
+    textarea,
+    select {
+      margin-bottom: 0;
+    }
+  }
+}
+
 .enform-side-style,
-.tag_cloud_form {
+.tag_cloud_form,
+.enform-full-width {
   .caption-overlay {
     display: none;
   }
@@ -139,6 +158,11 @@
     border: none;
     margin-bottom: 20px;
   }
+
+}
+
+.enform-side-style,
+.tag_cloud_form {
 
   // BACKGROUND
   > picture {
