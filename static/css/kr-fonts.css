@@ -132,3 +132,51 @@ button,
 .tip .tip-actions .tip-action-buttons .social-box a.tip-share-whatsapp {
   display: none;
 }
+
+.section-post-content .post-content p + h2,
+.section-post-content .post-content ol + h2,
+.section-post-content .post-content ul + h2,
+.section-post-content .post-content div + h2,
+.section-post-content .post-content blockquote + h2 {
+  margin-top: 40px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .section-hero-top > .ct-container .content .hero-issue-title h1 {
+    font-size: 130px !important;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .big-carousel-description p {
+    text-align: justify;
+  }
+}
+
+.card-mini.mini-update p {
+  font-size: 16px !important;
+}
+
+@media only screen and (min-width: 1024px) {
+  .card-mini.mini-update p {
+    font-size: 18px !important;
+  }
+}
+
+.tip p {
+  line-height: 32px !important;
+}
+
+.section-latest-news h2 {
+  font-size: 28px !important;
+}
+
+@media only screen and (min-width: 1024px) {
+  .section-latest-news h2 {
+    font-size: 38px !important;
+  }
+}
+
+.card-petition .box p {
+  text-align: left !important;
+}
