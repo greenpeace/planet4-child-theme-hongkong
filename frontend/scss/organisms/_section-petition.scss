@@ -70,6 +70,23 @@
       margin-bottom: 0;
     }
   }
+  #enform {
+    .thankyou.full-width {
+      left: auto;
+      box-shadow: none;
+      background-color: transparent;
+      height: auto;
+      margin: 0 auto;
+      
+      header {
+        position: relative;
+        background-color: transparent;
+      }
+      .sub-section {
+        display: none;
+      }
+    }    
+  }
 }
 
 .enform-side-style,
