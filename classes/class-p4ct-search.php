@@ -620,7 +620,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 			$context['strings'] = [
 				'issue'           => __( 'issue', 'gpea_theme' ),
-				'topic'           => __( 'Topic', 'gpea_theme' ),
+				'topic'           => __( 'topic', 'gpea_theme' ),
 				'posts'           => __( 'posts', 'gpea_theme' ),
 				'advanced_search' => __( 'advanced_search', 'gpea_theme' ),
 				'filters'         => __( 'filters', 'gpea_theme' ),

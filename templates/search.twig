@@ -9,7 +9,7 @@
             <!-- as seen in e.g. achievements_list.twig -->
             <script id="template-posts" type="text/template">
                 <% posts.forEach(post => {
-                console.log(post);
+                // console.log(post);
                 %>
                 <a href="<%= post.link %>" class="card-update compact">
                     <div class="thumbnail" style="background-image: url(<%= post.img_url %>);"></div>
@@ -43,7 +43,7 @@
             <!-- as seen in e.g. main_issues_carousel.twig -->
             <script id="template-issues" type="text/template">
                 <% issues.forEach(issue => {
-                console.log(issue);
+                // console.log(issue);
                 issue.main_issue = issue.name
                 %><a href="<%= issue.link %>" class="swiper-slide card-issue">
                     <div class="image" style="background-image: url(<%= issue.img_url %>);">
@@ -58,9 +58,9 @@
             <!-- as seen in e.g. tag_cloud.twig -->
             <script id="template-topics" type="text/template">
                 <% topics.forEach(topic => {
-                console.log(topic);
+                // console.log(topic);
                 %>
-                <a class="button tag" href="/tag/<%= topic.slug %>">
+                <a class="button tag" href="{{ home_url }}/?s&f&f[tag]=<%= topic.id %>">
                     <%= topic.name %>
                 </a>
                 <%

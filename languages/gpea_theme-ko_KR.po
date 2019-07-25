@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: 2019-07-01 10:57+0900\n"
+"PO-Revision-Date: 2019-07-25 14:04+0900\n"
 "X-Generator: Poedit 2.2.3\n"
 "X-Domain: gpea_theme\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -68,7 +68,7 @@ msgstr "죄송합니다. 검색결과가 없습니다."
 #: classes/class-p4ct-search.php:595
 msgid "%1$d result for '%2$s'"
 msgid_plural "%1$d results for '%2$s'"
-msgstr[0] "?"
+msgstr[0] "%1$d 개의 결과"
 
 #. translators: %d = Number of results.
 #: classes/class-p4ct-search.php:601
