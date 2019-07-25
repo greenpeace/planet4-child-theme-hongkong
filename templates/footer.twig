@@ -133,7 +133,7 @@ if (navigator.share) {
 	shareButton[0].addEventListener("click", function(){
 		navigator.share({
 			title: "{{ og_title|raw }}",
-			text: "{{ og_description|e('esc_js')|raw }}",
+			// text: "{{ og_description|e('esc_js')|raw }}",
 			url: "{{ post.link|e('esc_url') }}",
 		});
 	});	
