@@ -795,6 +795,14 @@ class P4CT_Metabox_Register {
 
 		$cmb_options->add_field(
 			array(
+				'name'    => esc_html__( 'Donation: default currency', 'gpea_theme_backend' ),
+				'id'      => 'gpea_default_donation_currency',
+				'type'    => 'text',
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
 				'name'    => esc_html__( 'Sharing options', 'gpea_theme_backend' ),
 				'id'      => 'gpea_sharing_options',
 				'type'    => 'multicheck',
