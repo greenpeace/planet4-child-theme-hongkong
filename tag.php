@@ -56,7 +56,11 @@ if ( is_tag() ) {
 
 		$context['projects'] = "[shortcake_projects_carousel layout='light' title='".$context['strings']['our_initiatives']."' topic='".$context['tag']->term_id."' /]";
 
-		$context['related_posts'] = $gpea_extra->gpea_get_related( false, 6, 1, false, $context['tag']->term_id );
+		$context['related_posts'] = $gpea_extra->gpea_get_related( false, 12, 1, false, $context['tag']->term_id );
+
+		$context['strings'] = [
+			'load_more' => __( 'SHOW MORE RESULTS', 'gpea_theme' ),
+		];
 
 		//[shortcake_take_action_boxout take_action_page='$take_action_page' /]";
 
