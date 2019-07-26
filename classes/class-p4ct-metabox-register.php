@@ -216,6 +216,15 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_petition->add_field(
+			array(
+				'name'    => esc_html__( 'CTA for external link(optional)', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'default will take the translation of "sign now', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_cta_external_link',
+				'type'             => 'text',
+			)
+		);
+
 	}
 
 	/**
