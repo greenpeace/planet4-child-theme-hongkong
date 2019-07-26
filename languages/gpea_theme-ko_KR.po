@@ -499,13 +499,13 @@ msgid "SHOW MORE RESULTS"
 msgstr "더보기 "
 
 msgid "Any"
-msgstr "모두 선택"
+msgstr "전체 보기"
 
 msgid "Start typing"
 msgstr "검색어를 입력해 주세요 "
 
 msgid "Any issue"
-msgstr "모두 선택"
+msgstr "전체 보기"
 
 msgid "Any topic"
-msgstr "모두 선택"
+msgstr "전체 보기"
