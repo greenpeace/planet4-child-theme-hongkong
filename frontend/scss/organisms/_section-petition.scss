@@ -70,7 +70,7 @@
       margin-bottom: 0;
     }
   }
-  #enform {
+  &#enform {
     .thankyou.full-width {
       left: auto;
       box-shadow: none;
@@ -81,6 +81,9 @@
       header {
         position: relative;
         background-color: transparent;
+        box-shadow: none;
+        height: auto;
+        transform: none !important;
       }
       .sub-section {
         display: none;
@@ -550,5 +553,13 @@
   }
   .formblock-flex {
     max-height: none;
+  }
+}
+
+
+/* fix header of thanks section of petition when scrolling  */
+.is-scrolling-down {
+  #enform .thankyou.full-width header {
+    transform: none !important;
   }
 }

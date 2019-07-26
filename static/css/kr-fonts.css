@@ -153,6 +153,25 @@ button,
   }
 }
 
+.section-report-launcher .launcher-content .button {
+  font-size: 14px;
+  height: auto;
+  min-height: 22px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  line-height: 16px;
+}
+
+
+@media only screen and (min-width: 1024px) {
+  .section-report-launcher .launcher-content .button {
+    font-size: 20px;
+    line-height: 18px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
 .card-mini.mini-update p {
   font-size: 16px !important;
 }

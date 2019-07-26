@@ -389,7 +389,7 @@ msgstr "프로젝트"
 
 #: page-templates/project.php:79 page-templates/main-issue.php:72
 msgid "Following"
-msgstr "팔로우"
+msgstr "팔로잉"
 
 #: page-templates/project.php:80
 msgid "Date of start"
