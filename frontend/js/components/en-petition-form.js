@@ -14,8 +14,9 @@ export default function() {
 
   const cta = document.querySelector('#p4en_form_save_button');
 
+  // that's valid only for korea... to be added option in backend
   const checkboxCheckall = document.querySelector(
-    '#en__field_supporter_all_check'
+    '#en__field_supporter_questions_455891'
   );
 
   if (!form || !cta) return;
@@ -40,7 +41,7 @@ export default function() {
   } else if ( 'ko-KR' == document.documentElement.lang ) {
     let privacyOptions = document.querySelectorAll('[type=checkbox]');
     for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {      
-      if ( 'en__field_supporter_all_check' != elementOption.id ) elementOption.required = true;
+      if ( 'en__field_supporter_questions_455891' != elementOption.id ) elementOption.required = true;
       elementOption.addEventListener( 'change', (e) => {
         if(e.target.checked) {
           e.target.value = 'Y';
