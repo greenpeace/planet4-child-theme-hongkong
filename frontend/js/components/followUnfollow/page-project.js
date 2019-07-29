@@ -23,7 +23,7 @@ const pageProject = function() {
     $('.js-project-follow').on('click', function(e) {
       e.preventDefault();
       gpea_projects_followed.push(current_project_id);
-      Cookies.set('gpea_projects', gpea_projects_followed, { expires: 3650, path: gpeaSiteHome });
+      Cookies.set('gpea_projects', gpea_projects_followed, { expires: 3650, path: '/' + gpeaSiteHome + '/' });
       $('.js-project-follow').hide();
       $('.js-project-unfollow').fadeIn();
     });
@@ -34,7 +34,7 @@ const pageProject = function() {
       if (index > -1) {
         gpea_projects_followed.splice(index, 1);
       }
-      Cookies.set('gpea_projects', gpea_projects_followed, { expires: 3650, path: gpeaSiteHome });
+      Cookies.set('gpea_projects', gpea_projects_followed, { expires: 3650, path: '/' + gpeaSiteHome + '/' });
       $('.js-project-follow').fadeIn();
       $('.js-project-unfollow').hide();
     });

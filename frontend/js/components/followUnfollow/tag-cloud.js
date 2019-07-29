@@ -66,7 +66,7 @@ const tagCloud = function() {
         $(`#en__field_supporter_questions_${gpea_selected_question_engaging_id}`).val('');
       }
     });
-    Cookies.set(cookie_name_issues, gpea_cookie_issues, { expires: 3650, path: gpeaSiteHome });
+    Cookies.set(cookie_name_issues, gpea_cookie_issues, { expires: 3650, path: '/' + gpeaSiteHome + '/' });
 
     var cookie_name_topics = 'gpea_topics';
     var gpea_cookie_topics = Cookies.get(cookie_name_topics)
@@ -91,7 +91,7 @@ const tagCloud = function() {
         $(`#en__field_supporter_questions_${gpea_selected_question_engaging_id}`).val('');
       }
     });
-    Cookies.set(cookie_name_topics, gpea_cookie_topics, { expires: 3650, path: gpeaSiteHome });
+    Cookies.set(cookie_name_topics, gpea_cookie_topics, { expires: 3650, path: '/' + gpeaSiteHome + '/' });
 
     $(this).hide();
     $('.tag_cloud_form').fadeIn();
