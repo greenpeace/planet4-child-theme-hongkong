@@ -168,6 +168,8 @@ class P4CT_Site {
 		$context['home_url'] = site_url();
 		$context['kakao_app_id'] = isset( $options['gpea_kakao_app_id'] ) ? $options['gpea_kakao_app_id'] : '';
 
+		$context['gpea_site_base'] = isset( $options['gpea_site_base'] ) ? $options['gpea_site_base'] : 'gpea';
+
 		// footer extra link
 
 		$context['strings_navbar'] = [

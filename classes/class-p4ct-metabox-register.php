@@ -550,6 +550,20 @@ class P4CT_Metabox_Register {
 		 * Options fields ids only need to be unique within these boxes.
 		 * Prefix is not needed.
 		 */
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Base of site domain', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Do not touch unless you know what you are doing', 'gpea_theme_backend' ),
+				'id'      => 'gpea_site_base',
+				'type'    => 'text',
+				'attributes'  => array(
+					'readonly' => 'readonly',
+					'disabled' => 'disabled',
+				),
+			)
+		);
+
 		$cmb_options->add_field(
 			array(
 				'name'    => esc_html__( 'Background image for "Values" section', 'gpea_theme_backend' ),
