@@ -113,6 +113,10 @@
 </div>
 </footer> #}
 
+<script>
+	var gpeaSiteHome = '{{ home_url }}';
+</script>
+
 {% if (kakao_app_id) %}
 <script src="https://secured-static.greenpeace.org/korea/Global/korea/DD/170519_DDpage/js/kakao.min.js"></script>
 <script type='text/javascript'>
@@ -133,7 +137,7 @@ if (navigator.share) {
 	shareButton[0].addEventListener("click", function(){
 		navigator.share({
 			title: "{{ og_title|raw }}",
-			text: "{{ og_description|e('esc_js')|raw }}",
+			// text: "{{ og_description|e('esc_js')|raw }}",
 			url: "{{ post.link|e('esc_url') }}",
 		});
 	});	

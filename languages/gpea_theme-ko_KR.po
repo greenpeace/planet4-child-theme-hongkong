@@ -389,7 +389,7 @@ msgstr "프로젝트"
 
 #: page-templates/project.php:79 page-templates/main-issue.php:72
 msgid "Following"
-msgstr "팔로우"
+msgstr "팔로잉"
 
 #: page-templates/project.php:80
 msgid "Date of start"
@@ -499,13 +499,13 @@ msgid "SHOW MORE RESULTS"
 msgstr "더보기 "
 
 msgid "Any"
-msgstr "모두 선택"
+msgstr "전체 보기"
 
 msgid "Start typing"
 msgstr "검색어를 입력해 주세요 "
 
 msgid "Any issue"
-msgstr "모두 선택"
+msgstr "전체 보기"
 
 msgid "Any topic"
-msgstr "모두 선택"
+msgstr "전체 보기"

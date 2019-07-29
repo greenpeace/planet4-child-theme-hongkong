@@ -53,4 +53,57 @@
 
 .section-choose-topics .tag_cloud_form .formblock-flex {
   height: auto;
+  .invalid-feedback {
+    margin-top: 0;
+    font-size: 12px;
+    line-height: 20px;
+    color: $color-red;
+    font-weight: normal;
+    position: absolute;
+    display: none;
+    padding: 0 8px;
+    left: 10px;
+    top: 34px;
+    background-color: white;
+  }
+
+  .en__field__element {
+    max-width: 400px;
+  }
+
+  .en__field__element input[type='email'].is-invalid,
+  .en__field__element input[type='tel'].is-invalid,
+  .en__field__element input[type='text'].is-invalid,
+  .en__field__element select.is-invalid {
+    border-color: $color-red !important;
+    margin-bottom: 0;
+
+    + .invalid-feedback {
+      display: inline-block;
+    }
+  }
+  .en__field--validationFailed > .en__field__error {
+    display: block;
+    z-index: 2;
+  }
+
+  .en__field--validationFailed .invalid-feedback {
+    display: none !important;
+  }
+  .en__field__element input[type='radio'].is-invalid,
+  .en__field__element input[type='checkbox'].is-invalid {
+    margin-top: 30px;
+
+    + .invalid-feedback {
+      display: inline-block;
+      top: 4px;
+      left: 0;
+      padding-left: 0;
+    }
+  }
+
+  .en__field__element.en__field__element--select {
+    border: none;
+    margin-bottom: 20px;
+  }
 }

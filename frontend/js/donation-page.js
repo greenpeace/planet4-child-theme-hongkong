@@ -164,6 +164,7 @@ function initDonation(Swiper, Scroll) {
     {
       if (data[item].name == 'supporter.NOT_TAGGED_6') {
         let birthDate = data[item].value;
+        if (!birthDate) continue;
         birthDate = birthDate.split('/');
         birthDate = birthDate[1] + '/' + birthDate[0] + '/' + birthDate[2];
         data[item].value = birthDate;

@@ -3,7 +3,7 @@
 {% block content %}
   {% if (background_image) %}
     <section class="section-hero-top has-hero-submenu has-hero-description" style="background-image: url({{ background_image }})">
-	<div class="background js-parallax-me" data-prlx-from-top="true" style="background-image: url({{ background_image }})"></div>
+	    <div class="background js-parallax-me" data-prlx-from-top="true" style="background-image: url({{ background_image }})"></div>
       <div class="section-hero-shade"></div>
       <div class="top-bar-wrapper-white">
         <div class="ct-container">
@@ -24,7 +24,9 @@
         </div>
       </div>
     </section>
-  {% else %}
+  {% endif %}
+
+  {#
     <section class="section-post-content ct-container">
         <h1>{{ tag.name|raw }}</h1>
         {% if tag.description %}
@@ -33,13 +35,13 @@
           </div>
         {% endif %}
     </section>
-  {% endif %}
+  #}
 
-  {{ projects|shortcodes|raw }}
+  {# { projects|shortcodes|raw } #}
 
   <section class="section-latest-news">
     <div class="ct-container">
-      <h2>{{ strings.latest_news }}</h2>
+      <h1>{{ tag.name|raw }}</h1>
       <div class="news-list">
         {% if ( related_posts ) %}
           {% for related_post in related_posts %}
@@ -47,6 +49,7 @@
           {% endfor %}
         {% endif %}
       </div>
+      <h3><a href="{{ home_url }}/?s&f&f[tag]={{ tag.term_id }}#search_form_inner"> {{ strings.load_more }}  <span class="icon-chevron-right"></span></a></h3>
     </div>
   </section>
 
