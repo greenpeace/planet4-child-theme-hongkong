@@ -26,8 +26,10 @@
     img {
       position: static;
       display: block;
-      height: 330px;
+      // height: 330px;
       width: auto;
+      max-width: 100%;
+      height: auto;
       margin: 0 auto;
       background: transparent;
 
