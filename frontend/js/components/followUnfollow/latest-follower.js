@@ -103,9 +103,13 @@ const latestFollower = function() {
     }));
 
   let gpea_topics_followed = Cookies.get('gpea_topics');
+  let gpea_issues_followed = Cookies.get('gpea_issues');
+
   if (
-    typeof gpea_topics_followed !== 'undefined' &&
-    gpea_topics_followed.length > 0
+    ( typeof gpea_topics_followed !== 'undefined' &&
+    gpea_topics_followed.length > 0 ) ||
+    ( typeof gpea_issues_followed !== 'undefined' &&
+    gpea_issues_followed.length > 0 )
   ) {
     $featuredSwiper.addClass('is-loading');
     $.ajax({
