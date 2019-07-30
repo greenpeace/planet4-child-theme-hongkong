@@ -306,6 +306,7 @@ class P4CT_AJAX_Handler {
 			$args = array(
 				'post_type'      => array( 'page', 'post' ),
 				'order'          => 'desc',
+				'post_status'    => 'publish',
 				'orderby'        => 'date',
 				'posts_per_page' => 5,
 			);
