@@ -68,6 +68,10 @@ $context['custom_body_classes']         = $main_issue_slug ?? '';
 $context['main_issue_slug']               = $main_issue_slug ?? '';
 $context['main_issue_name']               = $main_issue_name ?? '';
 
+$context['og_title']                = $post->get_og_title();
+$context['og_description']          = $post->get_og_description();
+$context['og_image_data']           = $post->get_og_image();
+
 $context['related_posts']               = $gpea_extra->gpea_get_related( $post->ID, 3, 1, $main_issue_id );
 
 $context['strings'] = [

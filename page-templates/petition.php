@@ -110,6 +110,11 @@ if ( $context['petition_target'] && $context['signatures'] ) {
 	$context['percentage'] = 100;
 }
 
+$context['og_title']                = $post->get_og_title();
+$context['og_description']          = $post->get_og_description();
+$context['og_image_data']           = $post->get_og_image();
+
+
 $context['strings'] = [
 	// translators: placeholder represents the number of signers.
 	'signatures' => $context['signatures'] ? sprintf( __( '%s signers', 'gpea_theme' ), $context['signatures'] ) : false,
