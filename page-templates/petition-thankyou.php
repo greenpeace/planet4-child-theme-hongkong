@@ -93,6 +93,11 @@ if ( $context['background_image'] ) {
 }
 $context['custom_body_classes']         = $categories;
 
+$context['og_title']                = $post->get_og_title();
+$context['og_description']          = $post->get_og_description();
+$context['og_image_data']           = $post->get_og_image();
+
+
 $context['strings'] = [
 	'thank_you_share' => __( 'Thank you for signing,', 'gpea_theme' ),
 	'share_petition' => __( 'Now, will you share this petition with your friends? The more people who sign, the more pressure the government will feel.', 'gpea_theme' ),

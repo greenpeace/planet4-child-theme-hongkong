@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: 2019-07-25 14:04+0900\n"
+"PO-Revision-Date: 2019-07-31 10:59+0200\n"
 "X-Generator: Poedit 2.2.3\n"
 "X-Domain: gpea_theme\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -381,7 +381,7 @@ msgstr "리포트"
 #: page-templates/report.php:55 page-templates/project.php:78
 #: page-templates/about.php:55 page-templates/main-issue.php:71
 msgid "Follow"
-msgstr "팔로우"
+msgstr "관심캠페인 등록"
 
 #. Template Name of the theme
 msgid "Project"

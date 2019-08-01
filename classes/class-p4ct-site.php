@@ -63,6 +63,7 @@ class P4CT_Site {
 		add_filter( 'timber_context', [ $this, 'add_to_context' ] );
 		add_filter( 'get_twig', [ $this, 'add_to_twig' ] );
 		add_action( 'init', [ $this, 'register_taxonomies' ], 2 );
+		add_action( 'init', [ $this, 'remove_planet4_actions' ] );
 		add_action( 'wp_print_styles', [ $this, 'dequeue_parent_assets' ], 100 );
 		// add_action( 'pre_get_posts', [ $this, 'add_search_options' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_assets' ] );
@@ -86,9 +87,39 @@ class P4CT_Site {
 		remove_action( 'wp_ajax_get_paged_posts', [ 'P4MT\P4_ElasticSearch', 'get_paged_posts' ] );
 		remove_action( 'wp_ajax_nopriv_get_paged_posts', [ 'P4MT\P4_ElasticSearch', 'get_paged_posts' ] );
 		add_action( 'wp_ajax_get_paged_posts', [ 'P4CT_ElasticSearch', 'get_paged_posts' ] );
-		add_action( 'wp_ajax_nopriv_get_paged_posts', [ 'P4CT_ElasticSearch', 'get_paged_posts' ] );
+		add_action( 'wp_ajax_nopriv_get_paged_posts', [ 'P4CT_ElasticSearch', 'get_paged_posts' ] );		
 
 	}
+
+	/**
+	 * Registers taxonomies.
+	 */
+	public function remove_planet4_actions() {
+		// remove the anti-democratic function to create tag pages..
+
+		// P4_Loader::get_instance()->get_services();
+
+		// remove_action( 'create_post_tag', [ 'P4MT\P4_Campaigns', 'save_taxonomy_meta' ] );
+		// remove_action( 'edit_post_tag', [ 'P4MT\P4_Campaigns', 'save_taxonomy_meta' ], 10 );
+		// remove_action( 'edit_post_tag', 'save_taxonomy_meta' );
+		global $pagenow;
+		if ( is_admin() && isset( P4_Loader::get_instance()->get_services()['P4_Campaigns'] ) ) {
+			remove_action( 'edit_post_tag', [ P4_Loader::get_instance()->get_services()['P4_Campaigns'], 'save_taxonomy_meta' ] );
+			add_action( 'edit_post_tag', [ $this, 'save_redirect_page_tag' ] );
+			remove_action( 'create_post_tag', [ P4_Loader::get_instance()->get_services()['P4_Campaigns'], 'save_taxonomy_meta' ] );
+			add_action( 'create_post_tag', [ $this, 'save_redirect_page_tag' ] );
+		}
+
+	}
+
+	/**
+	 * save info for redirection
+	 */
+	public function save_redirect_page_tag( $term_id ) {
+		$redirect_page = $_POST['redirect_page'] ?? 0;
+		update_term_meta( $term_id, 'redirect_page', intval( $redirect_page ) );
+	}
+
 
 	/**
 	 * Filters the oEmbed process to run the responsive_embed() function

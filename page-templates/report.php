@@ -48,6 +48,10 @@ $context['background_image']            = wp_get_attachment_url( get_post_meta( 
 $context['custom_body_classes']         = 'white-bg';
 $context['page_category']               = 'About Page';
 
+$context['og_title']                = $post->get_og_title();
+$context['og_description']          = $post->get_og_description();
+$context['og_image_data']           = $post->get_og_image();
+
 $extra_content                          = $page_meta_data['p4-gpea_page_extra_content'][0] ?? '';
 $context['extra_content']               = $extra_content ? wpautop( $extra_content ) : '';
 
