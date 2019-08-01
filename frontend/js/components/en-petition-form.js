@@ -40,7 +40,7 @@ export default function() {
     }
   } else if ( 'ko-KR' == document.documentElement.lang ) {
     let privacyOptions = document.querySelectorAll('[type=checkbox]');
-    for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {      
+    for (var i = 0, elementOption; (elementOption = privacyOptions[i++]); ) {
       if ( 'en__field_supporter_questions_455891' != elementOption.id ) elementOption.required = true;
       elementOption.addEventListener( 'change', (e) => {
         if(e.target.checked) {
@@ -49,6 +49,16 @@ export default function() {
           e.target.value = '';
         }
       });
+    }
+    // force translation...waiting for translated strings
+    let allInputEnForm = document.querySelectorAll('input');
+    for (var i = 0, elementOption; (elementOption = allInputEnForm[i++]); ) {
+      if ( 'en__field_supporter_emailAddress' == elementOption.id ) {
+        elementOption.setAttribute('data-errormessage', '이메일 형식이 유효하지 않습니다');
+      } else {
+        elementOption.setAttribute('data-errormessage', '개인정보 제공 필수 항목입니다');
+      }
+      
     }
   }
 

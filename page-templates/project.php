@@ -74,6 +74,11 @@ $context['stroke_dashoffset']           = $context['project_percentage'] ? 697.4
 $context['start_date']                  = $page_meta_data['p4-gpea_project_start_date'][0] ?? '';
 $context['localization']                = $page_meta_data['p4-gpea_project_localization'][0] ?? 0;
 
+$context['og_title']                = $post->get_og_title();
+$context['og_description']          = $post->get_og_description();
+$context['og_image_data']           = $post->get_og_image();
+
+
 $context['strings'] = [
 	'follow' => __( 'Follow', 'gpea_theme' ),
 	'following' => __( 'Following', 'gpea_theme' ),
