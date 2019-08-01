@@ -300,7 +300,6 @@ class P4CT_Metabox_Register {
 				'save_field'  => false, // Otherwise CMB2 will end up removing the value.
 				'attributes'  => array(
 					'readonly' => 'readonly',
-					'disabled' => 'disabled',
 				),
 			)
 		);
@@ -559,7 +558,6 @@ class P4CT_Metabox_Register {
 				'type'    => 'text',
 				'attributes'  => array(
 					'readonly' => 'readonly',
-					'disabled' => 'disabled',
 				),
 			)
 		);
