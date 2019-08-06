@@ -335,9 +335,16 @@ class P4CT_AJAX_Handler {
 				$most_recent = 0;
 
 				if ( $term_info ) {
-					$results[ $tag_id ]['name']    = $term_info->name;
-					$results[ $tag_id ]['slug']    = $term_info->slug;
-					$results[ $tag_id ]['term_id'] = $term_info->term_id;
+					$results[ $tag_id ]['name']     = $term_info->name;
+					$results[ $tag_id ]['slug']     = $term_info->slug;
+					if ( 'category' === $term_info->taxonomy ) {
+						$results[ $tag_id ]['cat_id']  = $term_info->term_id;
+						$results[ $tag_id ]['tag_id']  = 0;
+					} else if ( 'post_tag' === $term_info->taxonomy ) {
+						$results[ $tag_id ]['tag_id']  = $term_info->term_id;
+						$results[ $tag_id ]['cat_id']  = 0;
+					} 
+					$results[ $tag_id ]['term_id']  = $term_info->term_id;
 				}
 
 				while ( $the_query->have_posts() ) :
