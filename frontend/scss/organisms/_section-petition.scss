@@ -52,6 +52,26 @@
   &::after {
     display: none;
   }
+
+  // thanks box for side petition
+  .thankyou {
+    left: auto;
+    box-shadow: none;
+    background-color: transparent;
+    height: auto;
+    margin: 0 auto;
+    
+    header {
+      position: relative;
+      background-color: transparent;
+      box-shadow: none;
+      height: auto;
+      transform: none !important;
+    }
+    .sub-section {
+      display: none;
+    }
+  }
 }
 
 .enform-full-width .enform {

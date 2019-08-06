@@ -234,7 +234,7 @@
 	<script id="template-article-row-container" type="text/template">
 		<section class="section-article-row">
 			<div class="ct-container">
-				<h2><a href="/?s&tag_id=<%= term_id %>"><%= name %><span class="icon-chevron-right"></span></a></h2>
+				<h2><a href="{{ home_url }}/?s&f&f[tag]=<%= tag_id %>&f[cat]=<%= cat_id %>#search_form_inner"><%= name %><span class="icon-chevron-right"></span></a></h2>
 				<div class="swiper-container mini-swiper">
 					<div class="swiper-wrapper">
 						<%= row_posts %>
