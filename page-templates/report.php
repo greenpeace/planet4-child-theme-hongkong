@@ -45,7 +45,7 @@ $context['header_button_title']         = $page_meta_data['p4_button_title'][0] 
 $context['header_button_link']          = $page_meta_data['p4_button_link'][0] ?? '';
 // $context['header_button_link_checkbox'] = $page_meta_data['p4_button_link_checkbox'];
 $context['background_image']            = wp_get_attachment_url( get_post_meta( get_the_ID(), 'background_image_id', 1 ) );
-$context['custom_body_classes']         = 'white-bg';
+$context['custom_body_classes']         = 'single-report-page';
 $context['page_category']               = 'About Page';
 
 $context['og_title']                = $post->get_og_title();

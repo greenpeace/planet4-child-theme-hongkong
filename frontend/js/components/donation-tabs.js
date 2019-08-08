@@ -93,12 +93,16 @@ export default function() {
     let donationUrl = new URL(form.action);
     let amountValue = '';
     let frequencyValue = '';
+    let amountInput;
 
     if (form.amount) {
       amountValue = form.amount.value;
+      amountInput = form['amount'];
     } else if (form['free-amount'] && form['free-amount'].value) {
+      amountInput = form['free-amount'];
       amountValue = form['free-amount'].value;
     } else if (form['dollar-handle'] && form['dollar-handle'].value) {
+      amountInput = form['free-amount'];
       amountValue = form['dollar-handle'].value;
     }
 
@@ -106,7 +110,10 @@ export default function() {
     if ( form.frequency.value == 'Y' ) minimumValue = form.getAttribute('data-minimum-regular');
     else minimumValue = form.getAttribute('data-minimum-oneoff');
 
-    if ( parseInt(amountValue) < parseInt(minimumValue) ) return false;
+    if ( parseInt(amountValue) < parseInt(minimumValue) ) {
+      amountInput.classList.add('is-invalid');
+      return false;
+    }
     
     if (form['en_recurring_question'] && form['en_recurring_question'].value) {
       frequencyValue = form.frequency.value;
@@ -141,36 +148,36 @@ export default function() {
   else if (form['free-amount']) form['free-amount'].parentNode.insertBefore(feedback, form['free-amount'].nextSibling);
 
   // remove option to set suggested if amount has been changed + check minimum
-  form.addEventListener('input', e => {
-    let minimumValue = 0;
-    // if user change suggested input we stop suggesting...
-    if ( form.classList.contains('js-donation-basic') ) form.classList.remove('js-donation-basic');
+  // form.addEventListener('input', e => {
+  //   let minimumValue = 0;
+  //   // if user change suggested input we stop suggesting...
+  //   if ( form.classList.contains('js-donation-basic') ) form.classList.remove('js-donation-basic');
 
-    // on input change we check the minium
-    if ( form.classList.contains('js-donation-launcher-form') ) {
-      if ( form.frequency.value == 'Y' ) minimumValue = form.getAttribute('data-minimum-regular');
-      else minimumValue = form.getAttribute('data-minimum-oneoff');
+  //   // on input change we check the minium
+  //   if ( form.classList.contains('js-donation-launcher-form') ) {
+  //     if ( form.frequency.value == 'Y' ) minimumValue = form.getAttribute('data-minimum-regular');
+  //     else minimumValue = form.getAttribute('data-minimum-oneoff');
       
-      // console.log(minimumValue);
+  //     // console.log(minimumValue);
 
-      const invalid = validate.single(
-        e.target.value,
-        {
-          numericality: {
-            onlyInteger: true,
-            greaterThanOrEqualTo: parseInt(minimumValue),
-          }
-        }
-      );
+  //     const invalid = validate.single(
+  //       e.target.value,
+  //       {
+  //         numericality: {
+  //           onlyInteger: true,
+  //           greaterThanOrEqualTo: parseInt(minimumValue),
+  //         }
+  //       }
+  //     );
 
-      if (invalid) {
-        e.target.classList.add('is-invalid');
-      } else {
-        e.target.classList.remove('is-invalid');
-      }
+  //     if (invalid) {
+  //       e.target.classList.add('is-invalid');
+  //     } else {
+  //       e.target.classList.remove('is-invalid');
+  //     }
 
-    }
-  });
+  //   }
+  // });
 
 
 }
