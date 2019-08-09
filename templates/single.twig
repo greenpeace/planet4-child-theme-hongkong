@@ -64,17 +64,17 @@
   </article>
 
 
+  {% if ( related_posts ) %}
   <section class="section-latest-news">
     <div class="ct-container">
       <h2>{{ strings.related_news }}</h2>
       <div class="news-list">
-        {% if ( related_posts ) %}
-          {% for related_post in related_posts %}
-            {% include "blocks/tease-related-post-big.twig" with {post:related_post} %}
-          {% endfor %}
-        {% endif %}
+        {% for related_post in related_posts %}
+          {% include "blocks/tease-related-post-big.twig" with {post:related_post} %}
+        {% endfor %}
       </div>
     </div>
   </section>
+  {% endif %}
 
 {% endblock %}
