@@ -9,7 +9,7 @@
 export default function() {
   document.querySelectorAll('.js-tab-item').forEach(tab => {
     tab.addEventListener('click', e => {
-		console.log('clicked');
+		// console.log('clicked');
       const tabBar = e.target.parentElement;
       const siblings = tabBar.children;
       const form = tabBar.parentElement.querySelector('form');  
