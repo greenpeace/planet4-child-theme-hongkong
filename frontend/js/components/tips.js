@@ -27,7 +27,7 @@ export default function() {
         '#tip_commitments_post_' + query.pid + ' .js-tip-commitments'
       );
       submitted_tips_ids.push(query.pid);
-      Cookies.set(COOKIE_ID, submitted_tips_ids, { expires: 365 });
+      Cookies.set(COOKIE_ID, submitted_tips_ids, { expires: 365, path: '/' + gpeaSiteHome + '/' });
     }
     $.ajax({
       url: window.localizations.ajaxurl,
