@@ -196,3 +196,10 @@
     background: linear-gradient(to bottom, #eee, #fff0);
   }
 }
+
+// IE <= 11
+@media (min-width: 0\0) {
+  .section-donate .content {
+    display: inline-block;
+  }
+}

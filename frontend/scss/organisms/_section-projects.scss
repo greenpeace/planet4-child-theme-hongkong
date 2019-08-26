@@ -127,3 +127,14 @@ body:not(.js-home-follower) .section-projects,
     transition: opacity 140ms linear, visibility 0s linear 0s;
   }
 }
+
+
+// IE <= 11
+@media (min-width: 0\0) {
+  .js-home-follower .section-projects {
+    &:not(.is-loaded) > :not(.lds-spinner) {
+      opacity: 1;
+      visibility: visible;
+    }
+  }  
+}
