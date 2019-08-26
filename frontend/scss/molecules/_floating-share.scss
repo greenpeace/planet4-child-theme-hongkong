@@ -98,3 +98,11 @@
     margin-left: -450px;
   }
 }
+
+// IE <= 11
+@media (min-width: 0\0) {
+  .floating-share {
+    width: 50px;
+    height: 250px;
+  }
+}

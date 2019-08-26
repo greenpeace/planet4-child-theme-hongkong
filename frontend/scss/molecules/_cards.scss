@@ -613,3 +613,19 @@
     @include text;
   }
 }
+
+// IE <= 11
+@media (min-width: 0\0) {
+  .home .card-update.compact p {
+    display: inline-block;
+    max-width: 200px;
+  }
+  .card-petition .box .content p {
+    display: inline-block;
+    max-width: 200px;
+  }
+  .action.as-card p {
+    display: inline-block;
+    max-width: 300px;
+  }
+}
