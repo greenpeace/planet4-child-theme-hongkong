@@ -60,4 +60,65 @@
 		{% endfor %}
 	</div>
 	</header>
+
+	<!-- as seen in e.g. achievements_list.twig -->
+	<script id="template-posts" type="text/template">
+		<% posts.forEach(post => {
+		// console.log(post);
+		%>
+		<a href="<%= post.link %>" class="card-update compact">
+			<div class="thumbnail" style="background-image: url(<%= post.img_url %>);"></div>
+			<div class="box">
+				<div class="meta-box">
+					<div>
+						<span class="issue <%= post.main_issue_slug %>"><%= post.main_issue %></span>
+						<span><%= post.news_type %></span>
+					</div>
+				</div>
+				<p>
+					<%= post.post_title %>
+				</p>
+				<div class="meta-box">
+					<div>
+						<% if (typeof post.reading_time !== 'undefined' && post.reading_time) { %>
+						<span>
+					<span class="icon-clock"></span>
+					<%= post.reading_time %>
+				</span>
+						<% } %>
+						<span><%= post.post_date %></span>
+					</div>
+				</div>
+			</div>
+		</a>
+		<%
+		}); %>
+	</script>
+
+	<!-- as seen in e.g. main_issues_carousel.twig -->
+	<script id="template-issues" type="text/template">
+		<% issues.forEach(issue => {
+		// console.log(issue);
+		issue.main_issue = issue.name
+		%><a href="<%= issue.link %>" class="swiper-slide card-issue">
+			<div class="image" style="background-image: url(<%= issue.img_url %>);">
+				<h4><%= issue.post_title %></h4>
+				<div class="issue <%= issue.main_issue_slug %>"><%= issue.main_issue_slug %></div>
+			</div>
+		</a>
+		<%
+		}); %>
+	</script>
+
+	<!-- as seen in e.g. tag_cloud.twig -->
+	<script id="template-topics" type="text/template">
+		<% topics.forEach(topic => {
+		// console.log(topic);
+		%>
+		<a class="button tag" href="{{ home_url }}/?s&f&f[tag]=<%= topic.id %>">
+			<%= topic.name %>
+		</a>
+		<%
+		}); %>
+	</script>
 {% endblock %}
