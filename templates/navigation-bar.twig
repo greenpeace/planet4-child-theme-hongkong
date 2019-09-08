@@ -61,6 +61,12 @@
 	</div>
 	</header>
 
+	{% if not is_search_page %}
+		<div class="dynamic-search">
+			{% include 'blocks/section-live-search.twig' %}
+		</div>
+	{% endif %}
+
 	<!-- as seen in e.g. achievements_list.twig -->
 	<script id="template-posts" type="text/template">
 		<% posts.forEach(post => {

@@ -2,81 +2,27 @@
 
 {% block content %}
 
-	<section class="live-search">
+	{% set disabled  = posts ? '' : 'disabled' %}
+	{% set collapsed = posts ? '' : 'collapsed' %}
+	{% set show      = posts ? 'show' : '' %}
+	{% set expanded  = posts ? true : false %}
 
-		<div class="ct-container">
-
-			{% set disabled  = posts ? '' : 'disabled' %}
-			{% set collapsed = posts ? '' : 'collapsed' %}
-			{% set show      = posts ? 'show' : '' %}
-			{% set expanded  = posts ? true : false %}
-			{% set search_label = strings.search_label %}
-
-			<h2 class="search-title">{{ search_label }}</h2>
-
-			<!-- We also included results for: -->
-			<!-- Does this even work? -->
-			{% if ( corrected_term ) %}
-				{{ corrected_term }}
-			{% endif %}
-
-			<form
-					id="search_form_inner" role="search" action="{{ data_nav_bar.home_url }}">
-				<!-- Main search field -->
-				<div class="form-group search fluid">
-					<input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="{{ strings.start_typing }}" value="{{ search_query|e('wp_kses_post')|raw }}">
-					<button class="button primary" type="submit">{{ search_label }}</button>
-				</div>
-
-				<div class="lds-spinner">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-				</div>
-			</form>
-
-			<div hidden id="ajax-search-issues" class="fade-out">
-				<h5>
-					{{ strings.issue }}
-				</h5>
-				<div class="results-list"></div>
-			</div>
-
-			<div hidden id="ajax-search-topics" class="fade-out">
-				<h5>{{ strings.topic }}</h5>
-				<div class="results-list"></div>
-			</div>
-
-			<div hidden id="ajax-search-posts" class="fade-out">
-				<h5>{{ strings.posts }}</h5>
-				<div class="results-list"></div>
-			</div>
-		</div>
-	</section>
+	{% include 'blocks/section-live-search.twig' %}
 
 	<section class="advanced-search">
 
 		<div class="ct-container">
 
-			<h3>{{ strings.advanced_search }}</h3>
+			<h3>{{ search_strings.advanced_search }}</h3>
 
 			<div class="advanced-wrapper">
 				<div class="filters">
-					<label>{{ strings.filters }}</label>
+					<label>{{ search_strings.filters }}</label>
 					<div class="filters-selects">
 						{% if ( categories|length > 0 ) %}
 							<div class="select">
 								<select class="filter-search" form="search_form_inner" id="f[cat]" name="f[cat]">
-									<option value="0">-- {{ strings.any_issue }}  --</option>
+									<option value="0">-- {{ search_strings.any_issue }}  --</option>
 									{% for category in categories %}
 										<option value="{{ category.term_id }}" {{ category.selected ? 'selected' : '' }}>{{ category.name|e('wp_kses_post')|raw }}</option>
 									{% endfor %}
@@ -86,7 +32,7 @@
 						{% if ( tags|length > 0 ) %}
 							<div class="select">
 								<select class="filter-search" form="search_form_inner" id="f[tag]" name="f[tag]">
-									<option value="0">-- {{ strings.any_topic }} --</option>
+									<option value="0">-- {{ search_strings.any_topic }} --</option>
 									{% for tag in tags %}
 										<option value="{{ tag.term_id }}" {{ tag.selected ? 'selected' : '' }}>{{ tag.name|e('wp_kses_post')|raw }}</option>
 									{% endfor %}
@@ -95,12 +41,12 @@
 						{% endif %}
 					</div>
 
-					<button class="button small" id="btn_filter_reset">{{ strings.reset_filters }}</button>
+					<button class="button small" id="btn_filter_reset">{{ search_strings.reset_filters }}</button>
 				</div>
 
 				{#  TODO reimplement sort by logic#}
 				{#  <div class="sort-by">#}
-				{#    <label for="select_order">{{ strings.sort_by }}</label>#}
+				{#    <label for="select_order">{{ search_strings.sort_by }}</label>#}
 				{#    <div class="select">#}
 				{#      <select class="filter-search" form="search_form_innerg" id="select_order" name="select_order">#}
 				{#        {% for key, sort_option in sort_options %}#}
@@ -120,7 +66,7 @@
 			{% if ( not posts ) %}
 				<p class="nothing-found">
 					<i>
-						<small>{{ exception ?? strings.nothing_found }}</small>
+						<small>{{ exception ?? search_strings.nothing_found }}</small>
 					</i>
 				</p>
 			{% endif %}
