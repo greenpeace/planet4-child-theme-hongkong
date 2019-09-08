@@ -3,6 +3,14 @@
   display: flex;
   align-items: stretch;
 
+  &.only-images {
+    min-height: 400px;
+
+    @include greaterThan('sm') {
+      min-height: 550px;
+    }
+  }
+
   > .ct-container {
     padding-top: 40px;
     padding-bottom: 30px;
