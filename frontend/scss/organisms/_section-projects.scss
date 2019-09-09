@@ -48,6 +48,17 @@
     }
   }
 
+  .see-more {
+    text-align: right;
+    margin-top: 20px;
+
+    @include greaterThan('sm') {
+      text-align: left;
+      margin-top: 0px;
+    }
+
+  }  
+
   &.has-projects-list {
     .see-more {
       display: none;

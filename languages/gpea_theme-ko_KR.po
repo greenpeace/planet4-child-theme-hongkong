@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: 2019-07-31 10:59+0200\n"
+"PO-Revision-Date: 2019-09-09 12:21+0200\n"
 "X-Generator: Poedit 2.2.3\n"
 "X-Domain: gpea_theme\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -466,7 +466,7 @@ msgstr "서명"
 #. translators: placeholder represents the number of signers.
 #: page-templates/petition.php:113
 msgid "%s signers"
-msgstr "% 명 서명"
+msgstr "%s 명 서명"
 
 #. Template Name of the theme
 msgid "Main Issue"
