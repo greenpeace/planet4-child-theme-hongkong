@@ -116,6 +116,11 @@ button,
   .page-template-petition .outer_block_container .full-width > * {
     width: 800px !important;
   }
+
+  .section-post-content .embed-container > iframe {
+    width: 100% !important;
+  }
+
 }
 
 @media only screen and (min-width: 1024px) {
