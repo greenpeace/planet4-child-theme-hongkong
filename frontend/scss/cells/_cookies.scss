@@ -4,7 +4,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 10px 18px;
+  min-height: 52px;
+  // padding: 10px 18px;
+  padding: 0 18px;
   width: 100%;
   -ms-flex-direction: row;
   flex-direction: row;
@@ -14,11 +16,11 @@
   position: fixed;
     
   // background: $color-arctic;
-  background: rgba(102, 204, 0, 0.7);
-  color: #000;
+  background: rgba(26, 28, 38, 0.95);
+  color: #fff;
 
   a {
-    color: #000;
+    color: #fff;
     text-decoration: underline;
   }
 
@@ -28,11 +30,14 @@
 
   div.col-sm-9.col-md-10 {      
     margin: 0 auto;
-    max-width: 95%;
-    flex: 95%;
+    max-width: 80%;
+    flex: 80%;
     font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     @include greaterThan('sm') {
       flex: 1;
+      max-width: 90%;
       line-height: 30px;
     }
   }
@@ -47,7 +52,10 @@
   }
 
   .btn.btn-secondary.p-0 {
-    background: #fff;
+    background: $color-green;
+    border-color: $color-green;
+    color: #fff;
+    font-weight: 700;
     border-radius: 10px;
     padding: 6px 16px;
     box-shadow: 0 0 8px 0 rgba(0,0,0,0.2);

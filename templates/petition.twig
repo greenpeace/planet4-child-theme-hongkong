@@ -1,5 +1,29 @@
 {% extends "base.twig" %}
 
+{% block html_head_container_extra %}
+	{% if (gpea_facebook_app_id) %}
+	<script>
+		gpeaOptions.showFacebook = 1;
+		window.fbAsyncInit = function() {
+			FB.init({
+			appId      : '{{ gpea_facebook_app_id }}',
+			xfbml      : true,
+			version    : 'v3.3'
+			});
+			// FB.AppEvents.logPageView();
+		};
+	
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/{{ site.language }}/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+	{% endif %}
+{% endblock %}
+
 {% block content %}
 	<span id="petition-source" data-petition="{{ post.id }}">
 		<div class="progress-bar">
@@ -8,4 +32,17 @@
 		{% if signatures %}<div class="stats">{{ strings.signatures }}</div>{% endif %}
 	</span>
 	{{ post.content|raw }}
+{% endblock %}
+
+{% block extra_content %}
+	{% if extra_content %}
+		<section class="section-text-images ct-container petition-extra-content">
+			<div class="boxes">
+				<div class="box plain">
+					<div>{{ extra_content|e('wp_kses_post')|raw }}</div>
+				</div>
+				<div class="box no-image"></div>
+			</div>
+		</section>
+	{% endif %}
 {% endblock %}

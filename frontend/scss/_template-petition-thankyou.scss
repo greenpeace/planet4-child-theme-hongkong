@@ -15,10 +15,19 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 20vh;
-    background-color: #000;
+    height: 5vh;
+    // height: 20vh;
+    // background-color: #000;
     z-index: 2;
   }
+
+  .outer_block_container {
+    padding-top: 0;
+    > section {
+      padding-top: 0;
+    }
+  }
+
 }
 
 .section-petition-thankyou {

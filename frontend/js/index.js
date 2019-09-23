@@ -10,6 +10,7 @@ import {
 import LazyLoad from 'vanilla-lazyload';
 import SmoothScroll from 'smooth-scroll';
 import AOS from 'aos';
+import Cookies from 'js-cookie';
 
 import polyfills from './components/polyfills';
 
@@ -49,6 +50,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
     offset: 40,
     updateURL: false,
   });
+
+  // check cookies consent
+
+  let cookieConsentGp = Cookies.get('greenpeace');
+  if (
+    ( typeof cookieConsentGp !== 'undefined' &&
+    cookieConsentGp !== 2 ) ||
+    (!cookieConsentGp)
+   ) {
+      const cookieMessage = document.querySelector("#set-cookie");
+      if (cookieMessage) cookieMessage.display = "block";
+  }
 
   /* Components */
 

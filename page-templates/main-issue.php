@@ -74,6 +74,12 @@ $context['og_image_data']           = $post->get_og_image();
 
 $context['related_posts']               = $gpea_extra->gpea_get_related( $post->ID, 3, 1, $main_issue_id );
 
+// P4 Campaign/dataLayer fields.
+$context['cf_campaign_name'] = $page_meta_data['p4_campaign_name'][0] ?? '';
+$context['cf_basket_name']   = $page_meta_data['p4_basket_name'][0] ?? '';
+$context['cf_scope']         = $page_meta_data['p4_scope'][0] ?? '';
+$context['cf_department']    = $page_meta_data['p4_department'][0] ?? '';
+
 $context['strings'] = [
 	'follow' => __( 'Follow', 'gpea_theme' ),
 	'following' => __( 'Following', 'gpea_theme' ),
