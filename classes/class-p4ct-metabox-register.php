@@ -848,6 +848,15 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Facebook app id', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Used in subscribe form', 'gpea_theme_backend' ),
+				'id'      => 'gpea_facebook_app_id',
+				'type'    => 'text',
+			)
+		);		
+
 	}
 
 	/**

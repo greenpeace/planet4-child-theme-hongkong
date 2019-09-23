@@ -201,6 +201,9 @@ class P4CT_Site {
 
 		$context['gpea_site_base'] = isset( $options['gpea_site_base'] ) ? $options['gpea_site_base'] : 'gpea';
 
+		// facebook app id info
+		$context['gpea_facebook_app_id'] = isset( $options['gpea_facebook_app_id'] ) ? $options['gpea_facebook_app_id'] : '';
+
 		// footer extra link
 
 		$context['strings_navbar'] = [

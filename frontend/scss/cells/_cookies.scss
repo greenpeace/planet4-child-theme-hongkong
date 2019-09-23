@@ -1,0 +1,64 @@
+// Cookie Notice
+// Styleguide Layout.cookie-notice
+.cookie-notice {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 52px;
+  // padding: 10px 18px;
+  padding: 0 18px;
+  width: 100%;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  
+  z-index: 100;
+  display: none;
+  position: fixed;
+    
+  // background: $color-arctic;
+  background: rgba(26, 28, 38, 0.95);
+  color: #fff;
+
+  a {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  div.row.m-0 {
+    display: flex;
+  }
+
+  div.col-sm-9.col-md-10 {      
+    margin: 0 auto;
+    max-width: 80%;
+    flex: 80%;
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    @include greaterThan('sm') {
+      flex: 1;
+      max-width: 90%;
+      line-height: 30px;
+    }
+  }
+
+  div.col-sm-3.col-md-2 {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-line-pack: justify;
+    align-content: space-between;
+  }
+
+  .btn.btn-secondary.p-0 {
+    background: $color-green;
+    border-color: $color-green;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 6px 16px;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.2);
+  }
+
+}

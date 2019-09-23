@@ -176,7 +176,7 @@ function initDonation(Swiper, Scroll) {
     let dataForm = jQuery.param(data);
     
     let amountSent = jQuery("input[name='transaction.donationAmt']").val();
-    let recurringSent = ( jQuery("input[name='supporter.NOT_TAGGED_31']").val() == 'N' ) ? 'single' : 'recurring';
+    let recurringSent = ( jQuery("input[name='supporter.NOT_TAGGED_31']:checked").val() == 'N' ) ? 'single' : 'recurring';
 
     if(typeof fbq !== 'undefined') {
       fbq('track', 'AddPaymentInfo', {
@@ -210,7 +210,7 @@ function initDonation(Swiper, Scroll) {
         pageJsonReplicated.country = jQuery("input[name='supporter.country']").val();
         pageJsonReplicated.currency = window.NRO_PROPERTIES['HK'].currency;
         pageJsonReplicated.pageNumber = 2;
-        pageJsonReplicated.recurring = ( jQuery("input[name='supporter.NOT_TAGGED_31']").val() == 'N' ) ? 'false' : 'true';       
+        pageJsonReplicated.recurring = ( jQuery("input[name='supporter.NOT_TAGGED_31']:checked").val() == 'N' ) ? 'false' : 'true';       
         pageJsonReplicated.paymentType = jQuery("input[name='transaction.paymenttype']").val();                
 
         if (s.length > 0) {
