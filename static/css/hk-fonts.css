@@ -59,7 +59,8 @@ button,
 }
 
 .page-template-petition .logo-greenpeace,
-.page-template-donation .logo-greenpeace {
+.page-template-donation .logo-greenpeace,
+.page-template-petition-thankyou .logo-greenpeace {
   background-image: url('../images/logo_zh_green.svg');
 }
 

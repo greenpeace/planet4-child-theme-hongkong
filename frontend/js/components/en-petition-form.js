@@ -21,6 +21,9 @@ export default function() {
 
   if (!form || !cta) return;
 
+  // display little later cta button
+  cta.style.opacity = "1";
+
   // required by korea: if checkbox with "check_all" feature present
   if (checkboxCheckall) {
     checkboxCheckall.addEventListener('click', e => {
@@ -82,15 +85,7 @@ export default function() {
 
   const close = document.createElement('div');
   close.classList.add('close');
-  close.innerHTML = '×';
-
-  const ctaFacebook = document.createElement('button');
-  ctaFacebook.classList.add('button', 'fb', 'js-sign-facebook');
-  ctaFacebook.innerHTML = 'Facebook';  
-
-  form.insertBefore(stats, form.firstChild);
-  form.insertBefore(close, form.firstChild);
-  cta.parentNode.insertBefore(ctaFacebook, cta);
+  close.innerHTML = '×';  
 
   cta.addEventListener('click', e => {
     if (!form.classList.contains('is-open')) {
@@ -114,33 +109,48 @@ export default function() {
     }
   });
 
-  ctaFacebook.addEventListener('click', e => {
-    e.preventDefault();
+  if ( 1 == gpeaOptions.showFacebook ) {
+    const ctaFacebook = document.createElement('button');
+    ctaFacebook.classList.add('button', 'fb', 'js-sign-facebook');
+    ctaFacebook.innerHTML = 'Facebook';
 
-    if (
-      FB &&
-      (!form.querySelector('[name="supporter.emailAddress"]').value ||
-        form.classList.contains('is-open'))
-    ) {
-      FB.login(
-        function(response) {
-          if (response.status === 'connected') {
-            setFacebookUserInfo(form);
-          } else {
-            console.error('User cancelled login or did not fully authorize.');
-            // social login interrupted
-          }
-          // }, { scope: 'email,user_birthday' });
-        },
-        { scope: 'email' }
-      );
-    }
+    form.insertBefore(stats, form.firstChild);
+    form.insertBefore(close, form.firstChild);
+    cta.parentNode.insertBefore(ctaFacebook, cta);
 
-    if (!form.classList.contains('is-open')) {
-      form.classList.add('is-open');
-      document.body.classList.add('has-open-form');
-    }
-  });
+    ctaFacebook.addEventListener('click', e => {
+      e.preventDefault();
+  
+      if (
+        FB &&
+        (!form.querySelector('[name="supporter.emailAddress"]').value ||
+          form.classList.contains('is-open'))
+      ) {
+        FB.login(
+          function(response) {
+            if (response.status === 'connected') {
+              setFacebookUserInfo(form);
+            } else {
+              console.error('User cancelled login or did not fully authorize.');
+              // social login interrupted
+            }
+            // }, { scope: 'email,user_birthday' });
+          },
+          { scope: 'email' }
+        );
+      }
+  
+      if (!form.classList.contains('is-open')) {
+        form.classList.add('is-open');
+        document.body.classList.add('has-open-form');
+      }
+    });
+
+    // add class to reduce button width
+    cta.classList.add('facebook-enabled');
+    
+  }
+  
 
   // move email field "above the fold" and open form on focus
   const emailField = form.querySelector('.en__field--emailAddress');

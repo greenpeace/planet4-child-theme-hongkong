@@ -80,6 +80,11 @@ $context['engaging_page_id']            = $page_meta_data['p4-gpea_petition_enga
 $context['petition_target']             = $page_meta_data['p4-gpea_petition_engaging_target'][0] ?? '';
 $context['signatures']                  = $page_meta_data['p4-gpea_petition_current_signatures'][0] ?? '';
 
+// extra content to show below the petition bg image
+$extra_content                  = $page_meta_data['p4-gpea_page_extra_content'][0] ?? '';
+// $context['extra_content']       = $extra_content ? wpautop( $extra_content ) : '';
+$context['extra_content']       = $extra_content ? apply_filters( 'the_content', $extra_content ) : '';
+
 
 if ( $context['engaging_page_id'] && ! $context['signatures'] ) {
 	global $wp_version;
@@ -114,6 +119,11 @@ $context['og_title']                = $post->get_og_title();
 $context['og_description']          = $post->get_og_description();
 $context['og_image_data']           = $post->get_og_image();
 
+// P4 Campaign/dataLayer fields.
+$context['cf_campaign_name'] = $page_meta_data['p4_campaign_name'][0] ?? '';
+$context['cf_basket_name']   = $page_meta_data['p4_basket_name'][0] ?? '';
+$context['cf_scope']         = $page_meta_data['p4_scope'][0] ?? '';
+$context['cf_department']    = $page_meta_data['p4_department'][0] ?? '';
 
 $context['strings'] = [
 	// translators: placeholder represents the number of signers.

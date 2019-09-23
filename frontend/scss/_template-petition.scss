@@ -1,7 +1,7 @@
-.page-template-petition header .left-box {
-  margin-left: auto;
-  margin-right: auto;
-}
+// .page-template-petition header .left-box {
+//   margin-left: auto;
+//   margin-right: auto;
+// }
 
 .page-template-petition,
 .page-template-petition-thankyou,
@@ -53,6 +53,17 @@
   .mobile-box {
     display: none !important;
   }
+
+  .enform-side-style {
+    .enform form .submit .btn.facebook-enabled#p4en_form_save_button {
+      width: auto;
+    }
+    .enform form .submit .btn#p4en_form_save_button {
+      width: 100%;
+      opacity: 0;
+    }
+  }
+  
 }
 
 .page-template-petition,
@@ -111,14 +122,14 @@
 
 .page-template-petition,
 .page-template-petition-thankyou {
-  footer {
-    display: none;
-  }
+  // footer {
+  //   display: none;
+  // }
 
-  footer .bottom-bar {
-    height: calc(135px + 52px);
-    padding-bottom: 135px;
-  }
+  // footer .bottom-bar {
+  //   height: calc(135px + 52px);
+  //   padding-bottom: 135px;
+  // }
 }
 
 @include greaterThan('sm') {
@@ -149,4 +160,64 @@
       display: block;
     }
   }
+}
+
+
+// color text, inherited from main category choosen
+
+.page-template-petition {
+  .petition-extra-content {
+    h1, h2, h3, h4, h5, h6, a {
+      color: $color-green;
+    }
+  }
+  
+  &.forests {
+    .petition-extra-content {
+      h1, h2, h3, h4, h5, h6, a {
+        color: $color-forests;
+      }
+    }
+  }
+
+  &.oceans {
+    .petition-extra-content {
+      h1, h2, h3, h4, h5, h6, a {
+        color: $color-oceans;
+      }
+    }
+  }
+
+  &.arctic {
+    .petition-extra-content {
+      h1, h2, h3, h4, h5, h6, a {
+        color: $color-arctic;
+      }
+    }
+  }
+
+  &.climate {
+    .petition-extra-content {
+      h1, h2, h3, h4, h5, h6, a {
+        color: $color-climate;
+      }
+    }
+  }
+
+  &.plastics {
+    .petition-extra-content {
+      h1, h2, h3, h4, h5, h6, a {
+        color: $color-plastics;
+      }
+    }
+  }
+
+  &.health {
+    .petition-extra-content {
+      h1, h2, h3, h4, h5, h6, a {
+        color: $color-health;
+      }
+    }
+  }
+  
 }

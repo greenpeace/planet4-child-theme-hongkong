@@ -2,28 +2,15 @@
 
 {% include 'html-header.twig' %}
 
+<script>
+	var gpeaOptions = {};
+</script>
+
 {% endblock %}
 
 <body class="{{ body_class }} {{ custom_body_classes|default("") }}" {{ body_extra_info|raw }}>
-
-	<script>
-	window.fbAsyncInit = function() {
-		FB.init({
-		appId      : '1579566855506544',
-		xfbml      : true,
-		version    : 'v3.3'
-		});
-		// FB.AppEvents.logPageView();
-	};
-
-	(function(d, s, id){
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) {return;}
-		js = d.createElement(s); js.id = id;
-		js.src = "https://connect.facebook.net/zh_HK/sdk.js";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));
-	</script>
+	{% block html_head_container_extra %}
+	{% endblock %}	
 
 	<!-- as seen in big_carousel_manual_selection.twig !!! KEEP SYNCRONIZED !!! -->
 	<script id="template-card-petition-big" type="text/template">
@@ -277,11 +264,13 @@
 		{% endblock %}
 	</div>
 
+	{% block extra_content %}
 	{% if extra_content %}
-		<section class="section-post-content ct-container">
+		<section class="section-post-content section-post-content__extra-content ct-container">
 			{{ extra_content|e('wp_kses_post')|raw }}
 		</section>
-    {% endif %}
+	{% endif %}
+	{% endblock %}
 
 	{% if sidebar %}
 		<aside class="layout-sidebar">
@@ -317,6 +306,10 @@
 		{% else  %}
 			<script id="countries_script" type="application/json">{% include "countries.json" %}</script>
 		{% endif %}
+
+		{% block cookies %}
+			{% include 'cookies.twig' %}
+		{% endblock %}
 
 		{{ function('wp_footer') }}
 	{% endblock %}
