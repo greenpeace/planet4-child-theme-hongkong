@@ -36,12 +36,9 @@
 
 {% block extra_content %}
 	{% if extra_content %}
-		<section class="section-text-images ct-container petition-extra-content">
-			<div class="boxes">
-				<div class="box plain">
-					<div>{{ extra_content|e('wp_kses_post')|raw }}</div>
-				</div>
-				<div class="box no-image"></div>
+		<section class="ct-container petition-extra-content">
+			<div class="petition-extra-content__outer">
+				{{ extra_content|e('wp_kses_post')|raw }}
 			</div>
 		</section>
 	{% endif %}

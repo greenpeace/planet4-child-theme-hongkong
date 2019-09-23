@@ -19,10 +19,7 @@ export default function() {
     '#en__field_supporter_questions_455891'
   );
 
-  if (!form || !cta) return;
-
-  // display little later cta button
-  cta.style.opacity = "1";
+  if (!form || !cta) return;  
 
   // required by korea: if checkbox with "check_all" feature present
   if (checkboxCheckall) {
@@ -116,7 +113,10 @@ export default function() {
 
     form.insertBefore(stats, form.firstChild);
     form.insertBefore(close, form.firstChild);
-    cta.parentNode.insertBefore(ctaFacebook, cta);
+
+    // cta.parentNode.insertBefore(ctaFacebook, cta);
+    let formContainer = form.querySelector('.form-container');
+    if ( formContainer ) formContainer.insertBefore(ctaFacebook, formContainer.firstChild);
 
     ctaFacebook.addEventListener('click', e => {
       e.preventDefault();
@@ -130,6 +130,7 @@ export default function() {
           function(response) {
             if (response.status === 'connected') {
               setFacebookUserInfo(form);
+              ctaFacebook.style.opacity = "0";
             } else {
               console.error('User cancelled login or did not fully authorize.');
               // social login interrupted
@@ -145,9 +146,6 @@ export default function() {
         document.body.classList.add('has-open-form');
       }
     });
-
-    // add class to reduce button width
-    cta.classList.add('facebook-enabled');
     
   }
   

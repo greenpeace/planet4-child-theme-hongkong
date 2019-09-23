@@ -55,12 +55,11 @@
   }
 
   .enform-side-style {
-    .enform form .submit .btn.facebook-enabled#p4en_form_save_button {
-      width: auto;
-    }
     .enform form .submit .btn#p4en_form_save_button {
       width: 100%;
-      opacity: 0;
+    }
+    button.fb {
+      width: 100%;
     }
   }
   
@@ -122,9 +121,20 @@
 
 .page-template-petition,
 .page-template-petition-thankyou {
-  // footer {
-  //   display: none;
-  // }
+  footer {
+    padding-top: 0;
+
+    .footer-upper {
+      display: none;
+    }
+    .footer-lower {
+      margin-top: 20px;
+      padding-bottom: 220px;
+      @include greaterThan('sm') {
+        padding-bottom: 20px;
+      }
+    }    
+  }
 
   // footer .bottom-bar {
   //   height: calc(135px + 52px);
@@ -220,4 +230,29 @@
     }
   }
   
+  section.petition-extra-content {
+    background: #fff;
+
+    div.petition-extra-content__outer {
+      width: 95%;
+      margin: 0 auto;
+      @include greaterThan('sm') {
+        width: calc(100% - 450px);
+        margin-left: 0;
+      }
+    }
+    
+    .wp-caption {
+      max-width: 100% !important;
+    }
+    img {
+      max-width: 100% !important;
+      height: auto !important;
+      @include greaterThan('sm') {
+        max-width: auto;
+        height: auto;
+      }
+    }
+  }
+
 }
