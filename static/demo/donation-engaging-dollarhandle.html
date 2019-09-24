@@ -564,6 +564,10 @@ function debounce(func, wait, immediate) {
 				jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].main.home[campaignName].options.recurring[1].amt);
 				jQuery('.dollar-handles__recurring').addClass('is-active');
 				jQuery('.dollar-handles__once').removeClass('is-active');
+				jQuery('.paragraph-handles__recurring').addClass('is-active');
+				jQuery('.paragraph-handles__once').removeClass('is-active');
+				jQuery('.paragraph-handles__recurring').html(window.NRO_PROPERTIES[NRO].main.home[campaignName].options.recurring[1].text);
+				
 				jQuery('.dollar-handles__recurring input:eq(1)').prop("checked", true).trigger("click");
 			} else {
 				jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].suggested_amt_recurring);
@@ -576,6 +580,10 @@ function debounce(func, wait, immediate) {
 				jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].main.home[campaignName].options.single[1].amt);
 				jQuery('.dollar-handles__recurring').removeClass('is-active');
 				jQuery('.dollar-handles__once').addClass('is-active');
+				jQuery('.paragraph-handles__recurring').removeClass('is-active');
+				jQuery('.paragraph-handles__once').addClass('is-active');
+				jQuery('.paragraph-handles__once').html(window.NRO_PROPERTIES[NRO].main.home[campaignName].options.single[1].text);
+
 				jQuery('.dollar-handles__once input:eq(1)').prop("checked", true).trigger("click");
 			} else {
 				jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].suggested_amt_single);
