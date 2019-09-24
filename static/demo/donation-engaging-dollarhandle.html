@@ -208,79 +208,6 @@
 
 			<!-- adding dollar handles...-->
 
-
-			<div class="dollar-handles dollar-handles__once">
-					<div class="dollar-handle">
-		<input type="radio" id="a1500" name="dollar-handle" value="1500" data-paragraph="當有突發環境災難發生，因應需要安排調查小組到污染現場，追蹤並獨立監察。"/>
-											<label
-for="a1500"
-style="background-image: url(https://storage.googleapis.com/planet4-taiwan-stateless/2019/06/a7e2a360-a7e2a360-03-16-wrapup-2.jpg"
-><span>NTD 1500</span></label
->
-</div>
-												<div class="dollar-handle">
-		<input type="radio" id="a2500" name="dollar-handle" value="2500" data-paragraph="贊助發起連署行動，集結消費者力量，要求企業採取對環境友善的措施和政策。"/>
-											<label
-for="a2500"
-style="background-image: url(https://storage.googleapis.com/planet4-taiwan-stateless/2019/07/b17d310e-gp0sttfdd.jpg"
-><span>NTD 2500</span></label
->
-</div>
-												<div class="dollar-handle">
-		<input type="radio" id="a5000" name="dollar-handle" value="5000" data-paragraph="為一名調查員提供基本防護或野外工作裝備，實地調查環境罪行，並公諸於世。"/>
-											<label
-for="a5000"
-style="background-image: url(https://storage.googleapis.com/planet4-taiwan-stateless/2019/06/a3dea00b-a3dea00b-12-06_wilmar_2.jpg"
-><span>NTD 5000</span></label
->
-</div>
-			</div>
-<div class="dollar-handles dollar-handles__recurring is-active">
-					<div class="dollar-handle">
-	<input type="radio" id="b600" name="dollar-handle" value="600" data-paragraph="提高公眾對塑膠污染的認知，減少一次性塑膠製品對環境的衝擊，邁向無塑生活。"  />
-											<label
-for="b600"
-style="background-image: url(https://storage.googleapis.com/planet4-taiwan-stateless/2019/06/2653b0ef-gp0stt3fm.jpg"
-><span>NTD 600</span></label
->
-</div>
-																				<div class="dollar-handle">
-	<input type="radio" id="b800" name="dollar-handle" value="800" data-paragraph="持續實地調查非法破壞海洋、森林與環境的行為，以推動政府及企業加強監督及管理。" checked />
-											<label
-for="b800"
-style="background-image: url(https://storage.googleapis.com/planet4-taiwan-stateless/2019/06/bd4c2546-bd4c2546-03-16-wrapup-1.jpg"
-><span>NTD 800</span></label
->
-</div>
-																				<div class="dollar-handle">
-	<input type="radio" id="b1200" name="dollar-handle" value="1200" data-paragraph="協助我們與專家合作，研究能平衡經濟發展需求的能源出路，阻止氣候危機惡化。"  />
-											<label
-for="b1200"
-style="background-image: url(https://storage.googleapis.com/planet4-taiwan-stateless/2019/06/a243956a-a243956a-10-26_1.jpg"
-><span>NTD 1200</span></label
->
-</div>
-											</div>
-<p class="caption paragraph-handles__once">
-</p>
-<p class="caption paragraph-handles__recurring is-active">
-持續實地調查非法破壞海洋、森林與環境的行為，以推動政府及企業加強監督及管理。
-</p>
-<div class="form-group small">
-<label>其他金額</label>
-<span class="currency">NTD</span>
-<input
-class="free-amount"
-name="free-amount"
-type="number"
-aria-label="NTD"
-min="1"
-step="1"
-/>
-</div>
-
-
-
 			<!-- end adding dollar handle s-->
 
 
@@ -416,7 +343,7 @@ step="1"
 
 							</section>
 
-<script>var NRO = 'TW';</script>
+<script>var NRO = 'HK';</script>
 
 							<!-- end of inserimento llll-->
 					</div>
@@ -613,7 +540,7 @@ function debounce(func, wait, immediate) {
 //jQuery('[name="supporter.NOT_TAGGED_31"]').on('change', function(){
 </script>
 
-<script src="https://api.greenpeace.org.hk/general/donation_parameters.js"></script>
+<script src="donation_engaging/donation_parameters.js"></script>
 <script src="https://gpea.lattecreative.com/static/js/geo-data.js"></script>
 
 <script>
@@ -628,18 +555,40 @@ function debounce(func, wait, immediate) {
 <script>
 
 	jQuery(document).on('change','[name="supporter.NOT_TAGGED_31"]', function(){
-        console.log('changed frequency');
-        console.log(jQuery('input[name="supporter.NOT_TAGGED_31"]:checked').val());
+        // console.log('changed frequency');
+        // console.log(jQuery('input[name="supporter.NOT_TAGGED_31"]:checked').val());
 		if ( 'Y' == jQuery('[name="supporter.NOT_TAGGED_31"]:checked').val() ) {
             jQuery('[name="supporter.NOT_TAGGED_17"]').val('12');
-            console.log(jQuery('[name="supporter.NOT_TAGGED_17"]').val());
-			jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].suggested_amt_recurring);
+			console.log(jQuery('[name="supporter.NOT_TAGGED_17"]').val());
+			if ( 1 === window.NRO_PROPERTIES[NRO].main.home[campaignName].dollarHandles ) {
+				jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].main.home[campaignName].options.recurring[1].amt);
+				jQuery('.dollar-handles__recurring').addClass('is-active');
+				jQuery('.dollar-handles__once').removeClass('is-active');
+				jQuery('.paragraph-handles__recurring').addClass('is-active');
+				jQuery('.paragraph-handles__once').removeClass('is-active');
+				jQuery('.paragraph-handles__recurring').html(window.NRO_PROPERTIES[NRO].main.home[campaignName].options.recurring[1].text);
+				
+				jQuery('.dollar-handles__recurring input:eq(1)').prop("checked", true).trigger("click");
+			} else {
+				jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].suggested_amt_recurring);
+			}			
 		}
 		else {
             jQuery('[name="supporter.NOT_TAGGED_17"]').val('0');
-            console.log(jQuery('[name="supporter.NOT_TAGGED_17"]').val());
-			jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].suggested_amt_single);
+			// console.log(jQuery('[name="supporter.NOT_TAGGED_17"]').val());
+			if ( 1 === window.NRO_PROPERTIES[NRO].main.home[campaignName].dollarHandles ) {
+				jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].main.home[campaignName].options.single[1].amt);
+				jQuery('.dollar-handles__recurring').removeClass('is-active');
+				jQuery('.dollar-handles__once').addClass('is-active');
+				jQuery('.paragraph-handles__recurring').removeClass('is-active');
+				jQuery('.paragraph-handles__once').addClass('is-active');
+				jQuery('.paragraph-handles__once').html(window.NRO_PROPERTIES[NRO].main.home[campaignName].options.single[1].text);
+
+				jQuery('.dollar-handles__once input:eq(1)').prop("checked", true).trigger("click");
+			} else {
+				jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].suggested_amt_single);
 			}
+		}
 	});
 
 
@@ -677,6 +626,10 @@ jQuery(window).load(function(){
       if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
     }
 
+  } else {
+	if ( 1 === window.NRO_PROPERTIES[NRO].main.home[campaignName].dollarHandles ) {
+		jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].main.home[campaignName].options.recurring[1].amt);
+	}
   }
 
 

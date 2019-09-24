@@ -175,6 +175,11 @@
     background-color: white;
   }
 
+  .enform .custom-checkbox .invalid-feedback,
+  .enform .custom-checkbox .en__field__error {
+    top: 6px;
+  }
+
   .form-container .en__field__element input[type='email'].is-invalid,
   .form-container .en__field__element input[type='tel'].is-invalid,
   .form-container .en__field__element input[type='text'].is-invalid,
