@@ -23,6 +23,7 @@ import swiper from './Donation/swiper';
 import validation from './Donation/validation';
 import prevNext from './Donation/prevNext';
 import mask from './Donation/masks';
+import dollarHandles from './Donation/dollar-handles';
 
 Swiper.use([Navigation, Pagination, Scrollbar, Controller, Autoplay]);
 
@@ -31,6 +32,9 @@ polyfills();
 function initDonation(Swiper, Scroll) {
   // Quit if we aren't in a donation page
   if (!document.querySelector('.page-template-donation')) return;
+
+  // activate dollar handles if any
+  dollarHandles();
 
   // Activate radio-to-tabs
   donationTabs();
