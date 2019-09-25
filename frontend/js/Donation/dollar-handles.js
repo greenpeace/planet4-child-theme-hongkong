@@ -80,13 +80,14 @@ export default function() {
   });
 
   // Clear checked dollar handle if I insert a free amount
-  document.querySelector('#en__field_transaction_donationAmt').addEventListener('change', e => {
-    const form = e.target.form;
-    const checkedHandles = form['dollar-handle'];
-    if ( checkedHandles ) {
-      Array.from(checkedHandles).forEach(radio => {
-        radio.checked = false;
-      });
-    }    
+  jQuery(document).on('change', '#en__field_transaction_donationAmt', function(e){
+    jQuery('input[name="dollar-handle"]').attr('checked', false);
+    // const form = e.target.form;
+    // const checkedHandles = form['dollar-handle'];
+    // if ( checkedHandles ) {
+    //   Array.from(checkedHandles).forEach(radio => {
+    //     radio.checked = false;
+    //   });
+    // }    
   });
 }
