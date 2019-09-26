@@ -381,9 +381,9 @@ function checkUrlParameters(donationSwiper) {
   // if (window.NRO_PROPERTIES[NRO].backgroundStyle.campaignActive.image.backgroundImage) ;
 
   let amountValue = getUrlParameters('transaction.donationAmt', '', true);
-  if (amountValue) {
-    document.querySelector('button.js-amount-next').click();
-  }
+  // if (amountValue) {
+  //   document.querySelector('button.js-amount-next').click();
+  // }
 
   let alreadySubmitted = getUrlParameters('val', '', true);
   if (alreadySubmitted) {
