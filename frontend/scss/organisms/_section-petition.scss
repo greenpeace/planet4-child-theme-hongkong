@@ -15,6 +15,9 @@
   .enform-side-style .col-md-12 {
     min-height: 100%;
   }
+  .enform-side-style .form-container {
+    margin-top: 16px;
+  }
 }
 
 .outer_block_container > * {
@@ -338,7 +341,7 @@
     bottom: calc(-90vh + 205px);
     left: 0;
     right: 0;
-    height: 90vh;
+    height: 92vh;
     min-height: 0;
     overflow: auto;
     margin-left: 0 !important;
@@ -397,6 +400,7 @@
         width: auto;
         padding-left: 20px;
         padding-right: 20px;
+        margin-top: 16px;
 
         @include lessThan('sm') {
           margin-left: 0;

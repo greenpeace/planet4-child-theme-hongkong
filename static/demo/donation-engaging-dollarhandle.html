@@ -343,7 +343,7 @@
 
 							</section>
 
-<script>var NRO = 'HK';</script>
+<script>var NRO = 'TW';</script>
 
 							<!-- end of inserimento llll-->
 					</div>
@@ -594,7 +594,7 @@ function debounce(func, wait, immediate) {
 
 let recurringPayment = getUrlParameters("supporter.NOT_TAGGED_31", "", true);
 if (recurringPayment == 'Y') {
-	console.log('recurring');
+	// console.log('recurring');
 	jQuery('input[name="supporter.NOT_TAGGED_17"]').val('12');
 } else if (recurringPayment == 'N') {
 	jQuery('input[name="supporter.NOT_TAGGED_17"]').val('0');
@@ -608,6 +608,7 @@ jQuery(window).load(function(){
   }
 
   let amountParam = getUrlParameters("donate_amt", "", true);
+  let amountParamP8 = getUrlParameters("transaction.donationAmt", "", true);  
   if (amountParam) {
     let amountParamMultiple = amountParam.split(":");
     if ( ('s' == amountParamMultiple[0]) || ('single' == amountParamMultiple[0]) || ('oneoff' == amountParamMultiple[0]) ) {
@@ -616,17 +617,31 @@ jQuery(window).load(function(){
       // jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].suggested_amt_single);
       //jQuery('input#en__field_supporter_NOT_TAGGED_310').prop('checked', true);
       jQuery('label[for="en__field_supporter_NOT_TAGGED_310"]').trigger('click');
-      if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
+	  if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
+	  
+	  // de-activate dollarhandles option
+	  jQuery('input[name="dollar-handle"]').attr('checked', false);
+
     } else if ( ('m' == amountParamMultiple[0]) || ('monthly' == amountParamMultiple[0]) || ('recurring' == amountParamMultiple[0]) ) {
       // jQuery('input[name="supporter.NOT_TAGGED_17"]').val('12');
       // jQuery('input[name="supporter.NOT_TAGGED_31"]').val('Y');
       // jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].suggested_amt_recurring);
       jQuery('label[for="en__field_supporter_NOT_TAGGED_311"]').trigger('click');
       //jQuery('input#en__field_supporter_NOT_TAGGED_311').prop('checked', true);
-      if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
+	  if ( amountParamMultiple[1] ) jQuery('input[name="transaction.donationAmt"]').val(amountParamMultiple[1]);
+	  
+	  // de-activate dollarhandles option
+	  jQuery('input[name="dollar-handle"]').attr('checked', false);
+
     }
 
-  } else {
+  } else if ( amountParamP8 ) {
+	jQuery('input[name="transaction.donationAmt"]').val(amountParamP8);
+	// if using new specific parameter from p8, (default value set from engaging) de-activate dollarhandles option
+	jQuery('input[name="dollar-handle"]').attr('checked', false);
+	jQuery('button.js-amount-next').trigger('click');
+
+  }	else {
 	if ( 1 === window.NRO_PROPERTIES[NRO].main.home[campaignName].dollarHandles ) {
 		jQuery('[name="transaction.donationAmt"]').val(window.NRO_PROPERTIES[NRO].main.home[campaignName].options.recurring[1].amt);
 	}
