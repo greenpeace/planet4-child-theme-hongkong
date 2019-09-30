@@ -33,6 +33,11 @@ function initDonation(Swiper, Scroll) {
   // Quit if we aren't in a donation page
   if (!document.querySelector('.page-template-donation')) return;
 
+  // show national id if taiwan
+  if ( 'TW' === NRO ) {
+    jQuery('.en__field--NOT_TAGGED_34').show();
+  }
+
   // activate dollar handles if any
   dollarHandles();
 
@@ -212,7 +217,7 @@ function initDonation(Swiper, Scroll) {
         // var pageJsonReplicated = pageJson;
         pageJsonReplicated.amount = amountSent;
         pageJsonReplicated.country = jQuery("input[name='supporter.country']").val();
-        pageJsonReplicated.currency = window.NRO_PROPERTIES['HK'].currency;
+        pageJsonReplicated.currency = window.NRO_PROPERTIES[NRO].currency;
         pageJsonReplicated.pageNumber = 2;
         pageJsonReplicated.recurring = ( jQuery("input[name='supporter.NOT_TAGGED_31']:checked").val() == 'N' ) ? 'false' : 'true';       
         pageJsonReplicated.paymentType = jQuery("input[name='transaction.paymenttype']").val();                
