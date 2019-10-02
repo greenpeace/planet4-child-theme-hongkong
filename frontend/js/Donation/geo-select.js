@@ -963,6 +963,8 @@ jQuery(document).on('change',".js-country-select", function(){
 		});
 		regexPhone = window.NRO_PROPERTIES['HK'].regex.phone;
 		regexPhoneMessage = window.NRO_PROPERTIES['HK'].validation.format_phone;
+		jQuery('.en__field--NOT_TAGGED_34').hide();
+		jQuery('.enform').removeClass('extra-padding-bottom');
 		// citySelect.append(citySelectOptions);
 
 	} else if ( this.value == 'TW' ) {
@@ -979,6 +981,8 @@ jQuery(document).on('change',".js-country-select", function(){
 		regexPhone = window.NRO_PROPERTIES['TW'].regex.phone;
 		regexPhoneMessage = window.NRO_PROPERTIES['TW'].validation.format_phone;
 		// citySelect.append(citySelectOptions);
+		jQuery('.en__field--NOT_TAGGED_34').show();
+		jQuery('.enform').addClass('extra-padding-bottom');
 
 	} else {
 		jQuery('input[name="supporter.city"]').val('-');
@@ -995,6 +999,8 @@ jQuery(document).on('change',".js-country-select", function(){
 		jQuery('.js-region-select').html(o2);
 		regexPhone = window.NRO_PROPERTIES[NRO].regex.phone_general;
 		regexPhoneMessage = window.NRO_PROPERTIES[NRO].validation.format_phone_general;
+		jQuery('.en__field--NOT_TAGGED_34').hide();
+		jQuery('.enform').removeClass('extra-padding-bottom');
 	}
 });  
 

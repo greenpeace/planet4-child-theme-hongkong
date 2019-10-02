@@ -18,6 +18,8 @@ class P4CT_Site {
 	 */
 	protected $services;
 
+	const SHOW_SCROLL_TIMES     = 2;
+
 	/**
 	 * P4CT_Site constructor.
 	 *
@@ -87,7 +89,7 @@ class P4CT_Site {
 		remove_action( 'wp_ajax_get_paged_posts', [ 'P4MT\P4_ElasticSearch', 'get_paged_posts' ] );
 		remove_action( 'wp_ajax_nopriv_get_paged_posts', [ 'P4MT\P4_ElasticSearch', 'get_paged_posts' ] );
 		add_action( 'wp_ajax_get_paged_posts', [ 'P4CT_ElasticSearch', 'get_paged_posts' ] );
-		add_action( 'wp_ajax_nopriv_get_paged_posts', [ 'P4CT_ElasticSearch', 'get_paged_posts' ] );		
+		add_action( 'wp_ajax_nopriv_get_paged_posts', [ 'P4CT_ElasticSearch', 'get_paged_posts' ] );
 
 	}
 
@@ -223,6 +225,25 @@ class P4CT_Site {
 			'my_preferences' => __( 'My Preferences', 'gpea_theme' ),
 		];
 
+		$context['search_strings'] = [
+			'issue'           => __( 'issue', 'gpea_theme' ),
+			'topic'           => __( 'topic', 'gpea_theme' ),
+			'posts'           => __( 'posts', 'gpea_theme' ),
+			'advanced_search' => __( 'advanced_search', 'gpea_theme' ),
+			'filters'         => __( 'filters', 'gpea_theme' ),
+			'none'            => __( 'None', 'gpea_theme' ),
+			'start_typing'    => __( 'Start typing', 'gpea_theme' ),
+			'search_label'  => __( 'Search', 'gpea_theme' ),
+			'reset_filters' => __( 'Reset Filters', 'gpea_theme' ),
+			'sort_by'       => __( 'Sort by', 'gpea_theme' ),
+			'nothing_found' => __( 'Nothing found, sorry.', 'gpea_theme' ),
+			'any'           => __( 'Any', 'gpea_theme' ),
+			'any_issue'     => __( 'Any issue', 'gpea_theme' ),
+			'any_topic'     => __( 'Any topic', 'gpea_theme' ),
+		];
+
+
+
 		return $context;
 	}
 
@@ -293,6 +314,7 @@ class P4CT_Site {
 	public function enqueue_public_assets( $hook ) {
 		$css_creation = filectime( get_stylesheet_directory() . '/static/css/style.css' );
 		$js_creation = filectime( get_stylesheet_directory() . '/static/js/script.js' );
+		$search_js_creation = filectime( get_stylesheet_directory() . '/static/js/search.js' );
 
 		$css_fonts = gpea_get_option( 'gpea_css_fonts' ) ? gpea_get_option( 'gpea_css_fonts' ) : 'hk-fonts.css';
 		wp_enqueue_style( 'child-style-fonts', get_stylesheet_directory_uri() . '/static/css/' . $css_fonts, [], $css_creation );
@@ -301,6 +323,13 @@ class P4CT_Site {
 		wp_localize_script( 'child-script', 'localizations', [
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 		]);
+
+		wp_register_script( 'search-script', get_stylesheet_directory_uri() . '/static/js/search.js', [], $search_js_creation, true );
+		wp_localize_script( 'search-script', 'localizations', [
+			'ajaxurl'           => admin_url( 'admin-ajax.php' ),
+			'show_scroll_times' => self::SHOW_SCROLL_TIMES,
+		] );
+		wp_enqueue_script( 'search-script' );
 	}
 
 	/**

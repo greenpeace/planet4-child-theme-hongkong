@@ -24,6 +24,9 @@ export default function() {
 	jQuery('label[for="en__field_supporter_NOT_TAGGED_311"]').html(window.NRO_PROPERTIES[NRO].gift.type.recurring);
 	jQuery('label[for="en__field_supporter_NOT_TAGGED_310"]').html(window.NRO_PROPERTIES[NRO].gift.type.single);
 
+	// national id
+	jQuery('label[for="en__field_supporter_NOT_TAGGED_34"]').html(window.NRO_PROPERTIES[NRO].form.labels.national_id);
+
 	jQuery('label[for="en__field_transaction_ccnumber"]').html(window.NRO_PROPERTIES[NRO].form.labels.card_number);
 	jQuery('label[for="en__field_transaction_ccexpire"]').html(window.NRO_PROPERTIES[NRO].form.labels.expiry);
 	jQuery('label[for="en__field_transaction_ccvv"]').html(window.NRO_PROPERTIES[NRO].form.labels.cvv);
