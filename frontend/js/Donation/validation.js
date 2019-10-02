@@ -11,6 +11,26 @@ const required = {
   message: requiredMessage,
 };
 
+validate.validators.validateTwNationalId = function(id, options, key, attributes){
+  // console.log(id);
+  // leave it optional?
+  if (!id) return;
+  const cityValidation = new Array(1,10,19,28,37,46,55,64,39,73,82, 2,11,20,48,29,38,47,56,65,74,83,21, 3,12,30)
+  id = id.toUpperCase();
+  if (id.search(/^[A-Z](1|2)\d{8}$/i) == -1) {
+      return window.NRO_PROPERTIES[NRO].validation.format_id;
+  } else {
+      id = id.split('');
+      var total = cityValidation[id[0].charCodeAt(0)-65];
+      for(var i=1; i<=8; i++){
+          total += eval(id[i]) * (9 - i);
+      }
+      total += eval(id[9]);
+      if ((total%10 !== 0 )) return window.NRO_PROPERTIES[NRO].validation.format_id;
+      else return;
+  }
+};
+
 const amountConstraintsRecurring = {
   ['en__field--donationAmt']: {
     presence: required,
@@ -81,6 +101,9 @@ const dataConstraints = {
     presence: required,
     length: { maximum: 255 },
   },
+  ['en__field--NOT_TAGGED_34']: {
+    validateTwNationalId: {},    
+  },
   // ['en__field--NOT_TAGGED_33']: {
   //   presence: false,
   //   format: {
@@ -141,8 +164,9 @@ const allConstraints = Object.assign(
 );
 
 function prepareFormForValidation(form) {
-  for (const name in allConstraints) {
+  for (const name in allConstraints) {    
     if (allConstraints.hasOwnProperty(name)) {
+      console.log(name);
       // const options = allConstraints[name];
       let input = form.querySelector('.' + name + ' input');
       if (!input) input = form.querySelector('.' + name + ' select');

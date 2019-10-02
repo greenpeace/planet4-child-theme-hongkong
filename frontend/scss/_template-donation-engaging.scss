@@ -31,6 +31,10 @@
 	  transition-delay: .1s;
 	  transition-timing-function: linear;
 
+    &.extra-padding-bottom {
+      padding-bottom: 75px;
+    }
+
     .en__field__element {
       width: 100%;
     }
@@ -244,6 +248,12 @@
     font-size: 14px;
     color: $color-grey;
   }
+
+  // hide national id field for taiwan
+  .en__field--NOT_TAGGED_34 {
+    display: none;
+  }
+
 }
 
 /* steps visible here */

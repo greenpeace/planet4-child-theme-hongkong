@@ -35,6 +35,10 @@ body {
       overflow: hidden;
     }
   }
+
+  &.has-open-dynamic-search {
+    overflow: hidden;
+  }
 }
 
 h1,
@@ -209,4 +213,9 @@ body.is-loading .body-spinner {
     margin-top: -32px;
     margin-left: -32px;
   }
+}
+
+/* remove stuff from mater */
+svg.external_link {
+  display: none;
 }
