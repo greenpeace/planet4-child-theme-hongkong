@@ -210,3 +210,8 @@ body.is-loading .body-spinner {
     margin-left: -32px;
   }
 }
+
+/* remove stuff from mater */
+svg.external_link {
+  display: none;
+}
