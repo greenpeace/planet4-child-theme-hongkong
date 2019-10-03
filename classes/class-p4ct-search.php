@@ -617,24 +617,23 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					'order' => 'DESC',
 				],
 			];
-			$context['is_search_page'] = '1';
 
-			// $context['strings'] = [
-			// 	'issue'           => __( 'issue', 'gpea_theme' ),
-			// 	'topic'           => __( 'topic', 'gpea_theme' ),
-			// 	'posts'           => __( 'posts', 'gpea_theme' ),
-			// 	'advanced_search' => __( 'advanced_search', 'gpea_theme' ),
-			// 	'filters'         => __( 'filters', 'gpea_theme' ),
-			// 	'none'            => __( 'None', 'gpea_theme' ),
-			// 	'start_typing'    => __( 'Start typing', 'gpea_theme' ),
-			// 	'search_label'  => __( 'Search', 'gpea_theme' ),
-			// 	'reset_filters' => __( 'Reset Filters', 'gpea_theme' ),
-			// 	'sort_by'       => __( 'Sort by', 'gpea_theme' ),
-			// 	'nothing_found' => __( 'Nothing found, sorry.', 'gpea_theme' ),
-			// 	'any'           => __( 'Any', 'gpea_theme' ),
-			// 	'any_issue'     => __( 'Any issue', 'gpea_theme' ),
-			// 	'any_topic'     => __( 'Any topic', 'gpea_theme' ),
-			// ];
+			$context['strings'] = [
+				'issue'           => __( 'issue', 'gpea_theme' ),
+				'topic'           => __( 'topic', 'gpea_theme' ),
+				'posts'           => __( 'posts', 'gpea_theme' ),
+				'advanced_search' => __( 'advanced_search', 'gpea_theme' ),
+				'filters'         => __( 'filters', 'gpea_theme' ),
+				'none'            => __( 'None', 'gpea_theme' ),
+				'start_typing'    => __( 'Start typing', 'gpea_theme' ),
+				'search_label'  => __( 'Search', 'gpea_theme' ),
+				'reset_filters' => __( 'Reset Filters', 'gpea_theme' ),
+				'sort_by'       => __( 'Sort by', 'gpea_theme' ),
+				'nothing_found' => __( 'Nothing found, sorry.', 'gpea_theme' ),
+				'any'           => __( 'Any', 'gpea_theme' ),
+				'any_issue'     => __( 'Any issue', 'gpea_theme' ),
+				'any_topic'     => __( 'Any topic', 'gpea_theme' ),
+			];
 
 			if ( $this->search_query ) {
 				$context['page_title'] = sprintf(
@@ -942,16 +941,15 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 		/**
 		 * Load assets only on the search page.
-		 * Update 8/9/2019: on ALL pages -> moved to class-p4ct-site.php
 		 */
 		public function enqueue_public_assets() {
-			// if ( is_search() ) {
-				// $js_creation = filectime( get_stylesheet_directory() . '/static/js/search.js' );
+			if ( is_search() ) {
+				$js_creation = filectime( get_stylesheet_directory() . '/static/js/search.js' );
 
-				// wp_register_script( 'search-script', get_stylesheet_directory_uri() . '/static/js/search.js', [], $js_creation, true );
-				// wp_localize_script( 'search-script', 'localizations', $this->localizations );
-				// wp_enqueue_script( 'search-script' );
-			// }
+				wp_register_script( 'search-script', get_stylesheet_directory_uri() . '/static/js/search.js', [], $js_creation, true );
+				wp_localize_script( 'search-script', 'localizations', $this->localizations );
+				wp_enqueue_script( 'search-script' );
+			}
 		}
 	}
 }
