@@ -2,108 +2,217 @@
 
 {% block content %}
 
-	{% set disabled  = posts ? '' : 'disabled' %}
-	{% set collapsed = posts ? '' : 'collapsed' %}
-	{% set show      = posts ? 'show' : '' %}
-	{% set expanded  = posts ? true : false %}
+    <section class="live-search">
 
-	{% include 'blocks/section-live-search.twig' %}
+        <div class="ct-container">
 
-	<section class="advanced-search">
+            <!-- as seen in e.g. achievements_list.twig -->
+            <script id="template-posts" type="text/template">
+                <% posts.forEach(post => {
+                // console.log(post);
+                %>
+                <a href="<%= post.link %>" class="card-update compact">
+                    <div class="thumbnail" style="background-image: url(<%= post.img_url %>);"></div>
+                    <div class="box">
+                        <div class="meta-box">
+                            <div>
+                                <span class="issue <%= post.main_issue_slug %>"><%= post.main_issue %></span>
+                                <span><%= post.news_type %></span>
+                            </div>
+                        </div>
+                        <p>
+                            <%= post.post_title %>
+                        </p>
+                        <div class="meta-box">
+                            <div>
+                                <% if (typeof post.reading_time !== 'undefined' && post.reading_time) { %>
+                                <span>
+							<span class="icon-clock"></span>
+							<%= post.reading_time %>
+						</span>
+                                <% } %>
+                                <span><%= post.post_date %></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <%
+                }); %>
+            </script>
 
-		<div class="ct-container">
+            <!-- as seen in e.g. main_issues_carousel.twig -->
+            <script id="template-issues" type="text/template">
+                <% issues.forEach(issue => {
+                // console.log(issue);
+                issue.main_issue = issue.name
+                %><a href="<%= issue.link %>" class="swiper-slide card-issue">
+                    <div class="image" style="background-image: url(<%= issue.img_url %>);">
+                        <h4><%= issue.post_title %></h4>
+                        <div class="issue <%= issue.main_issue_slug %>"><%= issue.main_issue_slug %></div>
+                    </div>
+                </a>
+                <%
+                }); %>
+            </script>
 
-			<h3>{{ search_strings.advanced_search }}</h3>
+            <!-- as seen in e.g. tag_cloud.twig -->
+            <script id="template-topics" type="text/template">
+                <% topics.forEach(topic => {
+                // console.log(topic);
+                %>
+                <a class="button tag" href="{{ home_url }}/?s&f&f[tag]=<%= topic.id %>">
+                    <%= topic.name %>
+                </a>
+                <%
+                }); %>
+            </script>
 
-			<div class="advanced-wrapper">
-				<div class="filters">
-					<label>{{ search_strings.filters }}</label>
-					<div class="filters-selects">
-						{% if ( categories|length > 0 ) %}
-							<div class="select">
-								<select class="filter-search" form="search_form_inner" id="f[cat]" name="f[cat]">
-									<option value="0">-- {{ search_strings.any_issue }}  --</option>
-									{% for category in categories %}
-										<option value="{{ category.term_id }}" {{ category.selected ? 'selected' : '' }}>{{ category.name|e('wp_kses_post')|raw }}</option>
-									{% endfor %}
-								</select>
-							</div>
-						{% endif %}
-						{% if ( tags|length > 0 ) %}
-							<div class="select">
-								<select class="filter-search" form="search_form_inner" id="f[tag]" name="f[tag]">
-									<option value="0">-- {{ search_strings.any_topic }} --</option>
-									{% for tag in tags %}
-										<option value="{{ tag.term_id }}" {{ tag.selected ? 'selected' : '' }}>{{ tag.name|e('wp_kses_post')|raw }}</option>
-									{% endfor %}
-								</select>
-							</div>
-						{% endif %}
-					</div>
+            {% set disabled  = posts ? '' : 'disabled' %}
+            {% set collapsed = posts ? '' : 'collapsed' %}
+            {% set show      = posts ? 'show' : '' %}
+            {% set expanded  = posts ? true : false %}
+            {% set search_label = strings.search_label %}
 
-					<button class="button small" id="btn_filter_reset">{{ search_strings.reset_filters }}</button>
+            <h2 class="search-title">{{ search_label }}</h2>
+
+            <!-- We also included results for: -->
+            <!-- Does this even work? -->
+            {% if ( corrected_term ) %}
+                {{ corrected_term }}
+            {% endif %}
+
+            <form
+                    id="search_form_inner" role="search" action="{{ data_nav_bar.home_url }}">
+                <!-- Main search field -->
+                <div class="form-group search fluid">
+                    <input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="{{ strings.start_typing }}" value="{{ search_query|e('wp_kses_post')|raw }}">
+                    <button class="button primary" type="submit">{{ search_label }}</button>
+                </div>
+
+				<div class="lds-spinner">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
 				</div>
+            </form>
 
-				{#  TODO reimplement sort by logic#}
-				{#  <div class="sort-by">#}
-				{#    <label for="select_order">{{ search_strings.sort_by }}</label>#}
-				{#    <div class="select">#}
-				{#      <select class="filter-search" form="search_form_innerg" id="select_order" name="select_order">#}
-				{#        {% for key, sort_option in sort_options %}#}
-				{#          {% if key == selected_sort %}#}
-				{#            <option value="{{ key }}" {{ not search_query and key == '_score' ? 'disabled' : 'selected' }}>{{ sort_option.name }}</option>#}
-				{#          {% else %}#}
-				{#            <option value="{{ key }}">{{ sort_option.name }}</option>#}
-				{#          {% endif %}#}
-				{#        {% endfor %}#}
-				{#      </select>#}
-				{#    </div>#}
-				{#  </div>#}
+            <div hidden id="ajax-search-issues" class="fade-out">
+                <h5>
+                    {{ strings.issue }}
+                </h5>
+                <div class="results-list"></div>
+            </div>
 
-			</div>
+            <div hidden id="ajax-search-topics" class="fade-out">
+                <h5>{{ strings.topic }}</h5>
+                <div class="results-list"></div>
+            </div>
 
-			<!-- No posts found? -->
-			{% if ( not posts ) %}
-				<p class="nothing-found">
-					<i>
-						<small>{{ exception ?? search_strings.nothing_found }}</small>
-					</i>
-				</p>
-			{% endif %}
+            <div hidden id="ajax-search-posts" class="fade-out">
+                <h5>{{ strings.posts }}</h5>
+                <div class="results-list"></div>
+            </div></div></section><section class="advanced-search"><div class="ct-container">
 
-			<p class="results-no">
-				<b>{{ page_title|e('wp_kses_post')|raw }}</b>
-			</p>
+        <h3>{{ strings.advanced_search }}</h3>
 
-			<div class="multiple-search-result">
-				{% if ( load_more.async ) %}
-					{% set displayed_posts = paged_posts %}
-				{% else %}
-					{% set displayed_posts = posts %}
-				{% endif %}
-				<div class="results-list">
-					{% for post in displayed_posts %}
-						{% include ['tease-search.twig', 'tease-'~post.post_type~'.twig', 'tease-related-post.twig', 'tease.twig'] %}
-					{% endfor %}
-				</div>
-				{% if ( load_more and posts|length > paged_posts|length ) %}
-					<div class="has-load-more">
-						<button class="button {{ load_more.async ? 'btn-load-more-async' : '' }} btn-load-more-click-scroll" data-current_page="{{ current_page }}" data-total_posts="{{ found_posts }}" data-posts_per_load="{{ load_more.posts_per_load }}">
-							{{ load_more.button_text }}
-						</button>
-					</div>
-				{% endif %}
-				{% if ( pagination ) %}
-					{{ fn( 'the_posts_pagination', pagination ) }}
-				{% endif %}
-			</div>
+        <div class="advanced-wrapper">
+            <div class="filters">
+                <label>{{ strings.filters }}</label>
+                <div class="filters-selects">
+                    {% if ( categories|length > 0 ) %}
+                        <div class="select">
+                            <select class="filter-search" form="search_form_inner" id="f[cat]" name="f[cat]">
+                                <option value="0">-- {{ strings.any_issue }}  --</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.term_id }}" {{ category.selected ? 'selected' : '' }}>{{ category.name|e('wp_kses_post')|raw }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endif %}
+                    {% if ( tags|length > 0 ) %}
+                        <div class="select">
+                            <select class="filter-search" form="search_form_inner" id="f[tag]" name="f[tag]">
+                                <option value="0">-- {{ strings.any_topic }} --</option>
+                                {% for tag in tags %}
+                                    <option value="{{ tag.term_id }}" {{ tag.selected ? 'selected' : '' }}>{{ tag.name|e('wp_kses_post')|raw }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endif %}
+                </div>
 
-			{% if ( suggestions ) %}
-				{% for suggestion in suggestions %}
-					<p>{{ suggestion }}</p>
-				{% endfor %}
-			{% endif %}
+                <button class="button small" id="btn_filter_reset">{{ strings.reset_filters }}</button>
+            </div>
 
-		</div>
-	</section>
+            {#  TODO reimplement sort by logic#}
+            {#  <div class="sort-by">#}
+            {#    <label for="select_order">{{ strings.sort_by }}</label>#}
+            {#    <div class="select">#}
+            {#      <select class="filter-search" form="search_form_innerg" id="select_order" name="select_order">#}
+            {#        {% for key, sort_option in sort_options %}#}
+            {#          {% if key == selected_sort %}#}
+            {#            <option value="{{ key }}" {{ not search_query and key == '_score' ? 'disabled' : 'selected' }}>{{ sort_option.name }}</option>#}
+            {#          {% else %}#}
+            {#            <option value="{{ key }}">{{ sort_option.name }}</option>#}
+            {#          {% endif %}#}
+            {#        {% endfor %}#}
+            {#      </select>#}
+            {#    </div>#}
+            {#  </div>#}
+
+        </div>
+
+        <!-- No posts found? -->
+        {% if ( not posts ) %}
+            <p class="nothing-found">
+                <i>
+                    <small>{{ exception ?? strings.nothing_found }}</small>
+                </i>
+            </p>
+        {% endif %}
+
+        <p class="results-no">
+            <b>{{ page_title|e('wp_kses_post')|raw }}</b>
+        </p>
+
+        <div class="multiple-search-result">
+            {% if ( load_more.async ) %}
+                {% set displayed_posts = paged_posts %}
+            {% else %}
+                {% set displayed_posts = posts %}
+            {% endif %}
+            <div class="results-list">
+                {% for post in displayed_posts %}
+                    {% include ['tease-search.twig', 'tease-'~post.post_type~'.twig', 'tease-related-post.twig', 'tease.twig'] %}
+                {% endfor %}
+            </div>
+            {% if ( load_more and posts|length > paged_posts|length ) %}
+                <div class="has-load-more">
+                    <button class="button {{ load_more.async ? 'btn-load-more-async' : '' }} btn-load-more-click-scroll" data-current_page="{{ current_page }}" data-total_posts="{{ found_posts }}" data-posts_per_load="{{ load_more.posts_per_load }}">
+                        {{ load_more.button_text }}
+                    </button>
+                </div>
+            {% endif %}
+            {% if ( pagination ) %}
+                {{ fn( 'the_posts_pagination', pagination ) }}
+            {% endif %}
+        </div>
+
+        {% if ( suggestions ) %}
+            {% for suggestion in suggestions %}
+                <p>{{ suggestion }}</p>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+</section>
 {% endblock %}
