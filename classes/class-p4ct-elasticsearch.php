@@ -19,24 +19,38 @@ if ( ! class_exists( 'P4CT_ElasticSearch' ) ) {
 		 */
 		public function set_engines_args( &$args ) {
 
-			$args['ep_integrate'] = true;
-
-//			// Get only DOCUMENT_TYPES from the attachments.
-//			if ( ! $this->search_query && ! $this->filters ) {
-//				add_filter(
-//					'ep_formatted_args',
-//					function ( $formatted_args ) use ( $args ) {
-//						// TODO - Fix parsing exception in EP API call to Elasticsearch.
-//						$formatted_args['post_mime_type'] = self::DOCUMENT_TYPES;
-//						return $formatted_args;
-//					},
-//					10,
-//					1
-//				);
-//			}
+			 $args['ep_integrate'] = true;
+			// Get only DOCUMENT_TYPES from the attachments.
+			if ( ! $this->search_query && ! $this->filters ) {
+				add_filter(
+					'ep_formatted_args',
+					function ( $formatted_args ) use ( $args ) {
+						// TODO - Fix parsing exception in EP API call to Elasticsearch.
+						$formatted_args['post_mime_type'] = self::DOCUMENT_TYPES;
+						return $formatted_args;
+					},
+					10,
+					1
+				);
+			}
 
 			add_filter( 'ep_formatted_args', [ $this, 'set_full_text_search' ], 19, 1 );
 			add_filter( 'ep_formatted_args', [ $this, 'set_results_weight' ], 20, 1 );
+			// Remove from results any Documents that should not be there.
+			// TODO - This is a temp fix until we manage to query ES for only the desired documents.
+			add_filter(
+				'ep_search_results_array',
+				function ( $results, $response, $args, $scope ) {
+					foreach ( $results['posts'] as $key => $post ) {
+						if ( $post['post_mime_type'] && ! in_array( $post['post_mime_type'], self::DOCUMENT_TYPES, true ) ) {
+							unset( $results['posts'][ $key ] );
+						}
+					}
+					return $results;
+				},
+				10,
+				4
+			);
 		}
 
 		/**
