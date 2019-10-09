@@ -5,6 +5,7 @@
 export default function() {
   document.querySelectorAll('.toggle').forEach(toggle => {
     toggle.addEventListener('click', e => {
+      e.preventDefault();
       toggle.blur();
       const togglee = document.querySelector(toggle.dataset.toggleeSelector);
 
