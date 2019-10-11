@@ -1,4 +1,5 @@
-body.search {
+body.search,
+.dynamic-search {
   .live-search,
   .advanced-search {
     padding: 20px 0;
@@ -130,6 +131,64 @@ body.search {
           display: inline-block;
         }
       }
+    }
+  }
+}
+
+.dynamic-search {
+  position: fixed;
+  top: 96px; // see _header.scss
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.7);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 200ms linear, visibility 0ms linear 240ms;
+
+  &.is-visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 200ms linear, visibility 0ms linear 0ms;
+  }
+
+  @include greaterThan('sm') {
+    top: 50px; // see _header.scss
+  }
+
+  .live-search {
+    max-height: 100%;
+    // overflow-y: scroll;
+    overflow-y: auto;
+    transform: translateY(-20px);
+    transition: transform 140ms ease-in-out;
+
+    @include lessThan('sm') {
+      .ct-container {
+        position: relative;
+      }
+    }
+  }
+
+  &.is-visible .live-search {
+    transform: translateY(0);
+  }
+
+  .close-dynamic-search-button {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    margin: 0;
+    padding: 5px;
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    z-index: 4;
+    cursor: pointer;
+
+    @include greaterThan('sm') {
+      top: 14px;
     }
   }
 }
