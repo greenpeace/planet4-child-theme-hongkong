@@ -35,6 +35,10 @@ body {
       overflow: hidden;
     }
   }
+
+  &.has-open-dynamic-search {
+    overflow: hidden;
+  }
 }
 
 h1,
