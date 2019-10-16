@@ -2,6 +2,7 @@
   @include card;
   max-width: 400px;
   background: white;
+  position: relative;
 
   .tab-bar {
     height: 47px;
@@ -133,4 +134,30 @@
     border-bottom-color: $color-orange;
     color: white;
   }
+}
+
+/* reminder box */
+.donation-form .donation-reminder-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 10;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    .donation-reminder-box--content {
+      padding: 30px;
+      h6 {
+        color: $color-grey;
+      }
+    }
+    .donation-reminder-box--buttons {
+      text-align: center;
+      .button {
+        padding: 0 40px;
+        margin-top: 20px;
+      }
+    }    
 }
