@@ -37,7 +37,7 @@
     }
   }
 
-  ul {
+  ul.floating-share-list {
     @include list-inline;
     display: flex;
     justify-content: space-evenly;
@@ -45,6 +45,7 @@
     margin-bottom: 0 !important;
     font-size: 30px;
     padding-left: 0;
+    margin-left: 0;
 
     @include greaterThan('sm') {
       flex-grow: 1;
