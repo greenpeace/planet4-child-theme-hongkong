@@ -21,11 +21,9 @@
         <h2>{{ strings.thank_you }}&nbsp;{{ supporter_name }}.</h2>
         <p>{{ strings.wake_people }}</p>
         <p>
-          <!-- TODO: link petition URL -->
           <a class="button fb js-share-fb" href="https://www.facebook.com/sharer/sharer.php?u={{ source_link }}" rel="noopener noreferrer" target="_blank">{{ strings.share_social_1 }}</a>
-          <a class="button primary js-share-email" href="mailto:?subject=[subject...]&body=[body no html ...]" rel="noopener noreferrer" target="_blank">{{ strings.share_mail }}</a>
+          <a class="button primary js-share-email" href="mailto:?subject={{ source_title }}&body={{ source_link }}" rel="noopener noreferrer" target="_blank">{{ strings.share_mail }}</a>
         </p>
-        <!-- TODO: link petition URL -->
         <a class="fake-share-fb js-share-fb" href="https://www.facebook.com/sharer/sharer.php?u={{ source_link }}" rel="noopener noreferrer" target="_blank">
           <img src="{{ source_thumb }}"/>
           <div class="fake-share-fb-website">

@@ -12,8 +12,9 @@ export default function() {
     tab.addEventListener('click', e => {
       const tabBar = e.target.parentElement;
       const siblings = tabBar.children;
-      const form = tabBar.parentElement.querySelector('form');
+      const form = tabBar.parentElement.querySelector('form');      
       const handles = tabBar.parentElement.querySelectorAll('.dollar-handles');
+      const tabRecurring = tabBar.parentElement.querySelector('.tab-item__recurring');
       const handlesOnce = tabBar.parentElement.querySelectorAll(
         '.dollar-handles__once .dollar-handle'
       );
@@ -23,6 +24,26 @@ export default function() {
       const paragraphs = tabBar.parentElement.querySelectorAll(
         "[class^='paragraph-handles__'], [class*=' paragraph-handles__']"
       );
+
+      /* reminder box */
+      const reminderBox = document.querySelector('.donation-reminder-box');
+      // if reminder box present, and we are inside dollar handles, and oneoff is clicked -> we prompt for user confirmation
+      if ( handles.length && reminderBox && e.target.classList.contains('tab-item__once') ) {
+        reminderBox.style.display = 'flex';
+        const buttonConfirmOneOff = document.querySelector('.js-donation-confirm-oneoff');
+        const buttonConfirmRegular = document.querySelector('.js-donation-confirm-regular');
+
+        buttonConfirmOneOff.addEventListener('click', eventClick => {
+          reminderBox.style.display = 'none';
+          // if one off confirmed, just hide the alert
+        });
+
+        buttonConfirmRegular.addEventListener('click', eventClick => {
+          reminderBox.style.display = 'none';
+          tabRecurring.click();
+          // if regular confirmed, trigger click over it
+        });
+      }    
 
       Array.from(siblings).forEach(sibling => {
         sibling.classList.remove('is-active');
@@ -53,7 +74,7 @@ export default function() {
 
       if (handles.length) {
         const changeEvent = document.createEvent('HTMLEvents');
-        changeEvent.initEvent('change', false, true);
+        changeEvent.initEvent('change', false, true);        
 
         Array.from(handles).forEach(handle => {
           handle.classList.remove('is-active');
@@ -61,7 +82,7 @@ export default function() {
         Array.from(paragraphs).forEach(paragraph => {
           paragraph.classList.remove('is-active');
         });
-        if (e.target.classList.contains('tab-item__once')) {
+        if (e.target.classList.contains('tab-item__once')) {          
           form
             .querySelector('.dollar-handles__once')
             .classList.add('is-active');
@@ -69,7 +90,7 @@ export default function() {
             .querySelector('.paragraph-handles__once')
             .classList.add('is-active');
           handlesOnce[1].querySelector('input').checked = true;
-          handlesOnce[1].querySelector('input').dispatchEvent(changeEvent);          
+          handlesOnce[1].querySelector('input').dispatchEvent(changeEvent); 
         } else if (e.target.classList.contains('tab-item__recurring')) {
           form
             .querySelector('.dollar-handles__recurring')

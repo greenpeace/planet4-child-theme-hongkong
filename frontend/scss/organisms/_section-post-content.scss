@@ -50,6 +50,14 @@
     margin-bottom: 20px;
   }
 
+  ul,
+  ol {
+    margin-left: 22px;
+    li {
+      margin-bottom: 20px;
+    }
+  }
+
   h2 {
     @include title-mid;
   }

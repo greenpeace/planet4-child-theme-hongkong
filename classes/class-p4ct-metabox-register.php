@@ -225,6 +225,24 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_petition->add_field(
+			array(
+				'name'    => esc_html__( 'Link: Extra link for cta in thanks box (optional)', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'if added and no thanks page is set, this will be shown in the thanks box after signature', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_cta_thanks_link',
+				'type'             => 'text',
+			)
+		);
+
+		$cmb_petition->add_field(
+			array(
+				'name'    => esc_html__( 'Label: Extra link for cta in thanks box (optional)', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'This is the label!', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_cta_thanks_label',
+				'type'             => 'text',
+			)
+		);
+
 	}
 
 	/**
