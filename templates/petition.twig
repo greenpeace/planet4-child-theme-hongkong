@@ -22,6 +22,13 @@
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 	{% endif %}
+
+	{% if (extra_cta_link) and (extra_cta_label) %}
+	<script>
+		gpeaOptions.petition_thanks_link = '{{ extra_cta_link }}';
+		gpeaOptions.petition_thanks_label = '{{ extra_cta_label }}';
+	</script>
+	{% endif %}
 {% endblock %}
 
 {% block content %}

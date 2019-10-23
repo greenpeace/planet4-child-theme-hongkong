@@ -85,6 +85,10 @@ $extra_content                  = $page_meta_data['p4-gpea_page_extra_content'][
 // $context['extra_content']       = $extra_content ? wpautop( $extra_content ) : '';
 $context['extra_content']       = $extra_content ? apply_filters( 'the_content', $extra_content ) : '';
 
+// extra cta in thanks box
+$context['extra_cta_link']             = $page_meta_data['p4-gpea_cta_thanks_link'][0] ?? '';
+$context['extra_cta_label']            = $page_meta_data['p4-gpea_cta_thanks_label'][0] ?? '';
+
 
 if ( $context['engaging_page_id'] && ! $context['signatures'] ) {
 	global $wp_version;
