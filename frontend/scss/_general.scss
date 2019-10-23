@@ -216,6 +216,7 @@ body.is-loading .body-spinner {
 }
 
 /* remove stuff from mater */
-svg.external-link {
+svg.external-link,
+svg.external-icon {
   display: none;
 }
