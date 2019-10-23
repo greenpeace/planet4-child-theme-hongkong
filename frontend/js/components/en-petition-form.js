@@ -14,6 +14,9 @@ export default function() {
 
   const cta = document.querySelector('#p4en_form_save_button');
 
+  // get info also of thanks box
+  const thanksBox = document.querySelector('.sub-section');
+
   // that's valid only for korea... to be added option in backend
   const checkboxCheckall = document.querySelector(
     '#en__field_supporter_questions_455891'
@@ -106,6 +109,19 @@ export default function() {
     }
   });
 
+  // if extra cta is added in the petition page, add in the box area
+  if ( gpeaOptions.petition_thanks_link && gpeaOptions.petition_thanks_label ) {
+    // create link element
+    const ctaExtra = document.createElement('a');
+    ctaExtra.classList.add('button', 'btn', 'btn-primary', 'btn-block');
+    const createExtraCtaText = document.createTextNode(gpeaOptions.petition_thanks_label);
+    ctaExtra.setAttribute('href', gpeaOptions.petition_thanks_link);
+    ctaExtra.appendChild(createExtraCtaText);
+    // append to the thanks box
+    if ( thanksBox ) thanksBox.appendChild(ctaExtra);
+  }
+
+  // if facebook app id is present the add dynamically the facebook button to the form
   if ( 1 == gpeaOptions.showFacebook ) {
     const ctaFacebook = document.createElement('button');
     ctaFacebook.classList.add('button', 'fb', 'js-sign-facebook');

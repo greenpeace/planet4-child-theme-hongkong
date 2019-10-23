@@ -104,6 +104,13 @@ const dataConstraints = {
   ['en__field--NOT_TAGGED_34']: {
     validateTwNationalId: {},    
   },
+  ['en__field--NOT_TAGGED_33']: {    
+    length: {maximum: 10},
+    format: {
+      pattern: "(^[0-9]+$|^$)",
+      message: "can only contain a-z and 0-9"
+    }
+  },
   // ['en__field--NOT_TAGGED_33']: {
   //   presence: false,
   //   format: {
