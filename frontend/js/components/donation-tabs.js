@@ -12,7 +12,8 @@ export default function() {
     tab.addEventListener('click', e => {
       const tabBar = e.target.parentElement;
       const siblings = tabBar.children;
-      const form = tabBar.parentElement.querySelector('form');      
+      const form = tabBar.parentElement.querySelector('form');
+      const formDiv = document.querySelector('.donation-form');
       const handles = tabBar.parentElement.querySelectorAll('.dollar-handles');
       const tabRecurring = tabBar.parentElement.querySelector('.tab-item__recurring');
       const handlesOnce = tabBar.parentElement.querySelectorAll(
@@ -28,18 +29,21 @@ export default function() {
       /* reminder box */
       const reminderBox = document.querySelector('.donation-reminder-box');
       // if reminder box present, and we are inside dollar handles, and oneoff is clicked -> we prompt for user confirmation
-      if ( handles.length && reminderBox && e.target.classList.contains('tab-item__once') ) {
+      if ( reminderBox && e.target.classList.contains('tab-item__once') ) {
         reminderBox.style.display = 'flex';
+        if ( formDiv ) formDiv.classList.add('reminder-active');
         const buttonConfirmOneOff = document.querySelector('.js-donation-confirm-oneoff');
         const buttonConfirmRegular = document.querySelector('.js-donation-confirm-regular');
 
         buttonConfirmOneOff.addEventListener('click', eventClick => {
           reminderBox.style.display = 'none';
+          if ( formDiv ) formDiv.classList.remove('reminder-active');
           // if one off confirmed, just hide the alert
         });
 
         buttonConfirmRegular.addEventListener('click', eventClick => {
           reminderBox.style.display = 'none';
+          if ( formDiv ) formDiv.classList.remove('reminder-active');
           tabRecurring.click();
           // if regular confirmed, trigger click over it
         });
@@ -149,7 +153,8 @@ export default function() {
       //   frequencyValue + ':' + amountValue
       // );
 
-      donationUrl = donationUrl + '?donate_amt=' + frequencyValue + ':' + amountValue;
+      if ( (form.action).indexOf('?') > -1 ) donationUrl = donationUrl + '&donate_amt=' + frequencyValue + ':' + amountValue;
+      else donationUrl = donationUrl + '?donate_amt=' + frequencyValue + ':' + amountValue;
 
     } else {
       donationUrl.searchParams.append('transaction.donationAmt', amountValue);
