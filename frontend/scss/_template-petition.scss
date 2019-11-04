@@ -266,6 +266,12 @@
 
 .page-template-petition {
   .enform-side-style .enform {
+
+    // form .submit-container {
+    //   max-width: 480px;
+    //   margin: 0 auto;
+    // }
+
     button.fb {
       display: none;
       @include greaterThan('sm') {
