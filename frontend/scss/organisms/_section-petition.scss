@@ -586,6 +586,13 @@
     top: -14px;
   }
 
+  
+  @include lessThan('sm') {
+    .enform.is-open .close {
+      top: 14px;
+    }
+  }
+
   @include greaterThan('sm') {
     .enform .formblock-flex {
       padding-top: 0;
