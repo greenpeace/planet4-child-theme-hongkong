@@ -873,7 +873,23 @@ class P4CT_Metabox_Register {
 				'id'      => 'gpea_facebook_app_id',
 				'type'    => 'text',
 			)
-		);		
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Support email recipient: general', 'gpea_theme_backend' ),
+				'id'      => 'gpea_support_recipient_email_general',
+				'type'    => 'text',
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Support email recipient: special donations', 'gpea_theme_backend' ),
+				'id'      => 'gpea_support_recipient_email_special',
+				'type'    => 'text',
+			)
+		);
 
 	}
 

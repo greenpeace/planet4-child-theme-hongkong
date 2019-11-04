@@ -8,39 +8,39 @@ function petitionThankyou(Scroll) {
   const screenShare = document.querySelector('.js-screen-share');
   const screenDonate = document.querySelector('.js-screen-donate');
 
-  // If I choose YES on "Will you share?"
-  document.querySelector('.js-yes-share').addEventListener('click', e => {
+  // If I choose YES on "Will you donate?"
+  document.querySelector('.js-yes-donate').addEventListener('click', e => {
+    screenDonate.classList.add('is-visible');
+
+    stepDonate.classList.remove('is-disabled');
+    stepDonate.classList.remove('is-crossed');
+
+    Scroll.animateScroll(screenDonate);
+  });
+
+  // If I choose NO on "Will you donate?"
+  document.querySelector('.js-no-donate').addEventListener('click', e => {
     screenShare.classList.add('is-visible');
 
+    stepDonate.classList.remove('is-disabled');
     stepShare.classList.remove('is-disabled');
-    stepShare.classList.remove('is-crossed');
+    if (!stepDonate.classList.contains('is-checked')) {
+      stepDonate.classList.add('is-crossed');
+    }
 
     Scroll.animateScroll(screenShare);
   });
 
-  // If I choose NO on "Will you share?"
-  document.querySelector('.js-no-share').addEventListener('click', e => {
-    screenDonate.classList.add('is-visible');
+  // If I choose SKIP on the donate screen
+  document.querySelector('.js-skip-donate').addEventListener('click', e => {
+    screenShare.classList.add('is-visible');
 
     stepShare.classList.remove('is-disabled');
-    stepDonate.classList.remove('is-disabled');
-    if (!stepShare.classList.contains('is-checked')) {
-      stepShare.classList.add('is-crossed');
+    if (!stepDonate.classList.contains('is-checked')) {
+      stepDonate.classList.add('is-crossed');
     }
 
-    Scroll.animateScroll(screenDonate);
-  });
-
-  // If I choose SKIP on the sharing screen
-  document.querySelector('.js-skip-share').addEventListener('click', e => {
-    screenDonate.classList.add('is-visible');
-
-    stepDonate.classList.remove('is-disabled');
-    if (!stepShare.classList.contains('is-checked')) {
-      stepShare.classList.add('is-crossed');
-    }
-
-    Scroll.animateScroll(screenDonate);
+    Scroll.animateScroll(screenShare);
   });
 
   // If I click any share thing on the sharing screen
