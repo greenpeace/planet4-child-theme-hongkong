@@ -4,6 +4,14 @@
   background: white;
   position: relative;
 
+  &.reminder-active {
+    overflow: visible;
+    margin-bottom: 100px;
+    @include greaterThan('lg') {
+      margin: 0 -3px 10px;
+    }
+  }
+
   .tab-bar {
     height: 47px;
     background-color: #dddddd;
@@ -146,7 +154,8 @@
     display: none;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: visible;
+    min-height: 300px;
     .donation-reminder-box--content {
       padding: 30px;
       h6 {

@@ -731,6 +731,7 @@ Object.defineProperty(window, 'NRO_PROPERTIES', {
         expired_card: '信用卡已過期',
         invalid_mm_yy: '到期月份或年份不正確',
         invalid_cvv: '驗證碼不正確',
+        format_ddc_recruiter_id: '蝺刻errererere'
       },
       regex: {
         gift_amount: /^\d+$/,
@@ -740,6 +741,7 @@ Object.defineProperty(window, 'NRO_PROPERTIES', {
         phone_general: /^\d+$/,
         dob: /^\d{2}\/\d{2}\/\d{4}$/,
         national_id: /^[A-Z][0-9]{9}$/,
+        ddc_recruiter_id: /^.{0,10}$/
       },
     },
     TW: {
@@ -1327,6 +1329,7 @@ Object.defineProperty(window, 'NRO_PROPERTIES', {
         expired_card: '信用卡已過期',
         invalid_mm_yy: '到期月份或年份不正確',
         invalid_cvv: '驗證碼不正確',
+        format_ddc_recruiter_id: 'nononon'
       },
       regex: {
         gift_amount: /^\d+$/,
@@ -1336,6 +1339,7 @@ Object.defineProperty(window, 'NRO_PROPERTIES', {
         phone_general: /^\d+$/,
         dob: /^\d{2}\/\d{2}\/\d{4}$/,
         national_id: /^[A-Z][0-9]{9}$/,
+        ddc_recruiter_id: /^\d{0,10}$/
       },
     },
   },

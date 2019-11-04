@@ -103,9 +103,25 @@ $context['cf_basket_name']   = $page_meta_data['p4_basket_name'][0] ?? '';
 $context['cf_scope']         = $page_meta_data['p4_scope'][0] ?? '';
 $context['cf_department']    = $page_meta_data['p4_department'][0] ?? '';
 
+// donation box information 
+
+if ( 'ko-KR' !== get_language_attributes() ) {
+	// if not korea site, add the reminder box
+	$context['reminder_box'] = 1;
+}
+
+$context['minimum_oneoff'] = isset( $gpea_options['gpea_donation_minimum-oneoff'] ) ? $gpea_options['gpea_donation_minimum-oneoff'] : '';
+$context['minimum_regular'] = isset( $gpea_options['gpea_donation_minimum-regular'] ) ? $gpea_options['gpea_donation_minimum-regular'] : '';
+$context['suggested_oneoff'] = isset( $gpea_options['gpea_donation_suggested-oneoff'] ) ? $gpea_options['gpea_donation_suggested-oneoff'] : '';
+$context['suggested_regular'] = isset( $gpea_options['gpea_donation_suggested-regular'] ) ? $gpea_options['gpea_donation_suggested-regular'] : '';
+$context['minimum_error_single']    = sprintf( __( 'Minimum required for single donation is %s', 'planet4-gpea-blocks' ), $context['minimum_oneoff'] );
+$context['minimum_error_recurring'] = sprintf( __( 'Minimum required for recurring donation is %s', 'planet4-gpea-blocks' ), $context['minimum_regular'] );
+
 $context['strings'] = [
 	'thank_you_share' => __( 'Thank you for signing,', 'gpea_theme' ),
 	'share_petition' => __( 'Now, will you share this petition with your friends? The more people who sign, the more pressure the government will feel.', 'gpea_theme' ),
+	'thank_you_donate' => __( 'Thank you for signing,', 'gpea_theme' ),
+	'donate_headline' => __( 'In order to maintain a fair and independent, and continue to appeal to the government and enterprises, Greenpeace 100% relies on donations from your supporters to direct changes. Would you like to join us?', 'gpea_theme' ),
 	'no' => __( 'NO', 'gpea_theme' ),
 	'yes' => __( 'YES', 'gpea_theme' ),
 	'thank_you' => __( 'Thank you,', 'gpea_theme' ),
@@ -118,6 +134,10 @@ $context['strings'] = [
 	'one_off' => __( 'One off', 'gpea_theme' ),
 	'monthly' => __( 'Monthly', 'gpea_theme' ),
 	'donate' => __( 'Donate', 'gpea_theme' ),
+	'reminder_box_title' => __( 'Donation reminder box', 'planet4-gpea-blocks' ),
+	'reminder_box_description' => __( 'Donation reminder description', 'planet4-gpea-blocks' ),
+	'reminder_box_give_oneoff' => __( 'Donation reminder give oneoff', 'planet4-gpea-blocks' ),
+	'reminder_box_give_regular' => __( 'Donation reminder give regular', 'planet4-gpea-blocks' ),
 ];
 
 Timber::render( [ 'petition-thankyou.twig' ], $context );

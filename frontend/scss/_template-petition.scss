@@ -60,6 +60,10 @@
     }
     button.fb {
       width: 100%;
+      height: 40px;
+      @include lessThan('sm') {
+        width: 50%;
+      }      
     }
   }
   
@@ -255,4 +259,33 @@
     }
   }
 
+}
+
+
+/* fix to petition form ui */
+
+.page-template-petition {
+  .enform-side-style .enform {
+    button.fb {
+      display: none;
+      @include greaterThan('sm') {
+        display: inline-block;
+      }
+    }
+    .en__field--emailAddress {
+      display: none;
+      @include greaterThan('sm') {
+        display: block;
+      }  
+    }
+
+    &.is-open {
+      button.fb {
+        display: inline-block;
+      }
+      .en__field--emailAddress {
+        display: block;
+      }
+    }  
+  }
 }
