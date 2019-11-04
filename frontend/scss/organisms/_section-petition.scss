@@ -339,7 +339,8 @@
     @include card;
     position: fixed;
     box-sizing: inherit;
-    bottom: calc(-90vh + 205px);
+    //bottom: calc(-90vh + 205px);
+    bottom: calc(-70vh + 65px);
     left: 0;
     right: 0;
     height: 70vh;
