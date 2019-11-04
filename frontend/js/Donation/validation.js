@@ -4,6 +4,9 @@ const requiredMessage = window.NRO_PROPERTIES[NRO].validation.required;
 const invalidMessage = 'Please check the format of this field';
 const countryMessage = 'Should be one of "HK", "TW", "KR"';
 
+const ddc_recruiter_id = window.NRO_PROPERTIES[NRO].regex.ddc_recruiter_id;
+const ddc_recruiter_id_Message = window.NRO_PROPERTIES[NRO].validation.format_ddc_recruiter_id;
+
 // const invalidePhone = window.NRO_PROPERTIES[NRO].validation.format_phone;
 
 const required = {
@@ -105,10 +108,14 @@ const dataConstraints = {
     validateTwNationalId: {},    
   },
   ['en__field--NOT_TAGGED_33']: {    
-    length: {maximum: 10},
+    // length: {maximum: 10},
+    // format: {
+    //   pattern: "(^[0-9]+$|^$)",
+    //   message: "can only contain a-z and 0-9"
+    // }
     format: {
-      pattern: "(^[0-9]+$|^$)",
-      message: "can only contain a-z and 0-9"
+      pattern: ddc_recruiter_id,
+      message: ddc_recruiter_id_Message
     }
   },
   // ['en__field--NOT_TAGGED_33']: {
@@ -173,7 +180,7 @@ const allConstraints = Object.assign(
 function prepareFormForValidation(form) {
   for (const name in allConstraints) {    
     if (allConstraints.hasOwnProperty(name)) {
-      console.log(name);
+      // console.log(name);
       // const options = allConstraints[name];
       let input = form.querySelector('.' + name + ' input');
       if (!input) input = form.querySelector('.' + name + ' select');

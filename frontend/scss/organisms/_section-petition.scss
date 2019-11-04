@@ -16,7 +16,8 @@
     min-height: 100%;
   }
   .enform-side-style .form-container {
-    margin-top: 16px;
+    /*margin-top: 16px;*/
+    margin-top: 0px;
   }
 }
 
@@ -83,8 +84,8 @@
       margin: 10px 5px 10px 0;
       padding-left: 20px;
       padding-right: 20px;
-      height: 35px;
-      font-size: 16px;
+      height: 40px;
+      font-size: 18px;
       line-height: 34px;
       border-radius: 99px;
     }
@@ -341,7 +342,7 @@
     bottom: calc(-90vh + 205px);
     left: 0;
     right: 0;
-    height: 92vh;
+    height: 70vh;
     min-height: 0;
     overflow: auto;
     margin-left: 0 !important;
@@ -349,6 +350,10 @@
     padding: 28px 30px 24px;
     transition: all 300ms ease;
     -webkit-overflow-scrolling: touch;
+
+    @include greaterThan('sm') {
+      height: 92vh;
+    } 
 
     .form-group {
       margin-bottom: 15px;
@@ -393,6 +398,10 @@
       margin-top: 10px;
       margin-bottom: 135px;
 
+      @include lessThan('sm') {
+        margin-top: 0px;
+      }
+
       .button,
       .btn {
         position: relative;
@@ -405,11 +414,12 @@
         @include lessThan('sm') {
           margin-left: 0;
           margin-right: 0;
+          margin-top: 4px;
 
           &,
           &.primary,
           &.btn-primary {
-            height: 35px;
+            height: 40px;
             font-size: 16px;
             line-height: 34px;
           }
@@ -475,7 +485,18 @@
   .title-and-description {
     margin-top: 10px;
     margin-bottom: 30px;
+    @include lessThan('sm') {
+      margin-bottom: 0px;
+    }
+    .form-description {
+      margin-bottom: 30px;
+      @include lessThan('sm') {
+        margin-bottom: 0px;
+      }
+    }
   }
+
+
 
   @include greaterThan('sm') {
     .formblock-flex {
@@ -528,6 +549,7 @@
 
     .enform.is-open {
       transform: translateY(-55vh);
+      height: 92vh;
 
       .title-and-description,
       .formblock-flex {
@@ -540,8 +562,21 @@
 
       .title-and-description {
         margin-top: 10px;
-        margin-bottom: 30px;
+        margin-bottom: 0px;
       }
+
+      .form-container {
+        margin-top: 16px;
+      }
+
+      form .submit {
+        margin-top: 10px;
+        .button,
+        .btn {
+          margin-top: 16px;
+        }
+      } 
+
     }
   }
 }

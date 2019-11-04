@@ -30,9 +30,9 @@
 				<div class="right-box">
 					{% if (post._wp_page_template == 'page-templates/petition.php' or post._wp_page_template == 'page-templates/petition-thankyou.php') %}
 						<div class="stepper">
-							<div class="step is-checked js-step-sign">{{ strings.sign }}</div>
-							<div class="step is-disabled js-step-share">{{ strings.share }}</div>
+							<div class="step is-checked js-step-sign">{{ strings.sign }}</div>							
 							<div class="step is-disabled js-step-donate">{{ strings.donate }}</div>
+							<div class="step is-disabled js-step-share">{{ strings.share }}</div>
 						</div>
 					{% else %}
 						<a aria-label="Search" class="search-button js-dynamic-search" href="{{ home_url }}/?s">

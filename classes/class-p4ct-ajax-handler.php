@@ -63,9 +63,11 @@ class P4CT_AJAX_Handler {
 	 */
 	public function support_launcher_ajax_handler() {
 
+		$gpea_options = get_option( 'gpea_options' );
+
 		$args = [
 			'action' => FILTER_SANITIZE_STRING,
-			'recipient_email' => FILTER_SANITIZE_EMAIL,
+			'recipient_email' => FILTER_SANITIZE_STRING,
 			'subject' => FILTER_SANITIZE_STRING,
 			'send_to' => FILTER_SANITIZE_URL,
 			'name' => FILTER_SANITIZE_STRING,
@@ -84,7 +86,15 @@ class P4CT_AJAX_Handler {
 		// We assume $data['recipient_email'], $data['subject'] to have correct values.
 		if ( $data['name'] && $data['email'] && $data['message'] ) {
 
-			$to = $data['recipient_email'];
+			// switch option for receipient email
+
+			if ( 'special' == $data['recipient_email'] ) {
+				$data['recipient_email'] = $gpea_options['gpea_support_recipient_email_special'];
+			} else {
+				$data['recipient_email'] = $gpea_options['gpea_support_recipient_email_general'];
+			}
+
+			$to      = $data['recipient_email'];
 			$subject = $data['subject'];
 			$message = $data['message'];
 			$headers = [ "From: $data[name] <$data[email]>\n" ];

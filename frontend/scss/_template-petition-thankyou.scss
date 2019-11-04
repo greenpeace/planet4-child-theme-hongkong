@@ -25,6 +25,7 @@
     padding-top: 0;
     > section {
       padding-top: 0;
+      padding-bottom: 0;
     }
   }
 
@@ -157,4 +158,25 @@
 }
 .page-template-petition-thankyou.health::after {
   background-color: $color-health;
+}
+
+/* adapt section-donate feature */
+
+.page-template-petition-thankyou {
+  .section-donate::before {
+    background: none;
+    display: none;
+  }
+  .section-donate:not(.upper-fade)::after {
+    display: none;
+  }
+  .section-donate .content {
+    max-width: none;
+    margin-bottom: 40px;
+  }
+
+  footer .footer-lower {
+    margin-top: 0;
+  }
+
 }
