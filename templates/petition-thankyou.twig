@@ -11,10 +11,49 @@
     <div class="screens">
       <div class="screen-thankyou js-screen-thankyou ct-container">
         <h2>{{ strings.thank_you_share }}&nbsp;{{ supporter_name }}.</h2>
-        <p>{{ strings.share_petition }}</p>
+        <p>{{ strings.donate_headline }}</p>
         <p>
-          <button class="button grey js-no-share">{{ strings.no }}</button>
-          <button class="button primary js-yes-share">{{ strings.yes }}</button>
+          <button class="button grey js-no-donate">{{ strings.no }}</button>
+          <button class="button primary js-yes-donate">{{ strings.yes }}</button>
+        </p>
+      </div>      
+      <div class="section-donate screen-donate js-screen-donate ct-container">
+        <div class="content">
+          <h2>{{ supporter_name }}&nbsp;{{ strings.urgently_campaigning }}</h2>
+          <p>{{ strings.prompt_recurring }}</p>
+        </div>
+        <div class="donation-form">
+            {% if reminder_box %}
+            <div class="donation-reminder-box">
+              <div class="box">
+                <div class="donation-reminder-box--content">
+                  <h4>{{ strings.reminder_box_title }}</h4>
+                  <h6>{{ strings.reminder_box_description }}</h6>
+                  <div class="donation-reminder-box--buttons">
+                    <button type="button" class="button js-donation-confirm-oneoff">{{ strings.reminder_box_give_oneoff }}</button>
+                    <button type="button" class="button primary js-donation-confirm-regular">{{ strings.reminder_box_give_regular }}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          <div class="tab-bar">
+              <div class="tab-item is-active js-tab-item tab-item__recurring" data-recurring="Y">{{ strings.monthly }}</div>
+              <div class="tab-item js-tab-item tab-item__once" data-recurring="N">{{ strings.one_off }}</div>            
+          </div>
+          <form action="{{ button_landing_url }}" method="POST" class="js-donation-launcher-form js-donation-basic" data-minimum-regular="{{ minimum_regular }}" data-minimum-oneoff="{{ minimum_oneoff }}" data-minimum-single-error="{{ minimum_error_single }}" data-minimum-recurring-error="{{ minimum_error_recurring }}"  data-suggested-regular="{{ suggested_regular }}" data-suggested-oneoff="{{ suggested_oneoff }}">
+            <input name="frequency" type="hidden" value="Y"/>
+            <input name="currency" type="hidden" value="{{ donation_currency }}"/>
+            <div class="form-group">
+              <span class="currency">{{ donation_currency }}</span>
+              <input aria-label="{{ donation_currency }}" min="1" name="amount" required step="1" type="number"/>
+              <input type="hidden" name="en_recurring_question" value="{{ external_recurring_question }}" />
+            </div>
+            <button class="button primary fluid" type="submit" id="gpea_donation_form_button">{{ strings.donate }}</button>
+          </form>
+        </div>
+        <p>
+          <button class="button small js-skip-donate">{{ strings.skip }}</button>
         </p>
       </div>
       <div class="screen-share js-screen-share ct-container">
@@ -35,32 +74,7 @@
           <div class="fake-share-fb-description">
             {{ source_description }}
           </div>
-        </a>
-        <p>
-          <button class="button small js-skip-share">{{ strings.skip }}</button>
-        </p>
-      </div>
-      <div class="screen-donate js-screen-donate ct-container">
-        <div class="content">
-          <h2>{{ supporter_name }}&nbsp;{{ strings.urgently_campaigning }}</h2>
-          <p>{{ strings.prompt_recurring }}</p>
-        </div>
-        <div class="donation-form">
-          <div class="tab-bar">
-            <div class="tab-item js-tab-item is-active">{{ strings.monthly }}</div>
-            <div class="tab-item js-tab-item">{{ strings.one_off }}</div>            
-          </div>
-          <form action="{{ button_landing_url }}" method="POST" class="js-donation-launcher-form">
-            <input name="frequency" type="hidden" value="Y"/>
-            <input name="currency" type="hidden" value="{{ donation_currency }}"/>
-            <div class="form-group">
-              <span class="currency">{{ donation_currency }}</span>
-              <input aria-label="{{ donation_currency }}" min="1" name="amount" required step="1" type="number"/>
-              <input type="hidden" name="en_recurring_question" value="{{ external_recurring_question }}" />
-            </div>
-            <button class="button primary fluid" type="submit">{{ strings.donate }}</button>
-          </form>
-        </div>
+        </a>        
       </div>
     </div>
   </section>

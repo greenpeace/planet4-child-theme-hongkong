@@ -411,6 +411,10 @@ msgstr "서명해주셔서 감사합니다."
 msgid "Now, will you share this petition with your friends? The more people who sign, the more pressure the government will feel."
 msgstr "서명페이지를 친구들과 공유하시겠습니까?"
 
+#: page-templates/petition-thankyou.php:98
+msgid "In order to maintain a fair and independent, and continue to appeal to the government and enterprises, Greenpeace 100% relies on donations from your supporters to direct changes. Would you like to join us?"
+msgstr ""
+
 #: page-templates/petition-thankyou.php:99
 msgid "NO"
 msgstr "아니오"
