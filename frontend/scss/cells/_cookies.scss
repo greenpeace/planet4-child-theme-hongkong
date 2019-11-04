@@ -19,7 +19,8 @@
   background: rgba(54, 55, 63, 0.95);
   color: #fff;
 
-
+  align-items: center;
+  justify-content: space-between;
 
   a {
     color: #fff;
@@ -28,16 +29,14 @@
 
   p {      
     display: inline-flex;
-    margin: 0 auto;
-    max-width: 80%;
-    flex: 80%;
+    margin: 0;
+    /*flex: 80%;*/
     font-size: 14px;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 30px;
+    flex: 1;
     @include greaterThan('sm') {
-      flex: 1;
-      max-width: 90%;
       line-height: 30px;
     }
   }
