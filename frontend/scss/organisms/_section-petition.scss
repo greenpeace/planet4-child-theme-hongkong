@@ -587,6 +587,10 @@
     top: -14px;
   }
 
+  .enform.is-open .close {
+    top: 14px;
+  }
+
   
   @include lessThan('sm') {
     .enform.is-open .close {
@@ -598,6 +602,11 @@
     .enform .formblock-flex {
       padding-top: 0;
       max-height: 0;
+    }
+
+    .enform.is-open  .formblock-flex {
+      padding-top: 5px;
+      max-height: 750px;
     }
 
     .enform .title-and-description {
