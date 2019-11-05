@@ -85,7 +85,11 @@ export default function() {
 
   const close = document.createElement('div');
   close.classList.add('close');
-  close.innerHTML = '×';  
+  close.innerHTML = '×';
+  
+  // add stats and close icon to the form
+  form.insertBefore(stats, form.firstChild);
+  form.insertBefore(close, form.firstChild);
 
   cta.addEventListener('click', e => {
     if (!form.classList.contains('is-open')) {
@@ -125,10 +129,7 @@ export default function() {
   if ( 1 == gpeaOptions.showFacebook ) {
     const ctaFacebook = document.createElement('button');
     ctaFacebook.classList.add('button', 'fb', 'js-sign-facebook');
-    ctaFacebook.innerHTML = 'Facebook';
-
-    form.insertBefore(stats, form.firstChild);
-    form.insertBefore(close, form.firstChild);
+    ctaFacebook.innerHTML = 'Facebook';    
 
     // cta.parentNode.insertBefore(ctaFacebook, cta);
     let formContainer = form.querySelector('.form-container');
