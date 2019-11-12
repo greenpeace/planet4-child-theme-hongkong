@@ -17,7 +17,7 @@
   }
   .enform-side-style .form-container {
     /*margin-top: 16px;*/
-    margin-top: 0px;
+    margin-top: 18px;
   }
 }
 
@@ -340,7 +340,7 @@
     position: fixed;
     box-sizing: inherit;
     //bottom: calc(-90vh + 205px);
-    bottom: calc(-70vh + 65px);
+    bottom: calc(-70vh + 85px);
     left: 0;
     right: 0;
     height: 70vh;
@@ -549,7 +549,7 @@
     }
 
     .enform.is-open {
-      transform: translateY(-55vh);
+      transform: translateY(-50vh);
       height: 92vh;
 
       .title-and-description,
