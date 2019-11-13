@@ -891,6 +891,14 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Email recipient for ugc submission', 'gpea_theme_backend' ),
+				'id'      => 'gpea_ugc_recipient_email',
+				'type'    => 'text',
+			)
+		);
+
 	}
 
 	/**
