@@ -52,7 +52,7 @@ if ( is_tag() ) {
 		$context['og_description'] = $context['tag_description'];
 		if ( $tag_image_id ) {
 			$context['og_image_data'] = wp_get_attachment_image_src( $tag_image_id, 'full' );
-		}		
+		}
 
 		$context['projects'] = "[shortcake_projects_carousel layout='light' title='".$context['strings']['our_initiatives']."' topic='".$context['tag']->term_id."' /]";
 
