@@ -61,6 +61,10 @@
     button.fb {
       width: 100%;
       height: 40px;
+      background-image: url('../images/fb_logo_white.png');
+      background-repeat: no-repeat;
+      background-size: auto 70%;
+      background-position: 4px center;
       @include lessThan('sm') {
         width: 50%;
       }      
