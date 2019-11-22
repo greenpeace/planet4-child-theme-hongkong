@@ -1,7 +1,7 @@
 {
   "0": [
     {
-      "name": "International",
+      "name": "Greenpeace International",
       "url": "https://www.greenpeace.org/international/"
     }
   ],
@@ -112,16 +112,6 @@
       ]
     },
     {
-      "name": "China Mainland",
-      "codes": ["CN"],
-      "lang": [
-        {
-          "name": "简体中文",
-          "url": "https://www.greenpeace.org.cn"
-        }
-      ]
-    },
-    {
       "name": "Colombia",
       "codes": ["CO"],
       "lang": [
@@ -147,7 +137,7 @@
       "lang": [
         {
           "name": "Česky",
-          "url": "https://www.greenpeace.cz"
+          "url": "https://www.greenpeace.org/czech/"
         }
       ]
     }
@@ -159,7 +149,7 @@
       "lang": [
         {
           "name": "Dansk",
-          "url": "https://www.greenpeace.org/denmark/da/"
+          "url": "https://www.greenpeace.org/denmark/"
         }
       ]
     }
@@ -167,7 +157,24 @@
   "E": [
     {
       "name": "East Asia",
+      "codes": ["CN", "HK", "TW", "KR"],
       "lang": [
+        {
+          "name": "中文简体",
+          "url": "https://www.greenpeace.org.cn/"
+        },
+        {
+          "name": "繁體",
+          "url": "https://www.greenpeace.org/hongkong/"
+        },
+        {
+          "name": "正體",
+          "url": "https://www.greenpeace.org/taiwan/"
+        },
+        {
+          "name": "한국어",
+          "url": "https://www.greenpeace.org/korea/"
+        },
         {
           "name": "English",
           "url": "https://www.greenpeace.org/eastasia/"
@@ -230,16 +237,6 @@
   ],
   "H": [
     {
-      "name": "Hong Kong",
-      "codes": ["HK"],
-      "lang": [
-        {
-          "name": "繁體中文",
-          "url": "https://www.greenpeace.org/hk/"
-        }
-      ]
-    },
-    {
       "name": "Hungary",
       "codes": ["HU"],
       "lang": [
@@ -270,8 +267,8 @@
       "codes": ["ID"],
       "lang": [
         {
-          "name": "Indonesia",
-          "url": "https://www.greenpeace.org/seasia/id/"
+          "name": "Indonesian",
+          "url": "https://www.greenpeace.org/indonesia/"
         }
       ]
     },
@@ -308,18 +305,6 @@
       ]
     }
   ],
-  "K": [
-    {
-      "name": "Korea",
-      "codes": ["KR"],
-      "lang": [
-        {
-          "name": "한국어",
-          "url": "https://www.greenpeace.org/korea/"
-        }
-      ]
-    }
-  ],
   "L": [
     {
       "name": "Luxembourg",
@@ -343,7 +328,7 @@
       "lang": [
         {
           "name": "English",
-          "url": "https://www.greenpeace.org/seasia/about-us/Malaysia/"
+          "url": "https://www.greenpeace.org/malaysia/"
         }
       ]
     },
@@ -367,6 +352,10 @@
         {
           "name": "English",
           "url": "https://www.greenpeace.org/mena/en/"
+        },
+        {
+          "name": "Français",
+          "url": "https://www.greenpeace.org/mena/fr/"
         }
       ]
     }
@@ -378,7 +367,7 @@
       "lang": [
         {
           "name": "Nederlands",
-          "url": "https://www.greenpeace.nl"
+          "url": "https://www.greenpeace.org/nl"
         }
       ]
     },
@@ -398,19 +387,29 @@
       "lang": [
         {
           "name": "Norsk",
-          "url": "https://www.greenpeace.org/norway/no/"
+          "url": "https://www.greenpeace.org/norway/"
         }
       ]
     }
   ],
   "P": [
     {
+      "name": "Peru",
+      "codes": ["PE"],
+      "lang": [
+        {
+          "name": "Español",
+          "url": "https://www.greenpeace.org/peru/"
+        }
+      ]
+    },
+    {
       "name": "Philippines",
       "codes": ["PH"],
       "lang": [
         {
           "name": "English",
-          "url": "https://www.greenpeace.org/seasia/ph/"
+          "url": "https://www.greenpeace.org/philippines/"
         }
       ]
     },
@@ -432,7 +431,7 @@
       "lang": [
         {
           "name": "Română",
-          "url": "https://www.greenpeace.org/romania/ro/"
+          "url": "https://www.greenpeace.org/romania/"
         }
       ]
     },
@@ -442,7 +441,7 @@
       "lang": [
         {
           "name": "Русский",
-          "url": "https://www.greenpeace.org/russia/ru/"
+          "url": "https://www.greenpeace.ru"
         }
       ]
     }
@@ -505,7 +504,7 @@
       "lang": [
         {
           "name": "Svenska",
-          "url": "https://www.greenpeace.org/sweden/se/"
+          "url": "https://www.greenpeace.org/sweden/"
         }
       ]
     },
@@ -526,22 +525,12 @@
   ],
   "T": [
     {
-      "name": "Taiwan",
-      "codes": ["TW"],
-      "lang": [
-        {
-          "name": "正體中文",
-          "url": "https://www.greenpeace.org/taiwan/"
-        }
-      ]
-    },
-    {
       "name": "Thailand",
       "codes": ["TH"],
       "lang": [
         {
           "name": "ไทย",
-          "url": "https://www.greenpeace.org/seasia/th/"
+          "url": "https://www.greenpeace.org/thailand/"
         }
       ]
     },
@@ -558,7 +547,7 @@
   ],
   "U": [
     {
-      "name": "United Kingdom",
+      "name": "UK",
       "codes": ["GB"],
       "lang": [
         {
