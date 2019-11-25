@@ -300,14 +300,18 @@
         display: block;
       }
       div.thankyou {
+        background-color: #fff;
         .form-group {
           display: block;
         }
         .form-group.social-media {
           display: none;
         }
-        header, p {
+        header {
           display: inline-block;
+        }
+        p {
+          display: block;
         }
         .formblock-flex {
           height: auto;

@@ -513,3 +513,6 @@ msgstr "전체 보기"
 
 msgid "Any topic"
 msgstr "전체 보기"
+
+msgid "Facebook"
+msgstr "페이스북으로 로그인"
