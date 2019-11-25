@@ -78,7 +78,7 @@
   .outer_block_container {
     @include ct-container;
     padding-top: 0;
-    padding-bottom: 0;
+    padding-bottom: 0;    
 
     > :last-child:not(.enform-side-style) {
       margin-bottom: 145px;
@@ -129,6 +129,9 @@
 
 .page-template-petition,
 .page-template-petition-thankyou {
+  .outer_block_container {
+    overflow: visible;
+  }
   footer {
     padding-top: 0;
 
@@ -137,7 +140,7 @@
     }
     .footer-lower {
       margin-top: 20px;
-      padding-bottom: 220px;
+      padding-bottom: 120px;
       @include greaterThan('sm') {
         padding-bottom: 20px;
       }
@@ -296,6 +299,43 @@
       .en__field--emailAddress {
         display: block;
       }
-    }  
+      div.thankyou {
+        .form-group {
+          display: block;
+        }
+        .form-group.social-media {
+          display: none;
+        }
+        header, p {
+          display: inline-block;
+        }
+        .formblock-flex {
+          height: auto;
+          display: block;
+        }
+        a.btn.btn-primary.btn-block {
+          width: 100%;
+        }
+      }
+    }
+    div.thankyou {
+      .form-group {
+        display: none;
+      }
+      header, p {
+        display: none;
+      }
+      .formblock-flex {
+        display: flex;
+        height: auto;
+        max-height: none;
+        margin-bottom: 0;
+        align-items: center;
+        justify-content: center;
+      }
+      a.btn.btn-primary.btn-block {
+        width: auto;
+      }
+    }
   }
 }
