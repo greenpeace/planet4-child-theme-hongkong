@@ -422,8 +422,12 @@ class P4CT_AJAX_Handler {
 									'filename'    => null,
 								);
 								$result = wp_remote_get( $url, $args );
-								$obj = json_decode( $result['body'], true );
-								$single_update['signatures'] = $obj['rows'][0]['columns'][4]['value'];
+								if( is_wp_error( $result ) ) {
+									$single_update['signatures'] = 0;
+								} else {
+									$obj = json_decode( $result['body'], true );
+									$single_update['signatures'] = $obj['rows'][0]['columns'][4]['value'];
+								}								
 							}
 
 							if ( $single_update['engaging_target'] && $single_update['signatures'] ) {
