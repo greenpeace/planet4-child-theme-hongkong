@@ -88,6 +88,7 @@ $context['extra_content']       = $extra_content ? apply_filters( 'the_content',
 // extra cta in thanks box
 $context['extra_cta_link']             = $page_meta_data['p4-gpea_cta_thanks_link'][0] ?? '';
 $context['extra_cta_label']            = $page_meta_data['p4-gpea_cta_thanks_label'][0] ?? '';
+$context['facebook_label']             = __( 'Facebook', 'gpea_theme' );
 
 
 if ( $context['engaging_page_id'] && ! $context['signatures'] ) {
@@ -109,8 +110,12 @@ if ( $context['engaging_page_id'] && ! $context['signatures'] ) {
 		'filename'    => null,
 	);
 	$result = wp_remote_get( $url, $args );
-	$obj = json_decode( $result['body'], true );
-	$context['signatures'] = $obj['rows'][0]['columns'][4]['value'];
+	if( is_wp_error( $result ) ) {
+		$context['signatures'] = 0;
+	} else {
+		$obj = json_decode( $result['body'], true );
+		$context['signatures'] = $obj['rows'][0]['columns'][4]['value'];
+	}	
 }
 
 if ( $context['petition_target'] && $context['signatures'] ) {
