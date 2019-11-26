@@ -518,3 +518,6 @@ msgstr "所有主題"
 
 msgid "Any topic"
 msgstr "所有議題"
+
+msgid "Facebook"
+msgstr "Facebook"

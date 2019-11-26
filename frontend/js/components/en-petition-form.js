@@ -129,7 +129,7 @@ export default function() {
   if ( 1 == gpeaOptions.showFacebook ) {
     const ctaFacebook = document.createElement('button');
     ctaFacebook.classList.add('button', 'fb', 'js-sign-facebook');
-    ctaFacebook.innerHTML = 'Facebook';    
+    ctaFacebook.innerHTML = gpeaOptions.facebook_label;    
 
     // cta.parentNode.insertBefore(ctaFacebook, cta);
     let formContainer = form.querySelector('.form-container');
