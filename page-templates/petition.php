@@ -110,8 +110,12 @@ if ( $context['engaging_page_id'] && ! $context['signatures'] ) {
 		'filename'    => null,
 	);
 	$result = wp_remote_get( $url, $args );
-	$obj = json_decode( $result['body'], true );
-	$context['signatures'] = $obj['rows'][0]['columns'][4]['value'];
+	if( is_wp_error( $result ) ) {
+		$context['signatures'] = 0;
+	} else {
+		$obj = json_decode( $result['body'], true );
+		$context['signatures'] = $obj['rows'][0]['columns'][4]['value'];
+	}	
 }
 
 if ( $context['petition_target'] && $context['signatures'] ) {
