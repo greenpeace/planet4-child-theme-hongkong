@@ -71,3 +71,9 @@ button,
 html:lang(zh-TW) .tip .tip-actions .tip-action-buttons .social-box a.tip-share-whatsapp {
   display: none;
 }
+
+@media only screen and (max-width: 1023px) {
+  header .content .right-box .button {
+    margin-left: -7px;
+  } 
+}
