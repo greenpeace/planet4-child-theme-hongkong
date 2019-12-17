@@ -51,17 +51,28 @@
         <span>{{ strings.author }} {{ post.author.name }}</span>
       </div>
 
-      {{ post.content|e('wp_kses_post')|raw }}
-
-      {%if (show_article_donation_launcher=='on') %}
-        <h2>{{ strings.article_donation_launcher }}</h2>
-        <p>{{ strings.intro_donation_launcher }}</p>
-        <a href="{{ support_link }}" class="button primary">{{ strings.i_support }}</a>
-      {%endif%}
+      {{ post.content|e('wp_kses_post')|raw }}      
 
     </section>
 
   </article>
+
+  {%if (show_article_donation_launcher=='on') %}
+  <section class="section-post-donation-launcher">
+		<div class="ct-container">
+      <div class="post-donation-launcher__text">
+        <h2>{{ strings.article_donation_launcher }}</h2>
+        <p>{{ strings.intro_donation_launcher }}</p>
+        <a href="{{ strings.donation_launcher_link }}" class="button wider primary" target="_blank">{{ strings.i_support }}</a>
+      </div>
+      <div class="post-donation-launcher__image">
+        <img src="{{ strings.donation_launcher_img }}" alt="" title="">
+      </div>
+      
+    </div>
+  </section>
+  <div class="section-post-donation-launcher__border-bottom"></div>
+  {%endif%}
 
 
   {% if ( related_posts ) %}

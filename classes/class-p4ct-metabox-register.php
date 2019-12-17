@@ -899,6 +899,48 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		// post donation luncher
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Title for donation launcher below post', 'gpea_theme_backend' ),
+				'id'      => 'gpea_post_donation_launcher_title',
+				'type'    => 'text',
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Text for donation launcher below post', 'gpea_theme_backend' ),
+				'id'      => 'gpea_post_donation_launcher_text',
+				'type'    => 'textarea',
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Link for donation launcher below post', 'gpea_theme_backend' ),
+				'id'      => 'gpea_post_donation_launcher_link',
+				'type'    => 'text',
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Button label for donation launcher', 'gpea_theme_backend' ),
+				'id'      => 'gpea_post_donation_launcher_label',
+				'type'    => 'text',
+			)
+		);
+
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Image for donation launcher below post', 'gpea_theme_backend' ),
+				'id'      => 'gpea_post_donation_launcher_image',
+				'type'    => 'file',
+			)
+		);
+
 	}
 
 	/**
