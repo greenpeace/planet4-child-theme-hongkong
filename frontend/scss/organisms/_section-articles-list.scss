@@ -78,6 +78,23 @@
           border-top: none;
         }
       }
+
+      &.simple-list-posts {
+        width: 100%;
+        grid-column-gap: 0px;
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        .card-update.compact {
+          // width: 44%;
+          border-top: none;
+          padding: 0 30px;
+          margin-bottom: 60px;
+          border-right: 1px solid rgba(0,0,0,0.2);          
+          &:nth-child(3) {
+            border-right: none;
+          }
+        } 
+      }
+      
     }
   }
 }
