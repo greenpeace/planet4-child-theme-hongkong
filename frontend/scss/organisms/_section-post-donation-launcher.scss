@@ -1,0 +1,48 @@
+.section-post-donation-launcher {
+  min-height: 300px !important;
+  margin-top: 20px;
+  padding: 40px 0 20px !important;
+  background: $color-lightblue !important;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);  
+
+  @include lessThan('sm') {
+    padding: 40px 0 20px !important;
+  }
+
+  h2 {
+    color: $color-orange;
+  }
+
+  @include lessThan('sm') {
+    .post-donation-launcher__image {
+      display: none;
+    }    
+  }
+
+  @include greaterThan('sm') {
+    > div {
+      display: flex;
+      justify-content: space-between;
+
+      .post-donation-launcher__text {
+        width: 62%;
+      }
+    }
+
+    .post-donation-launcher__image {
+      width: 31%;
+      position: relative;
+
+      img {
+        position: absolute;
+        width: 100%;
+        bottom: -20px;
+      }
+    }    
+  }
+}
+
+div.section-post-donation-launcher__border-bottom {
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
+  height: 3px;
+}
