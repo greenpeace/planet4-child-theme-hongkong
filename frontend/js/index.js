@@ -31,6 +31,7 @@ import scrollWay from './components/scroll-way';
 import articleList from './components/article-list';
 import facebookVideo from './components/facebook-video';
 import dynamicSearch from './components/dynamic-search';
+import ugc from './components/ugc';
 
 import petitionThankyou from './petition-thankyou';
 
@@ -99,6 +100,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
   facebookVideo();
 
   dynamicSearch();
+
+  ugc();
 
   AOS.init({
     easing: 'ease-in-out-cubic',
