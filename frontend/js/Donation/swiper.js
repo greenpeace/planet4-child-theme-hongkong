@@ -65,8 +65,8 @@ function swiper(Swiper) {
     </div>');
 
   const submitButton = formblocks[2].querySelector('.en__submit button');
-  submitButton.classList.add('primary');
-  
+  submitButton.classList.add('primary', 'js-complete-donation');
+  submitButton.setAttribute('type', 'button');
   
   // add credit cards icons   
   formblocks[2].insertAdjacentHTML("afterbegin", '<div class="credit-card__row"><div class="credit-card__item-1 credit-card__item--logos"><div class="credit-card__logo credit-card__logo--visa"></div><div class="credit-card__logo credit-card__logo--mc"></div><div class="credit-card__logo credit-card__logo--amex"></div><!----><!----></div></div>');

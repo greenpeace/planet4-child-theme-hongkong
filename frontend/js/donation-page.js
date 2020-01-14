@@ -116,197 +116,202 @@ function initDonation(Swiper, Scroll) {
   checkUrlParameters(donationSwiper);
 
   // Submit safeguard
-  form.addEventListener('submit', e => {
-    // Prevent enForm.js from messing with our validation
-    e.stopImmediatePropagation();
-
-    const block = donationSwiper.slides[donationSwiper.activeIndex];
-
-    // Are we on step 1 or 2? Click on the "NEXT" button instead of submitting the form
-    if (donationSwiper.activeIndex === 0) {
+  // form.addEventListener('submit', e => {
+  const submitButtons = form.querySelectorAll('.js-complete-donation');
+  Array.from(submitButtons).forEach(submitButton => {
+    submitButton.addEventListener('click', e => {
+      // Prevent enForm.js from messing with our validation
+      // e.stopImmediatePropagation();
       e.preventDefault();
 
-      form.querySelector('.js-amount-next').click();
-      return false;
-    } else if (donationSwiper.activeIndex === 1) {
-      e.preventDefault();
-      form.querySelector('.js-to-payment').click();
-      return false;
-    }
+      const block = donationSwiper.slides[donationSwiper.activeIndex];
 
-    // We are on the final step. Validate the payment slide and proceed.
-    // first assign the credit card type based upon number
-    let ccNumber = form.querySelector("input[name='transaction.ccnumber']");
-    if (ccNumber) {
-      // form.querySelector(
-      //   "input[name='transaction.ccnumber']"
-      // ).value = ccNumber.value.replace(/\s/g, '');
-      let ccType = form.querySelector("input[name='transaction.paymenttype']");
-      if (ccType)
-        ccType.value = detectCardType(ccNumber.value.replace(/\s/g, ''));
-    }
+      // Are we on step 1 or 2? Click on the "NEXT" button instead of submitting the form
+      if (donationSwiper.activeIndex === 0) {
+        e.preventDefault();
 
-    if (!validateBlock(block, 'payment')) {
-      e.preventDefault();
-      Scroll.animateScroll(block.querySelector('.is-invalid'));
-      // block.querySelector('.is-invalid').focus();
-      return false;
-    }
-
-    e.preventDefault();
-    jQuery('button.primary').prop('disabled', true);
-    jQuery('button.primary').addClass('loading');
-
-    // add GA event
-    dataLayer.push({
-      'event' : 'donationEvent',
-      'eventCategory' : 'donations',
-      'eventAction' : 'form_interaction',
-      'eventLabel' : 'completed:credit_cards',
-    });
-
-    // let data = jQuery(form).serialize();
-    let data = jQuery(form).serializeArray();
-    
-    // modify birth date and credit card number before submitting
-    for (var item in data)
-    {
-      if (data[item].name == 'supporter.NOT_TAGGED_6') {
-        let birthDate = data[item].value;
-        if (!birthDate) continue;
-        birthDate = birthDate.split('/');
-        birthDate = birthDate[1] + '/' + birthDate[0] + '/' + birthDate[2];
-        data[item].value = birthDate;
-      } else if (data[item].name == 'transaction.ccnumber') {
-        data[item].value = data[item].value.replace(/\s/g, '');
+        form.querySelector('.js-amount-next').click();
+        return false;
+      } else if (donationSwiper.activeIndex === 1) {
+        e.preventDefault();
+        form.querySelector('.js-to-payment').click();
+        return false;
       }
-    }
 
-    let dataForm = jQuery.param(data);
-    
-    let amountSent = jQuery("input[name='transaction.donationAmt']").val();
-    let recurringSent = ( jQuery("input[name='supporter.NOT_TAGGED_31']:checked").val() == 'N' ) ? 'single' : 'recurring';
+      // We are on the final step. Validate the payment slide and proceed.
+      // first assign the credit card type based upon number
+      let ccNumber = form.querySelector("input[name='transaction.ccnumber']");
+      if (ccNumber) {
+        // form.querySelector(
+        //   "input[name='transaction.ccnumber']"
+        // ).value = ccNumber.value.replace(/\s/g, '');
+        let ccType = form.querySelector("input[name='transaction.paymenttype']");
+        if (ccType)
+          ccType.value = detectCardType(ccNumber.value.replace(/\s/g, ''));
+      }
 
-    if(typeof fbq !== 'undefined') {
-      fbq('track', 'AddPaymentInfo', {
-        content_name: campaignName
-      });      
-    }
+      if (!validateBlock(block, 'payment')) {
+        e.preventDefault();
+        Scroll.animateScroll(block.querySelector('.is-invalid'));
+        // block.querySelector('.is-invalid').focus();
+        return false;
+      }
 
-    jQuery
-      .ajax({
-        url: '2',
-        method: 'POST',
-        data: dataForm,
-        dataType: 'html',
-      })
-      .done(function(t) {        
-        jQuery('button').prop('disabled', false);
-        jQuery('button').removeClass('loading');
+      e.preventDefault();
+      jQuery('button.primary').prop('disabled', true);
+      jQuery('button.primary').addClass('loading');
 
-        // CODE CHANGED TO REFLECT CURRENT FLOW 
+      // add GA event
+      dataLayer.push({
+        'event' : 'donationEvent',
+        'eventCategory' : 'donations',
+        'eventAction' : 'form_interaction',
+        'eventLabel' : 'completed:credit_cards',
+      });
 
-        // console.log(t);
-        var i = jQuery.parseHTML(t, !0);
-        var s = jQuery(i).find('.en__errorHeader');
-        var a = jQuery(i).find('.en__errorList');
-        var n = jQuery(i).find('#thankyou-copy');
+      // let data = jQuery(form).serialize();
+      let data = jQuery(form).serializeArray();
+      
+      // modify birth date and credit card number before submitting
+      for (var item in data)
+      {
+        if (data[item].name == 'supporter.NOT_TAGGED_6') {
+          let birthDate = data[item].value;
+          if (!birthDate) continue;
+          birthDate = birthDate.split('/');
+          birthDate = birthDate[1] + '/' + birthDate[0] + '/' + birthDate[2];
+          data[item].value = birthDate;
+        } else if (data[item].name == 'transaction.ccnumber') {
+          data[item].value = data[item].value.replace(/\s/g, '');
+        }
+      }
 
-        // prepare the new pageJsonReplicated
+      let dataForm = jQuery.param(data);
+      
+      let amountSent = jQuery("input[name='transaction.donationAmt']").val();
+      let recurringSent = ( jQuery("input[name='supporter.NOT_TAGGED_31']:checked").val() == 'N' ) ? 'single' : 'recurring';
 
-        // var pageJsonReplicated = pageJson;
-        pageJsonReplicated.amount = amountSent;
-        pageJsonReplicated.country = jQuery("input[name='supporter.country']").val();
-        pageJsonReplicated.currency = window.NRO_PROPERTIES[NRO].currency;
-        pageJsonReplicated.pageNumber = 2;
-        pageJsonReplicated.recurring = ( jQuery("input[name='supporter.NOT_TAGGED_31']:checked").val() == 'N' ) ? 'false' : 'true';       
-        pageJsonReplicated.paymentType = jQuery("input[name='transaction.paymenttype']").val();                
+      if(typeof fbq !== 'undefined') {
+        fbq('track', 'AddPaymentInfo', {
+          content_name: campaignName
+        });      
+      }
 
-        if (s.length > 0) {
-          pageJsonReplicated.giftProcess = false;
-          // console.log(s);
-          // console.log(a);
-          jQuery('.en__errorHeader').remove();
-          jQuery('.en__errorList').remove();
-          jQuery('.credit-card__row').prepend(s[0].outerHTML + a[0].outerHTML);
-          jQuery('#enform').css('padding-bottom', '100px');
-          dataLayer.push({
-            'event' : 'donationEvent',
-            'eventCategory' : 'donations',
-            'eventAction' : 'fail',
-            'eventLabel' : recurringSent,
-            'eventValue' : amountSent
-          });
-          // e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
-        } else {
+      jQuery
+        .ajax({
+          url: '2',
+          method: 'POST',
+          data: dataForm,
+          dataType: 'html',
+        })
+        .done(function(t) {        
+          jQuery('button').prop('disabled', false);
+          jQuery('button').removeClass('loading');
 
-          pageJsonReplicated.giftProcess = true;
+          // CODE CHANGED TO REFLECT CURRENT FLOW 
 
-          dataLayer.push({
-            'event' : 'donationEvent',
-            'eventCategory' : 'donations',
-            'eventAction' : 'succeed',
-            'eventLabel' : recurringSent,
-            'eventValue' : amountSent
-          });
-          
-          if(typeof fbq !== 'undefined') {
-            fbq('track', 'Purchase', {
-              value: amountSent, 
-              content_name: campaignName, 
-              currency: pageJsonReplicated.currency, 
-              content_category: 'donations' });            
+          // console.log(t);
+          var i = jQuery.parseHTML(t, !0);
+          var s = jQuery(i).find('.en__errorHeader');
+          var a = jQuery(i).find('.en__errorList');
+          var n = jQuery(i).find('#thankyou-copy');
+
+          // prepare the new pageJsonReplicated
+
+          // var pageJsonReplicated = pageJson;
+          pageJsonReplicated.amount = amountSent;
+          pageJsonReplicated.country = jQuery("input[name='supporter.country']").val();
+          pageJsonReplicated.currency = window.NRO_PROPERTIES[NRO].currency;
+          pageJsonReplicated.pageNumber = 2;
+          pageJsonReplicated.recurring = ( jQuery("input[name='supporter.NOT_TAGGED_31']:checked").val() == 'N' ) ? 'false' : 'true';       
+          pageJsonReplicated.paymentType = jQuery("input[name='transaction.paymenttype']").val();                
+
+          if (s.length > 0) {
+            pageJsonReplicated.giftProcess = false;
+            // console.log(s);
+            // console.log(a);
+            jQuery('.en__errorHeader').remove();
+            jQuery('.en__errorList').remove();
+            jQuery('.credit-card__row').prepend(s[0].outerHTML + a[0].outerHTML);
+            jQuery('#enform').css('padding-bottom', '100px');
+            dataLayer.push({
+              'event' : 'donationEvent',
+              'eventCategory' : 'donations',
+              'eventAction' : 'fail',
+              'eventLabel' : recurringSent,
+              'eventValue' : amountSent
+            });
+            // e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
+          } else {
+
+            pageJsonReplicated.giftProcess = true;
+
+            dataLayer.push({
+              'event' : 'donationEvent',
+              'eventCategory' : 'donations',
+              'eventAction' : 'succeed',
+              'eventLabel' : recurringSent,
+              'eventValue' : amountSent
+            });
+            
+            if(typeof fbq !== 'undefined') {
+              fbq('track', 'Purchase', {
+                value: amountSent, 
+                content_name: campaignName, 
+                currency: pageJsonReplicated.currency, 
+                content_category: 'donations' });            
+            }
+
+            jQuery('.js-step-payment').removeClass('is-current');
+            jQuery('.js-step-payment').removeClass('is-todo');
+            jQuery('.js-step-payment').addClass('is-done');
+            jQuery('.en__component--column').html(n);          
+
+            // e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
+            //     value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
+            // }
+            // ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
+            // for(var r in e.fields)delete e.fields[r];
+            // delete e.temp.card_number, delete e.temp.card_expiration_date
           }
 
-          jQuery('.js-step-payment').removeClass('is-current');
-          jQuery('.js-step-payment').removeClass('is-todo');
-          jQuery('.js-step-payment').addClass('is-done');
-          jQuery('.en__component--column').html(n);          
-
-          // e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
-          //     value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
+          // if(e.pageFn.btnState="next", e.pageFn.isPaymentProceeding=!1, s.length>0)e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
+          // else {
+          //     e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
+          //         value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
+          //     }
+          //     ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
+          //     for(var r in e.fields)delete e.fields[r];
+          //     delete e.temp.card_number, delete e.temp.card_expiration_date
           // }
-          // ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
-          // for(var r in e.fields)delete e.fields[r];
-          // delete e.temp.card_number, delete e.temp.card_expiration_date
-        }
 
-        // if(e.pageFn.btnState="next", e.pageFn.isPaymentProceeding=!1, s.length>0)e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
-        // else {
-        //     e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
-        //         value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
-        //     }
-        //     ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
-        //     for(var r in e.fields)delete e.fields[r];
-        //     delete e.temp.card_number, delete e.temp.card_expiration_date
-        // }
+          //console.log(data);
 
-        //console.log(data);
-
-        //   if(this.validateCreditCard(!0)) {
-        //     this.pageFn.isPaymentPageError=!1, this.pageFn.btnState="loading", this.pageFn.isPaymentProceeding=!0, ""!=this.pageProps.ga_tracking_id&&ga("send", "event", "donations", "form_interaction", "submit:"+this.pageFn.retrySubmissionCount);
-        //     var e=this;
-        //     y.a.ajax( {
-        //         url: "2", method: "POST", data: y()(this.$refs.enform).serialize(), dataType: "html"
-        //     }
-        //     ).done(function(t) {
-        //         var i=y.a.parseHTML(t, !0), s=y()(i).find(".en__errorHeader"), a=y()(i).find(".en__errorList"), n=y()(i).find("#thankyou-copy");
-        //         if(e.pageFn.btnState="next", e.pageFn.isPaymentProceeding=!1, s.length>0)e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
-        //         else {
-        //             e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
-        //                 value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
-        //             }
-        //             ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
-        //             for(var r in e.fields)delete e.fields[r];
-        //             delete e.temp.card_number, delete e.temp.card_expiration_date
-        //         }
-        //     }
-        //     )
-        // }
-        // else this.pageFn.isPaymentPageError=!0
-      })
-      .fail(function(errorThrown) {
-        console.log(errorThrown);
+          //   if(this.validateCreditCard(!0)) {
+          //     this.pageFn.isPaymentPageError=!1, this.pageFn.btnState="loading", this.pageFn.isPaymentProceeding=!0, ""!=this.pageProps.ga_tracking_id&&ga("send", "event", "donations", "form_interaction", "submit:"+this.pageFn.retrySubmissionCount);
+          //     var e=this;
+          //     y.a.ajax( {
+          //         url: "2", method: "POST", data: y()(this.$refs.enform).serialize(), dataType: "html"
+          //     }
+          //     ).done(function(t) {
+          //         var i=y.a.parseHTML(t, !0), s=y()(i).find(".en__errorHeader"), a=y()(i).find(".en__errorList"), n=y()(i).find("#thankyou-copy");
+          //         if(e.pageFn.btnState="next", e.pageFn.isPaymentProceeding=!1, s.length>0)e.submitErrorHtml=s[0].outerHTML+a[0].outerHTML, e.submitError=!0, e.pageFn.retrySubmissionCount+=1, ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "fail", e.isRecurring?"recurring": "single");
+          //         else {
+          //             e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
+          //                 value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
+          //             }
+          //             ), e.currentPage+=1, e.pageFn.isPaymentSuccess=!0;
+          //             for(var r in e.fields)delete e.fields[r];
+          //             delete e.temp.card_number, delete e.temp.card_expiration_date
+          //         }
+          //     }
+          //     )
+          // }
+          // else this.pageFn.isPaymentPageError=!0
+        })
+        .fail(function(errorThrown) {
+          console.log(errorThrown);
+        });
       });
 
     return false;

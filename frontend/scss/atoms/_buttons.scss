@@ -57,6 +57,12 @@
     color: white;
     box-shadow: none !important;
 
+    &.wider {
+      @include greaterThan('sm') {
+        padding: 0 100px;
+      }
+    }
+
     &:hover,
     &:focus {
       background-color: darken($color-orange, 4%);
