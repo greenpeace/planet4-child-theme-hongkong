@@ -28,4 +28,21 @@
     max-width: 400px;
     font-size: 14px;
   }
+
+  span.ugc_input_file_selected {
+    font-size: 10px;
+    color: $color-grey;
+    margin-top: 16px;
+    display: inline-block;
+  }
+
+  span.ugc_input_file_button {
+    background-color: #f3f3f3;
+    border: 1px solid $color-grey;
+    font-size: 12px;
+    padding: 4px;
+    margin-top: 16px;
+    display: inline-block;
+  }
+
 }
