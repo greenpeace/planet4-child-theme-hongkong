@@ -51,14 +51,14 @@
         <span>{{ strings.author }} {{ post.author.name }}</span>
       </div>
 
-      {{ post.content|e('wp_kses_post')|raw }}      
+      {{ post.content|e('wp_kses_post')|raw }}
 
     </section>
 
   </article>
 
   {%if (show_article_donation_launcher=='on') %}
-  <section class="section-post-donation-launcher">
+  <section class="section-post-donation-launcher {%if (strings.donation_launcher_img_align_center=='on') %}align-items-center{%endif%}">
 		<div class="ct-container">
       <div class="post-donation-launcher__text">
         <h2>{{ strings.article_donation_launcher }}</h2>
@@ -68,7 +68,7 @@
       <div class="post-donation-launcher__image">
         <img src="{{ strings.donation_launcher_img }}" alt="" title="">
       </div>
-      
+
     </div>
   </section>
   <div class="section-post-donation-launcher__border-bottom"></div>

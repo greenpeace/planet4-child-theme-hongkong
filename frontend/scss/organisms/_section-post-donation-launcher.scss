@@ -3,7 +3,7 @@
   margin-top: 20px;
   padding: 40px 0 20px !important;
   background: $color-lightblue !important;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);  
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
 
   @include lessThan('sm') {
     padding: 40px 0 20px !important;
@@ -16,16 +16,19 @@
   @include lessThan('sm') {
     .post-donation-launcher__image {
       display: none;
-    }    
+    }
   }
 
   @include greaterThan('sm') {
-    > div {
+    > .ct-container {
       display: flex;
       justify-content: space-between;
+      padding: 0 65px;
 
       .post-donation-launcher__text {
-        width: 62%;
+        // width: 62%;
+        flex: 1;
+        margin-right: 1rem;
       }
     }
 
@@ -38,7 +41,21 @@
         width: 100%;
         bottom: -20px;
       }
-    }    
+    }
+
+    &.align-items-center {
+      > .ct-container {
+        align-items: center;
+      }
+
+      .post-donation-launcher__image {
+        img {
+          position: relative;
+          bottom: 0;
+        }
+
+      }
+    }
   }
 }
 
