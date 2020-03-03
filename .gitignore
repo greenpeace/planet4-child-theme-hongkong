@@ -5,3 +5,4 @@
 .tern-port
 .dir-locals.el
 .ac-php-conf.json
+yarn.lock

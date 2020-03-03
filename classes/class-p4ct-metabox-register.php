@@ -941,6 +941,15 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+		$cmb_options->add_field(
+			array(
+				'name'    => esc_html__( 'Align the image to vertical center for donation launcher', 'gpea_theme_backend' ),
+				'desc'    => esc_html__( 'Align the image center vertically.', 'gpea_theme_backend' ),
+				'id'      => 'gpea_post_donation_launcher_image_align_center',
+				'type'    => 'checkbox',
+			)
+		);
+
 	}
 
 	/**
