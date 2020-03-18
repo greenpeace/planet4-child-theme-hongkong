@@ -141,7 +141,8 @@ $context['strings'] = [
 	'intro_donation_launcher' => isset( $options['gpea_post_donation_launcher_text'] ) ? $options['gpea_post_donation_launcher_text'] : '',
 	'donation_launcher_link' => isset( $options['gpea_post_donation_launcher_link'] ) ? $options['gpea_post_donation_launcher_link'] : '',
 	'i_support' => isset( $options['gpea_post_donation_launcher_label'] ) ? $options['gpea_post_donation_launcher_label'] : '',
-	'donation_launcher_img' => isset( $options['gpea_post_donation_launcher_image'] ) ? $options['gpea_post_donation_launcher_image'] : '',	
+	'donation_launcher_img' => isset( $options['gpea_post_donation_launcher_image'] ) ? $options['gpea_post_donation_launcher_image'] : '',
+	'donation_launcher_img_align_center' => isset( $options['gpea_post_donation_launcher_image_align_center'] ) ? $options['gpea_post_donation_launcher_image_align_center'] : '',
 	'related_news' => __( 'Related news', 'gpea_theme' ),
 	'share' => __( 'Share', 'gpea_theme' ),
 ];
