@@ -949,7 +949,6 @@ class P4CT_Metabox_Register {
 				'type'    => 'checkbox',
 			)
 		);
-
 	}
 
 	/**
