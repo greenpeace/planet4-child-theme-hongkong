@@ -1,6 +1,6 @@
 {
-	"name": "greenpeace/planet4-child-theme-hongkong",
-	"description": "Child theme for the Hong Kong website of the Planet 4 Wordpress project",
+	"name": "greenpeace/gpea-planet8-child-theme",
+	"description": "Child theme for the GPEA P8 website of the Planet 4 Wordpress project",
 	"type":"wordpress-theme",
 	"minimum-stability" : "stable",
 	"authors": [
@@ -17,9 +17,9 @@
 		}
 	],
 	"support": {
-		"issues": "https://github.com/greenpeace/planet4-child-theme-hongkong/issues",
-		"wiki": "https://github.com/greenpeace/planet4-child-theme-hongkong/wiki",
-		"source": "https://github.com/greenpeace/planet4-child-theme-hongkong"
+		"issues": "https://github.com/greenpeace/gpea-planet8-child-theme/issues",
+		"wiki": "https://github.com/greenpeace/gpea-planet8-child-theme/wiki",
+		"source": "https://github.com/greenpeace/gpea-planet8-child-theme"
 	},
 	"extra": {
 		"installer-paths": {
