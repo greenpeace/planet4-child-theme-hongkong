@@ -29,13 +29,23 @@
 
     .action.as-card {
       width: 290px;
+      flex: 0 0 290px;
       max-width: none;
+    }
+
+    .maxi-swiper .swiper-slide {
+      margin-right: 30px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 
   @include greaterThan('lg') {
     .action.as-card {
       width: 360px;
+      flex: 0 0 360px;
     }
   }
 }
