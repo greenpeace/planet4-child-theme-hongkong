@@ -183,7 +183,7 @@ export default function(Swiper) {
         centeredSlides: true,
         simulateTouch: false,
         loop: false,
-        initialSlide: 1,
+        initialSlide: window.innerWidth<1023 ? 0:1,
         pagination: {
           el: $this.find('.swiper-pagination'),
           type: 'bullets',

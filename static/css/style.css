@@ -2753,16 +2753,13 @@ body:not(.page-template-project) .section-project-phases { min-height: 250px !im
 
 .section-launcher { padding-bottom: 0 !important; }
 
-.section-launcher .launchers { padding-bottom: 20px; }
-
 .section-launcher h2 { text-align: center; }
 
 .section-launcher .action.fluid h2, .section-launcher .action.fluid p { text-align: left; }
 
 .section-launcher .action.as-card { margin-top: 20px; margin-bottom: 20px; background: white; }
 
-@media only screen and (min-width: 1024px) { .section-launcher .launchers { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; -webkit-box-align: stretch; -ms-flex-align: stretch; align-items: stretch; }
-  .section-launcher .action.as-card { width: 290px; -webkit-box-flex: 0; -ms-flex: 0 0 290px; flex: 0 0 290px; max-width: none; }
+@media only screen and (min-width: 1024px) { .section-launcher .action.as-card { width: 290px; -webkit-box-flex: 0; -ms-flex: 0 0 290px; flex: 0 0 290px; max-width: none; }
   .section-launcher .maxi-swiper .swiper-slide { margin-right: 30px; }
   .section-launcher .maxi-swiper .swiper-slide:last-child { margin-right: 0; } }
 
