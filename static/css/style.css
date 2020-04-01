@@ -2794,6 +2794,10 @@ body:not(.page-template-project) .section-project-phases { min-height: 250px !im
 
 @media only screen and (min-width: 1024px) { .section-launcher.image-vertical-center .action.fluid img { bottom: auto; } }
 
+.section-launcher.layout-dark { background: #292f47; color: white; }
+
+.section-launcher.layout-dark .action.fluid .button { color: white; }
+
 /* ATTENTION!!! Most of the style of the donation page are taken from this file, and some are overridden (see: _template-donation-engaging.scss). IF YOU MODIFY ANYTHING HERE, ALWAY TEST THE DONATION PAGE AS WELL! */
 @media only screen and (max-width: 1023px) { .enform-side-style, .enform-side-style .container, .enform-side-style .row, .enform-side-style .col-md-12 { min-height: 100%; }
   .enform-side-style .form-container { /*margin-top: 16px;*/ margin-top: 18px; } }
