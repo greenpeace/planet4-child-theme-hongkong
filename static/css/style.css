@@ -2767,6 +2767,10 @@ body:not(.page-template-project) .section-project-phases { min-height: 250px !im
 
 @media only screen and (min-width: 1024px) { .section-report-launcher .button { padding-left: 30px; padding-right: 30px; font-size: 24px; } }
 
+.section-report-launcher.layout-light { background: #e6f5f5 !important; color: black; }
+
+.section-report-launcher.layout-light h2 { color: #66cc00; }
+
 .outer_block_container > section.section-launcher, .page-template > section.section-launcher { padding: 0 0; }
 
 .section-launcher .launchers { padding-bottom: 20px; }
