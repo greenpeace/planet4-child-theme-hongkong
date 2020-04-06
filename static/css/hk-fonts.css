@@ -1,46 +1,17 @@
 /*
 *
-* Embed Noto Sans TC from Google Font cdn
+* Embed Noto Sans TC from Google Fonts CDN
 *
 */
 
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,500&display=swap&subset=chinese-traditional");
 
-/*
-* Hide the import notosans TC otf file
-*
-@font-face {
-  font-family: 'Noto Sans TC';
-  font-display: swap;
-  font-weight: normal;
-  src: url('../fonts/Noto_Sans_TC/NotoSansTC-Regular.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'Noto Sans TC';
-  font-display: swap;
-  font-weight: bold;
-  src: url('../fonts/Noto_Sans_TC/NotoSansTC-Medium.otf') format('opentype');
-}
-*/
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,500&display=swap");
 
 /*
  * NOTE: Make sure 'Montserrat' and 'icomoon' are declared the same way
  *      in kr-fonts.css as well!!
  */
-@font-face {
-  font-family: "Montserrat";
-  font-display: swap;
-  src: url("../fonts/Montserrat/Montserrat-Light.ttf") format("truetype");
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: "Montserrat";
-  font-display: swap;
-  src: url("../fonts/Montserrat/Montserrat-Medium.ttf") format("truetype");
-  font-weight: bold;
-}
 
 @font-face {
   font-family: "icomoon";
