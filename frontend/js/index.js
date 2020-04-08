@@ -128,52 +128,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 /* GPEA extended functions */
+import $ from "jquery";
 import appear from "jquery-appear-original";
+import animatecounters from "./components/animatecounters";
 
 document.addEventListener("DOMContentLoaded", function (event) {
+  let $counter = $(".counter");
+  if (!$counter.length) return;
   // animate at the first time
   animatecounters();
-  //
-  $(".counter").appear();
+  $counter.appear();
   $(document.body).on("appear", ".counter", function (e) {
     if (!$(this).hasClass("appear")) {
       animatecounters();
       $(this).addClass("appear");
-      console.log("appear");
     }
   });
 });
-
-function animatecounters() {
-  // Get Countries List from <script> data block.
-  let $counter = $(".counter");
-  if (!$counter.length) return;
-  //
-  function commaSeparateNumber(val) {
-    while (/(\d+)(\d{3})/.test(val.toString())) {
-      val = val.toString().replace(/(\d+)(\d{3})/, "$1" + "," + "$2");
-    }
-    return val;
-  }
-  $(".counter").each(function () {
-    var $this = $(this),
-      countTo = $this.attr("data-count");
-    $({
-      countNum: $this.text(),
-    }).animate(
-      {
-        countNum: countTo,
-      },
-      {
-        duration: 1000,
-        easing: "swing",
-        step: function () {
-          $this.text(commaSeparateNumber(Math.floor(this.countNum)));
-        },
-        complete: function () {
-          $this.text(commaSeparateNumber(this.countNum));
-        },
-      }
-    );
-  });
-}
