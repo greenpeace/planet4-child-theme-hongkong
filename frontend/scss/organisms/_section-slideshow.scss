@@ -40,6 +40,11 @@
     text-align: center;
   }
 
+  a.swiper-slide {
+    display: block;
+    border-bottom: none;
+  }
+
   &.layout-dark {
     background: $color-blue !important;
     color: white;
