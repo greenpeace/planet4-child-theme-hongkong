@@ -1,19 +1,16 @@
 export default function () {
-  // Get Countries List from <script> data block.
   let $counter = $(".counter");
   if (!$counter.length) return;
   //
-  function commaSeparateNumber(val) {
-    while (/(\d+)(\d{3})/.test(val.toString())) {
-      val = val.toString().replace(/(\d+)(\d{3})/, "$1" + "," + "$2");
-    }
-    return val;
+  function numberWithCommas(value) {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  $(".counter").each(function () {
+  $(".counter:not(.appear)").each(function () {
     var $this = $(this),
       countTo = $this.attr("data-count");
+    console.log($this);
     $({
-      countNum: $this.text(),
+      countNum: 0,
     }).animate(
       {
         countNum: countTo,
@@ -22,10 +19,10 @@ export default function () {
         duration: 2000,
         easing: "swing",
         step: function () {
-          $this.text(commaSeparateNumber(Math.floor(this.countNum)));
+          $this.text(numberWithCommas(Math.ceil(this.countNum)));
         },
         complete: function () {
-          $this.text(commaSeparateNumber(this.countNum));
+          $this.text(numberWithCommas(countTo));
         },
       }
     );

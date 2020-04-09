@@ -132,13 +132,13 @@ import $ from "jquery";
 import appear from "jquery-appear-original";
 import animatecounters from "./components/animatecounters";
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", function () {
   let $counter = $(".counter");
   if (!$counter.length) return;
-  // animate at the first time
   animatecounters();
+  //
   $counter.appear();
-  $(document.body).on("appear", ".counter", function (e) {
+  $(document.body).on("appear", ".counter", function () {
     if (!$(this).hasClass("appear")) {
       animatecounters();
       $(this).addClass("appear");
