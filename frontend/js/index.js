@@ -35,6 +35,8 @@ import ugc from "./components/ugc";
 
 import petitionThankyou from "./petition-thankyou";
 
+import animatecounters from "./components/animatecounters";
+
 // import donationPage from './donation-page';
 
 Swiper.use([Navigation, Pagination, Scrollbar, Controller, Autoplay]);
@@ -125,23 +127,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
   /* Page specific functionality */
 
   petitionThankyou(Scroll);
-});
 
-/* GPEA extended functions */
-import $ from "jquery";
-import appear from "jquery-appear-original";
-import animatecounters from "./components/animatecounters";
+  /* GPEA extended functions */
 
-document.addEventListener("DOMContentLoaded", function () {
-  let $counter = $(".counter");
-  if (!$counter.length) return;
   animatecounters();
-  //
-  $counter.appear();
-  $(document.body).on("appear", ".counter", function () {
-    if (!$(this).hasClass("appear")) {
-      animatecounters();
-      $(this).addClass("appear");
-    }
-  });
 });
