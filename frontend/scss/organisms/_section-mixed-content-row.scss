@@ -4,13 +4,25 @@
   padding: 70px 0 !important;
   overflow: hidden;
 
-  .content {
-    // margin-bottom: 40px;
+  h2 {
+    @include greaterThan("sm") {
+      margin-bottom: 20px;
+    }
   }
 
-  h2 {
-    @include greaterThan('sm') {
-      margin-bottom: 20px;
+  .mobile-background {
+    z-index: 1;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 100ms ease-out;
+    @include lessThan("sm") {
+      visibility: visible;
     }
   }
 
@@ -28,7 +40,7 @@
   &.has-bg-image {
     padding: 60px 0 20px !important;
 
-    @include greaterThan('sm') {
+    @include greaterThan("sm") {
       padding: 100px 0 40px !important;
     }
 
@@ -38,7 +50,7 @@
       margin-bottom: 280px;
       z-index: 2;
 
-      @include greaterThan('sm') {
+      @include greaterThan("sm") {
         margin-top: -30px;
         margin-bottom: 290px;
       }
@@ -52,10 +64,10 @@
       right: 0;
       height: 130px;
       background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
-      content: '';
+      content: "";
       z-index: 1;
 
-      @include greaterThan('sm') {
+      @include greaterThan("sm") {
         height: 220px;
       }
     }
