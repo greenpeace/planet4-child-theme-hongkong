@@ -72,4 +72,13 @@
       }
     }
   }
+
+  &.layout-dark {
+    background: $color-blue;
+    color: white;
+
+    .action.fluid .button {
+      color: white;
+    }
+  }
 }
