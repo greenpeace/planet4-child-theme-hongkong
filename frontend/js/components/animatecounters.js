@@ -1,4 +1,5 @@
-import $ from "jquery";
+// import $ from "jquery";
+const $ = jQuery;
 import "jquery-appear-original";
 
 export default function () {
