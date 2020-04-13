@@ -73,4 +73,13 @@
       font-size: 24px;
     }
   }
+
+  &.layout-light {
+    background: $color-lightblue !important;
+    color: black;
+
+    h2 {
+      color: $color-green;
+    }
+  }
 }

@@ -252,6 +252,10 @@ const jsPack = (isProduction, doWatch) => {
         // fetch: 'exports-loader?self.fetch!whatwg-fetch',
       }),
     ],
+    externals: {
+      jquery: 'jQuery',
+      $: 'jQuery'
+    }
   };
 
   if (isProduction) {
