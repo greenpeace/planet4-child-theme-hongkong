@@ -1,6 +1,4 @@
 .section-launcher {
-  padding-bottom: 0 !important;
-
   .launchers {
     padding-bottom: 20px;
   }
@@ -14,6 +12,10 @@
     text-align: left;
   }
 
+  .action.fluid .button {
+      margin-top: 15px;
+  }
+
   .action.as-card {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -21,21 +23,57 @@
   }
 
   @include greaterThan('sm') {
-    .launchers {
-      display: flex;
-      justify-content: space-between;
-      align-items: stretch;
-    }
-
     .action.as-card {
       width: 290px;
+      flex: 0 0 290px;
       max-width: none;
+    }
+
+
+    .action.fluid {
+      height: auto;
+
+      img {
+        bottom: 0;
+      }
+
+      .button {
+        margin-bottom: 50px;
+      }
+    }
+
+    .maxi-swiper .swiper-slide {
+      margin-right: 30px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 
   @include greaterThan('lg') {
     .action.as-card {
       width: 360px;
+      flex: 0 0 360px;
+    }
+  }
+
+  &.image-vertical-center {
+    @include greaterThan('sm') {
+      .action.fluid {
+        img {
+          bottom: auto;
+        }
+      }
+    }
+  }
+
+  &.layout-dark {
+    background: $color-blue;
+    color: white;
+
+    .action.fluid .button {
+      color: white;
     }
   }
 }

@@ -169,4 +169,38 @@ export default function(Swiper) {
     controlledSwiper.controller.control = labelSwiper;
     labelSwiper.controller.control = controlledSwiper;
   });
+
+  $('.launcher-card-swiper').each(function() {
+    const $this = $(this);
+    const numOfSlides = $this.find('.swiper-slide').length
+
+    // We only active the swiper when
+    // 1. The cards is more than three
+    // 2. It's in mobile version
+    if (numOfSlides>3 || window.innerWidth<1023) {
+      new Swiper(this, {
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        simulateTouch: false,
+        loop: false,
+        initialSlide: window.innerWidth<1023 ? 0:1,
+        pagination: {
+          el: $this.find('.swiper-pagination'),
+          type: 'bullets',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: $this.find('.swiper-button-next'),
+          prevEl: $this.find('.swiper-button-prev'),
+        },
+        breakpoints: {
+          // when window width is <= 1023px
+          1023: {
+            pagination: false,
+            navigation: false,
+          },
+        },
+      });
+    }
+  });
 }

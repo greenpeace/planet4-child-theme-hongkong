@@ -2,22 +2,6 @@
   padding: 40px 0;
   background: $color-lightblue !important;
 
-  > .ct-container {
-    text-align: center;
-  }
-
-  &.layout-dark {
-    background: $color-blue !important;
-    color: white;
-
-    // h2,
-    // h3,
-    // h4,
-    // p {
-    // @include font-smoothing;
-    // }
-  }
-
   h2 {
     @include title-mid;
     color: $color-green;
@@ -50,5 +34,25 @@
 
   .see-more {
     text-align: center;
+  }
+
+  > .ct-container {
+    text-align: center;
+  }
+
+  a.swiper-slide {
+    display: block;
+    border-bottom: none;
+  }
+
+  &.layout-dark {
+    background: $color-blue !important;
+    color: white;
+  }
+
+  &.layout-light {
+    .swiper-pagination-bullet {
+      background-color: $color-grey;
+    }
   }
 }
