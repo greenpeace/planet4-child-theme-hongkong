@@ -2201,6 +2201,12 @@ body:not(.js-home-follower) .section-projects.dark, .js-home-follower .section-p
 
 .forests .section-mixed-content-row.layout-dark h2 { color: black; }
 
+.section-issues + .section-mixed-content-row::before { height: 170px; background: -webkit-gradient(linear, left top, left bottom, from(white), to(rgba(255, 255, 255, 0))); background: linear-gradient(to bottom, white, rgba(255, 255, 255, 0)); }
+
+.section-issues + .section-mixed-content-row h2 { color: black; }
+
+.section-issues + .section-mixed-content-row.has-bg-image .content { margin-top: -80px; }
+
 .section-hero-top { height: 70vh; padding: 0 !important; background-size: cover; background-position: center; position: relative; overflow: hidden; }
 
 .section-hero-top .background { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-size: cover; background-position: center; -webkit-transition: -webkit-transform 100ms ease-out; transition: -webkit-transform 100ms ease-out; transition: transform 100ms ease-out; transition: transform 100ms ease-out, -webkit-transform 100ms ease-out; }
