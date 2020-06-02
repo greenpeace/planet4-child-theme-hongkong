@@ -34,7 +34,7 @@ button,
   background-image: url("../images/logo_zh.png");
 }
 
-@media (max-width: 359px) {
+@media (max-width: 420px) {
   .logo-greenpeace {
     background-image: url("../images/logo_ko.svg");
     width: 100px !important;
@@ -58,10 +58,4 @@ html:lang(zh-TW)
   .social-box
   a.tip-share-whatsapp {
   display: none;
-}
-
-@media only screen and (max-width: 1023px) {
-  header .content .right-box .button {
-    margin-left: -7px;
-  }
 }

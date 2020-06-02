@@ -1458,7 +1458,7 @@ header .content .mobile-box a { color: white; font-size: 24px; text-decoration: 
 
 header .content .left-box { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
 
-header .content .left-box .logo { text-decoration: none !important; margin-top: 4px; margin-right: 15px; }
+header .content .left-box .logo { text-decoration: none !important; margin-top: 7px; margin-right: 15px; }
 
 header .content .left-box .logo-greenpeace { display: inline-block; height: 20px; width: 185px; background-size: contain; background-position: left center; background-repeat: no-repeat; }
 
@@ -1510,7 +1510,7 @@ header .content .right-box { display: -webkit-box; display: -ms-flexbox; display
 
 header .content .right-box .search-button { color: white; font-size: 25px; margin-right: 18px; text-decoration: none; }
 
-header .content .right-box .button { background: #ff8100; color: white; white-space: nowrap; height: 34px; line-height: 33px; }
+header .content .right-box .button { background: #ff8100; color: white; white-space: nowrap; height: auto; }
 
 header .content .right-box .button:hover, header .content .right-box .button:focus { background-color: #eb7700; }
 
@@ -1553,7 +1553,7 @@ header .content .right-box .button:hover, header .content .right-box .button:foc
 
 @media only screen and (max-width: 1023px) { header .content .center-box { display: none; }
   header .content .right-box .search-button { display: none; }
-  header .content .right-box .button { padding: 0 12px; }
+  header .content .right-box .button { padding: 2px 12px; }
   .mobile-toolbar { display: -webkit-box; display: -ms-flexbox; display: flex; }
   .is-scrolling-down header { -webkit-transform: translateY(-110px); -ms-transform: translateY(-110px); transform: translateY(-110px); -webkit-transition: -webkit-transform 500ms ease 200ms; transition: -webkit-transform 500ms ease 200ms; transition: transform 500ms ease 200ms; transition: transform 500ms ease 200ms, -webkit-transform 500ms ease 200ms; } }
 
