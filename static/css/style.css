@@ -1551,7 +1551,8 @@ header .content .right-box .button:hover, header .content .right-box .button:foc
 
 @media only screen and (max-width: 1023px) and (min-width: 400px) { header .content .left-box .logo-greenpeace { margin-left: 10px; margin-right: 10px; } }
 
-@media only screen and (max-width: 1023px) { header .content .center-box { display: none; }
+@media only screen and (max-width: 1023px) { header .content .left-box .dropdown button p { font-size: 10px; font-weight: normal; letter-spacing: 0px; }
+  header .content .center-box { display: none; }
   header .content .right-box .search-button { display: none; }
   header .content .right-box .button { padding: 2px 12px; }
   .mobile-toolbar { display: -webkit-box; display: -ms-flexbox; display: flex; }
