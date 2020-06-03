@@ -37,7 +37,7 @@ button,
 @media (max-width: 420px) {
   .logo-greenpeace {
     background-image: url("../images/logo_ko.svg");
-    width: 100px !important;
+    width: 80px !important;
   }
 }
 
