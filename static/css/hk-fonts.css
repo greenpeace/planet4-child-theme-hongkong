@@ -4,9 +4,9 @@
 *
 */
 
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC:wght@200;400&display=swap&subset=chinese-traditional");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&display=swap&subset=chinese-traditional");
 
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap");
 
 /*
  * NOTE: Make sure 'Montserrat' and 'icomoon' are declared the same way
@@ -34,10 +34,10 @@ button,
   background-image: url("../images/logo_zh.png");
 }
 
-@media (max-width: 359px) {
+@media (max-width: 420px) {
   .logo-greenpeace {
     background-image: url("../images/logo_ko.svg");
-    width: 100px !important;
+    width: 80px !important;
   }
 }
 
@@ -58,10 +58,4 @@ html:lang(zh-TW)
   .social-box
   a.tip-share-whatsapp {
   display: none;
-}
-
-@media only screen and (max-width: 1023px) {
-  header .content .right-box .button {
-    margin-left: -7px;
-  }
 }

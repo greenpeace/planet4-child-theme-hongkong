@@ -40,7 +40,7 @@ header {
 
       .logo {
         text-decoration: none !important;
-        margin-top: 4px;
+        margin-top: 5px;
         margin-right: 15px;
       }
 
@@ -195,8 +195,7 @@ header {
         background: $color-orange;
         color: white;
         white-space: nowrap;
-        height: 34px;
-        line-height: 33px;
+        height: auto;
 
         &:hover,
         &:focus {
@@ -322,6 +321,16 @@ header {
             margin-right: 10px;
           }
         }
+
+        .dropdown {
+          button {
+            p {
+              font-size: 10px;
+              font-weight: normal;
+              letter-spacing: 0px;
+            }
+          }
+        }
       }
 
       .center-box {
@@ -336,7 +345,7 @@ header {
         }
 
         .button {
-          padding: 0 12px;
+          padding: 2px 12px;
         }
       }
     }
