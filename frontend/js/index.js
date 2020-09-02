@@ -44,6 +44,9 @@ Swiper.use([Navigation, Pagination, Scrollbar, Controller, Autoplay]);
 polyfills();
 
 document.addEventListener("DOMContentLoaded", function (event) {
+  //append lazy load class before reuqest images
+  jQuery('.section-post-content img').addClass('lazy');
+  
   new LazyLoad({
     elements_selector: ".lazy",
     threshold: 400,
