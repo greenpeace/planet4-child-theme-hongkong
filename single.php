@@ -148,6 +148,17 @@ $context['strings'] = [
 ];
 
 $context['post_tags'] = implode( ', ', $post->tags() );
+
+//full description
+$context["full_description"] = $post->post_excerpt;
+if(isset($page_meta_data['p4-gpea_post_meta_desc'])){
+	$context["full_description"] = $page_meta_data['p4-gpea_post_meta_desc'][0] ?? '';
+}elseif(preg_match('~<blockquote>([\s\S]+?)</blockquote>~', $post->content, $matches)){
+	$context["full_description"] = trim(strip_tags($matches[1]));
+}else{
+	$context["full_description"] = mb_substr(strip_tags($post->content),0,300,"utf-8").'...';
+}
+
 /*
  for main issue relation we use categories */
 // $context['categories'] = implode( ', ', $post->categories() );
