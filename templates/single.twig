@@ -19,14 +19,14 @@
     </section>
 
     <section class="section-post-content ct-container">
-		<div class="floating-share" data-fix-from-top="80" data-unfix-with-scroll="9999">
+		<aside class="floating-share" data-fix-from-top="80" data-unfix-with-scroll="9999">
 			<p>{{ strings.share }}</p>
 			<ul class="floating-share-list">
         {% include 'share-links.twig' with {
           share_options: share_options,
         } %}
 			</ul>
-		</div>
+		</aside>
 
       <div class="meta-box">
         <div>
@@ -50,9 +50,7 @@
       <div class="meta-box">
         <span>{{ strings.author }} {{ post.author.name }}</span>
       </div>
-
-      {{ post.content|e('wp_kses_post')|raw }}
-
+      {{ post.content |replace({ '<blockquote>':'<blockquote><summary>', '</blockquote>':'</summary></blockquote>' }) |e('wp_kses_post') |raw }}
     </section>
 
   </article>
@@ -77,14 +75,14 @@
 
   {% if ( related_posts ) %}
   <section class="section-latest-news">
-    <div class="ct-container">
+    <nav class="ct-container">
       <h2>{{ strings.related_news }}</h2>
       <div class="news-list">
         {% for related_post in related_posts %}
           {% include "blocks/tease-related-post-big.twig" with {post:related_post} %}
         {% endfor %}
       </div>
-    </div>
+    </nav>
   </section>
   {% endif %}
 
