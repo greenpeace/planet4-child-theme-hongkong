@@ -16,6 +16,7 @@ $services = [
 	'P4CT_Shortcode',
 ];
 
+//move jquery core script to footer
 add_action('wp_enqueue_scripts', 'wp_enqueue_child', 100);
 function wp_enqueue_child(){
 	wp_dequeue_script('jquery-core');
@@ -27,8 +28,8 @@ function wp_enqueue_child(){
 
 new P4CT_Site( $services );
 
+//custom html tages for SEO
 add_filter( 'img_caption_shortcode', 'my_img_caption_shortcode', 10, 3 );
-
 function my_img_caption_shortcode( $empty, $attr, $content ){
 	$attr = shortcode_atts( array(
 		'id'      => '',
@@ -51,6 +52,11 @@ function my_img_caption_shortcode( $empty, $attr, $content ){
 	. do_shortcode( $content )
 	. '<figcaption class="wp-caption-text">' . $attr['caption'] . '</figcaption>'
 	. '</figure>';
-
 }
 
+// custom RSS feed for ASIA
+remove_action( 'do_feed_rss2', 'do_feed_rss2', 10 );
+function asia_do_feed_rss2() {
+	load_template( __DIR__ . '/rss.php' ); 
+}
+add_action( 'do_feed_rss2', 'asia_do_feed_rss2' );
