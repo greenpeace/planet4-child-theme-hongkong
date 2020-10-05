@@ -62,7 +62,7 @@ msgstr "排列方式"
 
 #: classes/class-p4ct-search.php:589
 msgid "Nothing found, sorry."
-msgstr "没有找到相關结果"
+msgstr "沒有找到相關結果"
 
 #. translators: %1$d = Number of results.
 #: classes/class-p4ct-search.php:595
