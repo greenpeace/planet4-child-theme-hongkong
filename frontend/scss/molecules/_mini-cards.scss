@@ -19,6 +19,12 @@
       margin-bottom: 14px;
     }
 
+    &.title {
+      font-weight: normal;
+      font-size: 18px;
+      color: #000000;
+    }
+
     &.data {
       @include title-text;
       font-weight: bold;
