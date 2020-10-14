@@ -9,12 +9,12 @@
 	></div>	
 	<div class="meta-box">
 		<div>
-			<span>{{ post.post_date|date }}</span>
+			<time>{{ post.post_date|date }}</time>
 		</div>
 		<div>
 			<span class="issue {{ post.categories[0].slug }}">{{ post.categories[0]|raw }}</span>
 			<span>{{ post.page_types[0].name }}</span>
 		</div>
 	</div>
-	<p>{{ post.post_title }}</p>
+	<h4 class="title">{{ post.post_title }}</h4>
 </a>

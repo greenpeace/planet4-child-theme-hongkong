@@ -260,6 +260,17 @@
     }
   }
 
+  figcaption.wp-caption-text {
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.4;
+
+    @include greaterThan('sm') {
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+
   .forests & {
     blockquote,
     .leader,

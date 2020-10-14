@@ -6,6 +6,17 @@
 	var gpeaOptions = {};
 </script>
 
+<script>
+	if(window.google_tag_value){
+		var dataLayer = window.dataLayer = window.dataLayer || [];
+		dataLayer.push({
+			'post_type' : '{{ post.page_types[0].name }}',
+			'post_issue' : '{{ main_issue|raw }}'
+		});
+	}
+
+</script>
+
 {% endblock %}
 
 <body class="{{ body_class }} {{ custom_body_classes|default("") }}" {{ body_extra_info|raw }}>
