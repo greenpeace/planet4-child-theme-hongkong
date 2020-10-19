@@ -151,7 +151,7 @@ hr {
 }
 
 img.lazy {
-  opacity: 0;
+  // opacity: 0;
   transition: opacity 140ms linear;
 
   &.error,
