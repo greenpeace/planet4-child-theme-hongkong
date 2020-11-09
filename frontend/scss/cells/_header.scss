@@ -356,7 +356,13 @@ header {
   }
 
   .is-scrolling-down header {
-    transform: translateY(-110px);
-    transition: transform 500ms ease 200ms;
+    height: 48px;
+    transition: height 500ms ease 200ms;
+
+    .mobile-toolbar {
+      height: 0;
+      transition: height 500ms ease 200ms;
+      overflow: hidden;
+    }
   }
 }
