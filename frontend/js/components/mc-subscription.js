@@ -173,6 +173,16 @@ export default function () {
           .find('.ct-container.subscribe').hide()
           .parent()
           .find('.ct-container.thankyou').show()
+
+        // trigger ga subscription event
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event' : 'gaEvent',
+          'eventCategory': 'mc-subscription',
+          'eventAction': 'subscribe',
+          'eventLabel': '',
+          'eventValue': ''
+        });
       },
       error: function (jqXHR, textStatus) {
         console.log('error', jqXHR, textStatus)
