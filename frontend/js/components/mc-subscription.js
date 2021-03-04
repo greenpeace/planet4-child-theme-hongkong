@@ -16,25 +16,56 @@ export default function () {
    * @return Object {firstname:string, lastname:string, email:string}
    */
   const formValues = function () {
-    return {
+    let values = {
       firstname: $firstnameField.find('input').val(),
       lastname: $lastnameField.find('input').val(),
       email: $emailField.find('input').val(),
-      campaignId: $section.find('[name="sf_campaign_id"]').val()
+      campaignId: $section.find('[name="sf_campaign_id"]').val(),
+      optIn: $section.find('[name="supporter.emailok"]').is(":checked") ? 1 : 0,
+    }
+    return values;
+  }
+
+  /**
+   * Only do validation after touched
+   */
+  const touchedFields = function () {
+    return {
+      firstname: $firstnameField.find('input').attr('data-touched'),
+      lastname: $lastnameField.find('input').attr('data-touched'),
+      email: $emailField.find('input').attr('data-touched'),
+      campaignId: $section.find('[name="sf_campaign_id"]').attr('data-touched')
+    }
+  }
+
+  const markTouched = function (e) {
+    if (e==='ALL') {
+        $('input').attr('data-touched', "1");
+    } else {
+        $(e.target).attr('data-touched', "1");
     }
   }
 
   const doValidation = function () {
     let values = formValues($section),
+      touched = touchedFields(),
       allpass = true
 
     // validate the names
-    toggleFieldRequiredMsg($firstnameField, !values.firstname);
-    toggleFieldRequiredMsg($lastnameField, !values.lastname);
+    if (touched.firstname) {
+      toggleFieldRequiredMsg($firstnameField, !values.firstname);
+    }
+    if (touched.lastname) {
+      toggleFieldRequiredMsg($lastnameField, !values.lastname);
+    }
+
     allpass = allpass && values.firstname && values.lastname;
 
     // validate emails
-    let emailPass = doEmailValidation()
+    let emailPass
+    if (touched.email) {
+      emailPass = doEmailValidation()
+    }
     allpass = allpass && emailPass
 
     return allpass
@@ -122,6 +153,8 @@ export default function () {
   }
 
   const doSubmit = function (e) {
+    markTouched('ALL')
+
     // check all the inputs
     let allpass = doValidation();
     if ( !allpass) {
@@ -134,7 +167,8 @@ export default function () {
       FirstName: values.firstname,
       LastName: values.lastname,
       Email: values.email,
-      CampaignId: values.campaignId
+      CampaignId: values.campaignId,
+      OptIn: values.optIn
     }
 
     // prepare the utm values
@@ -170,9 +204,9 @@ export default function () {
       success: function (data, status) {
         toggleSubmitLoading(false)
         $section
-          .find('.ct-container.subscribe').hide()
+          .find('.ct-container.subscribe').addClass('hide')
           .parent()
-          .find('.ct-container.thankyou').show()
+          .find('.ct-container.thankyou').removeClass('hide')
 
         // trigger ga subscription event
         window.dataLayer = window.dataLayer || [];
@@ -189,7 +223,6 @@ export default function () {
         toggleSubmitLoading(false)
         toggleServerError(true, '('+jqXHR.status+') '+jqXHR.statusText)
       }
-
     })
 
     return false;
@@ -220,6 +253,7 @@ export default function () {
     $emailField = $section.find('[name="supporter.email"]').closest('.en__field__element');
 
     $("input[required]").blur(doValidation)
+    $("input[required]").blur(markTouched)
 
     $section.find('button.submit').on('click', doSubmit)
   });

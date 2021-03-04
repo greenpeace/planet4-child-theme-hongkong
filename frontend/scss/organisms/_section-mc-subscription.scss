@@ -1,4 +1,8 @@
 .section-mc-subscription {
+  .hide {
+    display: none !important;
+  }
+
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
   background: white !important;
 
@@ -6,8 +10,12 @@
     @include title-mid;
   }
 
+  .ct-container.subscribe {}
+
   .ct-container.thankyou {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   @include greaterThan('sm') {
