@@ -95,3 +95,4 @@ Icon
 
 # Thumbnails
 ._*
+.remote-sync.json
