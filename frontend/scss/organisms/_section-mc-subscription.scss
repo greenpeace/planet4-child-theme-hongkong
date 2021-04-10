@@ -1,0 +1,150 @@
+.section-mc-subscription {
+  .hide {
+    display: none !important;
+  }
+
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
+  background: white !important;
+
+  h2 {
+    @include title-mid;
+  }
+
+  .ct-container.subscribe {}
+
+  .ct-container.thankyou {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @include greaterThan('sm') {
+    padding: 35px 0;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 400px;
+    margin-bottom: 20px;
+
+    .en__field__element {
+      position: relative;
+      width: 100%;
+    }
+  }
+
+  .name-part {
+    .en__field__element:first-child {
+      margin-right: 10px;
+      flex-basis: 40%;
+    }
+  }
+  .email-part {
+    .do-you-mean {
+      color: $color-health;
+      font-size: 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+  }
+  .yes-checkbox {
+
+  }
+  .submit-part {
+    flex-direction: column;
+
+    .enform-notice {
+      color: $color-red;
+    }
+  }
+
+  button.submit {
+    #spinner {
+      display: none;
+    }
+
+    &.loading {
+      color: transparent;
+
+      #spinner {
+        display: block;
+      }
+    }
+  }
+}
+
+
+// form styles
+.section-mc-subscription {
+  @keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+  }
+
+  .enform-error {
+    color: $color-red;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  }
+
+  .invalid-feedback {
+    margin-top: 0;
+    font-size: 12px;
+    line-height: 20px;
+    color: $color-red;
+    font-weight: normal;
+    position: absolute;
+    padding: 0 8px;
+    left: 10px;
+    top: 34px;
+    background-color: white;
+  }
+
+  .custom-checkbox .invalid-feedback {
+    top: 6px;
+  }
+
+  .en__field__element input[type='email'].is-invalid,
+  .en__field__element input[type='tel'].is-invalid,
+  .en__field__element input[type='text'].is-invalid,
+  .en__field__element select.is-invalid {
+    border-color: $color-red !important;
+    margin-bottom: 0;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97);
+
+    + .invalid-feedback {
+      display: inline-block;
+    }
+  }
+  .en__field--validationFailed > .en__field__error {
+    display: block;
+    z-index: 2;
+  }
+
+  .en__field--validationFailed .invalid-feedback {}
+  .en__field__element input[type='radio'].is-invalid,
+  .en__field__element input[type='checkbox'].is-invalid {
+    margin-top: 30px;
+
+    + .invalid-feedback {
+      display: inline-block;
+      top: 4px;
+      left: 0;
+      padding-left: 0;
+    }
+  }
+
+  .en__field__element.en__field__element--select {
+    border: none;
+    margin-bottom: 20px;
+  }
+}

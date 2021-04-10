@@ -32,6 +32,7 @@ import articleList from "./components/article-list";
 import facebookVideo from "./components/facebook-video";
 import dynamicSearch from "./components/dynamic-search";
 import ugc from "./components/ugc";
+import mcSubscription from "./components/mc-subscription";
 
 import petitionThankyou from "./petition-thankyou";
 
@@ -46,7 +47,7 @@ polyfills();
 document.addEventListener("DOMContentLoaded", function (event) {
   //append lazy load class before reuqest images
   jQuery('.section-post-content img').addClass('lazy');
-  
+
   new LazyLoad({
     elements_selector: ".lazy",
     threshold: 400,
@@ -106,6 +107,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
   dynamicSearch();
 
   ugc();
+
+  mcSubscription();
 
   AOS.init({
     easing: "ease-in-out-cubic",
