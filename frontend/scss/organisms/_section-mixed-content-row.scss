@@ -9,6 +9,9 @@
       margin-bottom: 20px;
     }
   }
+  .subtitle {
+    color: black;
+  }
 
   .mobile-background {
     z-index: 1;
@@ -106,6 +109,9 @@
     }
     h4 {
       color: $color-green;
+    }
+    .subtitle {
+      color: white;
     }
 
     &::before {
