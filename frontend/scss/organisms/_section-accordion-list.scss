@@ -1,16 +1,40 @@
 .section-accordion-list {
+
   min-height: 0 !important;
 
   h2 {
     color: $color-green;
-    margin-bottom: 35px;
+  }
 
-    @include greaterThan('sm') {
-      margin-bottom: 50px;
+  .ct-container {
+
+    &:not(.slim) {
+      margin-bottom: 35px;
+      @include greaterThan('sm') {
+        margin-bottom: 50px;
+      }
+      > p {
+        color: $color-grey;
+      }
+    }
+
+    > p {
+      margin-bottom: 0;
+    }
+
+  }
+
+  &.text-align-right {
+    .togglee.accordion > * {
+      margin-right: 0;
+      margin-left: auto;
+    }
+  }
+  &.text-align-center {
+    .togglee.accordion > * {
+      margin-right: auto;
+      margin-left: auto;
     }
   }
 
-  .ct-container > p {
-    margin-bottom: 0;
-  }
 }
