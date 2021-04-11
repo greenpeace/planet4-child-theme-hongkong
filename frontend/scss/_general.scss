@@ -75,6 +75,13 @@ ol {
   @include see-more;
 }
 
+.text-align-center {
+  text-align: center;
+}
+.text-align-right {
+  text-align: right;
+}
+
 p:not(.subtitle) {
   line-height: 1.5;
 }
