@@ -3,6 +3,27 @@
   display: flex;
   align-items: stretch;
 
+  &.only-images:before,
+  &.text-and-images.column-one:before {
+    display: block;
+    content: '';
+    padding-top: percentage(9/16) !important;
+  }
+
+  &.text-and-images.column-one {
+    position: relative;
+    > .swiper-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+    }
+    > .ct-container {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
   > .ct-container {
     padding-top: 40px;
     padding-bottom: 30px;
@@ -17,10 +38,6 @@
 
   h2 {
     @include title-mid;
-  }
-
-  .ct-container {
-    text-align: center;
   }
 
   .boxes {
