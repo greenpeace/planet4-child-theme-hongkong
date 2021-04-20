@@ -22,6 +22,14 @@
       position: relative;
       z-index: 1;
     }
+    @include greaterThan('sm') {
+      h2 {
+        font-size: 30 * 1.5px;
+      }
+      p {
+        font-size: 18 * 1.5px;
+      }
+    }
   }
 
   > .ct-container {
