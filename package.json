@@ -39,7 +39,7 @@
     "mailcheck": "^1.1.1",
     "remove-focus-outline": "^1.2.1",
     "smooth-scroll": "^16.1.2",
-    "swiper": "4.5.0",
+    "swiper": "6.5.1",
     "throttle-debounce": "^2.1.0",
     "topojson": "^3.0.2",
     "validate.js": "^0.13.1",
