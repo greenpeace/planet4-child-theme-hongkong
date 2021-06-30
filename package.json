@@ -4,13 +4,13 @@
   "description": "GPEA Frontend",
   "author": "us",
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
+    "@babel/cli": "^7.14.5",
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "ansi-colors": "^3.2.4",
     "babel-loader": "^8.0.6",
-    "browser-sync": "^2.26.12",
+    "browser-sync": "^2.27.3",
     "core-js": "^3.6.4",
     "exports-loader": "^0.7.0",
     "expose-loader": "^0.7.5",
@@ -30,6 +30,7 @@
     "whatwg-fetch": "^3.0.0"
   },
   "dependencies": {
+    "@babel/compat-data": "^7.14.7",
     "aos": "^2.3.4",
     "cleave.js": "^1.5.8",
     "d3": "^5.15.0",
