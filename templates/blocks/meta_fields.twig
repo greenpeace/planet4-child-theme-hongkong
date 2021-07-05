@@ -1,10 +1,10 @@
 {% if ((post and (1 != fn('post_password_required', post))) or author is defined) %}
   {% if (author.description is defined and author.description) %}
-		{% set meta_description = author.description|striptags %}
+		{% set meta_description = author.description %}
   {% elseif (og_description is defined and og_description) %}
 		{% set meta_description = og_description %}
   {% elseif (post.post_excerpt is defined and post.post_excerpt) %}
-		{% set meta_description = post.post_excerpt|striptags %}
+		{% set meta_description = post.post_excerpt %}
   {% else %}
 		{% set meta_description = site.description %}
 	{% endif %}
@@ -15,7 +15,7 @@
 		{% set meta_twitter_creator = post.author.name %}
 	{% endif %}
 
-	<meta name="description" content="{{ meta_description }}">
+	<meta name="description" content="{{ meta_description|striptags }}">
 	{% if not (og_title is defined) %}
 		{% if (wp_title) %}
 			{% set og_title = wp_title|raw~' - '~site.name %}
