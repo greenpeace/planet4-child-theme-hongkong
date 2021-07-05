@@ -8,8 +8,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: 2019-07-25 16:58+0900\n"
-"X-Generator: Poedit 2.2.3\n"
+"PO-Revision-Date: 2021-07-05 14:43+0800\n"
+"X-Generator: Poedit 3.0\n"
 "X-Domain: gpea_theme\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Last-Translator: \n"
@@ -139,7 +139,7 @@ msgstr "新聞中心"
 
 #: classes/class-p4ct-site.php:164
 msgid "My Preferences"
-msgstr "我的喜好"
+msgstr "訂閱電子報"
 
 #: classes/class-p4ct-ajax-handler.php:67
 msgid "Did not save because your form seemed to be invalid. Sorry."
