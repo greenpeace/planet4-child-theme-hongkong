@@ -1,0 +1,46 @@
+/* donate and support */
+.js-makechange-follower {
+  .leading {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+  }
+  .scroll {
+    margin-top: -20px;
+    background-color: #292f47;
+    width: 100%;
+    white-space: nowrap;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .scroll nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .scroll nav {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    overflow-y: hidden;
+    height: 100%;
+    align-items: center;
+    flex-flow: row nowrap;
+    scroll-snap-type: x proximity;
+  }
+  .scroll a {
+    color: #fff;
+    padding: 12px 20px;
+    text-decoration: none;
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      color: #6c0;
+      font-weight: bold;
+    }
+  }
+}
+@media (min-width: 576px) {
+  .js-makechange-follower .leading {
+    font-size: 16px;
+  }
+}
