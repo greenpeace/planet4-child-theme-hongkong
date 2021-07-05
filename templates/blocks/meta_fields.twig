@@ -1,19 +1,21 @@
 {% if ((post and (1 != fn('post_password_required', post))) or author is defined) %}
-	{% if (post.post_excerpt is defined and post.post_excerpt) %}
-		{% set meta_description = full_description %}
-	{% elseif (og_description is defined and og_description) %}
-		{% set meta_description = og_description %}
-	{% elseif (author.description is defined and author.description) %}
+  {% if (author.description is defined and author.description) %}
 		{% set meta_description = author.description|striptags %}
-	{% else %}
+  {% elseif (og_description is defined and og_description) %}
+		{% set meta_description = og_description %}
+  {% elseif (post.post_excerpt is defined and post.post_excerpt) %}
+		{% set meta_description = post.post_excerpt|striptags %}
+  {% else %}
 		{% set meta_description = site.description %}
 	{% endif %}
+
 	{% if (author.name is defined and author.name is not null) %}
 		{% set meta_twitter_creator = author.name %}
 	{% elseif (post.author is defined and post.author is not null) %}
 		{% set meta_twitter_creator = post.author.name %}
 	{% endif %}
-	<meta name="description" content="{{ meta_description|raw }}">
+
+	<meta name="description" content="{{ meta_description }}">
 	{% if not (og_title is defined) %}
 		{% if (wp_title) %}
 			{% set og_title = wp_title|raw~' - '~site.name %}
