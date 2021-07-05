@@ -1,4 +1,6 @@
-/* donate and support */
+/*
+* For donate and support
+*/
 .js-makechange-follower {
   .leading {
     color: rgba(0, 0, 0, 0.85);
@@ -42,5 +44,17 @@
 @media (min-width: 576px) {
   .js-makechange-follower .leading {
     font-size: 16px;
+  }
+}
+
+.is-background-image {
+  position: relative;
+  img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
