@@ -19,7 +19,7 @@
 }
 
 // Hide the unexpected iframe with empty space appear in the header.
-html,
+html > iframe,
 body > iframe {
   display: none !important;
   width: 1px !important;
