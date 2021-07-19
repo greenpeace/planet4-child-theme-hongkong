@@ -18,14 +18,8 @@
   clip: rect(1px, 1px, 1px, 1px);
 }
 
-html > iframe {
-  display: none !important;
-  width: 1px !important;
-  height: 1px !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
+// Hide the unexpected iframe with empty space appear in the header.
+html,
 body > iframe {
   display: none !important;
   width: 1px !important;
