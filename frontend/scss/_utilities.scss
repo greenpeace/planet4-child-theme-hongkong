@@ -1,10 +1,10 @@
-@include greaterThan('sm') {
+@include greaterThan("sm") {
   .mobile-only {
     display: none !important;
   }
 }
 
-@include lessThan('sm') {
+@include lessThan("sm") {
   .desktop-only {
     display: none !important;
   }
@@ -16,4 +16,14 @@
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
+}
+
+// Hide the unexpected iframe with empty space appear in the header.
+html > iframe,
+body > iframe {
+  display: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
