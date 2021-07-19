@@ -29,7 +29,6 @@ import backLinks from "./components/back-links";
 import parallax from "./components/parallax";
 import scrollWay from "./components/scroll-way";
 import articleList from "./components/article-list";
-// import facebookVideo from "./components/facebook-video";
 import dynamicSearch from "./components/dynamic-search";
 import ugc from "./components/ugc";
 import mcSubscription from "./components/mc-subscription";
@@ -101,8 +100,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   scrollWay();
 
   articleList();
-
-  // facebookVideo();
 
   dynamicSearch();
 
