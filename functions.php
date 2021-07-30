@@ -20,7 +20,6 @@ $services = [
 add_action('wp_enqueue_scripts', 'wp_enqueue_child', 100);
 function wp_enqueue_child(){
 	wp_dequeue_script('jquery-core');
-	wp_enqueue_script('jquery-core', '/wp-includes/js/jquery/jquery.js',  array(), false, true);
 	wp_deregister_script('cssvarsponyfill');
 	wp_register_script( 'cssvarsponyfill', 'https://cdnjs.cloudflare.com/ajax/libs/css-vars-ponyfill/2.3.1/css-vars-ponyfill.min.js', [], '2', true );
 }
