@@ -13,7 +13,6 @@
   }
 
   .meta-box {
-    margin-bottom: 25px;
 
     @include greaterThan('sm') {
       flex-direction: row;
