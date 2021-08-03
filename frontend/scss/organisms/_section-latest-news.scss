@@ -2,33 +2,33 @@
   background-color: #eeeeee !important;
 
   h2 {
-    @include caption;
-    margin-bottom: 70px;
+    @include title-mid;
+    margin-bottom: 3rem;
     text-align: center;
   }
 
   .news-list {
     margin-bottom: 60px;
 
+    a {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
     > * {
       padding: 20px 0;
-      border-top: 1px solid rgba(0, 0, 0, 0.2);
-
       &:first-child {
         padding-top: 0;
         border-top: none;
       }
-
       &:last-child {
         padding-bottom: 0;
       }
     }
 
     @include greaterThan('sm') {
+      width: 100%;
       display: flex;
       justify-content: center;
-      margin-left: -20px;
-      margin-right: -20px;
 
       > * {
         margin: 0;
