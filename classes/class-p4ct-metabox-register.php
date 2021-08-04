@@ -482,8 +482,8 @@ class P4CT_Metabox_Register {
 
 		$cmb_post->add_field(
 			array(
-				'name'             => esc_html__( 'Meta Description', 'gpea_theme_backend' ),
-				'desc'             => esc_html__( 'Show the description in meta tag', 'gpea_theme_backend' ),
+				'name'             => esc_html__( 'Meta Keywords', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Google ignores meta keywords in ranking but you can still keep the relevant keywords here as a reference.', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_post_meta_desc',
 				'type'             => 'text',
 			)
@@ -492,7 +492,7 @@ class P4CT_Metabox_Register {
 		$cmb_post->add_field(
 			array(
 				'name'             => esc_html__( 'Show the "Article donation laundher"', 'gpea_theme_backend' ),
-				'desc'             => esc_html__( 'Show the laundher to support page, below the main content?', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Show the launcher to support page, below the main content?', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_show_article_donation_launcher',
 				'type'             => 'checkbox',
 			// 'sanitization_cb' => 'intval',
