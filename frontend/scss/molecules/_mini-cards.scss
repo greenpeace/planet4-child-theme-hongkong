@@ -1,13 +1,14 @@
 .card-mini {
-  width: 240px;
+  width: 90%;
+  max-width: 280px;
 
-  @include greaterThan('sm') {
-    width: 215px;
-  }
+  // @include greaterThan('sm') {
+  //   width: 215px;
+  // }
 
-  @include greaterThan('lg') {
-    width: 280px;
-  }
+  // @include greaterThan('lg') {
+  //   width: 280px;
+  // }
 
   h4 {
     @include title-big;
@@ -30,23 +31,14 @@
       font-weight: bold;
       display: flex;
       flex-direction: column;
-      margin: 7px 0;
-
+      margin: 8px 0;
       @include greaterThan('sm') {
         margin-top: 0;
         margin-bottom: 12px;
       }
-
       i {
-        // font-size: 26px;
-        // font-family: Montserrat;
         font-style: normal;
-        // letter-spacing: -0.5px;
         margin-bottom: -5px;
-
-        @include greaterThan('sm') {
-          // font-size: 28px;
-        }
       }
     }
   }
@@ -55,7 +47,7 @@
   .thumbnail,
   .meta-box,
   .mini-tip {
-    margin: 7px 0 0;
+    margin: 8px 0 0;
   }
 
   > p:first-child {

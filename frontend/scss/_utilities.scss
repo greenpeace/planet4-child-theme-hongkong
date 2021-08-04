@@ -1,10 +1,10 @@
-@include greaterThan('sm') {
+@include greaterThan("sm") {
   .mobile-only {
     display: none !important;
   }
 }
 
-@include lessThan('sm') {
+@include lessThan("sm") {
   .desktop-only {
     display: none !important;
   }
@@ -16,4 +16,32 @@
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
+}
+
+//
+// Hacks
+//
+// Hide the unexpected iframe with empty space appear in the header.
+html > iframe,
+body > iframe {
+  display: none !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+// Remove the padding for full screen video module
+.section-video-row-container {
+  padding: 0 !important;
+}
+
+// Remove the unexpected space caused by the empty <br/> and <p> generated from wordpress
+.page-template {
+  br {
+    content: "";
+  }
+  p:empty {
+    margin: 0;
+  }
 }
