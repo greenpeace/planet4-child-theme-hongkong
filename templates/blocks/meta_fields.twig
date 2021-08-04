@@ -14,9 +14,9 @@
 	{% elseif (post.author is defined and post.author is not null) %}
 		{% set meta_twitter_creator = post.author.name %}
 	{% endif %}
-
 	<meta name="description" content="{{ meta_description|e('html') }}">
-	{% if not (og_title is defined) %}
+
+  {% if not (og_title is defined) %}
 		{% if (wp_title) %}
 			{% set og_title = wp_title|raw~' - '~site.name %}
 		{% else %}
@@ -24,6 +24,8 @@
 		{% endif %}
 	{% endif %}
 	<meta name="title" content="{{ og_title|e('html') }}"/>
+  <meta name="keywords" content="{{ full_description|e('html') }}" />
+
 	<meta property="og:title" content="{{ og_title|e('html') }}" />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="{{ current_url }}" />
