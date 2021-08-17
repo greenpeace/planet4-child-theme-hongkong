@@ -29,9 +29,9 @@ export default function() {
     } else {
       let countries_sublist = $(
         '<li>' +
-          '<h3 class="country-group-letter">' +
+          '<span class="country-group-letter">' +
           index +
-          '</h3>' +
+          '</span>' +
           '<ul class="countries_sublist"></ul>' +
           '</li>'
       );
