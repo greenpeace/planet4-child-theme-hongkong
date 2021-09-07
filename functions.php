@@ -20,7 +20,6 @@ $services = [
 add_action('wp_enqueue_scripts', 'wp_enqueue_child', 100);
 function wp_enqueue_child(){
 	wp_dequeue_script('jquery-core');
-	wp_enqueue_script('jquery-core', '/wp-includes/js/jquery/jquery.js',  array(), false, true);
 	wp_deregister_script('cssvarsponyfill');
 	wp_register_script( 'cssvarsponyfill', 'https://cdnjs.cloudflare.com/ajax/libs/css-vars-ponyfill/2.3.1/css-vars-ponyfill.min.js', [], '2', true );
 }
@@ -31,27 +30,32 @@ new P4CT_Site( $services );
 //custom html tages for SEO
 add_filter( 'img_caption_shortcode', 'my_img_caption_shortcode', 10, 3 );
 function my_img_caption_shortcode( $empty, $attr, $content ){
-	$attr = shortcode_atts( array(
+
+	$atts = shortcode_atts( array(
 		'id'      => '',
 		'align'   => 'alignnone',
 		'width'   => '',
 		'caption' => ''
 	), $attr );
 
-	if ( 1 > (int) $attr['width'] || empty( $attr['caption'] ) ) {
+	if ( 1 > (int) $atts['width'] || empty( $atts['caption'] ) ) {
 		return '';
 	}
 
-	if ( $attr['id'] ) {
-		$attr['id'] = 'id="' . esc_attr( $attr['id'] ) . '" ';
+	$image_id = trim( str_replace( 'attachment_', '', $atts['id'] ) );
+	$meta = get_post_meta( $image_id );
+	$image_credit = ( isset( $meta['_credit_text'] ) && ! empty( $meta['_credit_text'] ) ) ? ' ' . $meta['_credit_text'][0] : '';
+	$class = trim( 'wp-caption ' . $atts['align'] );
+
+	if ( $atts['id'] ) {
+		$atts['id'] = 'id="' . esc_attr( $atts['id'] ) . '" ';
 	}
 
-	return '<figure ' . $attr['id']
-	. 'class="wp-caption ' . esc_attr( $attr['align'] ) . '" '
-	. 'style="max-width: ' . ( 10 + (int) $attr['width'] ) . 'px;">'
-	. do_shortcode( $content )
-	. '<figcaption class="wp-caption-text">' . $attr['caption'] . '</figcaption>'
-	. '</figure>';
+
+	$output = '<figure ' . $attr['id'] . ' class="' . esc_attr( $class ) . '" style="max-width: ' . ( 10 + (int) $attr['width'] ) . 'px;">'
+	          . do_shortcode( $content ) . '<figcaption class="wp-caption-text">' . $attr['caption'] . $image_credit . '</figcaption></figure>';
+
+	return $output;
 }
 
 // custom RSS feed for ASIA

@@ -312,13 +312,20 @@ class P4CT_Site {
 	 * @param string $hook Hook.
 	 */
 	public function enqueue_public_assets( $hook ) {
+
 		$css_creation = filectime( get_stylesheet_directory() . '/static/css/style.css' );
 		$js_creation = filectime( get_stylesheet_directory() . '/static/js/script.js' );
 		$search_js_creation = filectime( get_stylesheet_directory() . '/static/js/search.js' );
 
 		$css_fonts = gpea_get_option( 'gpea_css_fonts' ) ? gpea_get_option( 'gpea_css_fonts' ) : 'hk-fonts.css';
+
+		wp_enqueue_style( 'child-style-noto-sans-tc', 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&display=swap&subset=chinese-traditional' );
+		wp_enqueue_style( 'child-style-montserrat', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap' );
 		wp_enqueue_style( 'child-style-fonts', get_stylesheet_directory_uri() . '/static/css/' . $css_fonts, [], $css_creation );
+
+		wp_enqueue_style( 'child-style-swiper', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css' );
 		wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/static/css/style.css', [], $css_creation );
+		
 		wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js',[], $js_creation, true );
 		wp_localize_script( 'child-script', 'localizations', [
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
