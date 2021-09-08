@@ -324,8 +324,10 @@ class P4CT_Site {
 		wp_enqueue_style( 'child-style-fonts', get_stylesheet_directory_uri() . '/static/css/' . $css_fonts, [], $css_creation );
 
 		wp_enqueue_style( 'child-style-swiper', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css' );
+    wp_enqueue_style( 'child-style-flexboxgrid', 'https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css' );
+
 		wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/static/css/style.css', [], $css_creation );
-		
+
 		wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js',[], $js_creation, true );
 		wp_localize_script( 'child-script', 'localizations', [
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
