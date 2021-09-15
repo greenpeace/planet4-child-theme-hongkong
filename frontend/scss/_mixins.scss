@@ -42,11 +42,9 @@
 
 @mixin ct-container-guardian {
   width: 100%;
-  // max-width: 480px;
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
-
   @include greaterThan('sm') {
     max-width: 700px;
     // max-width: none;
