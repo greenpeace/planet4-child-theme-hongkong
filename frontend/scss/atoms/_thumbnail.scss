@@ -8,6 +8,23 @@
   background-size: cover;
   background-repeat: no-repeat;
   transition: box-shadow 140ms linear;
+  overflow: hidden;
+  &.has-background-image {
+    position: relative;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
 
   @include greaterThan('sm') {
     height: 95px;
