@@ -1102,17 +1102,30 @@ class P4CT_Metabox_Register {
 	 */
 	public function add_donation_option_fields( $cmb_options, $cmb_id_prefix ) {
 
-		$issues = array(
-			'default'  => 'Default',
-			'arctic'   => 'Arctic',
-			'forests'  => 'Forests',
-			'climate'  => 'Climate',
-			'oceans'   => 'Oceans',
-			'plastics' => 'Plastics',
-			'health'   => 'Health',
-		);
+		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+		if ( ! $main_issues_category_id ) {
+			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+			if ( $main_issues_category ) {
+				$main_issues_category_id = $main_issues_category->term_id;
+			}
+		}
 
-		foreach( $issues as $issue_key => $issue_title ) {
+		$main_issues = array();
+		if( $main_issues_category_id ) {
+			$main_issues = get_terms(
+				array(
+					'taxonomy' => 'category',
+					'parent' => $main_issues_category_id,
+				)
+			);
+		}
+
+		$main_issues = array_column( $main_issues, 'name', 'slug' );
+		$main_issues = array(
+			'default'  => 'Default',
+		) + $main_issues;
+
+		foreach( $main_issues as $issue_key => $issue_title ) {
 
 			$cmb_options->add_field(
 				array(
