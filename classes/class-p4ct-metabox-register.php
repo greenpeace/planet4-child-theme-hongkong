@@ -55,6 +55,8 @@ class P4CT_Metabox_Register {
 		$this->register_post_metabox();
 		$this->register_page_metabox();
 		$this->register_main_options_metabox();
+		$this->register_donation_button_options_metabox();
+		$this->register_donation_block_options_metabox();
 	}
 
 	/**
@@ -1051,6 +1053,95 @@ class P4CT_Metabox_Register {
 			)
 		);
 
+	}
+
+	/**
+	 * Registers donation buttons option meta box(es).
+	 */
+	public function register_donation_button_options_metabox() {
+
+		$cmb_options = new_cmb2_box(
+			array(
+				'title'           => esc_html__( 'Post Donation Buttons', 'gpea_theme_backend' ),
+				'menu_title'      => esc_html__( 'Donation Buttons', 'gpea_theme_backend' ),
+				'id'              => 'gpea_donation_button_options_page',
+				'object_types'    => array( 'options-page' ),
+				'option_key'      => 'gpea_donation_button_options',
+				'parent_slug'     => 'options-general.php',
+			)
+		);
+
+		$this->add_donation_option_fields( $cmb_options, 'gpea_donation_button_' );
+
+	}
+
+	/**
+	 * Registers donation blocks option meta box(es).
+	 */
+	public function register_donation_block_options_metabox() {
+
+		$cmb_options = new_cmb2_box(
+			array(
+				'title'           => esc_html__( 'Post/Page Donation Blocks', 'gpea_theme_backend' ),
+				'menu_title'      => esc_html__( 'Donation Blocks', 'gpea_theme_backend' ),
+				'id'              => 'gpea_donation_block_options_page',
+				'object_types'    => array( 'options-page' ),
+				'option_key'      => 'gpea_donation_block_options',
+				'parent_slug'     => 'options-general.php',
+			)
+		);
+
+		$this->add_donation_option_fields( $cmb_options, 'gpea_donation_block_' );
+
+	}
+
+	/**
+	 * Populate an associative array with donation buttons' display mode.
+	 *
+	 * @return array
+	 */
+	public function add_donation_option_fields( $cmb_options, $cmb_id_prefix ) {
+
+		$issues = array(
+			'default'  => 'Default',
+			'arctic'   => 'Arctic',
+			'forests'  => 'Forests',
+			'climate'  => 'Climate',
+			'oceans'   => 'Oceans',
+			'plastics' => 'Plastics',
+			'health'   => 'Health',
+		);
+
+		foreach( $issues as $issue_key => $issue_title ) {
+
+			$cmb_options->add_field(
+				array(
+					'name'             => esc_html__( $issue_title, 'gpea_theme_backend' ),
+					'desc'             => $issue_key == 'default' ? '' : esc_html__( 'Leave link or text field empty to use the same setting in Default.', 'gpea_theme_backend' ),
+					'id'               => $cmb_id_prefix . $issue_key,
+					'type'             => 'title',
+				)
+			);
+
+			$cmb_options->add_field(
+				array(
+					'name'             => esc_html__( 'Button Link', 'gpea_theme_backend' ),
+					'id'               => $cmb_id_prefix . $issue_key . '_button_link',
+					'type'             => 'text_url',
+					'protocols'        => array( 'http', 'https' ),
+				)
+			);
+
+			$cmb_options->add_field(
+				array(
+					'name'             => esc_html__( 'Button Text', 'gpea_theme_backend' ),
+					'id'               => $cmb_id_prefix . $issue_key . '_button_text',
+					'type'             => 'text_medium',
+				)
+			);
+
+		}
+		
 	}
 
 	/**
