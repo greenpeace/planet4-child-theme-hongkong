@@ -71,6 +71,16 @@ if ( $post_categories ) {
 	}
 }
 
+
+// Donation buttons
+$content_separated = preg_split('@(?<=</blockquote>)@', $post->content);
+$content_abstract = '';
+if( count( $content_separated ) > 1 ) {
+	$content_abstract = array_shift($content_separated);
+}
+$context['post_content_abstract'] = $content_abstract;
+$context['post_content_main'] = implode('', $content_separated);
+
 /*
 /* get useful theme options */
 $options = get_option( 'gpea_options' );

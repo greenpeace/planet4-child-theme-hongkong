@@ -2,6 +2,21 @@
   position: relative;
   padding-top: 15px !important;
   padding-bottom: 10px !important;
+  
+  .donation-button-box {
+    text-align: center;
+    .button {
+        background: $color-orange;
+        color: white;
+        line-height: 1.7;
+        height: auto;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+  }
+
 }
 
 .section-post-content,

@@ -50,7 +50,14 @@
       <div class="meta-box">
         <span>{{ strings.author }} {{ post.author.name }}</span>
       </div>
-      {{ post.content |replace({ '<blockquote>':'<blockquote><summary>', '</blockquote>':'</summary></blockquote>' }) |e('wp_kses_post') |raw }}
+      {{ post_content_abstract |replace({ '<blockquote>':'<blockquote><summary>', '</blockquote>':'</summary></blockquote>' }) |e('wp_kses_post') |raw }}
+      <div class="donation-button-box">
+        <a href="" class="button">Donate for action</a>
+      </div>
+      {{ post_content_main |replace({ '<blockquote>':'<blockquote><summary>', '</blockquote>':'</summary></blockquote>' }) |e('wp_kses_post') |raw }}
+      <div class="donation-button-box">
+        <a href="" class="button">Donate for action</a>
+      </div>
     </section>
 
   </article>
