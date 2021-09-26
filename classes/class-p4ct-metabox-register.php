@@ -1091,7 +1091,7 @@ class P4CT_Metabox_Register {
 			)
 		);
 
-		$this->add_donation_option_fields( $cmb_options, 'gpea_donation_block_' );
+		$this->add_donation_option_fields( $cmb_options, 'gpea_donation_block_', true );
 
 	}
 
@@ -1100,7 +1100,7 @@ class P4CT_Metabox_Register {
 	 *
 	 * @return array
 	 */
-	public function add_donation_option_fields( $cmb_options, $cmb_id_prefix ) {
+	public function add_donation_option_fields( $cmb_options = null, $id_prefix = '', $title_field = false ) {
 
 		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
 		if ( ! $main_issues_category_id ) {
@@ -1130,16 +1130,28 @@ class P4CT_Metabox_Register {
 			$cmb_options->add_field(
 				array(
 					'name'             => esc_html__( $issue_title, 'gpea_theme_backend' ),
-					'desc'             => $issue_key == 'default' ? '' : esc_html__( 'Leave link or text field empty to use the same setting in Default.', 'gpea_theme_backend' ),
-					'id'               => $cmb_id_prefix . $issue_key,
+					'desc'             => $issue_key == 'default' ? '' : esc_html__( 'Leave empty to use the same setting in Default.', 'gpea_theme_backend' ),
+					'id'               => $id_prefix . $issue_key,
 					'type'             => 'title',
 				)
 			);
 
+			if( $title_field ) {
+
+				$cmb_options->add_field(
+					array(
+						'name'             => esc_html__( 'Title', 'gpea_theme_backend' ),
+						'id'               => $id_prefix . $issue_key . '_title',
+						'type'             => 'text',
+					)
+				);
+
+			}
+
 			$cmb_options->add_field(
 				array(
 					'name'             => esc_html__( 'Button Link', 'gpea_theme_backend' ),
-					'id'               => $cmb_id_prefix . $issue_key . '_button_link',
+					'id'               => $id_prefix . $issue_key . '_button_link',
 					'type'             => 'text_url',
 					'protocols'        => array( 'http', 'https' ),
 				)
@@ -1148,7 +1160,7 @@ class P4CT_Metabox_Register {
 			$cmb_options->add_field(
 				array(
 					'name'             => esc_html__( 'Button Text', 'gpea_theme_backend' ),
-					'id'               => $cmb_id_prefix . $issue_key . '_button_text',
+					'id'               => $id_prefix . $issue_key . '_button_text',
 					'type'             => 'text_medium',
 				)
 			);
