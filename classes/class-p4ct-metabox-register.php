@@ -524,7 +524,7 @@ class P4CT_Metabox_Register {
 		$cmb_post_donation_button->add_field(
 			array(
 				'name'             => esc_html__( 'Top Button', 'gpea_theme_backend' ),
-				'desc'             => esc_html__( 'Donation button above the main content. Leave link or text field empty to use default.', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Donation button above the main content. Leave link or label field empty to use default.', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_article_top_donation_button',
 				'type'             => 'title',
 			)
@@ -545,14 +545,13 @@ class P4CT_Metabox_Register {
 			array(
 				'name'             => esc_html__( 'Button Link', 'gpea_theme_backend' ),
 				'id'               => 'p4-article_top_donation_button_link',
-				'type'             => 'text_url',
-				'protocols'        => array( 'http', 'https' ),
+				'type'             => 'text',
 			)
 		);
 
 		$cmb_post_donation_button->add_field(
 			array(
-				'name'             => esc_html__( 'Button Text', 'gpea_theme_backend' ),
+				'name'             => esc_html__( 'Button Label', 'gpea_theme_backend' ),
 				'id'               => 'p4-article_top_donation_button_text',
 				'type'             => 'text_medium',
 			)
@@ -561,7 +560,7 @@ class P4CT_Metabox_Register {
 		$cmb_post_donation_button->add_field(
 			array(
 				'name'             => esc_html__( 'Bottom Button', 'gpea_theme_backend' ),
-				'desc'             => esc_html__( 'Donation button below the main content. Leave link or text field empty to use default.', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Donation button below the main content. Leave link or label field empty to use default.', 'gpea_theme_backend' ),
 				'id'               => 'p4-gpea_article_bottom_donation_button',
 				'type'             => 'title',
 			)
@@ -581,14 +580,13 @@ class P4CT_Metabox_Register {
 			array(
 				'name'             => esc_html__( 'Button Link', 'gpea_theme_backend' ),
 				'id'               => 'p4-article_bottom_donation_button_link',
-				'type'             => 'text_url',
-				'protocols'        => array( 'http', 'https' ),
+				'type'             => 'text',
 			)
 		);
 
 		$cmb_post_donation_button->add_field(
 			array(
-				'name'             => esc_html__( 'Button Text', 'gpea_theme_backend' ),
+				'name'             => esc_html__( 'Button Label', 'gpea_theme_backend' ),
 				'id'               => 'p4-article_bottom_donation_button_text',
 				'type'             => 'text_medium',
 			)
@@ -1152,14 +1150,13 @@ class P4CT_Metabox_Register {
 				array(
 					'name'             => esc_html__( 'Button Link', 'gpea_theme_backend' ),
 					'id'               => $id_prefix . $issue_key . '_button_link',
-					'type'             => 'text_url',
-					'protocols'        => array( 'http', 'https' ),
+					'type'             => 'text',
 				)
 			);
 
 			$cmb_options->add_field(
 				array(
-					'name'             => esc_html__( 'Button Text', 'gpea_theme_backend' ),
+					'name'             => esc_html__( 'Button Label', 'gpea_theme_backend' ),
 					'id'               => $id_prefix . $issue_key . '_button_text',
 					'type'             => 'text_medium',
 				)
