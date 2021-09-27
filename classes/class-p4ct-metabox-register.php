@@ -55,6 +55,8 @@ class P4CT_Metabox_Register {
 		$this->register_post_metabox();
 		$this->register_page_metabox();
 		$this->register_main_options_metabox();
+		$this->register_donation_button_options_metabox();
+		$this->register_donation_block_options_metabox();
 	}
 
 	/**
@@ -447,6 +449,10 @@ class P4CT_Metabox_Register {
 	 */
 	public function register_post_metabox() {
 
+		/**
+		 * Information about current post
+		 */
+
 		$cmb_post = new_cmb2_box(
 			array(
 				'id'           => 'p4-gpea-post-box',
@@ -497,6 +503,92 @@ class P4CT_Metabox_Register {
 				'type'             => 'checkbox',
 			// 'sanitization_cb' => 'intval',
 			// 'escape_cb'       => 'intval',
+			)
+		);
+
+		/**
+		 * Donation Buttons
+		 */
+
+		$cmb_post_donation_button = new_cmb2_box(
+			array(
+				'id'           => 'p4-gpea-post-donation-button-box',
+				'title'        => 'Donation Buttons',
+				'object_types' => array( 'post' ),
+				'context'      => 'normal',
+				'priority'     => 'high',
+				'show_names'   => true,
+			)
+		);
+
+		$cmb_post_donation_button->add_field(
+			array(
+				'name'             => esc_html__( 'Top Button', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Donation button above the main content. Leave link or label field empty to use default.', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_article_top_donation_button',
+				'type'             => 'title',
+			)
+		);
+
+		$cmb_post_donation_button->add_field(
+			array(
+				'name'             => esc_html__( 'Show the Button', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_show_article_top_donation_button',
+				'type'             => 'select',
+				'options_cb'       => [ $this, 'populate_donation_button_options' ],
+				'default_cb'       => [ $this, 'set_donation_button_default' ],
+			)
+		);
+
+
+		$cmb_post_donation_button->add_field(
+			array(
+				'name'             => esc_html__( 'Button Link', 'gpea_theme_backend' ),
+				'id'               => 'p4-article_top_donation_button_link',
+				'type'             => 'text',
+			)
+		);
+
+		$cmb_post_donation_button->add_field(
+			array(
+				'name'             => esc_html__( 'Button Label', 'gpea_theme_backend' ),
+				'id'               => 'p4-article_top_donation_button_text',
+				'type'             => 'text_medium',
+			)
+		);
+
+		$cmb_post_donation_button->add_field(
+			array(
+				'name'             => esc_html__( 'Bottom Button', 'gpea_theme_backend' ),
+				'desc'             => esc_html__( 'Donation button below the main content. Leave link or label field empty to use default.', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_article_bottom_donation_button',
+				'type'             => 'title',
+			)
+		);
+
+		$cmb_post_donation_button->add_field(
+			array(
+				'name'             => esc_html__( 'Show the Button', 'gpea_theme_backend' ),
+				'id'               => 'p4-gpea_show_article_bottom_donation_button',
+				'type'             => 'select',
+				'options_cb'       => [ $this, 'populate_donation_button_options' ],
+				'default_cb'       => [ $this, 'set_donation_button_default' ],
+			)
+		);
+
+		$cmb_post_donation_button->add_field(
+			array(
+				'name'             => esc_html__( 'Button Link', 'gpea_theme_backend' ),
+				'id'               => 'p4-article_bottom_donation_button_link',
+				'type'             => 'text',
+			)
+		);
+
+		$cmb_post_donation_button->add_field(
+			array(
+				'name'             => esc_html__( 'Button Label', 'gpea_theme_backend' ),
+				'id'               => 'p4-article_bottom_donation_button_text',
+				'type'             => 'text_medium',
 			)
 		);
 
@@ -962,6 +1054,119 @@ class P4CT_Metabox_Register {
 	}
 
 	/**
+	 * Registers donation buttons option meta box(es).
+	 */
+	public function register_donation_button_options_metabox() {
+
+		$cmb_options = new_cmb2_box(
+			array(
+				'title'           => esc_html__( 'Post Donation Buttons', 'gpea_theme_backend' ),
+				'menu_title'      => esc_html__( 'Donation Buttons', 'gpea_theme_backend' ),
+				'id'              => 'gpea_donation_button_options_page',
+				'object_types'    => array( 'options-page' ),
+				'option_key'      => 'gpea_donation_button_options',
+				'parent_slug'     => 'options-general.php',
+			)
+		);
+
+		$this->add_donation_option_fields( $cmb_options, 'gpea_donation_button_' );
+
+	}
+
+	/**
+	 * Registers donation blocks option meta box(es).
+	 */
+	public function register_donation_block_options_metabox() {
+
+		$cmb_options = new_cmb2_box(
+			array(
+				'title'           => esc_html__( 'Post/Page Donation Blocks', 'gpea_theme_backend' ),
+				'menu_title'      => esc_html__( 'Donation Blocks', 'gpea_theme_backend' ),
+				'id'              => 'gpea_donation_block_options_page',
+				'object_types'    => array( 'options-page' ),
+				'option_key'      => 'gpea_donation_block_options',
+				'parent_slug'     => 'options-general.php',
+			)
+		);
+
+		$this->add_donation_option_fields( $cmb_options, 'gpea_donation_block_', true );
+
+	}
+
+	/**
+	 * Populate an associative array with donation buttons' display mode.
+	 *
+	 * @return array
+	 */
+	public function add_donation_option_fields( $cmb_options = null, $id_prefix = '', $title_field = false ) {
+
+		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+		if ( ! $main_issues_category_id ) {
+			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+			if ( $main_issues_category ) {
+				$main_issues_category_id = $main_issues_category->term_id;
+			}
+		}
+
+		$main_issues = array();
+		if( $main_issues_category_id ) {
+			$main_issues = get_terms(
+				array(
+					'taxonomy' => 'category',
+					'parent' => $main_issues_category_id,
+				)
+			);
+		}
+
+		$main_issues = array_column( $main_issues, 'name', 'slug' );
+		$main_issues = array(
+			'default'  => 'Default',
+		) + $main_issues;
+
+		foreach( $main_issues as $issue_key => $issue_title ) {
+
+			$cmb_options->add_field(
+				array(
+					'name'             => esc_html__( $issue_title, 'gpea_theme_backend' ),
+					'desc'             => $issue_key == 'default' ? '' : esc_html__( 'Leave empty to use the same setting in Default.', 'gpea_theme_backend' ),
+					'id'               => $id_prefix . $issue_key,
+					'type'             => 'title',
+				)
+			);
+
+			if( $title_field ) {
+
+				$cmb_options->add_field(
+					array(
+						'name'             => esc_html__( 'Title', 'gpea_theme_backend' ),
+						'id'               => $id_prefix . $issue_key . '_title',
+						'type'             => 'text',
+					)
+				);
+
+			}
+
+			$cmb_options->add_field(
+				array(
+					'name'             => esc_html__( 'Button Link', 'gpea_theme_backend' ),
+					'id'               => $id_prefix . $issue_key . '_button_link',
+					'type'             => 'text',
+				)
+			);
+
+			$cmb_options->add_field(
+				array(
+					'name'             => esc_html__( 'Button Label', 'gpea_theme_backend' ),
+					'id'               => $id_prefix . $issue_key . '_button_text',
+					'type'             => 'text_medium',
+				)
+			);
+
+		}
+		
+	}
+
+	/**
 	 * Taxonomy show_on filter
 	 *
 	 * @author Bill Erickson
@@ -1056,6 +1261,28 @@ class P4CT_Metabox_Register {
 			$output[ $postid ] = $post->post_title;
 		}
 		return $output;
+	}
+
+	/**
+	 * Populate an associative array with donation buttons' display mode.
+	 *
+	 * @return array
+	 */
+	public function populate_donation_button_options( $field ) {
+		$options = array(
+			'1' => 'Yes',
+			'0' => 'No',
+		);
+		return $options;
+	}
+
+	/**
+	 * Set donation buttons' default display mode.
+	 *
+	 * @return string
+	 */
+	public function set_donation_button_default( $field_args, $field ) {
+		return get_current_screen()->action == 'add' ? '1' : '0';
 	}
 
 	/**
