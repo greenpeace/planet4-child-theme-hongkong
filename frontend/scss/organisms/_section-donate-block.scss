@@ -6,24 +6,11 @@
   padding-bottom: 100px !important;
   overflow: hidden;
 
-  .section-post-content & {
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    .donation-form {
-      max-width: 440px;
-    }
-    > .ct-container {
-      max-width: 480px;
-      @include greaterThan('sm') {
-        max-width: 440px;
-        max-width: 700px;
-        width: 700px;
-      }
-    }
-  }
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 
   @include greaterThan('sm') {
     display: flex;
@@ -34,6 +21,7 @@
   }
 
   .donation-form {
+    max-width: 440px;
     padding: 40px 25px 40px;
     border-radius: 0;
     border-top: 6px solid $color-orange;
@@ -91,10 +79,14 @@
     justify-content: flex-end;
     flex-direction: column;
     z-index: 2;
+    max-width: 480px;
 
     @include greaterThan('sm') {
       flex-direction: row;
       align-items: center;
+      max-width: 440px;
+      max-width: 700px;
+      width: 700px;
     }
   }
 
