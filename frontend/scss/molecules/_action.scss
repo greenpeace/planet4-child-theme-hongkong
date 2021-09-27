@@ -101,8 +101,9 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    max-width: 340px;
-
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto 20px;
     @include lessThan('sm') {
       margin-left: auto;
       margin-right: auto;
@@ -113,36 +114,26 @@
       box-shadow: none;
       width: 100%;
       height: 0;
-      padding-top: 66%;
+      padding-top: 56.25%;
     }
-
     h4,
     p,
     .button {
-      margin: 10px 0;
+      margin: 8px 0;
       text-align: center;
     }
-
     h4 {
       font-size: 24px;
-      line-height: 36px;
       color: $color-blue;
     }
-
     p {
       font-size: 16px;
-      line-height: 26px;
-      color: $color-grey;
+      color: $color-grey-700;
     }
-
     .button {
-      margin-bottom: 0;
-
       @include greaterThan('sm') {
         padding: 0 30px;
-        height: 30px;
         font-size: 14px;
-        line-height: 29px;
       }
     }
 
@@ -150,9 +141,35 @@
       width: 100%;
       background-color: white;
       position: relative;
-
+      &.has-theme {
+        .content {
+          h4,
+          p {
+            color: white;
+          }
+        }
+      }
+      &.forests {
+        background-color: $color-forests;
+      }
+      &.oceans {
+        background-color: $color-oceans;
+      }
+      &.arctic {
+        background-color: $color-arctic;
+      }
+      &.climate {
+        background-color: $color-climate;
+      }
+      &.plastics {
+        background-color: $color-plastics;
+      }
+      &.health {
+        background-color: $color-health;
+        color: white !important;
+      }
       .content {
-        padding: 8px 20px 15px;
+        padding: 8px 20px 16px;
         display: flex;
         flex-direction: column;
         align-items: center;
