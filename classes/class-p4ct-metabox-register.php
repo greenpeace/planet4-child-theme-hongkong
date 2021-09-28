@@ -1098,7 +1098,7 @@ class P4CT_Metabox_Register {
 	 *
 	 * @return array
 	 */
-	public function add_donation_option_fields( $cmb_options = null, $id_prefix = '', $title_field = false ) {
+	public function add_donation_option_fields( $cmb_options = null, $id_prefix = '', $is_block = false ) {
 
 		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
 		if ( ! $main_issues_category_id ) {
@@ -1134,7 +1134,7 @@ class P4CT_Metabox_Register {
 				)
 			);
 
-			if( $title_field ) {
+			if( $is_block ) {
 
 				$cmb_options->add_field(
 					array(
@@ -1161,6 +1161,18 @@ class P4CT_Metabox_Register {
 					'type'             => 'text_medium',
 				)
 			);
+
+			if( $is_block ) {
+
+				$cmb_options->add_field(
+					array(
+						'name'    => esc_html__( 'Background Image', 'gpea_theme_backend' ),
+						'id'      => $id_prefix . $issue_key . '_bg_img',
+						'type'    => 'file',
+					)
+				);
+
+			}
 
 		}
 		
