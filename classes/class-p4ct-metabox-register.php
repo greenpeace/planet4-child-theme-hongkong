@@ -1144,6 +1144,14 @@ class P4CT_Metabox_Register {
 					)
 				);
 
+				$cmb_options->add_field(
+					array(
+						'name'             => esc_html__( 'Description', 'gpea_theme_backend' ),
+						'id'               => $id_prefix . $issue_key . '_desc',
+						'type'             => 'textarea',
+					)
+				);
+
 			}
 
 			$cmb_options->add_field(
