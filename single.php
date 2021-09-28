@@ -186,12 +186,14 @@ if( $find_last_element->length && $find_last_element[0]->tagName == 'ul' ) {
 }
 
 $post->content = str_replace( [
+	'<?xml encoding="UTF-8">',
 	'{{TOP_DONATION_BUTTON}}',
 	'{{BOTTOM_DONATION_BUTTON}}',
 ], [
+	'',
 	$top_donation_button_html,
 	$bottom_donation_button_html,
-], $dom->saveHTML() );
+], $dom->saveHTML( $dom->documentElement ) );
 
 if( $content_abstract === NULL ) {
 	$post->content = $top_donation_button_html . $post->content;
