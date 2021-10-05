@@ -523,8 +523,13 @@ class P4CT_Metabox_Register {
 
 		$cmb_post_donation_button->add_field(
 			array(
-				'name'             => esc_html__( 'Top Button', 'gpea_theme_backend' ),
-				'desc'             => esc_html__( 'Donation button above the main content. Leave link or label field empty to use default.', 'gpea_theme_backend' ),
+				'name'             => esc_html__( 'Donation Button on Top', 'gpea_theme_backend' ),
+				'desc'             => '
+					<ol>
+						<li>Location: above the main content, under the quoteblock (quote with theme color background).</li>
+						<li>Leave the link or label field empty to use the default value.</li>
+						<li>Go to the setting &quot;' . __( 'Settings' ) . ' &gt; Post Donation Buttons&quot; to setup default values.</li>
+					<ol>', 'gpea_theme_backend',
 				'id'               => 'p4-gpea_article_top_donation_button',
 				'type'             => 'title',
 			)
@@ -559,8 +564,13 @@ class P4CT_Metabox_Register {
 
 		$cmb_post_donation_button->add_field(
 			array(
-				'name'             => esc_html__( 'Bottom Button', 'gpea_theme_backend' ),
-				'desc'             => esc_html__( 'Donation button below the main content. Leave link or label field empty to use default.', 'gpea_theme_backend' ),
+				'name'             => esc_html__( 'Donation Button at Bottom', 'gpea_theme_backend' ),
+				'desc'             => '
+					<ol>
+						<li>Location: below the main content, before the further reading section.</li>
+						<li>Leave the link or label field empty to use the default value.</li>
+						<li>Go to the setting &quot;' . __( 'Settings' ) . ' &gt; Post Donation Buttons&quot; to setup default values.</li>
+					<ol>', 'gpea_theme_backend',
 				'id'               => 'p4-gpea_article_bottom_donation_button',
 				'type'             => 'title',
 			)
@@ -1119,8 +1129,40 @@ class P4CT_Metabox_Register {
 		}
 
 		$main_issues = array_column( $main_issues, 'name', 'slug' );
+
+		if( $is_block ) {
+			$cmb_options->add_field(
+				array(
+					'name'             => '',
+					'desc'             => '
+						<ol>
+							<li>Please set the default values for the donation blocks in the post/page.</li>
+							<li>Location: it\'s better to set around the middle area of the post.</li>
+							<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the fields empty will go to the &quot;All-site Default&quot; once writers insert the donation block.</li>
+						<ol>', 'gpea_theme_backend',
+					'id'               => $id_prefix . '_hint',
+					'type'             => 'title',
+				)
+			);
+		}
+		else {
+			$cmb_options->add_field(
+				array(
+					'name'             => '',
+					'desc'             => '
+						<ol>
+							<li>Please set the default values for the donation buttons in the post.</li>
+							<li>Buttons\' locations: one is above the main content and under the blockquote (quote with theme color background); the second one is below the main content and before the further reading section.</li>
+							<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the link/label empty will go to the &quot;All-site Default&quot; once writers &quot;show the button.&quot;</li>
+						<ol>', 'gpea_theme_backend',
+					'id'               => $id_prefix . '_hint',
+					'type'             => 'title',
+				)
+			);
+		}
+
 		$main_issues = array(
-			'default'  => 'Default',
+			'default'  => 'All-site Default',
 		) + $main_issues;
 
 		foreach( $main_issues as $issue_key => $issue_title ) {
@@ -1128,7 +1170,7 @@ class P4CT_Metabox_Register {
 			$cmb_options->add_field(
 				array(
 					'name'             => esc_html__( $issue_title, 'gpea_theme_backend' ),
-					'desc'             => $issue_key == 'default' ? '' : esc_html__( 'Leave empty to use the same setting in Default.', 'gpea_theme_backend' ),
+					'desc'             => $issue_key == 'default' ? '' : esc_html__( 'Leave empty to use the same setting in &quot;All-site Default&quot;', 'gpea_theme_backend' ),
 					'id'               => $id_prefix . $issue_key,
 					'type'             => 'title',
 				)
@@ -1147,6 +1189,7 @@ class P4CT_Metabox_Register {
 				$cmb_options->add_field(
 					array(
 						'name'             => esc_html__( 'Description', 'gpea_theme_backend' ),
+						'desc'             => esc_html__( 'For a better user experience, it\'s better to leave empty or not over 20 characters.', 'gpea_theme_backend' ),
 						'id'               => $id_prefix . $issue_key . '_desc',
 						'type'             => 'textarea',
 					)
