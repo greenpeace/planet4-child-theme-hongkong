@@ -71,6 +71,7 @@ if ( $post_categories ) {
 	}
 }
 
+$gpea_extra = new P4CT_Site();
 
 /*
 /* Donation buttons */
@@ -114,6 +115,8 @@ if ( isset( $page_meta_data['p4-gpea_show_article_top_donation_button'][0] ) && 
 		$donation_button_text = $donation_button_default_text;
 	}
 
+	$donation_button_link = $gpea_extra->add_post_ref_query_to_link_url( $donation_button_link, $post );
+
 	$top_donation_button_html = Timber::compile( 'blocks/donation-button.twig', [
 		'donation_button_link' => $donation_button_link,
 		'donation_button_text' => $donation_button_text,
@@ -139,6 +142,8 @@ if ( isset( $page_meta_data['p4-gpea_show_article_bottom_donation_button'][0] ) 
 	else {
 		$donation_button_text = $donation_button_default_text;
 	}
+
+	$donation_button_link = $gpea_extra->add_post_ref_query_to_link_url( $donation_button_link, $post );
 
 	$bottom_donation_button_html = Timber::compile( 'blocks/donation-button.twig', [
 		'donation_button_link' => $donation_button_link,
@@ -225,7 +230,6 @@ $context['filter_url'] = add_query_arg(
 // Build the shortcode for articles block.
 if ( 'no' !== $post->include_articles ) {
 	// $post->articles = "[shortcake_articles exclude_post_id='" . $post->ID . "' /]"; !
-	$gpea_extra = new P4CT_Site();
 	$context['related_posts'] = $gpea_extra->gpea_get_related( $post->ID, 4, false, false, false, 'big' );
 }
 

@@ -524,6 +524,38 @@ class P4CT_Site {
 
 
 	/**
+	 * Add "ref" param into query string for links in post.
+	 *
+	 * @param string  $link Link URL.
+	 * @param WP_Post $post Post object.
+	 */
+	function add_post_ref_query_to_link_url( $link_url = '', $post ) {
+
+		$home_url_info = parse_url( home_url() );
+		$domain = $home_url_info['host'];
+		$domain = implode( '.', array_slice( explode( '.', $domain ), -2, 2 ) );
+
+		$link_info = parse_url( $link_url );
+		if( isset( $link_info['query'] ) ) {
+			parse_str( $link_info['query'], $link_query_array );
+		}
+		else {
+			$link_query_array = [];
+		}
+
+		if( !is_single() || @strlen( $link_url ) == 0 || strpos( $link_url, $domain ) === FALSE || isset( $link_query_array['ref'] ) ) {
+			return $link_url;
+		}
+
+		$link_query_array['ref'] = $post->ID . '-' . urldecode( $post->slug );
+		$link_url = explode( '#', $link_url );
+		$link_array = explode( '?', $link_url[0] );
+		$link_url[0] = $link_array[0] . '?' . http_build_query( $link_query_array );
+
+		return implode( '#', $link_url );
+	}
+
+	/**
 	 * Allow parameter to be passed to url.
 	 *
 	 * @param text $vars text variable allowed.
