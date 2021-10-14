@@ -8,6 +8,7 @@
     margin-top: 2.5em;
     margin-bottom: 2.5em;
     .button {
+      font-weight: normal;
       width: 75%;
       height: auto;
       line-height: 1.5;
@@ -198,6 +199,7 @@
 
   .wp-caption {
     margin: 30px 0;
+    background-color: #EEE;
     img {
       max-width: 100%;
       height: auto;
@@ -210,6 +212,7 @@
     padding: 0.4rem 0 0.4rem 0.75rem;
     border-left: 2px solid $color-green;
     color: rgba(0, 0, 0, 0.4);
+    background-color: #FFF;
   }
 
   .forests & {
