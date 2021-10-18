@@ -52,7 +52,7 @@ function my_img_caption_shortcode( $empty, $attr, $content ){
 	}
 
 
-	$output = '<figure ' . $attr['id'] . ' class="' . esc_attr( $class ) . '" style="max-width: ' . ( 10 + (int) $attr['width'] ) . 'px;">'
+	$output = '<figure ' . $attr['id'] . ' class="' . esc_attr( $class ) . '" style="max-width: ' . ( (int) $attr['width'] ) . 'px;">'
 	          . do_shortcode( $content ) . '<figcaption class="wp-caption-text">' . $attr['caption'] . $image_credit . '</figcaption></figure>';
 
 	return $output;
