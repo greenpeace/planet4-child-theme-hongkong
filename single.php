@@ -71,6 +71,143 @@ if ( $post_categories ) {
 	}
 }
 
+$gpea_extra = new P4CT_Site();
+
+/*
+/* Donation buttons */
+
+// Get button options
+
+$donation_button_options = get_option( 'gpea_donation_button_options' );
+
+$donation_button_default_link = '';
+if( isset( $context['main_issue_slug'] ) && isset( $donation_button_options['gpea_donation_button_' . $context['main_issue_slug'] . '_button_link'] ) && @strlen( $donation_button_options['gpea_donation_button_' . $context['main_issue_slug'] . '_button_link'] ) ) {
+	$donation_button_default_link = $donation_button_options['gpea_donation_button_' . $context['main_issue_slug'] . '_button_link'];
+}
+elseif( isset( $donation_button_options['gpea_donation_button_default_button_link'] ) ) {
+	$donation_button_default_link = $donation_button_options['gpea_donation_button_default_button_link'];
+}
+
+$donation_button_default_text = '';
+if( isset( $context['main_issue_slug'] ) && isset( $donation_button_options['gpea_donation_button_' . $context['main_issue_slug'] . '_button_text'] ) && @strlen( $donation_button_options['gpea_donation_button_' . $context['main_issue_slug'] . '_button_text'] ) ) {
+	$donation_button_default_text = $donation_button_options['gpea_donation_button_' . $context['main_issue_slug'] . '_button_text'];
+}
+elseif( isset( $donation_button_options['gpea_donation_button_default_button_text'] ) ) {
+	$donation_button_default_text = $donation_button_options['gpea_donation_button_default_button_text'];
+}
+
+$top_donation_button_html = '';
+if ( isset( $page_meta_data['p4-gpea_show_article_top_donation_button'][0] ) && $page_meta_data['p4-gpea_show_article_top_donation_button'][0] ) {
+
+	$donation_button_link = '';
+	if( isset( $page_meta_data['p4-article_top_donation_button_link'][0] ) && @strlen( $page_meta_data['p4-article_top_donation_button_link'][0] ) ) {
+		$donation_button_link = $page_meta_data['p4-article_top_donation_button_link'][0];
+	}
+	else {
+		$donation_button_link = $donation_button_default_link;
+	}
+
+	$donation_button_text = '';
+	if( isset( $page_meta_data['p4-article_top_donation_button_text'][0] ) && @strlen( $page_meta_data['p4-article_top_donation_button_text'][0] ) ) {
+		$donation_button_text = $page_meta_data['p4-article_top_donation_button_text'][0];
+	}
+	else {
+		$donation_button_text = $donation_button_default_text;
+	}
+
+	$donation_button_link = $gpea_extra->add_post_ref_query_to_link_url( $donation_button_link, $post );
+
+	$top_donation_button_html = Timber::compile( 'blocks/donation-button.twig', [
+		'donation_button_link' => $donation_button_link,
+		'donation_button_text' => $donation_button_text,
+	] );
+
+}
+
+$bottom_donation_button_html = '';
+if ( isset( $page_meta_data['p4-gpea_show_article_bottom_donation_button'][0] ) && $page_meta_data['p4-gpea_show_article_bottom_donation_button'][0] ) {
+
+	$donation_button_link = '';
+	if( isset( $page_meta_data['p4-article_bottom_donation_button_link'][0] ) && @strlen( $page_meta_data['p4-article_bottom_donation_button_link'][0] ) ) {
+		$donation_button_link = $page_meta_data['p4-article_bottom_donation_button_link'][0];
+	}
+	else {
+		$donation_button_link = $donation_button_default_link;
+	}
+
+	$donation_button_text = '';
+	if( isset( $page_meta_data['p4-article_bottom_donation_button_text'][0] ) && @strlen( $page_meta_data['p4-article_bottom_donation_button_text'][0] ) ) {
+		$donation_button_text = $page_meta_data['p4-article_bottom_donation_button_text'][0];
+	}
+	else {
+		$donation_button_text = $donation_button_default_text;
+	}
+
+	$donation_button_link = $gpea_extra->add_post_ref_query_to_link_url( $donation_button_link, $post );
+
+	$bottom_donation_button_html = Timber::compile( 'blocks/donation-button.twig', [
+		'donation_button_link' => $donation_button_link,
+		'donation_button_text' => $donation_button_text,
+	] );
+
+}
+
+// Find the position to insert buttons
+
+libxml_use_internal_errors(true);
+$dom = new DomDocument();
+$dom->loadHTML('<?xml encoding="UTF-8">' . $post->content);
+$xpath = new DOMXPath($dom);
+
+$top_donation_button_temp_tag = $dom->createTextNode('{{TOP_DONATION_BUTTON}}');
+$bottom_donation_button_temp_tag = $dom->createTextNode('{{BOTTOM_DONATION_BUTTON}}');
+
+$find_abstract_element = $xpath->query('//html/body/blockquote[1]|//html/body/div[@class="leader"]');
+$content_abstract = NULL;
+if( $find_abstract_element->length ) {
+	$content_abstract = $find_abstract_element[0];
+	if ( $content_abstract->nextSibling === NULL ) {
+		$content_abstract->parentNode->appendChild($top_donation_button_temp_tag);
+	}
+	else {
+		$content_abstract->parentNode->insertBefore($top_donation_button_temp_tag, $content_abstract->nextSibling);
+	}
+}
+
+$find_last_element = $xpath->query('//html/body/*[last()]');
+$content_footnote = NULL;
+if( $find_last_element->length && $find_last_element[0]->tagName == 'ul' ) {
+	$find_previous_element = $find_last_element[0];
+	while( $find_previous_element->previousSibling ) {
+		if( $find_previous_element->previousSibling instanceof DOMElement ) {
+			if( $find_previous_element->previousSibling->tagName == 'h3' ) {
+				$content_footnote = $find_previous_element->previousSibling;
+				$content_footnote->parentNode->insertBefore($bottom_donation_button_temp_tag, $content_footnote);
+			}
+			break;
+		}
+		$find_previous_element = $find_previous_element->previousSibling;
+	}
+}
+
+$post->content = str_replace( [
+	'<?xml encoding="UTF-8">',
+	'{{TOP_DONATION_BUTTON}}',
+	'{{BOTTOM_DONATION_BUTTON}}',
+], [
+	'',
+	$top_donation_button_html,
+	$bottom_donation_button_html,
+], $dom->saveHTML( $dom->documentElement ) );
+
+if( $content_abstract === NULL ) {
+	$post->content = $top_donation_button_html . $post->content;
+}
+
+if( $content_footnote === NULL ) {
+	$post->content .= $bottom_donation_button_html;
+}
+
 /*
 /* get useful theme options */
 $options = get_option( 'gpea_options' );
@@ -93,7 +230,6 @@ $context['filter_url'] = add_query_arg(
 // Build the shortcode for articles block.
 if ( 'no' !== $post->include_articles ) {
 	// $post->articles = "[shortcake_articles exclude_post_id='" . $post->ID . "' /]"; !
-	$gpea_extra = new P4CT_Site();
 	$context['related_posts'] = $gpea_extra->gpea_get_related( $post->ID, 4, false, false, false, 'big' );
 }
 
