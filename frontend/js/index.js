@@ -6,7 +6,7 @@ import {
   Scrollbar,
   Controller,
   Autoplay,
-} from "swiper/dist/js/swiper.esm.js";
+} from "swiper";
 import LazyLoad from "vanilla-lazyload";
 import SmoothScroll from "smooth-scroll";
 import AOS from "aos";
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   $countryOfficesDropdown.children("button").on("click", function () {
     $countryOfficesDropdown.toggleClass("is-open");
   });
-  $(window).click(function () {
+  $(window).on('click',function () {
     $countryOfficesDropdown.removeClass("is-open");
   });
 
