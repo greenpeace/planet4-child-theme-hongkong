@@ -2,8 +2,8 @@ import { debounce } from 'throttle-debounce';
 
 const $ = jQuery;
 
-export default function(Swiper) {
-  $('.featured-swiper, .projects-swiper, .tips-swiper').each(function(index) {
+export default function (Swiper) {
+  $('.featured-swiper, .projects-swiper, .tips-swiper').each(function (index) {
     const pagination = $(this)
       .closest('section')
       .find('.swiper-pagination')
@@ -57,7 +57,7 @@ export default function(Swiper) {
     },
   });
 
-  $('.cards-swiper:not(.controlled-swiper)').each(function(index) {
+  $('.cards-swiper:not(.controlled-swiper)').each(function (index) {
     const $this = $(this);
 
     new Swiper(this, {
@@ -84,7 +84,7 @@ export default function(Swiper) {
   });
 
   function miniSwipers() {
-    $('.mini-swiper').each(function() {
+    $('.mini-swiper').each(function () {
       const $this = $(this);
       if (this.swiper) this.swiper.destroy();
 
@@ -114,7 +114,7 @@ export default function(Swiper) {
   miniSwipers();
   window.addEventListener('resize', debounce(200, miniSwipers));
 
-  $('.section-text-images-swiper').each(function() {
+  $('.section-text-images-swiper').each(function () {
     const $this = $(this);
 
     new Swiper(this, {
@@ -139,7 +139,7 @@ export default function(Swiper) {
     });
   });
 
-  $('.label-swiper').each(function() {
+  $('.label-swiper').each(function () {
     const $this = $(this);
     const $controlled = $($this.data('controls'));
 
@@ -170,20 +170,20 @@ export default function(Swiper) {
     labelSwiper.controller.control = controlledSwiper;
   });
 
-  $('.launcher-card-swiper').each(function() {
+  $('.launcher-card-swiper').each(function () {
     const $this = $(this);
-    const numOfSlides = $this.find('.swiper-slide').length
+    const numOfSlides = $this.find('.swiper-slide').length;
 
     // We only active the swiper when
     // 1. The cards is more than three
     // 2. It's in mobile version
-    if (numOfSlides>3 || window.innerWidth<1023) {
+    if (numOfSlides > 3 || window.innerWidth < 1023) {
       new Swiper(this, {
         slidesPerView: 'auto',
         centeredSlides: true,
         simulateTouch: false,
         loop: false,
-        initialSlide: window.innerWidth<1023 ? 0:1,
+        initialSlide: window.innerWidth < 1023 ? 0 : 1,
         pagination: {
           el: $this.find('.swiper-pagination'),
           type: 'bullets',
