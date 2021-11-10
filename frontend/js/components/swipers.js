@@ -4,6 +4,7 @@ const $ = jQuery;
 
 export default function (Swiper) {
   $('.featured-swiper, .projects-swiper, .tips-swiper').each(function (index) {
+    const $this = $(this);
     const pagination = $(this)
       .closest('section')
       .find('.swiper-pagination')
@@ -21,8 +22,8 @@ export default function (Swiper) {
           clickable: true,
         },
         navigation: {
-          nextEl: $(this).find('.swiper-button-next'),
-          prevEl: $(this).find('.swiper-button-prev'),
+          nextEl: $this.find('.swiper-button-next'),
+          prevEl: $this.find('.swiper-button-prev'),
         },
         breakpoints: {
           // when window width is <= 1023px
