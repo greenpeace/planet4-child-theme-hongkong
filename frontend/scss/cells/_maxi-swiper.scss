@@ -41,7 +41,7 @@
     &:not(.maxi-swiper-centered) {
       @include greaterThan('sm') {
         .swiper-button-next {
-          right: -45px;
+          right: 0px;
         }
 
         .swiper-button-prev {
