@@ -24,6 +24,7 @@
 .outer_block_container > * {
   position: relative;
   z-index: 2;
+  width: auto;
 }
 
 #petition-source {
@@ -64,7 +65,7 @@
     background-color: transparent;
     height: auto;
     margin: 0 auto;
-    
+
     header {
       position: relative;
       background-color: transparent;
@@ -115,7 +116,7 @@
       background-color: transparent;
       height: auto;
       margin: 0 auto;
-      
+
       header {
         position: relative;
         background-color: transparent;
@@ -126,7 +127,7 @@
       .sub-section {
         display: none;
       }
-    }    
+    }
   }
 }
 
@@ -221,12 +222,10 @@
     border: none;
     margin-bottom: 20px;
   }
-
 }
 
 .enform-side-style,
 .tag_cloud_form {
-
   // BACKGROUND
   > picture {
     display: block;
@@ -354,7 +353,7 @@
 
     @include greaterThan('sm') {
       height: 92vh;
-    } 
+    }
 
     .form-group {
       margin-bottom: 15px;
@@ -497,8 +496,6 @@
     }
   }
 
-
-
   @include greaterThan('sm') {
     .formblock-flex {
       margin-left: -5px;
@@ -576,8 +573,7 @@
         .btn {
           margin-top: 16px;
         }
-      } 
-
+      }
     }
   }
 }
@@ -591,7 +587,6 @@
     top: 14px;
   }
 
-  
   @include lessThan('sm') {
     .enform.is-open .close {
       top: 14px;
@@ -604,7 +599,7 @@
       max-height: 0;
     }
 
-    .enform.is-open  .formblock-flex {
+    .enform.is-open .formblock-flex {
       padding-top: 5px;
       max-height: 750px;
     }
@@ -650,7 +645,6 @@
     max-height: none;
   }
 }
-
 
 /* fix header of thanks section of petition when scrolling  */
 .is-scrolling-down {
