@@ -21,7 +21,7 @@ export default function () {
       lastname: $lastnameField.find('input').val(),
       email: $emailField.find('input').val(),
       campaignId: $section.find('[name="sf_campaign_id"]').val(),
-      optIn: $section.find('[name="supporter.emailok"]').is(":checked") ? 1 : 0,
+      optIn: $section.find('[name="supporter.policy[]"]:not(:checked)').length == 0 ? 1 : 0,
     }
     return values;
   }
