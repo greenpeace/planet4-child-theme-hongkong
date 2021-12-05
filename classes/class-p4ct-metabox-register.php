@@ -667,7 +667,7 @@ class P4CT_Metabox_Register {
 				// 'capability'      => 'manage_options', // Cap required to view options-page.
 				// 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
 				// 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
-				// 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
+				'display_cb'      => [ $this, 'gpea_render_admin_page' ], // Override the options-page form output (CMB2_Hookup::options_page_output()).
 				// 'save_button'     => esc_html__( 'Save Theme Options', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
 				// 'disable_settings_errors' => true, // On settings pages (not options-general.php sub-pages), allows disabling.
 				// 'message_cb'      => 'yourprefix_options_page_message_callback',
@@ -721,7 +721,11 @@ class P4CT_Metabox_Register {
 				'name'    => esc_html__( 'Description text for generic footer', 'gpea_theme_backend' ),
 				'desc'    => esc_html__( 'Description text for generic footer', 'gpea_theme_backend' ),
 				'id'      => 'gpea_description_generic_footer_text',
-				'type'    => 'textarea',
+				'type'    => 'wysiwyg',
+				'options' => [
+					'textarea_rows' => 3,
+					'media_buttons' => false,
+				],
 			)
 		);
 
@@ -1076,6 +1080,7 @@ class P4CT_Metabox_Register {
 				'object_types'    => array( 'options-page' ),
 				'option_key'      => 'gpea_donation_button_options',
 				'parent_slug'     => 'options-general.php',
+				'display_cb'      => [ $this, 'gpea_render_admin_page' ],
 			)
 		);
 
@@ -1096,6 +1101,7 @@ class P4CT_Metabox_Register {
 				'object_types'    => array( 'options-page' ),
 				'option_key'      => 'gpea_donation_block_options',
 				'parent_slug'     => 'options-general.php',
+				'display_cb'      => [ $this, 'gpea_render_admin_page' ],
 			)
 		);
 
@@ -1346,6 +1352,62 @@ class P4CT_Metabox_Register {
 	 */
 	public function set_donation_button_default( $field_args, $field ) {
 		return get_current_screen()->action == 'add' ? '1' : '0';
+	}
+
+	/**
+	 * Admin page markup. Mostly handled by CMB2.
+	 *
+	 * @param string $plugin_page The key for the current page.
+	 */
+	public function gpea_render_admin_page( $cmb_instance ) {
+		?>
+		<div class="wrap cmb2-options-page option-<?php echo esc_attr( sanitize_html_class( $cmb_instance->option_key ) ); ?>">
+			<?php if ( $cmb_instance->cmb->prop( 'title' ) ) : ?>
+				<h2><?php echo wp_kses_post( $cmb_instance->cmb->prop( 'title' ) ); ?></h2>
+			<?php endif; ?>
+			<?php $cmb_instance->options_page_tab_nav_output(); ?>
+			<form class="cmb-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="POST" id="<?php echo $cmb_instance->cmb->cmb_id; ?>" enctype="multipart/form-data" encoding="multipart/form-data">
+				<input type="hidden" name="action" value="<?php echo esc_attr( $cmb_instance->option_key ); ?>">
+				<?php $cmb_instance->options_page_metabox(); ?>
+				<?php submit_button( esc_attr( $cmb_instance->cmb->prop( 'save_button' ) ), 'primary', 'submit-cmb' ); ?>
+			</form>
+		</div>
+		<style>
+		.cmb-row {
+			display: flex;
+			flex-direction: column;
+		}
+		.cmb-th {
+			float: none;
+		}
+		.cmb-td {
+			float: none;
+			flex:  0 0 auto;
+			padding-left: 0 !important;
+			margin-left: 0 !important;
+		}
+		@media screen and (min-width: 783px){ 
+			.cmb-row {
+				flex-direction: row;
+			}
+			.cmb-th {
+				flex:  0 0 200px;
+			}
+			.cmb-td {
+				margin-top: 1em;
+				margin-left: 1em !important;
+			}
+		}
+		</style>
+		<script>
+		/* jQuery('.cmb2-metabox').removeClass('cmb2-metabox');
+		jQuery('.cmb2-metabox-description').removeClass('cmb2-metabox-description');
+		jQuery('.cmb2-metabox-title').each(function() {
+			jQuery(this).removeClass('cmb2-metabox-title').addClass('title').unwrap().unwrap();
+			jQuery(this).replaceWith(jQuery('<h2/>').html(jQuery(this).html()));
+		}); */
+		</script>
+		<?php
 	}
 
 	/**
