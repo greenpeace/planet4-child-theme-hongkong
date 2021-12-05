@@ -17,13 +17,6 @@
 				<p>{{ generic_footer_text ? generic_footer_text|e('wp_kses_post')|raw : '綠色和平是獨立的國際環保組織，通過科學研究、政策倡議及和平行動，揭露全球環境問題並提出相應解決方案。我們從不接受任何政府、企業或政治團體的資助，只接受個人的直接捐款，以維持公正獨立。' }}</p>
 			</div>
 			<div>
-				<h5>{{ strings.our_commitment }}</h5>
-				<ul>
-					<li><a href="{{ commitment_projects_link }}">{{ commitment_projects_link_label }}</a></li>
-					<li><a href="{{ commitment_issues_link }}">{{ commitment_issues_link_label }}</a></li>
-				</ul>
-			</div>
-			<div>
 				<h5>{{ strings.about_greenpeace }}</h5>
 				<ul>
 					{% for item in footer_primary_menu %}
@@ -44,8 +37,6 @@
 	<div class="footer-lower">
 		<div class="ct-container">
 			<ul class="press-media-links">
-				<li><a href="{{ press_media_link }}">{{ strings.press_media }}</a></li>
-				<li><a href="{{ preferences_link }}">{{ strings.my_preferences }}</a></li>
 				{% if (footer_extra_link) %}<li class="press-media-links__last"><a href="{{ footer_extra_link }}">{{ footer_extra_link_label }}</a></li>{% endif %}
 			</ul>
 			<hr />
@@ -54,8 +45,6 @@
 					<li><a href="{{ item.url }}">{{ item.title }}</a></li>
 				{% endfor %}
 			</ul>
-			{% if (copyright_text_line1) %}<p class="footer-legal footer-legal__line1">{{ copyright_text_line1|e('wp_kses_post')|raw }}</p>{% endif %}
-			{% if (copyright_text_line2) %}<p class="footer-legal footer-legal__line2">{{ copyright_text_line2|e('wp_kses_post')|raw }}</p>{% endif %}
 		</div>
 	</div>
 </footer>
