@@ -693,27 +693,25 @@ svg.external-link, svg.external-icon, svg.external_link { display: none; }
 @media only screen and (min-width: 1280px) { .ct-container.slim { padding-left: 120px; padding-right: 120px; }
   .ct-container.slim .swiper-container { margin-left: -100px; margin-right: -100px; } }
 
-.button, .enform form button { display: inline-block; padding: 0 30px; height: 30px; margin: 10px 5px 10px 0; font-size: 14px; line-height: 29px; color: #ff8100; background: white; border-radius: 99px; -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2); box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2); font-weight: bold; -webkit-transition: background-color 140ms linear, -webkit-box-shadow 140ms linear; transition: background-color 140ms linear, -webkit-box-shadow 140ms linear; transition: background-color 140ms linear, box-shadow 140ms linear; transition: background-color 140ms linear, box-shadow 140ms linear, -webkit-box-shadow 140ms linear; text-decoration: none; border: none; cursor: pointer; }
+.button, .enform form button { display: inline-block; padding: 0 30px; height: 30px; margin: 10px 5px 10px 0; font-size: 14px; line-height: 29px; color: #ff8100; background: white; border-radius: 4px; font-weight: 400; -webkit-transition: background-color 140ms linear, border-color 140ms linear; transition: background-color 140ms linear, border-color 140ms linear; text-decoration: none; border: 1px solid #ff8100; cursor: pointer; }
 
 @media only screen and (min-width: 1024px) { .button, .enform form button { padding: 0 50px; height: 40px; font-size: 18px; line-height: 39px; } }
 
-.button:hover, .button:focus, .enform form button:hover, .enform form button:focus { background-color: #fafafa; -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3); box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3); }
+.button.primary, .button.btn-primary, .enform form button.primary, .enform form button.btn-primary { padding: 0 40px; height: 40px; font-size: 20px; line-height: 39px; background: #ff8100; color: white; }
 
-.button:active, .enform form button:active { -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2); }
+@media only screen and (min-width: 1024px) { .button.primary.wider, .button.btn-primary.wider, .enform form button.primary.wider, .enform form button.btn-primary.wider { padding: 0 100px; } }
+
+.button.secondary, .enform form button.secondary { color: #66cc00; }
+
+.button:hover, .button:focus, .enform form button:hover, .enform form button:focus { color: white; background-color: #FFB660; border-color: #FFB660; }
+
+.button:active, .enform form button:active { color: white; background-color: #E96D00; border-color: #E96D00; }
 
 .button:last-child, .enform form button:last-child { margin-right: 0; }
 
 .button.fluid, .enform form button.fluid { width: 100%; margin-left: 0; margin-right: 0; text-align: center; }
 
-.button.primary, .button.btn-primary, .enform form button.primary, .enform form button.btn-primary { padding: 0 40px; height: 40px; font-size: 20px; line-height: 39px; background: #ff8100; color: white; -webkit-box-shadow: none !important; box-shadow: none !important; }
-
-@media only screen and (min-width: 1024px) { .button.primary.wider, .button.btn-primary.wider, .enform form button.primary.wider, .enform form button.btn-primary.wider { padding: 0 100px; } }
-
-.button.primary:hover, .button.primary:focus, .button.btn-primary:hover, .button.btn-primary:focus, .enform form button.primary:hover, .enform form button.primary:focus, .enform form button.btn-primary:hover, .enform form button.btn-primary:focus { background-color: #eb7700; }
-
-.button.secondary, .enform form button.secondary { color: #66cc00; }
-
-.button.tag, .enform form button.tag { color: black; padding: 0 10px !important; height: 28px !important; font-size: 14px !important; line-height: 27px !important; -webkit-box-shadow: none !important; box-shadow: none !important; border: 1px solid #66cc00; }
+.button.tag, .enform form button.tag { color: black; padding: 0 10px !important; height: 28px !important; font-size: 14px !important; line-height: 27px !important; border: 1px solid #66cc00; }
 
 @media only screen and (min-width: 1024px) { .button.tag, .enform form button.tag { padding: 0 13px !important; height: 38px !important; font-size: 16px !important; line-height: 37px !important; } }
 
@@ -723,23 +721,23 @@ svg.external-link, svg.external-icon, svg.external_link { display: none; }
 
 .button.tag.active:hover, .button.tag.active:focus, .enform form button.tag.active:hover, .enform form button.tag.active:focus { background-color: #59b300; }
 
-.button.grey, .enform form button.grey { color: #5f5f5f; font-weight: normal; -webkit-box-shadow: none; box-shadow: none; }
+.button.grey, .enform form button.grey { color: #5f5f5f; font-weight: normal; }
 
 .button.grey:hover, .button.grey:focus, .enform form button.grey:hover, .enform form button.grey:focus { background-color: #fafafa; }
 
-.button.fb, .enform form button.fb { color: white; background-color: #007afa; -webkit-box-shadow: none; box-shadow: none; }
+.button.fb, .enform form button.fb { color: white; background-color: #007afa; }
 
 .button.fb:hover, .button.fb:focus, .enform form button.fb:hover, .enform form button.fb:focus { background-color: #006ee1; }
 
-.button.small, .enform form button.small { color: #5f5f5f; font-weight: normal; -webkit-box-shadow: none; box-shadow: none; padding: 0 15px; height: 26px; font-size: 13px; line-height: 25px; }
+.button.small, .enform form button.small { color: #5f5f5f; font-weight: normal; padding: 0 15px; height: 26px; font-size: 13px; line-height: 25px; }
 
 @media only screen and (min-width: 1024px) { .button.small, .enform form button.small { padding: 0 20px; height: 30px; font-size: 14px; line-height: 29px; } }
 
 .button.small:hover, .button.small:focus, .enform form button.small:hover, .enform form button.small:focus { background-color: #fafafa; }
 
-.button.loading, .button[disabled], .enform form button.loading, .enform form button[disabled] { color: rgba(204, 128, 51, 0.2); }
+.button.loading, .button[disabled], .enform form button.loading, .enform form button[disabled] { color: white; background-color: #BAB0A6; }
 
-.button.primary.loading, .button.primary[disabled], .enform form button.primary.loading, .enform form button.primary[disabled] { color: rgba(255, 255, 255, 0.2); }
+.button.primary.loading, .button.primary[disabled], .enform form button.primary.loading, .enform form button.primary[disabled] { color: white; background-color: #BAB0A6; }
 
 .button.loading, .button .en-spinner, .enform form button.loading, .enform form button .en-spinner { position: relative; }
 
@@ -1537,7 +1535,9 @@ header .content .right-box .search-button { color: white; font-size: 25px; margi
 
 header .content .right-box .button { background: #ff8100; color: white; white-space: nowrap; height: auto; }
 
-header .content .right-box .button:hover, header .content .right-box .button:focus { background-color: #eb7700; }
+header .content .right-box .button:hover, header .content .right-box .button:focus { background-color: #FFB660; border-color: #FFB660; }
+
+header .content .right-box .button:active { background-color: #E96D00; border-color: #E96D00; }
 
 .mobile-toolbar { display: none; height: 48px; background-color: white; -webkit-box-shadow: 0 10px 10px -10px inset rgba(0, 0, 0, 0.4); box-shadow: 0 10px 10px -10px inset rgba(0, 0, 0, 0.4); -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; }
 

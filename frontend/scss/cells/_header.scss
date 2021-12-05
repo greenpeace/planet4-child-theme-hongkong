@@ -199,8 +199,15 @@ header {
 
         &:hover,
         &:focus {
-          background-color: darken($color-orange, 4%);
+          background-color: $color-orange-hover;
+          border-color: $color-orange-hover;
         }
+
+        &:active {
+          background-color: $color-orange-active;
+          border-color: $color-orange-active;
+        }
+
       }
     }
   }
