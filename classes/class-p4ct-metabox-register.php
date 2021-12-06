@@ -11,11 +11,38 @@
 class P4CT_Metabox_Register {
 
 	/**
+	 * ID of the Metabox
+	 */
+	public const METABOX_ID = 'option_metabox';
+
+	/**
+	 * Option page slug
+	 *
+	 * @var string
+	 */
+	private $slug = 'gpea_main_options_page';
+
+	/**
+	 * Options Page title
+	 *
+	 * @var string
+	 */
+	protected $title = 'GPEA';
+
+	/**
 	 * Meta box prefix.
 	 *
 	 * @var string $prefix
 	 */
 	private $prefix = 'p4_';
+
+	/**
+	 * Subpages
+	 *
+	 * @var array
+	 * Includes arrays with the title and fields of each subpage
+	 */
+	protected $subpages = [];
 
 	/**
 	 * P4CT_Metabox_Register constructor.
@@ -29,6 +56,7 @@ class P4CT_Metabox_Register {
 	 */
 	private function hooks() {
 		add_action( 'cmb2_admin_init', [ $this, 'register_p4_meta_box' ] );
+		add_action( 'admin_menu', [ $this, 'add_options_pages' ] );
 		add_filter( 'cmb2_show_on', [ $this, 'be_taxonomy_show_on_filter' ], 10, 2 );
 		add_filter( 'cmb2_render_supportus_page_dropdown', [ $this, 'gpea_render_supportus_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_mainissue_page_dropdown', [ $this, 'gpea_render_mainissue_page_dropdown' ], 10, 2 );
@@ -45,6 +73,7 @@ class P4CT_Metabox_Register {
 	 * Register P4 meta box(es).
 	 */
 	public function register_p4_meta_box() {
+
 		$this->register_sidebar_metabox();
 		$this->register_project_metabox();
 		$this->register_petition_metabox();
@@ -54,9 +83,30 @@ class P4CT_Metabox_Register {
 		$this->register_category_metabox();
 		$this->register_post_metabox();
 		$this->register_page_metabox();
+
 		$this->register_main_options_metabox();
 		$this->register_donation_button_options_metabox();
 		$this->register_donation_block_options_metabox();
+
+	}
+
+	/**
+	 * Add menu options page.
+	 */
+	public function add_options_pages() {
+		add_menu_page( $this->title, $this->title, 'manage_options', $this->slug, function () {}, 'dashicons-admin-site-alt' );
+		foreach ( $this->subpages as $path => $subpage ) {
+			add_submenu_page(
+				$this->slug,
+				$subpage['title'],
+				isset($subpage['menu_title']) ? $subpage['menu_title'] : $subpage['title'],
+				'manage_options',
+				$path,
+				function () use ( $path ) {
+					$this->admin_page_display( $path );
+				}
+			);
+		}
 	}
 
 	/**
@@ -649,420 +699,323 @@ class P4CT_Metabox_Register {
 	 */
 	public function register_main_options_metabox() {
 
-		$cmb_options = new_cmb2_box(
-			array(
-				'id'           => 'gpea_main_options_page',
-				'title'        => esc_html__( 'GPEA Options', 'gpea_theme_backend' ),
-				'object_types' => array( 'options-page' ),
+		$this->subpages[$this->slug] = [
+			'title'        => esc_html__( 'GPEA Options', 'gpea_theme_backend' ),
+			'option_key'   => 'gpea_options',
+			'fields'       => [],
+		];
 
-				/*
-				 * The following parameters are specific to the options-page box
-				 * Several of these parameters are passed along to add_menu_page()/add_submenu_page().
-				 */
-
-				'option_key'      => 'gpea_options', // The option key and admin menu page slug.
-				// 'icon_url'        => 'dashicons-palmtree', // Menu icon. Only applicable if 'parent_slug' is left empty.
-				// 'menu_title'      => esc_html__( 'Options', 'cmb2' ), // Falls back to 'title' (above).
-				'parent_slug'     => 'options-general.php', // Make options page a submenu item of the themes menu.
-				// 'capability'      => 'manage_options', // Cap required to view options-page.
-				// 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
-				// 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
-				'display_cb'      => [ $this, 'gpea_render_admin_page' ], // Override the options-page form output (CMB2_Hookup::options_page_output()).
-				// 'save_button'     => esc_html__( 'Save Theme Options', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
-				// 'disable_settings_errors' => true, // On settings pages (not options-general.php sub-pages), allows disabling.
-				// 'message_cb'      => 'yourprefix_options_page_message_callback',
-			)
-		);
+		$cmb_options = &$this->subpages[$this->slug]['fields'];
 
 		/**
 		 * Options fields ids only need to be unique within these boxes.
 		 * Prefix is not needed.
 		 */
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Base of site domain', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Do not touch unless you know what you are doing', 'gpea_theme_backend' ),
-				'id'      => 'gpea_site_base',
-				'type'    => 'text',
-				'attributes'  => array(
-					'readonly' => 'readonly',
-				),
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Base of site domain', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Do not touch unless you know what you are doing', 'gpea_theme_backend' ),
+			'id'      => 'gpea_site_base',
+			'type'    => 'text',
+			'attributes'  => array(
+				'readonly' => 'readonly',
+			),
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Background image for "Values" section', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Specify the image to be used as background', 'gpea_theme_backend' ),
-				'id'      => 'gpea_values_section_bg_image',
-				'type'    => 'file',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Background image for "Values" section', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Specify the image to be used as background', 'gpea_theme_backend' ),
+			'id'      => 'gpea_values_section_bg_image',
+			'type'    => 'file',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Country title, to show next to the logo', 'gpea_theme_backend' ),
-				'id'      => 'gpea_current_country',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Country title, to show next to the logo', 'gpea_theme_backend' ),
+			'id'      => 'gpea_current_country',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'css file with fonts specifications (optional)', 'gpea_theme_backend' ),
-				'id'      => 'gpea_css_fonts',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'css file with fonts specifications (optional)', 'gpea_theme_backend' ),
+			'id'      => 'gpea_css_fonts',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Description text for generic footer', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Description text for generic footer', 'gpea_theme_backend' ),
-				'id'      => 'gpea_description_generic_footer_text',
-				'type'    => 'wysiwyg',
-				'options' => [
-					'textarea_rows' => 3,
-					'media_buttons' => false,
-				],
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Description text for generic footer', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Description text for generic footer', 'gpea_theme_backend' ),
+			'id'      => 'gpea_description_generic_footer_text',
+			'type'    => 'wysiwyg',
+			'options' => [
+				'textarea_rows' => 3,
+				'media_buttons' => false,
+			],
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Footer additional link', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Will be placed in the right corner, same row of other green links in footer', 'gpea_theme_backend' ),
-				'id'      => 'gpea_footer_extra_link',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Footer additional link', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Will be placed in the right corner, same row of other green links in footer', 'gpea_theme_backend' ),
+			'id'      => 'gpea_footer_extra_link',
+			'type'    => 'text',
 		);
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Footer additional link label', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Label of above link, if present', 'gpea_theme_backend' ),
-				'id'      => 'gpea_footer_extra_link_label',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Footer additional link label', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Label of above link, if present', 'gpea_theme_backend' ),
+			'id'      => 'gpea_footer_extra_link_label',
+			'type'    => 'text',
 		);
 
 		/* support us */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Select the "support" landing page', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Support page with all information and links', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_supportus_link',
-				'type'    => 'supportus_page_dropdown',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Select the "support" landing page', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Support page with all information and links', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_supportus_link',
+			'type'    => 'supportus_page_dropdown',
 		);
 
 		/* support us external */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Specify an external "support" page', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'If specified, the button in the top right of the screen will bring out of the site!', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_supportus_link_external',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Specify an external "support" page', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'If specified, the button in the top right of the screen will bring out of the site!', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_supportus_link_external',
+			'type'    => 'text',
 		);
 
 		/* ugc */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Select the "user generated content" landing page', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Page with form to submit new stories from users', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_ugc_link',
-				'type'    => 'ugc_page_dropdown',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Select the "user generated content" landing page', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Page with form to submit new stories from users', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_ugc_link',
+			'type'    => 'ugc_page_dropdown',
 		);
 
 		/* latest from the Earth */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Select the "latest from the Earth" page', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Page with latest news', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_latest_link',
-				'type'    => 'latest_page_dropdown',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Select the "latest from the Earth" page', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Page with latest news', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_latest_link',
+			'type'    => 'latest_page_dropdown',
 		);
 
 		/* Make a change */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Select the "Make a change" page', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_make_change',
-				'type'    => 'make_change_page_dropdown',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Select the "Make a change" page', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_make_change',
+			'type'    => 'make_change_page_dropdown',
 		);
 
 		/* Press & Media link */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Select the "Press&Media" page', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_press_media',
-				'type'    => 'press_media_page_dropdown',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Select the "Press&Media" page', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_press_media',
+			'type'    => 'press_media_page_dropdown',
 		);
 
 		/* My preferences */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Select the "User preferences" page', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_preferences',
-				'type'    => 'preferences_page_dropdown',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Select the "User preferences" page', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_preferences',
+			'type'    => 'preferences_page_dropdown',
 		);
 
 		/* Our commitment: projects */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Select the page with full list of projects', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_commitment_projects',
-				'type'    => 'commitment_projects_page_dropdown',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Select the page with full list of projects', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_commitment_projects',
+			'type'    => 'commitment_projects_page_dropdown',
 		);
 
 		/* Our commitment: issues */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Select the page with full list of issues', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_commitment_issues',
-				'type'    => 'commitment_issues_page_dropdown',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Select the page with full list of issues', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_commitment_issues',
+			'type'    => 'commitment_issues_page_dropdown',
 		);
 
 		/* Engaging default newsletter recipient */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( '"Id" code of your Engaging default subscription page', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'When user will select one or more topics to follow, he will be able to subscribe to that page', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_en_subscription_page',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( '"Id" code of your Engaging default subscription page', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'When user will select one or more topics to follow, he will be able to subscribe to that page', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_en_subscription_page',
+			'type'    => 'text',
 		);
 
 		/* default Engaging planet4-form associated to the tag cloud */
 
-		$cmb_options->add_field(
-			array(
-				'name'             => esc_html__( 'Select the form for tag cloud subsciption', 'gpea_theme_backend' ),
-				'desc'             => esc_html__( 'Form will be shown below the tag cloud to subscribe to Engaging Newsletter', 'gpea_theme_backend' ),
-				'id'               => 'gpea_tag_cloud_newsletter_form',
-				'type'             => 'select',
-				'show_option_none' => true,
-				'options'          => $this->generate_post_select( 'p4en_form', null, null ),
-			)
+		$cmb_options[] = array(
+			'name'             => esc_html__( 'Select the form for tag cloud subsciption', 'gpea_theme_backend' ),
+			'desc'             => esc_html__( 'Form will be shown below the tag cloud to subscribe to Engaging Newsletter', 'gpea_theme_backend' ),
+			'id'               => 'gpea_tag_cloud_newsletter_form',
+			'type'             => 'select',
+			'show_option_none' => true,
+			'options'          => $this->generate_post_select( 'p4en_form', null, null ),
 		);
 
 		/* Other Engaging newsletter default module */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Thank you main text, for "topic/issue" newsletter subscribe', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme_backend' ),
-				'id'      => 'gpea_subscription_page_thankyou_title',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Thank you main text, for "topic/issue" newsletter subscribe', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme_backend' ),
+			'id'      => 'gpea_subscription_page_thankyou_title',
+			'type'    => 'text',
 		);
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Thank you message: second line', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme_backend' ),
-				'id'      => 'gpea_subscription_page_thankyou_subtitle',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Thank you message: second line', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Show to user after he sign up also to newsletter', 'gpea_theme_backend' ),
+			'id'      => 'gpea_subscription_page_thankyou_subtitle',
+			'type'    => 'text',
 		);
 
 		/* donation default link */
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Default external link for donation ', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Parameters and fields of donation box will be sent to this link', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_donation_link',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Default external link for donation ', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Parameters and fields of donation box will be sent to this link', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_donation_link',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Engaging question for recurring donation', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'question name', 'gpea_theme_backend' ),
-				'id'      => 'gpea_donation_recurring_question',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Engaging question for recurring donation', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'question name', 'gpea_theme_backend' ),
+			'id'      => 'gpea_donation_recurring_question',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Donation: minimum amount for one-off', 'gpea_theme_backend' ),
-				'id'      => 'gpea_donation_minimum-oneoff',
-				'type' => 'text',
-				'attributes' => array(
-					'type'    => 'number',
-					'pattern' => '\d*',
-				),
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Donation: minimum amount for one-off', 'gpea_theme_backend' ),
+			'id'      => 'gpea_donation_minimum-oneoff',
+			'type' => 'text',
+			'attributes' => array(
+				'type'    => 'number',
+				'pattern' => '\d*',
+			),
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Donation: minimum amount for regular', 'gpea_theme_backend' ),
-				'id'      => 'gpea_donation_minimum-regular',
-				'type' => 'text',
-				'attributes' => array(
-					'type'    => 'number',
-					'pattern' => '\d*',
-				),
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Donation: minimum amount for regular', 'gpea_theme_backend' ),
+			'id'      => 'gpea_donation_minimum-regular',
+			'type' => 'text',
+			'attributes' => array(
+				'type'    => 'number',
+				'pattern' => '\d*',
+			),
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Donation: suggested amount for one-off', 'gpea_theme_backend' ),
-				'id'      => 'gpea_donation_suggested-oneoff',
-				'type' => 'text',
-				'attributes' => array(
-					'type'    => 'number',
-					'pattern' => '\d*',
-				),
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Donation: suggested amount for one-off', 'gpea_theme_backend' ),
+			'id'      => 'gpea_donation_suggested-oneoff',
+			'type' => 'text',
+			'attributes' => array(
+				'type'    => 'number',
+				'pattern' => '\d*',
+			),
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Donation: suggested amount for regular', 'gpea_theme_backend' ),
-				'id'      => 'gpea_donation_suggested-regular',
-				'type' => 'text',
-				'attributes' => array(
-					'type'    => 'number',
-					'pattern' => '\d*',
-				),
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Donation: suggested amount for regular', 'gpea_theme_backend' ),
+			'id'      => 'gpea_donation_suggested-regular',
+			'type' => 'text',
+			'attributes' => array(
+				'type'    => 'number',
+				'pattern' => '\d*',
+			),
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Donation: error message in case of lower to minimum', 'gpea_theme_backend' ),
-				'id'      => 'gpea_donation_minimum-error-message',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Donation: error message in case of lower to minimum', 'gpea_theme_backend' ),
+			'id'      => 'gpea_donation_minimum-error-message',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Donation: default currency', 'gpea_theme_backend' ),
-				'id'      => 'gpea_default_donation_currency',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Donation: default currency', 'gpea_theme_backend' ),
+			'id'      => 'gpea_default_donation_currency',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Sharing options', 'gpea_theme_backend' ),
-				'id'      => 'gpea_sharing_options',
-				'type'    => 'multicheck',
-				'options' => array(
-					'email'     => 'Email',
-					'facebook'  => 'Facebook',
-					'twitter'   => 'Twitter',
-					'whatsapp'  => 'Whatsapp',
-					'line'      => 'Line',
-					'kakaotalk' => 'KakaoTalk',
-					'wechat'    => 'WeChat',
-					'web_api'   => 'Web API Navigator',
-				),
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Sharing options', 'gpea_theme_backend' ),
+			'id'      => 'gpea_sharing_options',
+			'type'    => 'multicheck',
+			'options' => array(
+				'email'     => 'Email',
+				'facebook'  => 'Facebook',
+				'twitter'   => 'Twitter',
+				'whatsapp'  => 'Whatsapp',
+				'line'      => 'Line',
+				'kakaotalk' => 'KakaoTalk',
+				'wechat'    => 'WeChat',
+				'web_api'   => 'Web API Navigator',
+			),
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'KakaoTalk app id', 'gpea_theme_backend' ),
-				'id'      => 'gpea_kakao_app_id',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'KakaoTalk app id', 'gpea_theme_backend' ),
+			'id'      => 'gpea_kakao_app_id',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Facebook app id', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Used in subscribe form', 'gpea_theme_backend' ),
-				'id'      => 'gpea_facebook_app_id',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Facebook app id', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Used in subscribe form', 'gpea_theme_backend' ),
+			'id'      => 'gpea_facebook_app_id',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Support email recipient: general', 'gpea_theme_backend' ),
-				'id'      => 'gpea_support_recipient_email_general',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Support email recipient: general', 'gpea_theme_backend' ),
+			'id'      => 'gpea_support_recipient_email_general',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Support email recipient: special donations', 'gpea_theme_backend' ),
-				'id'      => 'gpea_support_recipient_email_special',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Support email recipient: special donations', 'gpea_theme_backend' ),
+			'id'      => 'gpea_support_recipient_email_special',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Email recipient for ugc submission', 'gpea_theme_backend' ),
-				'id'      => 'gpea_ugc_recipient_email',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Email recipient for ugc submission', 'gpea_theme_backend' ),
+			'id'      => 'gpea_ugc_recipient_email',
+			'type'    => 'text',
 		);
 
 		// post donation luncher
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Title for donation launcher below post', 'gpea_theme_backend' ),
-				'id'      => 'gpea_post_donation_launcher_title',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Title for donation launcher below post', 'gpea_theme_backend' ),
+			'id'      => 'gpea_post_donation_launcher_title',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Text for donation launcher below post', 'gpea_theme_backend' ),
-				'id'      => 'gpea_post_donation_launcher_text',
-				'type'    => 'textarea',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Text for donation launcher below post', 'gpea_theme_backend' ),
+			'id'      => 'gpea_post_donation_launcher_text',
+			'type'    => 'textarea',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Link for donation launcher below post', 'gpea_theme_backend' ),
-				'id'      => 'gpea_post_donation_launcher_link',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Link for donation launcher below post', 'gpea_theme_backend' ),
+			'id'      => 'gpea_post_donation_launcher_link',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Button label for donation launcher', 'gpea_theme_backend' ),
-				'id'      => 'gpea_post_donation_launcher_label',
-				'type'    => 'text',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Button label for donation launcher', 'gpea_theme_backend' ),
+			'id'      => 'gpea_post_donation_launcher_label',
+			'type'    => 'text',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Image for donation launcher below post', 'gpea_theme_backend' ),
-				'id'      => 'gpea_post_donation_launcher_image',
-				'type'    => 'file',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Image for donation launcher below post', 'gpea_theme_backend' ),
+			'id'      => 'gpea_post_donation_launcher_image',
+			'type'    => 'file',
 		);
 
-		$cmb_options->add_field(
-			array(
-				'name'    => esc_html__( 'Align the image to vertical center for donation launcher', 'gpea_theme_backend' ),
-				'desc'    => esc_html__( 'Align the image center vertically.', 'gpea_theme_backend' ),
-				'id'      => 'gpea_post_donation_launcher_image_align_center',
-				'type'    => 'checkbox',
-			)
+		$cmb_options[] = array(
+			'name'    => esc_html__( 'Align the image to vertical center for donation launcher', 'gpea_theme_backend' ),
+			'desc'    => esc_html__( 'Align the image center vertically.', 'gpea_theme_backend' ),
+			'id'      => 'gpea_post_donation_launcher_image_align_center',
+			'type'    => 'checkbox',
 		);
 
 	}
@@ -1072,19 +1025,16 @@ class P4CT_Metabox_Register {
 	 */
 	public function register_donation_button_options_metabox() {
 
-		$cmb_options = new_cmb2_box(
-			array(
-				'title'           => esc_html__( 'Post Donation Buttons', 'gpea_theme_backend' ),
-				'menu_title'      => esc_html__( 'Donation Buttons', 'gpea_theme_backend' ),
-				'id'              => 'gpea_donation_button_options_page',
-				'object_types'    => array( 'options-page' ),
-				'option_key'      => 'gpea_donation_button_options',
-				'parent_slug'     => 'options-general.php',
-				'display_cb'      => [ $this, 'gpea_render_admin_page' ],
-			)
-		);
+		$this->subpages['gpea_donation_button_options_page'] = [
+			'title'           => esc_html__( 'Post Donation Buttons', 'gpea_theme_backend' ),
+			'menu_title'      => esc_html__( 'Donation Buttons', 'gpea_theme_backend' ),
+			'option_key'      => 'gpea_donation_button_options',
+			'fields'          => [],
+		];
 
-		$this->add_donation_option_fields( $cmb_options, 'gpea_donation_button_' );
+		$cmb_options = &$this->subpages['gpea_donation_button_options_page']['fields'];
+
+		$cmb_options = $this->add_donation_option_fields( $cmb_options, 'gpea_donation_button_' );
 
 	}
 
@@ -1093,19 +1043,16 @@ class P4CT_Metabox_Register {
 	 */
 	public function register_donation_block_options_metabox() {
 
-		$cmb_options = new_cmb2_box(
-			array(
-				'title'           => esc_html__( 'Post/Page Donation Blocks', 'gpea_theme_backend' ),
-				'menu_title'      => esc_html__( 'Donation Blocks', 'gpea_theme_backend' ),
-				'id'              => 'gpea_donation_block_options_page',
-				'object_types'    => array( 'options-page' ),
-				'option_key'      => 'gpea_donation_block_options',
-				'parent_slug'     => 'options-general.php',
-				'display_cb'      => [ $this, 'gpea_render_admin_page' ],
-			)
-		);
+		$this->subpages['gpea_donation_block_options_page'] = [
+			'title'           => esc_html__( 'Post/Page Donation Blocks', 'gpea_theme_backend' ),
+			'menu_title'      => esc_html__( 'Donation Blocks', 'gpea_theme_backend' ),
+			'option_key'      => 'gpea_donation_block_options',
+			'fields'          => [],
+		];
 
-		$this->add_donation_option_fields( $cmb_options, 'gpea_donation_block_', true );
+		$cmb_options = &$this->subpages['gpea_donation_block_options_page']['fields'];
+
+		$cmb_options = $this->add_donation_option_fields( $cmb_options, 'gpea_donation_block_', true );
 
 	}
 
@@ -1114,7 +1061,7 @@ class P4CT_Metabox_Register {
 	 *
 	 * @return array
 	 */
-	public function add_donation_option_fields( $cmb_options = null, $id_prefix = '', $is_block = false ) {
+	public function add_donation_option_fields( $cmb_options = [], $id_prefix = '', $is_block = false ) {
 
 		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
 		if ( ! $main_issues_category_id ) {
@@ -1137,33 +1084,29 @@ class P4CT_Metabox_Register {
 		$main_issues = array_column( $main_issues, 'name', 'slug' );
 
 		if( $is_block ) {
-			$cmb_options->add_field(
-				array(
-					'name'             => '',
-					'desc'             => '
-						<ol>
-							<li>Please set the default values for the donation blocks in the post/page.</li>
-							<li>Location: it\'s better to set around the middle area of the post.</li>
-							<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the fields empty will go to the &quot;All-site Default&quot; once writers insert the donation block.</li>
-						<ol>', 'gpea_theme_backend',
-					'id'               => $id_prefix . '_hint',
-					'type'             => 'title',
-				)
+			$cmb_options[] = array(
+				'name'             => '',
+				'desc'             => '
+					<ol>
+						<li>Please set the default values for the donation blocks in the post/page.</li>
+						<li>Location: it\'s better to set around the middle area of the post.</li>
+						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the fields empty will go to the &quot;All-site Default&quot; once writers insert the donation block.</li>
+					<ol>', 'gpea_theme_backend',
+				'id'               => $id_prefix . '_hint',
+				'type'             => 'title',
 			);
 		}
 		else {
-			$cmb_options->add_field(
-				array(
-					'name'             => '',
-					'desc'             => '
-						<ol>
-							<li>Please set the default values for the donation buttons in the post.</li>
-							<li>Buttons\' locations: one is above the main content and under the blockquote (quote with theme color background); the second one is below the main content and before the further reading section.</li>
-							<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the link/label empty will go to the &quot;All-site Default&quot; once writers &quot;show the button.&quot;</li>
-						<ol>', 'gpea_theme_backend',
-					'id'               => $id_prefix . '_hint',
-					'type'             => 'title',
-				)
+			$cmb_options[] = array(
+				'name'             => '',
+				'desc'             => '
+					<ol>
+						<li>Please set the default values for the donation buttons in the post.</li>
+						<li>Buttons\' locations: one is above the main content and under the blockquote (quote with theme color background); the second one is below the main content and before the further reading section.</li>
+						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the link/label empty will go to the &quot;All-site Default&quot; once writers &quot;show the button.&quot;</li>
+					<ol>', 'gpea_theme_backend',
+				'id'               => $id_prefix . '_hint',
+				'type'             => 'title',
 			);
 		}
 
@@ -1173,65 +1116,55 @@ class P4CT_Metabox_Register {
 
 		foreach( $main_issues as $issue_key => $issue_title ) {
 
-			$cmb_options->add_field(
-				array(
-					'name'             => esc_html__( $issue_title, 'gpea_theme_backend' ),
-					'desc'             => $issue_key == 'default' ? '' : esc_html__( 'Leave empty to use the same setting in &quot;All-site Default&quot;', 'gpea_theme_backend' ),
-					'id'               => $id_prefix . $issue_key,
-					'type'             => 'title',
-				)
+			$cmb_options[] = array(
+				'name'             => esc_html__( $issue_title, 'gpea_theme_backend' ),
+				'desc'             => $issue_key == 'default' ? '' : esc_html__( 'Leave empty to use the same setting in &quot;All-site Default&quot;', 'gpea_theme_backend' ),
+				'id'               => $id_prefix . $issue_key,
+				'type'             => 'title',
 			);
 
 			if( $is_block ) {
 
-				$cmb_options->add_field(
-					array(
-						'name'             => esc_html__( 'Title', 'gpea_theme_backend' ),
-						'id'               => $id_prefix . $issue_key . '_title',
-						'type'             => 'text',
-					)
+				$cmb_options[] = array(
+					'name'             => esc_html__( 'Title', 'gpea_theme_backend' ),
+					'id'               => $id_prefix . $issue_key . '_title',
+					'type'             => 'text',
 				);
 
-				$cmb_options->add_field(
-					array(
-						'name'             => esc_html__( 'Description', 'gpea_theme_backend' ),
-						'desc'             => esc_html__( 'For a better user experience, it\'s better to leave empty or not over 20 characters.', 'gpea_theme_backend' ),
-						'id'               => $id_prefix . $issue_key . '_desc',
-						'type'             => 'textarea',
-					)
+				$cmb_options[] = array(
+					'name'             => esc_html__( 'Description', 'gpea_theme_backend' ),
+					'desc'             => esc_html__( 'For a better user experience, it\'s better to leave empty or not over 20 characters.', 'gpea_theme_backend' ),
+					'id'               => $id_prefix . $issue_key . '_desc',
+					'type'             => 'textarea',
 				);
 
 			}
 
-			$cmb_options->add_field(
-				array(
-					'name'             => esc_html__( 'Button Link', 'gpea_theme_backend' ),
-					'id'               => $id_prefix . $issue_key . '_button_link',
-					'type'             => 'text',
-				)
+			$cmb_options[] = array(
+				'name'             => esc_html__( 'Button Link', 'gpea_theme_backend' ),
+				'id'               => $id_prefix . $issue_key . '_button_link',
+				'type'             => 'text',
 			);
 
-			$cmb_options->add_field(
-				array(
-					'name'             => esc_html__( 'Button Label', 'gpea_theme_backend' ),
-					'id'               => $id_prefix . $issue_key . '_button_text',
-					'type'             => 'text_medium',
-				)
+			$cmb_options[] = array(
+				'name'             => esc_html__( 'Button Label', 'gpea_theme_backend' ),
+				'id'               => $id_prefix . $issue_key . '_button_text',
+				'type'             => 'text_medium',
 			);
 
 			if( $is_block ) {
 
-				$cmb_options->add_field(
-					array(
-						'name'    => esc_html__( 'Background Image', 'gpea_theme_backend' ),
-						'id'      => $id_prefix . $issue_key . '_bg_img',
-						'type'    => 'file',
-					)
+				$cmb_options[] = array(
+					'name'    => esc_html__( 'Background Image', 'gpea_theme_backend' ),
+					'id'      => $id_prefix . $issue_key . '_bg_img',
+					'type'    => 'file',
 				);
 
 			}
 
 		}
+
+		return $cmb_options;
 		
 	}
 
@@ -1352,62 +1285,6 @@ class P4CT_Metabox_Register {
 	 */
 	public function set_donation_button_default( $field_args, $field ) {
 		return get_current_screen()->action == 'add' ? '1' : '0';
-	}
-
-	/**
-	 * Admin page markup. Mostly handled by CMB2.
-	 *
-	 * @param string $plugin_page The key for the current page.
-	 */
-	public function gpea_render_admin_page( $cmb_instance ) {
-		?>
-		<div class="wrap cmb2-options-page option-<?php echo esc_attr( sanitize_html_class( $cmb_instance->option_key ) ); ?>">
-			<?php if ( $cmb_instance->cmb->prop( 'title' ) ) : ?>
-				<h2><?php echo wp_kses_post( $cmb_instance->cmb->prop( 'title' ) ); ?></h2>
-			<?php endif; ?>
-			<?php $cmb_instance->options_page_tab_nav_output(); ?>
-			<form class="cmb-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="POST" id="<?php echo $cmb_instance->cmb->cmb_id; ?>" enctype="multipart/form-data" encoding="multipart/form-data">
-				<input type="hidden" name="action" value="<?php echo esc_attr( $cmb_instance->option_key ); ?>">
-				<?php $cmb_instance->options_page_metabox(); ?>
-				<?php submit_button( esc_attr( $cmb_instance->cmb->prop( 'save_button' ) ), 'primary', 'submit-cmb' ); ?>
-			</form>
-		</div>
-		<style>
-		.cmb-row {
-			display: flex;
-			flex-direction: column;
-		}
-		.cmb-th {
-			float: none;
-		}
-		.cmb-td {
-			float: none;
-			flex:  0 0 auto;
-			padding-left: 0 !important;
-			margin-left: 0 !important;
-		}
-		@media screen and (min-width: 783px){ 
-			.cmb-row {
-				flex-direction: row;
-			}
-			.cmb-th {
-				flex:  0 0 200px;
-			}
-			.cmb-td {
-				margin-top: 1em;
-				margin-left: 1em !important;
-			}
-		}
-		</style>
-		<script>
-		/* jQuery('.cmb2-metabox').removeClass('cmb2-metabox');
-		jQuery('.cmb2-metabox-description').removeClass('cmb2-metabox-description');
-		jQuery('.cmb2-metabox-title').each(function() {
-			jQuery(this).removeClass('cmb2-metabox-title').addClass('title').unwrap().unwrap();
-			jQuery(this).replaceWith(jQuery('<h2/>').html(jQuery(this).html()));
-		}); */
-		</script>
-		<?php
 	}
 
 	/**
@@ -1571,6 +1448,50 @@ class P4CT_Metabox_Register {
 				'name'             => 'gpea_mainissue_page',
 			]
 		);
+	}
+
+
+	/**
+	 * Admin page markup. Mostly handled by CMB2.
+	 *
+	 * @param string $plugin_page The key for the current page.
+	 */
+	public function admin_page_display( string $plugin_page ) {
+
+		$fields = $this->subpages[ $plugin_page ]['fields'];
+		$option_key = $this->subpages[ $plugin_page ]['option_key'];
+
+		$add_scripts = $this->subpages[ $plugin_page ]['add_scripts'] ?? null;
+		if ( $add_scripts ) {
+			$add_scripts();
+		}
+		?>
+		<div class="wrap <?php echo esc_attr( $option_key ); ?>">
+			<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
+			<?php cmb2_metabox_form( $this->option_metabox( $fields, $option_key ), $option_key ); ?>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Defines the theme option metabox and field configuration.
+	 *
+	 * @param array $fields expects the fields (if they exist) of this subpage.
+	 *
+	 * @return array
+	 */
+	public function option_metabox( $fields, $option_key ) {
+		return [
+			'id'         => self::METABOX_ID,
+			'show_on'    => [
+				'key'   => 'options-page',
+				'value' => [
+					$option_key,
+				],
+			],
+			'show_names' => true,
+			'fields'     => $fields,
+		];
 	}
 
 }
