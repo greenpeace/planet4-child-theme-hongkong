@@ -737,7 +737,7 @@ svg.external-link, svg.external-icon, svg.external_link { display: none; }
 
 .button.loading, .button[disabled], .enform form button.loading, .enform form button[disabled] { color: white; background-color: #BAB0A6; }
 
-.button.primary.loading, .button.primary[disabled], .enform form button.primary.loading, .enform form button.primary[disabled] { color: white; background-color: #BAB0A6; }
+.button.primary.loading, .button.primary[disabled], .enform form button.primary.loading, .enform form button.primary[disabled] { color: white; border-color: #BAB0A6; background-color: #BAB0A6; }
 
 .button.loading, .button .en-spinner, .enform form button.loading, .enform form button .en-spinner { position: relative; }
 
@@ -3112,23 +3112,41 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-mc-subscription .content { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
 
-.section-mc-subscription .form-row { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; max-width: 400px; margin-bottom: 20px; }
+@media only screen and (min-width: 1024px) { .section-mc-subscription .form-container { max-width: 610px; } }
+
+@media only screen and (min-width: 1280px) { .section-mc-subscription .form-container { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; max-width: 740px; } }
+
+.section-mc-subscription .form-row { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; margin-bottom: 20px; }
 
 .section-mc-subscription .form-row .en__field__element { position: relative; width: 100%; }
 
-.section-mc-subscription .name-part .en__field__element:first-child { margin-right: 10px; -ms-flex-preferred-size: 40%; flex-basis: 40%; }
+@media only screen and (min-width: 1024px) { .section-mc-subscription .name-part .en__field__element--first-name { -webkit-box-flex: 0; -ms-flex: 0 0 210px; flex: 0 0 210px; } }
 
-.section-mc-subscription .email-part .do-you-mean { color: #f96d8c; font-size: 10px; text-align: left; cursor: pointer; }
+@media only screen and (min-width: 1280px) { .section-mc-subscription .name-part .en__field__element--first-name { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
+
+.section-mc-subscription .name-part .en__field__element--last-name { margin-left: 10px; }
+
+@media only screen and (max-width: 1023px) { .section-mc-subscription .name-part .en__field__element--last-name.en__field__element--is-required:before { display: none; } }
+
+@media only screen and (min-width: 1024px) { .section-mc-subscription .name-part .en__field__element--last-name { margin-left: 30px; } }
+
+.section-mc-subscription .email-part .do-you-mean { cursor: pointer; }
 
 .section-mc-subscription .submit-part { -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
 
 .section-mc-subscription .submit-part .enform-notice { color: #e41e1e; }
 
-.section-mc-subscription button.submit #spinner { display: none; }
+.section-mc-subscription .button.submit { font-size: 17px; max-width: 220px; margin-right: auto; margin-left: auto; }
 
-.section-mc-subscription button.submit.loading { color: transparent; }
+.section-mc-subscription .button.submit #spinner { display: none; }
 
-.section-mc-subscription button.submit.loading #spinner { display: block; }
+.section-mc-subscription .button.submit.loading { color: transparent; }
+
+.section-mc-subscription .button.submit.loading #spinner { display: block; }
+
+@media only screen and (min-width: 1024px) { .section-mc-subscription .button.submit { max-width: 290px; } }
+
+@media only screen and (min-width: 1280px) { .section-mc-subscription .button.submit { margin-top: 0; margin-left: 30px; max-width: 160px; } }
 
 @-webkit-keyframes shake { 10%, 90% { -webkit-transform: translate3d(-1px, 0, 0); transform: translate3d(-1px, 0, 0); }
   20%, 80% { -webkit-transform: translate3d(2px, 0, 0); transform: translate3d(2px, 0, 0); }
@@ -3142,17 +3160,29 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-mc-subscription .enform-error { color: #e41e1e; -webkit-animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
 
-.section-mc-subscription .invalid-feedback { margin-top: 0; font-size: 12px; line-height: 20px; color: #e41e1e; font-weight: normal; position: absolute; padding: 0 8px; left: 10px; top: 34px; background-color: white; }
+.section-mc-subscription .invalid-feedback { margin-top: 0; font-size: 15px; line-height: 20px; color: #e41e1e; font-weight: normal; position: absolute; padding: 0 8px; right: 15px; top: 10px; }
 
-.section-mc-subscription .custom-checkbox .invalid-feedback { position: static; padding-left: 0; }
+.section-mc-subscription .custom-checkbox { display: -webkit-box; display: -ms-flexbox; display: flex; }
 
-.section-mc-subscription .en__field__element input[type='email'].is-invalid, .section-mc-subscription .en__field__element input[type='tel'].is-invalid, .section-mc-subscription .en__field__element input[type='text'].is-invalid, .section-mc-subscription .en__field__element select.is-invalid, .section-mc-subscription .custom-checkbox.is-invalid { border-color: #e41e1e !important; margin-bottom: 0; -webkit-animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97); animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+.section-mc-subscription .custom-checkbox__mark { position: relative; height: 24px; width: 24px; border: 2px solid #393939; -webkit-box-flex: 0; -ms-flex: 0 0 auto; flex: 0 0 auto; margin-right: 0.5em; }
 
-.section-mc-subscription .en__field__element input[type='email'].is-invalid + .invalid-feedback, .section-mc-subscription .en__field__element input[type='tel'].is-invalid + .invalid-feedback, .section-mc-subscription .en__field__element input[type='text'].is-invalid + .invalid-feedback, .section-mc-subscription .en__field__element select.is-invalid + .invalid-feedback, .section-mc-subscription .custom-checkbox.is-invalid + .invalid-feedback { display: inline-block; }
+.section-mc-subscription .custom-checkbox__mark:after { content: ''; position: absolute; display: none; left: 6px; top: 1px; width: 8px; height: 15px; border: solid white; border-width: 0 2px 2px 0; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); }
 
-.section-mc-subscription .en__field--validationFailed > .en__field__error { display: block; z-index: 2; }
+.section-mc-subscription .custom-checkbox input { position: absolute; opacity: 0; height: 0; width: 0; }
 
-.section-mc-subscription .en__field__element input[type='radio'].is-invalid, .section-mc-subscription .en__field__element input[type='checkbox'].is-invalid { margin-top: 30px; }
+.section-mc-subscription .custom-checkbox input:checked + .custom-checkbox__mark { background-color: #393939; }
+
+.section-mc-subscription .custom-checkbox input:checked + .custom-checkbox__mark:after { display: block; }
+
+.section-mc-subscription .custom-checkbox .invalid-feedback { position: static; padding-left: 0; margin-top: 0.5em; }
+
+.section-mc-subscription .en__field__element--is-required:not(.custom-checkbox):before { content: '*'; position: absolute; color: #E52323; left: -0.75em; }
+
+.section-mc-subscription .en__field__element input[type='email'], .section-mc-subscription .en__field__element input[type='tel'], .section-mc-subscription .en__field__element input[type='text'], .section-mc-subscription .en__field__element select { border: none; background-color: #F5F5F5; -webkit-box-shadow: none; box-shadow: none; max-width: none; padding: 10px 15px; }
+
+.section-mc-subscription .en__field__element input[type='email'].is-invalid, .section-mc-subscription .en__field__element input[type='tel'].is-invalid, .section-mc-subscription .en__field__element input[type='text'].is-invalid, .section-mc-subscription .en__field__element select.is-invalid { -webkit-animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97); animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
+
+.section-mc-subscription .en__field__element input[type='email'], .section-mc-subscription .en__field__element input[type='tel'], .section-mc-subscription .en__field__element input[type='text'], .section-mc-subscription .en__field__element select, .section-mc-subscription .en__field__element .button, .section-mc-subscription .submit-part input[type='email'], .section-mc-subscription .submit-part input[type='tel'], .section-mc-subscription .submit-part input[type='text'], .section-mc-subscription .submit-part select, .section-mc-subscription .submit-part .button { line-height: 51px; height: 51px; }
 
 .section-mc-subscription .en__field__element input[type='radio'].is-invalid + .invalid-feedback, .section-mc-subscription .en__field__element input[type='checkbox'].is-invalid + .invalid-feedback { display: inline-block; top: 4px; left: 0; padding-left: 0; }
 

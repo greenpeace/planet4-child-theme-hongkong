@@ -150,6 +150,7 @@
     &.loading,
     &[disabled] {
       color: white;
+      border-color: $color-orange-disabled;
       background-color: $color-orange-disabled;
     }
   }
