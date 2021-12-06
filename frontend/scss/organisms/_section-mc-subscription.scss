@@ -112,6 +112,7 @@
     max-width: 220px;
     margin-right: auto;
     margin-left: auto;
+    white-space: nowrap;
     #spinner {
       display: none;
     }
@@ -120,6 +121,9 @@
       #spinner {
         display: block;
       }
+    }
+    &:after {
+      top: 14px;
     }
     @include greaterThan('sm') {
       max-width: 290px;
@@ -241,7 +245,7 @@
     input[type='text'],
     select,
     .button {
-      line-height: 51px;
+      line-height: 50px;
       height: 51px;
     }
   }
