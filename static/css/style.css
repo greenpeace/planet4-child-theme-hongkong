@@ -3112,6 +3112,12 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-mc-subscription .content { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
 
+.section-mc-subscription .content--title h2 { font-weight: normal; font-size: 22px; -webkit-box-ordinal-group: 3; -ms-flex-order: 2; order: 2; margin: 1.5em auto; }
+
+@media only screen and (min-width: 1024px) { .section-mc-subscription .content--title h2 { font-size: 28px; } }
+
+.section-mc-subscription .content--title p { margin-top: 3em; margin-bottom: 0; font-weight: 400; font-size: 16px; border-left: 4px solid #66cc00; padding-left: 0.75em; }
+
 @media only screen and (min-width: 1024px) { .section-mc-subscription .form-container { max-width: 610px; } }
 
 @media only screen and (min-width: 1280px) { .section-mc-subscription .form-container { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; max-width: 740px; } }
@@ -3174,6 +3180,10 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-mc-subscription .custom-checkbox input:checked + .custom-checkbox__mark:after { display: block; }
 
+.section-mc-subscription .custom-checkbox input.is-invalid + .custom-checkbox__mark { border-color: #E52323; }
+
+.section-mc-subscription .custom-checkbox input + .invalid-feedback { display: inline-block; top: 4px; left: 0; padding-left: 0; }
+
 .section-mc-subscription .custom-checkbox .invalid-feedback { position: static; padding-left: 0; margin-top: 0.5em; }
 
 .section-mc-subscription .en__field__element--is-required:not(.custom-checkbox):before { content: '*'; position: absolute; color: #E52323; left: -0.75em; }
@@ -3183,8 +3193,6 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 .section-mc-subscription .en__field__element input[type='email'].is-invalid, .section-mc-subscription .en__field__element input[type='tel'].is-invalid, .section-mc-subscription .en__field__element input[type='text'].is-invalid, .section-mc-subscription .en__field__element select.is-invalid { -webkit-animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97); animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97); }
 
 .section-mc-subscription .en__field__element input[type='email'], .section-mc-subscription .en__field__element input[type='tel'], .section-mc-subscription .en__field__element input[type='text'], .section-mc-subscription .en__field__element select, .section-mc-subscription .en__field__element .button, .section-mc-subscription .submit-part input[type='email'], .section-mc-subscription .submit-part input[type='tel'], .section-mc-subscription .submit-part input[type='text'], .section-mc-subscription .submit-part select, .section-mc-subscription .submit-part .button { line-height: 51px; height: 51px; }
-
-.section-mc-subscription .en__field__element input[type='radio'].is-invalid + .invalid-feedback, .section-mc-subscription .en__field__element input[type='checkbox'].is-invalid + .invalid-feedback { display: inline-block; top: 4px; left: 0; padding-left: 0; }
 
 .section-mc-subscription .en__field__element.en__field__element--select { border: none; margin-bottom: 20px; }
 

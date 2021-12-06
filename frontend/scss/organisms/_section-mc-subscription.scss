@@ -26,6 +26,25 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    &--title {
+      h2 {
+        font-weight: normal;
+        font-size: 22px;
+        order: 2;
+        margin: 1.5em auto;
+        @include greaterThan('sm') {
+          font-size: 28px;
+        }
+      }
+      p {
+        margin-top: 3em;
+        margin-bottom: 0;
+        font-weight: 400;
+        font-size: 16px;
+        border-left: 4px solid $color-green;
+        padding-left: 0.75em;
+      }
+    }
   }
 
   .form-container {
@@ -174,6 +193,15 @@
           display: block;
         }
       }
+      &.is-invalid + .custom-checkbox__mark {
+        border-color: #E52323;
+      }
+      + .invalid-feedback {
+        display: inline-block;
+        top: 4px;
+        left: 0;
+        padding-left: 0;
+      }
     }
     .invalid-feedback {
       position: static;
@@ -215,17 +243,6 @@
     .button {
       line-height: 51px;
       height: 51px;
-    }
-  }
-
-  .en__field--validationFailed .invalid-feedback {}
-  .en__field__element input[type='radio'].is-invalid,
-  .en__field__element input[type='checkbox'].is-invalid {
-    + .invalid-feedback {
-      display: inline-block;
-      top: 4px;
-      left: 0;
-      padding-left: 0;
     }
   }
 
