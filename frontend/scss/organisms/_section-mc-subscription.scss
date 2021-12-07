@@ -3,7 +3,7 @@
     display: none !important;
   }
 
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
+  // box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
   background: white !important;
 
   h2 {
@@ -18,8 +18,9 @@
     justify-content: center;
   }
 
+  margin: 35px 0 35px;
   @include greaterThan('sm') {
-    padding: 35px 0;
+    margin: 60px 0;
   }
 
   .content {
@@ -37,7 +38,7 @@
         }
       }
       p {
-        margin-top: 3em;
+        margin-top: 0;
         margin-bottom: 0;
         font-weight: 400;
         font-size: 16px;

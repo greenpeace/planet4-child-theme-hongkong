@@ -1,12 +1,19 @@
 header {
   position: relative;
   height: 50px;
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
+  // box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
   background-color: $color-green;
   color: white;
   display: flex;
   align-items: center;
   z-index: 4;
+
+  .admin-bar & {
+    top: 32px;
+    @media only screen and (max-width: 782px) {
+      top: 46px;
+    }
+  }
 
   @include greaterThan('sm') {
     position: fixed;
