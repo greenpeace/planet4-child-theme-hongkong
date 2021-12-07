@@ -55,9 +55,11 @@ class P4CT_Metabox_Register {
 	 * Class hooks.
 	 */
 	private function hooks() {
+
 		add_action( 'cmb2_admin_init', [ $this, 'register_p4_meta_box' ] );
 		add_action( 'admin_menu', [ $this, 'add_options_pages' ] );
 		add_filter( 'cmb2_show_on', [ $this, 'be_taxonomy_show_on_filter' ], 10, 2 );
+
 		add_filter( 'cmb2_render_supportus_page_dropdown', [ $this, 'gpea_render_supportus_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_mainissue_page_dropdown', [ $this, 'gpea_render_mainissue_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_ugc_page_dropdown', [ $this, 'gpea_render_ugc_page_dropdown' ], 10, 2 );
@@ -67,6 +69,9 @@ class P4CT_Metabox_Register {
 		add_filter( 'cmb2_render_preferences_page_dropdown', [ $this, 'gpea_render_preferences_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_commitment_projects_page_dropdown', [ $this, 'gpea_render_commitment_projects_page_dropdown' ], 10, 2 );
 		add_filter( 'cmb2_render_commitment_issues_page_dropdown', [ $this, 'gpea_render_commitment_issues_page_dropdown' ], 10, 2 );
+
+		add_filter( 'cmb2_override_meta_save', [ $this, 'gpea_override_meta_value' ], 10, 4 );
+
 	}
 
 	/**
@@ -87,6 +92,7 @@ class P4CT_Metabox_Register {
 		$this->register_main_options_metabox();
 		$this->register_donation_button_options_metabox();
 		$this->register_donation_block_options_metabox();
+		$this->register_notification_options_metabox();
 
 	}
 
@@ -495,7 +501,7 @@ class P4CT_Metabox_Register {
 			'name'             => esc_html__( 'Show the Button', self::METABOX_ID ),
 			'id'               => 'p4-gpea_show_article_top_donation_button',
 			'type'             => 'select',
-			'options_cb'       => [ $this, 'populate_donation_button_options' ],
+			'options_cb'       => [ $this, 'populate_yes_or_no_options' ],
 			'default_cb'       => [ $this, 'set_donation_button_default' ],
 		]);
 
@@ -528,7 +534,7 @@ class P4CT_Metabox_Register {
 			'name'             => esc_html__( 'Show the Button', self::METABOX_ID ),
 			'id'               => 'p4-gpea_show_article_bottom_donation_button',
 			'type'             => 'select',
-			'options_cb'       => [ $this, 'populate_donation_button_options' ],
+			'options_cb'       => [ $this, 'populate_yes_or_no_options' ],
 			'default_cb'       => [ $this, 'set_donation_button_default' ],
 		]);
 
@@ -1047,6 +1053,94 @@ class P4CT_Metabox_Register {
 		
 	}
 
+	/**
+	 * Registers notification option meta box(es).
+	 */
+	public function register_notification_options_metabox() {
+
+		$this->subpages['gpea_notification_options_page'] = [
+			'title'        => esc_html__( 'Homepage Notification', self::METABOX_ID ),
+			'menu_title'   => esc_html__( 'Notification', self::METABOX_ID ),
+			'option_key'   => 'gpea_notification_options',
+			'fields'       => [],
+		];
+
+		$cmb_options = &$this->subpages['gpea_notification_options_page']['fields'];
+
+		$cmb_options['gpea_notification_group'] = [
+			'id'      => 'gpea_notification_group',
+			'type'    => 'group',
+			'options' => [
+				'group_title'   => __( 'Notification {#}', self::METABOX_ID ),
+				'add_button'    => __( 'Add Another Notification', self::METABOX_ID ),
+		        'remove_button' => __( 'Remove Notification', self::METABOX_ID ),
+		        'sortable'      => TRUE,
+			],
+			'fields'  => [],
+		];
+
+		$cmb_child_options = &$cmb_options['gpea_notification_group']['fields'];
+
+		$cmb_child_options[] = [
+			'name'             => esc_html__( 'Color Theme', self::METABOX_ID ),
+			'id'               => 'layout',
+			'type'             => 'radio',
+			'options'          => [
+				'new'         => 'Hot updates',
+				'maintain'    => 'Maintain announcement',
+				'maintaining' => 'Maintaining',
+			],
+			'default'          => 'new',
+		];
+
+		$cmb_child_options[] = [
+			'name'             => esc_html__( 'Text', self::METABOX_ID ),
+			'id'               => 'content',
+			'type'             => 'textarea_small',
+		];
+
+		$cmb_child_options[] = [
+			'name'             => esc_html__( 'Link', self::METABOX_ID ),
+			'id'               => 'link',
+			'type'             => 'text',
+		];
+
+		$cmb_child_options[] = [
+			'name'             => esc_html__( 'Show the Notification', self::METABOX_ID ),
+			'id'               => 'enabled',
+			'type'             => 'select',
+			'options_cb'       => [ $this, 'populate_yes_or_no_options' ],
+			'default'          => 1,
+		];
+
+		$cmb_child_options[] = [
+			'name'             => esc_html__( 'Start Date/Time', self::METABOX_ID ),
+			'desc'             => esc_html__( 'Leave empty for unlimited.', self::METABOX_ID ),
+			'id'               => 'start_timestamp',
+			'type'             => 'text_datetime_timestamp',
+		];
+
+		$cmb_child_options[] = [
+			'name'             => esc_html__( 'End Date/Time', self::METABOX_ID ),
+			'desc'             => esc_html__( 'Leave empty for unlimited.', self::METABOX_ID ),
+			'id'               => 'end_timestamp',
+			'type'             => 'text_datetime_timestamp',
+		];
+
+	}
+
+	public function gpea_override_meta_value( $override, $args, $field_args, $field ) {
+
+		switch($args['id']) {
+			case 'gpea_notification_options':
+				update_option( $args['id'] . '_last_modified', str_replace('.', '_', microtime(TRUE)) );
+				break;
+		}
+		
+		return NULL;
+		
+	}
+	
 
 	/**
 	 * Taxonomy show_on filter
@@ -1150,7 +1244,7 @@ class P4CT_Metabox_Register {
 	 *
 	 * @return array
 	 */
-	public function populate_donation_button_options( $field ) {
+	public function populate_yes_or_no_options( $field ) {
 		$options = [
 			'1' => 'Yes',
 			'0' => 'No',
