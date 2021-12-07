@@ -60,63 +60,6 @@ header {
         background-repeat: no-repeat;
       }
 
-      .dropdown {
-        position: relative;
-
-        button {
-          height: 43px;
-          background-color: transparent;
-          border: none;
-          // outline: none;
-          display: flex;
-          align-items: center;
-          color: white;
-          cursor: pointer;
-
-          p {
-            font-size: 14px;
-            font-weight: bold;
-            white-space: nowrap;
-          }
-
-          span {
-            font-size: 22px;
-            margin-left: -2px;
-          }
-        }
-
-        .dropdown-menu {
-          display: none;
-          position: absolute;
-          left: -180px;
-          width: 300px;
-          max-height: 80vh;
-          background-color: white;
-          border-radius: 3px;
-          box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28);
-          flex-direction: column;
-          padding: 10px 20px;
-
-          @include greaterThan('sm') {
-            left: -185px;
-            width: 900px;
-          }
-
-          a {
-            text-decoration: none;
-            color: $color-blue;
-            margin-bottom: 5px;
-
-            &:last-child {
-              margin-bottom: 0;
-            }
-          }
-        }
-
-        &.is-open .dropdown-menu {
-          display: flex;
-        }
-      }
     }
 
     .center-box {

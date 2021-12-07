@@ -1489,24 +1489,6 @@ header .content .left-box .logo { text-decoration: none !important; margin-top: 
 
 header .content .left-box .logo-greenpeace { display: inline-block; height: 20px; width: 185px; background-size: contain; background-position: left center; background-repeat: no-repeat; }
 
-header .content .left-box .dropdown { position: relative; }
-
-header .content .left-box .dropdown button { height: 43px; background-color: transparent; border: none; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; color: white; cursor: pointer; }
-
-header .content .left-box .dropdown button p { font-size: 14px; font-weight: bold; white-space: nowrap; }
-
-header .content .left-box .dropdown button span { font-size: 22px; margin-left: -2px; }
-
-header .content .left-box .dropdown .dropdown-menu { display: none; position: absolute; left: -180px; width: 300px; max-height: 80vh; background-color: white; border-radius: 3px; -webkit-box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28); box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28); -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; padding: 10px 20px; }
-
-@media only screen and (min-width: 1024px) { header .content .left-box .dropdown .dropdown-menu { left: -185px; width: 900px; } }
-
-header .content .left-box .dropdown .dropdown-menu a { text-decoration: none; color: #292f47; margin-bottom: 5px; }
-
-header .content .left-box .dropdown .dropdown-menu a:last-child { margin-bottom: 0; }
-
-header .content .left-box .dropdown.is-open .dropdown-menu { display: -webkit-box; display: -ms-flexbox; display: flex; }
-
 header .content .center-box { -webkit-box-flex: 1; -ms-flex-positive: 1; flex-grow: 1; margin-left: 55px; }
 
 header .content .center-box .menu { display: -webkit-box; display: -ms-flexbox; display: flex; height: 50px; margin: 0; padding: 0; list-style: none; }
@@ -1709,6 +1691,24 @@ footer .latte-logo { position: absolute; display: block; width: 100px; height: 2
 footer .latte-logo.mobile-only { position: static; float: right; }
 
 footer img.footer-greenpeace--logo { max-height: 40px; }
+
+footer .dropdown { position: relative; }
+
+footer .dropdown button { height: 43px; background-color: transparent; border: none; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; color: white; cursor: pointer; }
+
+footer .dropdown button p { font-size: 14px; font-weight: bold; white-space: nowrap; }
+
+footer .dropdown button span { font-size: 22px; margin-left: -2px; }
+
+footer .dropdown .dropdown-menu { display: none; position: absolute; left: -180px; width: 300px; max-height: 80vh; background-color: white; border-radius: 3px; -webkit-box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28); box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28); -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; padding: 10px 20px; }
+
+@media only screen and (min-width: 1024px) { footer .dropdown .dropdown-menu { left: -185px; width: 900px; } }
+
+footer .dropdown .dropdown-menu a { text-decoration: none; color: #292f47; margin-bottom: 5px; }
+
+footer .dropdown .dropdown-menu a:last-child { margin-bottom: 0; }
+
+footer .dropdown.is-open .dropdown-menu { display: -webkit-box; display: -ms-flexbox; display: flex; }
 
 .big-carousel-description { margin-bottom: 20px; }
 
