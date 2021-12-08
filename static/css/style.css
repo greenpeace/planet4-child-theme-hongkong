@@ -1570,9 +1570,9 @@ header .content .right-box .button:active { background-color: #E96D00; border-co
   .is-scrolling-down header { height: 48px; -webkit-transition: height 500ms ease 200ms; transition: height 500ms ease 200ms; }
   .is-scrolling-down header .mobile-toolbar { height: 0; -webkit-transition: height 500ms ease 200ms; transition: height 500ms ease 200ms; overflow: hidden; } }
 
-footer { position: relative; padding-top: 20px; background: #292f47 url(../images/footer-bg.png) no-repeat center; background-size: cover; color: white; z-index: 2; }
+footer { position: relative; padding-top: 60px; background: #292f47 url(../images/footer-bg.png) no-repeat bottom center; background-size: cover; color: white; z-index: 2; }
 
-@media only screen and (min-width: 1024px) { footer { padding-top: 60px; } }
+@media only screen and (min-width: 1024px) { footer { padding-top: 150px; } }
 
 footer h5, footer .icon-greenpeace { color: #898b92; }
 
@@ -1588,14 +1588,14 @@ footer a, footer a [class^='icon-']::before, footer a [class*=' icon-']::before 
 
 footer a:focus, footer a:hover { color: #66cc00; border-bottom: none; }
 
-footer hr { background-color: rgba(255, 255, 255, 0.5); }
+footer hr { background-color: white; height: 2px; }
 
-footer .footer-upper { padding-bottom: 20px; }
+footer .footer-upper { padding-bottom: 200px; }
 
 @media only screen and (min-width: 1024px) { footer .footer-upper .ct-container { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; }
   footer .footer-upper h5 { margin-bottom: 35px; } }
 
-footer .footer-lower { padding-top: 20px; padding-bottom: 20px; overflow: hidden; }
+footer .footer-lower { padding-top: 20px; padding-bottom: 40px; overflow: hidden; width: 100%; }
 
 footer .socials > h6, footer .socials > ul { display: inline-block; margin-right: 30px; }
 
@@ -1619,16 +1619,10 @@ footer .social-links > li a:focus, footer .social-links > li a:hover { color: #c
 
 footer .social-links > li a:focus [class^='icon-']::before, footer .social-links > li a:focus [class*=' icon-']::before, footer .social-links > li a:hover [class^='icon-']::before, footer .social-links > li a:hover [class*=' icon-']::before { color: #cccccc; }
 
-footer .footer-greenpeace { margin-bottom: 20px; }
+footer .footer-greenpeace { margin-bottom: 20px; font-size: 16px; }
 
 @media only screen and (min-width: 1024px) { footer .footer-greenpeace { width: 50%; }
-  footer .footer-greenpeace p { width: 60%; } }
-
-@media only screen and (min-width: 1280px) { footer .footer-greenpeace p { width: 45%; } }
-
-footer .footer-greenpeace p:last-child { font-size: 12px; }
-
-@media only screen and (min-width: 1024px) { footer .footer-greenpeace p:last-child { font-size: 16px; } }
+  footer .footer-greenpeace p { width: 80%; } }
 
 footer .icon-greenpeace { font-size: 20px; }
 
@@ -1666,17 +1660,15 @@ footer .press-media-links a:hover, footer .press-media-links a:focus { border-bo
 
 footer .press-media-links li.press-media-links__last { float: right; }
 
-footer .secondary-links { font-size: 10px; }
+footer .secondary-links { font-size: 16px; }
 
 footer .secondary-links > li { display: inline-block; margin-right: 30px; }
 
 footer .secondary-links > li:last-child { margin-right: 0; }
 
-@media only screen and (min-width: 1024px) { footer .secondary-links { font-size: 14px; } }
+footer .secondary-links a { color: white; }
 
-footer .secondary-links a { color: #898b92; }
-
-footer .secondary-links a:hover, footer .secondary-links a:focus { color: white; }
+footer .secondary-links a:hover, footer .secondary-links a:focus { color: #66cc00; }
 
 footer .footer-legal { margin-top: 5px; margin-bottom: 5px; font-size: 10px; color: #898b92; }
 
@@ -1690,7 +1682,7 @@ footer .latte-logo { position: absolute; display: block; width: 100px; height: 2
 
 footer .latte-logo.mobile-only { position: static; float: right; }
 
-footer img.footer-greenpeace--logo { max-height: 40px; }
+footer img.footer-greenpeace--logo { width: 85%; max-width: 310px; }
 
 footer .dropdown { position: relative; }
 

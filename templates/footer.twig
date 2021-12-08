@@ -1,15 +1,6 @@
 <footer>
 	<div class="footer-upper">
 		<div class="ct-container">
-			<div class="socials mobile-only">
-				<h6>{{ strings.follow }}</h6>
-				<ul class="social-links">
-					{% for item in footer_social_menu %}
-						<li><a href="{{ item.url }}" aria-label="{{ item.title|lower }}"><span class="icon-{{ item.title|lower }}"></span></a></li>
-					{% endfor %}
-				</ul>
-				<hr />
-			</div>
 			<div class="footer-greenpeace">
 				<p>
 					<img data-src="{{theme.link}}/static/images/logo_zh_green.svg" class="footer-greenpeace--logo lazy" />
@@ -24,7 +15,9 @@
 					{% endfor %}
 				</ul>
 			</div>
-			<div class="desktop-only has-social-links">
+			<!-- .desktop-only -->
+			<!-- .mobile-only -->
+			<div class="has-social-links">
 				<h5>{{ strings.follow }}</h5>
 				<ul class="social-links">
 					{% for item in footer_social_menu %}

@@ -1,13 +1,12 @@
 footer {
   position: relative;
-  padding-top: 20px;
-  background: $color-blue url(../images/footer-bg.png) no-repeat center;
+  padding-top: 60px;
+  background: $color-blue url(../images/footer-bg.png) no-repeat bottom center;
   background-size: cover;
   color: white;
   z-index: 2;
-
   @include greaterThan('sm') {
-    padding-top: 60px;
+    padding-top: 150px;
   }
 
   h5,
@@ -49,18 +48,17 @@ footer {
   }
 
   hr {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: white;
+    height: 2px;
   }
 
   .footer-upper {
-    padding-bottom: 20px;
-
+    padding-bottom: 200px;
     @include greaterThan('sm') {
       .ct-container {
         display: flex;
         justify-content: space-between;
       }
-
       h5 {
         margin-bottom: 35px;
       }
@@ -69,8 +67,9 @@ footer {
 
   .footer-lower {
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     overflow: hidden;
+    width: 100%;
   }
 
   .socials > h6,
@@ -123,26 +122,11 @@ footer {
 
   .footer-greenpeace {
     margin-bottom: 20px;
-
+    font-size: 16px;
     @include greaterThan('sm') {
       width: 50%;
-
       p {
-        width: 60%;
-      }
-    }
-
-    @include greaterThan('lg') {
-      p {
-        width: 45%;
-      }
-    }
-
-    p:last-child {
-      font-size: 12px;
-
-      @include greaterThan('sm') {
-        font-size: 16px;
+        width: 80%;
       }
     }
   }
@@ -225,18 +209,12 @@ footer {
 
   .secondary-links {
     @include list-inline;
-    font-size: 10px;
-
-    @include greaterThan('sm') {
-      font-size: 14px;
-    }
-
+    font-size: 16px;
     a {
-      color: $color-grey;
-
+      color: white;
       &:hover,
       &:focus {
-        color: white;
+        color: $color-green;
       }
     }
   }
@@ -276,7 +254,9 @@ footer {
     }
   }
   img.footer-greenpeace--logo {
-    max-height: 40px;
+    width: 85%;
+    max-width: 310px;
+    // max-height: 40px;
   }
 
   .dropdown {
