@@ -1,7 +1,8 @@
 footer {
   position: relative;
   padding-top: 20px;
-  background-color: $color-blue;
+  background: $color-blue url(../images/footer-bg.png) no-repeat center;
+  background-size: cover;
   color: white;
   z-index: 2;
 
@@ -69,7 +70,6 @@ footer {
   .footer-lower {
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: #1a1c26;
     overflow: hidden;
   }
 

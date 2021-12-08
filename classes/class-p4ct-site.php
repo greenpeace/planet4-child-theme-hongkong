@@ -221,6 +221,7 @@ class P4CT_Site {
 			'projects' => __( 'Projects', 'gpea_theme' ),
 			'main_issues' => __( 'Main issues', 'gpea_theme' ),
 			'about_greenpeace' => __( 'About Greenpeace', 'gpea_theme' ),
+			'quick_links' => __( 'Quick links', 'gpea_theme' ),
 			'press_media' => __( 'Press release and media', 'gpea_theme' ),
 			'my_preferences' => __( 'My Preferences', 'gpea_theme' ),
 		];

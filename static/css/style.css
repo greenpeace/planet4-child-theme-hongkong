@@ -1570,7 +1570,7 @@ header .content .right-box .button:active { background-color: #E96D00; border-co
   .is-scrolling-down header { height: 48px; -webkit-transition: height 500ms ease 200ms; transition: height 500ms ease 200ms; }
   .is-scrolling-down header .mobile-toolbar { height: 0; -webkit-transition: height 500ms ease 200ms; transition: height 500ms ease 200ms; overflow: hidden; } }
 
-footer { position: relative; padding-top: 20px; background-color: #292f47; color: white; z-index: 2; }
+footer { position: relative; padding-top: 20px; background: #292f47 url(../images/footer-bg.png) no-repeat center; background-size: cover; color: white; z-index: 2; }
 
 @media only screen and (min-width: 1024px) { footer { padding-top: 60px; } }
 
@@ -1595,7 +1595,7 @@ footer .footer-upper { padding-bottom: 20px; }
 @media only screen and (min-width: 1024px) { footer .footer-upper .ct-container { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; }
   footer .footer-upper h5 { margin-bottom: 35px; } }
 
-footer .footer-lower { padding-top: 20px; padding-bottom: 20px; background-color: #1a1c26; overflow: hidden; }
+footer .footer-lower { padding-top: 20px; padding-bottom: 20px; overflow: hidden; }
 
 footer .socials > h6, footer .socials > ul { display: inline-block; margin-right: 30px; }
 
