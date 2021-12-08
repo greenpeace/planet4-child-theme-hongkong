@@ -37,6 +37,8 @@ import petitionThankyou from "./petition-thankyou";
 
 import animatecounters from "./components/animatecounters";
 
+import notificationList from "./components/notification-list";
+
 // import donationPage from './donation-page';
 
 Swiper.use([Navigation, Pagination, Scrollbar, Controller, Autoplay]);
@@ -134,4 +136,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
   /* GPEA extended functions */
 
   animatecounters();
+  notificationList();
 });

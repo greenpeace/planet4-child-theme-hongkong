@@ -1947,6 +1947,38 @@ footer .dropdown.is-open .dropdown-menu { display: -webkit-box; display: -ms-fle
 
 .cookie-notice .btn.btn-secondary.p-0 { background: #66cc00; border-color: #66cc00; color: #fff; font-weight: 700; border-radius: 10px; padding: 6px 16px; -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2); box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2); }
 
+.outer_block_container > .gpea-notification { position: absolute; width: 100%; z-index: 3; }
+
+.gpea-notification__container { font-size: 12px; font-weight: 400; }
+
+.gpea-notification__item { position: relative; list-style: none; background: #66cc00; margin-top: 30px; margin-left: auto; margin-right: 0; border-radius: 4px; }
+
+.gpea-notification__item--maintain { background: #84d633; }
+
+.gpea-notification__item--maintaining { background: #c9eda6; }
+
+@media only screen and (min-width: 1024px) { .gpea-notification__item { max-width: 255px; } }
+
+.gpea-notification__text { padding: 10px 35px 10px 10px; border-width: 0; display: block; width: 100%; height: 100%; }
+
+.gpea-notification__text--link { -webkit-transition: background 140ms linear; transition: background 140ms linear; }
+
+.gpea-notification__text--link:hover { background: rgba(255, 255, 255, 0.35); }
+
+.gpea-notification__text, .gpea-notification__text--link { color: white; }
+
+.gpea-notification__item--maintaining .gpea-notification__text, .gpea-notification__item--maintaining .gpea-notification__text--link { color: #3A722F; }
+
+.gpea-notification__close-button { position: absolute; display: block; width: 35px; height: 30px; border: none; background: transparent; cursor: pointer; top: 0; right: 0; }
+
+.gpea-notification__close-button:before, .gpea-notification__close-button:after { position: absolute; display: block; content: ''; height: 2px; width: 10px; top: 13px; left: 7px; background: rgba(255, 255, 255, 0.75); -webkit-transition: background 140ms linear; transition: background 140ms linear; }
+
+.gpea-notification__close-button:before { -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); }
+
+.gpea-notification__close-button:after { -webkit-transform: rotate(-45deg); -ms-transform: rotate(-45deg); transform: rotate(-45deg); }
+
+.gpea-notification__close-button:hover:before, .gpea-notification__close-button:hover:after { background: white; }
+
 .section-featured { position: relative; padding-top: 30px !important; overflow: hidden; }
 
 @media only screen and (min-width: 1024px) { .section-featured-tips { padding-top: 60px !important; padding-bottom: 60px !important; } }
