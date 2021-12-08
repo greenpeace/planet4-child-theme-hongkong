@@ -1,4 +1,5 @@
 footer {
+
   position: relative;
   padding-top: 60px;
   background: $color-blue url(../images/footer-bg.png) no-repeat bottom center;
@@ -11,18 +12,14 @@ footer {
 
   h5,
   .icon-greenpeace {
-    color: $color-grey;
-
-    @include greaterThan('sm') {
-      color: white;
-    }
+    color: white;
+    font-size: 16px;
   }
 
   ul {
     padding-left: 0;
     list-style: none;
     font-size: 14px;
-
     @include greaterThan('sm') {
       font-size: 16px;
     }
@@ -58,10 +55,11 @@ footer {
       .ct-container {
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
       }
-      h5 {
-        margin-bottom: 35px;
-      }
+    }
+    h5 {
+      margin-bottom: 10px;
     }
   }
 
@@ -70,21 +68,6 @@ footer {
     padding-bottom: 40px;
     overflow: hidden;
     width: 100%;
-  }
-
-  .socials > h6,
-  .socials > ul {
-    display: inline-block;
-    margin-right: 30px;
-  }
-
-  .socials > h6 {
-    vertical-align: middle;
-  }
-
-  .socials hr {
-    margin-top: 10px;
-    margin-bottom: 15px;
   }
 
   .social-links {
@@ -124,87 +107,42 @@ footer {
     margin-bottom: 20px;
     font-size: 16px;
     @include greaterThan('sm') {
-      width: 50%;
+      margin-right: 15px;
+      flex: 0 0 60%;
+      p {
+        width: 85%;
+      }
+    }
+    @include greaterThan('lg') {
+      flex: 0 0 50%;
       p {
         width: 80%;
       }
     }
-  }
-
-  .icon-greenpeace {
-    font-size: 20px;
-
-    @include greaterThan('sm') {
-      font-size: 40px;
+    + div {
+      width: 50%;
+      float: left;
+      @include greaterThan('sm') {
+        width: initial;
+        float: none;
+      }
+    }
+    &--logo {
+      width: 85%;
+      max-width: 310px;
+      max-height: 40px;
     }
   }
 
-  .footer-greenpeace + div {
-    width: 50%;
-    float: left;
-
+  .has-social-links,
+  .quick-links {
     @include greaterThan('sm') {
-      width: initial;
-      float: none;
-    }
-  }
-
-  .footer-greenpeace + div:not([hidden]) + div {
-    margin-left: 50%;
-
-    @include greaterThan('sm') {
-      margin-left: 0;
+      flex: 1 1 auto;
     }
   }
 
   .has-social-links {
     position: relative;
-  }
-
-  .footer-greenpeace + .footer-disclaimer {
-    width: initial;
-    float: none;
-    padding-top: 20px;
-    border-top: 1px solid rgba(white, 0.1);
-
-    @include greaterThan('sm') {
-      width: 50%;
-      padding-top: 0; // 62px;
-      border-top: none;
-    }
-
-    p {
-      font-size: 11px;
-
-      @include greaterThan('sm') {
-        font-size: 13px;
-      }
-    }
-  }
-
-  .press-media-links {
-    @include list-inline;
-    font-size: 12px;
-
-    @include greaterThan('sm') {
-      font-size: 16px;
-    }
-
-    a {
-      color: $color-green;
-      border-bottom: 1px solid transparent;
-      transition: border-bottom-color 140ms linear;
-
-      &:hover,
-      &:focus {
-        border-bottom-color: $color-green;
-      }
-    }
-    
-    li.press-media-links__last {
-      float: right;
-    }
-
   }
 
   .secondary-links {
@@ -219,51 +157,18 @@ footer {
     }
   }
 
-  .footer-legal {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: 10px;
-    color: $color-grey;
-
-    @include greaterThan('sm') {
-      font-size: 14px;
-    }
-
-    a {
-      color: $color-grey;
-
-      &:hover,
-      &:focus {
-        color: white;
-      }
-    }
-  }
-
-  .latte-logo {
-    position: absolute;
-    display: block;
-    width: 100px;
-    height: 21px;
-    bottom: 40px;
-    right: 0;
-    background: url('../images/lattecreative.svg') center / contain no-repeat;
-
-    &.mobile-only {
-      position: static;
-      float: right;
-    }
-  }
-  img.footer-greenpeace--logo {
-    width: 85%;
-    max-width: 310px;
-    // max-height: 40px;
-  }
-
   .dropdown {
     position: relative;
-
+    @include greaterThan('sm') {
+      flex: 0 0 100%;
+    }
+    @include greaterThan('lg') {
+      flex: 0 0 auto;
+    }
+    @include lessThan('lg') {
+      margin-top: 40px;
+    }
     button {
-      height: 43px;
       background-color: transparent;
       border: none;
       // outline: none;
@@ -271,20 +176,26 @@ footer {
       align-items: center;
       color: white;
       cursor: pointer;
-
-      p {
-        font-size: 14px;
-        font-weight: bold;
-        white-space: nowrap;
-      }
-
-      span {
-        font-size: 22px;
-        margin-left: -2px;
+      padding: 0;
+      margin-top: -0.5em;
+    }
+    &__selected {
+      font-size: 20px;
+      font-weight: bold;
+      white-space: nowrap;
+      padding-right: 1.5em;
+      @include greaterThan('sm') {
+        font-weight: 400;
       }
     }
-
-    .dropdown-menu {
+    &__arrow {
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      display: block;
+      padding: 4px;
+      transform: rotate(45deg);
+    }
+    &__menu {
       display: none;
       position: absolute;
       left: -180px;
@@ -312,7 +223,7 @@ footer {
       }
     }
 
-    &.is-open .dropdown-menu {
+    &.is-open .dropdown__menu {
       display: flex;
     }
   }

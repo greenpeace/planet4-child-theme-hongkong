@@ -1574,9 +1574,7 @@ footer { position: relative; padding-top: 60px; background: #292f47 url(../image
 
 @media only screen and (min-width: 1024px) { footer { padding-top: 150px; } }
 
-footer h5, footer .icon-greenpeace { color: #898b92; }
-
-@media only screen and (min-width: 1024px) { footer h5, footer .icon-greenpeace { color: white; } }
+footer h5, footer .icon-greenpeace { color: white; font-size: 16px; }
 
 footer ul { padding-left: 0; list-style: none; font-size: 14px; }
 
@@ -1592,16 +1590,11 @@ footer hr { background-color: white; height: 2px; }
 
 footer .footer-upper { padding-bottom: 200px; }
 
-@media only screen and (min-width: 1024px) { footer .footer-upper .ct-container { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; }
-  footer .footer-upper h5 { margin-bottom: 35px; } }
+@media only screen and (min-width: 1024px) { footer .footer-upper .ct-container { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; -ms-flex-wrap: wrap; flex-wrap: wrap; } }
+
+footer .footer-upper h5 { margin-bottom: 10px; }
 
 footer .footer-lower { padding-top: 20px; padding-bottom: 40px; overflow: hidden; width: 100%; }
-
-footer .socials > h6, footer .socials > ul { display: inline-block; margin-right: 30px; }
-
-footer .socials > h6 { vertical-align: middle; }
-
-footer .socials hr { margin-top: 10px; margin-bottom: 15px; }
 
 footer .social-links > li { display: inline-block; margin-right: 30px; }
 
@@ -1621,44 +1614,21 @@ footer .social-links > li a:focus [class^='icon-']::before, footer .social-links
 
 footer .footer-greenpeace { margin-bottom: 20px; font-size: 16px; }
 
-@media only screen and (min-width: 1024px) { footer .footer-greenpeace { width: 50%; }
+@media only screen and (min-width: 1024px) { footer .footer-greenpeace { margin-right: 15px; -webkit-box-flex: 0; -ms-flex: 0 0 60%; flex: 0 0 60%; }
+  footer .footer-greenpeace p { width: 85%; } }
+
+@media only screen and (min-width: 1280px) { footer .footer-greenpeace { -webkit-box-flex: 0; -ms-flex: 0 0 50%; flex: 0 0 50%; }
   footer .footer-greenpeace p { width: 80%; } }
-
-footer .icon-greenpeace { font-size: 20px; }
-
-@media only screen and (min-width: 1024px) { footer .icon-greenpeace { font-size: 40px; } }
 
 footer .footer-greenpeace + div { width: 50%; float: left; }
 
 @media only screen and (min-width: 1024px) { footer .footer-greenpeace + div { width: initial; float: none; } }
 
-footer .footer-greenpeace + div:not([hidden]) + div { margin-left: 50%; }
+footer .footer-greenpeace--logo { width: 85%; max-width: 310px; max-height: 40px; }
 
-@media only screen and (min-width: 1024px) { footer .footer-greenpeace + div:not([hidden]) + div { margin-left: 0; } }
+@media only screen and (min-width: 1024px) { footer .has-social-links, footer .quick-links { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
 
 footer .has-social-links { position: relative; }
-
-footer .footer-greenpeace + .footer-disclaimer { width: initial; float: none; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-
-@media only screen and (min-width: 1024px) { footer .footer-greenpeace + .footer-disclaimer { width: 50%; padding-top: 0; border-top: none; } }
-
-footer .footer-greenpeace + .footer-disclaimer p { font-size: 11px; }
-
-@media only screen and (min-width: 1024px) { footer .footer-greenpeace + .footer-disclaimer p { font-size: 13px; } }
-
-footer .press-media-links { font-size: 12px; }
-
-footer .press-media-links > li { display: inline-block; margin-right: 30px; }
-
-footer .press-media-links > li:last-child { margin-right: 0; }
-
-@media only screen and (min-width: 1024px) { footer .press-media-links { font-size: 16px; } }
-
-footer .press-media-links a { color: #66cc00; border-bottom: 1px solid transparent; -webkit-transition: border-bottom-color 140ms linear; transition: border-bottom-color 140ms linear; }
-
-footer .press-media-links a:hover, footer .press-media-links a:focus { border-bottom-color: #66cc00; }
-
-footer .press-media-links li.press-media-links__last { float: right; }
 
 footer .secondary-links { font-size: 16px; }
 
@@ -1670,37 +1640,31 @@ footer .secondary-links a { color: white; }
 
 footer .secondary-links a:hover, footer .secondary-links a:focus { color: #66cc00; }
 
-footer .footer-legal { margin-top: 5px; margin-bottom: 5px; font-size: 10px; color: #898b92; }
-
-@media only screen and (min-width: 1024px) { footer .footer-legal { font-size: 14px; } }
-
-footer .footer-legal a { color: #898b92; }
-
-footer .footer-legal a:hover, footer .footer-legal a:focus { color: white; }
-
-footer .latte-logo { position: absolute; display: block; width: 100px; height: 21px; bottom: 40px; right: 0; background: url("../images/lattecreative.svg") center/contain no-repeat; }
-
-footer .latte-logo.mobile-only { position: static; float: right; }
-
-footer img.footer-greenpeace--logo { width: 85%; max-width: 310px; }
-
 footer .dropdown { position: relative; }
 
-footer .dropdown button { height: 43px; background-color: transparent; border: none; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; color: white; cursor: pointer; }
+@media only screen and (min-width: 1024px) { footer .dropdown { -webkit-box-flex: 0; -ms-flex: 0 0 100%; flex: 0 0 100%; } }
 
-footer .dropdown button p { font-size: 14px; font-weight: bold; white-space: nowrap; }
+@media only screen and (min-width: 1280px) { footer .dropdown { -webkit-box-flex: 0; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
-footer .dropdown button span { font-size: 22px; margin-left: -2px; }
+@media only screen and (max-width: 1279px) { footer .dropdown { margin-top: 40px; } }
 
-footer .dropdown .dropdown-menu { display: none; position: absolute; left: -180px; width: 300px; max-height: 80vh; background-color: white; border-radius: 3px; -webkit-box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28); box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28); -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; padding: 10px 20px; }
+footer .dropdown button { background-color: transparent; border: none; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; color: white; cursor: pointer; padding: 0; margin-top: -0.5em; }
 
-@media only screen and (min-width: 1024px) { footer .dropdown .dropdown-menu { left: -185px; width: 900px; } }
+footer .dropdown__selected { font-size: 20px; font-weight: bold; white-space: nowrap; padding-right: 1.5em; }
 
-footer .dropdown .dropdown-menu a { text-decoration: none; color: #292f47; margin-bottom: 5px; }
+@media only screen and (min-width: 1024px) { footer .dropdown__selected { font-weight: 400; } }
 
-footer .dropdown .dropdown-menu a:last-child { margin-bottom: 0; }
+footer .dropdown__arrow { border: solid white; border-width: 0 2px 2px 0; display: block; padding: 4px; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); }
 
-footer .dropdown.is-open .dropdown-menu { display: -webkit-box; display: -ms-flexbox; display: flex; }
+footer .dropdown__menu { display: none; position: absolute; left: -180px; width: 300px; max-height: 80vh; background-color: white; border-radius: 3px; -webkit-box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28); box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28); -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; padding: 10px 20px; }
+
+@media only screen and (min-width: 1024px) { footer .dropdown__menu { left: -185px; width: 900px; } }
+
+footer .dropdown__menu a { text-decoration: none; color: #292f47; margin-bottom: 5px; }
+
+footer .dropdown__menu a:last-child { margin-bottom: 0; }
+
+footer .dropdown.is-open .dropdown__menu { display: -webkit-box; display: -ms-flexbox; display: flex; }
 
 .big-carousel-description { margin-bottom: 20px; }
 
