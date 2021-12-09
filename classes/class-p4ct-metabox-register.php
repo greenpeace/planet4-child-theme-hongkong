@@ -1059,8 +1059,8 @@ class P4CT_Metabox_Register {
 	public function register_notification_options_metabox() {
 
 		$this->subpages['gpea_notification_options_page'] = [
-			'title'        => esc_html__( 'Homepage Notification', self::METABOX_ID ),
-			'menu_title'   => esc_html__( 'Notification', self::METABOX_ID ),
+			'title'        => esc_html__( 'Homepage Notifications', self::METABOX_ID ),
+			'menu_title'   => esc_html__( 'Notifications', self::METABOX_ID ),
 			'option_key'   => 'gpea_notification_options',
 			'fields'       => [],
 		];
