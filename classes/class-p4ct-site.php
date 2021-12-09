@@ -62,6 +62,7 @@ class P4CT_Site {
 	 * Hooks the theme.
 	 */
 	protected function hooks() {
+
 		add_filter( 'timber_context', [ $this, 'add_to_context' ] );
 		add_filter( 'get_twig', [ $this, 'add_to_twig' ] );
 		add_action( 'init', [ $this, 'register_taxonomies' ], 2 );
@@ -80,9 +81,14 @@ class P4CT_Site {
 
 		register_nav_menus(
 			[
-				'navigation-bar-menu' => __( 'Navigation Bar Menu', 'gpea_theme_backend' ),
+				// 'navigation-bar-menu' => __( 'Navigation Bar Menu', 'gpea_theme_backend' ),
+				'navigation-bar-about-menu' => __( 'Navigation Bar: Who we are', 'gpea_theme_backend' ),
+				'navigation-bar-issues-menu' => __( 'Navigation Bar: Our Work', 'gpea_theme_backend' ),
+				'navigation-bar-involved-menu' => __( 'Navigation Bar: Get Involved', 'gpea_theme_backend' ),
+				'navigation-bar-news-menu' => __( 'Navigation Bar: News & Stories', 'gpea_theme_backend' ),
 			]
 		);
+		add_filter( 'manage_nav-menus_columns', [ $this, 'gpea_register_nav_menu_metabox' ] );
 		add_action( 'after_setup_theme', [ $this, 'gpea_child_theme_setup' ] );
 
 		// Override parent AJAX search functionality.
@@ -259,6 +265,21 @@ class P4CT_Site {
 		// $twig->addExtension( new Twig_Scappella_Destra() );
 		// $twig->addFilter( new Twig_Filtra_Scappella( 'svgicon', [ $this, 'svgicon' ] ) );
 		return $twig;
+	}
+
+
+	/**
+	 * Add custom meta boxes for nav menu manage
+	 */
+	public function gpea_register_nav_menu_metabox() {
+		add_meta_box( 'gpea-issues', __( 'Issues we work on' ), [ $this, 'gpea_render_issues_metabox' ] , 'nav-menus', 'side', 'default' );
+		add_meta_box( 'gpea-cta', __( 'CTA' ), [ $this, 'gpea_render_cta_metabox' ] , 'nav-menus', 'side', 'default' );
+	}
+	public function gpea_render_issues_metabox() {
+		
+	}
+	public function gpea_render_cta_metabox() {
+		
 	}
 
 	/**
