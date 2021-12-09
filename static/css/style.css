@@ -1909,9 +1909,9 @@ footer .dropdown.is-open .dropdown__menu { display: -webkit-box; display: -ms-fl
 
 .gpea-notification__item { position: relative; list-style: none; background: #66cc00; margin-top: 30px; margin-left: auto; margin-right: 0; border-radius: 4px; }
 
-.gpea-notification__item--maintain { background: #84d633; }
+.gpea-notification__item--maintaining { background: #84d633; }
 
-.gpea-notification__item--maintaining { background: #c9eda6; }
+.gpea-notification__item--maintain { background: #c9eda6; }
 
 @media only screen and (min-width: 1024px) { .gpea-notification__item { max-width: 255px; } }
 
@@ -1923,11 +1923,11 @@ footer .dropdown.is-open .dropdown__menu { display: -webkit-box; display: -ms-fl
 
 .gpea-notification__text, .gpea-notification__text--link { color: white; }
 
-.gpea-notification__item--maintaining .gpea-notification__text, .gpea-notification__item--maintaining .gpea-notification__text--link { color: #3A722F; }
+.gpea-notification__item--maintain .gpea-notification__text, .gpea-notification__item--maintain .gpea-notification__text--link { color: #3A722F; }
 
-.gpea-notification__close-button { position: absolute; display: block; width: 35px; height: 30px; border: none; background: transparent; cursor: pointer; top: 0; right: 0; }
+.gpea-notification__close-button { position: absolute; display: block; width: 35px; height: 37px; border: none; background: transparent; cursor: pointer; top: 0; right: 0; }
 
-.gpea-notification__close-button:before, .gpea-notification__close-button:after { position: absolute; display: block; content: ''; height: 2px; width: 10px; top: 13px; left: 7px; background: rgba(255, 255, 255, 0.75); -webkit-transition: background 140ms linear; transition: background 140ms linear; }
+.gpea-notification__close-button:before, .gpea-notification__close-button:after { position: absolute; display: block; content: ''; height: 2px; width: 10px; top: 17px; left: 7px; background: rgba(255, 255, 255, 0.75); -webkit-transition: background 140ms linear; transition: background 140ms linear; }
 
 .gpea-notification__close-button:before { -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); }
 

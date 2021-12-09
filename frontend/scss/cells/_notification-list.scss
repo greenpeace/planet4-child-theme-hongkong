@@ -19,11 +19,11 @@
     border-radius: 4px;
     &--new {
     }
-    &--maintain {
+    &--maintaining {
       // background: rgba($color-green, .8);
       background: rgb(132, 214, 51);
     }
-    &--maintaining {
+    &--maintain {
       // background: rgba($color-green, .35);
       background: rgb(201, 237, 166);
     }
@@ -46,7 +46,7 @@
     &,
     &--link {
       color: white;
-      .gpea-notification__item--maintaining & {
+      .gpea-notification__item--maintain & {
         color: #3A722F;
       }
     }
@@ -55,7 +55,7 @@
     position: absolute;
     display: block;
     width: 35px;
-    height: 30px;
+    height: 37px;
     border: none;
     background: transparent;
     cursor: pointer;
@@ -68,7 +68,7 @@
       content: '';
       height: 2px;
       width: 10px;
-      top: 13px;
+      top: 17px;
       left: 7px;
       background: rgba(white, .75);
       transition: background 140ms linear;
