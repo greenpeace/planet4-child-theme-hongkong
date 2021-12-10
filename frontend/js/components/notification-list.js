@@ -5,6 +5,9 @@ export default function() {
   let $container = $('.gpea-notification');
   let last_modified = $container.data('time');
   let closed_notification = Cookies.getJSON(COOKIE_ID) || [];
+  if($container.length == 0) {
+    return;
+  }
   if(!closed_notification || !closed_notification.time || !closed_notification.ids || closed_notification.time != last_modified) {
     closed_notification = {
       time: last_modified,
