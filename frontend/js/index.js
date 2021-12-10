@@ -6,7 +6,7 @@ import {
   Scrollbar,
   Controller,
   Autoplay,
-} from "swiper/dist/js/swiper.esm.js";
+} from 'swiper/dist/js/swiper.esm.js';
 import LazyLoad from "vanilla-lazyload";
 import SmoothScroll from "smooth-scroll";
 import AOS from "aos";

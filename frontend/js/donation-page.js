@@ -5,7 +5,7 @@ import {
   Scrollbar,
   Controller,
   Autoplay,
-} from 'swiper/dist/js/swiper.esm.js';
+} from 'swiper';
 import SmoothScroll from 'smooth-scroll';
 
 import polyfills from './components/polyfills';
@@ -171,7 +171,7 @@ function initDonation(Swiper, Scroll) {
 
       // let data = jQuery(form).serialize();
       let data = jQuery(form).serializeArray();
-      
+
       // modify birth date and credit card number before submitting
       for (var item in data)
       {
@@ -187,14 +187,14 @@ function initDonation(Swiper, Scroll) {
       }
 
       let dataForm = jQuery.param(data);
-      
+
       let amountSent = jQuery("input[name='transaction.donationAmt']").val();
       let recurringSent = ( jQuery("input[name='supporter.NOT_TAGGED_31']:checked").val() == 'N' ) ? 'single' : 'recurring';
 
       if(typeof fbq !== 'undefined') {
         fbq('track', 'AddPaymentInfo', {
           content_name: campaignName
-        });      
+        });
       }
 
       jQuery
@@ -204,11 +204,11 @@ function initDonation(Swiper, Scroll) {
           data: dataForm,
           dataType: 'html',
         })
-        .done(function(t) {        
+        .done(function(t) {
           jQuery('button').prop('disabled', false);
           jQuery('button').removeClass('loading');
 
-          // CODE CHANGED TO REFLECT CURRENT FLOW 
+          // CODE CHANGED TO REFLECT CURRENT FLOW
 
           // console.log(t);
           var i = jQuery.parseHTML(t, !0);
@@ -223,8 +223,8 @@ function initDonation(Swiper, Scroll) {
           pageJsonReplicated.country = jQuery("input[name='supporter.country']").val();
           pageJsonReplicated.currency = window.NRO_PROPERTIES[NRO].currency;
           pageJsonReplicated.pageNumber = 2;
-          pageJsonReplicated.recurring = ( jQuery("input[name='supporter.NOT_TAGGED_31']:checked").val() == 'N' ) ? 'false' : 'true';       
-          pageJsonReplicated.paymentType = jQuery("input[name='transaction.paymenttype']").val();                
+          pageJsonReplicated.recurring = ( jQuery("input[name='supporter.NOT_TAGGED_31']:checked").val() == 'N' ) ? 'false' : 'true';
+          pageJsonReplicated.paymentType = jQuery("input[name='transaction.paymenttype']").val();
 
           if (s.length > 0) {
             pageJsonReplicated.giftProcess = false;
@@ -253,19 +253,19 @@ function initDonation(Swiper, Scroll) {
               'eventLabel' : recurringSent,
               'eventValue' : amountSent
             });
-            
+
             if(typeof fbq !== 'undefined') {
               fbq('track', 'Purchase', {
-                value: amountSent, 
-                content_name: campaignName, 
-                currency: pageJsonReplicated.currency, 
-                content_category: 'donations' });            
+                value: amountSent,
+                content_name: campaignName,
+                currency: pageJsonReplicated.currency,
+                content_category: 'donations' });
             }
 
             jQuery('.js-step-payment').removeClass('is-current');
             jQuery('.js-step-payment').removeClass('is-todo');
             jQuery('.js-step-payment').addClass('is-done');
-            jQuery('.en__component--column').html(n);          
+            jQuery('.en__component--column').html(n);
 
             // e.submitError=!1, e.submitErrorHtml="", n.appendTo(y()(e.$refs.page3)), console.log(thankyouPageIsRecurring, thankyouPageDonationAmount), thankyouPageIsRecurring="Y"==thankyouPageIsRecurring?"recurring":"single", thankyouPageDonationAmount=parseInt(/\$(\d+)\.00/.exec(thankyouPageDonationAmount)[1]), ""!=e.pageProps.ga_tracking_id&&ga("send", "event", "donations", "succeed", thankyouPageIsRecurring, thankyouPageDonationAmount), ""!=e.pageProps.fb_pixel_id&&fbq("track", "Purchase", {
             //     value: thankyouPageDonationAmount, currency: "HK"==e.nro?"HKD": "EA"==e.nro?"HKD": "TWD", content_category: "donations", content_type: thankyouPageIsRecurring, content_name: e.pageProps.campaign
