@@ -56,7 +56,6 @@
     }
   }
   .yes-checkbox {
-
   }
   .submit-part {
     flex-direction: column;
@@ -110,13 +109,15 @@
   }
 
   .custom-checkbox .invalid-feedback {
-    top: 6px;
+    position: static;
+    padding-left: 0;
   }
 
   .en__field__element input[type='email'].is-invalid,
   .en__field__element input[type='tel'].is-invalid,
   .en__field__element input[type='text'].is-invalid,
-  .en__field__element select.is-invalid {
+  .en__field__element select.is-invalid,
+  .custom-checkbox.is-invalid {
     border-color: $color-red !important;
     margin-bottom: 0;
     animation: shake 0.82s cubic-bezier(.36,.07,.19,.97);
