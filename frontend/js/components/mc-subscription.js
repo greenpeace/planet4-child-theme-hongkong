@@ -6,7 +6,8 @@ export default function () {
   let $section,
     $firstnameField,
     $lastnameField,
-    $emailField;
+    $emailField,
+    $optInFields;
 
   let requiredMsg,
     emailFormatErrMsg;
@@ -21,7 +22,7 @@ export default function () {
       lastname: $lastnameField.find('input').val(),
       email: $emailField.find('input').val(),
       campaignId: $section.find('[name="sf_campaign_id"]').val(),
-      optIn: $section.find('[name="supporter.emailok"]').is(":checked") ? 1 : 0,
+      optIn: $optInFields.find('input:not(:checked)').length == 0 ? 1 : 0,
     }
     return values;
   }
@@ -30,12 +31,17 @@ export default function () {
    * Only do validation after touched
    */
   const touchedFields = function () {
-    return {
+    let values = {
       firstname: $firstnameField.find('input').attr('data-touched'),
       lastname: $lastnameField.find('input').attr('data-touched'),
       email: $emailField.find('input').attr('data-touched'),
-      campaignId: $section.find('[name="sf_campaign_id"]').attr('data-touched')
+      campaignId: $section.find('[name="sf_campaign_id"]').attr('data-touched'),
+      optIn: []
     }
+    $optInFields.find('input').each(function() {
+      values.optIn.push($(this).attr('data-touched'));
+    });
+    return values;
   }
 
   const markTouched = function (e) {
@@ -67,6 +73,16 @@ export default function () {
       emailPass = doEmailValidation()
     }
     allpass = allpass && emailPass
+
+    // validate policy aggrement
+    let optInPass = true;
+    $.each(touched.optIn, function(k, v) {
+      let currentOptInPass = doOptInValidation(k);
+      if(!currentOptInPass) {
+        optInPass = false;
+      }
+    });
+    allpass = allpass && optInPass
 
     return allpass
   }
@@ -114,6 +130,25 @@ export default function () {
     });
 
     return emailFormatPass;
+  }
+
+  const doOptInValidation = function (k) {
+
+    let $field = $optInFields.eq(k);
+    let optInPass = $field.find('input').prop('checked');
+    let requiredMsg = $('[name="policy_required_err_message"]').val();
+
+    // toggle the error class on the input element
+    $field.find('.custom-checkbox')
+      .toggleClass("is-invalid", !optInPass, 400);    
+
+    // toggle the required error message
+    $field.find('.invalid-feedback.is-required').remove()
+    if (!optInPass) {
+        $field.find('.custom-checkbox').append('<div class="invalid-feedback is-required">'+requiredMsg+'</div>')
+    }
+
+    return optInPass;
   }
 
   /**
@@ -251,6 +286,7 @@ export default function () {
     $firstnameField = $section.find('[name="supporter.firstname"]').closest('.en__field__element');
     $lastnameField = $section.find('[name="supporter.lastname"]').closest('.en__field__element');
     $emailField = $section.find('[name="supporter.email"]').closest('.en__field__element');
+    $optInFields = $section.find('.yes-checkbox');
 
     $("input[required]").blur(doValidation)
     $("input[required]").blur(markTouched)
