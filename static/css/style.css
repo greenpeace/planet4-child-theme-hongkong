@@ -1624,7 +1624,9 @@ footer .footer-greenpeace + div { width: 50%; float: left; }
 
 @media only screen and (min-width: 1024px) { footer .footer-greenpeace + div { width: initial; float: none; } }
 
-footer .footer-greenpeace--logo { width: 85%; max-width: 310px; max-height: 40px; }
+footer .footer-greenpeace__logo { width: 85%; max-width: 200px; max-height: 40px; }
+
+footer .footer-greenpeace__logo--zh { max-width: 310px; }
 
 @media only screen and (min-width: 1024px) { footer .has-social-links, footer .quick-links { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
 

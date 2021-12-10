@@ -127,10 +127,15 @@ footer {
         float: none;
       }
     }
-    &--logo {
+    &__logo {
       width: 85%;
-      max-width: 310px;
+      max-width: 200px;
       max-height: 40px;
+      &--zh {
+        max-width: 310px;
+      }
+      &--ko {
+      }
     }
   }
 
