@@ -3,6 +3,15 @@ import { debounce } from 'throttle-debounce';
 const $ = jQuery;
 
 export default function (Swiper) {
+
+  new Swiper('.slides-swiper', {
+    slidesPerView: 1,
+    simulateTouch: false,
+    pagination: false,
+    autoplay: true,
+    loop: true,
+  });
+
   $('.featured-swiper, .projects-swiper, .tips-swiper').each(function (index) {
     const $this = $(this);
     const pagination = $(this)

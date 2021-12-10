@@ -1082,7 +1082,7 @@ class P4CT_Metabox_Register {
 		$cmb_child_options = &$cmb_options['gpea_notification_group']['fields'];
 
 		$cmb_child_options[] = [
-			'name'             => esc_html__( 'Layout', self::METABOX_ID ),
+			'name'             => esc_html__( 'Type (Color)', self::METABOX_ID ),
 			'id'               => 'layout',
 			'type'             => 'radio',
 			'options'          => [
