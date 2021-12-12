@@ -36,8 +36,8 @@ import mcSubscription from "./components/mc-subscription";
 import petitionThankyou from "./petition-thankyou";
 
 import animatecounters from "./components/animatecounters";
-
 import notificationList from "./components/notification-list";
+import geographySet from "./components/geography-set";
 
 // import donationPage from './donation-page';
 
@@ -130,11 +130,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
   });
 
   /* Page specific functionality */
-
   petitionThankyou(Scroll);
 
   /* GPEA extended functions */
-
   animatecounters();
   notificationList();
+  geographySet();
+
 });

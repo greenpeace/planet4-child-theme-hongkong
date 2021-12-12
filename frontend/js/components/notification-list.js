@@ -1,5 +1,7 @@
 import * as Cookies from 'js-cookie';
 
+const $ = jQuery;
+
 export default function() {
   const COOKIE_ID = 'gpea_closed_notification_ids';
   let $container = $('.gpea-notification');
