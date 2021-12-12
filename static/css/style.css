@@ -3096,21 +3096,21 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-mc-subscription .hide { display: none !important; }
 
-.section-mc-subscription h2 { font-size: 19px; }
-
-@media only screen and (min-width: 1024px) { .section-mc-subscription h2 { font-size: 30px; } }
-
 .section-mc-subscription .ct-container.thankyou { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; }
 
 @media only screen and (min-width: 1024px) { .section-mc-subscription { margin: 60px 0; } }
 
 .section-mc-subscription .content { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
 
-.section-mc-subscription .content--title h2 { font-weight: normal; font-size: 22px; -webkit-box-ordinal-group: 3; -ms-flex-order: 2; order: 2; margin: 1.5em auto; }
+.section-mc-subscription .content--title h2, .section-mc-subscription .content--thankyou h2 { font-weight: normal; font-size: 22px; margin: 1.5em auto; }
 
-@media only screen and (min-width: 1024px) { .section-mc-subscription .content--title h2 { font-size: 28px; } }
+@media only screen and (min-width: 1024px) { .section-mc-subscription .content--title h2, .section-mc-subscription .content--thankyou h2 { font-size: 28px; } }
 
-.section-mc-subscription .content--title p { margin-top: 0; margin-bottom: 0; font-weight: 400; font-size: 16px; border-left: 4px solid #66cc00; padding-left: 0.75em; }
+.section-mc-subscription .content--title p, .section-mc-subscription .content--thankyou p { margin-top: 0; margin-bottom: 0; font-weight: 400; font-size: 16px; }
+
+.section-mc-subscription .content--title h2 { -webkit-box-ordinal-group: 3; -ms-flex-order: 2; order: 2; }
+
+.section-mc-subscription .content--title p { border-left: 4px solid #66cc00; padding-left: 0.75em; }
 
 @media only screen and (min-width: 1024px) { .section-mc-subscription .form-container { max-width: 610px; } }
 

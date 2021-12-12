@@ -6,10 +6,6 @@
   // box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
   background: white !important;
 
-  h2 {
-    @include title-mid;
-  }
-
   .ct-container.subscribe {}
 
   .ct-container.thankyou {
@@ -27,11 +23,11 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    &--title {
+    &--title,
+    &--thankyou {
       h2 {
         font-weight: normal;
         font-size: 22px;
-        order: 2;
         margin: 1.5em auto;
         @include greaterThan('sm') {
           font-size: 28px;
@@ -42,6 +38,13 @@
         margin-bottom: 0;
         font-weight: 400;
         font-size: 16px;
+      }
+    }
+    &--title {
+      h2 {
+        order: 2;
+      }
+      p {
         border-left: 4px solid $color-green;
         padding-left: 0.75em;
       }
