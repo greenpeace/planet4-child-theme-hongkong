@@ -49,6 +49,10 @@ footer {
     height: 2px;
   }
 
+  .ct-container {
+    @include ct-container-version-b;
+  }
+
   .footer-upper {
     padding-bottom: 200px;
     @include greaterThan('sm') {

@@ -6,12 +6,15 @@
   // box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
   background: white !important;
 
-  .ct-container.subscribe {}
-
-  .ct-container.thankyou {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .ct-container {
+    @include ct-container-version-b;
+    &.subscribe {
+    }
+    &.thankyou {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   margin: 35px 0 35px;
@@ -26,18 +29,12 @@
     &--title,
     &--thankyou {
       h2 {
-        font-weight: normal;
-        font-size: 22px;
-        margin: 1.5em auto;
-        @include greaterThan('sm') {
-          font-size: 28px;
-        }
+        @include title-text-version-b;
       }
       p {
         margin-top: 0;
         margin-bottom: 0;
-        font-weight: 400;
-        font-size: 16px;
+        @include text-version-b;
       }
     }
     &--title {
@@ -45,8 +42,7 @@
         order: 2;
       }
       p {
-        border-left: 4px solid $color-green;
-        padding-left: 0.75em;
+        @include text-border-version-b;
       }
     }
   }

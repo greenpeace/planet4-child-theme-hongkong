@@ -45,6 +45,10 @@
       align-content: flex-start;
       align-items: stretch;
     }
+    @include greaterThan('lg') {
+      margin-right: -2.5%;
+      margin-left: -2.5%;
+    }
     &__box {
       border: 2px solid $color-light-green;
       border-radius: 8px;

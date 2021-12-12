@@ -1,0 +1,29 @@
+.section-testimony {
+  margin-top: 80px;
+  margin-bottom: 30px;
+  @include greaterThan('sm') {
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  .ct-container {
+    @include ct-container-version-b;
+  }
+
+  .content {
+    &--title {
+      h2 {
+        @include title-text-version-b;
+        @include title-border-version-b;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 0;
+        @include text-version-b;
+        @include margin-right-version-b;
+        @include margin-left-version-b;
+      }
+    }
+  }
+
+}
