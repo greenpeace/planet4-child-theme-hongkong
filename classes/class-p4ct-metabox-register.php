@@ -1147,6 +1147,8 @@ class P4CT_Metabox_Register {
 	 */
 	public function register_testimony_block_options_metabox() {
 
+		$const_name = 'P4EABKS\Controllers\Blocks\Testimony_Controller::LAYOUT_OPTIONS';
+
 		$this->subpages['gpea_testimony_block_options_page'] = [
 			'title'        => esc_html__( 'Page Testimony Blocks', self::METABOX_ID ),
 			'menu_title'   => esc_html__( 'Testimony Blocks', self::METABOX_ID ),
@@ -1156,28 +1158,7 @@ class P4CT_Metabox_Register {
 
 		$cmb_options = &$this->subpages['gpea_testimony_block_options_page']['fields'];
 
-		$card_layouts = [
-			[
-				'key' => '1',
-				'title' => 'Vertical card, dark text',
-				'image' => TRUE,
-			],
-			[
-				'key' => '2',
-				'title' => 'Vertical card, light text',
-				'image' => TRUE,
-			],
-			[
-				'key' => '3',
-				'title' => 'Horizontal card, dark text',
-				'image' => FALSE,
-			],
-			[
-				'key' => '4',
-				'title' => 'Horizontal card, light text',
-				'image' => TRUE,
-			],
-		];
+		$card_layouts = defined($const_name) ? constant($const_name) : [];
 
 		foreach($card_layouts as $layout_data) {
 
