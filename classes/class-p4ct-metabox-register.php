@@ -90,9 +90,10 @@ class P4CT_Metabox_Register {
 		$this->register_page_metabox();
 
 		$this->register_main_options_metabox();
+		$this->register_notification_options_metabox();
 		$this->register_donation_button_options_metabox();
 		$this->register_donation_block_options_metabox();
-		$this->register_notification_options_metabox();
+		$this->register_testimony_block_options_metabox();
 
 	}
 
@@ -487,12 +488,12 @@ class P4CT_Metabox_Register {
 
 		$cmb_post_donation_button->add_field([
 			'name'             => esc_html__( 'Donation Button on Top', self::METABOX_ID ),
-			'desc'             => '
+			'desc'             => __('
 				<ol>
 					<li>Location: above the main content, under the quoteblock (quote with theme color background).</li>
 					<li>Leave the link or label field empty to use the default value.</li>
 					<li>Go to the setting &quot;' . __( 'Settings' ) . ' &gt; Post Donation Buttons&quot; to setup default values.</li>
-				<ol>', self::METABOX_ID,
+				</ol>', self::METABOX_ID),
 			'id'               => 'p4-gpea_article_top_donation_button',
 			'type'             => 'title',
 		]);
@@ -520,12 +521,12 @@ class P4CT_Metabox_Register {
 
 		$cmb_post_donation_button->add_field([
 			'name'             => esc_html__( 'Donation Button at Bottom', self::METABOX_ID ),
-			'desc'             => '
+			'desc'             => __('
 				<ol>
 					<li>Location: below the main content, before the further reading section.</li>
 					<li>Leave the link or label field empty to use the default value.</li>
 					<li>Go to the setting &quot;' . __( 'Settings' ) . ' &gt; Post Donation Buttons&quot; to setup default values.</li>
-				<ol>', self::METABOX_ID,
+				<ol>', self::METABOX_ID),
 			'id'               => 'p4-gpea_article_bottom_donation_button',
 			'type'             => 'title',
 		]);
@@ -971,12 +972,12 @@ class P4CT_Metabox_Register {
 		if( $is_block ) {
 			$cmb_options[] = [
 				'name'             => '',
-				'desc'             => '
+				'desc'             => __('
 					<ol>
 						<li>Please set the default values for the donation blocks in the post/page.</li>
 						<li>Location: it\'s better to set around the middle area of the post.</li>
 						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the fields empty will go to the &quot;All-site Default&quot; once writers insert the donation block.</li>
-					<ol>', self::METABOX_ID,
+					</ol>', self::METABOX_ID),
 				'id'               => $id_prefix . '_hint',
 				'type'             => 'title',
 			];
@@ -984,12 +985,12 @@ class P4CT_Metabox_Register {
 		else {
 			$cmb_options[] = [
 				'name'             => '',
-				'desc'             => '
+				'desc'             => __('
 					<ol>
 						<li>Please set the default values for the donation buttons in the post.</li>
 						<li>Buttons\' locations: one is above the main content and under the blockquote (quote with theme color background); the second one is below the main content and before the further reading section.</li>
 						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the link/label empty will go to the &quot;All-site Default&quot; once writers &quot;show the button.&quot;</li>
-					<ol>', self::METABOX_ID,
+					</ol>', self::METABOX_ID),
 				'id'               => $id_prefix . '_hint',
 				'type'             => 'title',
 			];
@@ -1141,6 +1142,63 @@ class P4CT_Metabox_Register {
 		
 	}
 	
+	/**
+	 * Registers testimony block option meta box(es).
+	 */
+	public function register_testimony_block_options_metabox() {
+
+		$this->subpages['gpea_testimony_block_options_page'] = [
+			'title'        => esc_html__( 'Page Testimony Blocks', self::METABOX_ID ),
+			'menu_title'   => esc_html__( 'Testimony Blocks', self::METABOX_ID ),
+			'option_key'   => 'gpea_testimony_block_options',
+			'fields'       => [],
+		];
+
+		$cmb_options = &$this->subpages['gpea_testimony_block_options_page']['fields'];
+
+		$card_layouts = [
+			[
+				'key' => '1',
+				'title' => 'Vertical card, dark text',
+				'image' => TRUE,
+			],
+			[
+				'key' => '2',
+				'title' => 'Vertical card, light text',
+				'image' => TRUE,
+			],
+			[
+				'key' => '3',
+				'title' => 'Horizontal card, dark text',
+				'image' => FALSE,
+			],
+			[
+				'key' => '4',
+				'title' => 'Horizontal card, light text',
+				'image' => TRUE,
+			],
+		];
+
+		foreach($card_layouts as $layout_data) {
+
+			$cmb_options[] = [
+				'name'             => esc_html__( 'Layout ' . $layout_data['key'] . ': ' . $layout_data['title'], self::METABOX_ID ),
+				'desc'             => $layout_data['image'] ? NULL : esc_html__( 'This layout has no background image.', self::METABOX_ID ) . '<br><br>',
+				'id'               => 'gpea_testimony_block_' . $layout_data['key'],
+				'type'             => 'title',
+			];
+
+			if($layout_data['image']) {
+				$cmb_options[] = [
+					'name'    => esc_html__( 'Background Image', self::METABOX_ID ),
+					'id'      => 'gpea_testimony_block_' . $layout_data['key'] . '_bg_img',
+					'type'    => 'file',
+				];
+			}
+
+		}
+
+	}
 
 	/**
 	 * Taxonomy show_on filter
