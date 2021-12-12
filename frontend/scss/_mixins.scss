@@ -121,6 +121,9 @@
   @include greaterThan('sm') {
     font-size: 28px;
   }
+  @include greaterThan('lg') {
+    margin: 1em auto;
+  }
 }
 @mixin title-border-version-b {
   border-left: 6px solid $color-green;

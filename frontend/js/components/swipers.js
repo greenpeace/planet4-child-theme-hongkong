@@ -4,12 +4,35 @@ const $ = jQuery;
 
 export default function (Swiper) {
 
-  new Swiper('.slides-swiper', {
-    slidesPerView: 1,
-    simulateTouch: false,
-    pagination: false,
-    autoplay: true,
-    loop: true,
+  // Hero set (Homepage B Version 1st Screen)
+  $('.hero-swiper').each(function (index) {
+    new Swiper(this, {
+      slidesPerView: 1,
+      simulateTouch: false,
+      pagination: false,
+      autoplay: true,
+      loop: true,
+    });
+  });
+
+  // Testimony (Homepage B Version 6th Screen)
+  $('.testimony-swiper').each(function (index) {
+    const $this = $(this);
+    const pagination = $(this)
+      .closest('section')
+      .find('.swiper-pagination')
+      .first()[0];
+    new Swiper(this, {
+      slidesPerView: 'auto',
+      simulateTouch: false,
+      pagination: {
+        el: pagination,
+        type: 'bullets',
+        clickable: true,
+      },
+      autoplay: false,
+      loop: false,
+    });
   });
 
   $('.featured-swiper, .projects-swiper, .tips-swiper').each(function (index) {
