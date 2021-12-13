@@ -12,11 +12,11 @@
 
   .content {
     &--title {
-      h2 {
+      .title {
         @include title-text-version-b;
         @include title-border-version-b;
       }
-      p {
+      .desc {
         @include text-version-b;
         @include margin-right-version-b;
         @include margin-left-version-b;

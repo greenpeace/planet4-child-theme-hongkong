@@ -11,17 +11,62 @@
   }
 
   .content {
+    counter-reset: counter;
     &--title {
-      h2 {
+      .title {
         @include title-text-version-b;
         @include title-border-version-b;
       }
-      p {
-        @include text-version-b;
-        @include margin-right-version-b;
+    }
+    &--desc {
+      position: relative;
+      .title {
+        color: #5CB107;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        align-items: baseline;
+        &:before {
+          counter-increment: counter;
+          content: counter(counter , decimal-leading-zero);
+          font-size: 20px;
+          font-weight: normal;
+          width: 30px;
+          @include greaterThan('lg') {
+            margin-left: -30px;
+          }
+        }
+      }
+      .title,
+      .desc {
         @include margin-left-version-b;
         @include greaterThan('sm') {
-          max-width: 420px;
+          max-width: 370px;
+        }
+        @include greaterThan('lg') {
+          max-width: 440px;
+          padding-left: 30px;
+        }
+      }
+      .desc {
+        @include text-version-b;
+      }
+      .image {
+        border: 2px solid $color-green;
+        width: 0.7 * 190px;
+        height: 0.7 * 250px;
+        @include greaterThan('sm') {
+          width: 190px;
+          height: 250px;
+        }
+      }
+    }
+    &__inner {
+      &--2 {
+        @include greaterThan('lg') {
+          position: absolute;
+          top: 0;
+          right: 0
         }
       }
     }

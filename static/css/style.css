@@ -3278,25 +3278,25 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-geography-set .ct-container { max-width: 1200px; } }
 
-.section-geography-set .content--title h2 { font-weight: normal; font-size: 22px; margin: 1.5em auto; border-left: 6px solid #66cc00; padding-left: 20px; }
+.section-geography-set .content--title .title { font-weight: normal; font-size: 22px; margin: 1.5em auto; border-left: 6px solid #66cc00; padding-left: 20px; }
 
-@media only screen and (max-width: 1023px) { .section-geography-set .content--title h2 { display: table; } }
+@media only screen and (max-width: 1023px) { .section-geography-set .content--title .title { display: table; } }
 
-@media only screen and (min-width: 1024px) { .section-geography-set .content--title h2 { font-size: 28px; } }
+@media only screen and (min-width: 1024px) { .section-geography-set .content--title .title { font-size: 28px; } }
 
-@media only screen and (min-width: 1280px) { .section-geography-set .content--title h2 { margin: 1em auto; } }
+@media only screen and (min-width: 1280px) { .section-geography-set .content--title .title { margin: 1em auto; } }
 
-.section-geography-set .content--title p { font-size: 16px; }
+.section-geography-set .content--title .desc { font-size: 16px; }
 
-@media only screen and (min-width: 1024px) { .section-geography-set .content--title p { margin-right: 26px; } }
+@media only screen and (min-width: 1024px) { .section-geography-set .content--title .desc { margin-right: 26px; } }
 
-@media only screen and (min-width: 1280px) { .section-geography-set .content--title p { margin-right: 82px; } }
+@media only screen and (min-width: 1280px) { .section-geography-set .content--title .desc { margin-right: 82px; } }
 
-@media only screen and (min-width: 1024px) { .section-geography-set .content--title p { margin-left: 26px; } }
+@media only screen and (min-width: 1024px) { .section-geography-set .content--title .desc { margin-left: 26px; } }
 
-@media only screen and (min-width: 1280px) { .section-geography-set .content--title p { margin-left: 82px; } }
+@media only screen and (min-width: 1280px) { .section-geography-set .content--title .desc { margin-left: 82px; } }
 
-@media only screen and (min-width: 1024px) { .section-geography-set .content--title p { max-width: 420px; } }
+@media only screen and (min-width: 1024px) { .section-geography-set .content--title .desc { max-width: 420px; } }
 
 .section-report-set { margin-top: 80px; margin-bottom: 50px; }
 
@@ -3306,25 +3306,39 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-report-set .ct-container { max-width: 1200px; } }
 
-.section-report-set .content--title h2 { font-weight: normal; font-size: 22px; margin: 1.5em auto; border-left: 6px solid #66cc00; padding-left: 20px; }
+.section-report-set .content { counter-reset: counter; }
 
-@media only screen and (max-width: 1023px) { .section-report-set .content--title h2 { display: table; } }
+.section-report-set .content--title .title { font-weight: normal; font-size: 22px; margin: 1.5em auto; border-left: 6px solid #66cc00; padding-left: 20px; }
 
-@media only screen and (min-width: 1024px) { .section-report-set .content--title h2 { font-size: 28px; } }
+@media only screen and (max-width: 1023px) { .section-report-set .content--title .title { display: table; } }
 
-@media only screen and (min-width: 1280px) { .section-report-set .content--title h2 { margin: 1em auto; } }
+@media only screen and (min-width: 1024px) { .section-report-set .content--title .title { font-size: 28px; } }
 
-.section-report-set .content--title p { font-size: 16px; }
+@media only screen and (min-width: 1280px) { .section-report-set .content--title .title { margin: 1em auto; } }
 
-@media only screen and (min-width: 1024px) { .section-report-set .content--title p { margin-right: 26px; } }
+.section-report-set .content--desc { position: relative; }
 
-@media only screen and (min-width: 1280px) { .section-report-set .content--title p { margin-right: 82px; } }
+.section-report-set .content--desc .title { color: #5CB107; font-size: 18px; font-weight: 600; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: baseline; -ms-flex-align: baseline; align-items: baseline; }
 
-@media only screen and (min-width: 1024px) { .section-report-set .content--title p { margin-left: 26px; } }
+.section-report-set .content--desc .title:before { counter-increment: counter; content: counter(counter, decimal-leading-zero); font-size: 20px; font-weight: normal; width: 30px; }
 
-@media only screen and (min-width: 1280px) { .section-report-set .content--title p { margin-left: 82px; } }
+@media only screen and (min-width: 1280px) { .section-report-set .content--desc .title:before { margin-left: -30px; } }
 
-@media only screen and (min-width: 1024px) { .section-report-set .content--title p { max-width: 420px; } }
+@media only screen and (min-width: 1024px) { .section-report-set .content--desc .title, .section-report-set .content--desc .desc { margin-left: 26px; } }
+
+@media only screen and (min-width: 1280px) { .section-report-set .content--desc .title, .section-report-set .content--desc .desc { margin-left: 82px; } }
+
+@media only screen and (min-width: 1024px) { .section-report-set .content--desc .title, .section-report-set .content--desc .desc { max-width: 370px; } }
+
+@media only screen and (min-width: 1280px) { .section-report-set .content--desc .title, .section-report-set .content--desc .desc { max-width: 440px; padding-left: 30px; } }
+
+.section-report-set .content--desc .desc { font-size: 16px; }
+
+.section-report-set .content--desc .image { border: 2px solid #66cc00; width: 133px; height: 175px; }
+
+@media only screen and (min-width: 1024px) { .section-report-set .content--desc .image { width: 190px; height: 250px; } }
+
+@media only screen and (min-width: 1280px) { .section-report-set .content__inner--2 { position: absolute; top: 0; right: 0; } }
 
 .section-infographic-cards { margin-top: 40px; margin-bottom: 50px; }
 
@@ -3402,25 +3416,25 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-testimony .ct-container { max-width: 1200px; } }
 
-.section-testimony .content--title h2 { font-weight: normal; font-size: 22px; margin: 1.5em auto; border-left: 6px solid #66cc00; padding-left: 20px; }
+.section-testimony .content--title .title { font-weight: normal; font-size: 22px; margin: 1.5em auto; border-left: 6px solid #66cc00; padding-left: 20px; }
 
-@media only screen and (max-width: 1023px) { .section-testimony .content--title h2 { display: table; } }
+@media only screen and (max-width: 1023px) { .section-testimony .content--title .title { display: table; } }
 
-@media only screen and (min-width: 1024px) { .section-testimony .content--title h2 { font-size: 28px; } }
+@media only screen and (min-width: 1024px) { .section-testimony .content--title .title { font-size: 28px; } }
 
-@media only screen and (min-width: 1280px) { .section-testimony .content--title h2 { margin: 1em auto; } }
+@media only screen and (min-width: 1280px) { .section-testimony .content--title .title { margin: 1em auto; } }
 
-.section-testimony .content--title p { font-size: 16px; }
+.section-testimony .content--title .desc { font-size: 16px; }
 
-@media only screen and (min-width: 1024px) { .section-testimony .content--title p { margin-right: 26px; } }
+@media only screen and (min-width: 1024px) { .section-testimony .content--title .desc { margin-right: 26px; } }
 
-@media only screen and (min-width: 1280px) { .section-testimony .content--title p { margin-right: 82px; } }
+@media only screen and (min-width: 1280px) { .section-testimony .content--title .desc { margin-right: 82px; } }
 
-@media only screen and (min-width: 1024px) { .section-testimony .content--title p { margin-left: 26px; } }
+@media only screen and (min-width: 1024px) { .section-testimony .content--title .desc { margin-left: 26px; } }
 
-@media only screen and (min-width: 1280px) { .section-testimony .content--title p { margin-left: 82px; } }
+@media only screen and (min-width: 1280px) { .section-testimony .content--title .desc { margin-left: 82px; } }
 
-@media only screen and (min-width: 1024px) { .section-testimony .content--title p { max-width: 420px; } }
+@media only screen and (min-width: 1024px) { .section-testimony .content--title .desc { max-width: 420px; } }
 
 .section-testimony .swiper-container { margin-right: 0; padding-left: 0; margin-top: 30px; }
 
