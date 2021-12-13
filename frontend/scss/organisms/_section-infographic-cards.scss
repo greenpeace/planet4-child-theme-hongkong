@@ -1,0 +1,30 @@
+.section-infographic-cards {
+  margin-top: 80px;
+  margin-bottom: 50px;
+  @include greaterThan('sm') {
+    margin-top: 60px;
+    margin-bottom: 100px;
+  }
+
+  .ct-container {
+    @include ct-container-version-b;
+  }
+
+  .content {
+    &--title {
+      h2 {
+        @include title-text-version-b;
+        @include title-border-version-b;
+      }
+      p {
+        @include text-version-b;
+        @include margin-right-version-b;
+        @include margin-left-version-b;
+        @include greaterThan('sm') {
+          max-width: 420px;
+        }
+      }
+    }
+  }
+
+}
