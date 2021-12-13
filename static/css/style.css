@@ -1467,11 +1467,13 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 @media only screen and (max-width: 1023px) { .stepper { margin-top: 5px; } }
 
-header { position: relative; height: 50px; background-color: #66cc00; color: white; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; z-index: 4; }
-
 .admin-bar header { top: 32px; }
 
 @media only screen and (max-width: 782px) { .admin-bar header { top: 46px; } }
+
+@media only screen and (max-width: 600px) { .admin-bar.is-scrolling-down header { top: 0; } }
+
+header { position: relative; height: 50px; background-color: #66cc00; color: white; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; z-index: 4; }
 
 @media only screen and (min-width: 1024px) { header { position: fixed; left: 0; right: 0; z-index: 99; } }
 
@@ -1554,6 +1556,7 @@ header .content .right-box .button:active { background-color: #E96D00; border-co
 .mobile-toolbar a.item__make-change.active span { background-image: url("../images/icons/Act-fill-mobile.svg"); }
 
 @media only screen and (max-width: 1023px) { body { padding-top: 96px; }
+  body.is-scrolling-down { padding-top: 48px; }
   header { position: fixed; display: block; top: 0; left: 0; right: 0; height: 96px; -webkit-transform: translateY(0); -ms-transform: translateY(0); transform: translateY(0); -webkit-transition: -webkit-transform 350ms ease; transition: -webkit-transform 350ms ease; transition: transform 350ms ease; transition: transform 350ms ease, -webkit-transform 350ms ease; will-change: transform; }
   header > .ct-container { height: 50px; }
   header .content .mobile-box { display: block; }
@@ -3270,6 +3273,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-hero-set .swiper-wrapper { width: 100%; height: 100%; }
 
+.section-hero-set .swiper-container { padding: 0; }
+
 .section-hero-set .swiper-container, .section-hero-set .bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 .section-hero-set .slide-item:after { content: ''; position: absolute; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.25); }
@@ -3439,7 +3444,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-testimony .slide-item { width: auto; } }
 
-.section-testimony .slide-item__inner { width: 100%; -webkit-box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); border-radius: 16px; color: white; padding-top: 30px; padding-left: 24px; padding-right: 24px; overflow: hidden; position: relative; }
+.section-testimony .slide-item__inner { width: 100%; -webkit-box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); border-radius: 16px; color: white; padding-top: 30px; padding-left: 12px; padding-right: 12px; overflow: hidden; position: relative; }
 
 .section-testimony .slide-item__inner p { font-size: 16px; }
 
@@ -3464,15 +3469,16 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-testimony .slide-item__inner--3 .text__name { color: #66cc00; }
 
+@media only screen and (min-width: 1024px) { .section-testimony .slide-item__inner { padding-left: 24px; padding-right: 24px; } }
+
 .section-testimony .slide-item__inner .text--desc { margin-bottom: 24px; }
 
-@media only screen and (min-width: 1024px) { .section-testimony .slide-item__inner--1, .section-testimony .slide-item__inner--2 { margin-bottom: 48px; } }
+@media only screen and (min-width: 1024px) { .section-testimony .slide-item__inner--1 .text--desc, .section-testimony .slide-item__inner--2 .text--desc { margin-bottom: 48px; } }
 
 @media only screen and (min-width: 1024px) { .section-testimony .slide-item__inner .text--desc { width: 348px; } }
 
-.section-testimony .slide-item__inner--1 { padding-left: 34px; padding-right: 34px; }
-
-@media only screen and (min-width: 1024px) { .section-testimony .slide-item__inner--1 .text--desc { width: 274px; } }
+@media only screen and (min-width: 1024px) { .section-testimony .slide-item__inner--1 { padding-left: 34px; padding-right: 34px; }
+  .section-testimony .slide-item__inner--1 .text--desc { width: 274px; } }
 
 @media only screen and (min-width: 1024px) { .section-testimony .slide-item__inner--2 .text--desc { width: 240px; } }
 
@@ -3913,14 +3919,19 @@ body.search .has-load-more, .dynamic-search .has-load-more { text-align: center;
   body.search .advanced-wrapper .sort-by, .dynamic-search .advanced-wrapper .sort-by { text-align: right; }
   body.search .advanced-wrapper .sort-by .select, .dynamic-search .advanced-wrapper .sort-by .select { display: inline-block; } }
 
-.dynamic-search { position: fixed; top: 96px; bottom: 0; left: 0; right: 0; z-index: 3; background: rgba(0, 0, 0, 0.7); visibility: hidden; opacity: 0; -webkit-transition: opacity 200ms linear, visibility 0ms linear 240ms; transition: opacity 200ms linear, visibility 0ms linear 240ms; }
+@media only screen and (min-width: 1024px) { .admin-bar .dynamic-search { top: 82px; } }
+
+@media only screen and (max-width: 782px) { .admin-bar .dynamic-search { top: 142px; } }
+
+@media only screen and (max-width: 600px) { .admin-bar.is-scrolling-down .dynamic-search { top: 48px; } }
+
+.is-scrolling-down .dynamic-search { top: 48px; }
+
+.dynamic-search { position: fixed; top: 96px; bottom: 0; left: 0; right: 0; z-index: 4; background: rgba(0, 0, 0, 0.7); visibility: hidden; opacity: 0; -webkit-transition: opacity 200ms linear, visibility 0ms linear 240ms; transition: opacity 200ms linear, visibility 0ms linear 240ms; }
 
 .dynamic-search.is-visible { visibility: visible; opacity: 1; -webkit-transition: opacity 200ms linear, visibility 0ms linear 0ms; transition: opacity 200ms linear, visibility 0ms linear 0ms; }
 
-@media only screen and (min-width: 1024px) { .dynamic-search { top: 50px; }
-  .admin-bar .dynamic-search { top: 82px; } }
-
-@media only screen and (max-width: 782px) { .admin-bar .dynamic-search { top: 142px; } }
+@media only screen and (min-width: 1024px) { .dynamic-search { top: 50px; } }
 
 .dynamic-search .live-search { max-height: 100%; overflow-y: auto; -webkit-transform: translateY(-20px); -ms-transform: translateY(-20px); transform: translateY(-20px); -webkit-transition: -webkit-transform 140ms ease-in-out; transition: -webkit-transform 140ms ease-in-out; transition: transform 140ms ease-in-out; transition: transform 140ms ease-in-out, -webkit-transform 140ms ease-in-out; }
 

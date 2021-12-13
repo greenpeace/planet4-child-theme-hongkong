@@ -1,3 +1,17 @@
+.admin-bar {
+  header {
+    top: 32px;
+    @media only screen and (max-width: 782px) {
+      top: 46px;
+    }
+  }
+  &.is-scrolling-down header {
+    @media only screen and (max-width: 600px) {
+        top: 0;
+    }
+  }
+}
+
 header {
   position: relative;
   height: 50px;
@@ -7,13 +21,6 @@ header {
   display: flex;
   align-items: center;
   z-index: 4;
-
-  .admin-bar & {
-    top: 32px;
-    @media only screen and (max-width: 782px) {
-      top: 46px;
-    }
-  }
 
   @include greaterThan('sm') {
     position: fixed;
@@ -239,6 +246,9 @@ header {
 @include lessThan('sm') {
   body {
     padding-top: 96px;
+    &.is-scrolling-down {
+      padding-top: 48px;
+    }
   }
 
   header {

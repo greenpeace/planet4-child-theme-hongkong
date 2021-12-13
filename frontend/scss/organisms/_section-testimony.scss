@@ -107,15 +107,21 @@
       }
       // box
       padding-top: 30px;
-      padding-left: 24px;
-      padding-right: 24px;
+      padding-left: 12px;
+      padding-right: 12px;
+      @include greaterThan('sm') {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
       .text--desc {
         margin-bottom: 24px;
       }
       &--1,
       &--2 {
         @include greaterThan('sm') {
-          margin-bottom: 48px;
+          .text--desc {
+            margin-bottom: 48px;
+          }
         }
       }
       @include greaterThan('sm') {
@@ -124,9 +130,9 @@
         }
       }
       &--1 {
-        padding-left: 34px;
-        padding-right: 34px;
         @include greaterThan('sm') {
+          padding-left: 34px;
+          padding-right: 34px;
           .text--desc {
             width: 274px;
           }
