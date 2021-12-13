@@ -231,6 +231,11 @@
   color: black;
 }
 
+@mixin card-version-b {
+  border-radius: 16px;
+  box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5);
+}
+
 @mixin profile {
   text-align: center;
 

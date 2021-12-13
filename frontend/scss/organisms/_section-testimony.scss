@@ -51,8 +51,7 @@
     }
     &__inner {
       width: 100%;
-      box-shadow: 0px 2px 25px 0px rgba(215,215,215,0.5);
-      border-radius: 16px;
+      @include card-version-b;
       p {
         @include text-version-b;
       }
