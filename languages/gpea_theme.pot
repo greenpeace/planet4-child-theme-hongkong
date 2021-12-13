@@ -518,3 +518,13 @@ msgstr ""
 
 msgid "Any topic"
 msgstr ""
+
+#. Header menu items
+msgid "WHO WE ARE"
+msgstr ""
+msgid "OUR WORK"
+msgstr ""
+msgid "GET INVOLVED"
+msgstr ""
+msgid "NEWS & STORIES"
+msgstr ""

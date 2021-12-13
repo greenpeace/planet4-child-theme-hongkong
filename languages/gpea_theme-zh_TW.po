@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/planet4-child-"
 "theme-hongkong\n"
 "POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: 2021-12-08 11:44+0800\n"
+"PO-Revision-Date: 2021-12-13 20:38+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -529,6 +529,19 @@ msgstr "所有議題"
 
 msgid "Any topic"
 msgstr "所有主題"
+
+#. Header menu items
+msgid "WHO WE ARE"
+msgstr "關於綠色和平"
+
+msgid "OUR WORK"
+msgstr "六大目標&專案"
+
+msgid "GET INVOLVED"
+msgstr "一起行動"
+
+msgid "NEWS & STORIES"
+msgstr "成果與故事"
 
 #~ msgid ""
 #~ "In order to maintain a fair and independent, and continue to appeal to "
