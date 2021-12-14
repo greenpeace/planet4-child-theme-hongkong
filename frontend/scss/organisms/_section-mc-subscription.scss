@@ -39,7 +39,7 @@
     }
     &--title {
       h2 {
-        order: 2;
+        order: 1;
       }
       p {
         @include text-border-version-b;
