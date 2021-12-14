@@ -3298,6 +3298,14 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-geography-set .content--title .desc { max-width: 420px; } }
 
+.section-get-involved { margin-top: 40px; margin-bottom: 50px; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved { margin-top: 80px; margin-bottom: 100px; } }
+
+.section-get-involved-cards { margin-top: 40px; margin-bottom: 50px; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards { margin-top: 80px; margin-bottom: 100px; } }
+
 .section-report-set { margin-top: 80px; margin-bottom: 50px; }
 
 @media only screen and (min-width: 1024px) { .section-report-set { margin-top: 60px; margin-bottom: 100px; } }
