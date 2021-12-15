@@ -33,7 +33,8 @@
         font-size: 25px;
         font-weight: normal;
       }
-      .desc {
+      .desc p,
+      .button {
         @include text-version-b;
       }
       .image {
@@ -48,6 +49,9 @@
         @include greaterThan('sm') {
           width: 296px;
           height: 384px;
+        }
+        @include greaterThan('sm') {
+          @include margin-right-version-b;
         }
         &__inner {
           position: absolute;
@@ -78,6 +82,12 @@
     }
     &__inner {
       @include margin-left-version-b;
+      @include greaterThan('sm') {
+        max-width: 520 - 105px;
+      }
+      @include greaterThan('lg') {
+        max-width: 520px;
+      }
       &--2 {
         @include greaterThan('sm') {
           position: absolute;

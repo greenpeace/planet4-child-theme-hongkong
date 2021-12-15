@@ -3189,18 +3189,24 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-hero-set .ct-container { height: 100%; }
 
-.section-hero-set .content { position: relative; z-index: 2; height: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; text-align: center; font-size: 16px; }
+.section-hero-set .content { position: relative; z-index: 2; height: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; text-align: center; }
 
 @media only screen and (min-width: 1024px) { .section-hero-set .content--left { -webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start; text-align: left; }
   .section-hero-set .content--right { -webkit-box-pack: end; -ms-flex-pack: end; justify-content: flex-end; text-align: left; } }
 
 .section-hero-set .content__text { color: white; }
 
-.section-hero-set .title { margin-bottom: 40px; font-size: 22px; }
+.section-hero-set .content p { font-size: 16px; }
 
-@media only screen and (min-width: 1024px) { .section-hero-set .title { font-size: 44px; display: -webkit-box; display: -ms-flexbox; display: flex; } }
+.section-hero-set .title { margin-bottom: 40px; }
 
-@media only screen and (min-width: 1280px) { .section-hero-set .title { font-size: 48px; } }
+@media only screen and (min-width: 1024px) { .section-hero-set .title { display: -webkit-box; display: -ms-flexbox; display: flex; } }
+
+.section-hero-set .title__text { font-size: 22px; }
+
+@media only screen and (min-width: 1024px) { .section-hero-set .title__text { font-size: 44px; } }
+
+@media only screen and (min-width: 1280px) { .section-hero-set .title__text { font-size: 48px; } }
 
 @media only screen and (max-width: 1023px) { .section-hero-set .title__text { display: block; } }
 
@@ -3220,11 +3226,13 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-steps-set { margin-top: 70px; margin-bottom: 70px; } }
 
-.section-steps-set .title { font-size: 22px; font-weight: normal; text-decoration: underline; text-underline-offset: 5px; line-height: 1.5; margin: 0 auto 35px; }
+.section-steps-set .title { margin: 0 auto 35px; }
 
 @media only screen and (max-width: 1023px) { .section-steps-set .title { display: table; } }
 
 @media only screen and (min-width: 1024px) { .section-steps-set .title { text-underline-offset: 10px; line-height: 2; margin-bottom: 50px; max-width: 450px; text-align: center; } }
+
+.section-steps-set .title__text { font-size: 22px; font-weight: normal; text-decoration: underline; text-underline-offset: 5px; line-height: 1.5; }
 
 @media only screen and (max-width: 1023px) { .section-steps-set .title__text--pc { display: none; } }
 
@@ -3236,13 +3244,11 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-steps-set .grid { margin-right: -2.5%; margin-left: -2.5%; } }
 
-.section-steps-set .grid__box { border: 2px solid #85D633; border-radius: 8px; -webkit-box-flex: 0; -ms-flex: 0 0 30%; flex: 0 0 30%; -ms-flex-item-align: auto; align-self: auto; margin: 0 auto 20px; padding: 4.5% 4%; }
+.section-steps-set .grid__box { border: 2px solid #85D633; border-radius: 8px; -webkit-box-flex: 0; -ms-flex: 0 0 30%; flex: 0 0 30%; -ms-flex-item-align: auto; align-self: auto; margin: 0 auto 20px; padding: 4.5% 4% 3%; }
 
-@media only screen and (max-width: 1023px) { .section-steps-set .grid__box { padding: 30px 20px; } }
+@media only screen and (max-width: 1023px) { .section-steps-set .grid__box { padding: 30px 20px 30px; } }
 
 @media only screen and (min-width: 1024px) { .section-steps-set .grid__box { margin-right: 1.25%; margin-left: 1.25%; margin-bottom: 3%; } }
-
-.section-steps-set .grid__box p { margin-bottom: 0; }
 
 .section-steps-set .grid__inner { position: relative; }
 
@@ -3272,7 +3278,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-steps-set .grid__title:before { position: absolute; font-weight: normal; top: 0; } }
 
-.section-steps-set .grid__desc { font-size: 16px; }
+.section-steps-set .grid__desc p { font-size: 16px; }
 
 .section-geography-set { margin-top: 80px; margin-bottom: 50px; }
 
@@ -3328,13 +3334,17 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-get-involved .content--desc .title { font-size: 25px; font-weight: normal; }
 
-.section-get-involved .content--desc .desc { font-size: 16px; }
+.section-get-involved .content--desc .desc p, .section-get-involved .content--desc .button { font-size: 16px; }
 
 .section-get-involved .content--desc .image { margin: auto; width: 186px; height: 241.2973px; position: relative; border: 1px solid #66CC00; }
 
 @media only screen and (max-width: 1023px) { .section-get-involved .content--desc .image { left: 17px; } }
 
 @media only screen and (min-width: 1024px) { .section-get-involved .content--desc .image { width: 296px; height: 384px; } }
+
+@media only screen and (min-width: 1024px) and (min-width: 1024px) { .section-get-involved .content--desc .image { margin-right: 26px; } }
+
+@media only screen and (min-width: 1024px) and (min-width: 1280px) { .section-get-involved .content--desc .image { margin-right: 82px; } }
 
 .section-get-involved .content--desc .image__inner { position: absolute; top: -9px; right: 12px; width: 208px; height: 236.64671px; border: 1px solid #1E1E1E; background-color: white; }
 
@@ -3347,6 +3357,10 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 @media only screen and (min-width: 1024px) { .section-get-involved .content__inner { margin-left: 26px; } }
 
 @media only screen and (min-width: 1280px) { .section-get-involved .content__inner { margin-left: 82px; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved .content__inner { max-width: 415px; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved .content__inner { max-width: 520px; } }
 
 @media only screen and (min-width: 1024px) { .section-get-involved .content__inner--2 { position: absolute; top: 0; right: 0; } }
 
@@ -3388,7 +3402,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-report-set .content--desc .title, .section-report-set .content--desc .desc { padding-left: 30px; } }
 
-.section-report-set .content--desc .desc { font-size: 16px; }
+.section-report-set .content--desc .desc p { font-size: 16px; }
 
 .section-report-set .content--desc .image { width: 133px; height: 175px; position: relative; }
 
@@ -3557,11 +3571,11 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
   .section-testimony .slide-item__inner--3 { width: 490px; }
   .section-testimony .slide-item__inner--4 { width: 476px; } }
 
-.section-testimony .slide-item__inner .text__title { font-weight: 600; font-size: 16px; }
+.section-testimony .slide-item__inner .text__title { font-weight: 600; font-size: 16px; margin-bottom: 5px; }
 
 @media only screen and (min-width: 1024px) { .section-testimony .slide-item__inner .text__title { font-size: 15px; } }
 
-.section-testimony .slide-item__inner .text__name { color: #9BEE48; font-weight: normal; font-size: 20px; }
+.section-testimony .slide-item__inner .text__name { color: #9BEE48; font-weight: normal; font-size: 20px; margin-bottom: 10px; }
 
 @media only screen and (min-width: 1024px) { .section-testimony .slide-item__inner .text__name { font-size: 26px; } }
 
@@ -3652,7 +3666,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-mc-subscription .content--title h2 { -webkit-box-ordinal-group: 2; -ms-flex-order: 1; order: 1; }
 
-.section-mc-subscription .content--title p { border-left: 4px solid #66CC00; padding-left: 20px; }
+.section-mc-subscription .content--title .desc { border-left: 4px solid #66CC00; padding-left: 20px; }
 
 @media only screen and (min-width: 1024px) { .section-mc-subscription .form-container { max-width: 610px; } }
 

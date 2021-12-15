@@ -47,16 +47,13 @@
       .title,
       .desc {
         @include greaterThan('sm') {
-          // max-width: 370px;
           max-width: 520px;
         }
         @include greaterThan('lg') {
-          // max-width: 440px;
-          // max-width: 510px;
           padding-left: 30px;
         }
       }
-      .desc {
+      .desc p {
         @include text-version-b;
       }
       .image {

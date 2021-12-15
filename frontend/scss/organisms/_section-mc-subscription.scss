@@ -41,7 +41,7 @@
       h2 {
         order: 1;
       }
-      p {
+      .desc {
         @include text-border-version-b;
       }
     }

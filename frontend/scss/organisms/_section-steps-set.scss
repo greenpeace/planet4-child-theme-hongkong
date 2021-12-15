@@ -6,11 +6,6 @@
     margin-bottom: 70px;
   }
   .title {
-    font-size: 22px;
-    font-weight: normal;
-    text-decoration: underline;
-    text-underline-offset: 5px;
-    line-height: 1.5;
     margin: 0 auto 35px;
     @include lessThan('sm') {
       display: table;
@@ -23,6 +18,11 @@
       text-align: center;
     }
     &__text {
+      font-size: 22px;
+      font-weight: normal;
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      line-height: 1.5;
       @include lessThan('sm') {
         &--pc {
           display: none;
@@ -55,9 +55,9 @@
       flex: 0 0 30%;
       align-self: auto;
       margin: 0 auto 20px;
-      padding: 4.5% 4%;
+      padding: 4.5% 4% 3%;
       @include lessThan('sm') {
-        padding: 30px 20px;
+        padding: 30px 20px 30px;
       }
       @include greaterThan('sm') {
         margin-right: 1.25%;
@@ -65,7 +65,7 @@
         margin-bottom: 3%;
       }
       p {
-        margin-bottom: 0;
+        // margin-bottom: 0;
       }
     }
     &__inner {
@@ -135,7 +135,9 @@
       }
     }
     &__desc {
-      font-size: 16px;
+      p {
+        @include text-version-b;
+      }
     }
   }
 }

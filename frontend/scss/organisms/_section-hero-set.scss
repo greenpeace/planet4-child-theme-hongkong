@@ -97,7 +97,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 16px;
     @include greaterThan("sm") {
       &--left {
         justify-content: flex-start;
@@ -113,19 +112,24 @@
     &__text {
       color: white;
     }
+    p {
+      @include text-version-b;
+    }
   }
 
   .title {
     margin-bottom: 40px;
-    font-size: 22px;
     @include greaterThan("sm") {
-      font-size: 44px;
       display: flex;
     }
-    @include greaterThan("lg") {
-      font-size: 48px;
-    }
     &__text {
+      font-size: 22px;
+      @include greaterThan("sm") {
+        font-size: 44px;
+      }
+      @include greaterThan("lg") {
+        font-size: 48px;
+      }
       @include lessThan("sm") {
         display: block;
       }
