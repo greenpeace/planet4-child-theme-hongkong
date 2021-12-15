@@ -2,35 +2,37 @@
 .enform form button {
 
   display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 10px 5px 10px 0;
   padding: 0 30px;
   height: 30px;
-  margin: 10px 5px 10px 0;
-  font-size: 14px;
   line-height: 29px;
   color: $color-orange;
-  background: white;
+  background-color: white;
+  border: none;
   border-radius: 4px;
-  font-weight: 400;
-  transition: background-color 140ms linear, border-color 140ms linear;
+  box-shadow: inset 0px 0px 0px 1px $color-orange;
+  transition: background-color 140ms linear, box-shadow 140ms linear, border-width 140ms linear;
   text-decoration: none;
-  border: 1px solid $color-orange;
   cursor: pointer;
 
   @include greaterThan('sm') {
+    font-size: 18px;
     padding: 0 50px;
     height: 40px;
-    font-size: 18px;
     line-height: 39px;
   }
 
   &.primary,
   &.btn-primary {
+    font-size: 20px;
     padding: 0 40px;
     height: 40px;
-    font-size: 20px;
     line-height: 39px;
-    background: $color-orange;
     color: white;
+    background: $color-orange;
+    box-shadow: none;
     &.wider {
       @include greaterThan('sm') {
         padding: 0 100px;
@@ -38,21 +40,38 @@
     }
   }
 
-  &.secondary {
-    color: $color-green;
-  }
-
   &:hover,
   &:focus {
     color: white;
     background-color: $color-orange-hover;
-    border-color: $color-orange-hover;
+    box-shadow: none;
   }
 
   &:active {
     color: white;
     background-color: $color-orange-active;
-    border-color: $color-orange-active;
+    box-shadow: none;
+  }
+
+  &.secondary {
+    color: $color-green;
+    border-radius: 0;
+    box-shadow: inset 0px -2px 0px 0px $color-green;
+    // border-bottom: 2px solid $color-green;
+    &:hover,
+    &:focus {
+      color: white;
+      border-radius: 4px;
+      box-shadow: none;
+      background-color: $color-green-hover;
+    }
+
+    &:active {
+      color: white;
+      border-radius: 4px;
+      box-shadow: none;
+      background-color: $color-green-active;
+    }
   }
 
   &:last-child {
@@ -143,15 +162,15 @@
   &.loading,
   &[disabled] {
     color: white;
-    background-color: $color-orange-disabled;
+    background-color: $color-disabled;
   }
 
   &.primary {
     &.loading,
     &[disabled] {
       color: white;
-      border-color: $color-orange-disabled;
-      background-color: $color-orange-disabled;
+      box-shadow: none;
+      background-color: $color-disabled;
     }
   }
 

@@ -1,8 +1,91 @@
 .section-get-involved {
-  margin-top: 40px;
+  margin-top: 80px;
   margin-bottom: 50px;
   @include greaterThan('sm') {
     margin-top: 80px;
     margin-bottom: 100px;
   }
+
+  .ct-container {
+    @include ct-container-version-b;
+  }
+
+  .content {
+    &--title {
+      .title {
+        @include title-text-version-b;
+        @include title-border-version-b;
+      }
+    }
+    &--desc {
+      position: relative;
+      @include greaterThan('sm') {
+        min-height: 330px;
+      }
+      @include greaterThan('lg') {
+        min-height: 250px;
+      }
+      .category {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .title {
+        font-size: 25px;
+        font-weight: normal;
+      }
+      .desc {
+        @include text-version-b;
+      }
+      .image {
+        margin: auto;
+        width: (186/296) * 296px;
+        height: (186/296) * 384px;
+        position: relative;
+        border: 1px solid $color-green;
+        @include lessThan('sm') {
+          left: 17px;
+        }
+        @include greaterThan('sm') {
+          width: 296px;
+          height: 384px;
+        }
+        &__inner {
+          position: absolute;
+          top: -9px;
+          right: 12px;
+          width: (208/334) * 334px;
+          height: (208/334) * 380px;
+          border: 1px solid #1E1E1E;
+          background-color: white;
+          @include greaterThan('sm') {
+            top: -12px;
+            right: 16px;
+            width: 334px;
+            height: 380px;
+          }
+        }
+        .bg {
+          margin: 14px auto auto;
+          width: percentage(302 / 334);
+          height: percentage(298 / 380);
+          background: no-repeat center;
+          background-size: cover;
+          @include greaterThan('sm') {
+            margin-top: 25px;
+          }
+        }
+      }
+    }
+    &__inner {
+      @include margin-left-version-b;
+      &--2 {
+        @include greaterThan('sm') {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+      }
+    }
+  }
+
 }

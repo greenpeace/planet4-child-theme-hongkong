@@ -46,7 +46,6 @@
       }
       .title,
       .desc {
-        @include margin-left-version-b;
         @include greaterThan('sm') {
           // max-width: 370px;
           max-width: 520px;
@@ -64,6 +63,9 @@
         width: 0.7 * 190px;
         height: 0.7 * 250px;
         position: relative;
+        @include lessThan('sm') {
+          margin-left: 20px;
+        }
         @include greaterThan('sm') {
           border: 2px solid $color-green;
           width: 190px;
@@ -86,6 +88,7 @@
       }
     }
     &__inner {
+      @include margin-left-version-b;
       &--2 {
         display: flex;
         @include lessThan('sm') {
@@ -133,17 +136,9 @@
             padding: 10px 10px;
             width: 160px;
           }
-          &:hover {
-            .buttons__arrow {
-              right: 10px;
-            }
-          }
           &--secondary {
-            border-bottom: 2px solid $color-green;
-            transition: color 140ms linear, border-color 140ms linear;
+            margin-top: 5px;
             &:hover {
-              color: $color-light-green;
-              border-color: $color-light-green;
               .buttons__arrow,
               .buttons__arrow:after,
               .buttons__arrow:before {
@@ -155,6 +150,17 @@
               &:after,
               &:before {
                 background-color: $color-green;
+              }
+            }
+            &:hover,
+            &:focus,
+            &:active {
+              .buttons__arrow {
+                &,
+                &:after,
+                &:before {
+                  background-color: white;
+                }
               }
             }
           }
@@ -169,7 +175,7 @@
           &:after,
           &:before {
             background-color: white;
-            transition: right 140ms linear, background-color 140ms linear;
+            transition: background-color 140ms linear;
           }
           &:after,
           &:before {

@@ -693,19 +693,23 @@ svg.external-link, svg.external-icon, svg.external_link { display: none; }
 @media only screen and (min-width: 1280px) { .ct-container.slim { padding-left: 120px; padding-right: 120px; }
   .ct-container.slim .swiper-container { margin-left: -100px; margin-right: -100px; } }
 
-.button, .enform form button { display: inline-block; padding: 0 30px; height: 30px; margin: 10px 5px 10px 0; font-size: 14px; line-height: 29px; color: #FF8100; background: white; border-radius: 4px; font-weight: 400; -webkit-transition: background-color 140ms linear, border-color 140ms linear; transition: background-color 140ms linear, border-color 140ms linear; text-decoration: none; border: 1px solid #FF8100; cursor: pointer; }
+.button, .enform form button { display: inline-block; font-size: 14px; font-weight: 400; margin: 10px 5px 10px 0; padding: 0 30px; height: 30px; line-height: 29px; color: #FF8100; background-color: white; border: none; border-radius: 4px; -webkit-box-shadow: inset 0px 0px 0px 1px #FF8100; box-shadow: inset 0px 0px 0px 1px #FF8100; -webkit-transition: background-color 140ms linear, border-width 140ms linear, -webkit-box-shadow 140ms linear; transition: background-color 140ms linear, border-width 140ms linear, -webkit-box-shadow 140ms linear; transition: background-color 140ms linear, box-shadow 140ms linear, border-width 140ms linear; transition: background-color 140ms linear, box-shadow 140ms linear, border-width 140ms linear, -webkit-box-shadow 140ms linear; text-decoration: none; cursor: pointer; }
 
-@media only screen and (min-width: 1024px) { .button, .enform form button { padding: 0 50px; height: 40px; font-size: 18px; line-height: 39px; } }
+@media only screen and (min-width: 1024px) { .button, .enform form button { font-size: 18px; padding: 0 50px; height: 40px; line-height: 39px; } }
 
-.button.primary, .button.btn-primary, .enform form button.primary, .enform form button.btn-primary { padding: 0 40px; height: 40px; font-size: 20px; line-height: 39px; background: #FF8100; color: white; }
+.button.primary, .button.btn-primary, .enform form button.primary, .enform form button.btn-primary { font-size: 20px; padding: 0 40px; height: 40px; line-height: 39px; color: white; background: #FF8100; -webkit-box-shadow: none; box-shadow: none; }
 
 @media only screen and (min-width: 1024px) { .button.primary.wider, .button.btn-primary.wider, .enform form button.primary.wider, .enform form button.btn-primary.wider { padding: 0 100px; } }
 
-.button.secondary, .enform form button.secondary { color: #66CC00; }
+.button:hover, .button:focus, .enform form button:hover, .enform form button:focus { color: white; background-color: #FFB660; -webkit-box-shadow: none; box-shadow: none; }
 
-.button:hover, .button:focus, .enform form button:hover, .enform form button:focus { color: white; background-color: #FFB660; border-color: #FFB660; }
+.button:active, .enform form button:active { color: white; background-color: #E96D00; -webkit-box-shadow: none; box-shadow: none; }
 
-.button:active, .enform form button:active { color: white; background-color: #E96D00; border-color: #E96D00; }
+.button.secondary, .enform form button.secondary { color: #66CC00; border-radius: 0; -webkit-box-shadow: inset 0px -2px 0px 0px #66CC00; box-shadow: inset 0px -2px 0px 0px #66CC00; }
+
+.button.secondary:hover, .button.secondary:focus, .enform form button.secondary:hover, .enform form button.secondary:focus { color: white; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none; background-color: #66CC00; }
+
+.button.secondary:active, .enform form button.secondary:active { color: white; border-radius: 4px; -webkit-box-shadow: none; box-shadow: none; background-color: #478F00; }
 
 .button:last-child, .enform form button:last-child { margin-right: 0; }
 
@@ -737,7 +741,7 @@ svg.external-link, svg.external-icon, svg.external_link { display: none; }
 
 .button.loading, .button[disabled], .enform form button.loading, .enform form button[disabled] { color: white; background-color: #BAB0A6; }
 
-.button.primary.loading, .button.primary[disabled], .enform form button.primary.loading, .enform form button.primary[disabled] { color: white; border-color: #BAB0A6; background-color: #BAB0A6; }
+.button.primary.loading, .button.primary[disabled], .enform form button.primary.loading, .enform form button.primary[disabled] { color: white; -webkit-box-shadow: none; box-shadow: none; background-color: #BAB0A6; }
 
 .button.loading, .button .en-spinner, .enform form button.loading, .enform form button .en-spinner { position: relative; }
 
@@ -1523,9 +1527,9 @@ header .content .right-box .search-button { color: white; font-size: 25px; margi
 
 header .content .right-box .button { background: #FF8100; color: white; white-space: nowrap; height: auto; }
 
-header .content .right-box .button:hover, header .content .right-box .button:focus { background-color: #FFB660; border-color: #FFB660; }
+header .content .right-box .button:hover, header .content .right-box .button:focus { background-color: #FFB660; }
 
-header .content .right-box .button:active { background-color: #E96D00; border-color: #E96D00; }
+header .content .right-box .button:active { background-color: #E96D00; }
 
 .mobile-toolbar { display: none; height: 48px; background-color: white; -webkit-box-shadow: 0 10px 10px -10px inset rgba(0, 0, 0, 0.4); box-shadow: 0 10px 10px -10px inset rgba(0, 0, 0, 0.4); -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; }
 
@@ -3298,9 +3302,53 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-geography-set .content--title .desc { max-width: 420px; } }
 
-.section-get-involved { margin-top: 40px; margin-bottom: 50px; }
+.section-get-involved { margin-top: 80px; margin-bottom: 50px; }
 
 @media only screen and (min-width: 1024px) { .section-get-involved { margin-top: 80px; margin-bottom: 100px; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved .ct-container { max-width: 960px; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved .ct-container { max-width: 1200px; } }
+
+.section-get-involved .content--title .title { font-weight: normal; font-size: 22px; margin: 1.5em auto; border-left: 6px solid #66CC00; padding-left: 20px; }
+
+@media only screen and (max-width: 1023px) { .section-get-involved .content--title .title { display: table; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved .content--title .title { font-size: 28px; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved .content--title .title { margin: 1em auto; } }
+
+.section-get-involved .content--desc { position: relative; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved .content--desc { min-height: 330px; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved .content--desc { min-height: 250px; } }
+
+.section-get-involved .content--desc .category { font-size: 18px; font-weight: 600; }
+
+.section-get-involved .content--desc .title { font-size: 25px; font-weight: normal; }
+
+.section-get-involved .content--desc .desc { font-size: 16px; }
+
+.section-get-involved .content--desc .image { margin: auto; width: 186px; height: 241.2973px; position: relative; border: 1px solid #66CC00; }
+
+@media only screen and (max-width: 1023px) { .section-get-involved .content--desc .image { left: 17px; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved .content--desc .image { width: 296px; height: 384px; } }
+
+.section-get-involved .content--desc .image__inner { position: absolute; top: -9px; right: 12px; width: 208px; height: 236.64671px; border: 1px solid #1E1E1E; background-color: white; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved .content--desc .image__inner { top: -12px; right: 16px; width: 334px; height: 380px; } }
+
+.section-get-involved .content--desc .image .bg { margin: 14px auto auto; width: 90.41916%; height: 78.42105%; background: no-repeat center; background-size: cover; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved .content--desc .image .bg { margin-top: 25px; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved .content__inner { margin-left: 26px; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved .content__inner { margin-left: 82px; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved .content__inner--2 { position: absolute; top: 0; right: 0; } }
 
 .section-get-involved-cards { margin-top: 40px; margin-bottom: 50px; }
 
@@ -3336,10 +3384,6 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-report-set .content--desc .title:before { margin-left: -30px; } }
 
-@media only screen and (min-width: 1024px) { .section-report-set .content--desc .title, .section-report-set .content--desc .desc { margin-left: 26px; } }
-
-@media only screen and (min-width: 1280px) { .section-report-set .content--desc .title, .section-report-set .content--desc .desc { margin-left: 82px; } }
-
 @media only screen and (min-width: 1024px) { .section-report-set .content--desc .title, .section-report-set .content--desc .desc { max-width: 520px; } }
 
 @media only screen and (min-width: 1280px) { .section-report-set .content--desc .title, .section-report-set .content--desc .desc { padding-left: 30px; } }
@@ -3348,11 +3392,17 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-report-set .content--desc .image { width: 133px; height: 175px; position: relative; }
 
+@media only screen and (max-width: 1023px) { .section-report-set .content--desc .image { margin-left: 20px; } }
+
 @media only screen and (min-width: 1024px) { .section-report-set .content--desc .image { border: 2px solid #66CC00; width: 190px; height: 250px; } }
 
 .section-report-set .content--desc .image .bg { position: absolute; top: 0x; left: 0px; width: 100%; height: 100%; background: no-repeat center; background-size: cover; -webkit-box-shadow: 2px 2px 8px 0px rgba(141, 141, 141, 0.5); box-shadow: 2px 2px 8px 0px rgba(141, 141, 141, 0.5); }
 
 @media only screen and (min-width: 1024px) { .section-report-set .content--desc .image .bg { top: -18px; left: -16px; } }
+
+@media only screen and (min-width: 1024px) { .section-report-set .content__inner { margin-left: 26px; } }
+
+@media only screen and (min-width: 1280px) { .section-report-set .content__inner { margin-left: 82px; } }
 
 .section-report-set .content__inner--2 { display: -webkit-box; display: -ms-flexbox; display: flex; }
 
@@ -3372,19 +3422,17 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-report-set .content__inner .buttons__link { padding: 10px 10px; width: 160px; } }
 
-.section-report-set .content__inner .buttons__link:hover .buttons__arrow { right: 10px; }
-
-.section-report-set .content__inner .buttons__link--secondary { border-bottom: 2px solid #66CC00; -webkit-transition: color 140ms linear, border-color 140ms linear; transition: color 140ms linear, border-color 140ms linear; }
-
-.section-report-set .content__inner .buttons__link--secondary:hover { color: #85D633; border-color: #85D633; }
+.section-report-set .content__inner .buttons__link--secondary { margin-top: 5px; }
 
 .section-report-set .content__inner .buttons__link--secondary:hover .buttons__arrow, .section-report-set .content__inner .buttons__link--secondary:hover .buttons__arrow:after, .section-report-set .content__inner .buttons__link--secondary:hover .buttons__arrow:before { background-color: #85D633; }
 
 .section-report-set .content__inner .buttons__link--secondary .buttons__arrow, .section-report-set .content__inner .buttons__link--secondary .buttons__arrow:after, .section-report-set .content__inner .buttons__link--secondary .buttons__arrow:before { background-color: #66CC00; }
 
+.section-report-set .content__inner .buttons__link--secondary:hover .buttons__arrow, .section-report-set .content__inner .buttons__link--secondary:hover .buttons__arrow:after, .section-report-set .content__inner .buttons__link--secondary:hover .buttons__arrow:before, .section-report-set .content__inner .buttons__link--secondary:focus .buttons__arrow, .section-report-set .content__inner .buttons__link--secondary:focus .buttons__arrow:after, .section-report-set .content__inner .buttons__link--secondary:focus .buttons__arrow:before, .section-report-set .content__inner .buttons__link--secondary:active .buttons__arrow, .section-report-set .content__inner .buttons__link--secondary:active .buttons__arrow:after, .section-report-set .content__inner .buttons__link--secondary:active .buttons__arrow:before { background-color: white; }
+
 .section-report-set .content__inner .buttons__arrow { position: absolute; top: 50%; right: 15px; width: 13px; height: 2px; }
 
-.section-report-set .content__inner .buttons__arrow, .section-report-set .content__inner .buttons__arrow:after, .section-report-set .content__inner .buttons__arrow:before { background-color: white; -webkit-transition: right 140ms linear, background-color 140ms linear; transition: right 140ms linear, background-color 140ms linear; }
+.section-report-set .content__inner .buttons__arrow, .section-report-set .content__inner .buttons__arrow:after, .section-report-set .content__inner .buttons__arrow:before { background-color: white; -webkit-transition: background-color 140ms linear; transition: background-color 140ms linear; }
 
 .section-report-set .content__inner .buttons__arrow:after, .section-report-set .content__inner .buttons__arrow:before { content: ''; position: absolute; width: 8px; height: 2px; right: 0; -webkit-transform-origin: center right; -ms-transform-origin: center right; transform-origin: center right; }
 
