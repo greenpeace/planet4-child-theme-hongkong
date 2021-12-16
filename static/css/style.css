@@ -3316,6 +3316,30 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-get-involved .ct-container { max-width: 1200px; } }
 
+.section-get-involved .content--issue-forests .category__name { color: #00B474; }
+
+.section-get-involved .content--issue-forests .content__inner .image { border-color: #00B474; }
+
+.section-get-involved .content--issue-oceans .category__name { color: #008FE2; }
+
+.section-get-involved .content--issue-oceans .content__inner .image { border-color: #008FE2; }
+
+.section-get-involved .content--issue-arctic .category__name { color: #62CBD7; }
+
+.section-get-involved .content--issue-arctic .content__inner .image { border-color: #62CBD7; }
+
+.section-get-involved .content--issue-climate .category__name { color: #FFBE00; }
+
+.section-get-involved .content--issue-climate .content__inner .image { border-color: #FFBE00; }
+
+.section-get-involved .content--issue-plastics .category__name { color: #AFAA91; }
+
+.section-get-involved .content--issue-plastics .content__inner .image { border-color: #AFAA91; }
+
+.section-get-involved .content--issue-health .category__name { color: #F09D7F; }
+
+.section-get-involved .content--issue-health .content__inner .image { border-color: #F09D7F; }
+
 .section-get-involved .content--title .title { font-weight: normal; font-size: 22px; margin: 1.5em auto; border-left: 6px solid #66CC00; padding-left: 20px; }
 
 @media only screen and (max-width: 1023px) { .section-get-involved .content--title .title { display: table; } }

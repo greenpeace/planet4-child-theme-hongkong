@@ -11,6 +11,56 @@
   }
 
   .content {
+    &--issue- {
+      &forests {
+        .category__name {
+          color: $color-forests;
+        }
+        .content__inner .image {
+          border-color: $color-forests;
+        }
+      }
+      &oceans {
+        .category__name {
+          color: $color-oceans;
+        }
+        .content__inner .image {
+          border-color: $color-oceans;
+        }
+      }
+      &arctic {
+        .category__name {
+          color: $color-arctic;
+        }
+        .content__inner .image {
+          border-color: $color-arctic;
+        }
+      }
+      &climate {
+        .category__name {
+          color: $color-climate;
+        }
+        .content__inner .image {
+          border-color: $color-climate;
+        }
+      }
+      &plastics {
+        .category__name {
+          color: $color-plastics;
+        }
+        .content__inner .image {
+          border-color: $color-plastics;
+        }
+      }
+      &health {
+        .category__name {
+          color: $color-health;
+        }
+        .content__inner .image {
+          border-color: $color-health;
+        }
+      }
+    }
     &--title {
       .title {
         @include title-text-version-b;
