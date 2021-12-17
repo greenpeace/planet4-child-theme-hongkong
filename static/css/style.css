@@ -3354,15 +3354,27 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-get-involved .content--desc { min-height: 250px; } }
 
+@media only screen and (max-width: 1023px) { .section-get-involved .content--desc .category, .section-get-involved .content--desc .title { text-align: center; } }
+
 .section-get-involved .content--desc .category { font-size: 18px; font-weight: 600; }
 
+.section-get-involved .content--desc .category__name { margin-left: 0.3em; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved .content--desc .category { margin-bottom: 5px; } }
+
 .section-get-involved .content--desc .title { font-size: 25px; font-weight: normal; }
+
+@media only screen and (max-width: 1023px) { .section-get-involved .content--desc .title { margin-top: 40px; margin-bottom: 40px; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved .content--desc .title { margin-top: 5px; } }
+
+.section-get-involved .content--desc .desc p { margin-top: 30px; margin-bottom: 30px; }
 
 .section-get-involved .content--desc .desc p, .section-get-involved .content--desc .button { font-size: 16px; }
 
 .section-get-involved .content--desc .image { margin: auto; width: 186px; height: 241.2973px; position: relative; border: 1px solid #66CC00; }
 
-@media only screen and (max-width: 1023px) { .section-get-involved .content--desc .image { left: 17px; } }
+@media only screen and (max-width: 1023px) { .section-get-involved .content--desc .image { margin-top: 60px; left: 17px; } }
 
 @media only screen and (min-width: 1024px) { .section-get-involved .content--desc .image { width: 296px; height: 384px; } }
 
@@ -3377,6 +3389,10 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 .section-get-involved .content--desc .image .bg { margin: 14px auto auto; width: 90.41916%; height: 78.42105%; background: no-repeat center; background-size: cover; }
 
 @media only screen and (min-width: 1024px) { .section-get-involved .content--desc .image .bg { margin-top: 25px; } }
+
+@media only screen and (max-width: 1023px) { .section-get-involved .content--desc .buttons { text-align: center; } }
+
+.section-get-involved .content--desc .button { margin-top: 35px; min-width: 222px; text-align: center; height: 50px; line-height: 49px; }
 
 @media only screen and (min-width: 1024px) { .section-get-involved .content__inner { margin-left: 26px; } }
 
