@@ -3408,6 +3408,140 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-get-involved-cards { margin-top: 80px; margin-bottom: 100px; } }
 
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .ct-container--thin { max-width: 960px; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved-cards .ct-container--thin { max-width: 1200px; } }
+
+.section-get-involved-cards .content--title { margin-bottom: 30px; }
+
+@media only screen and (max-width: 1023px) { .section-get-involved-cards .content--title { text-align: center; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .content--title { border-radius: 16px; -webkit-box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); display: -webkit-box; display: -ms-flexbox; display: flex; padding: 20px 50px; margin-bottom: 35px; } }
+
+@media only screen and (min-width: 1024px) and (min-width: 1024px) { .section-get-involved-cards .content--title { margin-left: 26px; } }
+
+@media only screen and (min-width: 1024px) and (min-width: 1280px) { .section-get-involved-cards .content--title { margin-left: 82px; } }
+
+@media only screen and (min-width: 1024px) and (min-width: 1024px) { .section-get-involved-cards .content--title { margin-right: 26px; } }
+
+@media only screen and (min-width: 1024px) and (min-width: 1280px) { .section-get-involved-cards .content--title { margin-right: 82px; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved-cards .content--title { margin-left: 0; margin-right: 0; } }
+
+.section-get-involved-cards .content--title .title { margin-bottom: 0; font-size: 16px; font-weight: bold; }
+
+@media only screen and (max-width: 1023px) { .section-get-involved-cards .content--title .title { margin-bottom: 30px; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .content--title .title { font-weight: 600; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved-cards .content--title .title { font-size: 18px; } }
+
+@media only screen and (max-width: 1023px) { .section-get-involved-cards .content .buttons { border-radius: 16px; -webkit-box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); padding: 15px 25px; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .content .buttons { border-left: 2px solid #0A0A0A; margin-left: 30px; -webkit-box-flex: 1; -ms-flex: 1; flex: 1; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved-cards .content .buttons { margin-left: 50px; } }
+
+.section-get-involved-cards .content .link { border: none; cursor: pointer; display: inline-block; font-size: 16px; color: black; -webkit-transition: color 140ms linear; transition: color 140ms linear; }
+
+@media only screen and (max-width: 1023px) { .section-get-involved-cards .content .link + .link { margin-left: 25px; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .content .link { margin-left: 30px; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved-cards .content .link { margin-left: 50px; } }
+
+@media only screen and (max-width: 1023px) { .section-get-involved-cards .content .link--more { display: none; } }
+
+.section-get-involved-cards .content .link:hover, .section-get-involved-cards .content .link--actived { color: #66CC00; }
+
+.section-get-involved-cards .content .link--actived { font-weight: bold; }
+
+.section-get-involved-cards .grid { display: none; }
+
+.section-get-involved-cards .grid--actived { display: block; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .grid--actived { display: -webkit-box; display: -ms-flexbox; display: flex; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .grid { -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: wrap; flex-wrap: wrap; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -ms-flex-line-pack: start; align-content: flex-start; -webkit-box-align: stretch; -ms-flex-align: stretch; align-items: stretch; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved-cards .grid { margin-right: -2.5%; margin-left: -2.5%; } }
+
+.section-get-involved-cards .grid__inner { height: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; padding: 20px 15px; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .grid__inner { padding: 25px 20px; } }
+
+@media only screen and (min-width: 1280px) { .section-get-involved-cards .grid__inner { padding: 30px 30px; } }
+
+.section-get-involved-cards .grid__header { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; }
+
+.section-get-involved-cards .grid .category { text-align: right; font-size: 16px; margin-bottom: 5px; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .grid .category { font-size: 15px; } }
+
+.section-get-involved-cards .grid .category__name:before { content: ''; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 0.5em; vertical-align: 0.1em; }
+
+.section-get-involved-cards .grid .title { font-weight: normal; font-size: 18px; margin-top: 5px; margin-bottom: 15px; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .grid .title { font-size: 20px; } }
+
+.section-get-involved-cards .grid .img { background: no-repeat center; background-size: cover; padding-bottom: 57.53425%; }
+
+.section-get-involved-cards .grid .subtitle { font-weight: 600; font-size: 16px; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .grid .subtitle { font-size: 18px; } }
+
+.section-get-involved-cards .grid .desc p { font-size: 16px; }
+
+.section-get-involved-cards .grid .percentage { background-color: #EAEAEA; height: 3px; margin-top: 30px; }
+
+.section-get-involved-cards .grid .percentage__inner { height: 100%; background-color: #66CC00; }
+
+.section-get-involved-cards .grid .percentage__num { float: right; margin-top: -30px; }
+
+.section-get-involved-cards .grid .counter-box { text-align: center; display: -webkit-box; display: -ms-flexbox; display: flex; margin: 15px auto 10px; }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .grid .counter-box { margin: 20px auto 10px; } }
+
+.section-get-involved-cards .grid .counter-box__inner { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; }
+
+.section-get-involved-cards .grid .counter-box__inner + .counter-box__inner { border-left: 1px solid #161616; }
+
+.section-get-involved-cards .grid .counter-box__inner--people .counter-box__num { color: #66CC00; }
+
+.section-get-involved-cards .grid__box { border-radius: 16px; -webkit-box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); -webkit-box-flex: 0; -ms-flex: 0 0 30%; flex: 0 0 30%; -ms-flex-item-align: auto; align-self: auto; margin: 0 auto 30px; border: none; color: #393939; }
+
+@media only screen and (max-width: 1023px) { .section-get-involved-cards .grid__box { display: block; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .grid__box { margin-right: 1.25%; margin-left: 1.25%; } }
+
+.section-get-involved-cards .grid__box .title { color: black; }
+
+.section-get-involved-cards .grid__box .subtitle { color: #181818; }
+
+.section-get-involved-cards .grid__box--issue-forests .category__name, .section-get-involved-cards .grid__box--issue-forests .counter-box__inner--people .counter-box__num { color: #00B474; }
+
+.section-get-involved-cards .grid__box--issue-forests .category__name:before, .section-get-involved-cards .grid__box--issue-forests .percentage__inner { background-color: #00B474; }
+
+.section-get-involved-cards .grid__box--issue-oceans .category__name, .section-get-involved-cards .grid__box--issue-oceans .counter-box__inner--people .counter-box__num { color: #008FE2; }
+
+.section-get-involved-cards .grid__box--issue-oceans .category__name:before, .section-get-involved-cards .grid__box--issue-oceans .percentage__inner { background-color: #008FE2; }
+
+.section-get-involved-cards .grid__box--issue-arctic .category__name, .section-get-involved-cards .grid__box--issue-arctic .counter-box__inner--people .counter-box__num { color: #62CBD7; }
+
+.section-get-involved-cards .grid__box--issue-arctic .category__name:before, .section-get-involved-cards .grid__box--issue-arctic .percentage__inner { background-color: #62CBD7; }
+
+.section-get-involved-cards .grid__box--issue-climate .category__name, .section-get-involved-cards .grid__box--issue-climate .counter-box__inner--people .counter-box__num { color: #FFBE00; }
+
+.section-get-involved-cards .grid__box--issue-climate .category__name:before, .section-get-involved-cards .grid__box--issue-climate .percentage__inner { background-color: #FFBE00; }
+
+.section-get-involved-cards .grid__box--issue-plastics .category__name, .section-get-involved-cards .grid__box--issue-plastics .counter-box__inner--people .counter-box__num { color: #AFAA91; }
+
+.section-get-involved-cards .grid__box--issue-plastics .category__name:before, .section-get-involved-cards .grid__box--issue-plastics .percentage__inner { background-color: #AFAA91; }
+
+.section-get-involved-cards .grid__box--issue-health .category__name, .section-get-involved-cards .grid__box--issue-health .counter-box__inner--people .counter-box__num { color: #F09D7F; }
+
+.section-get-involved-cards .grid__box--issue-health .category__name:before, .section-get-involved-cards .grid__box--issue-health .percentage__inner { background-color: #F09D7F; }
+
 .section-report-set { margin-top: 80px; margin-bottom: 50px; }
 
 @media only screen and (min-width: 1024px) { .section-report-set { margin-top: 60px; margin-bottom: 100px; } }
@@ -3670,7 +3804,9 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-testimony .slide-item:not(:last-child) { margin-right: 32px; } }
 
-.section-testimony .footer { position: relative; }
+.section-testimony .footer { position: relative; margin-top: 20px; }
+
+@media only screen and (min-width: 1024px) { .section-testimony .footer { margin-top: 40px; } }
 
 .section-testimony .swiper-pagination { width: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; }
 

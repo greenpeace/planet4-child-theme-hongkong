@@ -223,6 +223,10 @@
 
   .footer {
     position: relative;
+    margin-top: 20px;
+    @include greaterThan('sm') {
+      margin-top: 40px;
+    }
   }
 
   .swiper-pagination {
