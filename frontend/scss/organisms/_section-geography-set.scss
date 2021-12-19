@@ -18,14 +18,6 @@
         @include title-text-version-b;
         @include title-border-version-b;
       }
-      .desc {
-        @include text-version-b;
-        @include margin-right-version-b;
-        @include margin-left-version-b;
-        @include greaterThan('sm') {
-          max-width: 420px;
-        }
-      }
     }
     &--desc {
       @include greaterThan('sm') {
@@ -47,6 +39,24 @@
         @include greaterThan('lg') {
           margin-left: 0;
         }
+        .image {
+          background: no-repeat center;
+          background-size: cover;
+          padding-bottom: percentage(9 / 16);
+          cursor: pointer;
+          position: relative;
+          &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: url(../images/play-button.svg) no-repeat center;
+            background-size: contain;
+            width: percentage(74 / 440);
+            padding-bottom: percentage(74 / 440);
+          }
+        }
       }
       &--2 {
         @include greaterThan('sm') {
@@ -61,6 +71,53 @@
           background: url(../images/world-map.png) no-repeat center;
           background-size: contain;
           padding-bottom: percentage(240 / 484);
+          position: relative;
+          &__ship {
+            position: absolute;
+            display: none;
+            width: 100px;
+            height: 100px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 25px 0px rgba(215, 215, 215, 0.5);
+            overflow: hidden;
+            cursor: pointer;
+            transition: background-color 140ms linear;
+            @include greaterThan('lg') {
+              width: 112px;
+              height: 112px;
+            }
+            &:hover {
+              background-color: rgb(216, 242, 190);
+              z-index: 1;
+            }
+            &:focus,
+            &:active,
+            &--actived {
+              background-color: $color-green;
+              z-index: 1;
+              .image__name {
+                color: white;
+              }
+              .image__icon {
+                filter: invert(1);
+              }
+            }
+            &--loaded {
+              display: block;
+            }
+          }
+          &__name {
+            text-align: center;
+            padding-top: 20%;
+          }
+          &__icon {
+            background: no-repeat center;
+            background-size: contain;
+            width: 60%;
+            padding-bottom: percentage(40 / 60 * 0.6);
+            margin: auto;
+          }
         }
       }
     }

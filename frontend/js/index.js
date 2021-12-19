@@ -37,7 +37,6 @@ import petitionThankyou from "./petition-thankyou";
 
 import animatecounters from "./components/animatecounters";
 import notificationList from "./components/notification-list";
-import geographySet from "./components/geography-set";
 import getInvolvedCards from "./components/get-involved-cards";
 
 // import donationPage from './donation-page';
@@ -136,7 +135,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   /* GPEA extended functions */
   animatecounters();
   notificationList();
-  geographySet();
   getInvolvedCards();
 
 });

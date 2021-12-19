@@ -3296,18 +3296,6 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-geography-set .content--title .title { margin: 1em auto; } }
 
-.section-geography-set .content--title .desc { font-size: 16px; }
-
-@media only screen and (min-width: 1024px) { .section-geography-set .content--title .desc { margin-right: 26px; } }
-
-@media only screen and (min-width: 1280px) { .section-geography-set .content--title .desc { margin-right: 82px; } }
-
-@media only screen and (min-width: 1024px) { .section-geography-set .content--title .desc { margin-left: 26px; } }
-
-@media only screen and (min-width: 1280px) { .section-geography-set .content--title .desc { margin-left: 82px; } }
-
-@media only screen and (min-width: 1024px) { .section-geography-set .content--title .desc { max-width: 420px; } }
-
 @media only screen and (min-width: 1024px) { .section-geography-set .content--desc { display: -webkit-box; display: -ms-flexbox; display: flex; } }
 
 @media only screen and (min-width: 1024px) and (min-width: 1024px) { .section-geography-set .content--desc { margin-left: 26px; } }
@@ -3320,11 +3308,33 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-geography-set .content__inner--1 { margin-left: 0; } }
 
+.section-geography-set .content__inner--1 .image { background: no-repeat center; background-size: cover; padding-bottom: 56.25%; cursor: pointer; position: relative; }
+
+.section-geography-set .content__inner--1 .image:after { content: ''; position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); background: url(../images/play-button.svg) no-repeat center; background-size: contain; width: 16.81818%; padding-bottom: 16.81818%; }
+
 @media only screen and (min-width: 1024px) { .section-geography-set .content__inner--2 { margin-left: 30px; -webkit-box-flex: 1; -ms-flex: 1 0 450px; flex: 1 0 450px; } }
 
 @media only screen and (min-width: 1280px) { .section-geography-set .content__inner--2 { margin-left: 80px; -webkit-box-flex: 1; -ms-flex: 1 0 480px; flex: 1 0 480px; } }
 
-.section-geography-set .content__inner--2 .image { background: url(../images/world-map.png) no-repeat center; background-size: contain; padding-bottom: 49.58678%; }
+.section-geography-set .content__inner--2 .image { background: url(../images/world-map.png) no-repeat center; background-size: contain; padding-bottom: 49.58678%; position: relative; }
+
+.section-geography-set .content__inner--2 .image__ship { position: absolute; display: none; width: 100px; height: 100px; background-color: white; border-radius: 50%; -webkit-box-shadow: 0 2px 25px 0px rgba(215, 215, 215, 0.5); box-shadow: 0 2px 25px 0px rgba(215, 215, 215, 0.5); overflow: hidden; cursor: pointer; -webkit-transition: background-color 140ms linear; transition: background-color 140ms linear; }
+
+@media only screen and (min-width: 1280px) { .section-geography-set .content__inner--2 .image__ship { width: 112px; height: 112px; } }
+
+.section-geography-set .content__inner--2 .image__ship:hover { background-color: #d8f2be; z-index: 1; }
+
+.section-geography-set .content__inner--2 .image__ship:focus, .section-geography-set .content__inner--2 .image__ship:active, .section-geography-set .content__inner--2 .image__ship--actived { background-color: #66CC00; z-index: 1; }
+
+.section-geography-set .content__inner--2 .image__ship:focus .image__name, .section-geography-set .content__inner--2 .image__ship:active .image__name, .section-geography-set .content__inner--2 .image__ship--actived .image__name { color: white; }
+
+.section-geography-set .content__inner--2 .image__ship:focus .image__icon, .section-geography-set .content__inner--2 .image__ship:active .image__icon, .section-geography-set .content__inner--2 .image__ship--actived .image__icon { -webkit-filter: invert(1); filter: invert(1); }
+
+.section-geography-set .content__inner--2 .image__ship--loaded { display: block; }
+
+.section-geography-set .content__inner--2 .image__name { text-align: center; padding-top: 20%; }
+
+.section-geography-set .content__inner--2 .image__icon { background: no-repeat center; background-size: contain; width: 60%; padding-bottom: 40%; margin: auto; }
 
 .section-get-involved { margin-top: 80px; margin-bottom: 50px; }
 
