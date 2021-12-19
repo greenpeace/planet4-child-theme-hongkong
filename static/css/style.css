@@ -3284,9 +3284,9 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-geography-set { margin-top: 60px; margin-bottom: 100px; } }
 
-@media only screen and (min-width: 1024px) { .section-geography-set .ct-container { max-width: 960px; } }
+@media only screen and (min-width: 1024px) { .section-geography-set .ct-container--thin { max-width: 960px; } }
 
-@media only screen and (min-width: 1280px) { .section-geography-set .ct-container { max-width: 1200px; } }
+@media only screen and (min-width: 1280px) { .section-geography-set .ct-container--thin { max-width: 1200px; } }
 
 .section-geography-set .content--title .title { font-weight: normal; font-size: 22px; margin: 1.5em auto; border-left: 6px solid #66CC00; padding-left: 20px; }
 
@@ -3307,6 +3307,24 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 @media only screen and (min-width: 1280px) { .section-geography-set .content--title .desc { margin-left: 82px; } }
 
 @media only screen and (min-width: 1024px) { .section-geography-set .content--title .desc { max-width: 420px; } }
+
+@media only screen and (min-width: 1024px) { .section-geography-set .content--desc { display: -webkit-box; display: -ms-flexbox; display: flex; } }
+
+@media only screen and (min-width: 1024px) and (min-width: 1024px) { .section-geography-set .content--desc { margin-left: 26px; } }
+
+@media only screen and (min-width: 1024px) and (min-width: 1280px) { .section-geography-set .content--desc { margin-left: 82px; } }
+
+.section-geography-set .content--desc .desc p { font-size: 16px; margin-top: 30px; margin-bottom: 30px; }
+
+@media only screen and (min-width: 1024px) { .section-geography-set .content__inner--1 { margin-left: calc(50% - 448px); } }
+
+@media only screen and (min-width: 1280px) { .section-geography-set .content__inner--1 { margin-left: 0; } }
+
+@media only screen and (min-width: 1024px) { .section-geography-set .content__inner--2 { margin-left: 30px; -webkit-box-flex: 1; -ms-flex: 1 0 450px; flex: 1 0 450px; } }
+
+@media only screen and (min-width: 1280px) { .section-geography-set .content__inner--2 { margin-left: 80px; -webkit-box-flex: 1; -ms-flex: 1 0 480px; flex: 1 0 480px; } }
+
+.section-geography-set .content__inner--2 .image { background: url(../images/world-map.png) no-repeat center; background-size: contain; padding-bottom: 49.58678%; }
 
 .section-get-involved { margin-top: 80px; margin-bottom: 50px; }
 
