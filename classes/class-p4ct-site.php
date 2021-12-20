@@ -20,6 +20,29 @@ class P4CT_Site {
 
 	const SHOW_SCROLL_TIMES     = 2;
 
+	const NAV_MENUS             = [
+		'about' => [
+			'msgid'  => 'WHO WE ARE',
+			'depth'  => 1,
+			'issues' => FALSE,
+		],
+		'issues' => [
+			'msgid'  => 'OUR WORK',
+			'depth'  => 1,
+			'issues' => TRUE,
+		],
+		'involved' => [
+			'msgid'  => 'GET INVOLVED',
+			'depth'  => 2,
+			'issues' => FALSE,
+		],
+		'news' => [
+			'msgid'  => 'NEWS & STORIES',
+			'depth'  => 1,
+			'issues' => FALSE,
+		],
+	];
+
 	/**
 	 * P4CT_Site constructor.
 	 *
@@ -80,21 +103,19 @@ class P4CT_Site {
 		add_filter( 'run_wptexturize', '__return_false' );
 
 		// get main issues & create header nav
-
-		$header_nav = [];
-		$header_nav[ 'navigation-bar-about-menu' ] = sprintf(__( 'Header: %s', 'gpea_theme_backend' ), __( 'WHO WE ARE', 'gpea_theme' ));
-
 		$main_issues = $this->gpea_get_all_main_issues();
-
-		foreach( $main_issues as $issue_key => $issue_title ) {
-			$header_nav[ 'navigation-bar-issues-menu--' . $issue_key ] = sprintf(__( 'Header: %s: %s', 'gpea_theme_backend' ), __( 'OUR WORK', 'gpea_theme' ), $issue_title);
+		$header_nav = [];
+		foreach( self::NAV_MENUS as $menu_key => $menu_conf ) {
+			if( $menu_conf[ 'issues' ] ) {
+				foreach( $main_issues as $issue_key => $issue_title ) {
+					$header_nav[ 'gpea-header-' . $menu_key . '-menu--' . $issue_key ] = sprintf(__( 'Header: %s: %s', 'gpea_theme_backend' ), __( $menu_conf[ 'msgid' ], 'gpea_theme' ), $issue_title);
+				}
+				continue;
+			}
+			$header_nav[ 'gpea-header-' . $menu_key . '-menu' ] = sprintf(__( 'Header: %s', 'gpea_theme_backend' ), __( $menu_conf[ 'msgid' ], 'gpea_theme' ));
 		}
-
-		$header_nav[ 'navigation-bar-involved-menu' ] = sprintf(__( 'Header: %s', 'gpea_theme_backend' ), __( 'GET INVOLVED', 'gpea_theme' ));
-		$header_nav[ 'navigation-bar-news-menu' ] = sprintf(__( 'Header: %s', 'gpea_theme_backend' ), __( 'NEWS & STORIES', 'gpea_theme' ));
-
 		register_nav_menus($header_nav);
-		add_filter( 'nav_menu_meta_box_object', [ $this, 'gpea_register_nav_menu_metabox' ], 10, 1 );
+		add_filter( 'nav_menu_meta_box_object', [ $this, 'gpea_register_nav_menu_metabox' ] );
 		add_action( 'after_setup_theme', [ $this, 'gpea_child_theme_setup' ] );
 
 		// Override parent AJAX search functionality.
@@ -278,7 +299,7 @@ class P4CT_Site {
 	 * Add custom meta boxes for nav menu manage
 	 */
 	public function gpea_register_nav_menu_metabox( $object ) {
-		add_meta_box( 'gpea-nav-menu-item-projects', __( 'Projects' ), [ $this, 'gpea_render_nav_menu_projects_metabox' ] , 'nav-menus', 'side', 'default' );
+		add_meta_box( 'gpea-nav-menu-item-projects', __( 'Projects', 'gpea_theme_backend' ), [ $this, 'gpea_render_nav_menu_projects_metabox' ] , 'nav-menus', 'side', 'default' );
 		return $object;
 	}
 	public function gpea_render_nav_menu_projects_metabox() {
@@ -299,9 +320,6 @@ class P4CT_Site {
 
 		?>
 		<div id="gpea-projects" class="categorydiv">
-
-			
-
 			<div class="tabs-panel tabs-panel-active">
 				<ul class="categorychecklist form-no-clear">
 				<?php
@@ -309,14 +327,12 @@ class P4CT_Site {
 				?>
 				</ul>
 			</div>
-
 			<p class="button-controls wp-clearfix">
 				<span class="add-to-menu">
 					<input type="submit"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e('Add to Menu'); ?>" name="add-gpea-projects-menu-item" id="submit-gpea-projects" />
 					<span class="spinner"></span>
 				</span>
 			</p>
-
 		</div>
 		<?php
 	}
