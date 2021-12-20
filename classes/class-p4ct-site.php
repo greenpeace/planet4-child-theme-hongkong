@@ -83,7 +83,7 @@ class P4CT_Site {
 			[
 				// 'navigation-bar-menu' => __( 'Navigation Bar Menu', 'gpea_theme_backend' ),
 				'navigation-bar-about-menu' => __( 'Navigation Bar: Who we are', 'gpea_theme_backend' ),
-				'navigation-bar-issues-menu' => __( 'Navigation Bar: Our Work', 'gpea_theme_backend' ),
+				// 'navigation-bar-issues-menu' => __( 'Navigation Bar: Our Work', 'gpea_theme_backend' ),
 				'navigation-bar-involved-menu' => __( 'Navigation Bar: Get Involved', 'gpea_theme_backend' ),
 				'navigation-bar-news-menu' => __( 'Navigation Bar: News & Stories', 'gpea_theme_backend' ),
 			]
