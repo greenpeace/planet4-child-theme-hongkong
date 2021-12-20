@@ -547,7 +547,7 @@ class P4CT_Site {
 			return $link_url;
 		}
 
-		$link_query_array['ref'] = $post->ID . '-' . urldecode( $post->slug );
+		$link_query_array['ref'] = 'update-' . $post->ID . '-' . urldecode( $post->slug );
 		$link_url = explode( '#', $link_url );
 		$link_array = explode( '?', $link_url[0] );
 		$link_url[0] = $link_array[0] . '?' . http_build_query( $link_query_array );
