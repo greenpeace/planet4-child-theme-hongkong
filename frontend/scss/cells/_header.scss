@@ -1,4 +1,5 @@
-header {
+.header {
+
   background-color: $color-green;
   position: fixed;
   top: 0;
@@ -22,6 +23,205 @@ header {
   @include greaterThan('lg') {
     height: 86px;
   }
+
+  a {
+    text-decoration: none;
+    border: none;
+    transition: color .3s;
+  }
+
+  .ct-container,
+  .header__inner {
+    height: 100%;
+  }
+
+  .hide-lt-sm {
+    @include lessThan('sm') {
+      display: none;
+    }
+  }
+  .hide-gt-sm {
+    @include greaterThan('sm') {
+      display: none;
+    }
+  }
+  .hide-gt-lg {
+    @include greaterThan('lg') {
+      display: none;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    // justify-content: space-around;
+    align-items: center;
+    width: 100%;
+  }
+  &__column {
+    &--mobile-menu {
+
+    }
+    &--logo {
+
+    }
+    &--menu {
+      display: flex;
+      flex: 1;
+    }
+    &--tools {
+
+    }
+  }
+  &__item {
+    position: relative;
+  }
+  &__link {
+    font-size: 16px;
+    // font-weight: 600;
+    color: rgba(white, .8);
+    display: inline-block;
+    line-height: 60px;
+    padding: 0 20px;
+    &:hover,
+    &:focus,
+    &:active {
+      color: white;
+    }
+    @include greaterThan('sm') {
+      font-size: 15px;
+    }
+    &--mobile-menu {
+
+    }
+    &--search {
+
+    }
+  }
+
+  .menu {
+    &--logo {
+
+    }
+    &--primary {
+      display: flex;
+      @include lessThan('lg') {
+        flex-direction: column;
+      }
+      @include greaterThan('lg') {
+        flex: 1;
+        justify-content: space-evenly;
+      }
+    }
+    &--secondary {
+
+    }
+    ul {
+      list-style: none;
+      li {
+        
+      }
+      a {
+        line-height: 2;
+        display: block;
+        color: #303030;
+        font-size: 16px;
+        &:hover,
+        &:focus,
+        &:active {
+          // font-weight: 600;
+          color: #67CC02;
+        }
+        @include greaterThan('lg') {
+          font-size: 15px;
+        }
+      }
+      .sub-menu {
+        display: none;
+        // float: right;
+        position: absolute;
+        top: 0;
+        left: 100px;
+        width: 300px;
+        a {
+          @include greaterThan('lg') {
+            font-size: 16px;
+          }
+        }
+      }
+      li:hover {
+        .sub-menu {
+          display: block;
+        }
+      }
+    }
+    .has-children {
+      ul a {
+        color: rgba(#4C4C4C, .6);
+        @include greaterThan('lg') {
+          color: rgba(#303030, .45);
+        }
+        &:hover,
+        &:focus,
+        &:active {
+          color: #4C4C4C;
+          @include greaterThan('lg') {
+            color: #303030;
+          }
+        }
+      }
+      ul .sub-menu a {
+        color: #4C4C4C;
+        @include greaterThan('lg') {
+          color: #303030;
+        }
+        &:hover,
+        &:focus,
+        &:active {
+          color: #67CC02;
+          @include greaterThan('lg') {
+            color: #FF8100;
+          }
+        }
+      }
+    }
+    .is-issues {
+      
+    }
+    &__container {
+      display: none;
+      position: absolute;
+      width: 400px;
+      // top: 90px;
+      left: 0;
+      @include greaterThan('sm') {
+        padding: 10px 25px;
+      }
+    }
+    &__inner {
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 8px;
+      padding: 0px 25px 10px;
+    }
+    &__item {
+      position: relative;
+      .header__link {
+        
+      }
+      &:hover {
+        .menu__container {
+          display: block;
+        }
+      }
+    }
+
+  }
+
+  .menu-item {
+  }
+  .sub-menu {
+  }
+
 }
 
 /* .admin-bar {

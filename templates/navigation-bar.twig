@@ -1,6 +1,37 @@
 {% block navigation_bar %}
-<header>
-	
+<header class="header">
+	<div class="ct-container">
+		<div class="header__inner">
+			<div class="header__column header__column--mobile-menu hide-gt-lg">
+				<a href="" class="header__link header__link--mobile-menu">XX</a>
+			</div>
+			<div class="header__column header__column--logo">
+				<a href="{{ home_url }}" class="logo" aria-label="Greenpeace"></a>
+			</div>
+			<div class="header__column header__column--menu">
+				<div class="menu menu--logo hide-gt-lg">
+					<a href="{{ home_url }}" class="logo" aria-label="Greenpeace"></a>
+				</div>
+				<div class="menu menu--primary">
+					{% for menu in header_nav %}
+					<div class="menu__item">
+						<a href="{{ menu.link | e('html_attr') }}" class="header__link">{{ menu.label | e }}</a>
+						{{ menu.children | raw }}
+					</div>
+					{% endfor %}
+				</div>
+				<div class="menu menu--secondary hide-gt-lg">
+					<a href="" class="header__link">會員登入</a>
+				</div>
+			</div>
+			<div class="header__column header__column--tools">
+				<a href="" class="button primary hide-lt-sm">捐電腦</a>
+				<a href="" class="button primary hide-gt-sm">捐手機</a>
+				<a href="" class="header__link hide-gt-sm">會員登入</a>
+				<a href="" class="header__link header__link--search">搜尋</a>
+			</div>
+		</div>
+	</div>
 </header>
 	{# <header data-aos="slide-down">
 		<div class="ct-container">

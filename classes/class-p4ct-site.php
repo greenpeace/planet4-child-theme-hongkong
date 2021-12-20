@@ -276,7 +276,48 @@ class P4CT_Site {
 			'any_topic'     => __( 'Any topic', 'gpea_theme' ),
 		];
 
+		// new menu
+		$main_issues = $this->gpea_get_all_main_issues();
+		$header_nav = [];
+		foreach( self::NAV_MENUS as $menu_key => $menu_conf ) {
 
+			$has_children_classes = $menu_conf[ 'issues' ] || $menu_conf[ 'depth' ] > 1 ? 'has-children' : 'no-children';
+			$is_issue_classes = $menu_conf[ 'issues' ] ? 'is-issues' : 'not-issues';
+
+			$menu = [];
+			$menu[ 'label' ] = __( $menu_conf[ 'msgid' ], 'gpea_theme' );
+			$menu[ 'link' ] = '#';
+
+			if( $menu_conf[ 'issues' ] ) {
+				$children = '<div class="menu__container ' . $has_children_classes . ' ' . $is_issue_classes . '"><ul class="menu__inner">';
+				foreach( $main_issues as $issue_key => $issue_title ) {
+					$children .= '<li class="menu-item"><a href="">' . $issue_title . '</a>';
+					$children .= wp_nav_menu( [
+						'container' => NULL,
+						'menu_class' => 'sub-menu',
+						'theme_location' => 'gpea-header-' . $menu_key . '-menu--' . $issue_key,
+						'echo' => FALSE,
+						'depth' => $menu_conf[ 'depth' ],
+					]);
+					$children .= '</li>';
+				}
+				$children .= '</ul></div>';
+				$menu[ 'children' ] = $children;
+			}
+			else {
+				$menu[ 'children' ] = wp_nav_menu( [
+					'container_class' => 'menu__container ' . $has_children_classes . ' ' . $is_issue_classes,
+					'menu_class' => 'menu__inner',
+					'theme_location' => 'gpea-header-' . $menu_key . '-menu',
+					'echo' => FALSE,
+					'depth' => $menu_conf[ 'depth' ],
+				]);
+			}
+
+			$header_nav[] = $menu;
+
+		}
+		$context[ 'header_nav' ] = $header_nav;
 
 		return $context;
 	}
