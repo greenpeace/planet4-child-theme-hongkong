@@ -84,24 +84,7 @@ class P4CT_Site {
 		$header_nav = [];
 		$header_nav[ 'navigation-bar-about-menu' ] = sprintf(__( 'Header: %s', 'gpea_theme_backend' ), __( 'WHO WE ARE', 'gpea_theme' ));
 
-		$planet4_options = get_option( 'planet4_options' );
-		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
-		if ( ! $main_issues_category_id ) {
-			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-			if ( $main_issues_category ) {
-				$main_issues_category_id = $main_issues_category->term_id;
-			}
-		}
-
-		$main_issues = [];
-		if( $main_issues_category_id ) {
-			$main_issues = get_terms([
-				'taxonomy' => 'category',
-				'parent' => $main_issues_category_id,
-			]);
-		}
-
-		$main_issues = array_column( $main_issues, 'name', 'slug' );
+		$main_issues = $this->gpea_get_all_main_issues();
 
 		foreach( $main_issues as $issue_key => $issue_title ) {
 			$header_nav[ 'navigation-bar-issues-menu--' . $issue_key ] = sprintf(__( 'Header: %s: %s', 'gpea_theme_backend' ), __( 'OUR WORK', 'gpea_theme' ), $issue_title);
@@ -111,7 +94,7 @@ class P4CT_Site {
 		$header_nav[ 'navigation-bar-news-menu' ] = sprintf(__( 'Header: %s', 'gpea_theme_backend' ), __( 'NEWS & STORIES', 'gpea_theme' ));
 
 		register_nav_menus($header_nav);
-		add_filter( 'manage_nav-menus_columns', [ $this, 'gpea_register_nav_menu_metabox' ] );
+		add_filter( 'nav_menu_meta_box_object', [ $this, 'gpea_register_nav_menu_metabox' ], 10, 1 );
 		add_action( 'after_setup_theme', [ $this, 'gpea_child_theme_setup' ] );
 
 		// Override parent AJAX search functionality.
@@ -294,15 +277,40 @@ class P4CT_Site {
 	/**
 	 * Add custom meta boxes for nav menu manage
 	 */
-	public function gpea_register_nav_menu_metabox() {
-		add_meta_box( 'gpea-issues', __( 'Issues we work on' ), [ $this, 'gpea_render_issues_metabox' ] , 'nav-menus', 'side', 'default' );
-		add_meta_box( 'gpea-cta', __( 'CTA' ), [ $this, 'gpea_render_cta_metabox' ] , 'nav-menus', 'side', 'default' );
+	public function gpea_register_nav_menu_metabox( $object ) {
+		add_meta_box( 'gpea-nav-menu-item-projects', __( 'Projects' ), [ $this, 'gpea_render_nav_menu_projects_metabox' ] , 'nav-menus', 'side', 'default' );
+		return $object;
 	}
-	public function gpea_render_issues_metabox() {
-		
-	}
-	public function gpea_render_cta_metabox() {
-		
+	public function gpea_render_nav_menu_projects_metabox() {
+		global $nav_menu_selected_id;
+		$walker = new Walker_Nav_Menu_Checklist();
+		$current_tab = 'all';
+		if( isset( $_REQUEST['authorarchive-tab'] ) ) {
+			//
+		}
+		?>
+		<div class="customlinkdiv">
+
+			<input type="hidden" value="custom2" name="menu-item[<?php echo $_nav_menu_placeholder; ?>][menu-item-type]" />
+
+			<p id="menu-item-url-wrap" class="wp-clearfix">
+				<label class="howto" for="custom-menu-item-url"><?php _e( 'URL' ); ?></label>
+				<input id="custom-menu-item-url" name="menu-item[<?php echo $_nav_menu_placeholder; ?>][menu-item-url]" type="text"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="code menu-item-textbox form-required" placeholder="https://" />
+			</p>
+
+			<p id="menu-item-name-wrap" class="wp-clearfix">
+				<label class="howto" for="custom-menu-item-name"><?php _e( 'Link Text' ); ?></label>
+				<input id="custom-menu-item-name" name="menu-item[<?php echo $_nav_menu_placeholder; ?>][menu-item-title]" type="text"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="regular-text menu-item-textbox" />
+			</p>
+
+			<p class="button-controls wp-clearfix">
+				<span class="add-to-menu">
+					<input type="submit"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="button submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu' ); ?>" name="add-custom-menu-item" id="submit-custom-gpea-issues" />
+					<span class="spinner"></span>
+				</span>
+			</p>
+		</div>
+		<?php
 	}
 
 	/**
@@ -525,14 +533,7 @@ class P4CT_Site {
 		$post_id = (int) ( $post_id ?? '' );
 
 		// get related main issues!
-		$planet4_options = get_option( 'planet4_options' );
-		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
-		if ( ! $main_issues_category_id ) {
-			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-			if ( $main_issues_category ) {
-				$main_issues_category_id = $main_issues_category->term_id;
-			}
-		}
+		$main_issues_category_id = $this->gpea_get_main_issue_parent_id();
 
 		if ( $main_issues_category_id ) {
 			$categories = get_the_category( $post_id );
@@ -550,6 +551,53 @@ class P4CT_Site {
 		}
 
 		return false;
+
+	}
+
+	/**
+	 * Gpea_get_all_main_issues
+	 *
+	 * @param bool $all_field Return an array with WP_Term objects. Only slug (as key) and name (as value) will be returned if set to FALSE.
+	 *
+	 * @return array
+	 */
+	function gpea_get_all_main_issues( $all_field = FALSE ) {
+
+		$main_issues_category_id = $this->gpea_get_main_issue_parent_id();
+
+		$main_issues = [];
+		if( $main_issues_category_id ) {
+			$main_issues = get_terms([
+				'taxonomy' => 'category',
+				'parent' => $main_issues_category_id,
+			]);
+		}
+
+		if( !$all_field ) {
+			$main_issues = array_column( $main_issues, 'name', 'slug' );
+		}
+
+		return $main_issues;
+
+	}
+
+	/**
+	 * Gpea_get_main_issue_parent_id
+	 *
+	 * @return int
+	 */
+	function gpea_get_main_issue_parent_id() {
+
+		$planet4_options = get_option( 'planet4_options' );
+		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+		if ( ! $main_issues_category_id ) {
+			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+			if ( $main_issues_category ) {
+				$main_issues_category_id = $main_issues_category->term_id;
+			}
+		}
+
+		return $main_issues_category_id;
 
 	}
 

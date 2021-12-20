@@ -951,24 +951,8 @@ class P4CT_Metabox_Register {
 	 */
 	public function add_donation_option_fields( $cmb_options = [], $id_prefix = '', $is_block = FALSE ) {
 
-		$planet4_options = get_option( 'planet4_options' );
-		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : FALSE;
-		if ( ! $main_issues_category_id ) {
-			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-			if ( $main_issues_category ) {
-				$main_issues_category_id = $main_issues_category->term_id;
-			}
-		}
-
-		$main_issues = [];
-		if( $main_issues_category_id ) {
-			$main_issues = get_terms([
-				'taxonomy' => 'category',
-				'parent' => $main_issues_category_id,
-			]);
-		}
-
-		$main_issues = array_column( $main_issues, 'name', 'slug' );
+		$gpea_extra = new \P4CT_Site();
+		$main_issues = $gpea_extra->gpea_get_all_main_issues();
 
 		if( $is_block ) {
 			$cmb_options[] = [
