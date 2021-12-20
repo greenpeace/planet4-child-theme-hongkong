@@ -79,15 +79,38 @@ class P4CT_Site {
 		// avoid apostrofi
 		add_filter( 'run_wptexturize', '__return_false' );
 
-		register_nav_menus(
-			[
-				// 'navigation-bar-menu' => __( 'Navigation Bar Menu', 'gpea_theme_backend' ),
-				'navigation-bar-about-menu' => __( 'Navigation Bar: Who we are', 'gpea_theme_backend' ),
-				// 'navigation-bar-issues-menu' => __( 'Navigation Bar: Our Work', 'gpea_theme_backend' ),
-				'navigation-bar-involved-menu' => __( 'Navigation Bar: Get Involved', 'gpea_theme_backend' ),
-				'navigation-bar-news-menu' => __( 'Navigation Bar: News & Stories', 'gpea_theme_backend' ),
-			]
-		);
+		// get main issues & create header nav
+
+		$header_nav = [];
+		$header_nav[ 'navigation-bar-about-menu' ] = sprintf(__( 'Header: %s', 'gpea_theme_backend' ), __( 'WHO WE ARE', 'gpea_theme' ));
+
+		$planet4_options = get_option( 'planet4_options' );
+		$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+		if ( ! $main_issues_category_id ) {
+			$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+			if ( $main_issues_category ) {
+				$main_issues_category_id = $main_issues_category->term_id;
+			}
+		}
+
+		$main_issues = [];
+		if( $main_issues_category_id ) {
+			$main_issues = get_terms([
+				'taxonomy' => 'category',
+				'parent' => $main_issues_category_id,
+			]);
+		}
+
+		$main_issues = array_column( $main_issues, 'name', 'slug' );
+
+		foreach( $main_issues as $issue_key => $issue_title ) {
+			$header_nav[ 'navigation-bar-issues-menu--' . $issue_key ] = sprintf(__( 'Header: %s: %s', 'gpea_theme_backend' ), __( 'OUR WORK', 'gpea_theme' ), $issue_title);
+		}
+
+		$header_nav[ 'navigation-bar-involved-menu' ] = sprintf(__( 'Header: %s', 'gpea_theme_backend' ), __( 'GET INVOLVED', 'gpea_theme' ));
+		$header_nav[ 'navigation-bar-news-menu' ] = sprintf(__( 'Header: %s', 'gpea_theme_backend' ), __( 'NEWS & STORIES', 'gpea_theme' ));
+
+		register_nav_menus($header_nav);
 		add_filter( 'manage_nav-menus_columns', [ $this, 'gpea_register_nav_menu_metabox' ] );
 		add_action( 'after_setup_theme', [ $this, 'gpea_child_theme_setup' ] );
 
