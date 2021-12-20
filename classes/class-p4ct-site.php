@@ -282,33 +282,41 @@ class P4CT_Site {
 		return $object;
 	}
 	public function gpea_render_nav_menu_projects_metabox() {
+
 		global $nav_menu_selected_id;
 		$walker = new Walker_Nav_Menu_Checklist();
-		$current_tab = 'all';
-		if( isset( $_REQUEST['authorarchive-tab'] ) ) {
-			//
-		}
+
+		$options = array(
+			'order'       => 'desc',
+			'orderby'     => 'date',
+			'post_type'   => 'page',
+			'posts_per_page' => 20,
+			'meta_key'    => '_wp_page_template',
+			'meta_value'  => 'page-templates/project.php',
+		);
+		$query = new \WP_Query( $options );
+		$posts = $query->posts;
+
 		?>
-		<div class="customlinkdiv">
+		<div id="gpea-projects" class="categorydiv">
 
-			<input type="hidden" value="custom2" name="menu-item[<?php echo $_nav_menu_placeholder; ?>][menu-item-type]" />
+			
 
-			<p id="menu-item-url-wrap" class="wp-clearfix">
-				<label class="howto" for="custom-menu-item-url"><?php _e( 'URL' ); ?></label>
-				<input id="custom-menu-item-url" name="menu-item[<?php echo $_nav_menu_placeholder; ?>][menu-item-url]" type="text"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="code menu-item-textbox form-required" placeholder="https://" />
-			</p>
-
-			<p id="menu-item-name-wrap" class="wp-clearfix">
-				<label class="howto" for="custom-menu-item-name"><?php _e( 'Link Text' ); ?></label>
-				<input id="custom-menu-item-name" name="menu-item[<?php echo $_nav_menu_placeholder; ?>][menu-item-title]" type="text"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="regular-text menu-item-textbox" />
-			</p>
+			<div class="tabs-panel tabs-panel-active">
+				<ul class="categorychecklist form-no-clear">
+				<?php
+					echo walk_nav_menu_tree( array_map('wp_setup_nav_menu_item', $posts), 0, (object) array( 'walker' => $walker) );
+				?>
+				</ul>
+			</div>
 
 			<p class="button-controls wp-clearfix">
 				<span class="add-to-menu">
-					<input type="submit"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="button submit-add-to-menu right" value="<?php esc_attr_e( 'Add to Menu' ); ?>" name="add-custom-menu-item" id="submit-custom-gpea-issues" />
+					<input type="submit"<?php wp_nav_menu_disabled_check( $nav_menu_selected_id ); ?> class="button-secondary submit-add-to-menu right" value="<?php esc_attr_e('Add to Menu'); ?>" name="add-gpea-projects-menu-item" id="submit-gpea-projects" />
 					<span class="spinner"></span>
 				</span>
 			</p>
+
 		</div>
 		<?php
 	}
