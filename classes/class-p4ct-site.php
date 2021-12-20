@@ -286,6 +286,10 @@ class P4CT_Site {
 	 * Load translations for master theme
 	 */
 	public function gpea_child_theme_setup() {
+
+		// unregister master theme's nav menu
+		unregister_nav_menu( 'navigation-bar-menu' );
+
 		$domains = [
 			'gpea_theme',
 			'gpea_theme_backend',
@@ -296,6 +300,7 @@ class P4CT_Site {
 			$mofile = get_stylesheet_directory() . '/languages/' . $domain . '-' . $locale . '.mo';
 			load_textdomain( $domain, $mofile );
 		}
+
 	}
 
 	/**
