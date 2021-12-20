@@ -135,7 +135,7 @@ body.search,
   }
 }
 
-.admin-bar {
+/*.admin-bar {
   .dynamic-search {
     @include greaterThan('sm') {
       top: 50 + 32px;
@@ -152,7 +152,7 @@ body.search,
 }
 .is-scrolling-down .dynamic-search {
   top: 48px;
-}
+}*/
 
 .dynamic-search {
   position: fixed;

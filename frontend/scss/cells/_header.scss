@@ -1,4 +1,30 @@
-.admin-bar {
+header {
+  background-color: $color-green;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 86px;
+  z-index: 99;
+  .admin-bar & {
+    top: 32px;
+    @media only screen and (max-width: 782px) {
+      top: 46px;
+    }
+    @media screen and (max-width: 600px) {
+      position: sticky;
+      top: 0;
+    }
+  }
+  @include greaterThan('sm') {
+    height: 100px;
+  }
+  @include greaterThan('lg') {
+    height: 86px;
+  }
+}
+
+/* .admin-bar {
   header {
     top: 32px;
     @media only screen and (max-width: 782px) {
@@ -10,9 +36,9 @@
         top: 0;
     }
   }
-}
+} */
 
-header {
+/* header {
   position: relative;
   height: 50px;
   // box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
@@ -239,10 +265,10 @@ header {
       background-image: url('../images/icons/Act-fill-mobile.svg');
     }
   }
-}
+} */
 
 @include lessThan('sm') {
-  body {
+  /* body {
     padding-top: 96px;
     &.is-scrolling-down {
       padding-top: 48px;
@@ -329,5 +355,5 @@ header {
       transition: height 500ms ease 200ms;
       overflow: hidden;
     }
-  }
+  } */
 }
