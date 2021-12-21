@@ -135,28 +135,20 @@ body.search,
   }
 }
 
-/*.admin-bar {
+.admin-bar {
   .dynamic-search {
     @include greaterThan('sm') {
-      top: 50 + 32px;
+      top: 100 + 32px;
     }
-    @media only screen and (max-width: 782px) {
-      top: 96 + 46px;
-    }
-  }
-  &.is-scrolling-down .dynamic-search {
-    @media only screen and (max-width: 600px) {
-        top: 48px;
+    @include greaterThan('lg') {
+      top: 86 + 32px;
     }
   }
 }
-.is-scrolling-down .dynamic-search {
-  top: 48px;
-}*/
 
 .dynamic-search {
   position: fixed;
-  top: 96px;
+  top: 86px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -170,10 +162,16 @@ body.search,
     visibility: visible;
     opacity: 1;
     transition: opacity 200ms linear, visibility 0ms linear 0ms;
+    @include lessThan('sm') {
+      display: none;
+    }
   }
 
   @include greaterThan('sm') {
-    top: 50px;
+    top: 100px;
+  }
+  @include greaterThan('lg') {
+    top: 86px;
   }
 
   .live-search {
@@ -183,11 +181,11 @@ body.search,
     transform: translateY(-20px);
     transition: transform 140ms ease-in-out;
 
-    @include lessThan('sm') {
+    // @include lessThan('sm') {
       .ct-container {
         position: relative;
       }
-    }
+    // }
   }
 
   &.is-visible .live-search {
@@ -196,7 +194,7 @@ body.search,
 
   .close-dynamic-search-button {
     position: absolute;
-    top: 0px;
+    top: -50px;
     right: 20px;
     margin: 0;
     padding: 5px;
@@ -206,8 +204,8 @@ body.search,
     z-index: 4;
     cursor: pointer;
 
-    @include greaterThan('sm') {
+    /* @include greaterThan('sm') {
       top: 14px;
-    }
+    }*/
   }
 }

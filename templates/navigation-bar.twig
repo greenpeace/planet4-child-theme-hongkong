@@ -51,7 +51,7 @@
 					{% if header_nav.login.enabled %}
 					<a href="{{ header_nav.login.link | e('html_attr') }}" class="header__link hide-lt-lg">{{ header_nav.login.label | e }}</a>
 					{% endif %}
-					<a href="" class="header__link header__link--search"></a>
+					<button class="js-dynamic-search header__link header__link--search hide-lt-sm"></button>
 				</div>
 			</div>
 		</div>

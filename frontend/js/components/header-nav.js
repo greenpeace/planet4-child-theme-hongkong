@@ -70,12 +70,6 @@ export default function() {
 		$('body').removeClass('has-open-header-nav');
 	});
 
-	calcMenuItemWidth();
-
-	$(window).resize(function() {
-		calcMenuItemWidth();
-	});
-
 	function calcMenuItemWidth() {
 		if(!gt_lg()) {
 			$('.menu__container', $menu).attr('style', '');
@@ -86,9 +80,15 @@ export default function() {
 		$('.menu__container', $menu).each(function() {
 			let $item = $(this).closest('.menu__item');
 			$(this).attr('style', '').css({
-				left: $item.offset().left,
+				left: $item.offset().left - 16,
 			});
 		});
 	}
+
+	calcMenuItemWidth();
+
+	$(window).resize(function() {
+		calcMenuItemWidth();
+	});
 
 }

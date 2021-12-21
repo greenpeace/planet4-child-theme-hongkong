@@ -884,9 +884,9 @@ body .form-group.search, .enform form .form-group.search, .enform-side-style .fo
 
 body .form-group.search.fluid, .enform form .form-group.search.fluid, .enform-side-style .form-container .en__field__element .form-group.search.fluid { max-width: none; }
 
-body .form-group.search input, .enform form .form-group.search input, .enform-side-style .form-container .en__field__element .form-group.search input { height: 40px; margin: 10px -1px 10px 0; min-width: 0; max-width: none; padding-left: 14px; border-top-left-radius: 99px; border-bottom-left-radius: 99px; border-top-right-radius: 0; border-bottom-right-radius: 0; }
+body .form-group.search input, .enform form .form-group.search input, .enform-side-style .form-container .en__field__element .form-group.search input { height: 40px; margin: 10px -1px 10px 0; min-width: 0; max-width: none; padding-left: 14px; border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 0; border-bottom-right-radius: 0; }
 
-body .form-group.search .button, .enform form .form-group.search .button, .enform-side-style .form-container .en__field__element .form-group.search .button { padding: 0 20px 0 15px; font-size: 16px; white-space: nowrap; border-top-left-radius: 0; border-bottom-left-radius: 0; }
+body .form-group.search .button, .enform form .form-group.search .button, .enform-side-style .form-container .en__field__element .form-group.search .button { padding: 0 20px 0 20px; font-size: 16px; white-space: nowrap; border-top-left-radius: 0; border-bottom-left-radius: 0; }
 
 form .error, form .success { display: none; font-size: 14px; line-height: 20px; }
 
@@ -1503,8 +1503,6 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 .header .issue { margin-right: 0.5em; }
 
-@media only screen and (min-width: 1280px) { .header .ct-container { max-width: 1240px; } }
-
 .header .ct-container, .header .header__inner { height: 100%; }
 
 @media only screen and (max-width: 1279px) { .header .hide-lt-lg { display: none; } }
@@ -1535,6 +1533,8 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 @media only screen and (max-width: 1279px) { .header__column--actived { visibility: visible; opacity: 1; -webkit-transition: opacity 200ms linear, visibility 0ms linear 0ms; transition: opacity 200ms linear, visibility 0ms linear 0ms; }
   .header__column--actived .menu__outer { -webkit-transform: translateX(0); -ms-transform: translateX(0); transform: translateX(0); } }
 
+.header__column--tools .header__link { padding: 0; margin-left: 10px; }
+
 .header__column--tools .button { padding-right: 20px; padding-left: 20px; line-height: 33px; height: 34px; }
 
 @media only screen and (min-width: 1024px) { .header__column--tools .button { line-height: 49px; height: 50px; } }
@@ -1545,8 +1545,7 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 @media only screen and (max-width: 1279px) { .header__link { display: block; width: 100%; line-height: 44px; padding: 0 0; } }
 
-@media only screen and (min-width: 1280px) { .header__link { line-height: 60px; font-size: 15px; color: rgba(255, 255, 255, 0.8); }
-  .header__link:first-child { margin-left: 10px; } }
+@media only screen and (min-width: 1280px) { .header__link { line-height: 60px; font-size: 15px; color: rgba(255, 255, 255, 0.8); } }
 
 .header__link--mobile-menu { border: none; background: transparent; cursor: pointer; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; -webkit-box-sizing: content-box; box-sizing: content-box; width: 18px; height: 16px; padding: 30px 20px; padding-left: 30px; }
 
@@ -1558,7 +1557,13 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 @media only screen and (min-width: 1024px) { .header__link--mobile-menu span, .header__link--mobile-menu:before, .header__link--mobile-menu:after { height: 3px; } }
 
-@media only screen and (min-width: 1280px) { .header .menu__item.actived .header__link { color: white; } }
+.header__link--search { border: none; background: transparent; cursor: pointer; height: 60px; vertical-align: -0.25em; }
+
+.header__link--search:after { content: ''; display: block; background: url(../images/search-icon.svg) no-repeat center; background-size: contain; width: 20px; height: 20px; }
+
+@media only screen and (max-width: 1279px) { .header__link--search { display: inline-block; width: auto; padding-left: 30px !important; padding-right: 48px !important; margin-right: -20px; } }
+
+@media only screen and (min-width: 1280px) { .header .header__column--tools .header__link, .header .menu__item.actived .header__link { color: white; } }
 
 .header .menu--logo img { height: 20px; }
 
@@ -1629,6 +1634,8 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 .header .menu__inner2--fake { border-left: 1px solid #66CC00; padding-left: 18px; margin-left: 30px; }
 
 .header .menu__item { position: relative; }
+
+@media only screen and (min-width: 1280px) { .header .menu__item:first-child { margin-left: 10px; } }
 
 .header .menu__item.actived .menu__container { display: block; }
 
@@ -4523,22 +4530,27 @@ body.search .has-load-more, .dynamic-search .has-load-more { text-align: center;
   body.search .advanced-wrapper .sort-by, .dynamic-search .advanced-wrapper .sort-by { text-align: right; }
   body.search .advanced-wrapper .sort-by .select, .dynamic-search .advanced-wrapper .sort-by .select { display: inline-block; } }
 
-/*.admin-bar { .dynamic-search { @include greaterThan('sm') { top: 50 + 32px; } @media only screen and (max-width: 782px) { top: 96 + 46px; } } &.is-scrolling-down .dynamic-search { @media only screen and (max-width: 600px) { top: 48px; } } } .is-scrolling-down .dynamic-search { top: 48px; }*/
-.dynamic-search { position: fixed; top: 96px; bottom: 0; left: 0; right: 0; z-index: 4; background: rgba(0, 0, 0, 0.7); visibility: hidden; opacity: 0; -webkit-transition: opacity 200ms linear, visibility 0ms linear 240ms; transition: opacity 200ms linear, visibility 0ms linear 240ms; }
+@media only screen and (min-width: 1024px) { .admin-bar .dynamic-search { top: 132px; } }
+
+@media only screen and (min-width: 1280px) { .admin-bar .dynamic-search { top: 118px; } }
+
+.dynamic-search { position: fixed; top: 86px; bottom: 0; left: 0; right: 0; z-index: 4; background: rgba(0, 0, 0, 0.7); visibility: hidden; opacity: 0; -webkit-transition: opacity 200ms linear, visibility 0ms linear 240ms; transition: opacity 200ms linear, visibility 0ms linear 240ms; }
 
 .dynamic-search.is-visible { visibility: visible; opacity: 1; -webkit-transition: opacity 200ms linear, visibility 0ms linear 0ms; transition: opacity 200ms linear, visibility 0ms linear 0ms; }
 
-@media only screen and (min-width: 1024px) { .dynamic-search { top: 50px; } }
+@media only screen and (max-width: 1023px) { .dynamic-search.is-visible { display: none; } }
+
+@media only screen and (min-width: 1024px) { .dynamic-search { top: 100px; } }
+
+@media only screen and (min-width: 1280px) { .dynamic-search { top: 86px; } }
 
 .dynamic-search .live-search { max-height: 100%; overflow-y: auto; -webkit-transform: translateY(-20px); -ms-transform: translateY(-20px); transform: translateY(-20px); -webkit-transition: -webkit-transform 140ms ease-in-out; transition: -webkit-transform 140ms ease-in-out; transition: transform 140ms ease-in-out; transition: transform 140ms ease-in-out, -webkit-transform 140ms ease-in-out; }
 
-@media only screen and (max-width: 1023px) { .dynamic-search .live-search .ct-container { position: relative; } }
+.dynamic-search .live-search .ct-container { position: relative; }
 
 .dynamic-search.is-visible .live-search { -webkit-transform: translateY(0); -ms-transform: translateY(0); transform: translateY(0); }
 
-.dynamic-search .close-dynamic-search-button { position: absolute; top: 0px; right: 20px; margin: 0; padding: 5px; border: none; background: transparent; font-size: 24px; z-index: 4; cursor: pointer; }
-
-@media only screen and (min-width: 1024px) { .dynamic-search .close-dynamic-search-button { top: 14px; } }
+.dynamic-search .close-dynamic-search-button { position: absolute; top: -50px; right: 20px; margin: 0; padding: 5px; border: none; background: transparent; font-size: 24px; z-index: 4; cursor: pointer; /* @include greaterThan('sm') { top: 14px; }*/ }
 
 /* For donate and support */
 .js-makechange-follower .leading { color: rgba(0, 0, 0, 0.85); font-size: 14px; }
