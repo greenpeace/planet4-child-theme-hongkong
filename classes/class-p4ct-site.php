@@ -285,6 +285,7 @@ class P4CT_Site {
 		];
 
 		// new menu
+		$header_nav_options = get_option( 'gpea_header_nav_options' );
 		$main_issues = $this->gpea_get_all_main_issues();
 		$header_nav = [];
 		foreach( self::NAV_MENUS as $menu_key => $menu_conf ) {
@@ -297,7 +298,13 @@ class P4CT_Site {
 
 			$menu = [];
 			$menu[ 'label' ] = __( $menu_conf[ 'msgid' ], 'gpea_theme' );
-			$menu[ 'link' ] = '#';
+
+			if( $menu_conf[ 'link' ] && isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_link' ] ) ) {
+				$menu[ 'link' ] = $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_link' ];
+			}
+			else {
+				$menu[ 'link' ] = '#';
+			}
 
 			if( $menu_conf[ 'issues' ] ) {
 				$children = '
@@ -307,7 +314,7 @@ class P4CT_Site {
 				foreach( $main_issues as $issue_key => $issue_title ) {
 					$children .= '
 							<li class="menu-item menu-item-has-children">
-								<a href=""><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span>' . '測試中文' . '</a>';
+								<a href=""><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span></a>';
 					$children .= wp_nav_menu( [
 						'container' => NULL,
 						'menu_class' => 'sub-menu',
@@ -338,7 +345,26 @@ class P4CT_Site {
 			$header_nav[] = $menu;
 
 		}
-		$context[ 'header_nav' ] = $header_nav;
+
+		$context[ 'header_nav' ] = [
+			'sticky' => [
+				'enabled' => isset( $header_nav_options[ 'gpea_header_nav_sticky_enabled' ] ) ? $header_nav_options[ 'gpea_header_nav_sticky_enabled' ] : '0',
+				'link' => isset( $header_nav_options[ 'gpea_header_nav_sticky_link' ] ) ? $header_nav_options[ 'gpea_header_nav_sticky_link' ] : '',
+				'label' => isset( $header_nav_options[ 'gpea_header_nav_sticky_label' ] ) ? $header_nav_options[ 'gpea_header_nav_sticky_label' ] : '',
+				'label_mobile' => isset( $header_nav_options[ 'gpea_header_nav_sticky_label_mobile' ] ) ? $header_nav_options[ 'gpea_header_nav_sticky_label_mobile' ] : '',
+			],
+			'button' => [
+				'link' => isset( $header_nav_options[ 'gpea_header_nav_button_link' ] ) ? $header_nav_options[ 'gpea_header_nav_button_link' ] : '',
+				'label' => isset( $header_nav_options[ 'gpea_header_nav_button_label' ] ) ? $header_nav_options[ 'gpea_header_nav_button_label' ] : '',
+				'label_mobile' => isset( $header_nav_options[ 'gpea_header_nav_button_label_mobile' ] ) ? $header_nav_options[ 'gpea_header_nav_button_label_mobile' ] : '',
+			],
+			'login' => [
+				'enabled' => isset( $header_nav_options[ 'gpea_header_nav_login_enabled' ] ) ? $header_nav_options[ 'gpea_header_nav_login_enabled' ] : '0',
+				'link' => isset( $header_nav_options[ 'gpea_header_nav_login_link' ] ) ? $header_nav_options[ 'gpea_header_nav_login_link' ] : '',
+				'label' => __( 'login', 'gpea_theme' ),
+			],
+			'menus' => $header_nav,
+		];
 
 		return $context;
 	}

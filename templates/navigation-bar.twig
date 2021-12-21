@@ -4,10 +4,17 @@
 		<div class="ct-container">
 			<div class="header__inner">
 				<div class="header__column header__column--mobile-menu hide-gt-lg">
-					<button class="header__link header__link--mobile-menu">XXXXXXXXXXXXXXX</button>
+					<button class="header__link header__link--mobile-menu"><span></span></button>
 				</div>
 				<div class="header__column header__column--logo">
-					<a href="{{ home_url }}" class="logo" aria-label="Greenpeace"></a>
+					<a href="{{ home_url }}" class="logo" aria-label="Greenpeace">
+						{% if (fn('get_locale') matches '{^zh(_[A-Z]+)?$}') %}
+						<img src="{{ theme.link }}/static/images/logo_zh.svg" class="logo__inner logo__inner--zh hide-lt-sm" alt="Greenpeace" />
+						<img src="{{ theme.link }}/static/images/logo_ko.svg" class="logo__inner logo__inner--ko hide-gt-sm" alt="Greenpeace" />
+						{% else %}
+						<img src="{{ theme.link }}/static/images/logo_ko.svg" class="logo__inner logo__inner--ko" alt="Greenpeace" />
+						{% endif %}
+					</a>
 				</div>
 				<div class="header__column header__column--menu">
 					<div class="menu__outer">
@@ -15,26 +22,36 @@
 							<span class="icon-close"></span>
 						</button>
 						<div class="menu menu--logo hide-gt-lg">
-							<a href="{{ home_url }}" class="logo" aria-label="Greenpeace"></a>
+							<a href="{{ home_url }}" class="logo" aria-label="Greenpeace">
+								{% if (fn('get_locale') matches '{^zh(_[A-Z]+)?$}') %}
+								<img src="{{ theme.link }}/static/images/logo_zh_green.svg" class="logo__inner logo__inner--zh" alt="Greenpeace" />
+								{% else %}
+								<img src="{{ theme.link }}/static/images/logo_ko_green.svg" class="logo__inner logo__inner--ko" alt="Greenpeace" />
+								{% endif %}
+							</a>
 						</div>
 						<div class="menu menu--primary">
-							{% for menu in header_nav %}
+							{% for menu in header_nav.menus %}
 							<div class="menu__item">
 								<a href="{{ menu.link | e('html_attr') }}" class="header__link">{{ menu.label | e }}</a>
 								{{ menu.children | raw }}
 							</div>
 							{% endfor %}
 						</div>
+						{% if header_nav.login.enabled %}
 						<div class="menu menu--secondary hide-gt-lg">
-							<a href="" class="header__link">會員登入</a>
+							<a href="{{ header_nav.login.link | e('html_attr') }}" class="header__link">{{ header_nav.login.label | e }}</a>
 						</div>
+						{% endif %}
 					</div>
 				</div>
 				<div class="header__column header__column--tools">
-					<a href="" class="button primary hide-lt-sm">捐電腦</a>
-					<a href="" class="button primary hide-gt-sm">捐手機</a>
-					<a href="" class="header__link hide-lt-lg">會員登入</a>
-					<a href="" class="header__link header__link--search">搜尋</a>
+					<a href="{{ header_nav.button.link | e('html_attr') }}" class="button primary hide-lt-sm">{{ header_nav.button.label | e }}</a>
+					<a href="{{ header_nav.button.link | e('html_attr') }}" class="button primary hide-gt-sm">{{ header_nav.button.label_mobile | e }}</a>
+					{% if header_nav.login.enabled %}
+					<a href="{{ header_nav.login.link | e('html_attr') }}" class="header__link hide-lt-lg">{{ header_nav.login.label | e }}</a>
+					{% endif %}
+					<a href="" class="header__link header__link--search"></a>
 				</div>
 			</div>
 		</div>

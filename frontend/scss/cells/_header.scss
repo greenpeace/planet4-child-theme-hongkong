@@ -56,11 +56,17 @@
   a {
     text-decoration: none;
     border: none;
-    transition: color .3s;
+    transition: color .3s, background-color .3s;
   }
 
   .issue {
     margin-right: 0.5em;
+  }
+
+  .ct-container {
+    @include greaterThan('lg') {
+      max-width: 1240px;
+    }
   }
 
   .ct-container,
@@ -94,13 +100,29 @@
     // justify-content: space-around;
     align-items: center;
     width: 100%;
+    @include lessThan('sm') {
+      padding-top: 24px;
+    }
   }
   &__column {
     &--mobile-menu {
 
     }
     &--logo {
-
+      @include lessThan('lg') {
+        flex: 1;
+      }
+      img {
+        margin-top: 25px;
+        margin-bottom: 20px;
+        height: 18px;
+        @include greaterThan('sm') {
+          height: 30px;
+        }
+        @include greaterThan('lg') {
+          height: 22px;
+        }
+      }
     }
     &--menu {
       display: flex;
@@ -130,14 +152,29 @@
       }
     }
     &--tools {
-
+      .button {
+        padding-right: 20px;
+        padding-left: 20px;
+        line-height: 33px;
+        height: 34px;
+        @include greaterThan('sm') {
+          line-height: 49px;
+          height: 50px;
+        }
+        @include greaterThan('lg') {
+          padding-right: 25px;
+          padding-left: 25px;
+          line-height: 39px;
+          height: 40px;
+        }
+      }
     }
   }
   &__link {
     font-size: 16px;
     color: #4C4C4C;
     display: inline-block;
-    padding: 0 20px;
+    padding: 0 10px;
     @include lessThan('lg') {
       display: block;
       width: 100%;
@@ -148,9 +185,42 @@
       line-height: 60px;
       font-size: 15px;
       color: rgba(white, .8);
+      &:first-child {
+        margin-left: 10px;
+      }
     }
     &--mobile-menu {
-
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: content-box;
+      width: 18px;
+      height: 16px;
+      padding: 30px 20px;
+      padding-left: 30px;
+      @include lessThan('lg') {
+        margin-left: -20px;
+      }
+      @include greaterThan('sm') {
+        width: 26px;
+        height: 26px;
+        padding-left: 48px;
+      }
+      span,
+      &:before,
+      &:after {
+        display: block;
+        content: '';
+        width: 100%;
+        height: 2px;
+        @include greaterThan('sm') {
+          height: 3px;
+        }
+        background-color: white;
+      }
     }
     &--search {
 
@@ -167,9 +237,15 @@
 
   .menu {
     &--logo {
-
+      img {
+        height: 20px;
+        @include greaterThan('sm') {
+          height: 25px;
+        }
+      }
     }
     &--primary {
+      flex: 1;
       display: flex;
       @include lessThan('lg') {
         flex-direction: column;
@@ -184,7 +260,13 @@
       }
     }
     &--secondary {
-
+      border-top: 2px solid #979797;
+      margin-right: 86px;
+      margin-top: 15px;
+      padding-top: 15px;
+      @include greaterThan('sm') {
+        margin-right: 100px;
+      }
     }
     ul {
       li {
@@ -261,7 +343,7 @@
     }
     .is-counter {
       counter-reset: menu;
-      .menu__inner2--real > .menu-item a:before {
+      .menu__inner2--real > .menu-item > a:before {
         counter-increment: menu; 
         content: counter(menu);
         margin-right: 0.75em;
@@ -293,6 +375,8 @@
         box-shadow: 2px 3px 15px 0px rgba(170,170,170,0.49);
         padding-top: 50px;
         padding-bottom: 50px;
+        display: flex;
+        flex-direction: column;
       }
       @include lessThan('sm') {
         width: 100%;
@@ -407,6 +491,30 @@
       }
       .sub-menu--fake {
         display: block;
+      }
+    }
+  }
+
+  @include lessThan('lg') {
+    .menu__item,
+    .has-children .menu__inner2 > .menu-item {
+      // position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 18px;
+        width: 6px;
+        height: 6px;
+        border: 2px solid #1F1F1F;
+        background-color: white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        pointer-events: none;
+        transition: transform .3s;
+      }
+      &.actived:after {
+        transform: rotate(225deg);
       }
     }
   }

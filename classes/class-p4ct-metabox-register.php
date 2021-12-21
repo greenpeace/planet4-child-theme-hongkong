@@ -1230,6 +1230,23 @@ class P4CT_Metabox_Register {
 			'type'             => 'text_medium',
 		];
 
+		$cmb_options[] = [
+			'name'             => esc_html( sprintf( __('"%s" Button'), __( 'login', 'gpea_theme' ) ), self::METABOX_ID ),
+			'id'               => 'gpea_header_nav_login',
+			'type'             => 'title',
+		];
+		$cmb_options[] = [
+			'name'             => esc_html__( 'Show the Button', self::METABOX_ID ),
+			'id'               => 'gpea_header_nav_login_enabled',
+			'type'             => 'checkbox',
+			'default'          => '0',
+		];
+		$cmb_options[] = [
+			'name'             => esc_html__( 'Button Link', self::METABOX_ID ),
+			'id'               => 'gpea_header_nav_login_link',
+			'type'             => 'text',
+		];
+
 		$gpea_extra = new \P4CT_Site();
 		$main_issues = $gpea_extra->gpea_get_all_main_issues();
 
