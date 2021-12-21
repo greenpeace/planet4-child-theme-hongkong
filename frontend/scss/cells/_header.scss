@@ -552,4 +552,27 @@
     }
   }
 
+  &__sticky {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    .button {
+      width: 100%;
+      margin: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      line-height: 48 - 1px;
+      height: 48px;
+      @include greaterThan('sm') {
+        line-height: 64 - 1px;
+        height: 64px;
+      }
+      @include greaterThan('lg') {
+        display: none;
+      }
+    }
+  }
+
 }
