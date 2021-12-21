@@ -37,7 +37,8 @@ body {
   }
 
   &.has-open-dynamic-search,
-  &.has-open-section-geography-set-lightbox {
+  &.has-open-section-geography-set-lightbox,
+  &.has-open-header-nav {
     overflow: hidden;
   }
 }

@@ -25,21 +25,25 @@ class P4CT_Site {
 			'msgid'  => 'WHO WE ARE',
 			'depth'  => 1,
 			'issues' => FALSE,
+			'counter' => FALSE,
 		],
 		'issues' => [
 			'msgid'  => 'OUR WORK',
 			'depth'  => 1,
 			'issues' => TRUE,
+			'counter' => FALSE,
 		],
 		'involved' => [
 			'msgid'  => 'GET INVOLVED',
 			'depth'  => 2,
 			'issues' => FALSE,
+			'counter' => TRUE,
 		],
 		'news' => [
 			'msgid'  => 'NEWS & STORIES',
 			'depth'  => 1,
 			'issues' => FALSE,
+			'counter' => FALSE,
 		],
 	];
 
@@ -281,17 +285,20 @@ class P4CT_Site {
 		$header_nav = [];
 		foreach( self::NAV_MENUS as $menu_key => $menu_conf ) {
 
-			$has_children_classes = $menu_conf[ 'issues' ] || $menu_conf[ 'depth' ] > 1 ? 'has-children' : 'no-children';
-			$is_issue_classes = $menu_conf[ 'issues' ] ? 'is-issues' : 'not-issues';
+			$classes = [ 'menu__container' ];
+
+			$classes[] = $menu_conf[ 'issues' ] || $menu_conf[ 'depth' ] > 1 ? 'has-children' : 'no-children';
+			$classes[] = $menu_conf[ 'issues' ] ? 'is-issues' : 'not-issues';
+			$classes[] = $menu_conf[ 'counter' ] ? 'is-counter' : 'not-counter';
 
 			$menu = [];
 			$menu[ 'label' ] = __( $menu_conf[ 'msgid' ], 'gpea_theme' );
 			$menu[ 'link' ] = '#';
 
 			if( $menu_conf[ 'issues' ] ) {
-				$children = '<div class="menu__container ' . $has_children_classes . ' ' . $is_issue_classes . '"><ul class="menu__inner">';
+				$children = '<div class="' . implode( ' ', $classes ) . '"><div class="menu__inner"><ul class="menu__inner2 menu__inner2--real" data-label="' . esc_attr(__( 'Issue we work on', 'gpea_theme' )) . '" data-label-fake="' . esc_attr(__( 'On-Going Projects', 'gpea_theme' )) . '">';
 				foreach( $main_issues as $issue_key => $issue_title ) {
-					$children .= '<li class="menu-item"><a href="">' . $issue_title . '</a>';
+					$children .= '<li class="menu-item menu-item-has-children"><a href=""><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span>' . '測試中文' . '</a>';
 					$children .= wp_nav_menu( [
 						'container' => NULL,
 						'menu_class' => 'sub-menu',
@@ -301,16 +308,17 @@ class P4CT_Site {
 					]);
 					$children .= '</li>';
 				}
-				$children .= '</ul></div>';
+				$children .= '</ul></div></div>';
 				$menu[ 'children' ] = $children;
 			}
 			else {
 				$menu[ 'children' ] = wp_nav_menu( [
-					'container_class' => 'menu__container ' . $has_children_classes . ' ' . $is_issue_classes,
-					'menu_class' => 'menu__inner',
+					'container_class' => implode( ' ', $classes ),
+					'menu_class' => 'menu__inner2 menu__inner2--real',
 					'theme_location' => 'gpea-header-' . $menu_key . '-menu',
 					'echo' => FALSE,
 					'depth' => $menu_conf[ 'depth' ],
+					'items_wrap' => '<div class="menu__inner"><ul id="%1$s" class="%2$s">%3$s</ul></div>',
 				]);
 			}
 
