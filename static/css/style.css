@@ -1539,7 +1539,7 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 @media only screen and (min-width: 1280px) { .header .menu--primary { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; -webkit-box-pack: space-evenly; -ms-flex-pack: space-evenly; justify-content: space-evenly; } }
 
-.header .menu ul a { line-height: 2; display: block; color: #303030; font-size: 16px; }
+.header .menu ul a { padding-top: 5px; padding-bottom: 5px; display: block; color: #303030; font-size: 16px; }
 
 .header .menu ul a:hover, .header .menu ul a:focus, .header .menu ul a:active { color: #67CC02; }
 
@@ -1561,13 +1561,13 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 @media only screen and (min-width: 1280px) { .header .menu .has-children ul .sub-menu a:hover, .header .menu .has-children ul .sub-menu a:focus, .header .menu .has-children ul .sub-menu a:active { color: #FF8100; } }
 
-.header .menu .is-issues .menu__inner2:before { line-height: 2; color: #67CC02; font-size: 16px; }
+.header .menu .is-issues .menu__inner2:before { display: block; padding-top: 5px; padding-bottom: 5px; color: #67CC02; font-size: 16px; }
 
 @media only screen and (min-width: 1280px) { .header .menu .is-issues .menu__inner2:before { font-size: 15px; } }
 
 .header .menu .is-issues .menu__inner2--real:before { content: attr(data-label); }
 
-.header .menu .is-issues .menu__inner2--fake:before { content: attr(data-label); }
+.header .menu .is-issues .menu__inner2--fake:before { content: attr(data-label); margin-left: -30px; padding-left: 30px; background-color: white; }
 
 .header .menu .is-counter { counter-reset: menu; }
 
@@ -1605,7 +1605,7 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 .header .menu-item { position: relative; }
 
-.header .menu-item a { white-space: pre-line; }
+.header .menu-item a { white-space: pre-wrap; }
 
 .header .sub-menu { display: none; }
 

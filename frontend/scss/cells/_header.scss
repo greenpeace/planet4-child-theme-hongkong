@@ -191,7 +191,9 @@
         
       }
       a {
-        line-height: 2;
+        // line-height: 2;
+        padding-top: 5px;
+        padding-bottom: 5px;
         display: block;
         color: #303030;
         font-size: 16px;
@@ -236,7 +238,11 @@
     }
     .is-issues {
       .menu__inner2:before {
-        line-height: 2;
+        display: block;
+        // line-height: 2;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        // margin-bottom: 5px;
         color: #67CC02;
         font-size: 16px;
         @include greaterThan('lg') {
@@ -248,6 +254,9 @@
       }
       .menu__inner2--fake:before {
         content: attr(data-label);
+        margin-left: -30px;
+        padding-left: 30px;
+        background-color: white;
       }
     }
     .is-counter {
@@ -360,7 +369,7 @@
   .menu-item {
     position: relative;
     a {
-      white-space: pre-line;
+      white-space: pre-wrap;
     }
     &--fake {
 

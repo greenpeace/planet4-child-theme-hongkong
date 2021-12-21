@@ -26,24 +26,28 @@ class P4CT_Site {
 			'depth'  => 1,
 			'issues' => FALSE,
 			'counter' => FALSE,
+			'link' => FALSE,
 		],
 		'issues' => [
 			'msgid'  => 'OUR WORK',
 			'depth'  => 1,
 			'issues' => TRUE,
 			'counter' => FALSE,
+			'link' => FALSE,
 		],
 		'involved' => [
 			'msgid'  => 'GET INVOLVED',
 			'depth'  => 2,
 			'issues' => FALSE,
 			'counter' => TRUE,
+			'link' => FALSE,
 		],
 		'news' => [
 			'msgid'  => 'NEWS & STORIES',
 			'depth'  => 1,
 			'issues' => FALSE,
 			'counter' => FALSE,
+			'link' => TRUE,
 		],
 	];
 
@@ -296,9 +300,14 @@ class P4CT_Site {
 			$menu[ 'link' ] = '#';
 
 			if( $menu_conf[ 'issues' ] ) {
-				$children = '<div class="' . implode( ' ', $classes ) . '"><div class="menu__inner"><ul class="menu__inner2 menu__inner2--real" data-label="' . esc_attr(__( 'Issue we work on', 'gpea_theme' )) . '" data-label-fake="' . esc_attr(__( 'On-Going Projects', 'gpea_theme' )) . '">';
+				$children = '
+				<div class="' . implode( ' ', $classes ) . '">
+					<div class="menu__inner">
+						<ul class="menu__inner2 menu__inner2--real" data-label="' . esc_attr(__( 'Issue we work on', 'gpea_theme' )) . '" data-label-fake="' . esc_attr(__( 'On-Going Projects', 'gpea_theme' )) . '">';
 				foreach( $main_issues as $issue_key => $issue_title ) {
-					$children .= '<li class="menu-item menu-item-has-children"><a href=""><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span>' . '測試中文' . '</a>';
+					$children .= '
+							<li class="menu-item menu-item-has-children">
+								<a href=""><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span>' . '測試中文' . '</a>';
 					$children .= wp_nav_menu( [
 						'container' => NULL,
 						'menu_class' => 'sub-menu',
@@ -306,9 +315,13 @@ class P4CT_Site {
 						'echo' => FALSE,
 						'depth' => $menu_conf[ 'depth' ],
 					]);
-					$children .= '</li>';
+					$children .= '
+							</li>';
 				}
-				$children .= '</ul></div></div>';
+				$children .= '
+						</ul>
+					</div>
+				</div>';
 				$menu[ 'children' ] = $children;
 			}
 			else {
