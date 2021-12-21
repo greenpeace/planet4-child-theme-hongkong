@@ -207,18 +207,27 @@ footer {
     &__menu {
       display: none;
       position: absolute;
-      left: -180px;
-      width: 300px;
-      max-height: 80vh;
+      // width: 300px;
+      width: 100%;
+      // max-height: 80vh;
       background-color: white;
-      border-radius: 3px;
-      box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28);
+      border-radius: 8px;
+      box-shadow: 0px 2px 12px 0px #767676;
       flex-direction: column;
       padding: 10px 20px;
-
+      left: auto;
+      right: 0px;
+      @include lessThan('sm') {
+        max-height: 260px;
+      }
       @include greaterThan('sm') {
-        left: -185px;
+        left: 0;
+        right: auto;
         width: 900px;
+      }
+      @include greaterThan('lg') {
+        left: auto;
+        right: 0px;
       }
 
       a {
