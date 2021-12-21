@@ -1290,8 +1290,13 @@ class P4CT_Metabox_Register {
 				'type'             => 'text',
 			];
 			$cmb_options[] = [
-				'name'             => esc_html__( 'CTA Button Label', self::METABOX_ID ),
+				'name'             => esc_html__( 'CTA Button Label (for PC/Tablet)', self::METABOX_ID ),
 				'id'               => $id_prefix . '_cta_label',
+				'type'             => 'text_medium',
+			];
+			$cmb_options[] = [
+				'name'             => esc_html__( 'CTA Button Label (for Mobile)', self::METABOX_ID ),
+				'id'               => $id_prefix . '_cta_label_mobile',
 				'type'             => 'text_medium',
 			];
 			$cmb_options[] = [

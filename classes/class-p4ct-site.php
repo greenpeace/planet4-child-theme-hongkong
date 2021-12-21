@@ -310,11 +310,13 @@ class P4CT_Site {
 			if( isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_enabled' ] ) && $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_enabled' ] ) {
 				$cta_link = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_link' ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_link' ] : '';
 				$cta_label = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_label' ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_label' ] : '';
+				$cta_label_mobile = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_label_mobile' ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_label_mobile' ] : '';
 				$cta_img = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_img' ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_img' ] : '';
 				$cta_content .= '
 				<a class="header__cta header__cta--real" href="' . esc_attr( $cta_link ) . '">
 					<span class="icon" style="background-image: url(' . esc_attr( $cta_img ) . ')"></span>
-					<span class="title">' . esc_html( $cta_label ) . '</span>
+					<span class="title hide-lt-sm">' . esc_html( $cta_label ) . '</span>
+					<span class="title hide-gt-sm">' . esc_html( $cta_label_mobile ) . '</span>
 					<span class="arrow"><span></span></span>
 				</a>';
 			}
@@ -510,7 +512,7 @@ class P4CT_Site {
 		wp_enqueue_style( 'child-style-fonts', get_stylesheet_directory_uri() . '/static/css/' . $css_fonts, [], $css_creation );
 
 		wp_enqueue_style( 'child-style-swiper', 'https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css' );
-    wp_enqueue_style( 'child-style-flexboxgrid', 'https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css' );
+    	wp_enqueue_style( 'child-style-flexboxgrid', 'https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css' );
 
 		wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/static/css/style.css', [], $css_creation );
 
