@@ -249,10 +249,12 @@
       display: flex;
       @include lessThan('lg') {
         flex-direction: column;
-        margin-right: 120px;
+        padding-right: 120px;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
       @include lessThan('sm') {
-        margin-right: 70px;
+        padding-right: 70px;
       }
       @include greaterThan('lg') {
         flex: 1;
@@ -261,7 +263,8 @@
     }
     &--secondary {
       border-top: 2px solid #979797;
-      margin-right: 86px;
+      // margin-right: 86px;
+      margin-right: 70px;
       margin-top: 15px;
       padding-top: 15px;
       @include greaterThan('sm') {
@@ -499,10 +502,13 @@
     .menu__item,
     .has-children .menu__inner2 > .menu-item {
       // position: relative;
+      > a {
+        padding-right: 20px;
+      }
       &:after {
         content: '';
         position: absolute;
-        right: 0;
+        right: 2px;
         top: 18px;
         width: 6px;
         height: 6px;
@@ -511,9 +517,10 @@
         border-width: 0 2px 2px 0;
         transform: rotate(45deg);
         pointer-events: none;
-        transition: transform .3s;
+        // transition: transform .3s, top .3s;
       }
       &.actived:after {
+        top: 21px;
         transform: rotate(225deg);
       }
     }

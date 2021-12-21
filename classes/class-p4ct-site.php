@@ -312,9 +312,10 @@ class P4CT_Site {
 					<div class="menu__inner">
 						<ul class="menu__inner2 menu__inner2--real" data-label="' . esc_attr(__( 'Issue we work on', 'gpea_theme' )) . '" data-label-fake="' . esc_attr(__( 'On-Going Projects', 'gpea_theme' )) . '">';
 				foreach( $main_issues as $issue_key => $issue_title ) {
+					$setting_title = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_label--' . $issue_key ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_label--' . $issue_key ] : '';
 					$children .= '
 							<li class="menu-item menu-item-has-children">
-								<a href=""><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span></a>';
+								<a href=""><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span>' . $setting_title . '</a>';
 					$children .= wp_nav_menu( [
 						'container' => NULL,
 						'menu_class' => 'sub-menu',
