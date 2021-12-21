@@ -306,16 +306,30 @@ class P4CT_Site {
 				$menu[ 'link' ] = '#';
 			}
 
+			$cta_content = '';
+			if( isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_enabled' ] ) && $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_enabled' ] ) {
+				$cta_link = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_link' ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_link' ] : '';
+				$cta_label = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_label' ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_label' ] : '';
+				$cta_img = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_img' ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_img' ] : '';
+				$cta_content .= '
+				<a class="header__cta header__cta--real" href="' . esc_attr( $cta_link ) . '">
+					<span class="icon" style="background-image: url(' . esc_attr( $cta_img ) . ')"></span>
+					<span class="title">' . esc_html( $cta_label ) . '</span>
+					<span class="arrow"><span></span></span>
+				</a>';
+			}
+
 			if( $menu_conf[ 'issues' ] ) {
 				$children = '
 				<div class="' . implode( ' ', $classes ) . '">
 					<div class="menu__inner">
-						<ul class="menu__inner2 menu__inner2--real" data-label="' . esc_attr(__( 'Issue we work on', 'gpea_theme' )) . '" data-label-fake="' . esc_attr(__( 'On-Going Projects', 'gpea_theme' )) . '">';
+						<div class="menu__inner2">
+							<ul class="menu__inner3 menu__inner3--real" data-label="' . esc_attr(__( 'Issue we work on', 'gpea_theme' )) . '" data-label-fake="' . esc_attr(__( 'On-Going Projects', 'gpea_theme' )) . '">';
 				foreach( $main_issues as $issue_key => $issue_title ) {
 					$setting_title = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_label--' . $issue_key ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_label--' . $issue_key ] : '';
 					$children .= '
-							<li class="menu-item menu-item-has-children">
-								<a href=""><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span>' . $setting_title . '</a>';
+								<li class="menu-item menu-item-has-children">
+									<a href=""><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span>' . $setting_title . '</a>';
 					$children .= wp_nav_menu( [
 						'container' => NULL,
 						'menu_class' => 'sub-menu',
@@ -324,10 +338,11 @@ class P4CT_Site {
 						'depth' => $menu_conf[ 'depth' ],
 					]);
 					$children .= '
-							</li>';
+								</li>';
 				}
 				$children .= '
-						</ul>
+							</ul>
+						</div>' . $cta_content . '
 					</div>
 				</div>';
 				$menu[ 'children' ] = $children;
@@ -335,11 +350,11 @@ class P4CT_Site {
 			else {
 				$menu[ 'children' ] = wp_nav_menu( [
 					'container_class' => implode( ' ', $classes ),
-					'menu_class' => 'menu__inner2 menu__inner2--real',
+					'menu_class' => 'menu__inner3 menu__inner3--real',
 					'theme_location' => 'gpea-header-' . $menu_key . '-menu',
 					'echo' => FALSE,
 					'depth' => $menu_conf[ 'depth' ],
-					'items_wrap' => '<div class="menu__inner"><ul id="%1$s" class="%2$s">%3$s</ul></div>',
+					'items_wrap' => '<div class="menu__inner"><div class="menu__inner2"><ul id="%1$s" class="%2$s">%3$s</ul></div>' . $cta_content . '</div>',
 				]);
 			}
 
