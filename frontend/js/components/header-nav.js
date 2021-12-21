@@ -73,8 +73,15 @@ export default function() {
 	});
 	$('.menu__close-button', $header).on('click', function() {
 		if(gt_lg()) { return; }
+		$('.menu__search-button').removeClass('hidden');
+		$('.menu--search').removeClass('actived');
 		$('.header__column--menu', $header).removeClass('header__column--actived');
 		$('body').removeClass('has-open-header-nav');
+	});
+
+	$('.menu__search-button').on('click', function() {
+		$(this).addClass('hidden');
+		$('.menu--search').addClass('actived');
 	});
 
 	function calcMenuItemWidth() {
@@ -82,6 +89,8 @@ export default function() {
 			$('.menu__container', $menu).attr('style', '');
 			return;
 		}
+		$('.menu__search-button').removeClass('hidden');
+		$('.menu--search').removeClass('actived');
 		$('.header__column--menu', $header).removeClass('header__column--actived');
 		$('body').removeClass('has-open-header-nav');
 		$('.menu__container', $menu).each(function() {

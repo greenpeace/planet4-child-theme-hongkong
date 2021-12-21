@@ -264,6 +264,56 @@
           height: 25px;
         }
       }
+      @include lessThan('lg') {
+        margin-bottom: 40px;
+      }
+      @include lessThan('sm') {
+        margin-bottom: 20px;
+      }
+    }
+    &--search {
+      transition: height .3s;
+      height: 0;
+      overflow: hidden;
+      &.actived {
+        height: 66px;
+      }
+      form {
+        margin-bottom: 20px;
+        margin-right: 60px;
+        position: relative;
+      }
+      button {
+        position: absolute;
+        border: none;
+        background-color: transparent;
+        width: 50px;
+        height: 40px;
+        right: 0;
+        bottom: 2px;
+        &:after {
+          content: '';
+          display: block;
+          background: url(../images/search-icon.svg) no-repeat center;
+          background-size: contain;
+          width: 20px;
+          height: 20px;
+          filter: invert(1);
+          margin: auto;
+        }
+      }
+      input {
+        &,
+        &:focus {
+          border: none;
+          background-color: transparent;
+          border-radius: 0;
+          box-shadow: none;
+          border-bottom: 2px solid #4C4C4C;
+          padding-left: 0;
+          padding-right: 50px;
+        }
+      }
     }
     &--primary {
       flex: 1;
@@ -380,7 +430,8 @@
         position: fixed;
       }
     }
-    &__close-button {
+    &__close-button,
+    &__search-button {
       position: absolute;
       top: 27px;
       right: 10px;
@@ -391,6 +442,29 @@
       font-size: 30px;
       z-index: 4;
       cursor: pointer;
+    }
+    &__close-button {
+      right: 10px;
+    }
+    &__search-button {
+      transition: opacity .3s;
+      &.hidden {
+        pointer-events: none;
+        opacity: 0;
+      }
+      right: 50px;
+      width: 50px;
+      height: 64px;
+      &:after {
+        content: '';
+        display: block;
+        background: url(../images/search-icon.svg) no-repeat center;
+        background-size: contain;
+        width: 20px;
+        height: 20px;
+        filter: invert(1);
+        margin: auto;
+      }
     }
     &__outer {
       @include lessThan('lg') {
