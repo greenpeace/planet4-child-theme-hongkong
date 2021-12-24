@@ -884,9 +884,9 @@ body .form-group.search, .enform form .form-group.search, .enform-side-style .fo
 
 body .form-group.search.fluid, .enform form .form-group.search.fluid, .enform-side-style .form-container .en__field__element .form-group.search.fluid { max-width: none; }
 
-body .form-group.search input, .enform form .form-group.search input, .enform-side-style .form-container .en__field__element .form-group.search input { height: 40px; margin: 10px -1px 10px 0; min-width: 0; max-width: none; padding-left: 14px; border-top-left-radius: 4px; border-bottom-left-radius: 4px; border-top-right-radius: 0; border-bottom-right-radius: 0; }
+body .form-group.search input, .enform form .form-group.search input, .enform-side-style .form-container .en__field__element .form-group.search input { height: 40px; margin: 10px 10px 10px 0; min-width: 0; max-width: none; padding-left: 14px; border-top-left-radius: 4px; border-bottom-left-radius: 4px; }
 
-body .form-group.search .button, .enform form .form-group.search .button, .enform-side-style .form-container .en__field__element .form-group.search .button { padding: 0 20px 0 20px; font-size: 16px; white-space: nowrap; border-top-left-radius: 0; border-bottom-left-radius: 0; }
+body .form-group.search .button, .enform form .form-group.search .button, .enform-side-style .form-container .en__field__element .form-group.search .button { padding: 0 20px 0 20px; font-size: 16px; white-space: nowrap; }
 
 form .error, form .success { display: none; font-size: 14px; line-height: 20px; }
 
