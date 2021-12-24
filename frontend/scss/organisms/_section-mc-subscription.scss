@@ -73,14 +73,7 @@
   .name-part {
     .en__field__element {
       &--first-name {
-        @include greaterThan('sm') {
-          flex: 0 0 210px;
-        }
-        @include greaterThan('lg') {
-          flex: 1 1 auto;
-        }
-      }
-      &--last-name {
+        order: 2;
         margin-left: 10px;
         @include lessThan('sm') {
           &.en__field__element--is-required:before {
@@ -88,7 +81,19 @@
           }
         }
         @include greaterThan('sm') {
+          flex: 0 0 210px;
           margin-left: 30px;
+        }
+        @include greaterThan('lg') {
+          flex: 1 1 auto;
+        }
+      }
+      &--last-name {
+        // margin-left: 10px;
+        @include lessThan('sm') {
+        }
+        @include greaterThan('sm') {
+          // margin-left: 30px;
         }
       }
     }
