@@ -3354,8 +3354,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-hero-set .content { position: relative; z-index: 2; height: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; text-align: center; }
 
-@media only screen and (min-width: 1024px) { .section-hero-set .content--left { -webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start; text-align: left; }
-  .section-hero-set .content--right { -webkit-box-pack: end; -ms-flex-pack: end; justify-content: flex-end; text-align: left; } }
+@media only screen and (min-width: 1024px) { .section-hero-set .content--left .content__text { margin-right: auto; text-align: left; }
+  .section-hero-set .content--right .content__text { margin-left: auto; text-align: left; } }
 
 .section-hero-set .content__text { color: white; }
 

@@ -99,14 +99,20 @@
     text-align: center;
     @include greaterThan("sm") {
       &--left {
-        justify-content: flex-start;
-        text-align: left;
+        // justify-content: flex-start;
+        .content__text {
+          margin-right: auto;
+          text-align: left;
+        }
       }
       &--center {
       }
       &--right {
-        justify-content: flex-end;
-        text-align: left;
+        // justify-content: flex-end;
+        .content__text {
+          margin-left: auto;
+          text-align: left;
+        }
       }
     }
     &__text {
