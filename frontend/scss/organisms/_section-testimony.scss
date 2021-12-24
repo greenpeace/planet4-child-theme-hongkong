@@ -10,6 +10,10 @@
     @include ct-container-version-b;
   }
 
+  .swiper-pagination {
+    position: static;
+  }
+
   .content {
     &--title {
       .title {

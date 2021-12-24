@@ -4001,6 +4001,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-testimony .ct-container { max-width: 1200px; } }
 
+.section-testimony .swiper-pagination { position: static; }
+
 .section-testimony .content--title .title { font-weight: normal; font-size: 22px; margin: 1.5em auto; border-left: 6px solid #66CC00; padding-left: 20px; }
 
 @media only screen and (max-width: 1023px) { .section-testimony .content--title .title { display: table; } }
