@@ -48,15 +48,8 @@ $context['reading_time']        = $page_meta_data['p4-gpea_post_reading_time'][0
 $post->subtitle                 = $page_meta_data['p4-gpea_post_subtitle'][0] ?? '';
 $post_categories     = get_the_terms( $post, 'category' );
 
-$planet4_options = get_option( 'planet4_options' );
-
-$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
-if ( ! $main_issues_category_id ) {
-	$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-	if ( $main_issues_category ) {
-		$main_issues_category_id = $main_issues_category->term_id;
-	}
-}
+$gpea_extra = new \P4CT_Site();
+$main_issues_category_id = $gpea_extra->gpea_get_main_issue_parent_id();
 
 $context['post_categories'] = '';
 if ( $post_categories ) {

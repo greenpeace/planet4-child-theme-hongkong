@@ -135,6 +135,9 @@ msgstr ""
 msgid "About Greenpeace"
 msgstr ""
 
+msgid "Quick links"
+msgstr ""
+
 #: classes/class-p4ct-site.php:163
 msgid "Press release and media"
 msgstr ""
@@ -514,4 +517,20 @@ msgid "Any issue"
 msgstr ""
 
 msgid "Any topic"
+msgstr ""
+
+#. Header menu items
+msgid "WHO WE ARE"
+msgstr ""
+msgid "OUR WORK"
+msgstr ""
+msgid "GET INVOLVED"
+msgstr ""
+msgid "NEWS & STORIES"
+msgstr ""
+msgid "Issue we work on"
+msgstr ""
+msgid "On-Going Projects"
+msgstr ""
+msgid "login"
 msgstr ""

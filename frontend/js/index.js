@@ -36,6 +36,9 @@ import mcSubscription from "./components/mc-subscription";
 import petitionThankyou from "./petition-thankyou";
 
 import animatecounters from "./components/animatecounters";
+import notificationList from "./components/notification-list";
+import getInvolvedCards from "./components/get-involved-cards";
+import headerNav from "./components/header-nav";
 
 // import donationPage from './donation-page';
 
@@ -116,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   /**
    * Open/close country offices megamenu (not even putting it in a separate module)
    */
-  const $countryOfficesDropdown = $("header .dropdown");
+  const $countryOfficesDropdown = $("footer .dropdown");
   $countryOfficesDropdown.on("click", function (e) {
     e.stopPropagation();
   });
@@ -128,10 +131,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
   });
 
   /* Page specific functionality */
-
   petitionThankyou(Scroll);
 
   /* GPEA extended functions */
-
   animatecounters();
+  notificationList();
+  getInvolvedCards();
+  headerNav();
+
 });

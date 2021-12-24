@@ -10,7 +10,7 @@ body.search,
   }
 
   .live-search {
-    background: $color-lightblue;
+    background: white;
     min-height: 200px;
 
     form {
@@ -135,13 +135,24 @@ body.search,
   }
 }
 
+.admin-bar {
+  .dynamic-search {
+    @include greaterThan('sm') {
+      top: 100 + 32px;
+    }
+    @include greaterThan('lg') {
+      top: 86 + 32px;
+    }
+  }
+}
+
 .dynamic-search {
   position: fixed;
-  top: 96px; // see _header.scss
+  top: 86px;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: 4;
   background: rgba(0, 0, 0, 0.7);
   visibility: hidden;
   opacity: 0;
@@ -151,10 +162,16 @@ body.search,
     visibility: visible;
     opacity: 1;
     transition: opacity 200ms linear, visibility 0ms linear 0ms;
+    @include lessThan('sm') {
+      display: none;
+    }
   }
 
   @include greaterThan('sm') {
-    top: 50px; // see _header.scss
+    top: 100px;
+  }
+  @include greaterThan('lg') {
+    top: 86px;
   }
 
   .live-search {
@@ -164,11 +181,11 @@ body.search,
     transform: translateY(-20px);
     transition: transform 140ms ease-in-out;
 
-    @include lessThan('sm') {
+    // @include lessThan('sm') {
       .ct-container {
         position: relative;
       }
-    }
+    // }
   }
 
   &.is-visible .live-search {
@@ -177,7 +194,7 @@ body.search,
 
   .close-dynamic-search-button {
     position: absolute;
-    top: 0px;
+    top: -50px;
     right: 20px;
     margin: 0;
     padding: 5px;
@@ -187,8 +204,8 @@ body.search,
     z-index: 4;
     cursor: pointer;
 
-    @include greaterThan('sm') {
+    /* @include greaterThan('sm') {
       top: 14px;
-    }
+    }*/
   }
 }
