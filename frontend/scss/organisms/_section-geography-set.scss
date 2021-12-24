@@ -84,7 +84,8 @@
             height: 100px;
             background-color: white;
             border-radius: 50%;
-            box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5);
+            // box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5);
+            box-shadow: 0px 2px 15px 0px rgba(215, 215, 215, 1);
             overflow: hidden;
             cursor: pointer;
             transition: background-color 140ms linear;
