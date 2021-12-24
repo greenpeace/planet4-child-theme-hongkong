@@ -22,6 +22,14 @@ export default function (Swiper) {
       .closest('section')
       .find('.swiper-pagination')
       .first()[0];
+    $('.slide-item--short', $this).each(function() {
+      const $slide = $(this);
+      let $subSlides = $('.slide-item__inner', this);
+      if($subSlides.length > 1) {
+        let subSlideHtml = $subSlides[1].outerHTML;
+        $slide.after('<div class="swiper-slide slide-item slide-item--short slide-item__inner--mobile">' + subSlideHtml + '</div>');
+      }
+    });
     new Swiper(this, {
       slidesPerView: 'auto',
       simulateTouch: false,

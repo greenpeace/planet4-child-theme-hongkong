@@ -4033,9 +4033,13 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-testimony .slide-item { width: auto; } }
 
-.section-testimony .slide-item--3, .section-testimony .slide-item--4 { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
+.section-testimony .slide-item--short { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
 
-.section-testimony .slide-item--3 .slide-item__inner, .section-testimony .slide-item--4 .slide-item__inner { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; }
+.section-testimony .slide-item--short .slide-item__inner { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; }
+
+@media only screen and (min-width: 1024px) { .section-testimony .slide-item__inner--mobile { display: none; } }
+
+@media only screen and (max-width: 1023px) { .section-testimony .slide-item__inner + .slide-item__inner { display: none; } }
 
 .section-testimony .slide-item__inner { width: 100%; border-radius: 16px; -webkit-box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5); color: white; padding-top: 30px; padding-left: 12px; padding-right: 12px; overflow: hidden; position: relative; }
 
