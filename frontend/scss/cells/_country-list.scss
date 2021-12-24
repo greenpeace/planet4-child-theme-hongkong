@@ -74,19 +74,23 @@
 
   @include greaterThan('sm') {
     // position: absolute;
-    height: 344px;
+    height: 260px;
     overflow-x: hidden;
     overflow-y: hidden !important;
-    max-height: 344px;
+    max-height: 260px;
     max-height: calc(100vh - 50px);
     padding: 1em 2em 2em;
 
-    .admin-bar & {
+    /*.admin-bar & {
       max-height: calc(100vh - 50px - 32px);
-    }
+    } */
 
     > ul {
       column-count: 3;
     }
+  }
+  @include greaterThan('lg') {
+    height: 360px;
+    max-height: 360px;
   }
 }

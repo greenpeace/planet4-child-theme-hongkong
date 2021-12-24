@@ -1,64 +1,74 @@
 {% block navigation_bar %}
-	<header data-aos="slide-down">
+
+	<header class="header">
 		<div class="ct-container">
-			<div class="content">
-				<div class="mobile-box">
-					<a class="js-dynamic-search" href="{{ home_url }}/?s">
-						<span class="icon-search"></span>
-					</a>
+			<div class="header__inner">
+				<div class="header__column header__column--mobile-menu hide-gt-lg">
+					<button class="header__link header__link--mobile-menu"><span></span></button>
 				</div>
-				<div class="left-box">
+				<div class="header__column header__column--logo">
 					<a href="{{ home_url }}" class="logo" aria-label="Greenpeace">
-						<span class="logo-greenpeace"></span>
+						{% if (fn('get_locale') matches '{^zh(_[A-Z]+)?$}') %}
+						<img src="{{ theme.link }}/static/images/logo_zh.svg" class="logo__inner logo__inner--zh hide-lt-sm" alt="Greenpeace" />
+						<img src="{{ theme.link }}/static/images/logo_ko.svg" class="logo__inner logo__inner--ko hide-gt-sm" alt="Greenpeace" />
+						{% else %}
+						<img src="{{ theme.link }}/static/images/logo_ko.svg" class="logo__inner logo__inner--ko" alt="Greenpeace" />
+						{% endif %}
 					</a>
-					{% include 'countries.twig' %}
 				</div>
-				<div class="center-box">
-					<ul class="menu">
-						{% for key,item in navbar_menu.get_items %}
-							<li class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
-								<a
-									href="{{ item.get_link }}">
-									<!-- TODO add icon-globe or icon-people under menu CSS classes -->
-									<span class="item__menu__icon"></span>
-									<p>{{ item.title }}</p>
-								</a>
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
-				<div class="right-box">
-					{% if (post._wp_page_template == 'page-templates/petition.php' or post._wp_page_template == 'page-templates/petition-thankyou.php') %}
-						<div class="stepper">
-							<div class="step is-checked js-step-sign">{{ strings.sign }}</div>							
-							<div class="step is-disabled js-step-donate">{{ strings.donate }}</div>
-							<div class="step is-disabled js-step-share">{{ strings.share }}</div>
+				<div class="header__column header__column--menu">
+					<div class="menu__outer">
+						<button class="menu__close-button hide-gt-lg">
+							<span class="icon-close"></span>
+						</button>
+						<button class="menu__search-button hide-gt-sm">
+						</button>
+						<div class="menu menu--logo hide-gt-lg">
+							<a href="{{ home_url }}" class="logo" aria-label="Greenpeace">
+								{% if (fn('get_locale') matches '{^zh(_[A-Z]+)?$}') %}
+								<img src="{{ theme.link }}/static/images/logo_zh_green.svg" class="logo__inner logo__inner--zh" alt="Greenpeace" />
+								{% else %}
+								<img src="{{ theme.link }}/static/images/logo_ko_green.svg" class="logo__inner logo__inner--ko" alt="Greenpeace" />
+								{% endif %}
+							</a>
 						</div>
-					{% else %}
-						<a aria-label="Search" class="search-button js-dynamic-search" href="{{ home_url }}/?s">
-							<span class="icon-search"></span>
-						</a>
-						<a class="button" href="{{ support_link }}">{{ strings.support }}</a>
+						<div class="menu menu--search hide-gt-sm">
+							<form role="search" method="get" action="<?php echo home_url( '/' ); ?>">
+								<input type="text" value="" name="s" id="s" placeholder="search..." />
+								<button type="submit"></button>
+							</form>
+						</div>
+						<div class="menu menu--primary">
+							{% for menu in header_nav.menus %}
+							<div class="menu__item">
+								<a href="{{ menu.link | e('html_attr') }}" class="header__link">{{ menu.label | e }}</a>
+								{{ menu.children | raw }}
+							</div>
+							{% endfor %}
+						</div>
+						{% if header_nav.login.enabled %}
+						<div class="menu menu--secondary hide-gt-lg">
+							<a href="{{ header_nav.login.link | e('html_attr') }}" class="header__link">{{ header_nav.login.label | e }}</a>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+				<div class="header__column header__column--tools">
+					<a href="{{ header_nav.button.link | e('html_attr') }}" class="button primary hide-lt-sm">{{ header_nav.button.label | e }}</a>
+					<a href="{{ header_nav.button.link | e('html_attr') }}" class="button primary hide-gt-sm">{{ header_nav.button.label_mobile | e }}</a>
+					{% if header_nav.login.enabled %}
+					<a href="{{ header_nav.login.link | e('html_attr') }}" class="header__link hide-lt-lg">{{ header_nav.login.label | e }}</a>
 					{% endif %}
+					<button class="js-dynamic-search header__link header__link--search hide-lt-sm"></button>
 				</div>
 			</div>
-	</div>
-
-	<div class="mobile-toolbar">
-		{% for key,item in navbar_menu.get_items %}
-		{% if (key) < 2 %}
-			<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
-			<p class="{{ key == 1 ? 'visuallyhidden' : '' }}">{{ item.title }}</p>
-			<span class="item__menu__icon"></span>
-			</a>
-		{% else %}
-			<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
-			<span class="item__menu__icon"></span>
-			<p>{{ item.title }}</p>
-			</a>
+		</div>
+		{% if header_nav.sticky.enabled %}
+		<div class="header__sticky">
+			<a href="{{ header_nav.sticky.link | e('html_attr') }}" class="button primary hide-lt-sm">{{ header_nav.sticky.label | e }}</a>
+			<a href="{{ header_nav.sticky.link | e('html_attr') }}" class="button primary hide-gt-sm">{{ header_nav.sticky.label_mobile | e }}</a>
+		</div>
 		{% endif %}
-		{% endfor %}
-	</div>
 	</header>
 
 	{% if not is_search_page %}
@@ -66,6 +76,20 @@
 			{% include 'blocks/section-live-search.twig' %}
 		</div>
 	{% endif %}
+
+	<script id="template-fake-sub-menu" type="text/template">
+		<ul class="menu__inner3 menu__inner3--fake hide-lt-lg" data-label="__PLACEHOLDER__">
+			<li class="menu-item menu-item-has-children menu-item--fake">
+				<ul class="sub-menu sub-menu--fake"></ul>
+			</li>
+		</ul>
+	</script>
+
+	<script id="template-fake-cta" type="text/template">
+		<li class="menu-item menu-item--cta hide-gt-lg">
+			__CONTENT__
+		</li>
+	</script>
 
 	<!-- as seen in e.g. achievements_list.twig -->
 	<script id="template-posts" type="text/template">

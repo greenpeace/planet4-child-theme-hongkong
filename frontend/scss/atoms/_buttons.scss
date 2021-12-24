@@ -1,38 +1,77 @@
 .button,
 .enform form button {
+
   display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 10px 5px 10px 0;
   padding: 0 30px;
   height: 30px;
-  margin: 10px 5px 10px 0;
-  font-size: 14px;
   line-height: 29px;
   color: $color-orange;
-  background: white;
-  border-radius: 99px;
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
-  font-weight: bold;
-  transition: background-color 140ms linear, box-shadow 140ms linear;
-  text-decoration: none;
+  background-color: white;
   border: none;
+  border-radius: 4px;
+  box-shadow: inset 0px 0px 0px 1px $color-orange;
+  transition: background-color 140ms linear, box-shadow 140ms linear, border-width 140ms linear;
+  text-decoration: none;
   cursor: pointer;
 
   @include greaterThan('sm') {
+    font-size: 18px;
     padding: 0 50px;
     height: 40px;
-    // font-size: 20px;
-    font-size: 18px;
     line-height: 39px;
+  }
+
+  &.primary,
+  &.btn-primary {
+    font-size: 20px;
+    padding: 0 40px;
+    height: 40px;
+    line-height: 39px;
+    color: white;
+    background: $color-orange;
+    box-shadow: none;
+    &.wider {
+      @include greaterThan('sm') {
+        padding: 0 100px;
+      }
+    }
   }
 
   &:hover,
   &:focus {
-    // outline: none;
-    background-color: darken(white, 2%);
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+    color: white;
+    background-color: $color-orange-hover;
+    box-shadow: none;
   }
 
   &:active {
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+    color: white;
+    background-color: $color-orange-active;
+    box-shadow: none;
+  }
+
+  &.secondary {
+    color: $color-green;
+    border-radius: 0;
+    box-shadow: inset 0px -2px 0px 0px $color-green;
+    // border-bottom: 2px solid $color-green;
+    &:hover,
+    &:focus {
+      color: white;
+      border-radius: 4px;
+      box-shadow: none;
+      background-color: $color-green-hover;
+    }
+
+    &:active {
+      color: white;
+      border-radius: 4px;
+      box-shadow: none;
+      background-color: $color-green-active;
+    }
   }
 
   &:last-child {
@@ -46,40 +85,12 @@
     text-align: center;
   }
 
-  &.primary,
-  &.btn-primary {
-    // @include font-smoothing;
-    padding: 0 40px;
-    height: 40px;
-    font-size: 20px;
-    line-height: 39px;
-    background: $color-orange;
-    color: white;
-    box-shadow: none !important;
-
-    &.wider {
-      @include greaterThan('sm') {
-        padding: 0 100px;
-      }
-    }
-
-    &:hover,
-    &:focus {
-      background-color: darken($color-orange, 4%);
-    }
-  }
-
-  &.secondary {
-    color: $color-green;
-  }
-
   &.tag {
     color: black;
     padding: 0 10px !important;
     height: 28px !important;
     font-size: 14px !important;
     line-height: 27px !important;
-    box-shadow: none !important;
     border: 1px solid $color-green;
 
     @include greaterThan('sm') {
@@ -109,7 +120,6 @@
   &.grey {
     color: #5f5f5f;
     font-weight: normal;
-    box-shadow: none;
 
     &:hover,
     &:focus {
@@ -121,7 +131,6 @@
     // @include font-smoothing;
     color: white;
     background-color: $color-fb;
-    box-shadow: none;
 
     &:hover,
     &:focus {
@@ -132,7 +141,6 @@
   &.small {
     color: #5f5f5f;
     font-weight: normal;
-    box-shadow: none;
     padding: 0 15px;
     height: 26px;
     font-size: 13px;
@@ -153,13 +161,16 @@
 
   &.loading,
   &[disabled] {
-    color: rgba(desaturate($color-orange, 40%), 0.2);
+    color: white;
+    background-color: $color-disabled;
   }
 
   &.primary {
     &.loading,
     &[disabled] {
-      color: rgba(white, 0.2);
+      color: white;
+      box-shadow: none;
+      background-color: $color-disabled;
     }
   }
 
