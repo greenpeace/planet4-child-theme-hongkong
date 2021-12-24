@@ -49,6 +49,14 @@
     @include greaterThan('sm') {
       width: auto;
     }
+    &--3,
+    &--4 {
+      display: flex;
+      flex-direction: column;
+      .slide-item__inner {
+        flex: 1;
+      }
+    }
     &__inner {
       width: 100%;
       @include card-version-b;
