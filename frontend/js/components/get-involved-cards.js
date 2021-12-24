@@ -11,9 +11,9 @@ export default function() {
 			return;
 		}
 		$('.link--actived', space).removeClass('link--actived');
-		$('.grid--actived', space).removeClass('grid--actived');
+		$('.grid__outer2--actived', space).removeClass('grid__outer2--actived');
 		$this.addClass('link--actived');
-		$('.grid[data-group="' + target + '"]', space).addClass('grid--actived');
+		$('.grid__outer2[data-group="' + target + '"]', space).addClass('grid__outer2--actived');
 	});
 
 }

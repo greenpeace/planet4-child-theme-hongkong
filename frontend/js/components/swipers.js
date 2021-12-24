@@ -15,6 +15,56 @@ export default function (Swiper) {
     });
   });
 
+  // Get Involved Cards (Homepage B Version 4th Screen, Bottom Part)
+  $('.get-involved-cards-swiper').each(function (index) {
+    const $this = $(this);
+    const pagination = $(this)
+      .closest('.grid__outer2')
+      .find('.custom-pagination')
+      .first()[0];
+    const prevBtn = $(this)
+      .closest('.grid__outer2')
+      .find('.custom-button-prev')
+      .first()[0];
+    const nextBtn = $(this)
+      .closest('.grid__outer2')
+      .find('.custom-button-next')
+      .first()[0];
+    if($('.swiper-slide', this).length < 3) {
+      $this.addClass('few-slides');
+    }
+    new Swiper(this, {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      simulateTouch: false,
+      pagination: {
+        el: pagination,
+        type: 'bullets',
+        clickable: true,
+        renderBullet: function(index, className) {
+          return '<span class="' + className + '">' + (index + 1) + '</span>';
+        },
+      },
+      navigation: {
+        prevEl: prevBtn,
+        nextEl: nextBtn,
+      },
+      autoplay: false,
+      loop: false,
+      observer: true,
+      observeParents: true,
+      breakpoints: {
+        1280: {
+          spaceBetween: 24,
+          slidesPerView: 3,
+        },
+        1024: {
+          slidesPerView: 1,
+        },
+      },
+    });
+  });
+
   // Testimony (Homepage B Version 6th Screen)
   $('.testimony-swiper').each(function (index) {
     const $this = $(this);
