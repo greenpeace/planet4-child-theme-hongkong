@@ -1857,6 +1857,12 @@ footer .dropdown__menu a:last-child { margin-bottom: 0; }
 
 footer .dropdown.is-open .dropdown__menu { display: -webkit-box; display: -ms-flexbox; display: flex; }
 
+body.sticky-button-enabled:after { content: ''; display: block; background-color: #292F47; }
+
+@media only screen and (max-width: 1279px) { body.sticky-button-enabled:after { height: 64px; } }
+
+@media only screen and (max-width: 1023px) { body.sticky-button-enabled:after { height: 48px; } }
+
 .big-carousel-description { margin-bottom: 20px; }
 
 @media only screen and (min-width: 1024px) { .big-carousel-description { position: absolute; width: 250px; padding-top: 20px; } }

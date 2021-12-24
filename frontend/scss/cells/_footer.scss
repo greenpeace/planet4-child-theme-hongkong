@@ -247,3 +247,15 @@ footer {
   }
   
 }
+
+body.sticky-button-enabled:after {
+  content: '';
+  display: block;
+  background-color: #292F47;
+  @include lessThan('lg') {
+    height: 64px;
+  }
+  @include lessThan('sm') {
+    height: 48px;
+  }
+}
