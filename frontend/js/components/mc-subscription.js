@@ -298,6 +298,11 @@ export default function () {
     $("input[required]").change(doValidation);
     $("input[required]").change(markTouched);
 
-    $section.find('button.submit').on('click', doSubmit)
+    $section.find('button.submit').on('click', doSubmit);
+
+    $emailField.find('input').on('focus', function() {
+      $section.find('.form-toggle-part').addClass('form-toggle-part--actived');
+    });
+
   });
 }

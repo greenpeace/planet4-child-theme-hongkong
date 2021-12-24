@@ -4126,6 +4126,10 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-mc-subscription .hide { display: none !important; }
 
+.section-mc-subscription .form-toggle-part { height: 0; margin-top: 0; opacity: 0; -webkit-transition: visibility 0s linear .33s,opacity .33s linear; transition: visibility 0s linear .33s,opacity .33s linear; visibility: hidden; overflow: hidden; }
+
+.section-mc-subscription .form-toggle-part--actived { height: auto; opacity: 1; -webkit-transition-delay: .1s; transition-delay: .1s; visibility: visible; }
+
 @media only screen and (min-width: 1024px) { .section-mc-subscription .ct-container { max-width: 960px; } }
 
 @media only screen and (min-width: 1280px) { .section-mc-subscription .ct-container { max-width: 1200px; } }

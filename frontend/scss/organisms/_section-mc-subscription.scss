@@ -6,6 +6,21 @@
   // box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
   background: white !important;
 
+  .form-toggle-part {
+    height: 0;
+    margin-top: 0;
+    opacity: 0;
+    transition: visibility 0s linear .33s,opacity .33s linear;
+    visibility: hidden;
+    overflow: hidden;
+    &--actived {
+      height: auto;
+      opacity: 1;
+      transition-delay: .1s;
+      visibility: visible;
+    }
+  }
+
   .ct-container {
     @include ct-container-version-b;
     &.subscribe {
