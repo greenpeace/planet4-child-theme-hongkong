@@ -12,7 +12,7 @@
     opacity: 0;
     transition: visibility 0s linear .33s,opacity .33s linear;
     visibility: hidden;
-    overflow: hidden;
+    // overflow: hidden;
     &--actived {
       height: auto;
       opacity: 1;
@@ -88,7 +88,7 @@
   .name-part {
     .en__field__element {
       &--first-name {
-        order: 2;
+        // order: 2;
         margin-left: 10px;
         @include lessThan('sm') {
           &.en__field__element--is-required:before {
@@ -96,11 +96,8 @@
           }
         }
         @include greaterThan('sm') {
-          flex: 0 0 210px;
+          // flex: 0 0 210px;
           margin-left: 30px;
-        }
-        @include greaterThan('lg') {
-          flex: 1 1 auto;
         }
       }
       &--last-name {
@@ -108,7 +105,11 @@
         @include lessThan('sm') {
         }
         @include greaterThan('sm') {
+          flex: 0 0 210px;
           // margin-left: 30px;
+        }
+        @include greaterThan('lg') {
+          flex: 1 1 auto;
         }
       }
     }
