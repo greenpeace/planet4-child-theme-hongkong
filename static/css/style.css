@@ -3062,7 +3062,7 @@ body:not(.page-template-project) .section-project-phases { min-height: 250px !im
 @media only screen and (max-width: 1023px) { .enform-side-style, .enform-side-style .container, .enform-side-style .row, .enform-side-style .col-md-12 { min-height: 100%; }
   .enform-side-style .form-container { /*margin-top: 16px;*/ margin-top: 18px; } }
 
-.outer_block_container > * { position: relative; z-index: 2; width: auto; }
+.outer_block_container > * { position: relative; z-index: 2; }
 
 #petition-source { display: none; }
 
