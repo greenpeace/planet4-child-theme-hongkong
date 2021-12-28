@@ -66,7 +66,7 @@ export default function () {
       toggleFieldRequiredMsg($lastnameField, !values.lastname);
     }
 
-    allpass = allpass && values.firstname && values.lastname;
+    allpass = allpass && ($firstnameField.length == 0 || values.firstname) && values.lastname;
 
     // validate emails
     let emailPass

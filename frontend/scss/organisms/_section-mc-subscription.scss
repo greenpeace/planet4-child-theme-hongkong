@@ -76,6 +76,16 @@
       flex-direction: row;
       max-width: 740px;
     }
+    &--is-required-first-name {
+      .name-part .en__field__element--last-name {
+        @include greaterThan('sm') {
+          flex: 0 0 210px;
+        }
+        @include greaterThan('lg') {
+          flex: 1 1 auto;
+        }
+      }
+    }
   }
 
   .form-row {
@@ -93,27 +103,18 @@
   .name-part {
     .en__field__element {
       &--first-name {
+      }
+      &--last-name {
+      }
+      + .en__field__element {
         margin-left: 10px;
+        @include greaterThan('sm') {
+          margin-left: 30px;
+        }
         @include lessThan('sm') {
           &.en__field__element--is-required:before {
             display: none;
           }
-        }
-        @include greaterThan('sm') {
-          // flex: 0 0 210px;
-          margin-left: 30px;
-        }
-      }
-      &--last-name {
-        // margin-left: 10px;
-        @include lessThan('sm') {
-        }
-        @include greaterThan('sm') {
-          // margin-left: 30px;
-          flex: 0 0 210px;
-        }
-        @include greaterThan('lg') {
-          flex: 1 1 auto;
         }
       }
     }
