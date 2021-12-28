@@ -1,4 +1,9 @@
 .section-mc-subscription {
+
+  .page-template > & {
+    background-image: none;
+  }
+  
   .hide {
     display: none !important;
   }

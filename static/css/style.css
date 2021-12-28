@@ -3340,6 +3340,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-hero-set { height: 60vh; position: relative; overflow: hidden; }
 
+.page-template > .section-hero-set { background-image: none; }
+
 @media only screen and (min-width: 1024px) { .section-hero-set { height: 70vh; } }
 
 .section-hero-set .arrow { position: absolute; bottom: 8%; }
@@ -3409,6 +3411,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-steps-set { margin-top: 45px; margin-bottom: 45px; }
 
+.page-template > .section-steps-set { background-image: none; }
+
 @media only screen and (min-width: 1024px) { .section-steps-set { margin-top: 70px; margin-bottom: 70px; } }
 
 .section-steps-set .title { margin: 0 auto 35px; }
@@ -3466,6 +3470,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 .section-steps-set .grid__desc p { font-size: 16px; }
 
 .section-geography-set { margin-top: 80px; margin-bottom: 50px; }
+
+.page-template > .section-geography-set { background-image: none; }
 
 @media only screen and (min-width: 1024px) { .section-geography-set { margin-top: 60px; margin-bottom: 100px; } }
 
@@ -3613,6 +3619,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-get-involved { margin-top: 80px; margin-bottom: 50px; }
 
+.page-template > .section-get-involved { background-image: none; }
+
 @media only screen and (min-width: 1024px) { .section-get-involved { margin-top: 80px; margin-bottom: 100px; } }
 
 @media only screen and (min-width: 1024px) { .section-get-involved .ct-container { max-width: 960px; } }
@@ -3708,6 +3716,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 @media only screen and (min-width: 1024px) { .section-get-involved .content__inner--2 { position: absolute; top: 0; right: 0; } }
 
 .section-get-involved-cards { margin-top: 40px; margin-bottom: 50px; }
+
+.page-template > .section-get-involved-cards { background-image: none; }
 
 @media only screen and (min-width: 1024px) { .section-get-involved-cards { margin-top: 80px; margin-bottom: 50px; } }
 
@@ -3876,6 +3886,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-report-set { margin-top: 80px; margin-bottom: 50px; }
 
+.page-template > .section-report-set { background-image: none; }
+
 @media only screen and (min-width: 1024px) { .section-report-set { margin-top: 60px; margin-bottom: 100px; } }
 
 @media only screen and (min-width: 1024px) { .section-report-set .ct-container { max-width: 960px; } }
@@ -3962,6 +3974,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-infographic-cards { margin-top: 40px; margin-bottom: 50px; }
 
+.page-template > .section-infographic-cards { background-image: none; }
+
 @media only screen and (min-width: 1024px) { .section-infographic-cards { margin-top: 80px; margin-bottom: 100px; } }
 
 .section-infographic-cards .grid { counter-reset: counter; }
@@ -4029,6 +4043,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 @media only screen and (max-width: 1279px) { .section-infographic-cards .grid__title .hightlight--number { font-size: 20px; } }
 
 .section-testimony { margin-top: 80px; margin-bottom: 50px; }
+
+.page-template > .section-testimony { background-image: none; }
 
 @media only screen and (min-width: 1024px) { .section-testimony { margin-top: 60px; margin-bottom: 100px; } }
 
@@ -4158,6 +4174,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 .section-testimony .swiper-pagination-bullet.swiper-pagination-bullet-active { background-color: #85D633; width: 22px; height: 22px; }
 
 .section-mc-subscription { background: white !important; margin: 35px 0 35px; }
+
+.page-template > .section-mc-subscription { background-image: none; }
 
 .section-mc-subscription .hide { display: none !important; }
 

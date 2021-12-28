@@ -1,5 +1,9 @@
 .section-hero-set {
 
+  .page-template > & {
+    background-image: none;
+  }
+
   height: 60vh;
   position: relative;
   overflow: hidden;

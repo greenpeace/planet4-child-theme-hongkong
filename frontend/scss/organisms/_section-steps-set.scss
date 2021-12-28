@@ -1,4 +1,9 @@
 .section-steps-set {
+
+  .page-template > & {
+    background-image: none;
+  }
+  
   margin-top: 45px;
   margin-bottom: 45px;
   @include greaterThan('sm') {

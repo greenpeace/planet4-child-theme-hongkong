@@ -1,4 +1,9 @@
 .section-infographic-cards {
+
+  .page-template > & {
+    background-image: none;
+  }
+  
   margin-top: 40px;
   margin-bottom: 50px;
   @include greaterThan('sm') {
