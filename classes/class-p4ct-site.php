@@ -332,13 +332,13 @@ class P4CT_Site {
 					$children .= '
 								<li class="menu-item menu-item-has-children">
 									<a href=""><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span>' . $setting_title . '</a>';
-					$children .= wp_nav_menu( [
+					$children .= has_nav_menu( 'gpea-header-' . $menu_key . '-menu--' . $issue_key ) ? wp_nav_menu( [
 						'container' => NULL,
 						'menu_class' => 'sub-menu',
 						'theme_location' => 'gpea-header-' . $menu_key . '-menu--' . $issue_key,
 						'echo' => FALSE,
 						'depth' => $menu_conf[ 'depth' ],
-					]);
+					]) : '';
 					$children .= '
 								</li>';
 				}
@@ -350,14 +350,14 @@ class P4CT_Site {
 				$menu[ 'children' ] = $children;
 			}
 			else {
-				$menu[ 'children' ] = wp_nav_menu( [
+				$menu[ 'children' ] = has_nav_menu( 'gpea-header-' . $menu_key . '-menu' ) ? wp_nav_menu( [
 					'container_class' => implode( ' ', $classes ),
 					'menu_class' => 'menu__inner3 menu__inner3--real',
 					'theme_location' => 'gpea-header-' . $menu_key . '-menu',
 					'echo' => FALSE,
 					'depth' => $menu_conf[ 'depth' ],
 					'items_wrap' => '<div class="menu__inner"><div class="menu__inner2"><ul id="%1$s" class="%2$s">%3$s</ul></div>' . $cta_content . '</div>',
-				]);
+				]) : '';
 			}
 
 			$header_nav[] = $menu;
