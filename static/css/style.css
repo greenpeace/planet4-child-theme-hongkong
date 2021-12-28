@@ -3380,8 +3380,10 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-hero-set .content { position: relative; z-index: 2; height: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; text-align: center; }
 
-@media only screen and (min-width: 1024px) { .section-hero-set .content--left .content__text { margin-right: auto; text-align: left; }
-  .section-hero-set .content--right .content__text { margin-left: auto; text-align: left; } }
+@media only screen and (min-width: 1024px) { .section-hero-set .content .title > * { -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; /* margin-right: auto; margin-left: auto; */ }
+  .section-hero-set .content--left .content__text { margin-right: auto; text-align: left; }
+  .section-hero-set .content--right .content__text { margin-left: auto; text-align: left; }
+  .section-hero-set .content--left .title > *, .section-hero-set .content--right .title > * { -webkit-box-pack: start; -ms-flex-pack: start; justify-content: flex-start; } }
 
 .section-hero-set .content__text { color: white; }
 
@@ -3389,7 +3391,11 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-hero-set .title { margin-bottom: 40px; }
 
-@media only screen and (min-width: 1024px) { .section-hero-set .title { display: -webkit-box; display: -ms-flexbox; display: flex; } }
+@media only screen and (min-width: 1024px) { .section-hero-set .title > * { display: -webkit-box; display: -ms-flexbox; display: flex; } }
+
+@media only screen and (max-width: 1023px) { .section-hero-set .title__inner--pc { display: none; } }
+
+@media only screen and (min-width: 1024px) { .section-hero-set .title__inner--mobile { display: none; } }
 
 .section-hero-set .title__text { font-size: 22px; }
 
@@ -3398,10 +3404,6 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 @media only screen and (min-width: 1280px) { .section-hero-set .title__text { font-size: 48px; } }
 
 @media only screen and (max-width: 1023px) { .section-hero-set .title__text { display: block; } }
-
-@media only screen and (max-width: 1023px) { .section-hero-set .title__text--pc { display: none; } }
-
-@media only screen and (min-width: 1024px) { .section-hero-set .title__text--mobile { display: none; } }
 
 .section-hero-set .title__text--1 { color: white; }
 
