@@ -4,12 +4,12 @@
     background-image: none;
   }
   
-  margin-top: 80px;
+  /* margin-top: 80px;
   margin-bottom: 50px;
   @include greaterThan('sm') {
     margin-top: 80px;
     margin-bottom: 100px;
-  }
+  } */
 
   .ct-container {
     @include ct-container-version-b;
