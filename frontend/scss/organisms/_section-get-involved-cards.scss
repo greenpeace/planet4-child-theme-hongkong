@@ -1,9 +1,11 @@
 .section-get-involved-cards {
-  margin-top: 40px;
-  margin-bottom: 50px;
-  @include greaterThan('sm') {
-    margin-top: 80px;
-    margin-bottom: 50px;
+
+  .page-template > & {
+    background-image: none;
+  }
+
+  br {
+    content: none;
   }
 
   .ct-container {
@@ -196,21 +198,6 @@
     }
     &__outer2--actived {
       display: block;
-      // display: flex;
-      @include greaterThan('sm') {
-        // display: flex;
-      }
-    }
-    @include greaterThan('sm') {
-      // flex-direction: row;
-      // flex-wrap: wrap;
-      // justify-content: center;
-      // align-content: flex-start;
-      // align-items: stretch;
-    }
-    @include greaterThan('lg') {
-      // margin-right: -2.5%;
-      // margin-left: -2.5%;
     }
     &__inner {
       height: 100%;
@@ -304,16 +291,7 @@
     &__box {
       @include card-version-b;
       display: block;
-      // flex: 0 0 30%;
       align-self: auto;
-      // margin: 0 auto 30px;
-      @include lessThan('sm') {
-        // display: block;
-      }
-      @include greaterThan('sm') {
-        // margin-right: 1.25%;
-        // margin-left: 1.25%;
-      }
       border: none;
       color: #393939;
       .title {

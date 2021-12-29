@@ -1,9 +1,11 @@
 .section-geography-set {
-  margin-top: 80px;
-  margin-bottom: 50px;
-  @include greaterThan('sm') {
-    margin-top: 60px;
-    margin-bottom: 100px;
+
+  .page-template > & {
+    background-image: none;
+  }
+  
+  br {
+    content: none;
   }
 
   .ct-container {
@@ -141,7 +143,6 @@
     height: 100%;
     top: 0;
     left: 0;
-    // background-color: rgba(#2D2C2C, 0.16);
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;

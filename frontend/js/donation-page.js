@@ -5,7 +5,7 @@ import {
   Scrollbar,
   Controller,
   Autoplay,
-} from 'swiper';
+} from 'swiper/dist/js/swiper.esm.js';
 import SmoothScroll from 'smooth-scroll';
 
 import polyfills from './components/polyfills';

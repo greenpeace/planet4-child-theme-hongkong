@@ -7,7 +7,8 @@ export default function () {
     $firstnameField,
     $lastnameField,
     $emailField,
-    $optInFields;
+    $optInFields,
+    $customOptInFields;
 
   let requiredMsg,
     emailFormatErrMsg;
@@ -65,7 +66,7 @@ export default function () {
       toggleFieldRequiredMsg($lastnameField, !values.lastname);
     }
 
-    allpass = allpass && values.firstname && values.lastname;
+    allpass = allpass && ($firstnameField.length == 0 || values.firstname) && values.lastname;
 
     // validate emails
     let emailPass
@@ -206,10 +207,18 @@ export default function () {
       CampaignId: values.campaignId,
       OptIn: values.optIn
     }
+    let campaignData5 = {};
     $optInFields.each(function() {
-      let $field = $(this).find('input[name]');
-      if($field.length > 0) {
-        postData[$field.attr('name')] = $field.prop('checked') ? 1 : 0;
+      let $field = $(this).find('input');
+      let fieldName = $field.attr('name') || '';
+      let customIndex = $customOptInFields.index(this);
+      if($field.length > 0 && fieldName.length > 0) {
+        postData[fieldName] = $field.prop('checked') ? 1 : 0;
+        if(customIndex == -1) { return true; }
+        campaignData5[fieldName] = $field.prop('checked') ? true : false;
+      }
+      else if($field.length > 0 && customIndex != -1) {
+        campaignData5['checkbox' + ($customOptInFields.index(this) + 1)] = $field.prop('checked') ? true : false;
       }
     });
 
@@ -229,7 +238,7 @@ export default function () {
       CampaignData2__c: "",
       CampaignData3__c: "",
       CampaignData4__c: "",
-      CampaignData5__c: "",
+      CampaignData5__c: JSON.stringify(campaignData5),
     })
 
     let endpoint = $section.find('form').attr('action');
@@ -294,6 +303,7 @@ export default function () {
     $lastnameField = $section.find('[name="supporter.lastname"]').closest('.en__field__element');
     $emailField = $section.find('[name="supporter.email"]').closest('.en__field__element');
     $optInFields = $section.find('.checkbox-part');
+    $customOptInFields = $section.find('.checkbox-part--custom');
 
     $("input[required]").change(doValidation);
     $("input[required]").change(markTouched);

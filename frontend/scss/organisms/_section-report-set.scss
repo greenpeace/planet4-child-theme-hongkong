@@ -1,9 +1,11 @@
 .section-report-set {
-  margin-top: 80px;
-  margin-bottom: 50px;
-  @include greaterThan('sm') {
-    margin-top: 60px;
-    margin-bottom: 100px;
+
+  .page-template > & {
+    background-image: none;
+  }
+
+  br {
+    content: none;
   }
 
   .ct-container {
@@ -21,7 +23,7 @@
     &--desc {
       position: relative;
       @include greaterThan('sm') {
-        min-height: 330px;
+        min-height: 350px;
       }
       @include greaterThan('lg') {
         min-height: 250px;

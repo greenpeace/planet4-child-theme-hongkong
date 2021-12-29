@@ -1,5 +1,13 @@
 .section-hero-set {
 
+  .page-template > & {
+    background-image: none;
+  }
+
+  br {
+    content: none;
+  }
+
   height: 60vh;
   position: relative;
   overflow: hidden;
@@ -98,6 +106,11 @@
     justify-content: center;
     text-align: center;
     @include greaterThan("sm") {
+      .title > * {
+        justify-content: center;
+        /* margin-right: auto;
+        margin-left: auto; */
+      }
       &--left {
         // justify-content: flex-start;
         .content__text {
@@ -114,6 +127,13 @@
           text-align: left;
         }
       }
+      &--left,
+      &--right {
+        .title > * {
+          // margin-left: 0;
+          justify-content: flex-start;
+        }
+      }
     }
     &__text {
       color: white;
@@ -126,7 +146,19 @@
   .title {
     margin-bottom: 40px;
     @include greaterThan("sm") {
-      display: flex;
+      > * {
+        display: flex;
+      }
+    }
+    @include lessThan('sm') {
+      &__inner--pc {
+        display: none;
+      }
+    }
+    @include greaterThan('sm') {
+      &__inner--mobile {
+        display: none;
+      }
     }
     &__text {
       font-size: 22px;
@@ -138,16 +170,6 @@
       }
       @include lessThan("sm") {
         display: block;
-      }
-      @include lessThan('sm') {
-        &--pc {
-          display: none;
-        }
-      }
-      @include greaterThan('sm') {
-        &--mobile {
-          display: none;
-        }
       }
       &--1 {
         color: white;

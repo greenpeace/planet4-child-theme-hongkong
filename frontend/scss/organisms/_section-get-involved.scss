@@ -1,9 +1,11 @@
 .section-get-involved {
-  margin-top: 80px;
-  margin-bottom: 50px;
-  @include greaterThan('sm') {
-    margin-top: 80px;
-    margin-bottom: 100px;
+
+  .page-template > & {
+    background-image: none;
+  }
+
+  br {
+    content: none;
   }
 
   .ct-container {

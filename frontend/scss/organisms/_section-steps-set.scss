@@ -1,10 +1,16 @@
 .section-steps-set {
-  margin-top: 45px;
-  margin-bottom: 45px;
-  @include greaterThan('sm') {
-    margin-top: 70px;
-    margin-bottom: 70px;
+
+  .page-template > & {
+    background-image: none;
+    @include greaterThan('sm') {
+      padding-top: 70px;
+    }
   }
+  
+  br {
+    content: none;
+  }
+
   .title {
     margin: 0 auto 35px;
     @include lessThan('sm') {
@@ -13,7 +19,7 @@
     @include greaterThan('sm') {
       text-underline-offset: 10px;
       line-height: 2;
-      margin-bottom: 50px;
+      margin-bottom: 70px;
       max-width: 450px;
       text-align: center;
     }

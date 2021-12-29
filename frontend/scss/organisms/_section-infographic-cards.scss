@@ -1,9 +1,11 @@
 .section-infographic-cards {
-  margin-top: 40px;
-  margin-bottom: 50px;
-  @include greaterThan('sm') {
-    margin-top: 80px;
-    margin-bottom: 100px;
+
+  .page-template > & {
+    background-image: none;
+  }
+  
+  br {
+    content: none;
   }
 
   .grid {
@@ -71,7 +73,6 @@
       display: flex;
     }
     &__title {
-      // flex: 0 0 3em;
       flex: 0 0 auto;
       padding-right: 20px;
       + .grid__desc {

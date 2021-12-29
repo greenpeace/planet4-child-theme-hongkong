@@ -1,9 +1,19 @@
 .section-mc-subscription {
+
+  overflow: hidden;
+
+  .page-template > & {
+    background-image: none;
+  }
+
+  br {
+    content: none;
+  }
+  
   .hide {
     display: none !important;
   }
 
-  // box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
   background: white !important;
 
   .form-toggle-part {
@@ -12,7 +22,7 @@
     opacity: 0;
     transition: visibility 0s linear .33s,opacity .33s linear;
     visibility: hidden;
-    overflow: hidden;
+    // overflow: hidden;
     &--actived {
       height: auto;
       opacity: 1;
@@ -30,11 +40,6 @@
       align-items: center;
       justify-content: center;
     }
-  }
-
-  margin: 35px 0 35px;
-  @include greaterThan('sm') {
-    margin: 60px 0;
   }
 
   .content {
@@ -71,6 +76,16 @@
       flex-direction: row;
       max-width: 740px;
     }
+    &--is-required-first-name {
+      .name-part .en__field__element--last-name {
+        @include greaterThan('sm') {
+          flex: 0 0 210px;
+        }
+        @include greaterThan('lg') {
+          flex: 1 1 auto;
+        }
+      }
+    }
   }
 
   .form-row {
@@ -88,27 +103,18 @@
   .name-part {
     .en__field__element {
       &--first-name {
-        order: 2;
+      }
+      &--last-name {
+      }
+      + .en__field__element {
         margin-left: 10px;
+        @include greaterThan('sm') {
+          margin-left: 30px;
+        }
         @include lessThan('sm') {
           &.en__field__element--is-required:before {
             display: none;
           }
-        }
-        @include greaterThan('sm') {
-          flex: 0 0 210px;
-          margin-left: 30px;
-        }
-        @include greaterThan('lg') {
-          flex: 1 1 auto;
-        }
-      }
-      &--last-name {
-        // margin-left: 10px;
-        @include lessThan('sm') {
-        }
-        @include greaterThan('sm') {
-          // margin-left: 30px;
         }
       }
     }
