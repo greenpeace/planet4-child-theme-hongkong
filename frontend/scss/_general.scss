@@ -185,7 +185,8 @@ img.lazy {
   background-image: $gradient-smoke;
 }
 
-.outer_block_container {
+// B Version
+.b-version-homepage .outer_block_container { //// .outer_block_container {
   &:before {
     content: '';
     display: block;

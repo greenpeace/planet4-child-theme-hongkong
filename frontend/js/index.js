@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   /**
    * Open/close country offices megamenu (not even putting it in a separate module)
    */
-  const $countryOfficesDropdown = $("footer .dropdown");
+  const $countryOfficesDropdown = $("footer .dropdown, header .dropdown");
   $countryOfficesDropdown.on("click", function (e) {
     e.stopPropagation();
   });

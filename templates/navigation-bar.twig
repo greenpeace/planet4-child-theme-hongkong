@@ -1,6 +1,7 @@
 {% block navigation_bar %}
 
-	<header class="header">
+	<!-- B Version -->
+	<header class="header header--new">
 		<div class="ct-container">
 			<div class="header__inner">
 				<div class="header__column header__column--mobile-menu hide-gt-lg">
@@ -69,6 +70,68 @@
 			<a href="{{ header_nav.sticky.link | e('html_attr') }}" class="button primary hide-gt-sm">{{ header_nav.sticky.label_mobile | e }}</a>
 		</div>
 		{% endif %}
+	</header>
+
+	<!-- Old Version -->
+	<header class="header header--old" data-aos="slide-down">
+		<div class="ct-container">
+			<div class="content">
+				<div class="mobile-box">
+					<a class="js-dynamic-search" href="{{ home_url }}/?s">
+						<span class="icon-search"></span>
+					</a>
+				</div>
+				<div class="left-box">
+					<a href="{{ home_url }}" class="logo" aria-label="Greenpeace">
+						<span class="logo-greenpeace"></span>
+					</a>
+					{% include 'countries-old.twig' %}
+				</div>
+				<div class="center-box">
+					<ul class="menu">
+						{% for key,item in navbar_menu.get_items %}
+							<li class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
+								<a
+									href="{{ item.get_link }}">
+									<!-- TODO add icon-globe or icon-people under menu CSS classes -->
+									<span class="item__menu__icon"></span>
+									<p>{{ item.title }}</p>
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="right-box">
+					{% if (post._wp_page_template == 'page-templates/petition.php' or post._wp_page_template == 'page-templates/petition-thankyou.php') %}
+						<div class="stepper">
+							<div class="step is-checked js-step-sign">{{ strings.sign }}</div>							
+							<div class="step is-disabled js-step-donate">{{ strings.donate }}</div>
+							<div class="step is-disabled js-step-share">{{ strings.share }}</div>
+						</div>
+					{% else %}
+						<a aria-label="Search" class="search-button js-dynamic-search" href="{{ home_url }}/?s">
+							<span class="icon-search"></span>
+						</a>
+						<a class="button" href="{{ support_link }}">{{ strings.support }}</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<div class="mobile-toolbar">
+			{% for key,item in navbar_menu.get_items %}
+			{% if (key) < 2 %}
+				<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
+				<p class="{{ key == 1 ? 'visuallyhidden' : '' }}">{{ item.title }}</p>
+				<span class="item__menu__icon"></span>
+				</a>
+			{% else %}
+				<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
+				<span class="item__menu__icon"></span>
+				<p>{{ item.title }}</p>
+				</a>
+			{% endif %}
+			{% endfor %}
+		</div>
 	</header>
 
 	{% if not is_search_page %}
