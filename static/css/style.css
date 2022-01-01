@@ -3044,15 +3044,20 @@ body:not(.page-template-project) .section-project-phases { min-height: 250px !im
 .section-launcher .action.as-card { margin-top: 20px; margin-bottom: 20px; background: white; }
 
 @media only screen and (min-width: 1024px) { .section-launcher .action.as-card { width: 290px; -webkit-box-flex: 0; -ms-flex: 0 0 290px; flex: 0 0 290px; max-width: none; }
-  .section-launcher .action.fluid { height: auto; }
-  .section-launcher .action.fluid img { bottom: 0; }
+  .section-launcher .action.fluid { height: auto; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-pack: normal; -ms-flex-pack: normal; justify-content: normal; }
+  .section-launcher .action.fluid .inner { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; }
+  .section-launcher .action.fluid .inner--text { -ms-flex-item-align: end; align-self: flex-end; width: 50%; }
+  .section-launcher .action.fluid .inner--text h2, .section-launcher .action.fluid .inner--text p { width: auto; }
+  .section-launcher .action.fluid .inner--image { -ms-flex-item-align: end; align-self: flex-end; width: 50%; max-height: 400px; margin-top: -40px; margin-bottom: 0px; }
+  .section-launcher .action.fluid img { position: static; max-width: calc(100% - 180px); max-height: 100%; margin-left: auto; margin-right: 100px; }
   .section-launcher .action.fluid .button { margin-bottom: 50px; }
   .section-launcher .maxi-swiper .swiper-slide { margin-right: 30px; }
   .section-launcher .maxi-swiper .swiper-slide:last-child { margin-right: 0; } }
 
 @media only screen and (min-width: 1280px) { .section-launcher .action.as-card { width: 360px; -webkit-box-flex: 0; -ms-flex: 0 0 360px; flex: 0 0 360px; } }
 
-@media only screen and (min-width: 1024px) { .section-launcher.image-vertical-center .action.fluid img { bottom: auto; } }
+@media only screen and (min-width: 1024px) { .section-launcher.image-vertical-center .action.fluid .inner--text { -ms-flex-item-align: center; align-self: center; }
+  .section-launcher.image-vertical-center .action.fluid .inner--image { -ms-flex-item-align: center; align-self: center; margin-bottom: -30px; } }
 
 .section-launcher.layout-dark { background: #292F47; color: white; }
 

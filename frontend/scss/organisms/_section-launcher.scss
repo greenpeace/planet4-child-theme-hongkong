@@ -33,9 +33,36 @@
 
     .action.fluid {
       height: auto;
+      flex-direction: row;
+      justify-content: normal;
+
+      .inner {
+        display: flex;
+        flex-direction: column;
+        &--text {
+          align-self: flex-end;
+          width: 50%;
+          h2,
+          p {
+            width: auto;
+          }
+        }
+        &--image {
+          align-self: flex-end;
+          width: 50%;
+          max-height: 400px;
+          margin-top: -40px;
+          margin-bottom: 0px;
+        }
+      }
 
       img {
-        bottom: 0;
+        position: static;
+        // bottom: 0;
+        max-width: calc(100% - 180px);
+        max-height: 100%;
+        margin-left: auto;
+        margin-right: 100px;
       }
 
       .button {
@@ -62,8 +89,17 @@
   &.image-vertical-center {
     @include greaterThan('sm') {
       .action.fluid {
+        .inner {
+          &--text {
+            align-self: center;
+          }
+          &--image {
+            align-self: center;
+            margin-bottom: -30px;
+          }
+        }
         img {
-          bottom: auto;
+          // bottom: auto;
         }
       }
     }
