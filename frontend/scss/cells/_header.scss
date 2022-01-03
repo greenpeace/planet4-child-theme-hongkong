@@ -1,4 +1,5 @@
-.header {
+// B Version
+.b-version-homepage .header { //// .header {
   &,
   &__column--menu {
     top: 0;
@@ -9,7 +10,7 @@
     }
   }
 }
-.sticky-button-enabled .header {
+.sticky-button-enabled.b-version-homepage .header { //// .sticky-button-enabled .header {
   &__column--menu {
     @include lessThan('lg') {
       height: calc(100% - 64px);
@@ -19,7 +20,7 @@
     }
   }
 }
-.admin-bar .header {
+.admin-bar.b-version-homepage .header { //// .admin-bar .header {
   &,
   &__column--menu {
     top: 32px;
@@ -47,7 +48,7 @@
     }
   }
 }
-.sticky-button-enabled.admin-bar .header {
+.sticky-button-enabled.admin-bar.b-version-homepage .header { //// .sticky-button-enabled.admin-bar .header {
   &__column--menu {
     @include lessThan('lg') {
       height: calc(100% - 32px - 64px);
@@ -64,7 +65,7 @@
   }
 }
 
-.header {
+.b-version-homepage .header { //// .header {
   background-color: $color-green;
   position: fixed;
   left: 0;
@@ -789,5 +790,393 @@
     .no-children .header__cta {
       
     }
+  }
+}
+
+// Old Version
+.header--old {
+  display: none;
+  position: relative;
+  height: 50px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
+  background-color: $color-green;
+  color: white;
+  // display: flex;
+  align-items: center;
+  z-index: 4;
+
+  @include greaterThan('sm') {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 99;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .mobile-box {
+      display: none;
+
+      a {
+        color: white;
+        font-size: 24px;
+        text-decoration: none;
+      }
+    }
+
+    .left-box {
+      display: flex;
+      align-items: center;
+
+      .logo {
+        text-decoration: none !important;
+        margin-top: 5px;
+        margin-right: 15px;
+      }
+
+      .logo-greenpeace {
+        display: inline-block;
+        height: 20px;
+        width: 185px;
+        background-size: contain;
+        background-position: left center;
+        background-repeat: no-repeat;
+      }
+
+      .dropdown {
+        position: relative;
+
+        button {
+          height: 43px;
+          background-color: transparent;
+          border: none;
+          // outline: none;
+          display: flex;
+          align-items: center;
+          color: white;
+          cursor: pointer;
+
+          p {
+            font-size: 14px;
+            font-weight: bold;
+            white-space: nowrap;
+          }
+
+          span {
+            font-size: 22px;
+            margin-left: -2px;
+          }
+        }
+
+        .dropdown-menu {
+          display: none;
+          position: absolute;
+          left: -180px;
+          width: 300px;
+          max-height: 80vh;
+          background-color: white;
+          border-radius: 3px;
+          box-shadow: 0 0 9px 3px rgba(128, 128, 128, 0.28);
+          flex-direction: column;
+          padding: 10px 20px;
+
+          @include greaterThan('sm') {
+            left: -185px;
+            width: 900px;
+          }
+
+          a {
+            text-decoration: none;
+            color: $color-blue;
+            margin-bottom: 5px;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+
+        &.is-open .dropdown-menu {
+          display: flex;
+        }
+      }
+    }
+
+    .center-box {
+      flex-grow: 1;
+      margin-left: 55px;
+
+      .menu {
+        display: flex;
+        height: 50px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        .item {
+          margin-right: 50px;
+
+          &:last-child {
+            margin-right: 0;
+          }
+
+          a {
+            display: flex;
+            height: 100%;
+            padding-left: 5px;
+            padding-right: 5px;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+
+            &:hover {
+              color: darken(white, 5%);
+            }
+
+            span {
+              font-size: 36px;
+              margin-right: 10px;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 36px;
+              height: 36px;
+              display: inline-block;
+            }
+          }
+
+          &.active a {
+            border-bottom: 4px solid white;
+          }
+
+          &.item__latest-news a span {
+            background-image: url('../images/icons/Earth.svg');
+          }
+          &.item__latest-news.active a span {
+            background-image: url('../images/icons/Earth-fill.svg');
+          }
+
+          &.item__home {
+            display: none;
+          }
+
+          &.item__make-change a span {
+            background-image: url('../images/icons/Act.svg');
+          }
+          &.item__make-change.active a span {
+            background-image: url('../images/icons/Act-fill.svg');
+          }
+        }
+      }
+    }
+
+    .right-box {
+      display: flex;
+      align-items: center;
+
+      .search-button {
+        color: white;
+        font-size: 25px;
+        margin-right: 18px;
+        text-decoration: none;
+      }
+
+      .button {
+        background: $color-orange;
+        color: white;
+        white-space: nowrap;
+        height: auto;
+
+        &:hover,
+        &:focus {
+          background-color: darken($color-orange, 4%);
+        }
+      }
+    }
+  }
+}
+
+.header--old .mobile-toolbar {
+  display: none;
+  height: 48px;
+  background-color: white;
+  box-shadow: 0 10px 10px -10px inset rgba(0, 0, 0, 0.4);
+  justify-content: center;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  a {
+    display: flex;
+    color: $color-grey;
+    text-decoration: none;
+    align-items: center;
+    border-bottom: none !important;
+
+    &.active {
+      color: $color-green;
+    }
+
+    span {
+      font-size: 26px;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 26px;
+      height: 26px;
+      display: inline-block;
+    }
+
+    &:nth-child(1) {
+      span {
+        margin-left: 7px;
+      }
+    }
+
+    &:nth-child(2) {
+      margin: 0 25px;
+      color: $color-green;
+    }
+
+    &:nth-child(3) {
+      span {
+        margin-right: 7px;
+      }
+    }
+
+    &.item__latest-news span {
+      background-image: url('../images/icons/Earth-mobile.svg');
+    }
+    &.item__latest-news.active span {
+      background-image: url('../images/icons/Earth-fill-mobile.svg');
+    }
+
+    &.item__home {
+      span {
+        background-image: url('../images/icons/Home-mobile.svg');
+      }
+    }
+    &.item__home.active span {
+      background-image: url('../images/icons/Home-fill-mobile.svg');
+    }
+
+    &.item__make-change span {
+      background-image: url('../images/icons/Act-mobile.svg');
+    }
+    &.item__make-change.active span {
+      background-image: url('../images/icons/Act-fill-mobile.svg');
+    }
+  }
+}
+
+@include lessThan('sm') {
+  body.old-version-homepage {
+    padding-top: 96px;
+  }
+
+  .old-version-homepage .header--old {
+    position: fixed;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 96px;
+    transform: translateY(0);
+    transition: transform 350ms ease;
+    will-change: transform;
+
+    > .ct-container {
+      height: 50px;
+    }
+
+    .content {
+      // justify-content: flex-start;
+
+      .mobile-box {
+        display: block;
+      }
+
+      .left-box {
+        .logo {
+          margin-left: 5px;
+          margin-right: 0;
+        }
+
+        .logo-greenpeace {
+          height: 16px;
+          width: 148px;
+
+          @media only screen and (min-width: 400px) {
+            margin-left: 10px;
+            margin-right: 10px;
+          }
+        }
+
+        .dropdown {
+          button {
+            p {
+              font-size: 10px;
+              font-weight: normal;
+              letter-spacing: 0px;
+            }
+          }
+        }
+      }
+
+      .center-box {
+        display: none;
+      }
+
+      .right-box {
+        // margin-left: auto;
+
+        .search-button {
+          display: none;
+        }
+
+        .button {
+          padding: 2px 12px;
+        }
+      }
+    }
+  }
+
+  .mobile-toolbar {
+    display: flex;
+  }
+
+  .is-scrolling-down .header--old {
+    height: 48px;
+    transition: height 500ms ease 200ms;
+
+    .mobile-toolbar {
+      height: 0;
+      transition: height 500ms ease 200ms;
+      overflow: hidden;
+    }
+  }
+}
+
+body.old-version-homepage {
+  .header--old {
+    display: flex;
+    @include lessThan('sm') {
+      display: block;
+    }
+    .mobile-toolbar {
+      @include lessThan('sm') {
+        display: flex;
+      }
+    }
+  }
+  .header--new {
+    display: none;
   }
 }
