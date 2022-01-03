@@ -1,5 +1,5 @@
-footer {
-
+// B Version
+.footer--new { //// .footer {
   position: relative;
   padding-top: 60px;
   background: $color-blue url(../images/footer-bg.png) no-repeat bottom center;
@@ -257,5 +257,298 @@ body.sticky-button-enabled:after {
   }
   @include lessThan('sm') {
     height: 48px;
+  }
+}
+
+// Old Version
+.footer--old {
+  display: none;
+  position: relative;
+  padding-top: 20px;
+  background-color: $color-blue;
+  color: white;
+  z-index: 2;
+  @include greaterThan('sm') {
+    padding-top: 60px;
+  }
+
+  h5,
+  .icon-greenpeace {
+    color: $color-grey;
+
+    @include greaterThan('sm') {
+      color: white;
+    }
+  }
+
+  ul {
+    padding-left: 0;
+    list-style: none;
+    font-size: 14px;
+    @include greaterThan('sm') {
+      font-size: 16px;
+    }
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  a,
+  a [class^='icon-']::before,
+  a [class*=' icon-']::before {
+    color: white;
+    transition: color 140ms linear;
+  }
+
+  a {
+    &:focus,
+    &:hover {
+      color: $color-green;
+      border-bottom: none;
+    }
+  }
+
+  hr {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  .footer-upper {
+    padding-bottom: 20px;
+    @include greaterThan('sm') {
+      .ct-container {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      h5 {
+        margin-bottom: 35px;
+      }
+    }
+  }
+
+  .footer-lower {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #1a1c26;
+    overflow: hidden;
+  }
+
+  .socials > h6,
+  .socials > ul {
+    display: inline-block;
+    margin-right: 30px;
+  }
+
+  .socials > h6 {
+    vertical-align: middle;
+  }
+
+  .socials hr {
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  .social-links {
+    @include list-inline;
+
+    > li {
+      margin-right: 5px;
+
+      @include greaterThan('sm') {
+        margin-right: 0;
+      }
+
+      @include greaterThan('lg') {
+        margin-right: 5px;
+      }
+
+      a {
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 24px;
+        line-height: 1;
+
+        &:focus,
+        &:hover {
+          color: darken(white, 20%);
+
+          [class^='icon-']::before,
+          [class*=' icon-']::before {
+            color: darken(white, 20%);
+          }
+        }
+      }
+    }
+  }
+
+  .footer-greenpeace {
+    margin-bottom: 20px;
+
+    @include greaterThan('sm') {
+      width: 50%;
+
+      p {
+        width: 60%;
+      }
+    }
+
+    @include greaterThan('lg') {
+      p {
+        width: 45%;
+      }
+    }
+
+    p:last-child {
+      font-size: 12px;
+
+      @include greaterThan('sm') {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .icon-greenpeace {
+    font-size: 20px;
+
+    @include greaterThan('sm') {
+      font-size: 40px;
+    }
+  }
+
+  .footer-greenpeace + div {
+    width: 50%;
+    float: left;
+
+    @include greaterThan('sm') {
+      width: initial;
+      float: none;
+    }
+  }
+
+  .footer-greenpeace + div:not([hidden]) + div {
+    margin-left: 50%;
+
+    @include greaterThan('sm') {
+      margin-left: 0;
+    }
+  }
+
+  .has-social-links {
+    position: relative;
+  }
+
+  .footer-greenpeace + .footer-disclaimer {
+    width: initial;
+    float: none;
+    padding-top: 20px;
+    border-top: 1px solid rgba(white, 0.1);
+
+    @include greaterThan('sm') {
+      width: 50%;
+      padding-top: 0; // 62px;
+      border-top: none;
+    }
+
+    p {
+      font-size: 11px;
+
+      @include greaterThan('sm') {
+        font-size: 13px;
+      }
+    }
+  }
+
+  .press-media-links {
+    @include list-inline;
+    font-size: 12px;
+
+    @include greaterThan('sm') {
+      font-size: 16px;
+    }
+
+    a {
+      color: $color-green;
+      border-bottom: 1px solid transparent;
+      transition: border-bottom-color 140ms linear;
+
+      &:hover,
+      &:focus {
+        border-bottom-color: $color-green;
+      }
+    }
+    
+    li.press-media-links__last {
+      float: right;
+    }
+
+  }
+
+  .secondary-links {
+    @include list-inline;
+    font-size: 10px;
+
+    @include greaterThan('sm') {
+      font-size: 14px;
+    }
+
+    a {
+      color: $color-grey;
+
+      &:hover,
+      &:focus {
+        color: white;
+      }
+    }
+  }
+
+  .footer-legal {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 10px;
+    color: $color-grey;
+
+    @include greaterThan('sm') {
+      font-size: 14px;
+    }
+
+    a {
+      color: $color-grey;
+
+      &:hover,
+      &:focus {
+        color: white;
+      }
+    }
+  }
+
+  .latte-logo {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 21px;
+    bottom: 40px;
+    right: 0;
+    background: url('../images/lattecreative.svg') center / contain no-repeat;
+
+    &.mobile-only {
+      position: static;
+      float: right;
+    }
+  }
+  img.footer-greenpeace--logo {
+    max-height: 40px;
+  }
+}
+
+body.old-version-homepage {
+  .footer--old {
+    display: block;
+  }
+  .footer--new {
+    display: none;
+  }
+  &.sticky-button-enabled:after {
+    display: none;
   }
 }
