@@ -59,7 +59,7 @@ export default function() {
 		$(this).addClass('actived').siblings().removeClass('actived');
 		$(this).closest('.menu__container').find('.sub-menu--fake').html($('.sub-menu', this).html()).closest('.menu-item').addClass('actived');
 	});
-	$('.menu__item .menu-item-has-children:has(.menu-item) a', $menu).on('click', function(e) {
+	$('.menu__item .menu-item-has-children:has(.menu-item) > a', $menu).on('click', function(e) {
 		if(gt_lg()) { return; }
 		e.preventDefault();
 		let $target = $(this).closest('.menu-item');
