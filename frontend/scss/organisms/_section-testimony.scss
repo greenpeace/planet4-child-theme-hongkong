@@ -109,6 +109,7 @@
         font-weight: normal;
         font-size: 20px;
         margin-bottom: 10px;
+        text-shadow: 0 0 4px rgba(0, 0, 0, .8);
         @include greaterThan('sm') {
           font-size: 26px;
         }
@@ -125,6 +126,7 @@
         }
         .text__name {
           color: $color-green;
+          text-shadow: none;
         }
       }
       // box
@@ -195,6 +197,7 @@
         position: relative;
       }
       .bg {
+        background-size: cover;
         position: absolute;
         top: 0;
         left: 0;
@@ -207,7 +210,7 @@
           left: 0;
           width: 100%;
           height: 100%;
-          background-color: rgba(#606060, 0.3);
+          background-color: rgba(#606060, 0.4);
         }
       }
       &--1 {

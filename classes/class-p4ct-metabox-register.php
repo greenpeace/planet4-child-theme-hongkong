@@ -1275,6 +1275,11 @@ class P4CT_Metabox_Register {
 						'id'               => $id_prefix . '_label--' . $issue_key,
 						'type'             => 'text_medium',
 					];
+					$cmb_options[] = [
+						'name'             => esc_html( sprintf( __( 'Sub-Item Link: %s' ), $issue_title ), self::METABOX_ID ),
+						'id'               => $id_prefix . '_link--' . $issue_key,
+						'type'             => 'text',
+					];
 				}
 			}
 
