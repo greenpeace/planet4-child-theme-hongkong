@@ -1691,6 +1691,8 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 .b-version-homepage .header .menu-item a { white-space: pre-wrap; }
 
+.b-version-homepage .header .menu-item--fake { min-width: 8.5em; }
+
 .b-version-homepage .header .sub-menu { display: none; }
 
 @media only screen and (min-width: 1280px) { .b-version-homepage .header .sub-menu a { font-size: 16px; } }
