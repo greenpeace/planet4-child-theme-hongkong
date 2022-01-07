@@ -17,13 +17,6 @@ export default function() {
 			label_translate = $label_attr.data('label-fake');
 		}
 		$('.menu__inner2', this)[0].innerHTML += $('#template-fake-sub-menu').text().replace('__PLACEHOLDER__', label_translate);
-		let $cta = $('.header__cta', this);
-		let $sub = $('.sub-menu', this);
-		if($cta.length > 0 && $sub.length > 0) {
-			$sub.each(function() {
-				this.innerHTML += $('#template-fake-cta').text().replace('__CONTENT__', $cta[0].outerHTML).replace('header__cta--real', 'header__cta--fake');
-			});
-		}
 	});
 
 	$('.menu__item', $menu).hover(function() {
