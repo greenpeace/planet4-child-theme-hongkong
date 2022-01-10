@@ -5,3 +5,13 @@ button.shortcake_main_issues-remove-element[disabled] {
 .select2-container.select2-container--default.select2-container--open {
     z-index: 1000000;
 }
+
+.cmb2-metabox-title {
+	color: #23282d;
+    font-size: 1.2em !important;
+	border-bottom: 1px solid #CCC;
+	line-height: 2.5;
+}
+.post-php .cmb2-metabox-title {
+	font-size: 1em !important;
+}
