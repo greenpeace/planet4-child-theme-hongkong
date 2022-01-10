@@ -327,22 +327,35 @@ class P4CT_Site {
 					<div class="menu__inner">
 						<div class="menu__inner2">
 							<ul class="menu__inner3 menu__inner3--real" data-label="' . esc_attr(__( 'Issue we work on', 'gpea_theme' )) . '" data-label-fake="' . esc_attr(__( 'On-Going Projects', 'gpea_theme' )) . '">';
+				$all_issue_children = [];
 				foreach( $main_issues as $issue_key => $issue_title ) {
 					$setting_title = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_label--' . $issue_key ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_label--' . $issue_key ] : '';
 					$setting_link = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_link--' . $issue_key ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_link--' . $issue_key ] : '#';
-					$children .= '
+					$setting_sort = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_sort--' . $issue_key ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_sort--' . $issue_key ] : '0';
+					$issue_children = '
 								<li class="menu-item menu-item-has-children">
 									<a href="' . esc_attr($setting_link) . '"><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span>' . $setting_title . '</a>';
-					$children .= has_nav_menu( 'gpea-header-' . $menu_key . '-menu--' . $issue_key ) ? wp_nav_menu( [
+					$issue_children .= has_nav_menu( 'gpea-header-' . $menu_key . '-menu--' . $issue_key ) ? wp_nav_menu( [
 						'container' => NULL,
 						'menu_class' => 'sub-menu',
 						'theme_location' => 'gpea-header-' . $menu_key . '-menu--' . $issue_key,
 						'echo' => FALSE,
 						'depth' => $menu_conf[ 'depth' ],
 					]) : '';
-					$children .= '
+					$issue_children .= '
 								</li>';
+					$all_issue_children[] = [
+						'sort' => $setting_sort,
+						'html' => $issue_children,
+					];
 				}
+				usort( $all_issue_children, function( $a, $b ) {
+					if( $a[ 'sort' ] == $b[ 'sort' ] ) {
+						return 0;
+					}
+					return ( $a[ 'sort' ] < $b[ 'sort' ] ) ? -1 : 1;
+				} );
+				$children .= implode( '', array_column( $all_issue_children, 'html' ) );
 				$children .= '
 							</ul>
 						</div>' . $cta_content . '
