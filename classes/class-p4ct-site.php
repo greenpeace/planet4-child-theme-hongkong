@@ -508,7 +508,7 @@ class P4CT_Site {
 
 		$css_fonts = gpea_get_option( 'gpea_css_fonts' ) ? gpea_get_option( 'gpea_css_fonts' ) : 'hk-fonts.css';
 
-		wp_enqueue_style( 'child-style-noto-sans-tc', 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400&display=swap&subset=chinese-traditional' );
+		wp_enqueue_style( 'child-style-noto-sans-tc', 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&display=swap&subset=chinese-traditional' );
 		wp_enqueue_style( 'child-style-montserrat', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap' );
 		wp_enqueue_style( 'child-style-fonts', get_stylesheet_directory_uri() . '/static/css/' . $css_fonts, [], $css_creation );
 
