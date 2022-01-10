@@ -38,8 +38,8 @@
   }
   .swiper-slide-active {
     &,
-    & + .swiper-slide,
-    & + .swiper-slide + .swiper-slide {
+    & + .swiper-slide:not(.grid__box--fake),
+    & + .swiper-slide + .swiper-slide:not(.grid__box--fake) {
       @include greaterThan('sm') {
         visibility: visible;
         opacity: 1;
@@ -310,6 +310,11 @@
       align-self: auto;
       border: none;
       color: #393939;
+      &--fake {
+        @include lessThan('sm') {
+          display: none;
+        }
+      }
       .title {
         color: black;
       }
