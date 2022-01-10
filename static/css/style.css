@@ -4512,7 +4512,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-mc-subscription .enform-error { color: #E41E1E; -webkit-animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
 
-.section-mc-subscription .invalid-feedback { margin-top: 0; font-size: 15px; line-height: 20px; color: #E41E1E; font-weight: normal; position: absolute; padding: 0 8px; right: 15px; top: 10px; }
+.section-mc-subscription .invalid-feedback { margin-top: 0; font-size: 15px; line-height: 20px; color: #E41E1E; font-weight: normal; position: absolute; padding: 0 8px; right: 15px; top: 15px; pointer-events: none; }
 
 .section-mc-subscription .custom-checkbox { display: -webkit-box; display: -ms-flexbox; display: flex; }
 
