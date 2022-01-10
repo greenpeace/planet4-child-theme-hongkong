@@ -3660,7 +3660,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-hero-set .title__inner--mobile { display: none; } }
 
-.section-hero-set .title__text { font-size: 28px; }
+.section-hero-set .title__text { font-size: 28px; font-weight: 500; }
 
 @media only screen and (min-width: 1024px) { .section-hero-set .title__text { font-size: 44px; } }
 

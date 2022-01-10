@@ -162,6 +162,7 @@
     }
     &__text {
       font-size: 28px;
+      font-weight: 500;
       @include greaterThan("sm") {
         font-size: 44px;
       }
