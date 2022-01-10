@@ -6,6 +6,9 @@ export default function (Swiper) {
 
   // Hero set (Homepage B Version 1st Screen)
   $('.hero-swiper').each(function (index) {
+    if($('.swiper-slide', this).length <= 1) {
+      return true;
+    }
     new Swiper(this, {
       slidesPerView: 1,
       simulateTouch: false,
