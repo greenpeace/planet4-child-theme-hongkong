@@ -54,11 +54,11 @@ export default function (Swiper) {
       observer: true,
       observeParents: true,
       breakpoints: {
-        1280: {
+        1279: {
           spaceBetween: 24,
           slidesPerView: 3,
         },
-        1024: {
+        1023: {
           slidesPerView: 1,
         },
       },
