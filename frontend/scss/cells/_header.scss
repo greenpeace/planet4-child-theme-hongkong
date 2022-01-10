@@ -387,7 +387,7 @@
         &:hover,
         &:focus,
         &:active {
-          // font-weight: 600;
+          // font-weight: 500;
           color: #67CC02;
         }
         @include greaterThan('lg') {

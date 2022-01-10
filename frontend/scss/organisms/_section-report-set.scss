@@ -31,7 +31,7 @@
       .title {
         color: #5CB107;
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 500;
         margin-top: 50px;
         display: flex;
         align-items: baseline;
@@ -125,7 +125,7 @@
           padding: 10px 10px;
           margin: 0;
           line-height: 1;
-          font-weight: 600;
+          font-weight: 500;
           width: 135px;
           @include greaterThan('sm') {
             padding: 15px 10px;

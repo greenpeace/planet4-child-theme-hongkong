@@ -3930,7 +3930,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (max-width: 1023px) { .section-get-involved .content--desc .category, .section-get-involved .content--desc .title { text-align: center; } }
 
-.section-get-involved .content--desc .category { font-size: 18px; font-weight: 600; }
+.section-get-involved .content--desc .category { font-size: 18px; font-weight: 500; }
 
 .section-get-involved .content--desc .category__name { margin-left: 0.3em; }
 
@@ -4043,7 +4043,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (max-width: 1023px) { .section-get-involved-cards .content--title .title { margin-bottom: 30px; } }
 
-@media only screen and (min-width: 1024px) { .section-get-involved-cards .content--title .title { font-weight: 600; } }
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .content--title .title { font-weight: 500; } }
 
 @media only screen and (min-width: 1280px) { .section-get-involved-cards .content--title .title { font-size: 18px; } }
 
@@ -4093,7 +4093,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-get-involved-cards .grid .img { background: no-repeat center; background-size: cover; padding-bottom: 57.53425%; }
 
-.section-get-involved-cards .grid .subtitle { font-weight: 600; font-size: 16px; }
+.section-get-involved-cards .grid .subtitle { font-weight: 500; font-size: 16px; }
 
 @media only screen and (min-width: 1024px) { .section-get-involved-cards .grid .subtitle { font-size: 18px; } }
 
@@ -4169,7 +4169,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-report-set .content--desc { min-height: 250px; } }
 
-.section-report-set .content--desc .title { color: #5CB107; font-size: 18px; font-weight: 600; margin-top: 50px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: baseline; -ms-flex-align: baseline; align-items: baseline; }
+.section-report-set .content--desc .title { color: #5CB107; font-size: 18px; font-weight: 500; margin-top: 50px; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: baseline; -ms-flex-align: baseline; align-items: baseline; }
 
 .section-report-set .content--desc .title:before { counter-increment: counter; content: counter(counter, decimal-leading-zero); font-size: 20px; font-weight: normal; width: 30px; }
 
@@ -4207,7 +4207,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-report-set .content__inner .buttons { -webkit-box-ordinal-group: 1; -ms-flex-order: 0; order: 0; margin-top: 20px; margin-right: 90px; margin-left: 0; } }
 
-.section-report-set .content__inner .buttons__link { position: relative; display: block; font-size: 16px; height: auto; padding: 10px 10px; margin: 0; line-height: 1; font-weight: 600; width: 135px; }
+.section-report-set .content__inner .buttons__link { position: relative; display: block; font-size: 16px; height: auto; padding: 10px 10px; margin: 0; line-height: 1; font-weight: 500; width: 135px; }
 
 @media only screen and (min-width: 1024px) { .section-report-set .content__inner .buttons__link { padding: 15px 10px; width: 210px; } }
 
@@ -4279,7 +4279,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (max-width: 1279px) { .section-infographic-cards .grid__desc { font-size: 16px; } }
 
-.section-infographic-cards .hightlight--text { color: #66CC00; font-weight: 600; }
+.section-infographic-cards .hightlight--text { color: #66CC00; font-weight: 500; }
 
 .section-infographic-cards .hightlight--number { color: #59B300; font-size: 18px; }
 
@@ -4357,7 +4357,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
   .section-testimony .slide-item__inner--2 { width: 350px; }
   .section-testimony .slide-item__inner--3, .section-testimony .slide-item__inner--4 { width: 476px; } }
 
-.section-testimony .slide-item__inner .text__title { font-weight: 600; font-size: 16px; margin-bottom: 5px; }
+.section-testimony .slide-item__inner .text__title { font-weight: 500; font-size: 16px; margin-bottom: 5px; }
 
 @media only screen and (min-width: 1024px) { .section-testimony .slide-item__inner .text__title { font-size: 15px; } }
 

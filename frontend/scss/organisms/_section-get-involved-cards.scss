@@ -136,7 +136,7 @@
           margin-bottom: 30px;
         }
         @include greaterThan('sm') {
-          font-weight: 600;
+          font-weight: 500;
         }
         @include greaterThan('lg') {
           font-size: 18px;
@@ -246,7 +246,7 @@
       padding-bottom: percentage(168/292);
     }
     .subtitle {
-      font-weight: 600;
+      font-weight: 500;
       font-size: 16px;
       @include greaterThan('sm') {
         font-size: 18px;
