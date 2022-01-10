@@ -35,6 +35,7 @@ export default function (Swiper) {
     }
     new Swiper(this, {
       slidesPerView: 3,
+      slidesPerGroup: 3,
       spaceBetween: 30,
       simulateTouch: false,
       pagination: {
@@ -55,11 +56,13 @@ export default function (Swiper) {
       observeParents: true,
       breakpoints: {
         1279: {
-          spaceBetween: 24,
           slidesPerView: 3,
+          slidesPerGroup: 3,
+          spaceBetween: 24,
         },
         1023: {
           slidesPerView: 1,
+          slidesPerGroup: 1,
         },
       },
     });
