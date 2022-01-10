@@ -1709,6 +1709,7 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
   .b-version-homepage .header .menu__item.actived:after, .b-version-homepage .header .has-children .menu__inner3 > .menu-item.actived:after { -webkit-transform: rotate(225deg); -ms-transform: rotate(225deg); transform: rotate(225deg); }
   .b-version-homepage .header .menu__item:after { top: 18px; }
   .b-version-homepage .header .menu__item.actived:after { top: 21px; }
+  .b-version-homepage .header .menu__item--no-children:after { display: none; }
   .b-version-homepage .header .has-children .menu__inner3 > .menu-item:after { top: 12px; }
   .b-version-homepage .header .has-children .menu__inner3 > .menu-item.actived:after { top: 15px; } }
 

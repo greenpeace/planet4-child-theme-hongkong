@@ -662,6 +662,11 @@
       &.actived:after {
         top: 18 + 3px;
       }
+      &--no-children {
+        &:after {
+          display: none;
+        }
+      }
     }
     .has-children .menu__inner3 > .menu-item {
       &:after {
