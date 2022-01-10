@@ -1561,7 +1561,7 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 @media only screen and (max-width: 1279px) { .b-version-homepage .header__link { display: block; width: 100%; line-height: 44px; padding: 0 0; } }
 
-@media only screen and (min-width: 1280px) { .b-version-homepage .header__link { line-height: 60px; font-size: 15px; color: rgba(255, 255, 255, 0.8); } }
+@media only screen and (min-width: 1280px) { .b-version-homepage .header__link { line-height: 60px; font-size: 16px; color: rgba(255, 255, 255, 0.8); } }
 
 .b-version-homepage .header__link--mobile-menu { border: none; background: transparent; cursor: pointer; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; -webkit-box-sizing: content-box; box-sizing: content-box; width: 18px; height: 16px; padding: 30px 20px; padding-left: 30px; }
 
@@ -1728,9 +1728,9 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 @media only screen and (max-width: 1279px) { .b-version-homepage .header .menu__inner3 { width: 100%; } }
 
-.b-version-homepage .header__cta { display: -webkit-box !important; display: -ms-flexbox !important; display: flex !important; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; background-color: #FF8100; margin-left: -25px; margin-right: -25px; line-height: 42px !important; height: 43px !important; text-align: center; color: white !important; font-size: 16px !important; font-weight: 600; padding-right: 20px; padding-left: 20px; }
+.b-version-homepage .header__cta { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; background-color: #FF8100; margin-left: -25px; margin-right: -25px; line-height: 42px; height: 43px; text-align: center; color: white; font-size: 16px; padding-right: 20px; padding-left: 20px; }
 
-@media only screen and (min-width: 1280px) { .b-version-homepage .header__cta { line-height: 55px !important; height: 56px !important; font-size: 18px !important; } }
+@media only screen and (min-width: 1280px) { .b-version-homepage .header__cta { line-height: 55px; height: 56px; font-size: 18px; } }
 
 .b-version-homepage .header__cta:hover, .b-version-homepage .header__cta:focus { background-color: #FFB660; }
 

@@ -218,7 +218,7 @@
     }
     @include greaterThan('lg') {
       line-height: 60px;
-      font-size: 15px;
+      font-size: 16px;
       color: rgba(white, .8);
     }
     &--mobile-menu {
@@ -715,24 +715,24 @@
 
   &__cta {
     // display: block;
-    display: flex !important;
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: $color-orange;
     margin-left: -25px;
     margin-right: -25px;
-    line-height: 43 - 1px !important;
-    height: 43px !important;
+    line-height: 43 - 1px;
+    height: 43px;
     text-align: center;
-    color: white !important;
-    font-size: 16px !important;
-    font-weight: 600;
+    color: white;
+    font-size: 16px;
+    // font-weight: 500;
     padding-right: 20px;
     padding-left: 20px;
     @include greaterThan('lg') {
-      line-height: 56 - 1px !important;
-      height: 56px !important;
-      font-size: 18px !important;
+      line-height: 56 - 1px;
+      height: 56px;
+      font-size: 18px;
     }
     &:hover,
     &:focus {
