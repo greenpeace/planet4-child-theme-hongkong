@@ -1535,7 +1535,7 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 @media only screen and (max-width: 1279px) { .b-version-homepage .header__column--logo { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; } }
 
-.b-version-homepage .header__column--logo img { margin-top: 25px; margin-bottom: 20px; height: 18px; }
+.b-version-homepage .header__column--logo img { margin-top: 28px; margin-bottom: 20px; height: 18px; }
 
 @media only screen and (min-width: 1024px) { .b-version-homepage .header__column--logo img { height: 30px; } }
 

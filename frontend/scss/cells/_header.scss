@@ -144,7 +144,7 @@
         flex: 1;
       }
       img {
-        margin-top: 25px;
+        margin-top: 25 + 3px;
         margin-bottom: 20px;
         height: 18px;
         @include greaterThan('sm') {
