@@ -3994,6 +3994,10 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-get-involved-cards .swiper-slide { height: auto; }
 
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .swiper-slide { visibility: hidden; opacity: 0; -webkit-transition: opacity 140ms linear, visibility 140ms linear 140ms; transition: opacity 140ms linear, visibility 140ms linear 140ms; } }
+
+@media only screen and (min-width: 1024px) { .section-get-involved-cards .swiper-slide-active, .section-get-involved-cards .swiper-slide-active + .swiper-slide, .section-get-involved-cards .swiper-slide-active + .swiper-slide + .swiper-slide { visibility: visible; opacity: 1; -webkit-transition: opacity 140ms linear, visibility 140ms linear 0ms; transition: opacity 140ms linear, visibility 140ms linear 0ms; } }
+
 .section-get-involved-cards .swiper-pagination-bullet { display: block; background-color: transparent; width: auto; height: auto; line-height: 30px; padding-right: 10px; padding-left: 10px; margin-right: 2px !important; margin-left: 2px; color: #868E96; }
 
 .section-get-involved-cards .swiper-pagination-bullet-active { color: #212529; }
