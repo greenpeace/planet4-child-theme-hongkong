@@ -4204,7 +4204,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-report-set .content__inner--2 { display: -webkit-box; display: -ms-flexbox; display: flex; }
 
-@media only screen and (max-width: 1023px) { .section-report-set .content__inner--2 { margin-top: 30px; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; } }
+@media only screen and (max-width: 1023px) { .section-report-set .content__inner--2 { margin-top: 30px; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; } }
 
 @media only screen and (min-width: 1024px) { .section-report-set .content__inner--2 { position: absolute; top: 0; right: 0; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; } }
 
@@ -4214,11 +4214,11 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-report-set .content__inner .buttons { -webkit-box-ordinal-group: 1; -ms-flex-order: 0; order: 0; margin-top: 20px; margin-right: 90px; margin-left: 0; } }
 
-.section-report-set .content__inner .buttons__link { position: relative; display: block; font-size: 16px; height: auto; padding: 10px 10px; margin: 0; line-height: 1; font-weight: 500; width: 135px; }
+.section-report-set .content__inner .buttons__link { position: relative; display: block; font-size: 16px; height: auto; padding: 10px 22px 10px 10px; margin: 0; line-height: 1; font-weight: 500; min-width: 135px; }
 
-@media only screen and (min-width: 1024px) { .section-report-set .content__inner .buttons__link { padding: 15px 10px; width: 210px; } }
+@media only screen and (min-width: 1024px) { .section-report-set .content__inner .buttons__link { padding: 15px 30px 15px 10px; width: 210px; } }
 
-@media only screen and (min-width: 1280px) { .section-report-set .content__inner .buttons__link { padding: 10px 10px; width: 160px; } }
+@media only screen and (min-width: 1280px) { .section-report-set .content__inner .buttons__link { padding: 10px 30px 10px 10px; width: 160px; } }
 
 .section-report-set .content__inner .buttons__link--secondary { margin-top: 5px; }
 
@@ -4228,7 +4228,9 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-report-set .content__inner .buttons__link--secondary:hover .buttons__arrow, .section-report-set .content__inner .buttons__link--secondary:hover .buttons__arrow:after, .section-report-set .content__inner .buttons__link--secondary:hover .buttons__arrow:before, .section-report-set .content__inner .buttons__link--secondary:focus .buttons__arrow, .section-report-set .content__inner .buttons__link--secondary:focus .buttons__arrow:after, .section-report-set .content__inner .buttons__link--secondary:focus .buttons__arrow:before, .section-report-set .content__inner .buttons__link--secondary:active .buttons__arrow, .section-report-set .content__inner .buttons__link--secondary:active .buttons__arrow:after, .section-report-set .content__inner .buttons__link--secondary:active .buttons__arrow:before { background-color: white; }
 
-.section-report-set .content__inner .buttons__arrow { position: absolute; top: 50%; right: 15px; width: 13px; height: 2px; }
+.section-report-set .content__inner .buttons__arrow { position: absolute; top: 50%; right: 6px; width: 12px; height: 2px; }
+
+@media only screen and (min-width: 1024px) { .section-report-set .content__inner .buttons__arrow { right: 10px; } }
 
 .section-report-set .content__inner .buttons__arrow, .section-report-set .content__inner .buttons__arrow:after, .section-report-set .content__inner .buttons__arrow:before { background-color: white; -webkit-transition: background-color 140ms linear; transition: background-color 140ms linear; }
 
@@ -4342,7 +4344,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-testimony .swiper-container { margin-right: 0; margin-left: 0; margin-top: 50px; } }
 
-.section-testimony .custom-button-next, .section-testimony .custom-button-prev { background-color: white; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; position: absolute; top: 50%; margin-top: -40px; -webkit-box-shadow: 0px 0px 5px 0px rgba(215, 215, 215, 0.5); box-shadow: 0px 0px 5px 0px rgba(215, 215, 215, 0.5); border-radius: 4px; height: 80px; width: 55px; z-index: 1; }
+.section-testimony .custom-button-next, .section-testimony .custom-button-prev { background-color: white; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; position: absolute; top: 50%; margin-top: -40px; -webkit-box-shadow: 0px 0px 5px 0px rgba(215, 215, 215, 0.75); box-shadow: 0px 0px 5px 0px rgba(215, 215, 215, 0.75); border-radius: 4px; height: 80px; width: 55px; z-index: 1; }
 
 @media only screen and (max-width: 1023px) { .section-testimony .custom-button-next, .section-testimony .custom-button-prev { display: none; } }
 

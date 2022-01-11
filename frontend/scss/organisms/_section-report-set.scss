@@ -92,7 +92,7 @@
         display: flex;
         @include lessThan('sm') {
           margin-top: 30px;
-          justify-content: space-between;
+          justify-content: center;
         }
         @include greaterThan('sm') {
           position: absolute;
@@ -122,17 +122,17 @@
           @include text-version-b;
           // text-align: left;
           height: auto;
-          padding: 10px 10px;
+          padding: 10px 22px 10px 10px;
           margin: 0;
           line-height: 1;
           font-weight: 500;
-          width: 135px;
+          min-width: 135px;
           @include greaterThan('sm') {
-            padding: 15px 10px;
+            padding: 15px 30px 15px 10px;
             width: 210px;
           }
           @include greaterThan('lg') {
-            padding: 10px 10px;
+            padding: 10px 30px 10px 10px;
             width: 160px;
           }
           &--secondary {
@@ -167,9 +167,12 @@
         &__arrow {
           position: absolute;
           top: 50%;
-          right: 15px;
-          width: 13px;
+          right: 6px;
+          width: 12px;
           height: 2px;
+          @include greaterThan('sm') {
+            right: 10px;
+          }
           &,
           &:after,
           &:before {
