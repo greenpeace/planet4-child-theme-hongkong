@@ -48,46 +48,86 @@
       margin-top: 50px;
     }
   }
-  .swiper-button-next,
-  .swiper-button-prev {
+  .custom-button-next,
+  .custom-button-prev {
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
     margin-top: -40px;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 5px 0px rgba(215, 215, 215, .5);
     border-radius: 4px;
-    padding: 40px 15px;
     height: 80px;
     width: 40 + 15px;
+    z-index: 1;
     @include lessThan('sm') {
       display: none;
     }
     &:hover {
-      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+      // box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+    }
+    &:before,
+    &:after {
+      content: '';
+      height: 3px;
+      width: 14px;
+      background-color: #868E96;
+      display: block;
+      position: absolute;
+    }
+    &:before {
+      transform: rotate(-45deg);
+    }
+    &:after {
+      transform: rotate(45deg);
+    }
+    &:not(.swiper-button-disabled) {
+      cursor: pointer;
     }
   }
-  .swiper-button-next {
+  .custom-button-next {
     @include greaterThan('sm') {
       left: calc(50vw + 388px);
     }
     @include greaterThan('lg') {
       left: calc(50vw + 532px);
     }
-    right: auto;
     padding-right: 30px;
     &:hover {
       // transform: translateX(-10px);
     }
   }
-  .swiper-button-prev {
+  .custom-button-prev {
     @include greaterThan('sm') {
       right: calc(50vw + 388px);
     }
     @include greaterThan('lg') {
       right: calc(50vw + 532px);
     }
-    left: auto;
     padding-left: 30px;
     &:hover {
       // transform: translateX(10px);
     }
+  }
+  .custom-button-next:before,
+  .custom-button-prev:after {
+    top: 43px;
+  }
+  .custom-button-next:after,
+  .custom-button-prev:before {
+    bottom: 43px;
+  }
+  .custom-button-prev:before,
+  .custom-button-prev:after {
+    right: 14px;
+  }
+  .custom-button-next:before,
+  .custom-button-next:after {
+    left: 14px;
+  }
+  .swiper-button-disabled {
+    opacity: 0;
   }
 
   .slide-item {

@@ -90,8 +90,8 @@ export default function (Swiper) {
       slidesPerView: 'auto',
       simulateTouch: false,
       navigation: {
-        nextEl: $this.find('.swiper-button-next'),
-        prevEl: $this.find('.swiper-button-prev'),
+        nextEl: $this.find('.custom-button-next'),
+        prevEl: $this.find('.custom-button-prev'),
       },
       pagination: {
         el: pagination,
