@@ -4342,6 +4342,24 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-testimony .swiper-container { margin-right: 0; margin-left: 0; margin-top: 50px; } }
 
+.section-testimony .swiper-button-next, .section-testimony .swiper-button-prev { margin-top: -40px; -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25); box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25); border-radius: 4px; padding: 40px 15px; height: 80px; width: 55px; }
+
+@media only screen and (max-width: 1023px) { .section-testimony .swiper-button-next, .section-testimony .swiper-button-prev { display: none; } }
+
+.section-testimony .swiper-button-next:hover, .section-testimony .swiper-button-prev:hover { -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5); box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5); }
+
+.section-testimony .swiper-button-next { right: auto; padding-right: 30px; }
+
+@media only screen and (min-width: 1024px) { .section-testimony .swiper-button-next { left: calc(50vw + 388px); } }
+
+@media only screen and (min-width: 1280px) { .section-testimony .swiper-button-next { left: calc(50vw + 532px); } }
+
+.section-testimony .swiper-button-prev { left: auto; padding-left: 30px; }
+
+@media only screen and (min-width: 1024px) { .section-testimony .swiper-button-prev { right: calc(50vw + 388px); } }
+
+@media only screen and (min-width: 1280px) { .section-testimony .swiper-button-prev { right: calc(50vw + 532px); } }
+
 .section-testimony .slide-item { width: 64%; height: auto; }
 
 @media only screen and (min-width: 1024px) { .section-testimony .slide-item { width: auto; } }
