@@ -30,7 +30,7 @@
       font-weight: normal;
       text-decoration: underline;
       text-underline-offset: 5px;
-      line-height: 41px;
+      line-height: 38px;
       @include lessThan('sm') {
         &--pc {
           display: none;

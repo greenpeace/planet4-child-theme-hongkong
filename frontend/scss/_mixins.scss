@@ -124,6 +124,7 @@
   margin: 1.5em auto;
   @include lessThan('sm') {
     display: table;
+    @include line-height-version-b;
   }
   @include greaterThan('sm') {
     font-size: 28px;
