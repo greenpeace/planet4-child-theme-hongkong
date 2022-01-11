@@ -1,5 +1,7 @@
 .section-testimony {
 
+  @include letter-spacing-version-b;
+
   .page-template > & {
     background-image: none;
   }
@@ -179,7 +181,7 @@
       color: white;
       .text__title {
         font-weight: 500;
-        font-size: 16px;
+        @include text-version-b;
         margin-bottom: 5px;
         @include greaterThan('sm') {
           font-size: 15px;

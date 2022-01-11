@@ -87,6 +87,8 @@
 
 .section-geography-set {
 
+  @include letter-spacing-version-b;
+
   .page-template > & {
     background-image: none;
   }
@@ -231,6 +233,7 @@
   }
 
   &__lightbox {
+    @include letter-spacing-version-b;
     visibility: hidden;
     opacity: 0;
     transition: opacity 200ms linear, visibility 0ms linear 240ms;
@@ -405,15 +408,16 @@
         font-size: 29px;
       }
     }
-    .subtitle {
+    .lightbox__header .subtitle {
       color: $color-green;
-      font-size: 16px;
+      @include text-version-b;
       margin-top: 0;
       @include greaterThan('sm') {
         font-size: 20px;
       }
     }
     .lightbox__header p {
+      @include text-version-b;
       margin-top: 20px;
       margin-bottom: 20px;
     }
@@ -423,6 +427,7 @@
       }
     }
     .lightbox__footer {
+      @include line-height-version-b;
       @include lessThan('sm') {
         margin-top: 20px;
         margin-bottom: 20px;

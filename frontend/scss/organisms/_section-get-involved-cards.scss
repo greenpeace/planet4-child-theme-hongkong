@@ -1,5 +1,7 @@
 .section-get-involved-cards {
 
+  @include letter-spacing-version-b;
+
   .page-template > & {
     background-image: none;
   }
@@ -146,7 +148,7 @@
       }
       .title {
         margin-bottom: 0;
-        font-size: 16px;
+        @include text-version-b;
         font-weight: bold;
         @include lessThan('sm') {
           margin-bottom: 30px;
@@ -177,7 +179,7 @@
       border: none;
       cursor: pointer;
       display: inline-block;
-      font-size: 16px;
+      @include text-version-b;
       color: black;
       transition: color 140ms linear;
       @include lessThan('sm') {
@@ -232,7 +234,7 @@
     }
     .category {
       text-align: right;
-      font-size: 16px;
+      @include text-version-b;
       margin-bottom: 5px;
       @include greaterThan('sm') {
         font-size: 15px;
@@ -250,6 +252,7 @@
     .title {
       font-weight: normal;
       font-size: 18px;
+      @include line-height-version-b;
       margin-top: 5px;
       margin-bottom: 15px;
       @include greaterThan('sm') {
@@ -263,13 +266,13 @@
     }
     .subtitle {
       font-weight: 500;
-      font-size: 16px;
+      @include text-version-b;
       @include greaterThan('sm') {
         font-size: 18px;
       }
     }
     .desc p {
-      font-size: 16px;
+      @include text-version-b;
     }
 
     .percentage {

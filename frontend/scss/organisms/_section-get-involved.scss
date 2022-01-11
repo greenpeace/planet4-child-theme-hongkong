@@ -1,5 +1,7 @@
 .section-get-involved {
 
+  @include letter-spacing-version-b;
+
   .page-template > & {
     background-image: none;
   }
@@ -85,6 +87,7 @@
       }
       .category {
         font-size: 18px;
+        @include line-height-version-b;
         font-weight: 500;
         &__name {
           margin-left: 0.3em;

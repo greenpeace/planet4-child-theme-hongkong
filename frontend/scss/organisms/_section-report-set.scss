@@ -1,5 +1,7 @@
 .section-report-set {
 
+  @include letter-spacing-version-b;
+
   .page-template > & {
     background-image: none;
   }
@@ -31,6 +33,7 @@
       .title {
         color: #5CB107;
         font-size: 18px;
+        @include line-height-version-b;
         font-weight: 500;
         margin-top: 50px;
         display: flex;
