@@ -1,5 +1,7 @@
 .section-hero-set {
 
+  @include letter-spacing-version-b;
+
   .page-template > & {
     background-image: none;
   }
@@ -162,8 +164,12 @@
     }
     &__text {
       font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 1.96px;
+      line-height: 41px;
       @include greaterThan("sm") {
         font-size: 44px;
+        line-height: 1.46;
       }
       @include greaterThan("lg") {
         font-size: 48px;

@@ -6,6 +6,9 @@ export default function (Swiper) {
 
   // Hero set (Homepage B Version 1st Screen)
   $('.hero-swiper').each(function (index) {
+    if($('.swiper-slide', this).length <= 1) {
+      return true;
+    }
     new Swiper(this, {
       slidesPerView: 1,
       simulateTouch: false,
@@ -35,6 +38,7 @@ export default function (Swiper) {
     }
     new Swiper(this, {
       slidesPerView: 3,
+      slidesPerGroup: 3,
       spaceBetween: 30,
       simulateTouch: false,
       pagination: {
@@ -54,12 +58,14 @@ export default function (Swiper) {
       observer: true,
       observeParents: true,
       breakpoints: {
-        1280: {
-          spaceBetween: 24,
+        1279: {
           slidesPerView: 3,
+          slidesPerGroup: 3,
+          spaceBetween: 24,
         },
-        1024: {
+        1023: {
           slidesPerView: 1,
+          slidesPerGroup: 1,
         },
       },
     });
@@ -83,6 +89,10 @@ export default function (Swiper) {
     new Swiper(this, {
       slidesPerView: 'auto',
       simulateTouch: false,
+      navigation: {
+        nextEl: $this.find('.custom-button-next'),
+        prevEl: $this.find('.custom-button-prev'),
+      },
       pagination: {
         el: pagination,
         type: 'bullets',

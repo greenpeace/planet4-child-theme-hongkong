@@ -1,6 +1,7 @@
 .section-mc-subscription {
 
   overflow: hidden;
+  @include letter-spacing-version-b;
 
   .page-template > & {
     background-image: none;
@@ -186,11 +187,12 @@
     position: absolute;
     padding: 0 8px;
     right: 15px;
-    top: 10px;
-    // background-color: white;
+    top: 15px;
+    pointer-events: none;
   }
 
   .custom-checkbox {
+    @include line-height-version-b;
     display: flex;
     &__mark {
       position: relative;
@@ -199,6 +201,7 @@
       border: 2px solid #393939;
       flex: 0 0 auto;
       margin-right: 0.5em;
+      margin-top: 2px;
       &:after {
         content: '';
         position: absolute;
