@@ -61,6 +61,13 @@
 }
 
 // Typography
+@mixin letter-spacing-version-b {
+  letter-spacing: 0.84px;
+}
+@mixin line-height-version-b {
+  line-height: 26px;
+}
+
 @mixin margins {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -117,6 +124,7 @@
   margin: 1.5em auto;
   @include lessThan('sm') {
     display: table;
+    @include line-height-version-b;
   }
   @include greaterThan('sm') {
     font-size: 28px;
@@ -163,6 +171,7 @@
 
 @mixin text-version-b {
   font-size: 16px;
+  @include line-height-version-b;
 }
 @mixin text-border-version-b {
   border-left: 4px solid $color-green;

@@ -1183,49 +1183,49 @@ class P4CT_Metabox_Register {
 		$cmb_options = &$this->subpages['gpea_header_nav_options_page']['fields'];
 
 		$cmb_options[] = [
-			'name'             => esc_html__( 'Sticky Button', self::METABOX_ID ),
+			'name'             => esc_html__( 'Sticky CTA Button (on the bottom)', self::METABOX_ID ),
 			'id'               => 'gpea_header_nav_sticky',
 			'type'             => 'title',
 		];
 		$cmb_options[] = [
-			'name'             => esc_html__( 'Show the Button', self::METABOX_ID ),
+			'name'             => esc_html__( 'Show the Sticky Button', self::METABOX_ID ),
 			'id'               => 'gpea_header_nav_sticky_enabled',
 			'type'             => 'checkbox',
 			'default'          => '0',
 		];
 		$cmb_options[] = [
-			'name'             => esc_html__( 'Button Link', self::METABOX_ID ),
+			'name'             => esc_html__( 'Sticky Button Link', self::METABOX_ID ),
 			'id'               => 'gpea_header_nav_sticky_link',
 			'type'             => 'text',
 		];
 		$cmb_options[] = [
-			'name'             => esc_html__( 'Button Label (for Tablet)', self::METABOX_ID ),
+			'name'             => esc_html__( 'Sticky Button Label (for Tablet)', self::METABOX_ID ),
 			'id'               => 'gpea_header_nav_sticky_label',
 			'type'             => 'text_medium',
 		];
 		$cmb_options[] = [
-			'name'             => esc_html__( 'Button Label (for Mobile)', self::METABOX_ID ),
+			'name'             => esc_html__( 'Sticky Button Label (for Mobile)', self::METABOX_ID ),
 			'id'               => 'gpea_header_nav_sticky_label_mobile',
 			'type'             => 'text_medium',
 		];
 
 		$cmb_options[] = [
-			'name'             => esc_html__( 'Header Button', self::METABOX_ID ),
+			'name'             => esc_html__( 'Header CTA Button', self::METABOX_ID ),
 			'id'               => 'gpea_header_nav_button',
 			'type'             => 'title',
 		];
 		$cmb_options[] = [
-			'name'             => esc_html__( 'Button Link', self::METABOX_ID ),
+			'name'             => esc_html__( 'Header CTA Button Link', self::METABOX_ID ),
 			'id'               => 'gpea_header_nav_button_link',
 			'type'             => 'text',
 		];
 		$cmb_options[] = [
-			'name'             => esc_html__( 'Button Label (for PC/Tablet)', self::METABOX_ID ),
+			'name'             => esc_html__( 'Header CTA Button Label (for PC/Tablet)', self::METABOX_ID ),
 			'id'               => 'gpea_header_nav_button_label',
 			'type'             => 'text_medium',
 		];
 		$cmb_options[] = [
-			'name'             => esc_html__( 'Button Label (for Mobile)', self::METABOX_ID ),
+			'name'             => esc_html__( 'Header CTA Button Label (for Mobile)', self::METABOX_ID ),
 			'id'               => 'gpea_header_nav_button_label_mobile',
 			'type'             => 'text_medium',
 		];
@@ -1280,32 +1280,37 @@ class P4CT_Metabox_Register {
 						'id'               => $id_prefix . '_link--' . $issue_key,
 						'type'             => 'text',
 					];
+					$cmb_options[] = [
+						'name'             => esc_html( sprintf( __( 'Sub-Item Sort: %s' ), $issue_title ), self::METABOX_ID ),
+						'id'               => $id_prefix . '_sort--' . $issue_key,
+						'type'             => 'text_small',
+					];
 				}
 			}
 
 			$cmb_options[] = [
-				'name'             => esc_html__( 'Show CTA Button', self::METABOX_ID ),
+				'name'             => esc_html__( 'Show Sub-menu CTA Button', self::METABOX_ID ),
 				'id'               => $id_prefix . '_cta_enabled',
 				'type'             => 'checkbox',
 				'default'          => '0',
 			];
 			$cmb_options[] = [
-				'name'             => esc_html__( 'CTA Button Link', self::METABOX_ID ),
+				'name'             => esc_html__( 'Sub-menu CTA Button Link', self::METABOX_ID ),
 				'id'               => $id_prefix . '_cta_link',
 				'type'             => 'text',
 			];
 			$cmb_options[] = [
-				'name'             => esc_html__( 'CTA Button Label (for PC/Tablet)', self::METABOX_ID ),
+				'name'             => esc_html__( 'Sub-menu CTA Button Label (for PC/Tablet)', self::METABOX_ID ),
 				'id'               => $id_prefix . '_cta_label',
 				'type'             => 'text_medium',
 			];
 			$cmb_options[] = [
-				'name'             => esc_html__( 'CTA Button Label (for Mobile)', self::METABOX_ID ),
+				'name'             => esc_html__( 'Sub-menu CTA Button Label (for Mobile)', self::METABOX_ID ),
 				'id'               => $id_prefix . '_cta_label_mobile',
 				'type'             => 'text_medium',
 			];
 			$cmb_options[] = [
-				'name'             => esc_html__( 'CTA Button Icon', self::METABOX_ID ),
+				'name'             => esc_html__( 'Sub-menu CTA Button Icon', self::METABOX_ID ),
 				'id'               => $id_prefix . '_cta_img',
 				'type'             => 'file',
 			];

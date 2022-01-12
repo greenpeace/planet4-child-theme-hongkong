@@ -41,7 +41,7 @@
 						</div>
 						<div class="menu menu--primary">
 							{% for menu in header_nav.menus %}
-							<div class="menu__item">
+							<div class="menu__item menu__item--{% if menu.children %}has-children{% else %}no-children{% endif %}">
 								<a href="{{ menu.link | e('html_attr') }}" class="header__link">{{ menu.label | e }}</a>
 								{{ menu.children | raw }}
 							</div>
@@ -146,12 +146,6 @@
 				<ul class="sub-menu sub-menu--fake"></ul>
 			</li>
 		</ul>
-	</script>
-
-	<script id="template-fake-cta" type="text/template">
-		<li class="menu-item menu-item--cta hide-gt-lg">
-			__CONTENT__
-		</li>
 	</script>
 
 	<!-- as seen in e.g. achievements_list.twig -->

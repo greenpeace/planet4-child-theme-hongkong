@@ -17,16 +17,9 @@ export default function() {
 			label_translate = $label_attr.data('label-fake');
 		}
 		$('.menu__inner2', this)[0].innerHTML += $('#template-fake-sub-menu').text().replace('__PLACEHOLDER__', label_translate);
-		let $cta = $('.header__cta', this);
-		let $sub = $('.sub-menu', this);
-		if($cta.length > 0 && $sub.length > 0) {
-			$sub.each(function() {
-				this.innerHTML += $('#template-fake-cta').text().replace('__CONTENT__', $cta[0].outerHTML).replace('header__cta--real', 'header__cta--fake');
-			});
-		}
 	});
 
-	$('.menu__item', $menu).hover(function() {
+	$('.menu__item--has-children', $menu).hover(function() {
 		if(!gt_lg()) { return; }
 		$(this).addClass('actived').siblings().removeClass('actived').find('.menu-item.actived').removeClass('actived');
 		let $first_children = $('.menu-item-has-children:has(.menu-item):eq(0)', this);
@@ -38,7 +31,7 @@ export default function() {
 		$(this).removeClass('actived');
 		$('.menu-item.actived', this).removeClass('actived');
 	})
-	$('.menu__item .header__link', $menu).on('click', function(e) {
+	$('.menu__item--has-children .header__link', $menu).on('click', function(e) {
 		if(gt_lg()) { return; }
 		e.preventDefault();
 		if($(e.target).is('.menu-item-has-children:has(.menu-item), .menu-item-has-children:has(.menu-item) *')) { return; }

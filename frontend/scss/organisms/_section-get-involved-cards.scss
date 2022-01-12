@@ -1,5 +1,7 @@
 .section-get-involved-cards {
 
+  @include letter-spacing-version-b;
+
   .page-template > & {
     background-image: none;
   }
@@ -30,6 +32,22 @@
   }
   .swiper-slide {
     height: auto;
+    @include greaterThan('sm') {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 140ms linear, visibility 140ms linear 140ms;
+    }
+  }
+  .swiper-slide-active {
+    &,
+    & + .swiper-slide:not(.grid__box--fake),
+    & + .swiper-slide + .swiper-slide:not(.grid__box--fake) {
+      @include greaterThan('sm') {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 140ms linear, visibility 140ms linear 0ms;
+      }
+    }
   }
   .swiper-pagination-bullet {
     display: block;
@@ -130,13 +148,13 @@
       }
       .title {
         margin-bottom: 0;
-        font-size: 16px;
+        @include text-version-b;
         font-weight: bold;
         @include lessThan('sm') {
           margin-bottom: 30px;
         }
         @include greaterThan('sm') {
-          font-weight: 600;
+          font-weight: 500;
         }
         @include greaterThan('lg') {
           font-size: 18px;
@@ -161,7 +179,7 @@
       border: none;
       cursor: pointer;
       display: inline-block;
-      font-size: 16px;
+      @include text-version-b;
       color: black;
       transition: color 140ms linear;
       @include lessThan('sm') {
@@ -216,7 +234,7 @@
     }
     .category {
       text-align: right;
-      font-size: 16px;
+      @include text-version-b;
       margin-bottom: 5px;
       @include greaterThan('sm') {
         font-size: 15px;
@@ -234,6 +252,7 @@
     .title {
       font-weight: normal;
       font-size: 18px;
+      @include line-height-version-b;
       margin-top: 5px;
       margin-bottom: 15px;
       @include greaterThan('sm') {
@@ -246,14 +265,14 @@
       padding-bottom: percentage(168/292);
     }
     .subtitle {
-      font-weight: 600;
-      font-size: 16px;
+      font-weight: 500;
+      @include text-version-b;
       @include greaterThan('sm') {
         font-size: 18px;
       }
     }
     .desc p {
-      font-size: 16px;
+      @include text-version-b;
     }
 
     .percentage {
@@ -294,6 +313,11 @@
       align-self: auto;
       border: none;
       color: #393939;
+      &--fake {
+        @include lessThan('sm') {
+          display: none;
+        }
+      }
       .title {
         color: black;
       }
