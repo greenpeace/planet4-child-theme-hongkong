@@ -96,7 +96,6 @@ class P4CT_Metabox_Register {
 		$this->register_testimony_block_options_metabox();
 
 		$this->register_header_nav_options_metabox();
-		$this->register_curl_debug_metabox();
 
 	}
 
@@ -104,6 +103,9 @@ class P4CT_Metabox_Register {
 	 * Add menu options page.
 	 */
 	public function add_options_pages() {
+
+		add_menu_page( 'Debug Information', 'Debug Info', 'read', 'gpea_curl_debug', [ $this, 'register_curl_debug_metabox' ], 'dashicons-admin-site-alt' );
+
 		add_menu_page( $this->title, $this->title, 'manage_options', $this->slug, function () {}, 'dashicons-admin-site-alt' );
 		foreach ( $this->subpages as $path => $subpage ) {
 			add_submenu_page(
@@ -117,6 +119,7 @@ class P4CT_Metabox_Register {
 				}
 			);
 		}
+
 	}
 
 	/**
@@ -1328,43 +1331,46 @@ class P4CT_Metabox_Register {
 	 */
 	public function register_curl_debug_metabox() {
 
-		$this->subpages['gpea_curl_debug_page'] = [
-			'title'        => esc_html__( 'Debug Information', self::METABOX_ID ),
-			'menu_title'   => esc_html__( 'Debug Info', self::METABOX_ID ),
-			'option_key'   => 'gpea_curl_debug',
-			'fields'       => [],
-		];
-
-		$cmb_options = &$this->subpages['gpea_curl_debug_page']['fields'];
-
-		$cmb_options[] = [
-			'name'             => esc_html__( 'Loaded Extensions', self::METABOX_ID ),
-			'desc'             => '<pre>' . print_r( get_loaded_extensions(), TRUE ) . '</pre>',
-			'id'               => 'gpea_curl_debug_loaded_extestions',
-			'type'             => 'title',
-		];
-
-		$cmb_options[] = [
-			'name'             => esc_html__( 'cURL Version', self::METABOX_ID ),
-			'desc'             => function_exists( 'curl_version' ) ? '<pre>' . print_r( curl_version(), TRUE ) . '</pre>' : 'Function <code>curl_version()</code> is not exists.',
-			'id'               => 'gpea_curl_debug_curl_version',
-			'type'             => 'title',
-		];
-
 		ob_start();
 		phpinfo();
 		$phpinfo = ob_get_contents();
 		ob_end_clean();
-
+		
+		$phpinfo_style = explode( '{text-decoration: underline;}', $phpinfo );
+		$phpinfo_style = explode( '</style>', $phpinfo_style[1] );
+		
 		$phpinfo = explode( '<div class="center">', $phpinfo );
 		$phpinfo = explode( '</div></body>', $phpinfo[1] );
 
-		$cmb_options[] = [
-			'name'             => esc_html__( 'PHP Information', self::METABOX_ID ),
-			'desc'             => $phpinfo[ 0 ],
-			'id'               => 'gpea_curl_debug_phpinfo',
-			'type'             => 'title',
-		];
+		?>
+
+		<style><?php echo $phpinfo_style[0]; ?></style>
+
+		<h1>Debug Information</h1>
+
+		<h2>Loaded Extensions</h2>
+		<pre><?php print_r( get_loaded_extensions() ); ?></pre>
+
+		<h2>cURL Version</h2>
+		<pre><?php if( function_exists( 'curl_version' ) ): print_r( curl_version() ); else: ?>Function <code>curl_version()</code> is not exists.<?php endif; ?></pre>
+
+		<h2>PHP Information</h2>
+		<div style="overflow: auto;"><?php echo $phpinfo[0]; ?></div>
+
+		<h2>cURL Testing (Arctic Sunrise GPS)</h2>
+		<?php
+
+		$curl = curl_init();
+		if( !isset( $curl ) || !$curl ) {
+			echo 'Failed to init cURL.';
+		}
+		else {
+			curl_setopt( $curl, CURLOPT_URL, 'https://maps.greenpeace.org/maps/gpships/arctic_sunrise_gps_lastpoint.geojson' );
+			curl_setopt( $curl, CURLOPT_RETURNTRANSFER, TRUE );
+			$ship_data = curl_exec( $curl );
+			curl_close( $curl );
+			echo '<pre>' . print_r( @json_decode( $ship_data ), TRUE ) . '</pre>';
+		}
 
 	}
 
