@@ -66,6 +66,8 @@
 }
 
 .b-version-homepage .header { //// .header {
+  // @include line-height-version-b;
+  letter-spacing: 0.78px;
   background-color: $color-green;
   position: fixed;
   left: 0;
