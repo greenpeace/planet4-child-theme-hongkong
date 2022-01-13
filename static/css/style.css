@@ -1884,6 +1884,8 @@ body.old-version-homepage .header--new { display: none; }
 
 .footer--new { position: relative; padding-top: 60px; background: #292F47 url(../images/footer-bg.png) no-repeat bottom center; background-size: cover; color: white; z-index: 2; }
 
+.footer--new, .footer--new h5 { letter-spacing: 0.84px; line-height: 26px; }
+
 @media only screen and (min-width: 1024px) { .footer--new { padding-top: 150px; } }
 
 .footer--new h5, .footer--new .icon-greenpeace { color: white; font-size: 16px; }
@@ -1928,7 +1930,9 @@ body.old-version-homepage .header--new { display: none; }
 
 .footer--new .social-links > li a:focus [class^='icon-']::before, .footer--new .social-links > li a:focus [class*=' icon-']::before, .footer--new .social-links > li a:hover [class^='icon-']::before, .footer--new .social-links > li a:hover [class*=' icon-']::before { color: #cccccc; }
 
-.footer--new .footer-greenpeace { margin-bottom: 20px; font-size: 16px; }
+.footer--new .footer-greenpeace { margin-bottom: 20px; }
+
+.footer--new .footer-greenpeace p { font-size: 16px; line-height: 26px; }
 
 @media only screen and (min-width: 1024px) { .footer--new .footer-greenpeace { margin-right: 15px; -webkit-box-flex: 0; -ms-flex: 0 0 60%; flex: 0 0 60%; }
   .footer--new .footer-greenpeace p { width: 85%; } }
@@ -1940,7 +1944,7 @@ body.old-version-homepage .header--new { display: none; }
 
 @media only screen and (min-width: 1024px) { .footer--new .footer-greenpeace + div { width: initial; float: none; } }
 
-.footer--new .footer-greenpeace__logo { width: 85%; max-width: 200px; max-height: 40px; }
+.footer--new .footer-greenpeace__logo { width: 85%; max-width: 200px; max-height: 40px; margin-bottom: 5px; }
 
 .footer--new .footer-greenpeace__logo--zh { max-width: 310px; }
 
@@ -1948,7 +1952,7 @@ body.old-version-homepage .header--new { display: none; }
 
 .footer--new .has-social-links { position: relative; }
 
-.footer--new .secondary-links { font-size: 16px; }
+.footer--new .secondary-links { letter-spacing: 2.04px; font-size: 16px; }
 
 .footer--new .secondary-links > li { display: inline-block; margin-right: 30px; }
 

@@ -1,5 +1,12 @@
 // B Version
 .footer--new { //// .footer {
+
+  &,
+  h5 {
+    @include letter-spacing-version-b;
+    @include line-height-version-b;
+  }
+
   position: relative;
   padding-top: 60px;
   background: $color-blue url(../images/footer-bg.png) no-repeat bottom center;
@@ -109,7 +116,9 @@
 
   .footer-greenpeace {
     margin-bottom: 20px;
-    font-size: 16px;
+    p {
+      @include text-version-b;
+    }
     @include greaterThan('sm') {
       margin-right: 15px;
       flex: 0 0 60%;
@@ -135,6 +144,7 @@
       width: 85%;
       max-width: 200px;
       max-height: 40px;
+      margin-bottom: 5px;
       &--zh {
         max-width: 310px;
       }
@@ -156,6 +166,7 @@
 
   .secondary-links {
     @include list-inline;
+    letter-spacing: 2.04px;
     font-size: 16px;
     a {
       color: white;
