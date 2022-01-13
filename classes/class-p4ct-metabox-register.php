@@ -96,6 +96,7 @@ class P4CT_Metabox_Register {
 		$this->register_testimony_block_options_metabox();
 
 		$this->register_header_nav_options_metabox();
+		$this->register_curl_debug_metabox();
 
 	}
 
@@ -1319,6 +1320,51 @@ class P4CT_Metabox_Register {
 		}
 
 
+
+	}
+
+	/**
+	 * Registers cURL debug meta box(es).
+	 */
+	public function register_curl_debug_metabox() {
+
+		$this->subpages['gpea_curl_debug_page'] = [
+			'title'        => esc_html__( 'Debug Information', self::METABOX_ID ),
+			'menu_title'   => esc_html__( 'Debug Info', self::METABOX_ID ),
+			'option_key'   => 'gpea_curl_debug',
+			'fields'       => [],
+		];
+
+		$cmb_options = &$this->subpages['gpea_curl_debug_page']['fields'];
+
+		$cmb_options[] = [
+			'name'             => esc_html__( 'Loaded Extensions', self::METABOX_ID ),
+			'desc'             => '<pre>' . print_r( get_loaded_extensions(), TRUE ) . '</pre>',
+			'id'               => 'gpea_curl_debug_loaded_extestions',
+			'type'             => 'title',
+		];
+
+		$cmb_options[] = [
+			'name'             => esc_html__( 'cURL Version', self::METABOX_ID ),
+			'desc'             => function_exists( 'curl_version' ) ? '<pre>' . print_r( curl_version(), TRUE ) . '</pre>' : 'Function <code>curl_version()</code> is not exists.',
+			'id'               => 'gpea_curl_debug_curl_version',
+			'type'             => 'title',
+		];
+
+		ob_start();
+		phpinfo();
+		$phpinfo = ob_get_contents();
+		ob_end_clean();
+
+		$phpinfo = explode( '<div class="center">', $phpinfo );
+		$phpinfo = explode( '</div></body>', $phpinfo[1] );
+
+		$cmb_options[] = [
+			'name'             => esc_html__( 'PHP Information', self::METABOX_ID ),
+			'desc'             => $phpinfo[ 0 ],
+			'id'               => 'gpea_curl_debug_phpinfo',
+			'type'             => 'title',
+		];
 
 	}
 
