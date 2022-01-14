@@ -45,6 +45,13 @@
 	</div>
 </footer>
 
+{% if header_nav.sticky.enabled %}
+<div class="sticky-button">
+	<a href="{{ header_nav.sticky.link | e('html_attr') }}" class="button primary hide-lt-sm">{{ header_nav.sticky.label | e }}</a>
+	<a href="{{ header_nav.sticky.link | e('html_attr') }}" class="button primary hide-gt-sm">{{ header_nav.sticky.label_mobile | e }}</a>
+</div>
+{% endif %}
+
 <!-- Old Version -->
 <footer class="footer footer--old">
 	<div class="footer-upper">
