@@ -3,18 +3,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Greenpeace Planet 4 Child Theme Hong Kong 0.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/planet4-child-theme-hongkong\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/planet4-child-"
+"theme-hongkong\n"
+"POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
+"PO-Revision-Date: 2021-12-21 10:30+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: 2021-07-05 14:43+0800\n"
 "X-Generator: Poedit 3.0\n"
 "X-Domain: gpea_theme\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: zh_HK\n"
 
 #. Theme Name of the theme
 msgid "Greenpeace Planet 4 Child Theme Hong Kong"
@@ -132,6 +133,9 @@ msgstr "環境議題"
 #: classes/class-p4ct-site.php:162
 msgid "About Greenpeace"
 msgstr "關於綠色和平"
+
+msgid "Quick links"
+msgstr "快速連結"
 
 #: classes/class-p4ct-site.php:163
 msgid "Press release and media"
@@ -364,7 +368,14 @@ msgstr "很多臺灣人，像您一樣…"
 
 #: single.php:133
 msgid "Short intro to donation launcher"
-msgstr "關注地球環境，因為這與您、我、每一個人，都息息相關。面對眾多環境問題，綠色和平致力提供解決方案，讓您我能夠與慷慨的大地共生。 為確保獨立與公正，我們從不接受來自政府或企業的捐款。所有推動環境工作的資源，都來自熱心民眾，因此您的支持對我們無比重要。很多像您一樣的民眾，願意以行動帶來改變，才造就過去無數的環保成就。 您願意以小額捐助，以月捐方式支持我們的工作嗎？ 我們承諾謹慎使用每分資源，並力行資訊公開透明，以接受公眾、會員及監管機構的監督。 您願意加入我們，只要幾分鐘的時間登記，以及每天10元的金額，共同守護我們唯一家園嗎？"
+msgstr ""
+"關注地球環境，因為這與您、我、每一個人，都息息相關。面對眾多環境問題，綠色和"
+"平致力提供解決方案，讓您我能夠與慷慨的大地共生。 為確保獨立與公正，我們從不接"
+"受來自政府或企業的捐款。所有推動環境工作的資源，都來自熱心民眾，因此您的支持"
+"對我們無比重要。很多像您一樣的民眾，願意以行動帶來改變，才造就過去無數的環保"
+"成就。 您願意以小額捐助，以月捐方式支持我們的工作嗎？ 我們承諾謹慎使用每分資"
+"源，並力行資訊公開透明，以接受公眾、會員及監管機構的監督。 您願意加入我們，只"
+"要幾分鐘的時間登記，以及每天10元的金額，共同守護我們唯一家園嗎？"
 
 #: single.php:134
 msgid "I want to support"
@@ -408,12 +419,12 @@ msgid "Thank you for signing,"
 msgstr "感謝您加入連署！"
 
 #: page-templates/petition-thankyou.php:98
-msgid "Now, will you share this petition with your friends? The more people who sign, the more pressure the government will feel."
-msgstr "集合群眾力量，我們能夠成就更多！您願意邀請親友加入連署，向政府及企業施壓，以守護珍貴的地球嗎？"
-
-#: page-templates/petition-thankyou.php:98
-msgid "In order to maintain a fair and independent, and continue to appeal to the government and enterprises, Greenpeace 100% relies on donations from your supporters to direct changes. Would you like to join us?"
-msgstr "為維持公正獨立，持續向政府、企業提出訴求，綠色和平100%倚賴如您一般的支持者捐助，以直接行動帶來改變。您願意加入我們嗎？"
+msgid ""
+"Now, will you share this petition with your friends? The more people who "
+"sign, the more pressure the government will feel."
+msgstr ""
+"集合群眾力量，我們能夠成就更多！您願意邀請親友加入連署，向政府及企業施壓，以"
+"守護珍貴的地球嗎？"
 
 #: page-templates/petition-thankyou.php:99
 msgid "NO"
@@ -445,11 +456,16 @@ msgstr "跳過"
 
 #: page-templates/petition-thankyou.php:106
 msgid "- Greenpeace is urgently campaigning to protect our planet."
-msgstr "- 綠色和平致力確保地球維持孕育多元生命的能力，對抗現今最急切的環境危機。"
+msgstr ""
+"- 綠色和平致力確保地球維持孕育多元生命的能力，對抗現今最急切的環境危機。"
 
 #: page-templates/petition-thankyou.php:107
-msgid "Our campaigns are 100% funded by individuals like you. Will you join us as a supporter with a regular amount of 400HKD or more a month?"
-msgstr "我們從不接受來自政府或企業的捐款，以確保100%獨立。您願意以月捐NT$400支持我們的環保項目嗎？"
+msgid ""
+"Our campaigns are 100% funded by individuals like you. Will you join us as a "
+"supporter with a regular amount of 400HKD or more a month?"
+msgstr ""
+"我們從不接受來自政府或企業的捐款，以確保100%獨立。您願意以月捐NT$400支持我們"
+"的環保項目嗎？"
 
 #: page-templates/petition-thankyou.php:108
 msgid "One off"
@@ -514,5 +530,35 @@ msgstr "所有議題"
 msgid "Any topic"
 msgstr "所有主題"
 
-msgid "Facebook"
-msgstr "Facebook"
+#. Header menu items
+msgid "WHO WE ARE"
+msgstr "關於綠色和平"
+
+msgid "OUR WORK"
+msgstr "六大目標&專案"
+
+msgid "GET INVOLVED"
+msgstr "一起行動"
+
+msgid "NEWS & STORIES"
+msgstr "成果與故事"
+
+msgid "Issue we work on"
+msgstr "六大目標"
+
+msgid "On-Going Projects"
+msgstr "重點專案"
+
+msgid "login"
+msgstr "會員登入"
+
+#~ msgid ""
+#~ "In order to maintain a fair and independent, and continue to appeal to "
+#~ "the government and enterprises, Greenpeace 100% relies on donations from "
+#~ "your supporters to direct changes. Would you like to join us?"
+#~ msgstr ""
+#~ "為維持公正獨立，持續向政府、企業提出訴求，綠色和平100%倚賴如您一般的支持者"
+#~ "捐助，以直接行動帶來改變。您願意加入我們嗎？"
+
+#~ msgid "Facebook"
+#~ msgstr "Facebook"

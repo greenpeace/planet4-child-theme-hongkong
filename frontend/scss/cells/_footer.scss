@@ -1,10 +1,320 @@
-footer {
+// B Version
+.footer--new { //// .footer {
+
+  &,
+  h5 {
+    @include letter-spacing-version-b;
+    @include line-height-version-b;
+  }
+
+  position: relative;
+  padding-top: 60px;
+  background: $color-blue url(../images/footer-bg.png) no-repeat bottom center;
+  background-size: cover;
+  color: white;
+  z-index: 2;
+  @include greaterThan('sm') {
+    padding-top: 150px;
+  }
+
+  h5,
+  .icon-greenpeace {
+    color: white;
+    font-size: 16px;
+  }
+
+  ul {
+    padding-left: 0;
+    list-style: none;
+    font-size: 14px;
+    @include greaterThan('sm') {
+      font-size: 16px;
+    }
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  a,
+  a [class^='icon-']::before,
+  a [class*=' icon-']::before {
+    color: white;
+    transition: color 140ms linear;
+  }
+
+  a {
+    &:focus,
+    &:hover {
+      color: $color-green;
+      border-bottom: none;
+    }
+  }
+
+  hr {
+    background-color: white;
+    height: 2px;
+  }
+
+  .ct-container {
+    @include ct-container-version-b;
+  }
+
+  .footer-upper {
+    padding-bottom: 200px;
+    @include greaterThan('sm') {
+      .ct-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+    }
+    h5 {
+      margin-bottom: 10px;
+    }
+  }
+
+  .footer-lower {
+    padding-top: 20px;
+    padding-bottom: 40px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .social-links {
+    @include list-inline;
+
+    > li {
+      margin-right: 5px;
+
+      @include greaterThan('sm') {
+        margin-right: 0;
+      }
+
+      @include greaterThan('lg') {
+        margin-right: 5px;
+      }
+
+      a {
+        padding-left: 5px;
+        padding-right: 5px;
+        font-size: 24px;
+        line-height: 1;
+
+        &:focus,
+        &:hover {
+          color: darken(white, 20%);
+
+          [class^='icon-']::before,
+          [class*=' icon-']::before {
+            color: darken(white, 20%);
+          }
+        }
+      }
+    }
+  }
+
+  .footer-greenpeace {
+    margin-bottom: 20px;
+    p {
+      @include text-version-b;
+    }
+    @include greaterThan('sm') {
+      margin-right: 15px;
+      flex: 0 0 60%;
+      p {
+        width: 85%;
+      }
+    }
+    @include greaterThan('lg') {
+      flex: 0 0 50%;
+      p {
+        width: 80%;
+      }
+    }
+    + div {
+      width: 50%;
+      float: left;
+      @include greaterThan('sm') {
+        width: initial;
+        float: none;
+      }
+    }
+    &__logo {
+      width: 85%;
+      max-width: 200px;
+      max-height: 40px;
+      margin-bottom: 5px;
+      &--zh {
+        max-width: 310px;
+      }
+      &--ko {
+      }
+    }
+  }
+
+  .has-social-links,
+  .quick-links {
+    @include greaterThan('sm') {
+      flex: 1 1 auto;
+    }
+  }
+
+  .has-social-links {
+    position: relative;
+  }
+
+  .secondary-links {
+    @include list-inline;
+    letter-spacing: 2.04px;
+    font-size: 16px;
+    a {
+      color: white;
+      &:hover,
+      &:focus {
+        color: $color-green;
+      }
+    }
+  }
+
+  .dropdown {
+    position: relative;
+    @include greaterThan('sm') {
+      flex: 0 0 100%;
+    }
+    @include greaterThan('lg') {
+      flex: 0 0 auto;
+    }
+    @include lessThan('lg') {
+      margin-top: 40px;
+    }
+    button {
+      background-color: transparent;
+      border: none;
+      // outline: none;
+      display: flex;
+      align-items: center;
+      color: white;
+      cursor: pointer;
+      padding: 0;
+      margin-top: -0.5em;
+    }
+    &__selected {
+      font-size: 20px;
+      font-weight: bold;
+      white-space: nowrap;
+      padding-right: 1.5em;
+      @include greaterThan('sm') {
+        font-weight: 400;
+      }
+    }
+    &__arrow {
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      display: block;
+      padding: 4px;
+      transform: rotate(45deg);
+    }
+    &__menu {
+      display: none;
+      position: absolute;
+      // width: 300px;
+      width: 100%;
+      // max-height: 80vh;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0px 2px 12px 0px #767676;
+      flex-direction: column;
+      padding: 10px 20px;
+      left: auto;
+      right: 0px;
+      @include lessThan('sm') {
+        max-height: 260px;
+      }
+      @include greaterThan('sm') {
+        left: 0;
+        right: auto;
+        width: 900px;
+      }
+      @include greaterThan('lg') {
+        left: auto;
+        right: 0px;
+      }
+
+      a {
+        text-decoration: none;
+        color: $color-blue;
+        margin-bottom: 5px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &.is-open .dropdown__menu {
+      display: flex;
+    }
+  }
+
+}
+
+.sticky-button {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 99;
+  .button {
+    width: 100%;
+    margin: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    line-height: 48 - 1px;
+    height: 48px;
+    @include greaterThan('sm') {
+      line-height: 64 - 1px;
+      height: 64px;
+    }
+    @include greaterThan('lg') {
+      display: none;
+    }
+  }
+  .hide-lt-sm {
+    @include lessThan('sm') {
+      display: none;
+    }
+  }
+  .hide-gt-sm {
+    @include greaterThan('sm') {
+      display: none;
+    }
+  }
+}
+
+body.sticky-button-enabled:after {
+  content: '';
+  display: block;
+  background-color: #292F47;
+  @include lessThan('lg') {
+    height: 64px;
+    margin-top: -64px;
+  }
+  @include lessThan('sm') {
+    height: 48px;
+    margin-top: -48px;
+  }
+}
+
+// Old Version
+.footer--old {
+  display: none;
   position: relative;
   padding-top: 20px;
   background-color: $color-blue;
   color: white;
   z-index: 2;
-
   @include greaterThan('sm') {
     padding-top: 60px;
   }
@@ -22,7 +332,6 @@ footer {
     padding-left: 0;
     list-style: none;
     font-size: 14px;
-
     @include greaterThan('sm') {
       font-size: 16px;
     }
@@ -53,7 +362,6 @@ footer {
 
   .footer-upper {
     padding-bottom: 20px;
-
     @include greaterThan('sm') {
       .ct-container {
         display: flex;
@@ -277,5 +585,15 @@ footer {
   }
   img.footer-greenpeace--logo {
     max-height: 40px;
+  }
+}
+
+body.old-version-homepage {
+  .footer--old {
+    display: block;
+  }
+  .footer--new,
+  .sticky-button {
+    display: none;
   }
 }

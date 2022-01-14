@@ -1,5 +1,219 @@
-body.search,
-.dynamic-search {
+// B Version
+body.b-version-homepage.search, //// body.search,
+.b-version-homepage .dynamic-search { //// .dynamic-search {
+  .live-search,
+  .advanced-search {
+    padding: 20px 0;
+
+    @include greaterThan('sm') {
+      padding: 40px 0;
+    }
+  }
+
+  .live-search {
+    background: white;
+    min-height: 200px;
+
+    form {
+      .lds-spinner {
+        display: block;
+        position: absolute;
+        transform: scale(0.5);
+        transform-origin: left top;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 140ms linear, visibility 0s linear 140ms;
+      }
+
+      &.is-loading .lds-spinner {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 140ms linear, visibility 0s linear 0s;
+      }
+    }
+  }
+
+  #ajax-search-issues,
+  #ajax-search-topics,
+  #ajax-search-posts {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 140ms linear, visibility 0s linear 0s;
+
+    &.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 140ms linear, visibility 0s linear 140ms;
+    }
+  }
+
+  .search-title span {
+    @include text;
+    position: relative;
+    top: 13px;
+
+    @include greaterThan('sm') {
+      top: 22px;
+    }
+  }
+
+  .results-list {
+    margin-bottom: 40px;
+  }
+
+  .card-update.compact {
+    width: 100%;
+    padding: 20px 0;
+
+    + .card-update.compact {
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .card-issue {
+    margin-left: 0;
+  }
+
+  .filters {
+    margin: 20px 0;
+
+    .button {
+      float: right;
+    }
+  }
+
+  .results-no {
+    margin-top: 40px;
+  }
+
+  .filters-selects {
+    display: flex;
+    justify-content: space-between;
+
+    .select + .select {
+      margin-left: 10px;
+    }
+  }
+
+  .sort-by {
+    clear: both;
+    margin: 20px 0;
+  }
+
+  .has-load-more {
+    text-align: center;
+  }
+
+  @include greaterThan('sm') {
+    #ajax-search-posts .results-list,
+    .multiple-search-result .results-list {
+      display: grid;
+      grid-column-gap: 30px;
+      grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+
+      .card-update.compact:nth-child(2),
+      .card-update.compact:nth-child(3) {
+        border-top: none;
+      }
+    }
+
+    .advanced-wrapper {
+      display: flex;
+      justify-content: space-between;
+
+      > div {
+        width: 48%;
+      }
+
+      .sort-by {
+        text-align: right;
+
+        .select {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+.b-version-homepage.admin-bar { //// .admin-bar {
+  .dynamic-search {
+    @include greaterThan('sm') {
+      top: 100 + 32px;
+    }
+    @include greaterThan('lg') {
+      top: 86 + 32px;
+    }
+  }
+}
+
+.b-version-homepage .dynamic-search { //// .dynamic-search {
+  position: fixed;
+  top: 86px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  background: rgba(0, 0, 0, 0.7);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 200ms linear, visibility 0ms linear 240ms;
+
+  &.is-visible {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 200ms linear, visibility 0ms linear 0ms;
+    @include lessThan('sm') {
+      display: none;
+    }
+  }
+
+  @include greaterThan('sm') {
+    top: 100px;
+  }
+  @include greaterThan('lg') {
+    top: 86px;
+  }
+
+  .live-search {
+    max-height: 100%;
+    // overflow-y: scroll;
+    overflow-y: auto;
+    transform: translateY(-20px);
+    transition: transform 140ms ease-in-out;
+
+    // @include lessThan('sm') {
+      .ct-container {
+        position: relative;
+      }
+    // }
+  }
+
+  &.is-visible .live-search {
+    transform: translateY(0);
+  }
+
+  .close-dynamic-search-button {
+    position: absolute;
+    top: -50px;
+    right: 20px;
+    margin: 0;
+    padding: 5px;
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    z-index: 4;
+    cursor: pointer;
+
+    /* @include greaterThan('sm') {
+      top: 14px;
+    }*/
+  }
+}
+
+// Old Version
+body.old-version-homepage.search,
+.old-version-homepage .dynamic-search {
   .live-search,
   .advanced-search {
     padding: 20px 0;
@@ -135,7 +349,7 @@ body.search,
   }
 }
 
-.dynamic-search {
+.old-version-homepage .dynamic-search {
   position: fixed;
   top: 96px; // see _header.scss
   bottom: 0;

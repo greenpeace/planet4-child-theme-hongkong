@@ -7,7 +7,8 @@ export default function () {
     $firstnameField,
     $lastnameField,
     $emailField,
-    $optInFields;
+    $optInFields,
+    $customOptInFields;
 
   let requiredMsg,
     emailFormatErrMsg;
@@ -22,7 +23,7 @@ export default function () {
       lastname: $lastnameField.find('input').val(),
       email: $emailField.find('input').val(),
       campaignId: $section.find('[name="sf_campaign_id"]').val(),
-      optIn: $optInFields.find('input:not(:checked)').length == 0 ? 1 : 0,
+      optIn: $optInFields.find('input[required]:not(:checked)').length == 0 ? 1 : 0,
     }
     return values;
   }
@@ -65,7 +66,7 @@ export default function () {
       toggleFieldRequiredMsg($lastnameField, !values.lastname);
     }
 
-    allpass = allpass && values.firstname && values.lastname;
+    allpass = allpass && ($firstnameField.length == 0 || values.firstname) && values.lastname;
 
     // validate emails
     let emailPass
@@ -114,6 +115,7 @@ export default function () {
         let tmpl = $('[name="email_do_you_mean"]').val()
 
         // show that element
+        $emailField.find('.invalid-feedback').hide();
         $emailField.find('.do-you-mean')
           .text(tmpl.replace('%s', suggestion.full))
           .show()
@@ -135,17 +137,17 @@ export default function () {
   const doOptInValidation = function (k) {
 
     let $field = $optInFields.eq(k);
-    let optInPass = $field.find('input').prop('checked');
+    let optInPass = !$field.find('input').prop('required') || $field.find('input').prop('checked');
     let requiredMsg = $('[name="policy_required_err_message"]').val();
 
     // toggle the error class on the input element
-    $field.find('.custom-checkbox')
+    $field.find('input')
       .toggleClass("is-invalid", !optInPass, 400);    
 
     // toggle the required error message
     $field.find('.invalid-feedback.is-required').remove()
     if (!optInPass) {
-        $field.find('.custom-checkbox').append('<div class="invalid-feedback is-required">'+requiredMsg+'</div>')
+        $field.find('.custom-control-description').append('<div class="invalid-feedback is-required">'+requiredMsg+'</div>')
     }
 
     return optInPass;
@@ -205,6 +207,20 @@ export default function () {
       CampaignId: values.campaignId,
       OptIn: values.optIn
     }
+    let campaignData5 = {};
+    $optInFields.each(function() {
+      let $field = $(this).find('input');
+      let fieldName = $field.attr('name') || '';
+      let customIndex = $customOptInFields.index(this);
+      if($field.length > 0 && fieldName.length > 0) {
+        postData[fieldName] = $field.prop('checked') ? 1 : 0;
+        if(customIndex == -1) { return true; }
+        campaignData5[fieldName] = $field.prop('checked') ? true : false;
+      }
+      else if($field.length > 0 && customIndex != -1) {
+        campaignData5['checkbox' + ($customOptInFields.index(this) + 1)] = $field.prop('checked') ? true : false;
+      }
+    });
 
     // prepare the utm values
     const urlParams = new URLSearchParams(window.location.search);
@@ -222,7 +238,7 @@ export default function () {
       CampaignData2__c: "",
       CampaignData3__c: "",
       CampaignData4__c: "",
-      CampaignData5__c: "",
+      CampaignData5__c: JSON.stringify(campaignData5),
     })
 
     let endpoint = $section.find('form').attr('action');
@@ -286,11 +302,17 @@ export default function () {
     $firstnameField = $section.find('[name="supporter.firstname"]').closest('.en__field__element');
     $lastnameField = $section.find('[name="supporter.lastname"]').closest('.en__field__element');
     $emailField = $section.find('[name="supporter.email"]').closest('.en__field__element');
-    $optInFields = $section.find('.yes-checkbox');
+    $optInFields = $section.find('.checkbox-part');
+    $customOptInFields = $section.find('.checkbox-part--custom');
 
-    $("input[required]").blur(doValidation)
-    $("input[required]").blur(markTouched)
+    $("input[required]").change(doValidation);
+    $("input[required]").change(markTouched);
 
-    $section.find('button.submit').on('click', doSubmit)
+    $section.find('button.submit').on('click', doSubmit);
+
+    $emailField.find('input').on('focus', function() {
+      $section.find('.form-toggle-part').addClass('form-toggle-part--actived');
+    });
+
   });
 }

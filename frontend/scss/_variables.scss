@@ -3,40 +3,48 @@ $bs-lg: 1280px;
 $bs-sm: 1024px;
 
 // Colors
-$color-green: #66cc00;
-$color-blue: #292f47;
-$color-orange: #ff8100;
+$color-green: #66CC00;
+$color-blue: #292F47;
+$color-orange: #FF8100;
 
-$color-grey: #898b92;
-$color-grey-100: #f1f3f5;
-$color-grey-300: #dee2e6;
-$color-grey-500: #adb5bd;
+$color-light-green: #85D633;
+
+$color-orange-hover: #FFB660;
+$color-orange-active: #E96D00;
+$color-green-hover: $color-green;
+$color-green-active: #478F00;
+$color-disabled: #BAB0A6;
+
+$color-grey: #898B92;
+$color-grey-100: #F1F3F5;
+$color-grey-300: #DEE2E6;
+$color-grey-500: #ADB5BD;
 $color-grey-700: #495057;
 $color-grey-900: #212529;
 
-$color-lightblue: #e6f5f5;
-$color-red: #e41e1e;
+$color-lightblue: #E6F5F5;
+$color-red: #E41E1E;
 
-$color-forests: #00b474;
-$color-oceans: #008fe2;
-$color-arctic: #62cbd7;
-$color-climate: #ffbe00;
-$color-plastics: #afaa91;
-$color-health: #f96d8c;
+$color-forests: #00B474;
+$color-oceans: #008FE2;
+$color-arctic: #62CBD7;
+$color-climate: #FFBE00;
+$color-plastics: #AFAA91;
+$color-health: #F09D7F;
 
-$color-fb: #007afa;
-$color-tw: #1da1f2;
-$color-wa: #25d366;
+$color-fb: #007AFA;
+$color-tw: #1DA1F2;
+$color-wa: #25D366;
 
 // Backgrounds
 $gradient-smoke: linear-gradient(
   to bottom,
   rgba(238, 238, 238, 0) 0%,
-  #eeeeee 100%
+  #EEEEEE 100%
 );
 
 $gradient-smoke-inverted: linear-gradient(
   to top,
   rgba(238, 238, 238, 0) 0%,
-  #eeeeee 100%
+  #EEEEEE 100%
 );

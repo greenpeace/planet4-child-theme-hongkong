@@ -1,0 +1,488 @@
+.section-geography-set__lightbox .lightbox {
+  $temp: 86 / 2;
+  transform: translateY(#{$temp}px);
+  @include lessThan('lg') {
+    $temp: 100 / 2;
+    transform: translateY(#{$temp}px);
+  }
+  @include lessThan('sm') {
+    $temp: 86 / 2;
+    transform: translateY(#{$temp}px);
+  }
+  &__inner {
+    max-height: 80vh;
+  }
+}
+.sticky-button-enabled .section-geography-set__lightbox .lightbox {
+  @include lessThan('lg') {
+    $temp: (100 - 64) / 2;
+    transform: translateY(#{$temp}px);
+  }
+  @media only screen and (max-width: 782px) {
+    $temp: (86 - 48) / 2;
+    transform: translateY(#{$temp}px);
+  }
+  &__inner {
+    @include lessThan('lg') {
+      max-height: calc(80vh - 64px);
+    }
+    @media only screen and (max-width: 782px) {
+      max-height: calc(80vh - 48px);
+    }
+    @media only screen and (max-width: 600px) {
+      max-height: calc(80vh - 48px);
+    }
+  }
+}
+.admin-bar .section-geography-set__lightbox .lightbox {
+  $temp: (86 + 32) / 2;
+  transform: translateY(#{$temp}px);
+  @include lessThan('lg') {
+    $temp: (100 + 32) / 2;
+    transform: translateY(#{$temp}px);
+  }
+  @media only screen and (max-width: 782px) {
+    $temp: (86 + 46) / 2;
+    transform: translateY(#{$temp}px);
+  }
+  @media only screen and (max-width: 600px) {
+    $temp: 86 / 2;
+    transform: translateY(#{$temp}px);
+  }
+  &__inner {
+    max-height: calc(80vh - 32px);
+    @media only screen and (max-width: 782px) {
+      max-height: calc(80vh - 46px);
+    }
+    @media only screen and (max-width: 600px) {
+      max-height: 80vh;
+    }
+  }
+}
+.sticky-button-enabled.admin-bar .section-geography-set__lightbox .lightbox {
+  @include lessThan('lg') {
+    $temp: (100 + 32 - 64) / 2;
+    transform: translateY(#{$temp}px);
+  }
+  @media only screen and (max-width: 782px) {
+    $temp: (86 + 46 - 48) / 2;
+    transform: translateY(#{$temp}px);
+  }
+  @media only screen and (max-width: 600px) {
+    $temp: (86 - 48) / 2;
+    transform: translateY(#{$temp}px);
+  }
+  &__inner {
+    @include lessThan('lg') {
+      max-height: calc(80vh - 32px - 64px);
+    }
+    @media only screen and (max-width: 782px) {
+      max-height: calc(80vh - 46px - 48px);
+    }
+    @media only screen and (max-width: 600px) {
+      max-height: calc(80vh - 48px);
+    }
+  }
+}
+
+.section-geography-set {
+
+  @include letter-spacing-version-b;
+
+  .page-template > & {
+    background-image: none;
+  }
+  
+  br {
+    content: none;
+  }
+
+  .ct-container {
+    &--thin {
+      @include ct-container-version-b;
+    }
+  }
+
+  .content {
+    &--title {
+      .title {
+        @include title-text-version-b;
+        @include title-border-version-b;
+      }
+    }
+    &--desc {
+      @include greaterThan('sm') {
+        @include margin-left-version-b;
+        display: flex;
+      }
+      .desc p {
+        @include text-version-b;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+    }
+    &__inner {
+      &--1 {
+        @include greaterThan('sm') {
+          $content_margin: (960 / 2) - 26 - 6px;
+          margin-left: calc(50% - #{$content_margin});
+        }
+        @include greaterThan('lg') {
+          margin-left: 0;
+        }
+        .image {
+          background: no-repeat center;
+          background-size: cover;
+          padding-bottom: percentage(9 / 16);
+          cursor: pointer;
+          position: relative;
+          &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: url(../images/play-button.svg) no-repeat center;
+            background-size: contain;
+            width: percentage(74 / 440);
+            padding-bottom: percentage(74 / 440);
+          }
+        }
+      }
+      &--2 {
+        @include greaterThan('sm') {
+          margin-left: 30px;
+          flex: 1 0 450px;
+        }
+        @include greaterThan('lg') {
+          margin-left: 80px;
+          flex: 1 0 480px;
+        }
+        .image {
+          $ship_size: 100px;
+          position: relative;
+          // background: url(../images/world-map.png) no-repeat top center;
+          background: url(../images/world-map.png) no-repeat center;
+          background-size: contain;
+          // padding-bottom: percentage(240 / 484);
+          padding-bottom: calc(60% + #{$ship_size});
+          @include greaterThan('sm') {
+            height: 100%;
+            padding-bottom: 0;
+          }
+          &__inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: calc(100% - #{$ship_size});
+            height: calc(100% - #{$ship_size});
+          }
+          &__ship {
+            position: absolute;
+            display: none;
+            width: #{$ship_size};
+            height: #{$ship_size};
+            background-color: white;
+            border-radius: 50%;
+            // box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5);
+            box-shadow: 0px 2px 15px 0px rgba(215, 215, 215, 1);
+            overflow: hidden;
+            cursor: pointer;
+            transition: background-color 140ms linear;
+            @include greaterThan('lg') {
+              width: 112px;
+              height: 112px;
+            }
+            &:hover {
+              background-color: rgb(216, 242, 190);
+              z-index: 2;
+            }
+            &:focus,
+            &:active,
+            &--actived {
+              background-color: $color-green;
+              z-index: 2;
+              .image__name {
+                color: white;
+              }
+              .image__icon {
+                filter: invert(1);
+              }
+            }
+            &--actived {
+              z-index: 1;
+            }
+            &--loaded {
+              display: block;
+            }
+          }
+          &__name {
+            text-align: center;
+            padding-top: 20%;
+          }
+          &__icon {
+            background: no-repeat center;
+            background-size: contain;
+            width: 60%;
+            padding-bottom: percentage(40 / 60 * 0.6);
+            margin: auto;
+          }
+        }
+      }
+    }
+  }
+
+  &__lightbox {
+    @include letter-spacing-version-b;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 200ms linear, visibility 0ms linear 240ms;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    z-index: 4;
+    .lightbox {
+      &__inner {
+        background-color: white;
+        transform: translateY(-20px);
+        transition: transform 140ms ease-in-out;
+        box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5);
+        border-radius: 16px;
+        overflow-y: auto;
+        padding: 35px 15px;
+        @include greaterThan('sm') {
+          padding: 30px 74px;
+        }
+      }
+      &__close-button {
+        position: absolute;
+        top: 0px;
+        right: 20px;
+        margin: 0;
+        padding: 5px;
+        border: none;
+        background: transparent;
+        font-size: 24px;
+        z-index: 4;
+        cursor: pointer;
+        @include greaterThan('sm') {
+          top: 14px;
+        }
+      }
+      &__column {
+        &--text {
+          flex: 1;
+          @include greaterThan('sm') {
+            display: flex;
+            flex-direction: column;
+            .lightbox__header {
+              flex: 1;
+            }
+          }
+        }
+        &--video {
+          position: relative;
+          @include greaterThan('sm') {
+            margin-left: 30px;
+            flex: 0 0 percentage(290/610);
+          }
+          @include greaterThan('lg') {
+            margin-left: 60px;
+            flex: 0 0 percentage(540/920);
+          }
+          .media {
+            &:before {
+              display: block;
+              position: relative;
+              content: '';
+              padding-bottom: 100%;
+              @include greaterThan('lg') {
+                padding-bottom: percentage(435/540);
+              }
+            }
+          }
+          .image,
+          .video-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            .youtube-embed {
+              height: 100%;
+            }
+          }
+          .buttons {
+            position: absolute;
+            right: 20px;
+            bottom: 15px;
+            border-radius: 16px;
+            background-color: white;
+            box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5);
+            z-index: 1;
+            @include greaterThan('lg') {
+              right: 30px;
+              bottom: 35px;
+            }
+          }
+          .video-button {
+            padding-left: 20px;
+            padding-right: 20px;
+            line-height: 49px;
+            height: 50px;
+            cursor: pointer;
+            position: relative;
+            &--pause {
+              &:before,
+              &:after {
+                content: '';
+                display: inline-block;
+                height: 14px;
+                width: 2px;
+                background-color: $color-green;
+              }
+              &:before {
+                
+              }
+              &:after {
+                margin-left: 8px;
+              }
+            }
+            &--play {
+              &:before {
+                content: '';
+                display: inline-block;
+                height: 24px;
+                width: 24px;
+                background: url(../images/video-icon.svg) no-repeat center;
+                background-size: contain;
+                vertical-align: -0.4em;
+                margin-right: 10px;
+              }
+            }
+          }
+          .image {
+            background: no-repeat center;
+            background-size: cover;
+          }
+          &[data-playing="0"] {
+            .image {
+              z-index: 1;
+            }
+            .video-button--pause {
+              display: none;
+            }
+          }
+          &[data-playing="1"] {
+            .video-button--play {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    &--actived {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 200ms linear, visibility 0ms linear 0ms;
+      .lightbox__inner {
+        transform: translateY(0);
+      }
+    }
+  }
+  &__ship {
+    .title {
+      font-weight: normal;
+      font-size: 24px;
+      margin-bottom: 10px;
+      @include greaterThan('sm') {
+        font-size: 25px;
+      }
+      @include greaterThan('lg') {
+        font-size: 29px;
+      }
+    }
+    .lightbox__header .subtitle {
+      color: $color-green;
+      @include text-version-b;
+      margin-top: 0;
+      @include greaterThan('sm') {
+        font-size: 20px;
+      }
+    }
+    .lightbox__header p {
+      @include text-version-b;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .lightbox__content {
+      @include greaterThan('sm') {
+        display: flex;
+      }
+    }
+    .lightbox__footer {
+      @include line-height-version-b;
+      @include lessThan('sm') {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      &:before {
+        content: '';
+        display: inline-block;
+        background: url(../images/map-pin.svg) no-repeat center;
+        background-size: contain;
+        width: 20px;
+        height: 22px;
+        vertical-align: -0.25em;
+        margin-right: 10px;
+      }
+    }
+  }
+  &__video {
+    .video-content {
+      width: 100%;
+      &--youtube {
+        position: relative;
+        padding-bottom: percentage(9/16);
+        .youtube-embed {
+          position: absolute;
+          height: 100%;
+        }
+      }
+    }
+    .title {
+      font-weight: normal;
+      font-size: 25px;
+      @include greaterThan('lg') {
+        font-size: 29px;
+      }
+    }
+    @include lessThan('sm') {
+      .lightbox {
+        .title {
+          display: none;
+        }
+        .video-content {
+          margin-top: 20px;
+        }
+        &__inner {
+          background-color: transparent;
+          box-shadow: none;
+          border-radius: 0;
+          padding-right: 0;
+          padding-left: 0;
+        }
+        &__close-button {
+          color: white;
+        }
+      }
+    }
+  }
+
+}
