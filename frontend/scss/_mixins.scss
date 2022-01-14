@@ -51,7 +51,23 @@
   }
 }
 
+@mixin ct-container-version-b {
+  @include greaterThan('sm') {
+    max-width: 960px;
+  }
+  @include greaterThan('lg') {
+    max-width: 1200px;
+  }
+}
+
 // Typography
+@mixin letter-spacing-version-b {
+  letter-spacing: 0.84px;
+}
+@mixin line-height-version-b {
+  line-height: 26px;
+}
+
 @mixin margins {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -102,9 +118,47 @@
   }
 }
 
+@mixin title-text-version-b {
+  font-weight: normal;
+  font-size: 22px;
+  margin: 1.5em auto;
+  @include lessThan('sm') {
+    display: table;
+    @include line-height-version-b;
+  }
+  @include greaterThan('sm') {
+    font-size: 28px;
+  }
+  @include greaterThan('lg') {
+    margin: 1em auto;
+  }
+}
+@mixin title-border-version-b {
+  border-left: 6px solid $color-green;
+  padding-left: 20px;
+}
+
 @mixin subtitle {
   @include title-text;
   color: rgb(95, 95, 95);
+}
+
+@mixin margin-left-version-b {
+  @include greaterThan('sm') {
+    margin-left: 26px;
+  }
+  @include greaterThan('lg') {
+    margin-left: 82px;
+  }
+}
+
+@mixin margin-right-version-b {
+  @include greaterThan('sm') {
+    margin-right: 26px;
+  }
+  @include greaterThan('lg') {
+    margin-right: 82px;
+  }
 }
 
 @mixin text {
@@ -113,6 +167,15 @@
   @include greaterThan('sm') {
     font-size: 18px;
   }
+}
+
+@mixin text-version-b {
+  font-size: 16px;
+  @include line-height-version-b;
+}
+@mixin text-border-version-b {
+  border-left: 4px solid $color-green;
+  padding-left: 20px;
 }
 
 @mixin caption {
@@ -175,6 +238,11 @@
   text-decoration: none !important;
   border-bottom: none !important;
   color: black;
+}
+
+@mixin card-version-b {
+  border-radius: 16px;
+  box-shadow: 0px 2px 25px 0px rgba(215, 215, 215, 0.5);
 }
 
 @mixin profile {

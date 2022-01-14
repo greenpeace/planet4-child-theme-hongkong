@@ -1,40 +1,100 @@
 .section-mc-subscription {
+
+  overflow: hidden;
+  @include letter-spacing-version-b;
+
+  .page-template > & {
+    background-image: none;
+  }
+
+  br {
+    content: none;
+  }
+  
   .hide {
     display: none !important;
   }
 
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
   background: white !important;
 
-  h2 {
-    @include title-mid;
+  .form-toggle-part {
+    height: 0;
+    margin-top: 0;
+    opacity: 0;
+    transition: visibility 0s linear .33s,opacity .33s linear;
+    visibility: hidden;
+    // overflow: hidden;
+    &--actived {
+      height: auto;
+      opacity: 1;
+      transition-delay: .1s;
+      visibility: visible;
+    }
   }
 
-  .ct-container.subscribe {}
-
-  .ct-container.thankyou {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @include greaterThan('sm') {
-    padding: 35px 0;
+  .ct-container {
+    @include ct-container-version-b;
+    &.subscribe {
+    }
+    &.thankyou {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   .content {
     display: flex;
     align-items: center;
     flex-direction: column;
+    &--title,
+    &--thankyou {
+      h2 {
+        @include title-text-version-b;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 0;
+        @include text-version-b;
+      }
+    }
+    &--title {
+      h2 {
+        order: 1;
+      }
+      .desc {
+        @include text-border-version-b;
+      }
+    }
+  }
+
+  .form-container {
+    @include greaterThan('sm') {
+      max-width: 610px;
+    }
+    @include greaterThan('lg') {
+      display: flex;
+      flex-direction: row;
+      max-width: 740px;
+    }
+    &--is-required-first-name {
+      .name-part .en__field__element--last-name {
+        @include greaterThan('sm') {
+          flex: 0 0 210px;
+        }
+        @include greaterThan('lg') {
+          flex: 1 1 auto;
+        }
+      }
+    }
   }
 
   .form-row {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    max-width: 400px;
+    // max-width: 400px;
     margin-bottom: 20px;
-
     .en__field__element {
       position: relative;
       width: 100%;
@@ -42,16 +102,26 @@
   }
 
   .name-part {
-    .en__field__element:first-child {
-      margin-right: 10px;
-      flex-basis: 40%;
+    .en__field__element {
+      &--first-name {
+      }
+      &--last-name {
+      }
+      + .en__field__element {
+        margin-left: 10px;
+        @include greaterThan('sm') {
+          margin-left: 30px;
+        }
+        @include lessThan('sm') {
+          &.en__field__element--is-required:before {
+            display: none;
+          }
+        }
+      }
     }
   }
   .email-part {
     .do-you-mean {
-      color: $color-health;
-      font-size: 10px;
-      text-align: left;
       cursor: pointer;
     }
   }
@@ -59,23 +129,36 @@
   }
   .submit-part {
     flex-direction: column;
-
     .enform-notice {
       color: $color-red;
     }
   }
 
-  button.submit {
+  .button.submit {
+    font-size: 17px;
+    max-width: 220px;
+    margin-right: auto;
+    margin-left: auto;
+    white-space: nowrap;
     #spinner {
       display: none;
     }
-
     &.loading {
       color: transparent;
-
       #spinner {
         display: block;
       }
+    }
+    &:after {
+      top: 14px;
+    }
+    @include greaterThan('sm') {
+      max-width: 290px;
+    }
+    @include greaterThan('lg') {
+      margin-top: 0;
+      margin-left: 30px;
+      max-width: 160px;
     }
   }
 }
@@ -97,50 +180,102 @@
 
   .invalid-feedback {
     margin-top: 0;
-    font-size: 12px;
+    font-size: 15px;
     line-height: 20px;
     color: $color-red;
     font-weight: normal;
     position: absolute;
     padding: 0 8px;
-    left: 10px;
-    top: 34px;
-    background-color: white;
+    right: 15px;
+    top: 15px;
+    pointer-events: none;
   }
 
-  .custom-checkbox .invalid-feedback {
-    position: static;
-    padding-left: 0;
-  }
-
-  .en__field__element input[type='email'].is-invalid,
-  .en__field__element input[type='tel'].is-invalid,
-  .en__field__element input[type='text'].is-invalid,
-  .en__field__element select.is-invalid,
-  .custom-checkbox.is-invalid {
-    border-color: $color-red !important;
-    margin-bottom: 0;
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97);
-
-    + .invalid-feedback {
-      display: inline-block;
+  .custom-checkbox {
+    @include line-height-version-b;
+    display: flex;
+    &__mark {
+      position: relative;
+      height: 24px;
+      width: 24px;
+      border: 2px solid #393939;
+      flex: 0 0 auto;
+      margin-right: 0.5em;
+      margin-top: 2px;
+      &:after {
+        content: '';
+        position: absolute;
+        display: none;
+        left: 6px;
+        top: 1px;
+        width: 8px;
+        height: 15px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+    input {
+      position: absolute;
+      opacity: 0;
+      height: 0;
+      width: 0;
+      &:checked + .custom-checkbox__mark {
+        background-color: #393939;
+        &:after {
+          display: block;
+        }
+      }
+      &.is-invalid + .custom-checkbox__mark {
+        border-color: #E52323;
+      }
+      + .invalid-feedback {
+        display: inline-block;
+        top: 4px;
+        left: 0;
+        padding-left: 0;
+      }
+    }
+    .invalid-feedback {
+      position: static;
+      padding-left: 0;
+      margin-top: 0.5em;
     }
   }
-  .en__field--validationFailed > .en__field__error {
-    display: block;
-    z-index: 2;
+
+  .en__field__element {
+    &--is-required:not(.custom-checkbox) {
+      &:before {
+        content: '*';
+        position: absolute;
+        color: #E52323;
+        left: -0.75em;
+      }
+    }
+    input[type='email'],
+    input[type='tel'],
+    input[type='text'],
+    select {
+      border: none;
+      background-color: #F5F5F5;
+      box-shadow: none;
+      max-width: none;
+      padding: 10px 15px;
+      &.is-invalid {
+        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97);
+      }
+    }
   }
 
-  .en__field--validationFailed .invalid-feedback {}
-  .en__field__element input[type='radio'].is-invalid,
-  .en__field__element input[type='checkbox'].is-invalid {
-    margin-top: 30px;
-
-    + .invalid-feedback {
-      display: inline-block;
-      top: 4px;
-      left: 0;
-      padding-left: 0;
+  .en__field__element,
+  .submit-part {
+    input[type='email'],
+    input[type='tel'],
+    input[type='text'],
+    select,
+    .button {
+      line-height: 50px;
+      height: 51px;
     }
   }
 

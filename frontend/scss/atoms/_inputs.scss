@@ -235,22 +235,22 @@ body,
 
     input {
       height: 40px;
-      margin: 10px -1px 10px 0;
+      margin: 10px 10px 10px 0;
       min-width: 0;
       max-width: none;
       padding-left: 14px;
-      border-top-left-radius: 99px;
-      border-bottom-left-radius: 99px;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      // border-top-right-radius: 0;
+      // border-bottom-right-radius: 0;
     }
 
     .button {
-      padding: 0 20px 0 15px;
+      padding: 0 20px 0 20px;
       font-size: 16px;
       white-space: nowrap;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+      // border-top-left-radius: 0;
+      // border-bottom-left-radius: 0;
     }
   }
 }

@@ -3,6 +3,106 @@ import { debounce } from 'throttle-debounce';
 const $ = jQuery;
 
 export default function (Swiper) {
+
+  // Hero set (Homepage B Version 1st Screen)
+  $('.hero-swiper').each(function (index) {
+    if($('.swiper-slide', this).length <= 1) {
+      return true;
+    }
+    new Swiper(this, {
+      slidesPerView: 1,
+      simulateTouch: false,
+      pagination: false,
+      autoplay: true,
+      loop: true,
+    });
+  });
+
+  // Get Involved Cards (Homepage B Version 4th Screen, Bottom Part)
+  $('.get-involved-cards-swiper').each(function (index) {
+    const $this = $(this);
+    const pagination = $(this)
+      .closest('.grid__outer2')
+      .find('.custom-pagination')
+      .first()[0];
+    const prevBtn = $(this)
+      .closest('.grid__outer2')
+      .find('.custom-button-prev')
+      .first()[0];
+    const nextBtn = $(this)
+      .closest('.grid__outer2')
+      .find('.custom-button-next')
+      .first()[0];
+    if($('.swiper-slide', this).length < 3) {
+      $this.addClass('few-slides');
+    }
+    new Swiper(this, {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+      spaceBetween: 30,
+      simulateTouch: false,
+      pagination: {
+        el: pagination,
+        type: 'bullets',
+        clickable: true,
+        renderBullet: function(index, className) {
+          return '<span class="' + className + '">' + (index + 1) + '</span>';
+        },
+      },
+      navigation: {
+        prevEl: prevBtn,
+        nextEl: nextBtn,
+      },
+      autoplay: false,
+      loop: false,
+      observer: true,
+      observeParents: true,
+      breakpoints: {
+        1279: {
+          slidesPerView: 3,
+          slidesPerGroup: 3,
+          spaceBetween: 24,
+        },
+        1023: {
+          slidesPerView: 1,
+          slidesPerGroup: 1,
+        },
+      },
+    });
+  });
+
+  // Testimony (Homepage B Version 6th Screen)
+  $('.testimony-swiper').each(function (index) {
+    const $this = $(this);
+    const pagination = $(this)
+      .closest('section')
+      .find('.swiper-pagination')
+      .first()[0];
+    $('.slide-item--short', $this).each(function() {
+      const $slide = $(this);
+      let $subSlides = $('.slide-item__inner', this);
+      if($subSlides.length > 1) {
+        let subSlideHtml = $subSlides[1].outerHTML;
+        $slide.after('<div class="swiper-slide slide-item slide-item--short slide-item__inner--mobile">' + subSlideHtml + '</div>');
+      }
+    });
+    new Swiper(this, {
+      slidesPerView: 'auto',
+      simulateTouch: false,
+      navigation: {
+        nextEl: $this.find('.custom-button-next'),
+        prevEl: $this.find('.custom-button-prev'),
+      },
+      pagination: {
+        el: pagination,
+        type: 'bullets',
+        clickable: true,
+      },
+      autoplay: false,
+      loop: false,
+    });
+  });
+
   $('.featured-swiper, .projects-swiper, .tips-swiper').each(function (index) {
     const $this = $(this);
     const pagination = $(this)

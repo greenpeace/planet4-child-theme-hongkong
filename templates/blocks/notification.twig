@@ -1,0 +1,16 @@
+{% if gpea_notification_list %}
+<div class="gpea-notification" data-time="{{ gpea_notification_last_modified|e }}">
+	<ul class="ct-container gpea-notification__container">
+		{% for key, item in gpea_notification_list %}
+		<li class="gpea-notification__item gpea-notification__item--{{ item.layout|e('html_attr') }}" data-id="{{ key|e }}">
+			{% if item.link %}
+			<a href="" class="gpea-notification__text gpea-notification__text--link">{{ item.content|e|nl2br }}</a>
+			{% else %}
+			<span class="gpea-notification__text gpea-notification__text--text">{{ item.content|e|nl2br }}</span>
+			{% endif %}
+			<button class="gpea-notification__close-button"></button>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endif %}

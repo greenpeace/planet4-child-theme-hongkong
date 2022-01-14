@@ -1,0 +1,192 @@
+.section-get-involved {
+
+  @include letter-spacing-version-b;
+
+  .page-template > & {
+    background-image: none;
+  }
+
+  br {
+    content: none;
+  }
+
+  .ct-container {
+    @include ct-container-version-b;
+  }
+
+  .content {
+    &--issue- {
+      &forests {
+        .category__name {
+          color: $color-forests;
+        }
+        .content__inner .image {
+          border-color: $color-forests;
+        }
+      }
+      &oceans {
+        .category__name {
+          color: $color-oceans;
+        }
+        .content__inner .image {
+          border-color: $color-oceans;
+        }
+      }
+      &arctic {
+        .category__name {
+          color: $color-arctic;
+        }
+        .content__inner .image {
+          border-color: $color-arctic;
+        }
+      }
+      &climate {
+        .category__name {
+          color: $color-climate;
+        }
+        .content__inner .image {
+          border-color: $color-climate;
+        }
+      }
+      &plastics {
+        .category__name {
+          color: $color-plastics;
+        }
+        .content__inner .image {
+          border-color: $color-plastics;
+        }
+      }
+      &health {
+        .category__name {
+          color: $color-health;
+        }
+        .content__inner .image {
+          border-color: $color-health;
+        }
+      }
+    }
+    &--title {
+      .title {
+        @include title-text-version-b;
+        @include title-border-version-b;
+      }
+    }
+    &--desc {
+      position: relative;
+      @include greaterThan('sm') {
+        min-height: 330px;
+      }
+      @include greaterThan('lg') {
+        min-height: 250px;
+      }
+      .category,
+      .title {
+        @include lessThan('sm') {
+          text-align: center;
+        }
+      }
+      .category {
+        font-size: 18px;
+        @include line-height-version-b;
+        font-weight: 500;
+        &__name {
+          margin-left: 0.3em;
+        }
+        @include greaterThan('sm') {
+          margin-bottom: 5px;
+        }
+      }
+      .title {
+        font-size: 25px;
+        font-weight: normal;
+        @include lessThan('sm') {
+          margin-top: 40px;
+          margin-bottom: 40px;
+        }
+        @include greaterThan('sm') {
+          margin-top: 5px;
+        }
+      }
+      .desc p {
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+      .desc p,
+      .button {
+        @include text-version-b;
+      }
+      .image {
+        margin: auto;
+        width: (186/296) * 296px;
+        height: (186/296) * 384px;
+        position: relative;
+        border: 1px solid $color-green;
+        @include lessThan('sm') {
+          margin-top: 60px;
+          left: 17px;
+        }
+        @include greaterThan('sm') {
+          width: 296px;
+          height: 384px;
+        }
+        @include greaterThan('sm') {
+          @include margin-right-version-b;
+        }
+        &__inner {
+          position: absolute;
+          top: -9px;
+          right: 12px;
+          width: (208/334) * 334px;
+          height: (208/334) * 380px;
+          border: 1px solid #1E1E1E;
+          background-color: white;
+          @include greaterThan('sm') {
+            top: -12px;
+            right: 16px;
+            width: 334px;
+            height: 380px;
+          }
+        }
+        .bg {
+          margin: 14px auto auto;
+          width: percentage(302 / 334);
+          height: percentage(298 / 380);
+          background: no-repeat center;
+          background-size: cover;
+          @include greaterThan('sm') {
+            margin-top: 25px;
+          }
+        }
+      }
+      .buttons {
+        @include lessThan('sm') {
+          text-align: center;
+        }
+      }
+      .button {
+        margin-top: 35px;
+        min-width: 222px;
+        text-align: center;
+        height: 50px;
+        line-height: 49px;
+      }
+    }
+    &__inner {
+      @include margin-left-version-b;
+      @include greaterThan('sm') {
+        max-width: 520 - 105px;
+      }
+      @include greaterThan('lg') {
+        max-width: 520px;
+      }
+      &--2 {
+        @include greaterThan('sm') {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+      }
+    }
+  }
+
+}
