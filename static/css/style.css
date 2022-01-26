@@ -4511,7 +4511,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-testimony .slide-item__inner .text-container { position: relative; }
 
-.section-testimony .slide-item__inner .bg { background-size: cover; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.section-testimony .slide-item__inner .bg { background: no-repeat center; background-size: cover; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 .section-testimony .slide-item__inner .bg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(96, 96, 96, 0.4); }
 
