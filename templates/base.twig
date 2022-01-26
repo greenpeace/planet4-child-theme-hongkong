@@ -19,7 +19,7 @@
 
 {% endblock %}
 
-<body class="{{ body_class }} {{ custom_body_classes|default('') }} sticky-button-{% if header_nav.sticky.enabled %}enabled{% else %}disabled{% endif %} old-version-homepage" {{ body_extra_info|raw }}>
+<body class="{{ body_class }} {{ custom_body_classes|default('') }} sticky-button-{% if header_nav.sticky.enabled %}enabled{% else %}disabled{% endif %} b-version-homepage" {{ body_extra_info|raw }}>
 	{% block html_head_container_extra %}
 	{% endblock %}	
 
