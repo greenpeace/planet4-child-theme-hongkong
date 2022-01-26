@@ -4063,6 +4063,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-get-involved-cards .swiper-pagination-bullet { display: block; background-color: transparent; width: auto; height: auto; line-height: 30px; padding-right: 10px; padding-left: 10px; margin-right: 2px !important; margin-left: 2px; color: #868E96; }
 
+.section-get-involved-cards .swiper-pagination-bullet:only-child { display: none; }
+
 .section-get-involved-cards .swiper-pagination-bullet-active { color: #212529; }
 
 .section-get-involved-cards .grid__pagination { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; margin-top: 30px; /* > * { display: inline-block; } */ }
