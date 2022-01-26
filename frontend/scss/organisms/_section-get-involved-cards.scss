@@ -271,6 +271,9 @@
         font-size: 18px;
       }
     }
+    .desc {
+      margin-top: 20px;
+    }
     .desc p {
       @include text-version-b;
     }

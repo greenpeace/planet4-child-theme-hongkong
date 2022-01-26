@@ -4164,6 +4164,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-get-involved-cards .grid .subtitle { font-size: 18px; } }
 
+.section-get-involved-cards .grid .desc { margin-top: 20px; }
+
 .section-get-involved-cards .grid .desc p { font-size: 16px; line-height: 26px; }
 
 .section-get-involved-cards .grid .percentage { background-color: #EAEAEA; height: 3px; margin-top: 30px; }
