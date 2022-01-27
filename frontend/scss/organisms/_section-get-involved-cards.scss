@@ -60,6 +60,9 @@
     margin-right: 2px !important;
     margin-left: 2px;
     color: #868E96;
+    &:only-child {
+      display: none;
+    }
   }
   .swiper-pagination-bullet-active {
     color: #212529;
@@ -270,6 +273,9 @@
       @include greaterThan('sm') {
         font-size: 18px;
       }
+    }
+    .desc {
+      margin-top: 20px;
     }
     .desc p {
       @include text-version-b;
