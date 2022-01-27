@@ -4063,6 +4063,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-get-involved-cards .swiper-pagination-bullet { display: block; background-color: transparent; width: auto; height: auto; line-height: 30px; padding-right: 10px; padding-left: 10px; margin-right: 2px !important; margin-left: 2px; color: #868E96; }
 
+.section-get-involved-cards .swiper-pagination-bullet:only-child { display: none; }
+
 .section-get-involved-cards .swiper-pagination-bullet-active { color: #212529; }
 
 .section-get-involved-cards .grid__pagination { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; margin-top: 30px; /* > * { display: inline-block; } */ }
@@ -4163,6 +4165,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 .section-get-involved-cards .grid .subtitle { font-weight: 500; font-size: 16px; line-height: 26px; }
 
 @media only screen and (min-width: 1024px) { .section-get-involved-cards .grid .subtitle { font-size: 18px; } }
+
+.section-get-involved-cards .grid .desc { margin-top: 20px; }
 
 .section-get-involved-cards .grid .desc p { font-size: 16px; line-height: 26px; }
 
@@ -4511,7 +4515,7 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-testimony .slide-item__inner .text-container { position: relative; }
 
-.section-testimony .slide-item__inner .bg { background-size: cover; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.section-testimony .slide-item__inner .bg { background: no-repeat center; background-size: cover; position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 .section-testimony .slide-item__inner .bg:after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(96, 96, 96, 0.4); }
 
