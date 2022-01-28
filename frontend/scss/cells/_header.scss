@@ -31,11 +31,6 @@
       top: 0;
     }
   }
-  & {
-    @media only screen and (max-width: 600px) {
-      position: sticky;
-    }
-  }
   &__column--menu {
     @include lessThan('lg') {
       height: calc(100% - 32px);
@@ -69,16 +64,16 @@
   // @include line-height-version-b;
   letter-spacing: 0.78px;
   background-color: $color-green;
-  position: fixed;
+  position: sticky;
   left: 0;
   width: 100%;
-  height: 86px;
+  height: 86 - 24px;
   z-index: 99;
   @include greaterThan('sm') {
     height: 100px;
   }
   @include greaterThan('lg') {
-    height: 86px;
+    height: 86 - 24px;
   }
 
   ul {
@@ -134,7 +129,7 @@
     align-items: center;
     width: 100%;
     @include lessThan('sm') {
-      padding-top: 24px;
+      // padding-top: 24px;
     }
   }
   &__column {
@@ -227,33 +222,57 @@
       border: none;
       background: transparent;
       cursor: pointer;
-      display: flex;
       flex-direction: column;
       justify-content: space-between;
       box-sizing: content-box;
       width: 18px;
       height: 16px;
-      padding: 30px 20px;
+      padding: 23px 20px;
       padding-left: 30px;
+      position: relative;
       @include lessThan('lg') {
         margin-left: -20px;
       }
       @include greaterThan('sm') {
         width: 26px;
         height: 26px;
+        padding-top: 37px;
+        padding-bottom: 37px;
         padding-left: 48px;
       }
       span,
       &:before,
       &:after {
+        position: absolute;
         display: block;
         content: '';
-        width: 100%;
+        width: 18px;
         height: 2px;
+        left: 30px;
         @include greaterThan('sm') {
+          width: 26px;
           height: 3px;
+          left: 48px;
         }
         background-color: white;
+      }
+      span {
+        top: 23 + 7px;
+        @include greaterThan('sm') {
+          top: 37 + 11px;
+        }
+      }
+      &:before {
+        top: 23px;
+        @include greaterThan('sm') {
+          top: 37px;
+        }
+      }
+      &:after {
+        top: 23 + 2 * 7px;
+        @include greaterThan('sm') {
+          top: 37 + 2 * 11px;
+        }
       }
     }
     &--search {

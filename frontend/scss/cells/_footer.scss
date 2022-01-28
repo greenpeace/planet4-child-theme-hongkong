@@ -12,7 +12,7 @@
   background: $color-blue url(../images/footer-bg.png) no-repeat bottom center;
   background-size: cover;
   color: white;
-  z-index: 2;
+  z-index: 1;
   @include greaterThan('sm') {
     padding-top: 150px;
   }
