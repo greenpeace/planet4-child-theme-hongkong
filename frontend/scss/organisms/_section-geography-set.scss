@@ -123,6 +123,7 @@
     }
     &__inner {
       &--1 {
+        flex: 1 1 auto;
         @include greaterThan('sm') {
           $content_margin: (960 / 2) - 26 - 6px;
           margin-left: calc(50% - #{$content_margin});
@@ -152,11 +153,11 @@
       &--2 {
         @include greaterThan('sm') {
           margin-left: 30px;
-          flex: 1 0 450px;
+          flex: 0 0 450px;
         }
         @include greaterThan('lg') {
           margin-left: 80px;
-          flex: 1 0 480px;
+          flex: 0 0 480px;
         }
         .image {
           $ship_size: 100px;
