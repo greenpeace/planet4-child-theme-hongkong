@@ -185,25 +185,6 @@ img.lazy {
   background-image: $gradient-smoke;
 }
 
-// B Version
-.b-version-homepage .outer_block_container { //// .outer_block_container {
-  &:before {
-    content: '';
-    display: block;
-    background-color: $color-green;
-    padding-top: 86px;
-    @media only screen and (max-width: 600px) {
-      padding-top: 0px;
-    }
-    @include greaterThan('sm') {
-      padding-top: 100px;
-    }
-    @include greaterThan('lg') {
-      padding-top: 86px;
-    }
-  }
-}
-
 body .icon-facebook::before {
   color: $color-fb;
 }
