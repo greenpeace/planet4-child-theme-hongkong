@@ -5058,7 +5058,7 @@ body.b-version-homepage.search .has-load-more, .b-version-homepage .dynamic-sear
 
 @media only screen and (min-width: 1024px) { .b-version-homepage.admin-bar .dynamic-search { top: 132px; } }
 
-@media only screen and (min-width: 1280px) { .b-version-homepage.admin-bar .dynamic-search { top: 118px; } }
+@media only screen and (min-width: 1280px) { .b-version-homepage.admin-bar .dynamic-search { top: 94px; } }
 
 .b-version-homepage .dynamic-search { position: fixed; top: 86px; bottom: 0; left: 0; right: 0; z-index: 4; background: rgba(0, 0, 0, 0.7); visibility: hidden; opacity: 0; -webkit-transition: opacity 200ms linear, visibility 0ms linear 240ms; transition: opacity 200ms linear, visibility 0ms linear 240ms; }
 
@@ -5068,7 +5068,7 @@ body.b-version-homepage.search .has-load-more, .b-version-homepage .dynamic-sear
 
 @media only screen and (min-width: 1024px) { .b-version-homepage .dynamic-search { top: 100px; } }
 
-@media only screen and (min-width: 1280px) { .b-version-homepage .dynamic-search { top: 86px; } }
+@media only screen and (min-width: 1280px) { .b-version-homepage .dynamic-search { top: 62px; } }
 
 .b-version-homepage .dynamic-search .live-search { max-height: 100%; overflow-y: auto; -webkit-transform: translateY(-20px); -ms-transform: translateY(-20px); transform: translateY(-20px); -webkit-transition: -webkit-transform 140ms ease-in-out; transition: -webkit-transform 140ms ease-in-out; transition: transform 140ms ease-in-out; transition: transform 140ms ease-in-out, -webkit-transform 140ms ease-in-out; }
 
