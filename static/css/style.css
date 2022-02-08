@@ -695,13 +695,13 @@ svg.external-link, svg.external-icon, svg.external_link { display: none; }
 
 @media only screen and (min-width: 1024px) { .button, .enform form button { font-size: 18px; padding: 0 50px; height: 40px; line-height: 39px; } }
 
-.button.primary, .button.btn-primary, .enform form button.primary, .enform form button.btn-primary { font-size: 20px; padding: 0 40px; height: 40px; line-height: 39px; color: white; background: #FF8100; -webkit-box-shadow: none; box-shadow: none; }
+.button.primary, .button.btn-primary, .button.tag.active, .enform form button.primary, .enform form button.btn-primary, .enform form button.tag.active { font-size: 20px; padding: 0 40px; height: 40px; line-height: 39px; color: white; background: #FF8100; -webkit-box-shadow: none; box-shadow: none; }
 
-@media only screen and (min-width: 1024px) { .button.primary.wider, .button.btn-primary.wider, .enform form button.primary.wider, .enform form button.btn-primary.wider { padding: 0 100px; } }
+@media only screen and (min-width: 1024px) { .button.primary.wider, .button.btn-primary.wider, .button.tag.active.wider, .enform form button.primary.wider, .enform form button.btn-primary.wider, .enform form button.tag.active.wider { padding: 0 100px; } }
 
-.button:hover, .button:focus, .enform form button:hover, .enform form button:focus { color: white; background-color: #FFB660; -webkit-box-shadow: none; box-shadow: none; }
+.button:hover, .button:focus, .button.tag.active:hover, .button.tag.active:focus, .enform form button:hover, .enform form button:focus, .enform form button.tag.active:hover, .enform form button.tag.active:focus { color: white; background-color: #FFB660; -webkit-box-shadow: none; box-shadow: none; }
 
-.button:active, .enform form button:active { color: white; background-color: #E96D00; -webkit-box-shadow: none; box-shadow: none; }
+.button:active, .button.tag.active:active, .enform form button:active, .enform form button.tag.active:active { color: white; background-color: #E96D00; -webkit-box-shadow: none; box-shadow: none; }
 
 .button.secondary, .enform form button.secondary { color: #66CC00; border-radius: 0; -webkit-box-shadow: inset 0px -2px 0px 0px #66CC00; box-shadow: inset 0px -2px 0px 0px #66CC00; }
 
@@ -713,15 +713,9 @@ svg.external-link, svg.external-icon, svg.external_link { display: none; }
 
 .button.fluid, .enform form button.fluid { width: 100%; margin-left: 0; margin-right: 0; text-align: center; }
 
-.button.tag, .enform form button.tag { color: black; padding: 0 10px !important; height: 28px !important; font-size: 14px !important; line-height: 27px !important; border: 1px solid #66CC00; }
+.button.tag, .enform form button.tag { padding: 0 10px !important; height: 28px !important; font-size: 14px !important; line-height: 27px !important; }
 
 @media only screen and (min-width: 1024px) { .button.tag, .enform form button.tag { padding: 0 13px !important; height: 38px !important; font-size: 16px !important; line-height: 37px !important; } }
-
-.button.tag:hover, .button.tag:focus, .enform form button.tag:hover, .enform form button.tag:focus { background-color: whitesmoke; }
-
-.button.tag.active, .enform form button.tag.active { background-color: #66CC00; color: white; }
-
-.button.tag.active:hover, .button.tag.active:focus, .enform form button.tag.active:hover, .enform form button.tag.active:focus { background-color: #59b300; }
 
 .button.grey, .enform form button.grey { color: #5f5f5f; font-weight: normal; }
 
@@ -5058,7 +5052,7 @@ body.b-version-homepage.search .has-load-more, .b-version-homepage .dynamic-sear
 
 @media only screen and (min-width: 1024px) { .b-version-homepage.admin-bar .dynamic-search { top: 132px; } }
 
-@media only screen and (min-width: 1280px) { .b-version-homepage.admin-bar .dynamic-search { top: 118px; } }
+@media only screen and (min-width: 1280px) { .b-version-homepage.admin-bar .dynamic-search { top: 94px; } }
 
 .b-version-homepage .dynamic-search { position: fixed; top: 86px; bottom: 0; left: 0; right: 0; z-index: 4; background: rgba(0, 0, 0, 0.7); visibility: hidden; opacity: 0; -webkit-transition: opacity 200ms linear, visibility 0ms linear 240ms; transition: opacity 200ms linear, visibility 0ms linear 240ms; }
 
@@ -5068,7 +5062,7 @@ body.b-version-homepage.search .has-load-more, .b-version-homepage .dynamic-sear
 
 @media only screen and (min-width: 1024px) { .b-version-homepage .dynamic-search { top: 100px; } }
 
-@media only screen and (min-width: 1280px) { .b-version-homepage .dynamic-search { top: 86px; } }
+@media only screen and (min-width: 1280px) { .b-version-homepage .dynamic-search { top: 62px; } }
 
 .b-version-homepage .dynamic-search .live-search { max-height: 100%; overflow-y: auto; -webkit-transform: translateY(-20px); -ms-transform: translateY(-20px); transform: translateY(-20px); -webkit-transition: -webkit-transform 140ms ease-in-out; transition: -webkit-transform 140ms ease-in-out; transition: transform 140ms ease-in-out; transition: transform 140ms ease-in-out, -webkit-transform 140ms ease-in-out; }
 
