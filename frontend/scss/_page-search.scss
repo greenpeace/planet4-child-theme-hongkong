@@ -142,7 +142,7 @@ body.b-version-homepage.search, //// body.search,
       top: 100 + 32px;
     }
     @include greaterThan('lg') {
-      top: 86 + 32px;
+      top: 62 + 32px;
     }
   }
 }
@@ -172,7 +172,7 @@ body.b-version-homepage.search, //// body.search,
     top: 100px;
   }
   @include greaterThan('lg') {
-    top: 86px;
+    top: 62px;
   }
 
   .live-search {
