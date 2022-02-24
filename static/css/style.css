@@ -1958,9 +1958,9 @@ body.old-version-homepage .header--new { display: none; }
 
 .footer--new .dropdown button { background-color: transparent; border: none; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; color: white; cursor: pointer; padding: 0; margin-top: -0.5em; }
 
-.footer--new .dropdown__selected { font-size: 20px; font-weight: bold; white-space: nowrap; padding-right: 1.5em; }
+.footer--new .dropdown__selected { font-size: 16px; font-weight: bold; white-space: nowrap; padding-right: 1.5em; }
 
-@media only screen and (min-width: 1024px) { .footer--new .dropdown__selected { font-weight: 400; } }
+@media only screen and (min-width: 1024px) { .footer--new .dropdown__selected { font-size: 20px; font-weight: 400; } }
 
 .footer--new .dropdown__arrow { border: solid white; border-width: 0 2px 2px 0; display: block; padding: 4px; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); }
 
@@ -3685,11 +3685,11 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-steps-set br { content: none; }
 
-.section-steps-set .title { margin: 0 auto 35px; }
+.section-steps-set .title { margin: 0 auto 35px; max-width: 450px; }
 
-@media only screen and (max-width: 1023px) { .section-steps-set .title { display: table; } }
+@media only screen and (max-width: 1023px) { .section-steps-set .title { display: table; width: 75%; } }
 
-@media only screen and (min-width: 1024px) { .section-steps-set .title { text-underline-offset: 10px; line-height: 2; margin-bottom: 70px; max-width: 450px; text-align: center; } }
+@media only screen and (min-width: 1024px) { .section-steps-set .title { text-underline-offset: 10px; line-height: 2; margin-bottom: 70px; text-align: center; } }
 
 .section-steps-set .title__text { font-size: 22px; font-weight: normal; text-decoration: underline; text-underline-offset: 5px; line-height: 38px; }
 
@@ -3720,6 +3720,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 @media only screen and (min-width: 1024px) { .section-steps-set .grid__image { width: 128px; height: 112px; } }
 
 @media only screen and (min-width: 1280px) { .section-steps-set .grid__image { width: 160px; height: 140px; } }
+
+.section-steps-set .grid__text { text-align: justify; }
 
 @media only screen and (max-width: 1023px) { .section-steps-set .grid__text { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
 
@@ -4328,15 +4330,9 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-infographic-cards .grid__inner { height: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: wrap; flex-wrap: wrap; -ms-flex-line-pack: justify; align-content: space-between; } }
 
-.section-infographic-cards .grid__image { background: no-repeat center; background-size: contain; width: 264px; height: 198px; margin: auto; }
+.section-infographic-cards .grid__image { background: no-repeat center; background-size: cover; margin: 30px auto auto; width: 100%; height: 0; padding-bottom: 75%; }
 
-@media only screen and (max-width: 1023px) { .section-infographic-cards .grid__image { -webkit-box-flex: 0; -ms-flex: 0 0 95px; flex: 0 0 95px; } }
-
-@media only screen and (min-width: 1024px) { .section-infographic-cards .grid__image { width: 211.2px; height: 158.4px; } }
-
-@media only screen and (min-width: 1280px) { .section-infographic-cards .grid__image { width: 264px; height: 198px; } }
-
-.section-infographic-cards .grid__text { display: -webkit-box; display: -ms-flexbox; display: flex; }
+.section-infographic-cards .grid__text { display: -webkit-box; display: -ms-flexbox; display: flex; text-align: justify; }
 
 .section-infographic-cards .grid__title { -webkit-box-flex: 0; -ms-flex: 0 0 auto; flex: 0 0 auto; padding-right: 20px; }
 
