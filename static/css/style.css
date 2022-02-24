@@ -3721,6 +3721,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1280px) { .section-steps-set .grid__image { width: 160px; height: 140px; } }
 
+.section-steps-set .grid__text { text-align: justify; }
+
 @media only screen and (max-width: 1023px) { .section-steps-set .grid__text { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
 
 .section-steps-set .grid__title { color: #85D633; font-size: 17px; line-height: 26px; margin-bottom: 10px; vertical-align: middle; }
