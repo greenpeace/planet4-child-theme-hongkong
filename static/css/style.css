@@ -1958,9 +1958,9 @@ body.old-version-homepage .header--new { display: none; }
 
 .footer--new .dropdown button { background-color: transparent; border: none; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; color: white; cursor: pointer; padding: 0; margin-top: -0.5em; }
 
-.footer--new .dropdown__selected { font-size: 20px; font-weight: bold; white-space: nowrap; padding-right: 1.5em; }
+.footer--new .dropdown__selected { font-size: 16px; font-weight: bold; white-space: nowrap; padding-right: 1.5em; }
 
-@media only screen and (min-width: 1024px) { .footer--new .dropdown__selected { font-weight: 400; } }
+@media only screen and (min-width: 1024px) { .footer--new .dropdown__selected { font-size: 20px; font-weight: 400; } }
 
 .footer--new .dropdown__arrow { border: solid white; border-width: 0 2px 2px 0; display: block; padding: 4px; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); }
 
