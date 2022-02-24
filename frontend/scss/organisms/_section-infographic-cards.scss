@@ -57,7 +57,7 @@
       background-size: contain;
       width: 264px;
       height: 198px;
-      margin: auto;
+      margin: 30px auto auto;
       @include lessThan('sm') {
         flex: 0 0 95px;
       }
