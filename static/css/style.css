@@ -3685,11 +3685,11 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-steps-set br { content: none; }
 
-.section-steps-set .title { margin: 0 auto 35px; }
+.section-steps-set .title { margin: 0 auto 35px; max-width: 450px; }
 
-@media only screen and (max-width: 1023px) { .section-steps-set .title { display: table; } }
+@media only screen and (max-width: 1023px) { .section-steps-set .title { display: table; width: 75%; } }
 
-@media only screen and (min-width: 1024px) { .section-steps-set .title { text-underline-offset: 10px; line-height: 2; margin-bottom: 70px; max-width: 450px; text-align: center; } }
+@media only screen and (min-width: 1024px) { .section-steps-set .title { text-underline-offset: 10px; line-height: 2; margin-bottom: 70px; text-align: center; } }
 
 .section-steps-set .title__text { font-size: 22px; font-weight: normal; text-decoration: underline; text-underline-offset: 5px; line-height: 38px; }
 
