@@ -54,25 +54,20 @@
     }
     &__image {
       background: no-repeat center;
-      background-size: contain;
-      width: 264px;
-      height: 198px;
-      margin: auto;
+      background-size: cover;
+      margin: 30px auto auto;
+      width: 100%;
+      height: 0;
+      padding-bottom: percentage( 198 / 264 );
       @include lessThan('sm') {
-        flex: 0 0 95px;
-      }
-      @include greaterThan('sm') {
-        width: 264px * 0.8;
-        height: 198px * 0.8;
-      }
-      @include greaterThan('lg') {
-        width: 264px;
-        height: 198px;
+        // flex: 0 0 95px;
+        // max-width: 264px;
       }
     }
 
     &__text {
       display: flex;
+      text-align: justify;
     }
     &__title {
       flex: 0 0 auto;
