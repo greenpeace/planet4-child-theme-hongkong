@@ -162,10 +162,8 @@
         .image {
           $ship_size: 100px;
           position: relative;
-          // background: url(../images/world-map.png) no-repeat top center;
           background: url(../images/world-map.png) no-repeat center;
           background-size: contain;
-          // padding-bottom: percentage(240 / 484);
           padding-bottom: calc(60% + #{$ship_size});
           @include greaterThan('sm') {
             height: 100%;
@@ -177,6 +175,12 @@
             left: 0;
             width: calc(100% - #{$ship_size});
             height: calc(100% - #{$ship_size});
+            @include greaterThan('sm') {
+              top: 50%;
+              height: 0;
+              padding-bottom: calc(60% + #{$ship_size / 2});
+              transform: translateY(-50%) translateY(-#{$ship_size / 2});
+            }
           }
           &__ship {
             position: absolute;
