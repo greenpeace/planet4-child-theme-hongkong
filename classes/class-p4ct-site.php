@@ -378,15 +378,31 @@ class P4CT_Site {
 
 		}
 
+		$header_nav_sticky_link = '';
+		$header_nav_button_link = '';
+
+		if( isset( $header_nav_options[ 'gpea_header_nav_sticky_link' ] ) ) {
+			$header_nav_sticky_link = $header_nav_options[ 'gpea_header_nav_sticky_link' ];
+			if( @strlen( $header_nav_sticky_link ) ) {
+				$header_nav_sticky_link .= ( strpos( $header_nav_sticky_link, '?' ) === FALSE ? '?' : '&' ) . 'ref=cta-sticky';
+			}
+		}
+		if( isset( $header_nav_options[ 'gpea_header_nav_button_link' ] ) ) {
+			$header_nav_button_link = $header_nav_options[ 'gpea_header_nav_button_link' ];
+			if( @strlen( $header_nav_button_link ) ) {
+				$header_nav_button_link .= ( strpos( $header_nav_button_link, '?' ) === FALSE ? '?' : '&' ) . 'ref=cta-header';
+			}
+		}
+
 		$context[ 'header_nav' ] = [
 			'sticky' => [
 				'enabled' => isset( $header_nav_options[ 'gpea_header_nav_sticky_enabled' ] ) ? $header_nav_options[ 'gpea_header_nav_sticky_enabled' ] : '0',
-				'link' => isset( $header_nav_options[ 'gpea_header_nav_sticky_link' ] ) ? $header_nav_options[ 'gpea_header_nav_sticky_link' ] : '',
+				'link' => $header_nav_sticky_link,
 				'label' => isset( $header_nav_options[ 'gpea_header_nav_sticky_label' ] ) ? $header_nav_options[ 'gpea_header_nav_sticky_label' ] : '',
 				'label_mobile' => isset( $header_nav_options[ 'gpea_header_nav_sticky_label_mobile' ] ) ? $header_nav_options[ 'gpea_header_nav_sticky_label_mobile' ] : '',
 			],
 			'button' => [
-				'link' => isset( $header_nav_options[ 'gpea_header_nav_button_link' ] ) ? $header_nav_options[ 'gpea_header_nav_button_link' ] : '',
+				'link' => $header_nav_button_link,
 				'label' => isset( $header_nav_options[ 'gpea_header_nav_button_label' ] ) ? $header_nav_options[ 'gpea_header_nav_button_label' ] : '',
 				'label_mobile' => isset( $header_nav_options[ 'gpea_header_nav_button_label_mobile' ] ) ? $header_nav_options[ 'gpea_header_nav_button_label_mobile' ] : '',
 			],
