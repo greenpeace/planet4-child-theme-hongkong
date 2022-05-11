@@ -1872,7 +1872,7 @@ body.old-version-homepage .header--old { display: -webkit-box; display: -ms-flex
 
 body.old-version-homepage .header--new { display: none; }
 
-.footer--new { position: relative; padding-top: 60px; background: #292F47 url(../images/footer-bg.png) no-repeat bottom center; background-size: cover; color: white; z-index: 1; }
+.footer--new { position: relative; padding-top: 60px; background: #292F47 url(../images/footer-bg.jpg) no-repeat bottom center; background-size: cover; color: white; z-index: 1; }
 
 .footer--new, .footer--new h5 { letter-spacing: 0.84px; line-height: 26px; }
 
