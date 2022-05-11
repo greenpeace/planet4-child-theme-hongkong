@@ -5,6 +5,17 @@ const $ = jQuery;
 export default function (Swiper) {
 
   // Hero set (Homepage B Version 1st Screen)
+  $('.section-hero-set .arrow').on('click', function (e) {
+    const $this = $(this);
+    const $next_section = $this.closest('section').next('section');
+    const $adminbar = $('#wpadminbar');
+    const $header = $('header:visible');
+    const adminbar_height = $adminbar.length > 0 ? $adminbar.height() : 0;
+    const header_height = $header.length > 0 ? $header.height() : 0;
+    if($next_section.length > 0) {
+      $('html, body').animate({scrollTop: $next_section.offset().top - adminbar_height - header_height + 1 }, 'slow');
+    }
+  });
   $('.hero-swiper').each(function (index) {
     if($('.swiper-slide', this).length <= 1) {
       return true;

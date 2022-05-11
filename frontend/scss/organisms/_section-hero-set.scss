@@ -20,13 +20,19 @@
   .arrow {
     position: absolute;
     bottom: 8%;
+    width: 100px;
+    height: 80px;
+    margin-bottom: -35px;
+    cursor: pointer;
     @include greaterThan("sm") {
       bottom: 12%;
     }
     &:before,
     &:after {
       position: absolute;
+      top: 45px;
       left: -0.5 * 26px;
+      margin-left: 50px;
       content: '';
       height: 2px;
       width: 26px;

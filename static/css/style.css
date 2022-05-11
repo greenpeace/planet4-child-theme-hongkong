@@ -3614,11 +3614,11 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-hero-set { height: 70vh; } }
 
-.section-hero-set .arrow { position: absolute; bottom: 8%; }
+.section-hero-set .arrow { position: absolute; bottom: 8%; width: 100px; height: 80px; margin-bottom: -35px; cursor: pointer; }
 
 @media only screen and (min-width: 1024px) { .section-hero-set .arrow { bottom: 12%; } }
 
-.section-hero-set .arrow:before, .section-hero-set .arrow:after { position: absolute; left: -13px; content: ''; height: 2px; width: 26px; background-color: white; }
+.section-hero-set .arrow:before, .section-hero-set .arrow:after { position: absolute; top: 45px; left: -13px; margin-left: 50px; content: ''; height: 2px; width: 26px; background-color: white; }
 
 .section-hero-set .arrow:before { -webkit-transform: rotate(-30deg) translateX(50%); -ms-transform: rotate(-30deg) translateX(50%); transform: rotate(-30deg) translateX(50%); }
 
