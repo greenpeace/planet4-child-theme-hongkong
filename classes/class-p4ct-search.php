@@ -116,9 +116,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		/**
 		 * Main issues
 		 *
-		 * @var int $main_issues;
+		 * @var array $main_issues;
 		 */
-		public $main_issues;
+		public $main_issues = [];
 
 		/**
 		 * P4CT_Search constructor.
@@ -358,11 +358,11 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					}
 
 					$post_categories = wp_get_post_categories( $post->ID );
-					$main_issue = array_filter(
+					$main_issue = is_array( $this->main_issues ) ? array_filter(
 						$post_categories, function( $cat ) {
 							return array_key_exists( $cat, $this->main_issues );
 						}
-					);
+					) : NULL;
 
 					if ( $main_issue && isset( $main_issue[0] ) ) {
 						$main_issue = $main_issue[0];
