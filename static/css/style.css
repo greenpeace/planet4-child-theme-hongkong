@@ -4128,7 +4128,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-get-involved-cards .content .link { border: none; cursor: pointer; display: inline-block; font-size: 16px; line-height: 26px; color: black; -webkit-transition: color 140ms linear; transition: color 140ms linear; }
 
-@media only screen and (max-width: 1023px) { .section-get-involved-cards .content .link + .link { margin-left: 25px; } }
+@media only screen and (max-width: 1023px) { .section-get-involved-cards .content .link + .link { margin-left: 25px; }
+  .section-get-involved-cards .content .link[data-group="4"] { display: none; } }
 
 @media only screen and (min-width: 1024px) { .section-get-involved-cards .content .link { margin-left: 30px; } }
 
