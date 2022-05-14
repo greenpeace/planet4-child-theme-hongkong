@@ -101,6 +101,21 @@
     }
   }
 
+  .video {
+    position: relative;
+    //padding-bottom: percentage(9/16);
+    width: 100%;
+    height: 100%;
+    .youtube-embed {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    @include lessThan('lg') {
+      display: none;
+    }
+  }
+
   .ct-container {
     height: 100%;
   }
