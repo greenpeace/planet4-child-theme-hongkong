@@ -86,6 +86,7 @@ export default function (Swiper) {
     });
   }
   function pauseHeroSetVideo(slide, YT) {
+    const mq = window.matchMedia("(max-width: 1279px)");
     if(mq.matches) { return; }
     const $video = $(slide).find('.video');
     if($video.length == 0) { return; }
