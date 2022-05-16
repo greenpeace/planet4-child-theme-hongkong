@@ -4,19 +4,95 @@ const $ = jQuery;
 
 export default function (Swiper) {
 
-  // Hero set (Homepage B Version 1st Screen)
-  $('.hero-swiper').each(function (index) {
-    if($('.swiper-slide', this).length <= 1) {
-      return true;
+  $('.section-hero-set .arrow').on('click', function (e) {
+    const $this = $(this);
+    const $next_section = $this.closest('section').next('section');
+    const $adminbar = $('#wpadminbar');
+    const $header = $('header:visible');
+    const adminbar_height = $adminbar.length > 0 ? $adminbar.height() : 0;
+    const header_height = $header.length > 0 ? $header.height() : 0;
+    if($next_section.length > 0) {
+      $('html, body').animate({scrollTop: $next_section.offset().top - adminbar_height - header_height + 1 }, 'slow');
     }
-    new Swiper(this, {
-      slidesPerView: 1,
-      simulateTouch: false,
-      pagination: false,
-      autoplay: true,
-      loop: true,
-    });
   });
+  if($('.hero-swiper .video').length > 0) {
+    var YTdeferred = jQuery.Deferred();
+    window.onYouTubeIframeAPIReady = function() {
+      YTdeferred.resolve(window.YT);
+    };
+    YTdeferred.done(function(YT) {
+      init_hero_swiper(YT);
+    });
+  }
+  else {
+    init_hero_swiper();
+  }
+  function init_hero_swiper(YT) {
+    $('.hero-swiper').each(function (index) {
+      const $slides = $('.swiper-slide', this);
+      if($slides.length <= 1) {
+        playHeroSetVideo($slides.get(0));
+        return true;
+      }
+      new Swiper(this, {
+        slidesPerView: 1,
+        simulateTouch: false,
+        pagination: false,
+        autoplay: true,
+        loop: true,
+        on: {
+          slideChangeTransitionEnd: function() {
+            pauseHeroSetVideo(this.slides[this.previousIndex], YT);
+            playHeroSetVideo(this.slides[this.activeIndex], YT);
+          },
+        },
+      });
+    });
+  }
+  function playHeroSetVideo(slide, YT) {
+    const mq = window.matchMedia("(max-width: 1279px)");
+    if(mq.matches) { return; }
+    const $video = $(slide).find('.video');
+    if($video.length == 0) { return; }
+    const $player = $video.find('.youtube-embed');
+    if($player.is('iframe')) {
+      $player.get(0).contentWindow.postMessage('{"event":"command","func":"seekTo","args":"0"}', '*');
+      $player.get(0).contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+      return;
+    }
+    const ytId = $video.data('youtube-id');
+    const playerId = $player.attr('id');
+    const player = new YT.Player($player.get(0), {
+      width: '100%',
+      videoId: ytId,
+      host: 'https://www.youtube-nocookie.com',
+      playerVars: {
+        'modestbranding': 1,
+        'autohide': 1,
+        'autoplay': 1,
+        'showinfo': 0,
+        'loop': 1,
+        'mute': 1,
+        'controls': 0,
+        'rel': 0,
+      },
+      events: {
+        'onStateChange': function(event) {
+          if (event.data === YT.PlayerState.ENDED) {
+            player.playVideo();
+          }
+        },
+      },
+    });
+  }
+  function pauseHeroSetVideo(slide, YT) {
+    if(mq.matches) { return; }
+    const $video = $(slide).find('.video');
+    if($video.length == 0) { return; }
+    const $player = $video.find('.youtube-embed');
+    if(!$player.is('iframe')) { return; }
+    $player.get(0).contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+  }
 
   // Get Involved Cards (Homepage B Version 4th Screen, Bottom Part)
   $('.get-involved-cards-swiper').each(function (index) {

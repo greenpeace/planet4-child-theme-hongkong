@@ -1872,7 +1872,7 @@ body.old-version-homepage .header--old { display: -webkit-box; display: -ms-flex
 
 body.old-version-homepage .header--new { display: none; }
 
-.footer--new { position: relative; padding-top: 60px; background: #292F47 url(../images/footer-bg.png) no-repeat bottom center; background-size: cover; color: white; z-index: 1; }
+.footer--new { position: relative; padding-top: 60px; background: #292F47 url(../images/footer-bg.jpg) no-repeat bottom center; background-size: cover; color: white; z-index: 1; }
 
 .footer--new, .footer--new h5 { letter-spacing: 0.84px; line-height: 26px; }
 
@@ -3614,11 +3614,11 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 @media only screen and (min-width: 1024px) { .section-hero-set { height: 70vh; } }
 
-.section-hero-set .arrow { position: absolute; bottom: 8%; }
+.section-hero-set .arrow { position: absolute; bottom: 8%; width: 100px; height: 80px; margin-bottom: -35px; cursor: pointer; }
 
 @media only screen and (min-width: 1024px) { .section-hero-set .arrow { bottom: 12%; } }
 
-.section-hero-set .arrow:before, .section-hero-set .arrow:after { position: absolute; left: -13px; content: ''; height: 2px; width: 26px; background-color: white; }
+.section-hero-set .arrow:before, .section-hero-set .arrow:after { position: absolute; top: 45px; left: -13px; margin-left: 50px; content: ''; height: 2px; width: 26px; background-color: white; }
 
 .section-hero-set .arrow:before { -webkit-transform: rotate(-30deg) translateX(50%); -ms-transform: rotate(-30deg) translateX(50%); transform: rotate(-30deg) translateX(50%); }
 
@@ -3643,6 +3643,12 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 @media only screen and (min-width: 1024px) { .section-hero-set .bg--pc { visibility: visible; } }
 
 @media only screen and (min-width: 1024px) { .section-hero-set .bg--mobile { visibility: hidden; } }
+
+.section-hero-set .video { position: relative; width: 100%; height: 100%; }
+
+.section-hero-set .video .youtube-embed { position: absolute; width: 100%; height: 100%; }
+
+@media only screen and (max-width: 1279px) { .section-hero-set .video { display: none; } }
 
 .section-hero-set .ct-container { height: 100%; }
 
@@ -4128,7 +4134,8 @@ div.section-post-donation-launcher__border-bottom { -webkit-box-shadow: 0 0 6px 
 
 .section-get-involved-cards .content .link { border: none; cursor: pointer; display: inline-block; font-size: 16px; line-height: 26px; color: black; -webkit-transition: color 140ms linear; transition: color 140ms linear; }
 
-@media only screen and (max-width: 1023px) { .section-get-involved-cards .content .link + .link { margin-left: 25px; } }
+@media only screen and (max-width: 1023px) { .section-get-involved-cards .content .link + .link { margin-left: 25px; }
+  .section-get-involved-cards .content .link[data-group="4"] { display: none; } }
 
 @media only screen and (min-width: 1024px) { .section-get-involved-cards .content .link { margin-left: 30px; } }
 
