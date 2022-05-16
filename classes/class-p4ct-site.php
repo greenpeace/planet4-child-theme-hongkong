@@ -384,13 +384,13 @@ class P4CT_Site {
 		if( isset( $header_nav_options[ 'gpea_header_nav_sticky_link' ] ) ) {
 			$header_nav_sticky_link = $header_nav_options[ 'gpea_header_nav_sticky_link' ];
 			if( @strlen( $header_nav_sticky_link ) ) {
-				$header_nav_sticky_link .= ( strpos( $header_nav_sticky_link, '?' ) === FALSE ? '?' : '&' ) . 'ref=cta-sticky';
+				$header_nav_sticky_link = add_query_arg( 'ref', 'cta-sticky', $header_nav_sticky_link );
 			}
 		}
 		if( isset( $header_nav_options[ 'gpea_header_nav_button_link' ] ) ) {
 			$header_nav_button_link = $header_nav_options[ 'gpea_header_nav_button_link' ];
 			if( @strlen( $header_nav_button_link ) ) {
-				$header_nav_button_link .= ( strpos( $header_nav_button_link, '?' ) === FALSE ? '?' : '&' ) . 'ref=cta-header';
+				$header_nav_button_link = add_query_arg( 'ref', 'cta-header', $header_nav_button_link );
 			}
 		}
 
@@ -804,13 +804,8 @@ class P4CT_Site {
 		if( !is_single() || @strlen( $link_url ) == 0 || strpos( $link_url, $domain ) === FALSE || isset( $link_query_array['ref'] ) ) {
 			return $link_url;
 		}
+		return add_query_arg( 'ref', 'update-' . $post->ID . '-' . urldecode( $post->slug ), $link_url );
 
-		$link_query_array['ref'] = 'update-' . $post->ID . '-' . urldecode( $post->slug );
-		$link_url = explode( '#', $link_url );
-		$link_array = explode( '?', $link_url[0] );
-		$link_url[0] = $link_array[0] . '?' . http_build_query( $link_query_array );
-
-		return implode( '#', $link_url );
 	}
 
 	/**

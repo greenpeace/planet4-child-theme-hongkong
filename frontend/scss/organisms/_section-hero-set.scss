@@ -20,13 +20,19 @@
   .arrow {
     position: absolute;
     bottom: 8%;
+    width: 100px;
+    height: 80px;
+    margin-bottom: -35px;
+    cursor: pointer;
     @include greaterThan("sm") {
       bottom: 12%;
     }
     &:before,
     &:after {
       position: absolute;
+      top: 45px;
       left: -0.5 * 26px;
+      margin-left: 50px;
       content: '';
       height: 2px;
       width: 26px;
@@ -92,6 +98,21 @@
       @include greaterThan("sm") {
         visibility: hidden;
       }
+    }
+  }
+
+  .video {
+    position: relative;
+    //padding-bottom: percentage(9/16);
+    width: 100%;
+    height: 100%;
+    .youtube-embed {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    @include lessThan('lg') {
+      display: none;
     }
   }
 

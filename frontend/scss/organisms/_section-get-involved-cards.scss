@@ -189,6 +189,9 @@
         + .link {
           margin-left: 25px;
         }
+        &[data-group="4"] {
+          display: none;
+        }
       }
       @include greaterThan('sm') {
         margin-left: 30px;
