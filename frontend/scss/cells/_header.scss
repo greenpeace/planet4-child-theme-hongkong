@@ -764,9 +764,9 @@
         width: 48px;
         height: 28px;
       }
-    }
-    .title {
-      margin-left: 0.5em;
+      ~ .title {
+        margin-left: 0.5em;
+      }
     }
     .arrow {
       margin-left: 0.5em;

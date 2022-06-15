@@ -314,7 +314,7 @@ class P4CT_Site {
 				$cta_img = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_img' ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_cta_img' ] : '';
 				$cta_content .= '
 				<a class="header__cta header__cta--real" href="' . esc_attr( $cta_link ) . '">
-					<span class="icon" style="background-image: url(' . esc_attr( $cta_img ) . ')"></span>
+					' . ( @strlen( $cta_img ) ? '<span class="icon" style="background-image: url(' . esc_attr( $cta_img ) . ')"></span>' : '' ) . '
 					<span class="title hide-lt-sm">' . esc_html( $cta_label ) . '</span>
 					<span class="title hide-gt-sm">' . esc_html( $cta_label_mobile ) . '</span>
 					<span class="arrow"><span></span></span>

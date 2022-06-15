@@ -1731,7 +1731,7 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 @media only screen and (min-width: 1280px) { .b-version-homepage .header__cta .icon { width: 48px; height: 28px; } }
 
-.b-version-homepage .header__cta .title { margin-left: 0.5em; }
+.b-version-homepage .header__cta .icon ~ .title { margin-left: 0.5em; }
 
 .b-version-homepage .header__cta .arrow { margin-left: 0.5em; position: relative; width: 12px; }
 
