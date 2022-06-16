@@ -1208,4 +1208,10 @@ body.old-version-homepage {
   .header--new {
     display: none;
   }
+
+  @include greaterThan('sm') {
+    .outer_block_container {
+      padding-top: 50px;
+    }
+  }
 }
