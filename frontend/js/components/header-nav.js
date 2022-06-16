@@ -63,6 +63,9 @@ export default function() {
 		if(gt_lg()) { return; }
 		$('.header__column--menu', $header).addClass('header__column--actived');
 		$('body').addClass('has-open-header-nav');
+		if($('.menu__item--has-children.actived').length == 0) {
+			$('.menu__item--has-children:first-child').addClass('actived');
+		}
 	});
 	$('.menu__close-button', $header).on('click', function() {
 		if(gt_lg()) { return; }

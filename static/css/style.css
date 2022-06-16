@@ -1731,7 +1731,7 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 @media only screen and (min-width: 1280px) { .b-version-homepage .header__cta .icon { width: 48px; height: 28px; } }
 
-.b-version-homepage .header__cta .title { margin-left: 0.5em; }
+.b-version-homepage .header__cta .icon ~ .title { margin-left: 0.5em; }
 
 .b-version-homepage .header__cta .arrow { margin-left: 0.5em; position: relative; width: 12px; }
 
@@ -1871,6 +1871,8 @@ body.old-version-homepage .header--old { display: -webkit-box; display: -ms-flex
 @media only screen and (max-width: 1023px) { body.old-version-homepage .header--old .mobile-toolbar { display: -webkit-box; display: -ms-flexbox; display: flex; } }
 
 body.old-version-homepage .header--new { display: none; }
+
+@media only screen and (min-width: 1024px) { body.old-version-homepage .outer_block_container { padding-top: 50px; } }
 
 .footer--new { position: relative; padding-top: 60px; background: #292F47 url(../images/footer-bg.jpg) no-repeat bottom center; background-size: cover; color: white; z-index: 1; }
 
