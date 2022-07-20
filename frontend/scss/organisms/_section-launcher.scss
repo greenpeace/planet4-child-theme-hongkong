@@ -1,4 +1,11 @@
 .section-launcher {
+
+  .page-template > & {
+    min-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .launchers {
     padding-bottom: 20px;
   }
