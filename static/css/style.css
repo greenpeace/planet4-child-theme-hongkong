@@ -3298,6 +3298,8 @@ body:not(.page-template-project) .section-project-phases { min-height: 250px !im
 
 .section-report-launcher.layout-light h2 { color: #66CC00; }
 
+.page-template > .section-launcher { min-height: 0; padding-top: 0; padding-bottom: 0; }
+
 .section-launcher .launchers { padding-bottom: 20px; }
 
 .section-launcher h2, .section-launcher .ct-container > p { text-align: center; }
