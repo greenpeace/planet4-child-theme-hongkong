@@ -669,6 +669,10 @@ img.lazy.error, img.lazy.loaded { opacity: 1; }
 
 .outer_block_container > section, .page-template > section { min-height: 400px; padding: 40px 0 30px; background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(238, 238, 238, 0)), to(#EEEEEE)); background-image: linear-gradient(to bottom, rgba(238, 238, 238, 0) 0%, #EEEEEE 100%); }
 
+.outer_block_container > section.section-no-padding, .page-template > section.section-no-padding { padding-top: 0; padding-bottom: 0; }
+
+.outer_block_container > section.section-no-min-height, .page-template > section.section-no-min-height { min-height: 0; }
+
 body .icon-facebook::before { color: #007AFA; }
 
 .body-spinner { display: block; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); background: rgba(255, 255, 255, 0.8); opacity: 0; visibility: hidden; pointer-events: none; -webkit-transition: opacity 140ms linear, visibility 140ms linear 140ms; transition: opacity 140ms linear, visibility 140ms linear 140ms; z-index: 98; }
@@ -3297,8 +3301,6 @@ body:not(.page-template-project) .section-project-phases { min-height: 250px !im
 .section-report-launcher.layout-light { background: #E6F5F5 !important; color: black; }
 
 .section-report-launcher.layout-light h2 { color: #66CC00; }
-
-.page-template > .section-launcher { min-height: 0; padding-top: 0; padding-bottom: 0; }
 
 .section-launcher .launchers { padding-bottom: 20px; }
 
