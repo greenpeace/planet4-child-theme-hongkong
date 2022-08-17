@@ -183,6 +183,13 @@ img.lazy {
   min-height: 400px;
   padding: 40px 0 30px;
   background-image: $gradient-smoke;
+  &.section-no-padding {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  &.section-no-min-height {
+    min-height: 0;
+  }
 }
 
 body .icon-facebook::before {
