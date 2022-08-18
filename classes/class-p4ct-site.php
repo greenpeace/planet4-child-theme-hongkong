@@ -546,12 +546,12 @@ class P4CT_Site {
 
 		wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/static/css/style.css', [], $css_creation );
 
-		wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js',[], $js_creation, true );
+		wp_enqueue_script( 'child-script', get_stylesheet_directory_uri() . '/static/js/script.js', [ 'jquery' ], $js_creation, true );
 		wp_localize_script( 'child-script', 'localizations', [
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 		]);
 
-		wp_register_script( 'search-script', get_stylesheet_directory_uri() . '/static/js/search.js', [], $search_js_creation, true );
+		wp_register_script( 'search-script', get_stylesheet_directory_uri() . '/static/js/search.js', [ 'jquery' ], $search_js_creation, true );
 		wp_localize_script( 'search-script', 'localizations', [
 			'ajaxurl'           => admin_url( 'admin-ajax.php' ),
 			'show_scroll_times' => self::SHOW_SCROLL_TIMES,
