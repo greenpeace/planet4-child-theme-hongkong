@@ -16,7 +16,7 @@
 	{% endif %}
 	<meta name="description" content="{{ meta_description|e('html') }}">
 
-  {% if not (og_title is defined) %}
+  {% if (og_title is not defined or og_title|length == 0) %}
 		{% if (wp_title) %}
 			{% set og_title = wp_title|raw~' - '~site.name %}
 		{% else %}
