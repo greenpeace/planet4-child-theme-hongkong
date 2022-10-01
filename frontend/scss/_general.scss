@@ -184,7 +184,9 @@ img.lazy {
   padding: 40px 0 30px;
   background-image: $gradient-smoke;
   &.section-no-padding {
-    padding-top: 0;
+    @include greaterThan('sm') {
+      padding-top: 0;
+    }
     padding-bottom: 0;
   }
   &.section-no-min-height {
