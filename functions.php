@@ -64,3 +64,11 @@ function asia_do_feed_rss2() {
 	load_template( __DIR__ . '/rss.php' ); 
 }
 add_action( 'do_feed_rss2', 'asia_do_feed_rss2' );
+
+// redirect author page
+function my_redirect() {
+	if ( is_author() ) {
+		wp_redirect( get_option('home'), 301 );
+	}
+}
+add_action( 'template_redirect', 'my_redirect' );
