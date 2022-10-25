@@ -504,6 +504,7 @@ class P4CT_Site {
 		wp_dequeue_style( 'bootstrap' );
 		wp_dequeue_style( 'slick' );
 		// wp_dequeue_style( 'plugin-en' );
+		wp_dequeue_style( 'gravity-forms-style' );
 		// wp_deregister_script( 'jquery' );
 		wp_dequeue_script( 'popperjs' );
 		wp_dequeue_script( 'bootstrapjs' );
