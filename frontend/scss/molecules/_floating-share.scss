@@ -85,7 +85,8 @@
       filter: brightness(80%);
     }
 
-    &.email {
+    &.email,
+    &.email:visited {
       color: $color-grey;
     }
   }
