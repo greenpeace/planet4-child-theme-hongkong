@@ -769,17 +769,17 @@ svg.external-link, svg.external-icon, svg.external_link { display: none; }
 @keyframes lds-dual-ring { 0% { -webkit-transform: rotate(0deg); transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } }
 
-.issue.forests { color: #00B474; }
+.issue.forests, .section-post-content a.issue:visited.forests { color: #00B474; }
 
-.issue.oceans { color: #008FE2; }
+.issue.oceans, .section-post-content a.issue:visited.oceans { color: #008FE2; }
 
-.issue.arctic { color: #62CBD7; }
+.issue.arctic, .section-post-content a.issue:visited.arctic { color: #62CBD7; }
 
-.issue.climate { color: #FFBE00; }
+.issue.climate, .section-post-content a.issue:visited.climate { color: #FFBE00; }
 
-.issue.plastics { color: #AFAA91; }
+.issue.plastics, .section-post-content a.issue:visited.plastics { color: #AFAA91; }
 
-.issue.health { color: #F09D7F; }
+.issue.health, .section-post-content a.issue:visited.health { color: #F09D7F; }
 
 a.issue:hover.forests, a.issue:focus.forests { border-bottom-color: #00B474; }
 

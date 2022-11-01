@@ -1,4 +1,5 @@
-.issue {
+.issue,
+.section-post-content a.issue:visited {
   &.forests {
     color: $color-forests;
   }
