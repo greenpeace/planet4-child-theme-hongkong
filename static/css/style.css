@@ -1462,7 +1462,7 @@ a.card-mini { display: block; text-decoration: none !important; border-bottom: n
 
 .floating-share-icon:focus, .floating-share-icon:hover { -webkit-filter: brightness(80%); filter: brightness(80%); }
 
-.floating-share-icon.email { color: #898B92; }
+.floating-share-icon.email, .floating-share-icon.email:visited { color: #898B92; }
 
 @media only screen and (min-width: 1024px) { .floating-share.is-fixed { position: fixed !important; top: 80px; left: 50vw; margin-left: -450px; } }
 
