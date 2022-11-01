@@ -26,12 +26,19 @@
 
   &.primary,
   &.btn-primary,
+  &.tag.active,
+  &.primary:visited,
+  &.btn-primary:visited,
+  &.tag.active:visited {
+    color: white;
+  }
+  &.primary,
+  &.btn-primary,
   &.tag.active {
     font-size: 20px;
     padding: 0 40px;
     height: 40px;
     line-height: 39px;
-    color: white;
     background: $color-orange;
     box-shadow: none;
     &.wider {
