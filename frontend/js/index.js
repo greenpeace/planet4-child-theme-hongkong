@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   //append lazy load class before reuqest images
   jQuery(".section-post-content img").addClass("lazy");
 
-  new LazyLoad({
+  const LazyLoadImages = new LazyLoad({
     elements_selector: ".lazy",
     threshold: 400,
   });
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   countriesMenu();
 
-  swipers(Swiper);
+  swipers(Swiper, LazyLoadImages);
 
   setTimeout(followUnfollow, 0);
 

@@ -2,7 +2,7 @@ import { debounce } from 'throttle-debounce';
 
 const $ = jQuery;
 
-export default function (Swiper) {
+export default function (Swiper, LazyLoadImages) {
 
   $('.section-hero-set .arrow').on('click', function (e) {
     const $this = $(this);
@@ -41,6 +41,9 @@ export default function (Swiper) {
         autoplay: true,
         loop: true,
         on: {
+          init: function() {
+            LazyLoadImages.update();
+          },
           slideChangeTransitionEnd: function() {
             pauseHeroSetVideo(this.slides[this.previousIndex], YT);
             playHeroSetVideo(this.slides[this.activeIndex], YT);
