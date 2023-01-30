@@ -39,6 +39,7 @@ import animatecounters from "./components/animatecounters";
 import notificationList from "./components/notification-list";
 import getInvolvedCards from "./components/get-involved-cards";
 import headerNav from "./components/header-nav";
+import articleNotes from "./components/article-notes";
 
 // import donationPage from './donation-page';
 
@@ -138,5 +139,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
   notificationList();
   getInvolvedCards();
   headerNav();
+  articleNotes();
 
 });
