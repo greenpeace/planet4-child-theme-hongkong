@@ -99,7 +99,13 @@ function article_note_add_editor_buttons() {
 	add_filter( 'mce_buttons', 'article_note_register_editor_button' );
 }
 function article_note_add_editor_script( $plugin_array = [] ) {
+	$article_note_locales = [
+		'action_insert' => __( 'Insert note', 'gpea_theme' ),
+		'default_content' => __( 'Input note content here', 'gpea_theme' ),
+		'default_title' => __( 'Input display text here', 'gpea_theme' ),
+	];
 	$plugin_array['article-notes'] = get_stylesheet_directory_uri() . '/admin/js/admin_editor_article_note_buttons.js';
+	wp_localize_script( 'wp-tinymce', 'article_note_editor_locales', $article_note_locales );
 	return $plugin_array;
 }
 function article_note_register_editor_button( $buttons = [] ) {
@@ -110,5 +116,11 @@ function article_note_register_editor_button( $buttons = [] ) {
 // add buttons to basic editors
 add_action( 'admin_enqueue_scripts', 'article_note_add_editor_quicktag' );
 function article_note_add_editor_quicktag(){
+	$article_note_locales = [
+		'action_insert' => __( 'Insert note', 'gpea_theme' ),
+		'default_content' => __( 'Input note content here', 'gpea_theme' ),
+		'default_title' => __( 'Input display text here', 'gpea_theme' ),
+	];
 	wp_enqueue_script( 'quicktag-article-note-buttons', get_stylesheet_directory_uri() . '/admin/js/admin_quicktag_article_note_buttons.js', array( 'jquery', 'quicktags' ), '1.0.0', TRUE );
+	wp_localize_script( 'quicktag-article-note-buttons', 'article_note_quicktag_locales', $article_note_locales );
 }

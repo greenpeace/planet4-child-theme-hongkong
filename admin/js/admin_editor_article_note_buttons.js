@@ -1,18 +1,17 @@
 ( function() {
-	tinymce.PluginManager.add( 'article-notes', function( editor, url ) {
-        console.log( 1233, url );
+	tinymce.PluginManager.add( 'article-notes', function( editor ) {
 		editor.addButton( 'article-notes', {
-			title: '插入註解',
+			title: article_note_editor_locales.action_insert,
 			cmd: 'article-notes',
-			text: '插入註解',
+			text: article_note_editor_locales.action_insert,
 		});
 		editor.addCommand('article-notes', function() {
 			var selected_text = editor.selection.getContent( {
 				'format': 'html'
 			} );
-			var open_column = '[note title="';
-			var close_column = '"]註解文字[/note]';
-			var return_text = open_column + ( selected_text.length > 0 ? selected_text : '顯示文字') + close_column;
+			var open_tag = '[note title="';
+			var close_tag = '"]' + article_note_editor_locales.default_content + '[/note]';
+			var return_text = open_tag + ( selected_text.length > 0 ? selected_text : article_note_editor_locales.default_title) + close_tag;
 			editor.execCommand( 'mceReplaceContent', false, return_text );
 			return;
 		} );
