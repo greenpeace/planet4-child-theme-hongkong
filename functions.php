@@ -92,13 +92,14 @@ function article_note_theme_setup(){
 	add_action( 'init', 'article_note_add_editor_buttons' );
 }
 function article_note_add_editor_buttons() {
-	if ( ( !current_user_can( 'edit_posts' ) && !current_user_can( 'edit_pages' ) ) || get_user_option( 'rich_editing' ) !== 'true' ) {
-		return;
-	}
 	add_filter( 'mce_external_plugins', 'article_note_add_editor_script' );
 	add_filter( 'mce_buttons', 'article_note_register_editor_button' );
 }
 function article_note_add_editor_script( $plugin_array = [] ) {
+	$screen = get_current_screen();
+	if ( $screen->post_type !== 'post' || !current_user_can( 'edit_posts' ) || get_user_option( 'rich_editing' ) !== 'true' ) {
+		return $plugin_array;
+	}
 	$article_note_locales = [
 		'action_insert' => __( 'Insert note', 'gpea_theme' ),
 		'default_content' => __( 'Input note content here', 'gpea_theme' ),
@@ -109,13 +110,21 @@ function article_note_add_editor_script( $plugin_array = [] ) {
 	return $plugin_array;
 }
 function article_note_register_editor_button( $buttons = [] ) {
+	$screen = get_current_screen();
+	if ( $screen->post_type !== 'post' || !current_user_can( 'edit_posts' ) || get_user_option( 'rich_editing' ) !== 'true' ) {
+		return $buttons;
+	}
 	array_push( $buttons, 'article-notes' );
 	return $buttons;
 }
 
 // add buttons to basic editors
 add_action( 'admin_enqueue_scripts', 'article_note_add_editor_quicktag' );
-function article_note_add_editor_quicktag(){
+function article_note_add_editor_quicktag() {
+	$screen = get_current_screen();
+	if ( $screen->post_type !== 'post' || !current_user_can( 'edit_posts' ) || get_user_option( 'rich_editing' ) !== 'true' ) {
+		return;
+	}
 	$article_note_locales = [
 		'action_insert' => __( 'Insert note', 'gpea_theme' ),
 		'default_content' => __( 'Input note content here', 'gpea_theme' ),
