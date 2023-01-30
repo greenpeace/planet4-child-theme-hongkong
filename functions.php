@@ -89,11 +89,7 @@ function article_note_shortcode( $attr = [], $content = NULL ) {
 // add buttons to visual editors
 add_action( 'after_setup_theme', 'article_note_theme_setup' );
 function article_note_theme_setup(){
-	add_action( 'admin_init', 'article_note_add_editor_styles' );
 	add_action( 'init', 'article_note_add_editor_buttons' );
-}
-function article_note_add_editor_styles() {
-	add_editor_style( 'tinymce_article_note_buttons.css' );
 }
 function article_note_add_editor_buttons() {
 	if ( ( !current_user_can( 'edit_posts' ) && !current_user_can( 'edit_pages' ) ) || get_user_option( 'rich_editing' ) !== 'true' ) {
@@ -102,17 +98,17 @@ function article_note_add_editor_buttons() {
 	add_filter( 'mce_external_plugins', 'article_note_add_editor_script' );
 	add_filter( 'mce_buttons', 'article_note_register_editor_button' );
 }
-function article_note_add_editor_script( $plugin_array ) {
-	$plugin_array['article_notes'] = get_stylesheet_directory_uri() . '/tinymce_article_note_buttons.js';
+function article_note_add_editor_script( $plugin_array = [] ) {
+	$plugin_array['article-notes'] = get_stylesheet_directory_uri() . '/admin/js/admin_editor_article_note_buttons.js';
 	return $plugin_array;
 }
-function article_note_register_editor_button( $buttons ) {
-	array_push( $buttons, 'article_notes' );
+function article_note_register_editor_button( $buttons = [] ) {
+	array_push( $buttons, 'article-notes' );
 	return $buttons;
 }
 
 // add buttons to basic editors
 add_action( 'admin_enqueue_scripts', 'article_note_add_editor_quicktag' );
 function article_note_add_editor_quicktag(){
-	wp_enqueue_script( 'quicktag-article-note-buttons', get_stylesheet_directory_uri() . '/quicktag_article_note_buttons.js', array( 'jquery', 'quicktags' ), '1.0.0', TRUE );
+	wp_enqueue_script( 'quicktag-article-note-buttons', get_stylesheet_directory_uri() . '/admin/js/admin_quicktag_article_note_buttons.js', array( 'jquery', 'quicktags' ), '1.0.0', TRUE );
 }
