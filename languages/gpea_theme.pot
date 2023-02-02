@@ -534,3 +534,11 @@ msgid "On-Going Projects"
 msgstr ""
 msgid "login"
 msgstr ""
+
+#. Collapsible notes for articles
+msgid "Insert note"
+msgstr ""
+msgid "Input display text here"
+msgstr ""
+msgid "Input note content here"
+msgstr ""
