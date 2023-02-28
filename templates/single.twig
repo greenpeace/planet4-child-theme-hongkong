@@ -52,6 +52,16 @@
       </div>
       
       {{ post.content |replace({ '<blockquote>':'<blockquote><summary>', '</blockquote>':'</summary></blockquote>' }) |e('wp_kses_post') |raw }}
+
+      {% if page_tags %}
+      <div class="tag-box">
+      <h3 class="tag-box__title">{{ strings.related_tags }}</h3>
+      <p class="tag-box__list">
+      {% for tag in page_tags %}<a class="tag-box__item" href="{{ tag.link }}">{{ tag.name }}</a>{{ not loop.last ? strings.related_tag_separator }}{% endfor %}
+      </p>
+      </div>
+      {% endif %}
+
     </section>
 
   </article>

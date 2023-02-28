@@ -36,12 +36,13 @@ $context['page_type']           = $page_terms_data[0]->name ?? '';
 $context['page_term_id']        = $page_terms_data[0]->term_id ?? '';
 $context['page_category']       = $category->name ?? __( 'Post page', 'gpea_theme' );
 $context['page_type_slug']      = $page_terms_data[0]->slug ?? '';
+$context['page_tags']           = $post->tags();
 $context['social_accounts']     = $post->get_social_accounts( $context['footer_social_menu'] );
 $context['og_title']            = $post->get_og_title();
 $context['og_description']      = strip_tags( $post->get_og_description() );
 $context['og_image_data']       = $post->get_og_image();
 $context['custom_body_classes'] = 'white-bg';
-$context['show_article_donation_launcher']    = $page_meta_data['p4-gpea_show_article_donation_launcher'][0] ?? '';
+$context['show_article_donation_launcher'] = $page_meta_data['p4-gpea_show_article_donation_launcher'][0] ?? '';
 
 // reading time and categories info!
 $context['reading_time']        = $page_meta_data['p4-gpea_post_reading_time'][0] ?? '';
@@ -223,7 +224,12 @@ $context['filter_url'] = add_query_arg(
 // Build the shortcode for articles block.
 if ( 'no' !== $post->include_articles ) {
 	// $post->articles = "[shortcake_articles exclude_post_id='" . $post->ID . "' /]"; !
-	$context['related_posts'] = $gpea_extra->gpea_get_related( $post->ID, 4, false, false, false, 'big' );
+	if( isset( $context['main_issue_id'] ) ) {
+		$context['related_posts'] = $gpea_extra->gpea_get_related( $post->ID, 4, false, false, false, 'big' );
+	}
+	else {
+		$context['related_posts'] = $gpea_extra->gpea_get_related( $post->ID, 4, true, $context['main_issue_id'], false, 'big' );
+	}
 }
 
 // Build the shortcode for take action boxout block
@@ -272,7 +278,9 @@ $context['strings'] = [
 	'i_support' => isset( $options['gpea_post_donation_launcher_label'] ) ? $options['gpea_post_donation_launcher_label'] : '',
 	'donation_launcher_img' => isset( $options['gpea_post_donation_launcher_image'] ) ? $options['gpea_post_donation_launcher_image'] : '',
 	'donation_launcher_img_align_center' => isset( $options['gpea_post_donation_launcher_image_align_center'] ) ? $options['gpea_post_donation_launcher_image_align_center'] : '',
-	'related_news' => __( 'Related news', 'gpea_theme' ),
+	'related_tags' => __( 'Related tags:', 'gpea_theme' ),
+	'related_tag_separator' => __( ', ', 'gpea_theme' ),
+	'related_news' => isset( $context['main_issue'] ) ? sprintf( __( 'More about %s...', 'gpea_theme' ), $context['main_issue'] ) : __( 'Related news', 'gpea_theme' ),
 	'share' => __( 'Share', 'gpea_theme' ),
 ];
 

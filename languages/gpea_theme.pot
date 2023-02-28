@@ -542,3 +542,11 @@ msgid "Input display text here"
 msgstr ""
 msgid "Input note content here"
 msgstr ""
+
+#. Tag & related articles
+msgid "Related tags:"
+msgstr ""
+msgid "More about %s..."
+msgstr ""
+msgid ", "
+msgstr ""
