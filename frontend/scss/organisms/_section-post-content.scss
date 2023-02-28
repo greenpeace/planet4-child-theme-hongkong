@@ -345,4 +345,19 @@
       border-color: $color-health;
     }
   }
+
+  .tag-box {
+    &__item {
+      color: black;
+      border-bottom-color: black;
+      transition: color 140ms linear, border-bottom-color 140ms linear;
+      &:hover,
+      &:focus,
+      &:active {
+        color: $color-green;
+        border-bottom-color: $color-green;
+      }
+    }
+  }
+
 }
