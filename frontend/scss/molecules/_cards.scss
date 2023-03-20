@@ -355,7 +355,7 @@
       }
     }
 
-    p {
+    p, h3 {
       @include title-text;
       min-height: 75px;
       display: flex;
