@@ -12,11 +12,15 @@
     max-width: 500px;
   }
 
-  h5 {
+  h2 {
     margin-bottom: 3px;
+    font-size: 16px;
+    @include greaterThan('sm') {
+      font-size: 18px;
+    }
   }
 
-  h5 + p {
+  h2 + p {
     margin-top: 3px;
     margin-bottom: 10px;
     padding-bottom: 20px;
@@ -38,4 +42,27 @@
     overflow: hidden;
     margin-bottom: 20px;
   }
+
+  .see-more {
+    line-height: 1.5;
+    a {
+      font-weight: normal;
+    }
+  }
+  h2,
+  .see-more {
+    a {
+      color: $color-green;
+      text-decoration: none;
+      border-bottom: 1px solid transparent !important;
+      transition: border-bottom-color 140ms linear;
+      opacity: 1;
+      display: inline;
+      &:hover,
+      &:focus {
+        border-bottom-color: $color-green !important;
+      }
+    }
+  }
+
 }
