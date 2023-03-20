@@ -113,7 +113,7 @@
         padding-top: 60px;
         justify-content: space-evenly;
 
-        p {
+        p, h3 {
           flex-grow: 1;
           display: flex;
           justify-content: center;
@@ -122,11 +122,17 @@
       }
     }
 
-    p {
+    p, h3 {
       @include title-mid;
       margin: 0 0 4px;
       text-align: center;
     }
+
+    h3 {
+      font-weight: normal;
+      line-height: 1.5;
+    }
+    
   }
 
   &.compact {
@@ -249,19 +255,28 @@
     }
   }
 
-  p {
+  p, h3 {
     @include title-mid;
     margin: 4px 0;
   }
 
-  &.force-mobile p {
-    font-size: 24px;
-    margin: 4px 0;
+  h3 {
+    font-weight: normal;
+    line-height: 1.5;
   }
 
-  &:not(.force-mobile) p {
-    @include greaterThan('sm') {
-      margin-top: 20px;
+  &.force-mobile {
+    p, h3 {
+      font-size: 24px;
+      margin: 4px 0;
+    }
+  }
+
+  &:not(.force-mobile) {
+    p, h3 {
+      @include greaterThan('sm') {
+        margin-top: 20px;
+      }
     }
   }
 
@@ -340,7 +355,7 @@
       }
     }
 
-    p {
+    p, h3 {
       @include title-text;
       min-height: 75px;
       display: flex;
@@ -434,7 +449,7 @@
     }
   }
 
-  h4 {
+  h3 {
     text-align: center;
     font-size: 40px;
     line-height: 59px;
