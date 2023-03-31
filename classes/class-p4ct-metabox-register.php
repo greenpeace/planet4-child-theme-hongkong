@@ -1347,8 +1347,11 @@ class P4CT_Metabox_Register {
 			'post' => 'Posts',
 		];
 
+		$perpage = 50;
 		$current_type = isset( $_GET['type'] ) && array_key_exists( $_GET['type'], $type_map ) ? $_GET['type'] : key( $type_map );
-		$current_module = isset( $_GET['module'] ) ? $_GET['module'] : NULL; ?>
+		$current_module = isset( $_GET['module'] ) ? $_GET['module'] : NULL;
+		$current_page = isset( $_GET['paged'] ) ? $_GET['paged'] : 1;
+		?>
 		
 		<?php if( !is_callable( 'Shortcode_UI', 'get_shortcodes' ) ): ?>
 
@@ -1361,6 +1364,7 @@ class P4CT_Metabox_Register {
 			<a href="<?php echo esc_attr( add_query_arg( [
 				'type' => $value,
 				'module' => NULL,
+				'paged' => NULL,
 			] ) ); ?>" class="nav-tab <?php if( $current_type == $value ): ?>nav-tab-active<?php endif; ?>"><?php echo esc_html( $label ); ?></a>
 			<?php endforeach; ?>
     	</nav>
@@ -1387,6 +1391,7 @@ class P4CT_Metabox_Register {
 			?>
 			<label style="display: block;"><input onclick="location=this.value" name="module" type="radio" value="<?php echo esc_attr( add_query_arg( [
 				'module' => $key,
+				'paged' => NULL,
 			] ) ); ?>" <?php if( $current_module == $key ): ?>checked<?php endif; ?> /><?php echo esc_html( $settings[ 'label' ] ); ?></label>
 			<?php
 		}
@@ -1395,23 +1400,43 @@ class P4CT_Metabox_Register {
 
 		</div>
 
-		<h3>Search Result:</h3>
-
 		<?php if( !isset( $current_module_shortcode ) ): ?>
+
+		<h3>Search Result:</h3>
 
 		<p>No module is selected.</p>
 
 		<?php else: ?>
 
 		<?php
+			
 		$the_query = new WP_Query( [
+			'posts_per_page' => $perpage,
+			'paged' => $current_page,
 			'post_type' => $current_type,
 			's' => '[' . $current_module . ' ',
 		] );
+
+		?>
+
+		<h3>Search Result: Found <?php echo esc_html( $the_query->found_posts ); ?> <?php echo esc_html( $type_map[ $current_type ] ); ?></h3>
+
+		<?php
+
 		while ( $the_query->have_posts() ) {
 			$the_query->the_post();
-			echo '<p>Title: ' . esc_html( get_the_title() ) . '<br>Permalink: <a href="' . esc_attr( get_the_permalink() ) . '" target="_blank">' . esc_html( get_the_permalink() ) . '</a></p>';
+			echo '<p><b>' . esc_html( get_the_title() ) . ' — ' . esc_html( get_post_statuses()[ get_post_status() ] ) . '</b><br><a href="' . esc_attr( get_the_permalink() ) . '" target="_blank">' . esc_html( get_the_permalink() ) . '</a></p>';
 		}
+
+		echo paginate_links( [
+			'base' => add_query_arg( [
+				'paged' => '%#%',
+			] ),
+			'format' => '?paged=%#%',
+			'current' => $current_page,
+			'total' => $the_query->max_num_pages,
+		] );
+
 		?>
 
 		<?php endif; ?>
