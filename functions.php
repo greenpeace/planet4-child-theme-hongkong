@@ -133,3 +133,12 @@ function article_note_add_editor_quicktag() {
 	wp_enqueue_script( 'quicktag-article-note-buttons', get_stylesheet_directory_uri() . '/admin/js/admin_quicktag_article_note_buttons.js', array( 'jquery', 'quicktags' ), '1.0.0', TRUE );
 	wp_localize_script( 'quicktag-article-note-buttons', 'article_note_quicktag_locales', $article_note_locales );
 }
+
+add_filter( 'posts_where', 'gpea_posts_where', 10, 2 );
+function gpea_posts_where( $where, &$wp_query  ){
+    global $wpdb;
+    if ( $gpea_short_code = $wp_query->get( 'gpea_short_code' ) ) {
+        $where .= ' AND ' . $wpdb->posts . '.post_content LIKE \'%' . esc_sql( $wpdb->esc_like(  '[' . $gpea_short_code . ' ' ) ) . '%\'';
+    }
+    return $where;
+}

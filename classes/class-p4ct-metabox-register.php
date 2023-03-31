@@ -1414,7 +1414,7 @@ class P4CT_Metabox_Register {
 			'posts_per_page' => $perpage,
 			'paged' => $current_page,
 			'post_type' => $current_type,
-			's' => '[' . $current_module . ' ',
+			'gpea_short_code' => $current_module,
 		] );
 
 		?>
