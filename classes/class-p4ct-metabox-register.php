@@ -97,6 +97,8 @@ class P4CT_Metabox_Register {
 
 		$this->register_header_nav_options_metabox();
 
+		$this->register_module_map_page();
+
 	}
 
 	/**
@@ -111,8 +113,8 @@ class P4CT_Metabox_Register {
 				isset($subpage['menu_title']) ? $subpage['menu_title'] : $subpage['title'],
 				'manage_options',
 				$path,
-				function () use ( $path ) {
-					$this->admin_page_display( $path );
+				function () use ( $path, $subpage ) {
+					$this->admin_page_display( $subpage );
 				}
 			);
 		}
@@ -1323,6 +1325,104 @@ class P4CT_Metabox_Register {
 	}
 
 	/**
+	 * Registers module map page.
+	 */
+	public function register_module_map_page() {
+
+		$this->subpages['gpea_module_map_page'] = [
+			'title'        => esc_html__( 'Module In Posts/Pages', self::METABOX_ID ),
+			'menu_title'   => esc_html__( 'Module In Pages', self::METABOX_ID ),
+			'display_callback'   => [ $this, 'display_module_map_page' ],
+		];
+
+	}
+
+	/**
+	 * Registers module map page.
+	 */
+	public function display_module_map_page(array $subpage) {
+
+		$type_map = [ 
+			'page' => 'Pages',
+			'post' => 'Posts',
+		];
+
+		$current_type = isset( $_GET['type'] ) && array_key_exists( $_GET['type'], $type_map ) ? $_GET['type'] : key( $type_map );
+		$current_module = isset( $_GET['module'] ) ? $_GET['module'] : NULL; ?>
+		
+		<?php if( !is_callable( 'Shortcode_UI', 'get_shortcodes' ) ): ?>
+
+		<p>Plugin &quot;Shortcake (Shortcode UI)&quot; is not exists.</p>
+
+		<?php else: ?>
+
+		<nav class="nav-tab-wrapper">
+			<?php foreach( $type_map as $value => $label ): ?>
+			<a href="<?php echo esc_attr( add_query_arg( [
+				'type' => $value,
+				'module' => NULL,
+			] ) ); ?>" class="nav-tab <?php if( $current_type == $value ): ?>nav-tab-active<?php endif; ?>"><?php echo esc_html( $label ); ?></a>
+			<?php endforeach; ?>
+    	</nav>
+
+		<h3>Search <?php echo esc_html( $type_map[ $current_type ] ); ?> by Selected a Module:</h3>
+
+		<div style="column-gap: 2em; column-count: auto; column-width: 20em; line-height: 2;">
+		<?php
+		
+		$module_map = \Shortcode_UI::get_instance()->get_shortcodes();
+		$current_module_shortcode = NULL;
+		$first_module = TRUE;
+		foreach( $module_map as $key => $settings) {
+			if( !in_array( $current_type, $settings[ 'post_type' ] ) ) {
+				continue;
+			}
+			if( $first_module && !isset( $current_module ) ) {
+				$current_module = $key;
+				$first_module = FALSE;
+			}
+			if( $key == $current_module ) {
+				$current_module_shortcode = $settings[ 'shortcode_tag' ];
+			}
+			?>
+			<label style="display: block;"><input onclick="location=this.value" name="module" type="radio" value="<?php echo esc_attr( add_query_arg( [
+				'module' => $key,
+			] ) ); ?>" <?php if( $current_module == $key ): ?>checked<?php endif; ?> /><?php echo esc_html( $settings[ 'label' ] ); ?></label>
+			<?php
+		}
+
+		?>
+
+		</div>
+
+		<h3>Search Result:</h3>
+
+		<?php if( !isset( $current_module_shortcode ) ): ?>
+
+		<p>No module is selected.</p>
+
+		<?php else: ?>
+
+		<?php
+		$the_query = new WP_Query( [
+			'post_type' => $current_type,
+			's' => '[' . $current_module . ' ',
+		] );
+		while ( $the_query->have_posts() ) {
+			$the_query->the_post();
+			echo '<p>Title: ' . esc_html( get_the_title() ) . '<br>Permalink: <a href="' . esc_attr( get_the_permalink() ) . '" target="_blank">' . esc_html( get_the_permalink() ) . '</a></p>';
+		}
+		?>
+
+		<?php endif; ?>
+
+		<?php endif; ?>
+
+		<?php
+
+	}
+
+	/**
 	 * Taxonomy show_on filter
 	 *
 	 * @author Bill Erickson
@@ -1610,19 +1710,26 @@ class P4CT_Metabox_Register {
 	 *
 	 * @param string $plugin_page The key for the current page.
 	 */
-	public function admin_page_display( string $plugin_page ) {
+	public function admin_page_display( array $subpage ) {
 
-		$fields = $this->subpages[ $plugin_page ]['fields'];
-		$option_key = $this->subpages[ $plugin_page ]['option_key'];
+		$fields = $subpage['fields'] ?? [];
+		$option_key = $subpage['option_key'] ?? NULL;
 
-		$add_scripts = $this->subpages[ $plugin_page ]['add_scripts'] ?? NULL;
+		$add_scripts = $subpage['add_scripts'] ?? NULL;
 		if ( $add_scripts ) {
 			$add_scripts();
 		}
 		?>
 		<div class="wrap <?php echo esc_attr( $option_key ); ?>">
 			<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
-			<?php cmb2_metabox_form( $this->option_metabox( $fields, $option_key ), $option_key ); ?>
+			<?php
+			if( isset( $subpage[ 'display_callback' ] ) && is_callable( $subpage[ 'display_callback' ] ) ){
+				call_user_func($subpage['display_callback'], $subpage);
+			}
+			elseif(isset($option_key)) {
+				cmb2_metabox_form( $this->option_metabox( $fields, $option_key ), $option_key );
+			}
+			?>
 		</div>
 		<?php
 	}
