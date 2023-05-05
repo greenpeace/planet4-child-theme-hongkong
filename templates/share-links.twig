@@ -2,49 +2,49 @@
   {% for key,item in share_options %}
       {% if item == 'facebook' %}
         <li class="floating-share-icon facebook">
-          <a href="https://www.facebook.com/sharer/sharer.php?u={{ post.link }}" class="floating-share-icon fb" aria-label="{{ '[Share on Facebook]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Facebook', 'eventLabel': '{{ post.link }}'});">
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ post.link }}" class="floating-share-icon fb" aria-label="{{ '[Share on Facebook]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Facebook', 'eventLabel': '{{ post.link }}'}); dataLayer.push({'event' : 'custom_event', 'event_name' : 'social_share', 'event_category': 'blog', 'event_action': 'social_share', 'method': 'facebook', 'share_url': '{{ post.link }}', 'content_title': '{{ post.title }}', 'content_type': 'blog'});">
           <span class="icon-facebook"></span>
           </a>
         </li>
       {% elseif item == 'twitter' %}
         <li class="floating-share-icon twitter">
-          <a href="https://twitter.com/intent/tweet?text={{ og_description|e('html_attr')|raw }}&url={{ post.link }}" class="floating-share-icon tw" aria-label="{{ '[Share on Twitter]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Twitter', 'eventLabel': '{{ post.link }}'});">
+          <a href="https://twitter.com/intent/tweet?text={{ og_description|e('html_attr')|raw }}&url={{ post.link }}" class="floating-share-icon tw" aria-label="{{ '[Share on Twitter]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Twitter', 'eventLabel': '{{ post.link }}'}); dataLayer.push({'event' : 'custom_event', 'event_name' : 'social_share', 'event_category': 'blog', 'event_action': 'social_share', 'method': 'twitter', 'share_url': '{{ post.link }}', 'content_title': '{{ post.title }}', 'content_type': 'blog'});">
           <span class="icon-twitter"></span>
           </a>
         </li> 
       {% elseif item == 'email' %}
         <li class="floating-share-icon email">
-          <a href="mailto:?subject={{ og_description|e('html_attr')|raw }}&body={{ post.link }}" class="floating-share-icon email" aria-label="{{ '[Share via e-mail]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Email', 'eventLabel': '{{ post.link }}'});">
+          <a href="mailto:?subject={{ og_description|e('html_attr')|raw }}&body={{ post.link }}" class="floating-share-icon email" aria-label="{{ '[Share via e-mail]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Email', 'eventLabel': '{{ post.link }}'}); dataLayer.push({'event' : 'custom_event', 'event_name' : 'social_share', 'event_category': 'blog', 'event_action': 'social_share', 'method': 'email', 'share_url': '{{ post.link }}', 'content_title': '{{ post.title }}', 'content_type': 'blog'});">
           <span class="icon-email"></span>
           </a>
         </li>
       {% elseif item == 'whatsapp' %}
         <li class="floating-share-icon whatsapp">
-          <a href="whatsapp://send?text={{ post.link }}" class="floating-share-icon whatsapp" aria-label="{{ '[Share via whatsapp]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Whatsapp', 'eventLabel': '{{ post.link }}'});">
+          <a href="whatsapp://send?text={{ post.link }}" class="floating-share-icon whatsapp" aria-label="{{ '[Share via whatsapp]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Whatsapp', 'eventLabel': '{{ post.link }}'}); dataLayer.push({'event' : 'custom_event', 'event_name' : 'social_share', 'event_category': 'blog', 'event_action': 'social_share', 'method': 'whatsapp', 'share_url': '{{ post.link }}', 'content_title': '{{ post.title }}', 'content_type': 'blog'});">
           <span class="icon-whatsapp"></span>
           </a>
         </li>
       {% elseif item == 'line' %}
         <li class="floating-share-icon line">
-          <a href="https://social-plugins.line.me/lineit/share?url={{ post.link }}" class="floating-share-icon line" aria-label="{{ '[Share via Line]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Line', 'eventLabel': '{{ post.link }}'});">
+          <a href="https://social-plugins.line.me/lineit/share?url={{ post.link }}" class="floating-share-icon line" aria-label="{{ '[Share via Line]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Line', 'eventLabel': '{{ post.link }}'}); dataLayer.push({'event' : 'custom_event', 'event_name' : 'social_share', 'event_category': 'blog', 'event_action': 'social_share', 'method': 'line', 'share_url': '{{ post.link }}', 'content_title': '{{ post.title }}', 'content_type': 'blog'});">
           <span class="icon-line"></span>
           </a>
         </li>
 	  {% elseif item == 'kakaotalk' %}
         <li class="floating-share-icon kakaotalk">
-          <a id="kakao-link-btn" href="javascript:;" class="floating-share-icon line" aria-label="{{ '[Share via KakaoTalk]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Kakao', 'eventLabel': '{{ post.link }}'});">
+          <a id="kakao-link-btn" href="javascript:;" class="floating-share-icon line" aria-label="{{ '[Share via KakaoTalk]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'uaevent', 'eventCategory' : 'Social Share', 'eventAction': 'Kakao', 'eventLabel': '{{ post.link }}'}); dataLayer.push({'event' : 'custom_event', 'event_name' : 'social_share', 'event_category': 'blog', 'event_action': 'social_share', 'method': 'kakao', 'share_url': '{{ post.link }}', 'content_title': '{{ post.title }}', 'content_type': 'blog'});">
           <span class="icon-kakaotalk"></span>
           </a>
         </li>
       {% elseif item == 'wechat' %}
         <li class="floating-share-icon wechat">
-          <a href="weixin://dl/posts?url={{ post.link }}" class="floating-share-icon line" aria-label="{{ '[Share via WeChat]' }}" target="_blank" rel="noopener noreferrer">
+          <a href="weixin://dl/posts?url={{ post.link }}" class="floating-share-icon line" aria-label="{{ '[Share via WeChat]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'custom_event', 'event_name' : 'social_share', 'event_category': 'blog', 'event_action': 'social_share', 'method': 'wechat', 'share_url': '{{ post.link }}', 'content_title': '{{ post.title }}', 'content_type': 'blog'});">
           <span class="icon-wechat"></span>
           </a>
         </li>
       {% elseif item == 'web_api' %}
         <li class="floating-share-icon navigator">
-          <a href="#" class="floating-share-icon js-share-api" aria-label="{{ '[Share]' }}" target="_blank" rel="noopener noreferrer">
+          <a href="#" class="floating-share-icon js-share-api" aria-label="{{ '[Share]' }}" target="_blank" rel="noopener noreferrer" onclick="dataLayer.push({'event' : 'custom_event', 'event_name' : 'social_share', 'event_category': 'blog', 'event_action': 'social_share', 'method': 'web_api', 'share_url': '{{ post.link }}', 'content_title': '{{ post.title }}', 'content_type': 'blog'});">
             <span class="icon-navigator"></span>
           </a>                
         </li>
