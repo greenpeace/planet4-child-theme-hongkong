@@ -261,12 +261,20 @@ export default function () {
 
         // trigger ga subscription event
         window.dataLayer = window.dataLayer || [];
+        // GA3
         window.dataLayer.push({
-          'event' : 'gaEvent',
+          'event': 'gaEvent',
           'eventCategory': 'mc-subscription',
           'eventAction': 'subscribe',
           'eventLabel': '',
-          'eventValue': ''
+          'eventValue': '',
+        });
+        // GA4
+        window.dataLayer.push({
+          'event': 'custom_event',
+          'event_name': 'signup_news',
+          'event_category': 'blog',
+          'event_action': 'signup_news',
         });
       },
       error: function (jqXHR, textStatus) {

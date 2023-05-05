@@ -92,6 +92,18 @@ const p4ct_search = function() {
     $(document.body).addClass('is-loading');
   });
 
+  // GA4
+  $('[role="search"]').on('submit', function() {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'custom_event',
+      'event_name': 'search',
+      'event_category': 'blog',
+      'event_action': 'search',
+      'search_query': $(this).find('[name="s"]').val(),
+    });
+  });
+
   filters_search.change(function(ev) {
     $search_form.submit();
   });
