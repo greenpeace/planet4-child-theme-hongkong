@@ -434,16 +434,6 @@
           "url": "https://www.greenpeace.org/romania/"
         }
       ]
-    },
-    {
-      "name": "Russia",
-      "codes": ["RU"],
-      "lang": [
-        {
-          "name": "Русский",
-          "url": "https://www.greenpeace.ru"
-        }
-      ]
     }
   ],
   "S": [
