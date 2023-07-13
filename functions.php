@@ -135,7 +135,7 @@ function article_note_add_editor_quicktag() {
 }
 
 add_filter( 'posts_where', 'gpea_posts_where', 10, 2 );
-function gpea_posts_where( $where, &$wp_query  ){
+function gpea_posts_where( $where, $wp_query ){
     global $wpdb;
     if ( $gpea_short_code = $wp_query->get( 'gpea_short_code' ) ) {
         $where .= ' AND ' . $wpdb->posts . '.post_content LIKE \'%' . esc_sql( $wpdb->esc_like(  '[' . $gpea_short_code . ' ' ) ) . '%\'';
