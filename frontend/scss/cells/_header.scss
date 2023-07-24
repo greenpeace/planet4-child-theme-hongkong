@@ -660,6 +660,11 @@
       .sub-menu--fake {
         display: block;
       }
+      &:not(.menu-item-has-children) {
+        &:after {
+          display: none;
+        }
+      }
     }
   }
 
