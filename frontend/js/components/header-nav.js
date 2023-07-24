@@ -42,13 +42,20 @@ export default function() {
 		}
 	});
 
-	$('.menu__item .menu-item-has-children:not(.menu-item--fake):has(.menu-item)', $menu).hover(function() {
+	$('.menu__item .menu-item:not(.menu-item--fake)', $menu).hover(function() {
 		if(!gt_lg()) { return; }
 		$(this).addClass('actived').siblings().removeClass('actived');
+		if(!$(this).is('.menu-item-has-children:has(.menu-item)')) {
+			$(this).closest('.menu__container').find('.sub-menu--fake').closest('.menu-item').removeClass('actived');
+			return;
+		}
 		$(this).closest('.menu__container').find('.sub-menu--fake').html($('.sub-menu', this).html()).closest('.menu-item').addClass('actived');
 	}, function() {
 		return;
 	}).on('gpea-fake-hover', function() {
+		if(!$(this).is('.menu-item-has-children:has(.menu-item)')) {
+			return;
+		}
 		$(this).addClass('actived').siblings().removeClass('actived');
 		$(this).closest('.menu__container').find('.sub-menu--fake').html($('.sub-menu', this).html()).closest('.menu-item').addClass('actived');
 	});

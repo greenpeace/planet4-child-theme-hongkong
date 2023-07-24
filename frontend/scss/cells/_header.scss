@@ -660,6 +660,11 @@
       .sub-menu--fake {
         display: block;
       }
+      &:not(.menu-item-has-children) {
+        &:after {
+          display: none;
+        }
+      }
     }
   }
 
@@ -705,6 +710,11 @@
       }
       &.actived:after {
         top: 18 + 3 - 6px;
+      }
+      &:not(.menu-item-has-children) {
+        &:after {
+          display: none;
+        }
       }
     }
   }
