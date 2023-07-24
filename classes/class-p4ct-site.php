@@ -332,16 +332,17 @@ class P4CT_Site {
 					$setting_title = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_label--' . $issue_key ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_label--' . $issue_key ] : '';
 					$setting_link = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_link--' . $issue_key ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_link--' . $issue_key ] : '#';
 					$setting_sort = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_sort--' . $issue_key ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_sort--' . $issue_key ] : '0';
-					$issue_children = '
-								<li class="menu-item menu-item-has-children">
-									<a href="' . esc_attr($setting_link) . '"><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span>' . $setting_title . '</a>';
-					$issue_children .= has_nav_menu( 'gpea-header-' . $menu_key . '-menu--' . $issue_key ) ? wp_nav_menu( [
+					$issue_children_menu_html = has_nav_menu( 'gpea-header-' . $menu_key . '-menu--' . $issue_key ) ? wp_nav_menu( [
 						'container' => NULL,
 						'menu_class' => 'sub-menu',
 						'theme_location' => 'gpea-header-' . $menu_key . '-menu--' . $issue_key,
 						'echo' => FALSE,
 						'depth' => $menu_conf[ 'depth' ],
 					]) : '';
+					$issue_children = '
+								<li class="menu-item' . (@strlen($issue_children_menu_html) ? ' menu-item-has-children' : '') . '">
+									<a href="' . esc_attr($setting_link) . '"><span class="issue ' . esc_attr($issue_key) . '">' . esc_html($issue_title) . '</span>' . $setting_title . '</a>';
+					$issue_children .= $issue_children_menu_html;
 					$issue_children .= '
 								</li>';
 					$all_issue_children[] = [
