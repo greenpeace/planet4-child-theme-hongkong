@@ -44,7 +44,6 @@ export default function() {
 
 	$('.menu__item .menu-item:not(.menu-item--fake)', $menu).hover(function() {
 		if(!gt_lg()) { return; }
-		console.log('aaa')
 		$(this).addClass('actived').siblings().removeClass('actived');
 		if(!$(this).is('.menu-item-has-children:has(.menu-item)')) {
 			$(this).closest('.menu__container').find('.sub-menu--fake').closest('.menu-item').removeClass('actived');
