@@ -67,8 +67,8 @@
         &__content {
           display: block;
           animation: .4s ease 0s 1 running article-note-fade-in;
-          background-color: #F1F3F5;
-          color: #495057;
+          background-color: $color-grey-100;
+          color: $color-grey-700;
           margin-top: 20px;
           margin-bottom: 15px;
           padding: 15px 20px;
@@ -273,8 +273,42 @@
     color: rgba(0, 0, 0, 0.4);
   }
 
+  table {
+    border-collapse: collapse;
+    border: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    @include lessThan('sm') {
+      width: calc(100% - 2em);
+      margin-right: 1em;
+      margin-left: 1em;
+    }
+    th,
+    td {
+      padding: 0 48px 0 24px;
+      line-height: 36px;
+      text-align: left;
+    }
+    thead {
+      th {
+        color: white;
+        background-color: $color-green;
+      }
+    }
+    tbody {
+      tr:nth-child(even) {
+        th,
+        td {
+          background-color: $color-grey-100;
+        }
+      }
+    }
+  }
+
   .forests & {
     blockquote,
+    table thead th,
     .leader,
     .leader::before,
     .embed-container,
@@ -287,6 +321,7 @@
   }
   .oceans & {
     blockquote,
+    table thead th,
     .leader,
     .leader::before,
     .embed-container,
@@ -299,6 +334,7 @@
   }
   .arctic & {
     blockquote,
+    table thead th,
     .leader,
     .leader::before,
     .embed-container,
@@ -311,6 +347,7 @@
   }
   .climate & {
     blockquote,
+    table thead th,
     .leader,
     .leader::before,
     .embed-container,
@@ -323,6 +360,7 @@
   }
   .plastics & {
     blockquote,
+    table thead th,
     .leader,
     .leader::before,
     .embed-container,
@@ -335,6 +373,7 @@
   }
   .health & {
     blockquote,
+    table thead th,
     .leader,
     .leader::before,
     .embed-container,
