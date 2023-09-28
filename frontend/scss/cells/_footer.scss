@@ -1,6 +1,10 @@
 // B Version
 .footer--new { //// .footer {
 
+  br {
+    content: none;
+  }
+
   &,
   h5 {
     @include letter-spacing-version-b;
