@@ -69,6 +69,7 @@
   }
 
   .form-container {
+    width: 100%;
     @include greaterThan('sm') {
       max-width: 610px;
     }
@@ -86,6 +87,12 @@
           flex: 1 1 auto;
         }
       }
+    }
+  }
+
+  .form-column {
+    &--fields {
+      flex: 1;
     }
   }
 
