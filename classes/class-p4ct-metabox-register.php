@@ -93,6 +93,8 @@ class P4CT_Metabox_Register {
 		$this->register_notification_options_metabox();
 		$this->register_donation_button_options_metabox();
 		$this->register_donation_block_options_metabox();
+		$this->register_subscription_button_options_metabox();
+		$this->register_subscription_block_options_metabox();
 		$this->register_testimony_block_options_metabox();
 
 		$this->register_header_nav_options_metabox();
@@ -926,7 +928,7 @@ class P4CT_Metabox_Register {
 
 		$cmb_options = &$this->subpages['gpea_donation_button_options_page']['fields'];
 
-		$cmb_options = $this->add_donation_option_fields( $cmb_options, 'gpea_donation_button_' );
+		$cmb_options = $this->add_issue_option_fields( $cmb_options, 'gpea_donation_button_' );
 
 	}
 
@@ -944,28 +946,65 @@ class P4CT_Metabox_Register {
 
 		$cmb_options = &$this->subpages['gpea_donation_block_options_page']['fields'];
 
-		$cmb_options = $this->add_donation_option_fields( $cmb_options, 'gpea_donation_block_', TRUE );
+		$cmb_options = $this->add_issue_option_fields( $cmb_options, 'gpea_donation_block_', TRUE );
 
 	}
 
 	/**
-	 * Populate an associative array with donation buttons' display mode.
+	 * Registers subscription buttons option meta box(es).
+	 */
+	public function register_subscription_button_options_metabox() {
+		$this->subpages['gpea_subscription_button_options_page'] = [
+			'title'        => esc_html__( 'Post Subscription Buttons', self::METABOX_ID ),
+			'menu_title'   => esc_html__( 'Subscription Buttons', self::METABOX_ID ),
+			'option_key'   => 'gpea_subscription_button_options',
+			'fields'       => [],
+		];
+
+		$cmb_options = &$this->subpages['gpea_subscription_button_options_page']['fields'];
+
+		$cmb_options = $this->add_issue_option_fields( $cmb_options, 'gpea_subscription_button_' );
+
+	}
+
+	/**
+	 * Registers subscription blocks option meta box(es).
+	 */
+	public function register_subscription_block_options_metabox() {
+
+		$this->subpages['gpea_subscription_block_options_page'] = [
+			'title'        => esc_html__( 'Post/Page Subscription Blocks', self::METABOX_ID ),
+			'menu_title'   => esc_html__( 'Subscription Blocks', self::METABOX_ID ),
+			'option_key'   => 'gpea_subscription_block_options',
+			'fields'       => [],
+		];
+
+		$cmb_options = &$this->subpages['gpea_subscription_block_options_page']['fields'];
+
+		$cmb_options = $this->add_issue_option_fields( $cmb_options, 'gpea_subscription_block_', TRUE, TRUE );
+
+	}
+
+	/**
+	 * Populate an associative array with donation/subscription buttons' display mode.
 	 *
 	 * @return array
 	 */
-	public function add_donation_option_fields( $cmb_options = [], $id_prefix = '', $is_block = FALSE ) {
+	public function add_issue_option_fields( $cmb_options = [], $id_prefix = '', $is_block = FALSE, $is_subscription = FALSE ) {
 
 		$gpea_extra = new \P4CT_Site();
 		$main_issues = $gpea_extra->gpea_get_all_main_issues();
+
+		$type = $is_subscription ? 'subscription' : 'donation';
 
 		if( $is_block ) {
 			$cmb_options[] = [
 				'name'             => '',
 				'desc'             => __('
 					<ol>
-						<li>Please set the default values for the donation blocks in the post/page.</li>
+						<li>Please set the default values for the ' . $type . ' blocks in the post/page.</li>
 						<li>Location: it\'s better to set around the middle area of the post.</li>
-						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the fields empty will go to the &quot;All-site Default&quot; once writers insert the donation block.</li>
+						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the fields empty will go to the &quot;All-site Default&quot; once writers insert the ' . $type . ' block.</li>
 					</ol>', self::METABOX_ID),
 				'id'               => $id_prefix . '_hint',
 				'type'             => 'title',
@@ -976,7 +1015,7 @@ class P4CT_Metabox_Register {
 				'name'             => '',
 				'desc'             => __('
 					<ol>
-						<li>Please set the default values for the donation buttons in the post.</li>
+						<li>Please set the default values for the ' . $type . ' buttons in the post.</li>
 						<li>Buttons\' locations: one is above the main content and under the blockquote (quote with theme color background); the second one is below the main content and before the further reading section.</li>
 						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the link/label empty will go to the &quot;All-site Default&quot; once writers &quot;show the button.&quot;</li>
 					</ol>', self::METABOX_ID),
@@ -1015,11 +1054,15 @@ class P4CT_Metabox_Register {
 
 			}
 
-			$cmb_options[] = [
-				'name'             => esc_html__( 'Button Link', self::METABOX_ID ),
-				'id'               => $id_prefix . $issue_key . '_button_link',
-				'type'             => 'text',
-			];
+			if(!$is_subscription) {
+
+				$cmb_options[] = [
+					'name'             => esc_html__( 'Button Link', self::METABOX_ID ),
+					'id'               => $id_prefix . $issue_key . '_button_link',
+					'type'             => 'text',
+				];
+
+			}
 
 			$cmb_options[] = [
 				'name'             => esc_html__( 'Button Label', self::METABOX_ID ),
