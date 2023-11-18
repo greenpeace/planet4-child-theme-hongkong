@@ -45,10 +45,20 @@ class P4CT_Metabox_Register {
 	protected $subpages = [];
 
 	/**
+	 * Allowed subscription buttons or not
+	 *
+	 * @var bool
+	 */
+	protected $allowed_subscription_buttons = FALSE;
+
+	/**
 	 * P4CT_Metabox_Register constructor.
 	 */
 	public function __construct() {
 		$this->hooks();
+		$this->allowed_subscription_buttons = in_array( get_locale(), [
+			'zh_TW',
+		] );
 	}
 
 	/**
@@ -97,7 +107,7 @@ class P4CT_Metabox_Register {
 		 */
 		$this->register_donation_button_options_metabox();
 		$this->register_donation_block_options_metabox();
-		if(get_locale() === 'zh_TW') {
+		if( $this->allowed_subscription_buttons ) {
 			$this->register_subscription_button_options_metabox();
 		}
 		$this->register_subscription_block_options_metabox();
@@ -487,9 +497,8 @@ class P4CT_Metabox_Register {
 		/**
 		 * Donation/Subscription Buttons
 		 */
-
 		$cmb_post_donation_button = $this->register_donation_button_metabox();
-		if(get_locale() === 'zh_TW') {
+		if( $this->allowed_subscription_buttons ) {
 			$cmb_post_subscription_button = $this->register_donation_button_metabox(TRUE);
 		}
 
