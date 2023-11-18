@@ -93,7 +93,9 @@ class P4CT_Metabox_Register {
 		$this->register_notification_options_metabox();
 		$this->register_donation_button_options_metabox();
 		$this->register_donation_block_options_metabox();
-		$this->register_subscription_button_options_metabox();
+		if(get_locale() === 'zh_TW') {
+			$this->register_subscription_button_options_metabox();
+		}
 		$this->register_subscription_block_options_metabox();
 		$this->register_testimony_block_options_metabox();
 
