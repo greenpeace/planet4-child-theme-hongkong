@@ -45,10 +45,20 @@ class P4CT_Metabox_Register {
 	protected $subpages = [];
 
 	/**
+	 * Allowed subscription buttons or not
+	 *
+	 * @var bool
+	 */
+	protected $allowed_subscription_buttons = FALSE;
+
+	/**
 	 * P4CT_Metabox_Register constructor.
 	 */
 	public function __construct() {
 		$this->hooks();
+		$this->allowed_subscription_buttons = in_array( get_locale(), [
+			'zh_TW',
+		] );
 	}
 
 	/**
@@ -91,12 +101,19 @@ class P4CT_Metabox_Register {
 
 		$this->register_main_options_metabox();
 		$this->register_notification_options_metabox();
+
+		/**
+		 * Donation/Subscription Buttons/Blocks
+		 */
 		$this->register_donation_button_options_metabox();
 		$this->register_donation_block_options_metabox();
+		if( $this->allowed_subscription_buttons ) {
+			$this->register_subscription_button_options_metabox();
+		}
+		$this->register_subscription_block_options_metabox();
+
 		$this->register_testimony_block_options_metabox();
-
 		$this->register_header_nav_options_metabox();
-
 		$this->register_module_map_page();
 
 	}
@@ -478,12 +495,26 @@ class P4CT_Metabox_Register {
 		]);
 
 		/**
-		 * Donation Buttons
+		 * Donation/Subscription Buttons
 		 */
+		$cmb_post_donation_button = $this->register_donation_button_metabox();
+		if( $this->allowed_subscription_buttons ) {
+			$cmb_post_subscription_button = $this->register_donation_button_metabox(TRUE);
+		}
+
+	}
+
+	/**
+	 * Registers post donation/subscription button meta box(es).
+	 */
+	public function register_donation_button_metabox($is_subscription = FALSE) {
+
+		$type_string = $is_subscription ? 'Subscription' : 'Donation';
+		$type_key = $is_subscription ? 'subscription' : 'donation';
 
 		$cmb_post_donation_button = new_cmb2_box([
-			'id'           => 'p4-gpea-post-donation-button-box',
-			'title'        => 'Donation Buttons',
+			'id'           => 'p4-gpea-post-' . $type_key . '-button-box',
+			'title'        => $type_string . ' Buttons',
 			'object_types' => [ 'post' ],
 			'context'      => 'normal',
 			'priority'     => 'high',
@@ -491,69 +522,78 @@ class P4CT_Metabox_Register {
 		]);
 
 		$cmb_post_donation_button->add_field([
-			'name'             => esc_html__( 'Donation Button on Top', self::METABOX_ID ),
+			'name'             => esc_html__( $type_string . ' Button on Top', self::METABOX_ID ),
 			'desc'             => __('
 				<ol>
 					<li>Location: above the main content, under the quoteblock (quote with theme color background).</li>
 					<li>Leave the link or label field empty to use the default value.</li>
-					<li>Go to the setting &quot;' . __( 'Settings' ) . ' &gt; Post Donation Buttons&quot; to setup default values.</li>
+					<li>Go to the setting &quot;' . __( 'Settings' ) . ' &gt; Post ' . $type_string . ' Buttons&quot; to setup default values.</li>
 				</ol>', self::METABOX_ID),
-			'id'               => 'p4-gpea_article_top_donation_button',
+			'id'               => 'p4-gpea_article_top_' . $type_key . '_button',
 			'type'             => 'title',
 		]);
 
 		$cmb_post_donation_button->add_field([
 			'name'             => esc_html__( 'Show the Button', self::METABOX_ID ),
-			'id'               => 'p4-gpea_show_article_top_donation_button',
+			'id'               => 'p4-gpea_show_article_top_' . $type_key . '_button',
 			'type'             => 'select',
 			'options_cb'       => [ $this, 'populate_yes_or_no_options' ],
-			'default_cb'       => [ $this, 'set_donation_button_default' ],
+			'default_cb'       => [ $this, 'set_' . $type_key . '_button_default' ],
 		]);
 
+		if(!$is_subscription) {
 
-		$cmb_post_donation_button->add_field([
-			'name'             => esc_html__( 'Button Link', self::METABOX_ID ),
-			'id'               => 'p4-article_top_donation_button_link',
-			'type'             => 'text',
-		]);
+			$cmb_post_donation_button->add_field([
+				'name'             => esc_html__( 'Button Link', self::METABOX_ID ),
+				'id'               => 'p4-article_top_' . $type_key . '_button_link',
+				'type'             => 'text',
+			]);
+
+		}
 
 		$cmb_post_donation_button->add_field([
 			'name'             => esc_html__( 'Button Label', self::METABOX_ID ),
-			'id'               => 'p4-article_top_donation_button_text',
+			'id'               => 'p4-article_top_' . $type_key . '_button_text',
 			'type'             => 'text_medium',
 		]);
 
 		$cmb_post_donation_button->add_field([
-			'name'             => esc_html__( 'Donation Button at Bottom', self::METABOX_ID ),
+			'name'             => esc_html__( $type_string . ' Button at Bottom', self::METABOX_ID ),
 			'desc'             => __('
 				<ol>
 					<li>Location: below the main content, before the further reading section.</li>
 					<li>Leave the link or label field empty to use the default value.</li>
-					<li>Go to the setting &quot;' . __( 'Settings' ) . ' &gt; Post Donation Buttons&quot; to setup default values.</li>
+					<li>Go to the setting &quot;' . __( 'Settings' ) . ' &gt; Post ' . $type_string . ' Buttons&quot; to setup default values.</li>
 				<ol>', self::METABOX_ID),
-			'id'               => 'p4-gpea_article_bottom_donation_button',
+			'id'               => 'p4-gpea_article_bottom_' . $type_key . '_button',
 			'type'             => 'title',
 		]);
 
 		$cmb_post_donation_button->add_field([
 			'name'             => esc_html__( 'Show the Button', self::METABOX_ID ),
-			'id'               => 'p4-gpea_show_article_bottom_donation_button',
+			'id'               => 'p4-gpea_show_article_bottom_' . $type_key . '_button',
 			'type'             => 'select',
 			'options_cb'       => [ $this, 'populate_yes_or_no_options' ],
-			'default_cb'       => [ $this, 'set_donation_button_default' ],
+			'default_cb'       => [ $this, 'set_' . $type_key . '_button_default' ],
 		]);
 
-		$cmb_post_donation_button->add_field([
-			'name'             => esc_html__( 'Button Link', self::METABOX_ID ),
-			'id'               => 'p4-article_bottom_donation_button_link',
-			'type'             => 'text',
-		]);
+		if(!$is_subscription) {
+
+			$cmb_post_donation_button->add_field([
+				'name'             => esc_html__( 'Button Link', self::METABOX_ID ),
+				'id'               => 'p4-article_bottom_' . $type_key . '_button_link',
+				'type'             => 'text',
+			]);
+
+		}
 
 		$cmb_post_donation_button->add_field([
 			'name'             => esc_html__( 'Button Label', self::METABOX_ID ),
-			'id'               => 'p4-article_bottom_donation_button_text',
+			'id'               => 'p4-article_bottom_' . $type_key . '_button_text',
 			'type'             => 'text_medium',
 		]);
+
+		return $cmb_post_donation_button;
 
 	}
 
@@ -925,7 +965,7 @@ class P4CT_Metabox_Register {
 
 		$cmb_options = &$this->subpages['gpea_donation_button_options_page']['fields'];
 
-		$cmb_options = $this->add_donation_option_fields( $cmb_options, 'gpea_donation_button_' );
+		$cmb_options = $this->add_donation_option_fields( $cmb_options );
 
 	}
 
@@ -943,28 +983,70 @@ class P4CT_Metabox_Register {
 
 		$cmb_options = &$this->subpages['gpea_donation_block_options_page']['fields'];
 
-		$cmb_options = $this->add_donation_option_fields( $cmb_options, 'gpea_donation_block_', TRUE );
+		$cmb_options = $this->add_donation_option_fields( $cmb_options, TRUE );
 
 	}
 
 	/**
-	 * Populate an associative array with donation buttons' display mode.
+	 * Registers subscription buttons option meta box(es).
+	 */
+	public function register_subscription_button_options_metabox() {
+		$this->subpages['gpea_subscription_button_options_page'] = [
+			'title'        => esc_html__( 'Post Subscription Buttons', self::METABOX_ID ),
+			'menu_title'   => esc_html__( 'Subscription Buttons', self::METABOX_ID ),
+			'option_key'   => 'gpea_subscription_button_options',
+			'fields'       => [],
+		];
+
+		$cmb_options = &$this->subpages['gpea_subscription_button_options_page']['fields'];
+
+		$cmb_options = $this->add_donation_option_fields( $cmb_options, FALSE, TRUE );
+
+	}
+
+	/**
+	 * Registers subscription blocks option meta box(es).
+	 */
+	public function register_subscription_block_options_metabox() {
+
+		$this->subpages['gpea_subscription_block_options_page'] = [
+			'title'        => esc_html__( 'Post/Page Subscription Blocks', self::METABOX_ID ),
+			'menu_title'   => esc_html__( 'Subscription Blocks', self::METABOX_ID ),
+			'option_key'   => 'gpea_subscription_block_options',
+			'fields'       => [],
+		];
+
+		$cmb_options = &$this->subpages['gpea_subscription_block_options_page']['fields'];
+
+		$cmb_options = $this->add_donation_option_fields( $cmb_options, TRUE, TRUE );
+
+	}
+
+	/**
+	 * Populate an associative array with donation/subscription buttons' display mode.
 	 *
 	 * @return array
 	 */
-	public function add_donation_option_fields( $cmb_options = [], $id_prefix = '', $is_block = FALSE ) {
+	public function add_donation_option_fields( $cmb_options = [], $is_block = FALSE, $is_subscription = FALSE ) {
 
 		$gpea_extra = new \P4CT_Site();
 		$main_issues = $gpea_extra->gpea_get_all_main_issues();
+		$count_issues = count( $main_issues );
+		$issue_string = implode( ', ', $main_issues );
+
+		$type_string = $is_subscription ? 'subscription' : 'donation';
+		$type_key = $is_subscription ? 'subscription' : 'donation';
+		$layout_key = $is_block ? 'block' : 'button';
+		$id_prefix = 'gpea_' . $type_key . '_' . $layout_key . '_';
 
 		if( $is_block ) {
 			$cmb_options[] = [
 				'name'             => '',
 				'desc'             => __('
 					<ol>
-						<li>Please set the default values for the donation blocks in the post/page.</li>
+						<li>Please set the default values for the ' . $type_string . ' blocks in the post/page.</li>
 						<li>Location: it\'s better to set around the middle area of the post.</li>
-						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the fields empty will go to the &quot;All-site Default&quot; once writers insert the donation block.</li>
+						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . $count_issues . ' themes (' . $issue_string . '), or you didn\'t set the default value for 6 themes and leave the fields empty will go to the &quot;All-site Default&quot; once writers insert the ' . $type_string . ' block.</li>
 					</ol>', self::METABOX_ID),
 				'id'               => $id_prefix . '_hint',
 				'type'             => 'title',
@@ -975,9 +1057,9 @@ class P4CT_Metabox_Register {
 				'name'             => '',
 				'desc'             => __('
 					<ol>
-						<li>Please set the default values for the donation buttons in the post.</li>
+						<li>Please set the default values for the ' . $type_string . ' buttons in the post.</li>
 						<li>Buttons\' locations: one is above the main content and under the blockquote (quote with theme color background); the second one is below the main content and before the further reading section.</li>
-						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . count( $main_issues ) . ' themes (' . implode( ', ', $main_issues ) . '), or you didn\'t set the default value for 6 themes and leave the link/label empty will go to the &quot;All-site Default&quot; once writers &quot;show the button.&quot;</li>
+						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . $count_issues . ' themes (' . $issue_string . '), or you didn\'t set the default value for 6 themes and leave the link/label empty will go to the &quot;All-site Default&quot; once writers &quot;show the button.&quot;</li>
 					</ol>', self::METABOX_ID),
 				'id'               => $id_prefix . '_hint',
 				'type'             => 'title',
@@ -1014,11 +1096,15 @@ class P4CT_Metabox_Register {
 
 			}
 
-			$cmb_options[] = [
-				'name'             => esc_html__( 'Button Link', self::METABOX_ID ),
-				'id'               => $id_prefix . $issue_key . '_button_link',
-				'type'             => 'text',
-			];
+			if(!$is_subscription) {
+
+				$cmb_options[] = [
+					'name'             => esc_html__( 'Button Link', self::METABOX_ID ),
+					'id'               => $id_prefix . $issue_key . '_button_link',
+					'type'             => 'text',
+				];
+
+			}
 
 			$cmb_options[] = [
 				'name'             => esc_html__( 'Button Label', self::METABOX_ID ),

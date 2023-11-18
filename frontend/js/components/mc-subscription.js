@@ -306,7 +306,7 @@ export default function () {
   // init functions
   $(function () {
     // assign the init values
-    $section = $(".section-mc-subscription");
+    $section = $(".section-mc-subscription:not(.section-mc-subscription--with-popup)");
     $firstnameField = $section.find('[name="supporter.firstname"]').closest('.en__field__element');
     $lastnameField = $section.find('[name="supporter.lastname"]').closest('.en__field__element');
     $emailField = $section.find('[name="supporter.email"]').closest('.en__field__element');

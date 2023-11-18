@@ -68,9 +68,9 @@ if ( $post_categories ) {
 $gpea_extra = new P4CT_Site();
 
 /*
-/* Donation buttons */
+/* Donation/Subscription buttons */
 
-// Get button options
+// Get donation button default options
 
 $donation_button_options = get_option( 'gpea_donation_button_options' );
 
@@ -90,28 +90,70 @@ elseif( isset( $donation_button_options['gpea_donation_button_default_button_tex
 	$donation_button_default_text = $donation_button_options['gpea_donation_button_default_button_text'];
 }
 
-$top_donation_button_html = '';
+// Get subscription button default options
+
+$subscription_button_options = get_option( 'gpea_subscription_button_options' );
+
+$subscription_button_default_text = '';
+if( isset( $context['main_issue_slug'] ) && isset( $subscription_button_options['gpea_subscription_button_' . $context['main_issue_slug'] . '_button_text'] ) && @strlen( $subscription_button_options['gpea_subscription_button_' . $context['main_issue_slug'] . '_button_text'] ) ) {
+	$subscription_button_default_text = $subscription_button_options['gpea_subscription_button_' . $context['main_issue_slug'] . '_button_text'];
+}
+elseif( isset( $subscription_button_options['gpea_subscription_button_default_button_text'] ) ) {
+	$subscription_button_default_text = $subscription_button_options['gpea_subscription_button_default_button_text'];
+}
+
+// Donation or subscription?
+
+$top_button_type_key = NULL;
+$bottom_button_type_key = NULL;
+$allowed_subscription_buttons = in_array(get_locale(), [
+	'zh_TW',
+]);
 if ( isset( $page_meta_data['p4-gpea_show_article_top_donation_button'][0] ) && $page_meta_data['p4-gpea_show_article_top_donation_button'][0] ) {
+	$top_button_type_key = 'donation';
+	if($allowed_subscription_buttons && ( ! isset( $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) || $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) ) {
+		$top_button_type_key = 'subscription';
+	}
+}
+if ( isset( $page_meta_data['p4-gpea_show_article_bottom_donation_button'][0] ) && $page_meta_data['p4-gpea_show_article_bottom_donation_button'][0] ) {
+	$bottom_button_type_key = 'donation';
+	if($allowed_subscription_buttons && ( ! isset( $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) || $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) ) {
+		$bottom_button_type_key = 'subscription';
+	}
+}
+if ( $allowed_subscription_buttons && isset( $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) && $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) {
+	$top_button_type_key = 'subscription';
+}
+if ( $allowed_subscription_buttons && isset( $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) && $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) {
+	$bottom_button_type_key = 'subscription';
+}
+$top_button_is_subscription = $top_button_type_key == 'subscription';
+$bottom_button_is_subscription = $bottom_button_type_key == 'subscription';
+
+// Get current post's donation/subscription button options
+
+$top_donation_button_html = '';
+if ( isset( $top_button_type_key ) ) {
 
 	$donation_button_link = '';
-	if( isset( $page_meta_data['p4-article_top_donation_button_link'][0] ) && @strlen( $page_meta_data['p4-article_top_donation_button_link'][0] ) ) {
+	if( ! $top_button_is_subscription && isset( $page_meta_data['p4-article_top_donation_button_link'][0] ) && @strlen( $page_meta_data['p4-article_top_donation_button_link'][0] ) ) {
 		$donation_button_link = $page_meta_data['p4-article_top_donation_button_link'][0];
 	}
-	else {
+	elseif( ! $top_button_is_subscription ) {
 		$donation_button_link = $donation_button_default_link;
 	}
 
 	$donation_button_text = '';
-	if( isset( $page_meta_data['p4-article_top_donation_button_text'][0] ) && @strlen( $page_meta_data['p4-article_top_donation_button_text'][0] ) ) {
-		$donation_button_text = $page_meta_data['p4-article_top_donation_button_text'][0];
+	if( isset( $page_meta_data['p4-article_top_' . $top_button_type_key . '_button_text'][0] ) && @strlen( $page_meta_data['p4-article_top_' . $top_button_type_key . '_button_text'][0] ) ) {
+		$donation_button_text = $page_meta_data['p4-article_top_' . $top_button_type_key . '_button_text'][0];
 	}
 	else {
-		$donation_button_text = $donation_button_default_text;
+		$donation_button_text = ${$top_button_type_key . '_button_default_text'};
 	}
 
 	$donation_button_link = $gpea_extra->add_post_ref_query_to_link_url( $donation_button_link, $post );
 
-	$top_donation_button_html = Timber::compile( 'blocks/donation-button.twig', [
+	$top_donation_button_html = Timber::compile( 'blocks/' . $top_button_type_key . '-button.twig', [
 		'donation_button_link' => $donation_button_link,
 		'donation_button_text' => $donation_button_text,
 	] );
@@ -119,27 +161,27 @@ if ( isset( $page_meta_data['p4-gpea_show_article_top_donation_button'][0] ) && 
 }
 
 $bottom_donation_button_html = '';
-if ( isset( $page_meta_data['p4-gpea_show_article_bottom_donation_button'][0] ) && $page_meta_data['p4-gpea_show_article_bottom_donation_button'][0] ) {
+if ( isset( $bottom_button_type_key ) ) {
 
 	$donation_button_link = '';
-	if( isset( $page_meta_data['p4-article_bottom_donation_button_link'][0] ) && @strlen( $page_meta_data['p4-article_bottom_donation_button_link'][0] ) ) {
+	if( ! $bottom_button_is_subscription && isset( $page_meta_data['p4-article_bottom_donation_button_link'][0] ) && @strlen( $page_meta_data['p4-article_bottom_donation_button_link'][0] ) ) {
 		$donation_button_link = $page_meta_data['p4-article_bottom_donation_button_link'][0];
 	}
-	else {
+	elseif( ! $bottom_button_is_subscription ) {
 		$donation_button_link = $donation_button_default_link;
 	}
 
 	$donation_button_text = '';
-	if( isset( $page_meta_data['p4-article_bottom_donation_button_text'][0] ) && @strlen( $page_meta_data['p4-article_bottom_donation_button_text'][0] ) ) {
-		$donation_button_text = $page_meta_data['p4-article_bottom_donation_button_text'][0];
+	if( isset( $page_meta_data['p4-article_bottom_' . $bottom_button_type_key . '_button_text'][0] ) && @strlen( $page_meta_data['p4-article_bottom_' . $bottom_button_type_key . '_button_text'][0] ) ) {
+		$donation_button_text = $page_meta_data['p4-article_bottom_' . $bottom_button_type_key . '_button_text'][0];
 	}
 	else {
-		$donation_button_text = $donation_button_default_text;
+		$donation_button_text = ${$bottom_button_type_key . '_button_default_text'};
 	}
 
 	$donation_button_link = $gpea_extra->add_post_ref_query_to_link_url( $donation_button_link, $post );
 
-	$bottom_donation_button_html = Timber::compile( 'blocks/donation-button.twig', [
+	$bottom_donation_button_html = Timber::compile( 'blocks/' . $bottom_button_type_key . '-button.twig', [
 		'donation_button_link' => $donation_button_link,
 		'donation_button_text' => $donation_button_text,
 	] );
