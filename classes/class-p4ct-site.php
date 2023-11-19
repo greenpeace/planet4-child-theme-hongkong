@@ -772,6 +772,40 @@ class P4CT_Site {
 	}
 
 	/**
+	 * Gpea_get_main_issue_by_post
+	 *
+	 * @return array
+	 */
+	function gpea_get_main_issue_by_post($post, $context = []) {
+
+		$context['post_categories'] = NULL;
+		$context['main_issue'] = NULL;
+		$context['main_issue_id'] = NULL;
+		$context['main_issue_slug'] = NULL;
+		$context['main_issue_url'] = NULL;
+
+		$post_categories = get_the_terms( $post, 'category' );
+		$main_issues_category_id = $this->gpea_get_main_issue_parent_id();
+		$context_post_categories = [];
+
+		if ( $post_categories ) {
+			foreach ( $post_categories as $post_category ) {
+				$context_post_categories[] = $post_category->slug;
+				if ( ( $main_issues_category_id ) && ( intval( $post_category->parent ) === intval( $main_issues_category_id ) ) ) {
+					$context['main_issue'] = $post_category->name;
+					$context['main_issue_id'] = $post_category->term_id;
+					$context['main_issue_slug'] = $post_category->slug;
+					$context['main_issue_url'] = get_category_link( $post_category->term_id );
+				}
+			}
+			$context['post_categories'] = implode(' ', $context_post_categories);
+		}
+
+		return $context;
+
+	}
+
+	/**
 	 * Auto generate excerpt for post.
 	 *
 	 * @param int     $post_id Id of the saved post.

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  <article id="post-{{ post.ID }}" class="{{ post_categories }}">
+  <article id="post-{{ post.ID }}" class="{{ post_categories }}" data-main-issue="{{ main_issue_slug }}">
 
     <section class="section-hero-top">
 		<div class="background js-parallax-me" data-prlx-from-top="true" style="background-image: url({{ background_image ? background_image : post.thumbnail.src }})"></div>

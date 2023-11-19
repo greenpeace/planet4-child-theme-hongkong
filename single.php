@@ -47,25 +47,9 @@ $context['show_article_donation_launcher'] = $page_meta_data['p4-gpea_show_artic
 // reading time and categories info!
 $context['reading_time']        = $page_meta_data['p4-gpea_post_reading_time'][0] ?? '';
 $post->subtitle                 = $page_meta_data['p4-gpea_post_subtitle'][0] ?? '';
-$post_categories     = get_the_terms( $post, 'category' );
 
 $gpea_extra = new \P4CT_Site();
-$main_issues_category_id = $gpea_extra->gpea_get_main_issue_parent_id();
-
-$context['post_categories'] = '';
-if ( $post_categories ) {
-	foreach ( $post_categories as $post_category ) {
-		$context['post_categories'] .= $post_category->slug . ' ';
-		if ( ( $main_issues_category_id ) && ( intval( $post_category->parent ) === intval( $main_issues_category_id ) ) ) {
-			$context['main_issue'] = $post_category->name;
-			$context['main_issue_id'] = $post_category->term_id;
-			$context['main_issue_slug'] = $post_category->slug;
-			$context['main_issue_url'] = get_category_link( $post_category->term_id );
-		}
-	}
-}
-
-$gpea_extra = new P4CT_Site();
+$context                        = $gpea_extra->gpea_get_main_issue_by_post($post, $context);
 
 /*
 /* Donation/Subscription buttons */
