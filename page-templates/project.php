@@ -68,7 +68,10 @@ $context['header_button_link']          = $page_meta_data['p4_button_link'][0] ?
 // $context['header_button_link_checkbox'] = $page_meta_data['p4_button_link_checkbox'];
 $context['background_image']            = wp_get_attachment_url( get_post_meta( get_the_ID(), 'background_image_id', 1 ) );
 $context['custom_body_classes']         = $main_issue_slug ?? '';
+
+$context['main_issue_slug']             = $main_issue_slug ?? '';
 $context['main_issue_name']             = $main_issue_name ?? '';
+
 $context['project_percentage']          = $page_meta_data['p4-gpea_project_percentage'][0] ?? 0;
 $context['stroke_dashoffset']           = $context['project_percentage'] ? 697.433 * ( ( 100 - $context['project_percentage'] ) / 100 ) : 0;
 $context['start_date']                  = $page_meta_data['p4-gpea_project_start_date'][0] ?? '';

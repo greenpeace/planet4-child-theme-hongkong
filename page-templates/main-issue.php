@@ -65,8 +65,8 @@ $context['background_image']            = wp_get_attachment_url( get_post_meta( 
 $context['main_issue_id']               = $main_issue_id ?? '';
 $context['custom_body_classes']         = $main_issue_slug ?? '';
 
-$context['main_issue_slug']               = $main_issue_slug ?? '';
-$context['main_issue_name']               = $main_issue_name ?? '';
+$context['main_issue_slug']             = $main_issue_slug ?? '';
+$context['main_issue_name']             = $main_issue_name ?? '';
 
 $context['og_title']                = $post->get_og_title();
 $context['og_description']          = $post->get_og_description();
