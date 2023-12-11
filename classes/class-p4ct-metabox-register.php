@@ -525,9 +525,9 @@ class P4CT_Metabox_Register {
 			'name'             => esc_html__( $type_string . ' Button on Top', self::METABOX_ID ),
 			'desc'             => __('
 				<ol>
-					<li>Location: above the main content, under the quoteblock (quote with theme color background).</li>
-					<li>Leave the link or label field empty to use the default value.</li>
-					<li>Go to the setting &quot;' . __( 'Settings' ) . ' &gt; Post ' . $type_string . ' Buttons&quot; to setup default values.</li>
+					<li>Location: above the main content, under the quoteblock.</li>
+					<li>Leave empty to use default values.</li>
+					<li>Setup default values on &quot;' . __( 'Settings' ) . ' &gt; Post ' . $type_string . ' Buttons&quot;.</li>
 				</ol>', self::METABOX_ID),
 			'id'               => 'p4-gpea_article_top_' . $type_key . '_button',
 			'type'             => 'title',
@@ -562,8 +562,8 @@ class P4CT_Metabox_Register {
 			'desc'             => __('
 				<ol>
 					<li>Location: below the main content, before the further reading section.</li>
-					<li>Leave the link or label field empty to use the default value.</li>
-					<li>Go to the setting &quot;' . __( 'Settings' ) . ' &gt; Post ' . $type_string . ' Buttons&quot; to setup default values.</li>
+					<li>Leave empty to use default values.</li>
+					<li>Setup default values on &quot;' . __( 'Settings' ) . ' &gt; Post ' . $type_string . ' Buttons&quot;.</li>
 				<ol>', self::METABOX_ID),
 			'id'               => 'p4-gpea_article_bottom_' . $type_key . '_button',
 			'type'             => 'title',
@@ -1045,9 +1045,22 @@ class P4CT_Metabox_Register {
 				'name'             => '',
 				'desc'             => __('
 					<ol>
-						<li>Please set the default values for the ' . $type_string . ' blocks in the post/page.</li>
-						<li>Location: it\'s better to set around the middle area of the post.</li>
-						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . $count_issues . ' themes (' . $issue_string . '), or you didn\'t set the default value for 6 themes and leave the fields empty will go to the &quot;All-site Default&quot; once writers insert the ' . $type_string . ' block.</li>
+						<li>General or issues\' default values for ' . $type_string . ' blocks in the post/page.</li>
+						<li>Locations: decided by post/page authors.</li>
+						<li>You need to set general default at least. If post/page authors leave block fields to empty, values set on here will be used.</li>
+					</ol>', self::METABOX_ID),
+				'id'               => $id_prefix . '_hint',
+				'type'             => 'title',
+			];
+		}
+		elseif( $is_subscription ) {
+			$cmb_options[] = [
+				'name'             => '',
+				'desc'             => __('
+					<ol>
+						<li>General or issues\' default values for ' . $type_string . ' buttons in the post.</li>
+						<li>Locations: around main content if post authors set them to show.</li>
+						<li>If post authors leave button labels to empty, values set on here will be used.</li>
 					</ol>', self::METABOX_ID),
 				'id'               => $id_prefix . '_hint',
 				'type'             => 'title',
@@ -1058,9 +1071,9 @@ class P4CT_Metabox_Register {
 				'name'             => '',
 				'desc'             => __('
 					<ol>
-						<li>Please set the default values for the ' . $type_string . ' buttons in the post.</li>
-						<li>Buttons\' locations: one is above the main content and under the blockquote (quote with theme color background); the second one is below the main content and before the further reading section.</li>
-						<li>You need to set the &quot;All-site Default&quot; at least. Every post not under ' . $count_issues . ' themes (' . $issue_string . '), or you didn\'t set the default value for 6 themes and leave the link/label empty will go to the &quot;All-site Default&quot; once writers &quot;show the button.&quot;</li>
+						<li>General or issues\' default values for ' . $type_string . ' buttons in the post.</li>
+						<li>Locations: around main content if post authors set them to show.</li>
+						<li>You need to set general default at least. If post authors leave button links or labels to empty, values set on here will be used.</li>
 					</ol>', self::METABOX_ID),
 				'id'               => $id_prefix . '_hint',
 				'type'             => 'title',
@@ -1068,17 +1081,27 @@ class P4CT_Metabox_Register {
 		}
 
 		$main_issues = [
-			'default'  => 'All-site Default',
+			'default'  => 'General Default',
 		] + $main_issues;
 
 		foreach( $main_issues as $issue_key => $issue_title ) {
 
-			$cmb_options[] = [
-				'name'             => esc_html__( $issue_title, self::METABOX_ID ),
-				'desc'             => $issue_key == 'default' ? '' : esc_html__( 'Leave empty to use the same setting in &quot;All-site Default&quot;', self::METABOX_ID ),
-				'id'               => $id_prefix . $issue_key,
-				'type'             => 'title',
-			];
+			if( $is_subscription && !$is_block ) {
+				$cmb_options[] = [
+					'name'             => esc_html__( $issue_title, self::METABOX_ID ),
+					'desc'             => esc_html__( 'Leave empty to use default string "' . ( $issue_key == 'default' ? __( 'Subscribe to our newsletter', 'gpea_theme' ) : sprintf( __( 'Subscribe to newsletter about %s', 'gpea_theme' ), $issue_title ) ) . '".', self::METABOX_ID ),
+					'id'               => $id_prefix . $issue_key,
+					'type'             => 'title',
+				];
+			}
+			else {
+				$cmb_options[] = [
+					'name'             => esc_html__( $issue_title, self::METABOX_ID ),
+					'desc'             => $issue_key == 'default' ? '' : esc_html__( 'Leave empty to use general default.', self::METABOX_ID ),
+					'id'               => $id_prefix . $issue_key,
+					'type'             => 'title',
+				];
+			}
 
 			if( $is_block ) {
 
