@@ -85,6 +85,12 @@ if( isset( $context['main_issue_slug'] ) && isset( $subscription_button_options[
 elseif( isset( $subscription_button_options['gpea_subscription_button_default_button_text'] ) ) {
 	$subscription_button_default_text = $subscription_button_options['gpea_subscription_button_default_button_text'];
 }
+if( !@strlen( $subscription_button_default_text ) && isset( $context['main_issue_slug'] ) ) {
+	$subscription_button_default_text = sprintf( __( 'Subscribe to newsletter about %s', 'gpea_theme' ), $context['main_issue'] );
+}
+elseif( !@strlen( $subscription_button_default_text ) ) {
+	$subscription_button_default_text = __( 'Subscribe to our newsletter', 'gpea_theme' );
+}
 
 // Donation or subscription?
 

@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Greenpeace Planet 4 Child Theme Hong Kong 0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/planet4-child-theme-hongkong\n"
 "POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: 2023-02-28 18:25+0800\n"
+"PO-Revision-Date: 2023-12-11 18:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ko_KR\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Domain: gpea_theme\n"
 
 #. Theme Name of the theme
@@ -535,4 +535,11 @@ msgid "More about %s..."
 msgstr ""
 
 msgid ", "
+msgstr ""
+
+# Subscription buttons
+msgid "Subscribe to our newsletter"
+msgstr ""
+
+msgid "Subscribe to newsletter about %s"
 msgstr ""
