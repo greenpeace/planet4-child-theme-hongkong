@@ -550,3 +550,9 @@ msgid "More about %s..."
 msgstr ""
 msgid ", "
 msgstr ""
+
+#. Subscription buttons
+msgid "Subscribe to our newsletter"
+msgstr ""
+msgid "Subscribe to newsletter about %s"
+msgstr ""
