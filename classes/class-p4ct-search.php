@@ -201,7 +201,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			}
 
 			// Set the decoded url query string as key.
-			$query_string = urldecode( filter_input( INPUT_SERVER, 'search', FILTER_SANITIZE_STRING ) );
+			$query_string = urldecode( filter_input( INPUT_POST, 'search', FILTER_SANITIZE_STRING ) );
 			$group        = 'search';
 			$subgroup     = $has_search_query ? $this->search_query : ':all';
 
