@@ -18,7 +18,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 		const POSTS_LIMIT           = -1;
 		const POSTS_PER_PAGE        = 10;
-		const POSTS_PER_LOAD        = 6;
+		const POSTS_PER_LOAD        = 12;
 		const SHOW_SCROLL_TIMES     = 2;
 		const DEFAULT_SORT          = '_score';
 		const DEFAULT_MIN_WEIGHT    = 1;
