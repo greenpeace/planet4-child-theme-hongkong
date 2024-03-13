@@ -16,7 +16,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 	 */
 	abstract class P4CT_Search {
 
-		const POSTS_LIMIT           = 300;
+		const POSTS_LIMIT           = -1;
 		const POSTS_PER_PAGE        = 10;
 		const POSTS_PER_LOAD        = 6;
 		const SHOW_SCROLL_TIMES     = 2;
