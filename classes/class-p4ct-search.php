@@ -153,6 +153,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			} else {
 				$this->context = Timber::get_context();
 
+				$has_search_query = @strlen($this->search_query) > 0;
+
 				// Validate user input (sort, filters, etc).
 				if ( $this->validate( $selected_sort, $filters, $this->context ) ) {
 					$this->selected_sort = $selected_sort;
@@ -162,7 +164,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				// Set the decoded url query string as key.
 				$query_string = urldecode( filter_input( INPUT_SERVER, 'QUERY_STRING', FILTER_SANITIZE_STRING ) );
 				$group        = 'search';
-				$subgroup     = $this->search_query ? $this->search_query : 'all';
+				$subgroup     = $has_search_query ? $this->search_query : ':all';
 				// Check Object cache for stored key.
 				$this->check_cache( $query_string, "$group:$subgroup" );
 
@@ -190,6 +192,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			$this->context = Timber::get_context();
 			$this->set_main_issues();
 
+			$has_search_query = @strlen($this->search_query) > 0;
+
 			// Validate user input (sort, filters, etc).
 			if ( $this->validate( $selected_sort, $filters, $this->context ) ) {
 				$this->selected_sort = $selected_sort;
@@ -199,7 +203,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			// Set the decoded url query string as key.
 			$query_string = urldecode( filter_input( INPUT_SERVER, 'search', FILTER_SANITIZE_STRING ) );
 			$group        = 'search';
-			$subgroup     = $this->search_query ? $this->search_query : 'all';
+			$subgroup     = $has_search_query ? $this->search_query : ':all';
 
 			// Check Object cache for stored key.
 			$this->check_cache( $query_string, "$group:$subgroup" );
@@ -229,13 +233,15 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$search_async = new static();
 					$search_async->set_context( $search_async->context );
 					$search_async->search_query = urldecode( filter_input( INPUT_GET, 'search_query', FILTER_SANITIZE_STRING ) );
+					
+					$has_search_query = @strlen($search_async->search_query) > 0;
 
 					// Get the decoded url query string and then use it as key for redis.
 					$query_string_full = urldecode( filter_input( INPUT_SERVER, 'QUERY_STRING', FILTER_SANITIZE_STRING ) );
 					$query_string      = str_replace( '&query-string=', '', strstr( $query_string_full, '&query-string=' ) );
 
 					$group                      = 'search';
-					$subgroup                   = $search_async->search_query ? $search_async->search_query : 'all';
+					$subgroup                   = $has_search_query ? $search_async->search_query : ':all';
 					$search_async->current_page = $paged;
 
 					parse_str( $query_string, $filters_array );
