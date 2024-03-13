@@ -10,19 +10,11 @@ const p4ct_search = function() {
   var ajaxurl = window.localizations.ajaxurl; // eslint-disable-line no-undef
 
   var resultsPosts = $('#ajax-search-posts');
-  var resultsIssues = $('#ajax-search-issues');
-  var resultsTopics = $('#ajax-search-topics');
 
   var reset_filters = $('#btn_filter_reset');
 
   const postsTemplate = $('#template-posts');
   const buildPosts = template(postsTemplate[0].innerHTML);
-
-  const issuesTemplate = $('#template-issues');
-  const buildIssues = template(issuesTemplate[0].innerHTML);
-
-  const topicsTemplate = $('#template-topics');
-  const buildTopics = template(topicsTemplate[0].innerHTML);
 
   $('.search-autocomplete').autoComplete({
     minChars: 2,
@@ -33,8 +25,6 @@ const p4ct_search = function() {
 
       $search_form.addClass('is-loading');
       resultsPosts.addClass('fade-out');
-      resultsIssues.addClass('fade-out');
-      resultsTopics.addClass('fade-out');
 
       searchRequest = $.post(
         ajaxurl,
@@ -50,18 +40,9 @@ const p4ct_search = function() {
           // window.res = res;
           // console.log(res);
           const posts = res.posts;
-          const terms = res.terms;
-          const issues = terms.filter(term => term.taxonomy === 'category');
-          const topics = terms.filter(term => term.taxonomy === 'post_tag');
 
           if (posts.length) resultsPosts.show().removeClass('fade-out');
           else resultsPosts.hide();
-
-          if (issues.length) resultsIssues.show().removeClass('fade-out');
-          else resultsIssues.hide();
-
-          if (topics.length) resultsTopics.show().removeClass('fade-out');
-          else resultsTopics.hide();
 
           // posts = posts.map(post => post.post_title);
           // posts = posts.join('<br>');
@@ -69,16 +50,6 @@ const p4ct_search = function() {
           resultsPosts.find('.results-list')[0].innerHTML = buildPosts({
             posts: posts,
           });
-          resultsIssues.find('.results-list')[0].innerHTML = buildIssues({
-            issues: issues,
-          });
-          resultsTopics.find('.results-list')[0].innerHTML = buildTopics({
-            topics: topics,
-          });
-          // terms = terms.map(term => term.name);
-          // terms = terms.join('<br>');
-          // terms = terms || 'No terms found';
-          // results_terms.html(terms);
           // console.log(posts);
           // suggest(res.data);
         }
