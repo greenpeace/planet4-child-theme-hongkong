@@ -50,13 +50,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		protected $posts;
 
 		/**
-		 * Terms
-		 *
-		 * @var array|bool|null $terms
-		 */
-		protected $terms;
-
-		/**
 		 * Paged Posts
 		 *
 		 * @var array|bool|null $paged_posts
@@ -290,23 +283,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * @param string $cache_group The group that will be used for storing the results in the object cache.
 		 */
 		protected function check_cache( $cache_key, $cache_group ) {
-			$cache_group_terms = $cache_group . '_terms';
 			// Get search results from cache and then set the context for those results.
 			$this->posts = wp_cache_get( $cache_key, $cache_group );
-			$this->terms = wp_cache_get( $cache_key, $cache_group_terms );
 			// If cache key expired then retrieve results once again and re-cache them.
 			if ( false === $this->posts ) {
 				$this->posts = $this->get_timber_posts();
 				if ( $this->posts ) {
 					wp_cache_add( $cache_key, $this->posts, $cache_group, self::DEFAULT_CACHE_TTL );
-				}
-			}
-			// TODO check if we only want to fetch posts if this is an AJAX request.
-			// if ( false === $this->terms && wp_doing_ajax() ) {
-			if ( false === $this->terms ) {
-				$this->terms = $this->get_timber_terms();
-				if ( $this->terms ) {
-					wp_cache_add( $cache_key, $this->terms, $cache_group_terms, self::DEFAULT_CACHE_TTL );
 				}
 			}
 		}
@@ -396,71 +379,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			$posts = ( new WP_Query( $args ) )->posts;
 
 			return (array) $posts;
-		}
-
-		/**
-		 * Gets the respective Timber Terms, to be used with the twig template.
-		 * If there are not then uses Timber's get_posts to retrieve all of them (up to the limit set).
-		 *
-		 * @param int $paged The number of the page of the results to be shown when using pagination/load_more.
-		 *
-		 * @return array The respective Timber Posts.
-		 */
-		protected function get_timber_terms( $paged = 1 ) : array {
-			$timber_terms = [];
-
-			$terms = $this->get_terms( $paged );
-			// Use Timber's Post instead of WP_Post so that we can make use of Timber within the template.
-			if ( $terms ) {
-				foreach ( $terms as $term ) {
-					$timber_term = new TimberTerm( $term->term_id );
-					// Get the main issue page & related data if this term is a main issue & has an associated page.
-					if ( isset( $this->main_issues_category_id ) && $timber_term->parent === $this->main_issues_category_id ) {
-						$related = $this->get_cached_main_issue_pages( $timber_term->ID );
-						if ( count( $related ) ) {
-							$related = $related[0];
-							$timber_term->link = get_permalink( $related->ID );
-							$img_url = get_the_post_thumbnail_url( $related->ID, 'thumbnail' );
-							if ( $img_url ) {
-								$timber_term->img_url = $img_url;
-							}
-							$timber_term->post_title = $related->post_title;
-							$timber_term->main_issue_slug = $timber_term->slug;
-						}
-					}
-					$timber_terms[] = $timber_term ;
-				}
-			}
-			return (array) $timber_terms;
-		}
-
-		/**
-		 * Gets cached terms
-		 *
-		 * @param int $term_id The term ID.
-		 *
-		 * @return array The cached terms.
-		 */
-		protected function get_cached_main_issue_pages( $term_id ) : array {
-			$cache_key = $term_id;
-			$cache_group = 'main_issue_related_page';
-			$related = wp_cache_get( $cache_key, $cache_group );
-			if ( false === $related ) {
-				$related = ( new WP_Query(
-					[
-						'post_type' => 'page',
-						'category__in' => $term_id,
-						'meta_query' => [
-							[
-								'key'   => '_wp_page_template',
-								'value' => 'page-templates/main-issue.php',
-							],
-						],
-					]
-				) )->posts;
-				wp_cache_add( $cache_key, $related, $cache_group, self::DEFAULT_CACHE_TTL );
-			}
-			return $related;
 		}
 
 		/**
@@ -597,7 +515,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 			// Search context.
 			$context['posts']            = $this->posts;
-			$context['terms']            = $this->terms;
 			$context['paged_posts']      = $this->paged_posts;
 			$context['current_page']     = $this->current_page;
 			$context['search_query']     = $this->search_query;
@@ -889,7 +806,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			return wp_json_encode(
 				array(
 					'posts' => array_slice( $this->context['posts'], 0, self::POSTS_LIVE_SEARCH_PER_LOAD ),
-					'terms' => array_slice( $this->context['terms'], 0, self::POSTS_PER_LOAD ),
 				)
 			);
 		}
