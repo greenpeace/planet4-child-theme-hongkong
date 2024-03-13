@@ -19,6 +19,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		const POSTS_LIMIT           = -1;
 		const POSTS_PER_PAGE        = 10;
 		const POSTS_PER_LOAD        = 12;
+		const POSTS_LIVE_SEARCH_PER_LOAD = 6;
 		const SHOW_SCROLL_TIMES     = 2;
 		const DEFAULT_SORT          = '_score';
 		const DEFAULT_MIN_WEIGHT    = 1;
@@ -210,9 +211,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			// Check Object cache for stored key.
 			$this->check_cache( $query_string, "$group:$subgroup" );
 
-			// If posts were found either in object cache or primary database then get the first POSTS_PER_LOAD results.
+			// If posts were found either in object cache or primary database then get the first POSTS_LIVE_SEARCH_PER_LOAD results.
 			if ( $this->posts ) {
-				$this->paged_posts = array_slice( $this->posts, 0, self::POSTS_PER_LOAD );
+				$this->paged_posts = array_slice( $this->posts, 0, self::POSTS_LIVE_SEARCH_PER_LOAD );
 			}
 
 			$this->current_page = 1;
@@ -887,7 +888,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		public function gpea_view_json() {
 			return wp_json_encode(
 				array(
-					'posts' => array_slice( $this->context['posts'], 0, self::POSTS_PER_LOAD ),
+					'posts' => array_slice( $this->context['posts'], 0, self::POSTS_LIVE_SEARCH_PER_LOAD ),
 					'terms' => array_slice( $this->context['terms'], 0, self::POSTS_PER_LOAD ),
 				)
 			);
