@@ -16,22 +16,23 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 	 */
 	abstract class P4CT_Search {
 
-		const POSTS_LIMIT           = -1;
-		const POSTS_PER_PAGE        = 10;
-		const POSTS_PER_LOAD        = 12;
+		const POSTS_LIMIT                = -1;
+		const POSTS_PER_PAGE             = 10;
+		const POSTS_PER_LOAD             = 12;
 		const POSTS_LIVE_SEARCH_PER_LOAD = 6;
-		const SHOW_SCROLL_TIMES     = 2;
-		const DEFAULT_SORT          = '_score';
-		const DEFAULT_MIN_WEIGHT    = 1;
-		const DEFAULT_PAGE_WEIGHT   = 100;
-		const DEFAULT_ACTION_WEIGHT = 2000;
-		const DEFAULT_MAX_WEIGHT    = 3000;
-		const DEFAULT_CACHE_TTL     = 600;
-		const DUMMY_THUMBNAIL       = '/images/dummy-thumbnail.png';
-		const POST_TYPES            = [
+		const SHOW_SCROLL_TIMES          = 2;
+		const DEFAULT_SORT               = '_score';
+		const DEFAULT_ALL_POST_SORT      = 'post_date';
+		const DEFAULT_MIN_WEIGHT         = 1;
+		const DEFAULT_PAGE_WEIGHT        = 100;
+		const DEFAULT_ACTION_WEIGHT      = 2000;
+		const DEFAULT_MAX_WEIGHT         = 3000;
+		const DEFAULT_CACHE_TTL          = 600;
+		const DUMMY_THUMBNAIL            = '/images/dummy-thumbnail.png';
+		const POST_TYPES                 = [
 			'post',
 		];
-		const DOCUMENT_TYPES        = [
+		const DOCUMENT_TYPES             = [
 			'application/pdf',
 		];
 
@@ -141,7 +142,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * @param array      $templates An indexed array with template file names. The first to be found will be used.
 		 * @param array|null $context An associative array with all the context needed to render the template found first.
 		 */
-		public function load( $search_query, $selected_sort = self::DEFAULT_SORT, $filters = [], $templates = [ 'search.twig', 'archive.twig', 'index.twig' ], $context = null ) {
+		public function load( $search_query, $selected_sort = NULL, $filters = [], $templates = [ 'search.twig', 'archive.twig', 'index.twig' ], $context = null ) {
 
 			// TODO Shouldn't we check for a nonce, both here and on AJAX?
 			$this->initialize();
@@ -154,6 +155,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				$this->context = Timber::get_context();
 
 				$has_search_query = @strlen($this->search_query) > 0;
+				if (!$has_search_query && is_null($selected_sort)) {
+					$selected_sort = $selected_sort ? self::DEFAULT_SORT : self::DEFAULT_ALL_POST_SORT;
+				}
 
 				// Validate user input (sort, filters, etc).
 				if ( $this->validate( $selected_sort, $filters, $this->context ) ) {
@@ -186,13 +190,16 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * @param array      $filters The selected filters.
 		 * @param array|null $context An associative array with all the context needed to render the template found first.
 		 */
-		public function gpea_load_ajax( $search_query, $selected_sort = self::DEFAULT_SORT, $filters = [], $context = null ) {
+		public function gpea_load_ajax( $search_query, $selected_sort = NULL, $filters = [], $context = null ) {
 
 			$this->search_query = $search_query;
 			$this->context = Timber::get_context();
 			$this->set_main_issues();
 
 			$has_search_query = @strlen($this->search_query) > 0;
+			if (!$has_search_query && is_null($selected_sort)) {
+				$selected_sort = $selected_sort ? self::DEFAULT_SORT : self::DEFAULT_ALL_POST_SORT;
+			}
 
 			// Validate user input (sort, filters, etc).
 			if ( $this->validate( $selected_sort, $filters, $this->context ) ) {
@@ -245,7 +252,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$search_async->current_page = $paged;
 
 					parse_str( $query_string, $filters_array );
-					$selected_sort    = $filters_array['orderby'] ?? self::DEFAULT_SORT;
+					$selected_sort    = $filters_array['orderby'] ?? ($has_search_query ? self::DEFAULT_SORT : self::DEFAULT_ALL_POST_SORT);
 					$selected_filters = $filters_array['f'] ?? [];
 					$filters          = [];
 
