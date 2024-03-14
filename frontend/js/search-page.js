@@ -11,8 +11,6 @@ const p4ct_search = function() {
 
   var resultsPosts = $('#ajax-search-posts');
 
-  var reset_filters = $('#btn_filter_reset');
-
   const postsTemplate = $('#template-posts');
   const buildPosts = template(postsTemplate[0].innerHTML);
 
@@ -57,8 +55,6 @@ const p4ct_search = function() {
     },
   });
 
-  var filters_search = $('.filter-search');
-
   $search_form.on('submit', function() {
     $(document.body).addClass('is-loading');
   });
@@ -73,17 +69,6 @@ const p4ct_search = function() {
       'event_action': 'search',
       'search_query': $(this).find('[name="s"]').val(),
     });
-  });
-
-  filters_search.change(function(ev) {
-    $search_form.submit();
-  });
-
-  reset_filters.click(function(ev) {
-    filters_search.map(function() {
-      $(this).val('');
-    });
-    $search_form.submit();
   });
 
   var $load_more_button = $('.btn-load-more-click-scroll');
