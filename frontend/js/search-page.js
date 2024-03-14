@@ -6,6 +6,9 @@ $ = jQuery; // eslint-disable-line no-global-assign
 const p4ct_search = function() {
   var $search_form = $('#search_form_inner');
   if (!$search_form.length) return;
+
+  var isSearchResults = $('body.search').length > 0;
+
   var searchRequest;
   var ajaxurl = window.localizations.ajaxurl; // eslint-disable-line no-undef
 
@@ -20,6 +23,11 @@ const p4ct_search = function() {
       try {
         searchRequest.abort();
       } catch (e) {} // eslint-disable-line no-empty
+
+      if(isSearchResults) {
+        $search_form.trigger('submit');
+        return;
+      }
 
       $search_form.addClass('is-loading');
       resultsPosts.addClass('fade-out');
@@ -55,7 +63,8 @@ const p4ct_search = function() {
     },
   });
 
-  $search_form.on('submit', function() {
+  $search_form.on('submit', function(e) {
+    e.preventDefault();
     $(document.body).addClass('is-loading');
   });
 
