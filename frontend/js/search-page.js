@@ -7,7 +7,8 @@ const p4ct_search = function() {
   const $search_form = $('#search_form_inner');
   if (!$search_form.length){ return; }
 
-  var search_request;
+  var search_request, live_search_timer, last_search_query;
+  var search_query = $('#search_input').val().trim();
   const ajaxurl = window.localizations.ajaxurl; // eslint-disable-line no-undef
 
   const $live_result_posts = $('#ajax-search-posts');
@@ -21,58 +22,65 @@ const p4ct_search = function() {
   const $result_page_result_posts = $('.multiple-search-result .results-list');
   const $load_more_button = $('.btn-load-more-click-scroll');
 
-  $('.search-autocomplete').autoComplete({
-    minChars: is_result_page ? 0 : 2,
-    source: function(term, suggest) {
-      try {
-        search_request.abort();
-      } catch (e) {} // eslint-disable-line no-empty
-
-      if(is_result_page) {
-        $search_form.trigger('submit');
-        return;
-      }
-
-      $search_form.addClass('is-loading');
-      $live_result_posts.addClass('fade-out');
-
-      search_request = $.post(
-        ajaxurl,
-        {
-          action: 'p4ct_search_site',
-          search: term,
-        },
-        function(res) {
-          $('.nothing-found').remove();
-          $search_form.removeClass('is-loading');
-          // Frontend TODO: integrate
-          res = JSON.parse(res);
-          // window.res = res;
-          // console.log(res);
-          const posts = res.posts;
-
-          if (posts.length) { $live_result_posts.show().removeClass('fade-out'); }
-          else { $live_result_posts.hide(); }
-
-          // posts = posts.map(post => post.post_title);
-          // posts = posts.join('<br>');
-          // posts = posts || 'No posts found';
-          $live_result_posts.find('.results-list')[0].innerHTML = build_posts({
-            posts: posts,
-          });
-          // console.log(posts);
-          // suggest(res.data);
+  if(is_result_page) {
+    $('.search-autocomplete').on('input', function() {
+      clearTimeout(live_search_timer);
+      live_search_timer = setTimeout(function() {
+        search_query = $('#search_input').val().trim();
+        if(last_search_query == search_query) {
+          return;
         }
-      );
-    },
-  });
+        last_search_query = search_query;
+        $(document.body).addClass('is-loading');
+        next_page = 1;
+        load_next_page();
+      }, $.fn.autoComplete.defaults.delay);
+    });
+  }
+  else {
+    $('.search-autocomplete').autoComplete({
+      minChars: 2,
+      source: function(term, suggest) {
+        try {
+          search_request.abort();
+        } catch (e) {} // eslint-disable-line no-empty
+
+        $search_form.addClass('is-loading');
+        $live_result_posts.addClass('fade-out');
+
+        search_request = $.post(
+          ajaxurl,
+          {
+            action: 'p4ct_search_site',
+            search: term,
+          },
+          function(res) {
+            $('.nothing-found').remove();
+            $search_form.removeClass('is-loading');
+            // Frontend TODO: integrate
+            res = JSON.parse(res);
+            // window.res = res;
+            // console.log(res);
+            const posts = res.posts;
+
+            if (posts.length) { $live_result_posts.show().removeClass('fade-out'); }
+            else { $live_result_posts.hide(); }
+
+            // posts = posts.map(post => post.post_title);
+            // posts = posts.join('<br>');
+            // posts = posts || 'No posts found';
+            $live_result_posts.find('.results-list')[0].innerHTML = build_posts({
+              posts: posts,
+            });
+            // console.log(posts);
+            // suggest(res.data);
+          }
+        );
+      },
+    });
+  }
 
   $search_form.on('submit', function(e) {
-    if(is_result_page) {
-      e.preventDefault();
-      next_page = 1;
-      load_next_page();
-    }
     $(document.body).addClass('is-loading');
   });
 
@@ -99,9 +107,11 @@ const p4ct_search = function() {
     load_next_page();
   });
   function load_next_page() {
-    const search_query = $('#search_input').val().trim();
+    try {
+      search_request.abort();
+    } catch (e) {}
     const current_params = new URLSearchParams(location.search);
-    $.ajax({
+    search_request = $.ajax({
       url: window.localizations.ajaxurl,
       type: 'GET',
       data: {
@@ -111,22 +121,24 @@ const p4ct_search = function() {
         paged: next_page,
         'query-string': 's=' + search_query, // Ignore the ? in the search url (first char).
       },
-      dataType: 'html',
+      dataType: 'json',
     })
       .done(function(response) {
         // console.log(response);
         // Append the response at the bottom of the results and then show it.
+        console.log(response);
         current_page = next_page;
-        $load_more_button.removeClass('loading');
-        $(document.body).removeClass('is-loading');
-        if(next_page == 1) {
-          $result_page_result_posts.empty();
-        }
-        $result_page_result_posts.append(response);
-        // $result_page_result_title = '';
+        total_posts = response.total_posts;
         current_params.set('s', search_query);
         history.replaceState(null, '', '?' + current_params.toString());
-        if (posts_per_load * next_page > total_posts || total_posts == 0) {
+        $load_more_button.removeClass('loading');
+        $(document.body).removeClass('is-loading');
+        // $result_page_result_title = '';
+        if(current_page == 1) {
+          $result_page_result_posts.empty();
+        }
+        $result_page_result_posts.append(response.posts_html);
+        if (posts_per_load * current_page > total_posts || total_posts == 0) {
           $load_more_button.hide();
         }
         else {

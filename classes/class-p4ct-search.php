@@ -7,7 +7,6 @@
 
 use Timber\Timber;
 use Timber\Post as TimberPost;
-use Timber\Term as TimberTerm;
 
 if ( ! class_exists( 'P4CT_Search' ) ) {
 
@@ -280,10 +279,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					}
 
 					// If there are paged results then set their context and send them back to client.
-					if ( $search_async->paged_posts ) {
-						$search_async->set_results_context( $search_async->context );
-						$search_async->view_paged_posts();
-					}
+					$search_async->set_results_context( $search_async->context );
+					$search_async->view_json_paged_posts();
 				}
 				wp_die();
 			}
@@ -825,8 +822,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		/**
 		 * View the paged posts of the next page/load.
 		 */
-		public function view_paged_posts() {
+		public function view_json_paged_posts() {
 			// TODO - The $paged_context related code should be transferred to set_results_context method for better separation of concerns.
+			$posts_html = '';
 			if ( $this->paged_posts ) {
 				$paged_context             = [
 					'posts_data' => $this->context['posts_data'],
@@ -840,9 +838,15 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					} else {
 						$paged_context['first_of_the_page'] = false;
 					}
-					Timber::render( [ 'tease-search.twig' ], $paged_context, self::DEFAULT_CACHE_TTL, \Timber\Loader::CACHE_OBJECT );
+					$posts_html .= Timber::compile( [ 'tease-search.twig' ], $paged_context, self::DEFAULT_CACHE_TTL, \Timber\Loader::CACHE_OBJECT );
 				}
 			}
+			return wp_send_json(
+				array(
+					'total_posts' => count($this->posts),
+					'posts_html' => $posts_html,
+				)
+			);
 		}
 
 		/**
