@@ -16,14 +16,14 @@
 			{{ corrected_term }}
 		{% endif %}
 
-		<form
-				id="search_form_inner" role="search" action="{{ data_nav_bar.home_url }}">
+		<form id="search_form_inner" role="search" action="{{ data_nav_bar.home_url }}">
 			<!-- Main search field -->
 			<div class="form-group search fluid">
 				<input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="{{ search_strings.start_typing }}" value="{{ search_query|e('wp_kses_post')|raw }}">
 				<button class="button primary" type="submit">{{ search_strings.search_label }}</button>
 			</div>
 
+			{% if not is_search_page %}
 			<div class="lds-spinner">
 				<div></div>
 				<div></div>
@@ -38,24 +38,14 @@
 				<div></div>
 				<div></div>
 			</div>
+			{% endif %}
 		</form>
 
-		<div hidden id="ajax-search-issues" class="fade-out">
-			<h5>
-				{{ search_strings.issue }}
-			</h5>
-			<div class="results-list"></div>
-		</div>
-
-		<div hidden id="ajax-search-topics" class="fade-out">
-			<h5>{{ search_strings.topic }}</h5>
-			<div class="results-list"></div>
-		</div>
-
+		{% if not is_search_page %}
 		<div hidden id="ajax-search-posts" class="fade-out">
-			<h5>{{ search_strings.posts }}</h5>
 			<div class="results-list"></div>
 		</div>
+		{% endif %}
 
 	</div>
 </section>

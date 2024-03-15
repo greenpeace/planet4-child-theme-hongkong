@@ -127,10 +127,11 @@ class P4CT_Site {
 		add_action( 'after_setup_theme', [ $this, 'gpea_child_theme_setup' ] );
 
 		// Override parent AJAX search functionality.
+		$search = new P4CT_ElasticSearch();
 		remove_action( 'wp_ajax_get_paged_posts', [ 'P4MT\P4_ElasticSearch', 'get_paged_posts' ] );
 		remove_action( 'wp_ajax_nopriv_get_paged_posts', [ 'P4MT\P4_ElasticSearch', 'get_paged_posts' ] );
-		add_action( 'wp_ajax_get_paged_posts', [ 'P4CT_ElasticSearch', 'get_paged_posts' ] );
-		add_action( 'wp_ajax_nopriv_get_paged_posts', [ 'P4CT_ElasticSearch', 'get_paged_posts' ] );
+		add_action( 'wp_ajax_get_paged_posts', [ &$search, 'get_paged_posts' ] );
+		add_action( 'wp_ajax_nopriv_get_paged_posts', [ &$search, 'get_paged_posts' ] );
 
 	}
 

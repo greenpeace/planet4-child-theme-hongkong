@@ -17,6 +17,10 @@
   text-decoration: none;
   cursor: pointer;
 
+  &[hidden] {
+    display: none;
+  }
+
   @include greaterThan('sm') {
     font-size: 18px;
     padding: 0 50px;

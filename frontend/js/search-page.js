@@ -4,91 +4,83 @@ import './vendor/jquery.auto-complete.min.js';
 $ = jQuery; // eslint-disable-line no-global-assign
 
 const p4ct_search = function() {
-  var $search_form = $('#search_form_inner');
-  if (!$search_form.length) return;
-  var searchRequest;
-  var ajaxurl = window.localizations.ajaxurl; // eslint-disable-line no-undef
+  const $search_form = $('#search_form_inner');
+  if (!$search_form.length){ return; }
 
-  var resultsPosts = $('#ajax-search-posts');
-  var resultsIssues = $('#ajax-search-issues');
-  var resultsTopics = $('#ajax-search-topics');
+  var search_request, live_search_timer, last_search_query;
+  var search_query = $('#search_input').val().trim();
+  const ajaxurl = window.localizations.ajaxurl; // eslint-disable-line no-undef
 
-  var reset_filters = $('#btn_filter_reset');
+  const $live_result_posts = $('#ajax-search-posts');
 
-  const postsTemplate = $('#template-posts');
-  const buildPosts = template(postsTemplate[0].innerHTML);
+  const $post_template = $('#template-posts');
+  const build_posts = template($post_template[0].innerHTML);
 
-  const issuesTemplate = $('#template-issues');
-  const buildIssues = template(issuesTemplate[0].innerHTML);
+  const is_result_page = $('body.search').length > 0;
+  const $result_page_result_title = $('.results-no');
+  const $result_page_no_results = $('.nothing-found');
+  const $result_page_result_posts = $('.multiple-search-result .results-list');
+  const $load_more_button = $('.btn-load-more-click-scroll');
 
-  const topicsTemplate = $('#template-topics');
-  const buildTopics = template(topicsTemplate[0].innerHTML);
-
-  $('.search-autocomplete').autoComplete({
-    minChars: 2,
-    source: function(term, suggest) {
-      try {
-        searchRequest.abort();
-      } catch (e) {} // eslint-disable-line no-empty
-
-      $search_form.addClass('is-loading');
-      resultsPosts.addClass('fade-out');
-      resultsIssues.addClass('fade-out');
-      resultsTopics.addClass('fade-out');
-
-      searchRequest = $.post(
-        ajaxurl,
-        {
-          action: 'p4ct_search_site',
-          search: term,
-        },
-        function(res) {
-          $('.nothing-found').remove();
-          $search_form.removeClass('is-loading');
-          // Frontend TODO: integrate
-          res = JSON.parse(res);
-          // window.res = res;
-          // console.log(res);
-          const posts = res.posts;
-          const terms = res.terms;
-          const issues = terms.filter(term => term.taxonomy === 'category');
-          const topics = terms.filter(term => term.taxonomy === 'post_tag');
-
-          if (posts.length) resultsPosts.show().removeClass('fade-out');
-          else resultsPosts.hide();
-
-          if (issues.length) resultsIssues.show().removeClass('fade-out');
-          else resultsIssues.hide();
-
-          if (topics.length) resultsTopics.show().removeClass('fade-out');
-          else resultsTopics.hide();
-
-          // posts = posts.map(post => post.post_title);
-          // posts = posts.join('<br>');
-          // posts = posts || 'No posts found';
-          resultsPosts.find('.results-list')[0].innerHTML = buildPosts({
-            posts: posts,
-          });
-          resultsIssues.find('.results-list')[0].innerHTML = buildIssues({
-            issues: issues,
-          });
-          resultsTopics.find('.results-list')[0].innerHTML = buildTopics({
-            topics: topics,
-          });
-          // terms = terms.map(term => term.name);
-          // terms = terms.join('<br>');
-          // terms = terms || 'No terms found';
-          // results_terms.html(terms);
-          // console.log(posts);
-          // suggest(res.data);
+  if(is_result_page) {
+    $('.search-autocomplete').on('input', function() {
+      clearTimeout(live_search_timer);
+      live_search_timer = setTimeout(function() {
+        search_query = $('#search_input').val().trim();
+        if(last_search_query == search_query) {
+          return;
         }
-      );
-    },
-  });
+        last_search_query = search_query;
+        $(document.body).addClass('is-loading');
+        next_page = 1;
+        load_next_page();
+      }, $.fn.autoComplete.defaults.delay);
+    });
+  }
+  else {
+    $('.search-autocomplete').autoComplete({
+      minChars: 2,
+      source: function(term, suggest) {
+        try {
+          search_request.abort();
+        } catch (e) {} // eslint-disable-line no-empty
 
-  var filters_search = $('.filter-search');
+        $search_form.addClass('is-loading');
+        $live_result_posts.addClass('fade-out');
 
-  $search_form.on('submit', function() {
+        search_request = $.post(
+          ajaxurl,
+          {
+            action: 'p4ct_search_site',
+            search: term,
+          },
+          function(res) {
+            $('.nothing-found').remove();
+            $search_form.removeClass('is-loading');
+            // Frontend TODO: integrate
+            res = JSON.parse(res);
+            // window.res = res;
+            // console.log(res);
+            const posts = res.posts;
+
+            if (posts.length) { $live_result_posts.show().removeClass('fade-out'); }
+            else { $live_result_posts.hide(); }
+
+            // posts = posts.map(post => post.post_title);
+            // posts = posts.join('<br>');
+            // posts = posts || 'No posts found';
+            $live_result_posts.find('.results-list')[0].innerHTML = build_posts({
+              posts: posts,
+            });
+            // console.log(posts);
+            // suggest(res.data);
+          }
+        );
+      },
+    });
+  }
+
+  $search_form.on('submit', function(e) {
     $(document.body).addClass('is-loading');
   });
 
@@ -104,75 +96,69 @@ const p4ct_search = function() {
     });
   });
 
-  filters_search.change(function(ev) {
-    $search_form.submit();
-  });
-
-  reset_filters.click(function(ev) {
-    filters_search.map(function() {
-      $(this).val('');
-    });
-    $search_form.submit();
-  });
-
-  var $load_more_button = $('.btn-load-more-click-scroll');
-  var load_more_count = 0;
-  var loaded_more = false;
   // Add click event for load more button in blocks.
+  var total_posts = $load_more_button.data('total_posts');
+  var posts_per_load = $load_more_button.data('posts_per_load');
+  var current_page = $load_more_button.data('current_page');
+  var next_page = current_page + 1;
   $load_more_button.off('click').on('click', function() {
-    // If this button has this class then Lazy-loading is enabled.
-    if ($(this).hasClass('btn-load-more-async')) {
-      var total_posts = $(this).data('total_posts');
-      var posts_per_load = $(this).data('posts_per_load');
-      var next_page = $(this).data('current_page') + 1;
-      $(this).data('current_page', next_page);
-
-      var $load_more_button = $('.btn-load-more-click-scroll');
-      var load_more_count = 0;
-      var loaded_more = false;
-      $load_more_button.addClass('loading');
-      $.ajax({
-        url: window.localizations.ajaxurl,
-        type: 'GET',
-        data: {
-          action: 'get_paged_posts',
-          'search-action': 'get_paged_posts',
-          search_query: $('#search_input')
-            .val()
-            .trim(),
-          paged: next_page,
-          'query-string': decodeURIComponent(location.search).substr(1), // Ignore the ? in the search url (first char).
-        },
-        dataType: 'html',
-      })
-        .done(function(response) {
-          // console.log(response);
-          // Append the response at the bottom of the results and then show it.
-          $load_more_button.removeClass('loading');
-          $('.multiple-search-result .results-list').append(response);
-          $('.row-hidden:last')
-            .removeClass('row-hidden')
-            .show('fast');
-          if (posts_per_load * next_page > total_posts) {
-            $load_more_button.hide();
-          }
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-          $load_more_button.removeClass('loading');
-          console.log(errorThrown); //eslint-disable-line no-console
-        });
-    } else {
-      var $row = $('.row-hidden', $load_more_button.closest('.container'));
-
-      if (1 === $row.length) {
-        $load_more_button.closest('.load-more-button-div').hide('fast');
-      }
-      $row
-        .first()
-        .show('fast')
-        .removeClass('row-hidden');
-    }
+    next_page = current_page + 1;
+    $load_more_button.addClass('loading');
+    load_next_page();
   });
+  function load_next_page() {
+    try {
+      search_request.abort();
+    } catch (e) {}
+    const current_params = new URLSearchParams(location.search);
+    search_request = $.ajax({
+      url: window.localizations.ajaxurl,
+      type: 'GET',
+      data: {
+        action: 'get_paged_posts',
+        'search-action': 'get_paged_posts',
+        search_query: search_query,
+        paged: next_page,
+        'query-string': 's=' + search_query, // Ignore the ? in the search url (first char).
+      },
+      dataType: 'json',
+    })
+      .done(function(response) {
+        // console.log(response);
+        // Append the response at the bottom of the results and then show it.
+        current_page = next_page;
+        total_posts = response.total_posts;
+        current_params.set('s', search_query);
+        history.replaceState(null, '', '?' + current_params.toString());
+        document.title = current_params.page_title;
+        $load_more_button.removeClass('loading');
+        $(document.body).removeClass('is-loading');
+        $result_page_result_title.html(response.result_title);
+        if(current_page == 1) {
+          $result_page_result_posts.empty();
+        }
+        $result_page_result_posts.append(response.build_posts);
+        if (posts_per_load * current_page > total_posts || total_posts == 0) {
+          $load_more_button.hide();
+        }
+        else {
+          $load_more_button.show();
+        }
+        if (total_posts == 0) {
+          $result_page_no_results.show();
+          $result_page_result_posts.hide();
+        }
+        else {
+          $result_page_no_results.hide();
+          $result_page_result_posts.show();
+        }
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        $load_more_button.removeClass('loading');
+        $(document.body).removeClass('is-loading');
+        console.log(errorThrown); //eslint-disable-line no-console
+      });
+  }
 };
 
 /* Run */

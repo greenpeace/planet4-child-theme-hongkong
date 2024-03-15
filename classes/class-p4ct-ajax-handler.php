@@ -286,7 +286,7 @@ class P4CT_AJAX_Handler {
 	public function search_posts_ajax() {
 		$query = $_POST['search'];
 		$search = new P4CT_ElasticSearch(); // TODO Can we create a new search only once?
-		$search->gpea_load_ajax( $query, $selected_sort, $filters );
+		$search->gpea_load_ajax( $query );
 		$this->safe_echo( $search->gpea_view_json(), false );
 	}
 
