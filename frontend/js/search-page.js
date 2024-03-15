@@ -22,7 +22,7 @@ const p4ct_search = function() {
   const $load_more_button = $('.btn-load-more-click-scroll');
 
   $('.search-autocomplete').autoComplete({
-    minChars: 2,
+    minChars: is_result_page ? 0 : 2,
     source: function(term, suggest) {
       try {
         search_request.abort();
@@ -70,6 +70,7 @@ const p4ct_search = function() {
   $search_form.on('submit', function(e) {
     if(is_result_page) {
       e.preventDefault();
+      next_page = 1;
       load_next_page();
     }
     $(document.body).addClass('is-loading');
@@ -100,8 +101,6 @@ const p4ct_search = function() {
   function load_next_page() {
     const search_query = $('#search_input').val().trim();
     const current_params = new URLSearchParams(location.search);
-    current_params.set('s', search_query);
-    history.replaceState(null, '', '?' + current_params.toString());
     $.ajax({
       url: window.localizations.ajaxurl,
       type: 'GET',
@@ -119,15 +118,32 @@ const p4ct_search = function() {
         // Append the response at the bottom of the results and then show it.
         current_page = next_page;
         $load_more_button.removeClass('loading');
-        $search_form.removeClass('is-loading');
+        $(document.body).removeClass('is-loading');
+        if(next_page == 1) {
+          $result_page_result_posts.empty();
+        }
         $result_page_result_posts.append(response);
-        if (posts_per_load * next_page > total_posts) {
+        // $result_page_result_title = '';
+        current_params.set('s', search_query);
+        history.replaceState(null, '', '?' + current_params.toString());
+        if (posts_per_load * next_page > total_posts || total_posts == 0) {
           $load_more_button.hide();
+        }
+        else {
+          $load_more_button.show();
+        }
+        if (total_posts == 0) {
+          $result_page_no_results.show();
+          $result_page_result_posts.hide();
+        }
+        else {
+          $result_page_no_results.hide();
+          $result_page_result_posts.show();
         }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
         $load_more_button.removeClass('loading');
-        $search_form.removeClass('is-loading');
+        $(document.body).removeClass('is-loading');
         console.log(errorThrown); //eslint-disable-line no-console
       });
   }
