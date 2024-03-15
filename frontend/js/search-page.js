@@ -64,7 +64,9 @@ const p4ct_search = function() {
   });
 
   $search_form.on('submit', function(e) {
-    e.preventDefault();
+    if(isSearchResults) {
+      e.preventDefault();
+    }
     $(document.body).addClass('is-loading');
   });
 
