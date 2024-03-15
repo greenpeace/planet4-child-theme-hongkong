@@ -841,12 +841,25 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$build_posts .= Timber::compile( [ 'tease-search.twig' ], $paged_context, self::DEFAULT_CACHE_TTL, \Timber\Loader::CACHE_OBJECT );
 				}
 			}
+			if( function_exists( 'wpseo_replace_vars' ) ) {
+				$yoast_title_option = get_option( 'wpseo_titles', [] );
+        		$wp_title = isset($yoast_title_option[ 'title-search-wpseo' ]) ? $yoast_title_option[ 'title-search-wpseo' ] : NULL;
+				if( !is_null($wp_title) ) {
+					$wp_title = wpseo_replace_vars($wp_title, [], [
+						'searchphrase',
+					]);
+					$wp_title = esc_html(str_replace('%%searchphrase%%', $this->search_query, $wp_title));
+				}
+			}
+			if( !isset( $wp_title ) ) {
+				$wp_title = sprintf(esc_html__('Search Results %1$s %2$s'), '', $this->search_query);
+			}
 			return wp_send_json(
 				array(
 					'total_posts' => count($this->posts),
 					'build_posts' => $build_posts,
 					'result_title' => sprintf(esc_html__('%1$d result for \'%2$s\'', 'gpea_theme'), count($this->posts), $this->search_query),
-					'page_title' => '',
+					'page_title' => $wp_title . ' - ' . esc_html__(get_bloginfo( 'name' )),
 				)
 			);
 		}
