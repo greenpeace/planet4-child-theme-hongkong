@@ -796,7 +796,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			$this->context['load_more'] = $args ?? [
 				'posts_per_load' => self::POSTS_PER_LOAD,
 				'button_text'    => __( 'SHOW MORE RESULTS', 'gpea_theme' ),
-				'async'          => true,
 			];
 		}
 

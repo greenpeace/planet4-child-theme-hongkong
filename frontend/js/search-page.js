@@ -4,35 +4,39 @@ import './vendor/jquery.auto-complete.min.js';
 $ = jQuery; // eslint-disable-line no-global-assign
 
 const p4ct_search = function() {
-  var $search_form = $('#search_form_inner');
-  if (!$search_form.length) return;
+  const $search_form = $('#search_form_inner');
+  if (!$search_form.length){ return; }
 
-  var isSearchResults = $('body.search').length > 0;
+  var search_request;
+  const ajaxurl = window.localizations.ajaxurl; // eslint-disable-line no-undef
 
-  var searchRequest;
-  var ajaxurl = window.localizations.ajaxurl; // eslint-disable-line no-undef
+  const $live_result_posts = $('#ajax-search-posts');
 
-  var resultsPosts = $('#ajax-search-posts');
+  const $post_template = $('#template-posts');
+  const build_posts = template($post_template[0].innerHTML);
 
-  const postsTemplate = $('#template-posts');
-  const buildPosts = template(postsTemplate[0].innerHTML);
+  const is_result_page = $('body.search').length > 0;
+  const $result_page_result_title = $('.results-no');
+  const $result_page_no_results = $('.nothing-found');
+  const $result_page_result_posts = $('.multiple-search-result .results-list');
+  const $load_more_button = $('.btn-load-more-click-scroll');
 
   $('.search-autocomplete').autoComplete({
     minChars: 2,
     source: function(term, suggest) {
       try {
-        searchRequest.abort();
+        search_request.abort();
       } catch (e) {} // eslint-disable-line no-empty
 
-      if(isSearchResults) {
+      if(is_result_page) {
         $search_form.trigger('submit');
         return;
       }
 
       $search_form.addClass('is-loading');
-      resultsPosts.addClass('fade-out');
+      $live_result_posts.addClass('fade-out');
 
-      searchRequest = $.post(
+      search_request = $.post(
         ajaxurl,
         {
           action: 'p4ct_search_site',
@@ -47,13 +51,13 @@ const p4ct_search = function() {
           // console.log(res);
           const posts = res.posts;
 
-          if (posts.length) resultsPosts.show().removeClass('fade-out');
-          else resultsPosts.hide();
+          if (posts.length) { $live_result_posts.show().removeClass('fade-out'); }
+          else { $live_result_posts.hide(); }
 
           // posts = posts.map(post => post.post_title);
           // posts = posts.join('<br>');
           // posts = posts || 'No posts found';
-          resultsPosts.find('.results-list')[0].innerHTML = buildPosts({
+          $live_result_posts.find('.results-list')[0].innerHTML = build_posts({
             posts: posts,
           });
           // console.log(posts);
@@ -64,8 +68,9 @@ const p4ct_search = function() {
   });
 
   $search_form.on('submit', function(e) {
-    if(isSearchResults) {
+    if(is_result_page) {
       e.preventDefault();
+      load_next_page();
     }
     $(document.body).addClass('is-loading');
   });
@@ -82,64 +87,50 @@ const p4ct_search = function() {
     });
   });
 
-  var $load_more_button = $('.btn-load-more-click-scroll');
-  var load_more_count = 0;
-  var loaded_more = false;
   // Add click event for load more button in blocks.
+  var total_posts = $load_more_button.data('total_posts');
+  var posts_per_load = $load_more_button.data('posts_per_load');
+  var current_page = $load_more_button.data('current_page');
+  var next_page = current_page + 1;
   $load_more_button.off('click').on('click', function() {
-    // If this button has this class then Lazy-loading is enabled.
-    if ($(this).hasClass('btn-load-more-async')) {
-      var total_posts = $(this).data('total_posts');
-      var posts_per_load = $(this).data('posts_per_load');
-      var next_page = $(this).data('current_page') + 1;
-      $(this).data('current_page', next_page);
-
-      var $load_more_button = $('.btn-load-more-click-scroll');
-      var load_more_count = 0;
-      var loaded_more = false;
-      $load_more_button.addClass('loading');
-      $.ajax({
-        url: window.localizations.ajaxurl,
-        type: 'GET',
-        data: {
-          action: 'get_paged_posts',
-          'search-action': 'get_paged_posts',
-          search_query: $('#search_input')
-            .val()
-            .trim(),
-          paged: next_page,
-          'query-string': decodeURIComponent(location.search).substr(1), // Ignore the ? in the search url (first char).
-        },
-        dataType: 'html',
-      })
-        .done(function(response) {
-          // console.log(response);
-          // Append the response at the bottom of the results and then show it.
-          $load_more_button.removeClass('loading');
-          $('.multiple-search-result .results-list').append(response);
-          $('.row-hidden:last')
-            .removeClass('row-hidden')
-            .show('fast');
-          if (posts_per_load * next_page > total_posts) {
-            $load_more_button.hide();
-          }
-        })
-        .fail(function(jqXHR, textStatus, errorThrown) {
-          $load_more_button.removeClass('loading');
-          console.log(errorThrown); //eslint-disable-line no-console
-        });
-    } else {
-      var $row = $('.row-hidden', $load_more_button.closest('.container'));
-
-      if (1 === $row.length) {
-        $load_more_button.closest('.load-more-button-div').hide('fast');
-      }
-      $row
-        .first()
-        .show('fast')
-        .removeClass('row-hidden');
-    }
+    next_page = current_page + 1;
+    $load_more_button.addClass('loading');
+    load_next_page();
   });
+  function load_next_page() {
+    const search_query = $('#search_input').val().trim();
+    const current_params = new URLSearchParams(location.search);
+    current_params.set('s', search_query);
+    history.replaceState(null, '', '?' + current_params.toString());
+    $.ajax({
+      url: window.localizations.ajaxurl,
+      type: 'GET',
+      data: {
+        action: 'get_paged_posts',
+        'search-action': 'get_paged_posts',
+        search_query: search_query,
+        paged: next_page,
+        'query-string': 's=' + search_query, // Ignore the ? in the search url (first char).
+      },
+      dataType: 'html',
+    })
+      .done(function(response) {
+        // console.log(response);
+        // Append the response at the bottom of the results and then show it.
+        current_page = next_page;
+        $load_more_button.removeClass('loading');
+        $search_form.removeClass('is-loading');
+        $result_page_result_posts.append(response);
+        if (posts_per_load * next_page > total_posts) {
+          $load_more_button.hide();
+        }
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        $load_more_button.removeClass('loading');
+        $search_form.removeClass('is-loading');
+        console.log(errorThrown); //eslint-disable-line no-console
+      });
+  }
 };
 
 /* Run */

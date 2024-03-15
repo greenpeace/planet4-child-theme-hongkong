@@ -14,7 +14,7 @@
 		<div class="ct-container">
 
 			<!-- No posts found? -->
-			<p {% if ( posts ) %}hidden{% endif %} class="nothing-found {% if ( posts ) %}fade-out{% endif %}">
+			<p {% if ( posts ) %}hidden{% endif %} class="nothing-found">
 				<i>
 					<small>{{ exception ?? search_strings.nothing_found }}</small>
 				</i>
@@ -24,24 +24,17 @@
 				<b>{{ page_title|e('wp_kses_post')|raw }}</b>
 			</p>
 
-			<div {% if ( not posts ) %}hidden{% endif %} class="multiple-search-result {% if ( not posts ) %}fade-out{% endif %}">
-				{% if ( load_more.async ) %}
-					{% set displayed_posts = paged_posts %}
-				{% else %}
-					{% set displayed_posts = posts %}
-				{% endif %}
-				<div class="results-list">
-					{% for post in displayed_posts %}
+			<div class="multiple-search-result">
+				<div {% if ( not posts ) %}hidden{% endif %} class="results-list">
+					{% for post in paged_posts %}
 						{% include ['tease-search.twig', 'tease-'~post.post_type~'.twig', 'tease-related-post.twig', 'tease.twig'] %}
 					{% endfor %}
 				</div>
-				{% if ( load_more and posts|length > paged_posts|length ) %}
-					<div class="has-load-more">
-						<button class="button {{ load_more.async ? 'btn-load-more-async' : '' }} btn-load-more-click-scroll" data-current_page="{{ current_page }}" data-total_posts="{{ found_posts }}" data-posts_per_load="{{ load_more.posts_per_load }}">
-							{{ load_more.button_text }}
-						</button>
-					</div>
-				{% endif %}
+				<div {% if ( not load_more or posts|length <= paged_posts|length ) %}hidden{% endif %} class="has-load-more">
+					<button class="button btn-load-more-click-scroll" data-current_page="{{ current_page }}" data-total_posts="{{ found_posts }}" data-posts_per_load="{{ load_more.posts_per_load }}">
+						{{ load_more.button_text }}
+					</button>
+				</div>
 			</div>
 
 		</div>
