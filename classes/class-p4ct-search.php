@@ -824,7 +824,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 */
 		public function view_json_paged_posts() {
 			// TODO - The $paged_context related code should be transferred to set_results_context method for better separation of concerns.
-			$posts_html = '';
+			$build_posts = '';
 			if ( $this->paged_posts ) {
 				$paged_context             = [
 					'posts_data' => $this->context['posts_data'],
@@ -838,13 +838,15 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					} else {
 						$paged_context['first_of_the_page'] = false;
 					}
-					$posts_html .= Timber::compile( [ 'tease-search.twig' ], $paged_context, self::DEFAULT_CACHE_TTL, \Timber\Loader::CACHE_OBJECT );
+					$build_posts .= Timber::compile( [ 'tease-search.twig' ], $paged_context, self::DEFAULT_CACHE_TTL, \Timber\Loader::CACHE_OBJECT );
 				}
 			}
 			return wp_send_json(
 				array(
 					'total_posts' => count($this->posts),
-					'posts_html' => $posts_html,
+					'build_posts' => $build_posts,
+					'result_title' => sprintf(esc_html__('%1$d result for \'%2$s\'', 'gpea_theme'), count($this->posts), $this->search_query),
+					'page_title' => '',
 				)
 			);
 		}

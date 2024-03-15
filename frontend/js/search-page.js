@@ -126,18 +126,17 @@ const p4ct_search = function() {
       .done(function(response) {
         // console.log(response);
         // Append the response at the bottom of the results and then show it.
-        console.log(response);
         current_page = next_page;
         total_posts = response.total_posts;
         current_params.set('s', search_query);
         history.replaceState(null, '', '?' + current_params.toString());
         $load_more_button.removeClass('loading');
         $(document.body).removeClass('is-loading');
-        // $result_page_result_title = '';
+        $result_page_result_title.html(response.result_title);
         if(current_page == 1) {
           $result_page_result_posts.empty();
         }
-        $result_page_result_posts.append(response.posts_html);
+        $result_page_result_posts.append(response.build_posts);
         if (posts_per_load * current_page > total_posts || total_posts == 0) {
           $load_more_button.hide();
         }
