@@ -130,7 +130,7 @@ const p4ct_search = function() {
         total_posts = response.total_posts;
         current_params.set('s', search_query);
         history.replaceState(null, '', '?' + current_params.toString());
-        document.title = current_params.page_title;
+        document.title = response.page_title;
         $load_more_button.removeClass('loading');
         $(document.body).removeClass('is-loading');
         $result_page_result_title.html(response.result_title);
