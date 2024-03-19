@@ -15,17 +15,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 	 */
 	abstract class P4CT_Search {
 
-		const POSTS_LIMIT                = -1;
-		const POSTS_PER_PAGE             = 10;
-		const POSTS_PER_LOAD             = 12;
+		const POSTS_PER_PAGE             = 12;
 		const POSTS_LIVE_SEARCH_PER_LOAD = 6;
 		const SHOW_SCROLL_TIMES          = 2;
 		const DEFAULT_SORT               = '_score';
 		const DEFAULT_ALL_POST_SORT      = 'post_date';
-		const DEFAULT_MIN_WEIGHT         = 1;
 		const DEFAULT_PAGE_WEIGHT        = 100;
 		const DEFAULT_ACTION_WEIGHT      = 2000;
-		const DEFAULT_MAX_WEIGHT         = 3000;
 		const DEFAULT_CACHE_TTL          = 600;
 		const DUMMY_THUMBNAIL            = '/images/dummy-thumbnail.png';
 		const POST_TYPES                 = [
@@ -43,11 +39,11 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		protected $search_query;
 
 		/**
-		 * Posts
+		 * Total Posts
 		 *
-		 * @var array|bool|null $posts
+		 * @var int $total_posts
 		 */
-		protected $posts;
+		protected $total_posts;
 
 		/**
 		 * Paged Posts
@@ -153,6 +149,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			} else {
 				$this->context = Timber::get_context();
 
+				$paged = ( 0 === get_query_var( 'paged' ) ) ? 1 : get_query_var( 'paged' );
+
 				$has_search_query = @strlen($this->search_query) > 0;
 				if (!$has_search_query && is_null($selected_sort)) {
 					$selected_sort = $selected_sort ? self::DEFAULT_SORT : self::DEFAULT_ALL_POST_SORT;
@@ -169,14 +167,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				$group        = 'search';
 				$subgroup     = $has_search_query ? $this->search_query : ':all';
 				// Check Object cache for stored key.
-				$this->check_cache( $query_string, "$group:$subgroup" );
+				$this->check_cache( $query_string, "$group:$subgroup", $paged );
 
-				// If posts were found either in object cache or primary database then get the first POSTS_PER_LOAD results.
-				if ( $this->posts ) {
-					$this->paged_posts = array_slice( $this->posts, 0, self::POSTS_PER_LOAD );
-				}
-
-				$this->current_page = ( 0 === get_query_var( 'paged' ) ) ? 1 : get_query_var( 'paged' );
+				$this->current_page = $paged;
 				$this->set_context( $this->context );
 			}
 		}
@@ -195,6 +188,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			$this->context = Timber::get_context();
 			$this->set_main_issues();
 
+			$paged = 1;
+
 			$has_search_query = @strlen($this->search_query) > 0;
 			if (!$has_search_query && is_null($selected_sort)) {
 				$selected_sort = $selected_sort ? self::DEFAULT_SORT : self::DEFAULT_ALL_POST_SORT;
@@ -212,14 +207,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			$subgroup     = $has_search_query ? $this->search_query : ':all';
 
 			// Check Object cache for stored key.
-			$this->check_cache( $query_string, "$group:$subgroup" );
+			$this->check_cache( $query_string, "$group:$subgroup", $paged );
 
-			// If posts were found either in object cache or primary database then get the first POSTS_LIVE_SEARCH_PER_LOAD results.
-			if ( $this->posts ) {
-				$this->paged_posts = array_slice( $this->posts, 0, self::POSTS_LIVE_SEARCH_PER_LOAD );
-			}
-
-			$this->current_page = 1;
+			$this->current_page = $paged;
 			$this->set_context( $this->context );
 
 		}
@@ -269,12 +259,10 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					}
 
 					// Check Object cache for stored key.
-					$search_async->check_cache( $query_string, "$group:$subgroup" );
+					$search_async->check_cache( $query_string, "$group:$subgroup", $paged );
 
 					// Check if there are results already in the cache else fallback to the primary database.
-					if ( $search_async->posts ) {
-						$search_async->paged_posts = array_slice( $search_async->posts, ( $search_async->current_page - 1 ) * self::POSTS_PER_LOAD, self::POSTS_PER_LOAD );
-					} else {
+					if ( !$search_async->paged_posts ) {
 						$search_async->paged_posts = $search_async->get_timber_posts( $search_async->current_page );
 					}
 
@@ -292,14 +280,20 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * @param string $cache_key The key that will be used for storing the results in the object cache.
 		 * @param string $cache_group The group that will be used for storing the results in the object cache.
 		 */
-		protected function check_cache( $cache_key, $cache_group ) {
+		protected function check_cache( $cache_key, $cache_group, $paged = 1 ) {
 			// Get search results from cache and then set the context for those results.
-			$this->posts = wp_cache_get( $cache_key, $cache_group );
+			$this->paged_posts = wp_cache_get( $cache_key . ':' . $paged, $cache_group );
+			if( !$this->total_posts ) {
+				$this->total_posts = wp_cache_get( $cache_key . ':total_posts', $cache_group );
+			}
 			// If cache key expired then retrieve results once again and re-cache them.
-			if ( false === $this->posts ) {
-				$this->posts = $this->get_timber_posts();
-				if ( $this->posts ) {
-					wp_cache_add( $cache_key, $this->posts, $cache_group, self::DEFAULT_CACHE_TTL );
+			if ( !$this->paged_posts ) {
+				$this->paged_posts = $this->get_timber_posts($paged);
+				if ( $this->paged_posts ) {
+					wp_cache_add( $cache_key . ':' . $paged, $this->paged_posts, $cache_group, self::DEFAULT_CACHE_TTL );
+				}
+				if ( $this->total_posts ) {
+					wp_cache_add( $cache_key . ':total_posts', $this->total_posts, $cache_group, self::DEFAULT_CACHE_TTL );
 				}
 			}
 		}
@@ -375,7 +369,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 *
 		 * @return array The posts of the search.
 		 */
-		public function get_posts( $paged = 1 ) : array {
+		public function get_posts( $paged = NULL ) : array {
 			$args = [];
 
 			$this->set_general_args( $args, $paged );
@@ -386,7 +380,10 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				return [];
 			}
 			$this->set_engines_args( $args );
-			$posts = ( new WP_Query( $args ) )->posts;
+
+			$the_query = new WP_Query( $args );
+			$posts = $the_query->posts;
+			$this->total_posts = $the_query->found_posts;
 
 			return (array) $posts;
 		}
@@ -412,16 +409,12 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 */
 		protected function set_general_args( &$args, $paged ) {
 			$args = [
-				'posts_per_page' => self::POSTS_LIMIT,          // Set a high maximum because -1 will get ALL posts and this can be very intensive in production.
-				'no_found_rows'  => true,                       // This means that the result counters of each filter might not be 100% precise.
+				'posts_per_page' => self::POSTS_PER_PAGE,
+				'no_found_rows'  => false,
 				'post_type'      => self::POST_TYPES,
 				'post_status'    => [ 'publish', 'inherit' ],
+				'paged'          => $paged,
 			];
-
-			if ( $paged > 1 ) {
-				$args['posts_per_page'] = self::POSTS_PER_LOAD;
-				$args['paged']          = $paged;
-			}
 
 			if ( $this->search_query ) {
 				$args['s'] = $this->search_query;
@@ -524,14 +517,13 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		protected function set_general_context( &$context ) {
 
 			// Search context.
-			$context['posts']            = $this->posts;
 			$context['paged_posts']      = $this->paged_posts;
 			$context['current_page']     = $this->current_page;
 			$context['search_query']     = $this->search_query;
 			$context['selected_sort']    = $this->selected_sort;
 			$context['default_sort']     = self::DEFAULT_SORT;
 			$context['filters']          = $this->filters;
-			$context['found_posts']      = count( (array) $this->posts );
+			$context['found_posts']      = (int) $this->total_posts;
 			$context['page_category']    = __( 'Search Page', 'gpea_theme' );
 			$context['sort_options']     = [
 				'_score'    => [
@@ -544,23 +536,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				],
 			];
 			$context['is_search_page'] = '1';
-
-			// $context['strings'] = [
-			// 	'issue'           => __( 'issue', 'gpea_theme' ),
-			// 	'topic'           => __( 'topic', 'gpea_theme' ),
-			// 	'posts'           => __( 'posts', 'gpea_theme' ),
-			// 	'advanced_search' => __( 'advanced_search', 'gpea_theme' ),
-			// 	'filters'         => __( 'filters', 'gpea_theme' ),
-			// 	'none'            => __( 'None', 'gpea_theme' ),
-			// 	'start_typing'    => __( 'Start typing', 'gpea_theme' ),
-			// 	'search_label'  => __( 'Search', 'gpea_theme' ),
-			// 	'reset_filters' => __( 'Reset Filters', 'gpea_theme' ),
-			// 	'sort_by'       => __( 'Sort by', 'gpea_theme' ),
-			// 	'nothing_found' => __( 'Nothing found, sorry.', 'gpea_theme' ),
-			// 	'any'           => __( 'Any', 'gpea_theme' ),
-			// 	'any_issue'     => __( 'Any issue', 'gpea_theme' ),
-			// 	'any_topic'     => __( 'Any topic', 'gpea_theme' ),
-			// ];
 
 			if ( $this->search_query ) {
 				$context['page_title'] = sprintf(
@@ -675,7 +650,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 */
 		protected function set_results_context( &$context ) {
 
-			$posts = $this->posts;
+			$posts = $this->paged_posts;
 
 			// Retrieve P4CT settings in order to check that we add only categories that are children of the Issues category.
 			$options = get_option( 'planet4_options' );
@@ -791,7 +766,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 */
 		public function add_load_more( $args = null ) {
 			$this->context['load_more'] = $args ?? [
-				'posts_per_load' => self::POSTS_PER_LOAD,
+				'posts_per_load' => self::POSTS_PER_PAGE,
 				'button_text'    => __( 'SHOW MORE RESULTS', 'gpea_theme' ),
 			];
 		}
@@ -814,7 +789,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		public function gpea_view_json() {
 			return wp_json_encode(
 				array(
-					'posts' => array_slice( $this->context['posts'], 0, self::POSTS_LIVE_SEARCH_PER_LOAD ),
+					'posts' => array_slice( $this->context['paged_posts'], 0, self::POSTS_LIVE_SEARCH_PER_LOAD ),
 				)
 			);
 		}
@@ -833,11 +808,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 				foreach ( $this->paged_posts as $index => $post ) {
 					$paged_context['post'] = $post;
-					if ( 0 === $index % self::POSTS_PER_LOAD ) {
-						$paged_context['first_of_the_page'] = true;
-					} else {
-						$paged_context['first_of_the_page'] = false;
-					}
 					$build_posts .= Timber::compile( [ 'tease-search.twig' ], $paged_context, self::DEFAULT_CACHE_TTL, \Timber\Loader::CACHE_OBJECT );
 				}
 			}
@@ -856,9 +826,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			}
 			return wp_send_json(
 				array(
-					'total_posts' => count($this->posts),
+					'total_posts' => (int) $this->total_posts,
 					'build_posts' => $build_posts,
-					'result_title' => sprintf(esc_html__('%1$d result for \'%2$s\'', 'gpea_theme'), count($this->posts), $this->search_query),
+					'result_title' => sprintf(esc_html__('%1$d result for \'%2$s\'', 'gpea_theme'), (int) $this->total_posts, $this->search_query),
 					'page_title' => $wp_title . ' - ' . esc_html__(get_bloginfo( 'name' )),
 				)
 			);
