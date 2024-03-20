@@ -268,7 +268,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 					// If there are paged results then set their context and send them back to client.
 					$search_async->set_results_context( $search_async->context );
-					$search_async->view_json_paged_posts();
+					$search_async->view_paged_posts();
 				}
 				wp_die();
 			}
@@ -797,9 +797,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		/**
 		 * View the paged posts of the next page/load.
 		 */
-		public function view_json_paged_posts() {
+		public function view_paged_posts() {
 			// TODO - The $paged_context related code should be transferred to set_results_context method for better separation of concerns.
-			$build_posts = '';
 			if ( $this->paged_posts ) {
 				$paged_context             = [
 					'posts_data' => $this->context['posts_data'],
@@ -808,30 +807,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 				foreach ( $this->paged_posts as $index => $post ) {
 					$paged_context['post'] = $post;
-					$build_posts .= Timber::compile( [ 'tease-search.twig' ], $paged_context, self::DEFAULT_CACHE_TTL, \Timber\Loader::CACHE_OBJECT );
+					Timber::render( [ 'tease-search.twig' ], $paged_context, self::DEFAULT_CACHE_TTL, \Timber\Loader::CACHE_OBJECT );
 				}
 			}
-			if( function_exists( 'wpseo_replace_vars' ) ) {
-				$yoast_title_option = get_option( 'wpseo_titles', [] );
-        		$wp_title = isset($yoast_title_option[ 'title-search-wpseo' ]) ? $yoast_title_option[ 'title-search-wpseo' ] : NULL;
-				if( !is_null($wp_title) ) {
-					$wp_title = wpseo_replace_vars($wp_title, [], [
-						'searchphrase',
-					]);
-					$wp_title = esc_html(str_replace('%%searchphrase%%', $this->search_query, $wp_title));
-				}
-			}
-			if( !isset( $wp_title ) ) {
-				$wp_title = sprintf(esc_html__('Search Results %1$s %2$s'), '', $this->search_query);
-			}
-			return wp_send_json(
-				array(
-					'total_posts' => (int) $this->total_posts,
-					'build_posts' => $build_posts,
-					'result_title' => sprintf(esc_html__('%1$d result for \'%2$s\'', 'gpea_theme'), (int) $this->total_posts, $this->search_query),
-					'page_title' => $wp_title . ' - ' . esc_html__(get_bloginfo( 'name' )),
-				)
-			);
 		}
 
 		/**
