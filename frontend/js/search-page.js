@@ -17,27 +17,10 @@ const p4ct_search = function() {
   const build_posts = template($post_template[0].innerHTML);
 
   const is_result_page = $('body.search').length > 0;
-  const $result_page_result_title = $('.results-no');
-  const $result_page_no_results = $('.nothing-found');
   const $result_page_result_posts = $('.multiple-search-result .results-list');
   const $load_more_button = $('.btn-load-more-click-scroll');
 
-  if(is_result_page) {
-    $('.search-autocomplete').on('input', function() {
-      clearTimeout(live_search_timer);
-      live_search_timer = setTimeout(function() {
-        search_query = $('#search_input').val().trim();
-        if(last_search_query == search_query) {
-          return;
-        }
-        last_search_query = search_query;
-        $(document.body).addClass('is-loading');
-        next_page = 1;
-        load_next_page();
-      }, $.fn.autoComplete.defaults.delay);
-    });
-  }
-  else {
+  if(!is_result_page) {
     $('.search-autocomplete').autoComplete({
       minChars: 2,
       source: function(term, suggest) {
@@ -121,41 +104,23 @@ const p4ct_search = function() {
         paged: next_page,
         'query-string': 's=' + search_query, // Ignore the ? in the search url (first char).
       },
-      dataType: 'json',
+      dataType: 'html',
     })
       .done(function(response) {
         // console.log(response);
         // Append the response at the bottom of the results and then show it.
         current_page = next_page;
-        total_posts = response.total_posts;
-        current_params.set('s', search_query);
-        history.replaceState(null, '', '?' + current_params.toString());
-        document.title = response.page_title;
         $load_more_button.removeClass('loading');
-        $(document.body).removeClass('is-loading');
-        $result_page_result_title.html(response.result_title);
-        if(current_page == 1) {
-          $result_page_result_posts.empty();
-        }
-        $result_page_result_posts.append(response.build_posts);
+        $result_page_result_posts.append(response);
         if (posts_per_load * current_page > total_posts || total_posts == 0) {
           $load_more_button.hide();
         }
         else {
           $load_more_button.show();
         }
-        if (total_posts == 0) {
-          $result_page_no_results.show();
-          $result_page_result_posts.hide();
-        }
-        else {
-          $result_page_no_results.hide();
-          $result_page_result_posts.show();
-        }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
         $load_more_button.removeClass('loading');
-        $(document.body).removeClass('is-loading');
         console.log(errorThrown); //eslint-disable-line no-console
       });
   }

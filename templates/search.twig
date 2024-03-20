@@ -9,28 +9,34 @@
 		<div class="ct-container">
 
 			<!-- No posts found? -->
-			<p {% if ( paged_posts ) %}hidden{% endif %} class="nothing-found">
+			{% if ( not paged_posts ) %}
+			<p class="nothing-found">
 				<i>
 					<small>{{ exception ?? search_strings.nothing_found }}</small>
 				</i>
 			</p>
+			{% endif %}
 
 			<p class="results-no">
 				<b>{{ page_title|e('wp_kses_post')|raw }}</b>
 			</p>
 
+			{% if ( paged_posts ) %}
 			<div class="multiple-search-result">
-				<div {% if ( not paged_posts ) %}hidden{% endif %} class="results-list">
+				<div class="results-list">
 					{% for post in paged_posts %}
 						{% include ['tease-search.twig', 'tease-'~post.post_type~'.twig', 'tease-related-post.twig', 'tease.twig'] %}
 					{% endfor %}
 				</div>
+				{% if ( load_more and found_posts > paged_posts|length ) %}
 				<div class="has-load-more">
-					<button {% if ( not load_more or found_posts <= paged_posts|length ) %}hidden{% endif %} class="button btn-load-more-click-scroll" data-current_page="{{ current_page }}" data-total_posts="{{ found_posts }}" data-posts_per_load="{{ load_more.posts_per_load }}">
+					<button class="button btn-load-more-click-scroll" data-current_page="{{ current_page }}" data-total_posts="{{ found_posts }}" data-posts_per_load="{{ load_more.posts_per_load }}">
 						{{ load_more.button_text }}
 					</button>
 				</div>
+				{% endif %}
 			</div>
+			{% endif %}
 
 		</div>
 	</section>
