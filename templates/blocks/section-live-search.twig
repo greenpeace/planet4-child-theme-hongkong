@@ -10,42 +10,13 @@
 
 		<h2 class="search-title">{{ search_strings.search_label }}</h2>
 
-		<!-- We also included results for: -->
-		<!-- Does this even work? -->
-		{% if ( corrected_term ) %}
-			{{ corrected_term }}
-		{% endif %}
-
 		<form id="search_form_inner" role="search" action="{{ data_nav_bar.home_url }}">
 			<!-- Main search field -->
 			<div class="form-group search fluid">
-				<input id="search_input" class="search-autocomplete" type="search" name="s" placeholder="{{ search_strings.start_typing }}" value="{{ search_query|e('wp_kses_post')|raw }}">
+				<input id="search_input" type="search" name="s" placeholder="{{ search_strings.start_typing }}" value="{{ search_query|e('wp_kses_post')|raw }}">
 				<button class="button primary" type="submit">{{ search_strings.search_label }}</button>
 			</div>
-
-			{% if not is_search_page %}
-			<div class="lds-spinner">
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-			</div>
-			{% endif %}
 		</form>
-
-		{% if not is_search_page %}
-		<div hidden id="ajax-search-posts" class="fade-out">
-			<div class="results-list"></div>
-		</div>
-		{% endif %}
 
 	</div>
 </section>
