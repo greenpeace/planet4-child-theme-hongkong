@@ -56,9 +56,8 @@ class P4CT_Metabox_Register {
 	 */
 	public function __construct() {
 		$this->hooks();
-		$this->allowed_subscription_buttons = in_array( get_locale(), [
-			'zh_TW',
-		] );
+		$gpea_extra = new \P4CT_Site();
+		$this->allowed_subscription_buttons = in_array( get_locale(), $gpea_extra::LOCALES_ENABLE_SUBSCRIPTION_BUTTONS );
 	}
 
 	/**

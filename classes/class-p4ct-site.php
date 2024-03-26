@@ -18,6 +18,10 @@ class P4CT_Site {
 	 */
 	protected $services;
 
+	const LOCALES_ENABLE_SUBSCRIPTION_BUTTONS = [
+		'zh_TW',
+	];
+
 	const NAV_MENUS             = [
 		'about' => [
 			'msgid'  => 'WHO WE ARE',
