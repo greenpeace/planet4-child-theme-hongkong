@@ -18,8 +18,6 @@ class P4CT_Site {
 	 */
 	protected $services;
 
-	const SHOW_SCROLL_TIMES     = 2;
-
 	const NAV_MENUS             = [
 		'about' => [
 			'msgid'  => 'WHO WE ARE',
@@ -565,7 +563,6 @@ class P4CT_Site {
 		wp_register_script( 'search-script', get_stylesheet_directory_uri() . '/static/js/search.js', [ 'jquery' ], $search_js_creation, true );
 		wp_localize_script( 'search-script', 'localizations', [
 			'ajaxurl'           => admin_url( 'admin-ajax.php' ),
-			'show_scroll_times' => self::SHOW_SCROLL_TIMES,
 		] );
 		wp_enqueue_script( 'search-script' );
 	}

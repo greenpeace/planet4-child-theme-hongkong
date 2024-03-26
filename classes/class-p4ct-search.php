@@ -17,7 +17,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 		const POSTS_PER_PAGE             = 12;
 		const POSTS_LIVE_SEARCH_PER_LOAD = 6;
-		const SHOW_SCROLL_TIMES          = 2;
 		const DEFAULT_SORT               = '_score';
 		const DEFAULT_ALL_POST_SORT      = 'post_date';
 		const DEFAULT_PAGE_WEIGHT        = 100;
@@ -121,7 +120,6 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				// The ajaxurl variable is a global js variable defined by WP itself but only for the WP admin
 				// For the frontend we need to define it ourselves and pass it to js.
 				'ajaxurl'           => admin_url( 'admin-ajax.php' ),
-				'show_scroll_times' => self::SHOW_SCROLL_TIMES,
 			];
 			add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_public_assets' ] );
 			add_filter( 'posts_where', [ $this, 'edit_search_mime_types' ] );
