@@ -150,8 +150,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				$paged = ( 0 === get_query_var( 'paged' ) ) ? 1 : get_query_var( 'paged' );
 
 				$has_search_query = @strlen($this->search_query) > 0;
-				if (!$has_search_query && is_null($selected_sort)) {
-					$selected_sort = $selected_sort ? self::DEFAULT_SORT : self::DEFAULT_ALL_POST_SORT;
+				if (is_null($selected_sort)) {
+					$selected_sort = $has_search_query ? self::DEFAULT_SORT : self::DEFAULT_ALL_POST_SORT;
 				}
 
 				// Validate user input (sort, filters, etc).
@@ -189,8 +189,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			$paged = 1;
 
 			$has_search_query = @strlen($this->search_query) > 0;
-			if (!$has_search_query && is_null($selected_sort)) {
-				$selected_sort = $selected_sort ? self::DEFAULT_SORT : self::DEFAULT_ALL_POST_SORT;
+			if (is_null($selected_sort)) {
+				$selected_sort = $has_search_query ? self::DEFAULT_SORT : self::DEFAULT_ALL_POST_SORT;
 			}
 
 			// Validate user input (sort, filters, etc).
