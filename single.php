@@ -44,12 +44,9 @@ $context['og_image_data']       = $post->get_og_image();
 $context['custom_body_classes'] = 'white-bg';
 $context['show_article_donation_launcher'] = $page_meta_data['p4-gpea_show_article_donation_launcher'][0] ?? '';
 
-// reading time and categories info!
-$context['reading_time']        = $page_meta_data['p4-gpea_post_reading_time'][0] ?? '';
-$post->subtitle                 = $page_meta_data['p4-gpea_post_subtitle'][0] ?? '';
-
+// reading time, subtitle and categories info!
 $gpea_extra = new \P4CT_Site();
-$context                        = $gpea_extra->gpea_get_main_issue_by_post($post, $context);
+$gpea_extra->gpea_set_more_data_by_post($post, $context);
 
 /*
 /* Donation/Subscription buttons */

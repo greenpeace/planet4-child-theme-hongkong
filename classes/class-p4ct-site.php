@@ -774,11 +774,9 @@ class P4CT_Site {
 	}
 
 	/**
-	 * Gpea_get_main_issue_by_post
-	 *
-	 * @return array
+	 * Gpea_set_more_data_by_post
 	 */
-	function gpea_get_main_issue_by_post($post, $context = []) {
+	function gpea_set_more_data_by_post(&$post, &$context = []) {
 
 		$context['post_categories'] = NULL;
 		$context['main_issue'] = NULL;
@@ -803,7 +801,14 @@ class P4CT_Site {
 			$context['post_categories'] = implode(' ', $context_post_categories);
 		}
 
-		return $context;
+		$page_meta_data = get_post_meta( $post->ID );
+
+		$reading_time_for_display = $page_meta_data['p4-gpea_post_reading_time'][0] ?? '';
+		preg_match_all('/^(\d+)(\s*mins?)?$/', $reading_time_for_display, $matches, PREG_SET_ORDER, 0);
+
+		$context['reading_time_for_display'] = $reading_time_for_display;
+		$context['reading_time']             = isset($matches[0][1]) ? $matches[0][1] * 60 * 1000 : '';
+		$post->subtitle                      = $page_meta_data['p4-gpea_post_subtitle'][0] ?? '';
 
 	}
 

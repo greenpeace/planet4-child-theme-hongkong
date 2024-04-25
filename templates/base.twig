@@ -60,10 +60,10 @@
 						<% } %>
 					</div>
 					<div>
-						<% if (typeof reading_time !== 'undefined' && reading_time) { %>
+						<% if (typeof reading_time_for_display !== 'undefined' && reading_time_for_display) { %>
 							<span>
 								<span class="icon-clock"></span>
-								<%= reading_time %>
+								<%= reading_time_for_display %>
 								{{ __('Reading time', 'planet4-gpea-blocks') }}
 							</span>
 						<% } %>
@@ -169,9 +169,9 @@
 				</p>
 				<div class="meta-box">
 					<div>
-						<% if (typeof reading_time !== 'undefined' && reading_time) { %>
+						<% if (typeof reading_time_for_display !== 'undefined' && reading_time_for_display) { %>
 							<span class="icon-clock"></span>
-							<%= reading_time %>
+							<%= reading_time_for_display %>
 							{{ __('Reading time', 'planet4-gpea-blocks') }}
 						<% } %>
 						<span><%= post_date %></span>

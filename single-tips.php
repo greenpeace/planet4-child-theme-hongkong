@@ -44,7 +44,7 @@ $context['custom_body_classes'] = 'white-bg';
 $context['show_article_donation_launcher']    = $page_meta_data['p4-gpea_show_article_donation_launcher'][0] ?? '';
 
 // reading time and categories info!
-$context['reading_time']        = $page_meta_data['p4-gpea_post_reading_time'][0] ?? '';
+$context['reading_time_for_display']        = $page_meta_data['p4-gpea_post_reading_time'][0] ?? '';
 $post->subtitle                 = $page_meta_data['p4-gpea_post_subtitle'][0] ?? '';
 $post_categories     = get_the_terms( $post, 'category' );
 

@@ -161,10 +161,10 @@
 				</p>
 				<div class="meta-box">
 					<div>
-						<% if (typeof post.reading_time !== 'undefined' && post.reading_time) { %>
+						<% if (typeof post.reading_time_for_display !== 'undefined' && post.reading_time_for_display) { %>
 						<span>
 					<span class="icon-clock"></span>
-					<%= post.reading_time %>
+					<%= post.reading_time_for_display %>
 				</span>
 						<% } %>
 						<span><%= post.post_date %></span>
