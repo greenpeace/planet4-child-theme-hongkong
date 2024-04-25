@@ -254,7 +254,7 @@ class P4CT_AJAX_Handler {
 						$single_update['news_type'] = $news_type[0]->name;
 					}
 
-					$single_update['reading_time'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+					$single_update['reading_time_for_display'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
 
 					$project_related[] = $single_update;
 				endwhile;
@@ -371,7 +371,7 @@ class P4CT_AJAX_Handler {
 					// update the most recent date
 					$most_recent = ( strtotime( get_the_date() ) > $most_recent ) ? strtotime( get_the_date() ) : $most_recent;
 
-					$single_update['reading_time'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+					$single_update['reading_time_for_display'] = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
 
 					// other info
 					$main_issues = $this->gpea_extra->gpea_get_main_issue( $post->ID );

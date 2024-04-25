@@ -318,7 +318,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 					$timber_post->post_date = date( 'Y-m-d', strtotime( $timber_post->post_date ) );
 
-					$timber_post->reading_time = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+					$timber_post->reading_time_for_display = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
 
 					$img_url = get_the_post_thumbnail_url( $post->ID, 'thumbnail' );
 					if ( $img_url ) {
