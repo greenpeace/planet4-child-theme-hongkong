@@ -24,7 +24,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		const DEFAULT_CACHE_TTL          = 600;
 		const DUMMY_THUMBNAIL            = '/images/dummy-thumbnail.png';
 		const POST_TYPES                 = [
+			'page',
 			'post',
+			'user_story',
 		];
 		const DOCUMENT_TYPES             = [
 			'application/pdf',
