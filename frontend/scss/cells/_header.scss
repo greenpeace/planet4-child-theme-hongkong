@@ -199,6 +199,7 @@
         padding-left: 20px;
         line-height: 33px;
         height: 34px;
+        vertical-align: middle;
         @include greaterThan('sm') {
           line-height: 49px;
           height: 50px;
@@ -290,7 +291,7 @@
       background: transparent;
       cursor: pointer;
       height: 60px;
-      vertical-align: -0.25em;
+      vertical-align: middle;
       &:after {
         content: '';
         display: block;
