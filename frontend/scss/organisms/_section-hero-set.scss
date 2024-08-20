@@ -245,7 +245,7 @@
       bottom: -15px;
     }
     [data-gpea-module] {
-      p:not(.form-field__note) {
+      p:not(.form-field__note):not(.invalid__message) {
         font-size: initial;
       }
       .step,
