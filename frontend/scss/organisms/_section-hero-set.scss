@@ -10,18 +10,12 @@
     content: none;
   }
 
-  height: 60vh;
   position: relative;
   overflow: hidden;
-  @include greaterThan("sm") {
-    height: 70vh;
-  }
 
   .arrow {
     position: absolute;
-    bottom: 8%;
     width: 100px;
-    height: 80px;
     margin-bottom: -35px;
     cursor: pointer;
     @include greaterThan("sm") {
@@ -127,7 +121,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     @include greaterThan("sm") {
       .title > * {
         justify-content: center;
@@ -159,10 +152,11 @@
       }
     }
     &__text {
+      text-align: center;
       color: white;
-    }
-    p {
-      @include text-version-b;
+      p {
+        @include text-version-b;
+      }
     }
   }
 
@@ -214,6 +208,63 @@
       &--orange {
         color: #FF8100;
       }
+    }
+  }
+
+  // no donation module
+  &--no-donation-module {
+    height: 60vh;
+    @include greaterThan("sm") {
+      height: 70vh;
+    }
+    .arrow {
+      bottom: 8%;
+      height: 80px;
+      @include greaterThan("sm") {
+        bottom: 12%;
+      }
+    }
+  }
+
+  // with donation module
+  &--donation-module {
+    .page-template & {
+      @include greaterThan("sm") {
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+    }
+    .content__text {
+      @include greaterThan("sm") {
+        align-self: end;
+        margin-bottom: 30px;
+      }
+    }
+    .arrow {
+      height: 70px;
+      bottom: -15px;
+    }
+    [data-gpea-module] {
+      p:not(.form-field__note) {
+        font-size: initial;
+      }
+      .step,
+      .step:before {
+        all: unset;
+      }
+      label {
+        margin: 0;
+        &:not(.text-bold) {
+          font-weight: initial;
+        }
+      }
+      @include lessThan("sm") {
+        display: none;
+      }
+      overflow: hidden;
+      background: var(--white);
+      border-radius: var(--radius);
+      max-width: 432px;
     }
   }
 
