@@ -6,7 +6,7 @@ export default function (Swiper, LazyLoadImages) {
 
   $('.section-hero-set .arrow').on('click', function (e) {
     const $this = $(this);
-    const $next_section = $this.closest('section').next('section');
+    const $next_section = $this.closest('section').nextAll('section:visible').eq(0);
     const $adminbar = $('#wpadminbar');
     const $header = $('header:visible');
     const adminbar_height = $adminbar.length > 0 ? $adminbar.height() : 0;
