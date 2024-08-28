@@ -29,12 +29,31 @@ export default function (Swiper, LazyLoadImages) {
   }
   function init_hero_swiper(YT) {
     $('.hero-swiper').each(function (index) {
-      const $slides = $('.swiper-slide', this);
+      if($(this).is(':visible')) {
+        deep_init_hero_swiper(this, YT);
+        return;
+      }
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if(mutation.target?.style?.display == 'block') {
+            deep_init_hero_swiper(mutation.target.querySelector('.hero-swiper'), YT);
+            observer.disconnect();
+          }
+        });
+      });
+      observer.observe($(this).closest('.section-hero-set').get(0), {
+        attributes: true,
+        attributeFilter: ['style'],
+      });
+    });
+  }
+  function deep_init_hero_swiper(_this, YT) {
+    const $slides = $('.swiper-slide', _this);
       if($slides.length <= 1) {
         playHeroSetVideo($slides.get(0));
         return true;
       }
-      new Swiper(this, {
+      new Swiper(_this, {
         slidesPerView: 1,
         simulateTouch: false,
         pagination: false,
@@ -50,7 +69,6 @@ export default function (Swiper, LazyLoadImages) {
           },
         },
       });
-    });
   }
   function playHeroSetVideo(slide, YT) {
     const mq = window.matchMedia("(max-width: 1279px)");
