@@ -3,9 +3,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Greenpeace Planet 4 Child Theme Hong Kong 0.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/planet4-child-theme-hongkong\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/planet4-child-"
+"theme-hongkong\n"
 "POT-Creation-Date: 2019-06-27T19:00:40+02:00\n"
-"PO-Revision-Date: 2023-12-11 21:51+0800\n"
+"PO-Revision-Date: 2024-10-31 19:08+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ko_KR\n"
@@ -132,6 +133,9 @@ msgstr "메인이슈"
 #: classes/class-p4ct-site.php:162
 msgid "About Greenpeace"
 msgstr "그린피스 소개"
+
+msgid "Quick links"
+msgstr ""
 
 #: classes/class-p4ct-site.php:163
 msgid "Press release and media"
@@ -408,12 +412,10 @@ msgid "Thank you for signing,"
 msgstr "서명해주셔서 감사합니다."
 
 #: page-templates/petition-thankyou.php:98
-msgid "Now, will you share this petition with your friends? The more people who sign, the more pressure the government will feel."
+msgid ""
+"Now, will you share this petition with your friends? The more people who "
+"sign, the more pressure the government will feel."
 msgstr "서명페이지를 친구들과 공유하시겠습니까?"
-
-#: page-templates/petition-thankyou.php:98
-msgid "In order to maintain a fair and independent, and continue to appeal to the government and enterprises, Greenpeace 100% relies on donations from your supporters to direct changes. Would you like to join us?"
-msgstr ""
 
 #: page-templates/petition-thankyou.php:99
 msgid "NO"
@@ -448,8 +450,12 @@ msgid "- Greenpeace is urgently campaigning to protect our planet."
 msgstr "그린피스는 지구를 보호하기 위해 긴급 캠페인을 진행 중입니다."
 
 #: page-templates/petition-thankyou.php:107
-msgid "Our campaigns are 100% funded by individuals like you. Will you join us as a supporter with a regular amount of 400HKD or more a month?"
-msgstr "우리 캠페인은 100% 개인후원으로만 진행됩니다. 정기후원 월 #만원으로 시작 하시겠습니까?"
+msgid ""
+"Our campaigns are 100% funded by individuals like you. Will you join us as a "
+"supporter with a regular amount of 400HKD or more a month?"
+msgstr ""
+"우리 캠페인은 100% 개인후원으로만 진행됩니다. 정기후원 월 #만원으로 시작 하시"
+"겠습니까?"
 
 #: page-templates/petition-thankyou.php:108
 msgid "One off"
@@ -514,8 +520,27 @@ msgstr "전체 보기"
 msgid "Any topic"
 msgstr "전체 보기"
 
-msgid "Facebook"
-msgstr "페이스북으로 로그인"
+#. Header menu items
+msgid "WHO WE ARE"
+msgstr "재단 소개"
+
+msgid "OUR WORK"
+msgstr "캠페인"
+
+msgid "GET INVOLVED"
+msgstr "후원/참여"
+
+msgid "NEWS & STORIES"
+msgstr "소식/뉴스룸"
+
+msgid "Issue we work on"
+msgstr ""
+
+msgid "On-Going Projects"
+msgstr ""
+
+msgid "login"
+msgstr "로그인"
 
 #. Collapsible notes for articles
 msgid "Insert note"
@@ -543,3 +568,6 @@ msgstr ""
 
 msgid "Subscribe to newsletter about %s"
 msgstr ""
+
+#~ msgid "Facebook"
+#~ msgstr "페이스북으로 로그인"
