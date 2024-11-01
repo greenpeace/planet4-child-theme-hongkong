@@ -22,6 +22,10 @@ class P4CT_Site {
 		'zh_TW',
 	];
 
+	const LOCALES_ENABLE_ALT_HEADER = [
+		'ko_KR',
+	];
+
 	const NAV_MENUS             = [
 		'about' => [
 			'msgid'  => 'WHO WE ARE',
@@ -54,11 +58,28 @@ class P4CT_Site {
 	];
 
 	/**
+	 * Allowed subscription buttons or not
+	 *
+	 * @var bool
+	 */
+	public $allowed_subscription_buttons = FALSE;
+
+	/**
+	 * Use alternative header
+	 *
+	 * @var bool
+	 */
+	public $use_alt_header = FALSE;
+
+	/**
 	 * P4CT_Site constructor.
 	 *
 	 * @param array $services The dependencies to inject.
 	 */
 	public function __construct( $services = [] ) {
+
+		$this->allowed_subscription_buttons = in_array( get_locale(), $this::LOCALES_ENABLE_SUBSCRIPTION_BUTTONS );
+		$this->use_alt_header = in_array( get_locale(), $this::LOCALES_ENABLE_ALT_HEADER );
 
 		$this->load();
 		$this->settings();
@@ -116,7 +137,7 @@ class P4CT_Site {
 		$main_issues = $this->gpea_get_all_main_issues();
 		$header_nav = [];
 		foreach( self::NAV_MENUS as $menu_key => $menu_conf ) {
-			if( $menu_conf[ 'issues' ] ) {
+			if( ! $this->use_alt_header && $menu_conf[ 'issues' ] ) {
 				foreach( $main_issues as $issue_key => $issue_title ) {
 					$header_nav[ 'gpea-header-' . $menu_key . '-menu--' . $issue_key ] = sprintf(__( 'Header: %s: %s', 'gpea_theme_backend' ), __( $menu_conf[ 'msgid' ], 'gpea_theme' ), $issue_title);
 				}
@@ -295,8 +316,8 @@ class P4CT_Site {
 
 			$classes = [ 'menu__container' ];
 
-			$classes[] = $menu_conf[ 'issues' ] || $menu_conf[ 'depth' ] > 1 ? 'has-children' : 'no-children';
-			$classes[] = $menu_conf[ 'issues' ] ? 'is-issues' : 'not-issues';
+			$classes[] = ( ! $this->use_alt_header && $menu_conf[ 'issues' ] ) || $menu_conf[ 'depth' ] > 1 ? 'has-children' : 'no-children';
+			$classes[] = ! $this->use_alt_header && $menu_conf[ 'issues' ] ? 'is-issues' : 'not-issues';
 			$classes[] = $menu_conf[ 'counter' ] ? 'is-counter' : 'not-counter';
 
 			$menu = [];
@@ -325,17 +346,21 @@ class P4CT_Site {
 			}
 
 			if( $menu_conf[ 'issues' ] ) {
+				$children_data_attr = ! $this->use_alt_header ? ' data-label="' . esc_attr(__( 'Issue we work on', 'gpea_theme' )) . '" data-label-fake="' . esc_attr(__( 'On-Going Projects', 'gpea_theme' )) . '" ' : '';
 				$children = '
 				<div class="' . implode( ' ', $classes ) . '">
 					<div class="menu__inner">
 						<div class="menu__inner2">
-							<ul class="menu__inner3 menu__inner3--real" data-label="' . esc_attr(__( 'Issue we work on', 'gpea_theme' )) . '" data-label-fake="' . esc_attr(__( 'On-Going Projects', 'gpea_theme' )) . '">';
+							<ul class="menu__inner3 menu__inner3--real" ' . $children_data_attr . '>';
 				$all_issue_children = [];
 				foreach( $main_issues as $issue_key => $issue_title ) {
+					if( $this->use_alt_header && $issue_key == 'general' ) {
+						continue;
+					}
 					$setting_title = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_label--' . $issue_key ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_label--' . $issue_key ] : '';
 					$setting_link = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_link--' . $issue_key ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_link--' . $issue_key ] : '#';
 					$setting_sort = isset( $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_sort--' . $issue_key ] ) ? $header_nav_options[ 'gpea_header_nav_menu_' . $menu_key . '_sort--' . $issue_key ] : '0';
-					$issue_children_menu_html = has_nav_menu( 'gpea-header-' . $menu_key . '-menu--' . $issue_key ) ? wp_nav_menu( [
+					$issue_children_menu_html = ! $this->use_alt_header && has_nav_menu( 'gpea-header-' . $menu_key . '-menu--' . $issue_key ) ? wp_nav_menu( [
 						'container' => NULL,
 						'menu_class' => 'sub-menu',
 						'theme_location' => 'gpea-header-' . $menu_key . '-menu--' . $issue_key,

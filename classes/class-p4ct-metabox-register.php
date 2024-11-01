@@ -44,20 +44,14 @@ class P4CT_Metabox_Register {
 	 */
 	protected $subpages = [];
 
-	/**
-	 * Allowed subscription buttons or not
-	 *
-	 * @var bool
-	 */
-	protected $allowed_subscription_buttons = FALSE;
+	public $gpea_extra;
 
 	/**
 	 * P4CT_Metabox_Register constructor.
 	 */
 	public function __construct() {
 		$this->hooks();
-		$gpea_extra = new \P4CT_Site();
-		$this->allowed_subscription_buttons = in_array( get_locale(), $gpea_extra::LOCALES_ENABLE_SUBSCRIPTION_BUTTONS );
+		$this->gpea_extra = new \P4CT_Site();
 	}
 
 	/**
@@ -106,7 +100,7 @@ class P4CT_Metabox_Register {
 		 */
 		$this->register_donation_button_options_metabox();
 		$this->register_donation_block_options_metabox();
-		if( $this->allowed_subscription_buttons ) {
+		if( $this->gpea_extra->allowed_subscription_buttons ) {
 			$this->register_subscription_button_options_metabox();
 		}
 		$this->register_subscription_block_options_metabox();
@@ -497,7 +491,7 @@ class P4CT_Metabox_Register {
 		 * Donation/Subscription Buttons
 		 */
 		$cmb_post_donation_button = $this->register_donation_button_metabox();
-		if( $this->allowed_subscription_buttons ) {
+		if( $this->gpea_extra->allowed_subscription_buttons ) {
 			$cmb_post_subscription_button = $this->register_donation_button_metabox(TRUE);
 		}
 
@@ -1029,8 +1023,7 @@ class P4CT_Metabox_Register {
 	 */
 	public function add_donation_option_fields( $cmb_options = [], $is_block = FALSE, $is_subscription = FALSE ) {
 
-		$gpea_extra = new \P4CT_Site();
-		$main_issues = $gpea_extra->gpea_get_all_main_issues();
+		$main_issues = $this->gpea_extra->gpea_get_all_main_issues();
 		$count_issues = count( $main_issues );
 		$issue_string = implode( ', ', $main_issues );
 
@@ -1357,10 +1350,9 @@ class P4CT_Metabox_Register {
 			'type'             => 'text',
 		];
 
-		$gpea_extra = new \P4CT_Site();
-		$main_issues = $gpea_extra->gpea_get_all_main_issues();
+		$main_issues = $this->gpea_extra->gpea_get_all_main_issues();
 
-		foreach($gpea_extra::NAV_MENUS as $menu_key => $menu_conf) {
+		foreach($this->gpea_extra::NAV_MENUS as $menu_key => $menu_conf) {
 
 			$id_prefix = 'gpea_header_nav_menu_' . $menu_key;
 
@@ -1380,6 +1372,9 @@ class P4CT_Metabox_Register {
 
 			if( $menu_conf[ 'issues' ] ) {
 				foreach( $main_issues as $issue_key => $issue_title ) {
+					if( $this->gpea_extra->use_alt_header && $issue_key == 'general' ) {
+						continue;
+					}
 					$cmb_options[] = [
 						'name'             => esc_html( sprintf( __( 'Sub-Item Title: %s' ), $issue_title ), self::METABOX_ID ),
 						'id'               => $id_prefix . '_label--' . $issue_key,
