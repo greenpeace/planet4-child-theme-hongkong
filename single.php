@@ -93,23 +93,22 @@ elseif( !@strlen( $subscription_button_default_text ) ) {
 
 $top_button_type_key = NULL;
 $bottom_button_type_key = NULL;
-$allowed_subscription_buttons = in_array(get_locale(), $gpea_extra::LOCALES_ENABLE_SUBSCRIPTION_BUTTONS);
 if ( isset( $page_meta_data['p4-gpea_show_article_top_donation_button'][0] ) && $page_meta_data['p4-gpea_show_article_top_donation_button'][0] ) {
 	$top_button_type_key = 'donation';
-	if($allowed_subscription_buttons && ( ! isset( $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) || $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) ) {
+	if($gpea_extra->allowed_subscription_buttons && ( ! isset( $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) || $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) ) {
 		$top_button_type_key = 'subscription';
 	}
 }
 if ( isset( $page_meta_data['p4-gpea_show_article_bottom_donation_button'][0] ) && $page_meta_data['p4-gpea_show_article_bottom_donation_button'][0] ) {
 	$bottom_button_type_key = 'donation';
-	if($allowed_subscription_buttons && ( ! isset( $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) || $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) ) {
+	if($gpea_extra->allowed_subscription_buttons && ( ! isset( $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) || $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) ) {
 		$bottom_button_type_key = 'subscription';
 	}
 }
-if ( $allowed_subscription_buttons && isset( $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) && $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) {
+if ( $gpea_extra->allowed_subscription_buttons && isset( $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) && $page_meta_data['p4-gpea_show_article_top_subscription_button'][0] ) {
 	$top_button_type_key = 'subscription';
 }
-if ( $allowed_subscription_buttons && isset( $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) && $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) {
+if ( $gpea_extra->allowed_subscription_buttons && isset( $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) && $page_meta_data['p4-gpea_show_article_bottom_subscription_button'][0] ) {
 	$bottom_button_type_key = 'subscription';
 }
 $top_button_is_subscription = $top_button_type_key == 'subscription';
