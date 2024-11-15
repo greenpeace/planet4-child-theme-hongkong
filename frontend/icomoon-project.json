@@ -8,8 +8,57 @@
     {
       "selection": [
         {
+          "order": 128,
+          "id": 0,
+          "name": "naver-blog",
+          "prevSize": 32,
+          "code": 59680,
+          "tempChar": ""
+        }
+      ],
+      "id": 3,
+      "metadata": {
+        "name": "Untitled Set",
+        "importSize": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "height": 1024,
+      "prevSize": 32,
+      "icons": [
+        {
+          "id": 0,
+          "paths": [
+            "M259.413 443.733c0 18.851-15.282 34.133-34.133 34.133s-34.133-15.282-34.133-34.133c0-18.851 15.282-34.133 34.133-34.133s34.133 15.282 34.133 34.133z",
+            "M614.4 436.907c0 22.622-18.338 40.96-40.96 40.96s-40.96-18.338-40.96-40.96c0-22.622 18.338-40.96 40.96-40.96s40.96 18.338 40.96 40.96z",
+            "M621.227 771.413h266.24c75.093 0 136.533-61.44 136.533-136.533v-443.733c0-75.093-61.44-136.533-136.533-136.533h-750.933c-75.093 0-136.533 61.44-136.533 136.533v443.733c0 75.093 61.44 136.533 136.533 136.533h266.24l88.747 211.627c0 0 6.827 20.48 20.48 20.48v0c13.653 0 20.48-20.48 20.48-20.48l88.747-211.627zM320.853 450.56c0 81.92-81.92 81.92-81.92 81.92-34.133 0-47.787-20.48-47.787-20.48v13.653h-61.44v-252.587c0 0 0 0 0 0v0c6.827 0 61.44 0 61.44 0v95.573c13.653-20.48 54.613-20.48 54.613-20.48 88.747 6.827 75.093 102.4 75.093 102.4zM430.080 354.987v170.667h-61.44v-170.667c0-20.48-27.307-27.307-27.307-27.307v-61.44c95.573 0 88.747 88.747 88.747 88.747zM573.44 532.48c-54.613 0-102.4-40.96-102.4-88.747s47.787-88.747 102.4-88.747c54.613 0 102.4 40.96 102.4 88.747s-47.787 88.747-102.4 88.747zM901.12 532.48c0 0 0 88.747-88.747 88.747h-27.307v-61.44h13.653c0 0 34.133 6.827 34.133-54.613 0 0-6.827 20.48-61.44 20.48 0 0-75.093-6.827-75.093-75.093v-27.307c0 0 0-75.093 81.92-81.92 0 0 34.133-6.827 54.613 20.48v-13.653h61.44v184.32z",
+            "M839.68 436.907c0 18.851-15.282 34.133-34.133 34.133s-34.133-15.282-34.133-34.133c0-18.851 15.282-34.133 34.133-34.133s34.133 15.282 34.133 34.133z"
+          ],
+          "attrs": [],
+          "isMulticolor": false,
+          "isMulticolor2": false,
+          "grid": 0,
+          "tags": [
+            "naver-blog",
+            "naver",
+            "blog"
+          ],
+          "colorPermutations": {}
+        }
+      ],
+      "invisible": false,
+      "colorThemes": []
+    },
+    {
+      "selection": [
+        {
           "order": 124,
-          "id": 0
+          "id": 0,
+          "prevSize": 32,
+          "code": 59679,
+          "name": "x",
+          "tempChar": ""
         }
       ],
       "id": 2,
@@ -644,7 +693,7 @@
         "gridSize": 16,
         "showGrid": false,
         "quickUsageToken": {
-          "UntitledProject": "ZDFkYzQ5YTk5MmNmMTdmMTgyYTFjNDkxZWUzMDZhOWIjMSMxNTc4NjU2NTE1IyMj"
+          "gpea": "Y2QxMzUyYmVkNSMxNzMxNjU3NjE5I1NoMkpQWTJhbDhEaDlObERqaWpkempTbFlRV0xlTDM4eVpqSEsvREhkSXdX"
         }
       },
       "selection": [
@@ -653,217 +702,248 @@
           "order": 92,
           "prevSize": 32,
           "code": 59678,
-          "name": "medium"
+          "name": "medium",
+          "tempChar": ""
         },
         {
           "order": 110,
           "id": 0,
           "name": "kakaotalk",
           "prevSize": 32,
-          "code": 59676
+          "code": 59676,
+          "tempChar": ""
         },
         {
           "order": 111,
           "id": 6,
           "prevSize": 32,
           "code": 59669,
-          "name": "youtube"
+          "name": "youtube",
+          "tempChar": ""
         },
         {
           "order": 112,
           "id": 5,
           "name": "instagram",
           "prevSize": 32,
-          "code": 59670
+          "code": 59670,
+          "tempChar": ""
         },
         {
           "order": 113,
           "id": 4,
           "prevSize": 32,
           "code": 59671,
-          "name": "twitter"
+          "name": "twitter",
+          "tempChar": ""
         },
         {
           "order": 114,
           "id": 3,
           "name": "facebook",
           "prevSize": 32,
-          "code": 59672
+          "code": 59672,
+          "tempChar": ""
         },
         {
           "order": 115,
           "id": 2,
           "name": "whatsapp",
           "prevSize": 32,
-          "code": 59673
+          "code": 59673,
+          "tempChar": ""
         },
         {
           "order": 116,
           "id": 1,
           "name": "wechat",
           "prevSize": 32,
-          "code": 59674
+          "code": 59674,
+          "tempChar": ""
         },
         {
           "order": 117,
           "id": 0,
           "name": "line",
           "prevSize": 32,
-          "code": 59675
+          "code": 59675,
+          "tempChar": ""
         },
         {
           "order": 93,
           "id": 0,
           "prevSize": 32,
           "code": 59677,
-          "name": "navigator"
+          "name": "navigator",
+          "tempChar": ""
         },
         {
           "order": 94,
           "id": 0,
           "name": "close",
           "prevSize": 32,
-          "code": 59663
+          "code": 59663,
+          "tempChar": ""
         },
         {
           "order": 95,
           "id": 40,
           "name": "whatsapp-black",
           "prevSize": 32,
-          "code": 59648
+          "code": 59648,
+          "tempChar": ""
         },
         {
           "order": 96,
           "id": 41,
           "name": "play",
           "prevSize": 32,
-          "code": 59649
+          "code": 59649,
+          "tempChar": ""
         },
         {
           "order": 97,
           "id": 42,
           "name": "home",
           "prevSize": 32,
-          "code": 59660
+          "code": 59660,
+          "tempChar": ""
         },
         {
           "order": 98,
           "id": 43,
           "name": "down-arrow",
           "prevSize": 32,
-          "code": 59650
+          "code": 59650,
+          "tempChar": ""
         },
         {
           "order": 99,
           "id": 44,
           "name": "chevron-right",
           "prevSize": 32,
-          "code": 59651
+          "code": 59651,
+          "tempChar": ""
         },
         {
           "order": 100,
           "id": 45,
           "name": "chevron-left",
           "prevSize": 32,
-          "code": 59652
+          "code": 59652,
+          "tempChar": ""
         },
         {
           "order": 101,
           "id": 46,
           "name": "people",
           "prevSize": 32,
-          "code": 59653
+          "code": 59653,
+          "tempChar": ""
         },
         {
           "order": 102,
           "id": 47,
           "name": "search",
           "prevSize": 32,
-          "code": 59654
+          "code": 59654,
+          "tempChar": ""
         },
         {
           "order": 103,
           "id": 48,
           "name": "clock",
           "prevSize": 32,
-          "code": 59655
+          "code": 59655,
+          "tempChar": ""
         },
         {
           "order": 104,
           "id": 49,
           "name": "facebook-black",
           "prevSize": 32,
-          "code": 59656
+          "code": 59656,
+          "tempChar": ""
         },
         {
           "order": 105,
           "id": 50,
           "name": "globe",
           "prevSize": 32,
-          "code": 59657
+          "code": 59657,
+          "tempChar": ""
         },
         {
           "order": 106,
           "id": 51,
           "name": "instagram-black",
           "prevSize": 32,
-          "code": 59658
+          "code": 59658,
+          "tempChar": ""
         },
         {
           "order": 107,
           "id": 52,
           "name": "twitter-black",
           "prevSize": 32,
-          "code": 59659
+          "code": 59659,
+          "tempChar": ""
         },
         {
           "order": 108,
           "id": 53,
           "name": "youtube-black",
           "prevSize": 32,
-          "code": 59661
+          "code": 59661,
+          "tempChar": ""
         },
         {
           "order": 109,
           "id": 54,
           "name": "greenpeace",
           "prevSize": 32,
-          "code": 59662
+          "code": 59662,
+          "tempChar": ""
         },
         {
           "order": 118,
           "id": 3,
           "prevSize": 32,
           "code": 59665,
-          "name": "lock"
+          "name": "lock",
+          "tempChar": ""
         },
         {
           "order": 119,
           "id": 2,
           "name": "cc-mastercard",
           "prevSize": 32,
-          "code": 59666
+          "code": 59666,
+          "tempChar": ""
         },
         {
           "order": 120,
           "id": 1,
           "name": "cc-visa",
           "prevSize": 32,
-          "code": 59667
+          "code": 59667,
+          "tempChar": ""
         },
         {
           "order": 121,
           "id": 0,
           "name": "cc-paypal",
           "prevSize": 32,
-          "code": 59668
+          "code": 59668,
+          "tempChar": ""
         },
         {
           "order": 122,
           "id": 0,
           "name": "email",
           "prevSize": 32,
-          "code": 59664
+          "code": 59664,
+          "tempChar": ""
         }
       ],
       "prevSize": 32,
@@ -907,7 +987,7 @@
     "gridSize": 16,
     "showGrid": false,
     "quickUsageToken": {
-      "UntitledProject": "ZDFkYzQ5YTk5MmNmMTdmMTgyYTFjNDkxZWUzMDZhOWIjMSMxNTc4NjU2NTE1IyMj"
+      "gpea": "Y2QxMzUyYmVkNSMxNzMxNjU3NjE5I1NoMkpQWTJhbDhEaDlObERqaWpkempTbFlRV0xlTDM4eVpqSEsvREhkSXdX"
     }
   },
   "uid": -1
