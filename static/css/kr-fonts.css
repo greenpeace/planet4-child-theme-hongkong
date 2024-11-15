@@ -179,3 +179,7 @@ button,
 .card-petition .box p {
   text-align: left !important;
 }
+
+a.header__link {
+  font-weight: 500;
+}
