@@ -33,9 +33,9 @@
   content: '\e916';
   color: #e4405f;
 }
+.icon-x:before,
 .icon-twitter:before {
-  content: '\e917';
-  color: #1da1f2;
+  content: '\e91f';
 }
 .icon-facebook:before {
   content: '\e918';
@@ -118,4 +118,7 @@
 }
 .icon-greenpeace:before {
   content: '\e90e';
+}
+.icon-naver-blog:before {
+  content: '\e920';
 }

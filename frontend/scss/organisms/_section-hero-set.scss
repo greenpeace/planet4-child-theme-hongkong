@@ -16,11 +16,7 @@
   .arrow {
     position: absolute;
     width: 100px;
-    margin-bottom: -35px;
     cursor: pointer;
-    @include greaterThan("sm") {
-      bottom: 12%;
-    }
     &:before,
     &:after {
       position: absolute;
@@ -218,8 +214,9 @@
       height: 70vh;
     }
     .arrow {
-      bottom: 8%;
       height: 80px;
+      bottom: 8%;
+      margin-bottom: -35px;
       @include greaterThan("sm") {
         bottom: 12%;
       }
@@ -228,6 +225,9 @@
 
   // with donation module
   &--donation-module {
+    @include lessThan("sm") {
+      height: 60vh;
+    }
     .page-template & {
       @include greaterThan("sm") {
         padding-top: 50px;
@@ -241,9 +241,60 @@
       }
     }
     .arrow {
-      height: 70px;
-      bottom: -15px;
+      height: 80px;
+      bottom: 8%;
+      @include lessThan("sm") {
+        margin-bottom: -35px;
+      }
+      @include greaterThan("sm") {
+        height: 70px;
+        bottom: -50px;
+      }
     }
+    [data-gpea-module] {
+      @include lessThan("sm") {
+        display: none;
+      }
+    }
+  }
+
+  // with donation module for mobile
+  &--donation-module-for-mobile {
+    @include greaterThan("sm") {
+      height: 70vh;
+    }
+    .page-template & {
+      @include lessThan("sm") {
+        padding-top: 70px;
+        padding-bottom: 70px;
+      }
+    }
+    .content {
+      flex-direction: column;
+    }
+    .arrow {
+      height: 70px;
+      bottom: -70px;
+      @include greaterThan("sm") {
+        height: 80px;
+        bottom: 12%;
+        margin-bottom: -35px;
+      }
+    }
+    [data-gpea-module] {
+      @include lessThan("sm") {
+        margin-top: 50px;
+      }
+      @include greaterThan("sm") {
+        display: none;
+      }
+    }
+  }
+
+  // with donation module
+  &--donation-module,
+  // with donation module for mobile
+  &--donation-module-for-mobile {
     [data-gpea-module] {
       p:not(.form-field__note):not(.invalid__message) {
         font-size: initial;
@@ -257,9 +308,6 @@
         &:not(.text-bold) {
           font-weight: initial;
         }
-      }
-      @include lessThan("sm") {
-        display: none;
       }
       overflow: hidden;
       background: var(--white);
