@@ -87,10 +87,10 @@ if ( $page_special_class ) {
 $notification_list = [];
 $last_modified = '0';
 if(is_front_page()) {
-    $notification_options = get_option( 'gpea_notification_options' );
+    $notification_options = get_option( 'gpea_notification_options', [] );
     $last_modified = get_option( 'gpea_notification_options_last_modified' );
     $last_modified = @strlen($last_modified) ? $last_modified : '0';
-    $notification_list = $notification_options['gpea_notification_group'];
+    $notification_list = $notification_options['gpea_notification_group'] ?? [];
     $notification_list = is_array($notification_list) ? $notification_list : [];
     $notification_list = array_filter($notification_list, function($item) {
         if(!is_array($item) || !isset($item['enabled']) || !$item['enabled']) {
