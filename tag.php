@@ -83,6 +83,7 @@ if ( is_tag() ) {
 		// 	]
 		// );
 
+		do_action('enqueue_google_tag_manager_script', $context);
 		Timber::render( [ 'tag.twig' ], $context );
 
 	}

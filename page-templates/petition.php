@@ -139,4 +139,5 @@ $context['strings'] = [
 	'signatures' => $context['signatures'] ? sprintf( __( '%s signers', 'gpea_theme' ), $context['signatures'] ) : false,
 ];
 
+do_action('enqueue_google_tag_manager_script', $context);
 Timber::render( [ 'petition.twig' ], $context );

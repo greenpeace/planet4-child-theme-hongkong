@@ -775,6 +775,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * View the Search page template.
 		 */
 		public function view() {
+			do_action('enqueue_google_tag_manager_script', $this->context);
 			Timber::render(
 				$this->templates,
 				$this->context,
@@ -807,6 +808,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 
 				foreach ( $this->paged_posts as $index => $post ) {
 					$paged_context['post'] = $post;
+					do_action('enqueue_google_tag_manager_script', $paged_context);
 					Timber::render( [ 'tease-search.twig' ], $paged_context, self::DEFAULT_CACHE_TTL, \Timber\Loader::CACHE_OBJECT );
 				}
 			}

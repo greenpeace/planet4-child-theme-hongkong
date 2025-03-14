@@ -108,4 +108,5 @@ if(is_front_page()) {
 $context['gpea_notification_list'] = $notification_list;
 $context['gpea_notification_last_modified'] = $last_modified;
 
+do_action('enqueue_google_tag_manager_script', $context);
 Timber::render( [ 'page-' . $post->post_name . '.twig', 'page.twig' ], $context );

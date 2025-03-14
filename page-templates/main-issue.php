@@ -87,4 +87,5 @@ $context['strings'] = [
 	'related_news' => __( 'Related news', 'gpea_theme' ),
 ];
 
+do_action('enqueue_google_tag_manager_script', $context);
 Timber::render( [ 'main-issue.twig' ], $context );

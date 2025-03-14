@@ -60,6 +60,7 @@ if ( ! $context['og_image_data'] ) {
 /*
  for main issue relation we use categories */
 // $context['categories'] = implode( ', ', $post->categories() );
+do_action('enqueue_google_tag_manager_script', $context);
 if ( post_password_required( $post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );
 } else {
