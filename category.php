@@ -72,6 +72,7 @@ if ( is_category() ) {
 		// 	]
 		// );
 
+		do_action('enqueue_google_tag_manager_script', $context);
 		Timber::render( [ 'tag.twig' ], $context );
 
 	}

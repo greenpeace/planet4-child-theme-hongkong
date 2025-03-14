@@ -94,5 +94,5 @@ $context['strings'] = [
 	'zones_interested' => __( 'Zones interested', 'gpea_theme' ),
 ];
 
-
+do_action('enqueue_google_tag_manager_script', $context);
 Timber::render( [ 'project.twig' ], $context );

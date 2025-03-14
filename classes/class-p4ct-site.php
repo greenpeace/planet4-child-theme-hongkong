@@ -121,6 +121,7 @@ class P4CT_Site {
 		add_filter( 'get_twig', [ $this, 'add_to_twig' ] );
 		add_action( 'init', [ $this, 'register_taxonomies' ], 2 );
 		add_action( 'init', [ $this, 'remove_planet4_actions' ] );
+		add_action( 'init', [ $this, 'add_parent_actions' ] );
 		add_action( 'wp_print_styles', [ $this, 'dequeue_parent_assets' ], 100 );
 		// add_action( 'pre_get_posts', [ $this, 'add_search_options' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_assets' ] );
@@ -177,6 +178,17 @@ class P4CT_Site {
 			add_action( 'create_post_tag', [ $this, 'save_redirect_page_tag' ] );
 		}
 
+	}
+
+	/**
+	 * Add actions.
+	 */
+	public function add_parent_actions() {
+		if(has_action('enqueue_google_tag_manager_script')) {
+			return;
+		}
+		$parent_enqueue = new P4\MasterTheme\EnqueueController;
+		add_action( 'enqueue_google_tag_manager_script', [ $parent_enqueue, 'enqueue_google_tag_manager' ] );
 	}
 
 	/**
@@ -442,6 +454,21 @@ class P4CT_Site {
 			],
 			'menus' => $header_nav,
 		];
+
+		// Copy from master theme
+		$options = get_option('planet4_options');
+        $context['enforce_cookies_policy'] = isset($options['enforce_cookies_policy']) ? true : false;
+        $context['google_tag_value'] = $options['google_tag_manager_identifier'] ?? '';
+        $context['google_tag_domain'] = !empty($options['google_tag_manager_domain']) ?
+            $options['google_tag_manager_domain'] : 'www.googletagmanager.com';
+        $context['consent_default_analytics_storage'] =
+            planet4_get_option('consent_default_analytics_storage') ?? 'denied';
+        $context['consent_default_ad_storage'] =
+            planet4_get_option('consent_default_ad_storage') ?? 'denied';
+        $context['consent_default_ad_user_data'] =
+            planet4_get_option('consent_default_ad_user_data') ?? 'denied';
+        $context['consent_default_ad_personalization'] =
+            planet4_get_option('consent_default_ad_personalization') ?? 'denied';
 
 		return $context;
 	}

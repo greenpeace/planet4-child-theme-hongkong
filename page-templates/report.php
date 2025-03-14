@@ -67,4 +67,5 @@ $context['strings'] = [
 
 /* build about menu */
 
+do_action('enqueue_google_tag_manager_script', $context);
 Timber::render( [ 'about.twig' ], $context );

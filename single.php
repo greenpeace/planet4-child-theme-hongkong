@@ -325,6 +325,7 @@ if(isset($page_meta_data['p4-gpea_post_meta_desc'])){
 /*
  for main issue relation we use categories */
 // $context['categories'] = implode( ', ', $post->categories() );
+do_action('enqueue_google_tag_manager_script', $context);
 if ( post_password_required( $post->ID ) ) {
 	Timber::render( 'single-password.twig', $context );
 } else {

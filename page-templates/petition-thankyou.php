@@ -140,4 +140,5 @@ $context['strings'] = [
 	'reminder_box_give_regular' => __( 'Donation reminder give regular', 'planet4-gpea-blocks' ),
 ];
 
+do_action('enqueue_google_tag_manager_script', $context);
 Timber::render( [ 'petition-thankyou.twig' ], $context );
