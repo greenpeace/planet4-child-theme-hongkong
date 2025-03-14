@@ -121,6 +121,7 @@ class P4CT_Site {
 		add_filter( 'get_twig', [ $this, 'add_to_twig' ] );
 		add_action( 'init', [ $this, 'register_taxonomies' ], 2 );
 		add_action( 'init', [ $this, 'remove_planet4_actions' ] );
+		add_action( 'init', [ $this, 'add_parent_actions' ] );
 		add_action( 'wp_print_styles', [ $this, 'dequeue_parent_assets' ], 100 );
 		// add_action( 'pre_get_posts', [ $this, 'add_search_options' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_assets' ] );
@@ -177,6 +178,17 @@ class P4CT_Site {
 			add_action( 'create_post_tag', [ $this, 'save_redirect_page_tag' ] );
 		}
 
+	}
+
+	/**
+	 * Add actions.
+	 */
+	public function add_parent_actions() {
+		if(has_action('enqueue_google_tag_manager_script')) {
+			return;
+		}
+		$parent_enqueue = new P4\MasterTheme\EnqueueController;
+		add_action( 'enqueue_google_tag_manager_script', [ $parent_enqueue, 'enqueue_google_tag_manager' ] );
 	}
 
 	/**
