@@ -83,10 +83,10 @@
 				</div>
 				<div class="center-box">
 					<ul class="menu">
-						{% for key,item in navbar_menu.get_items %}
+						{% for key,item in navbar_menu.children %}
 							<li class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
 								<a
-									href="{{ item.get_link }}">
+									href="{{ item.link }}">
 									<!-- TODO add icon-globe or icon-people under menu CSS classes -->
 									<span class="item__menu__icon"></span>
 									<p>{{ item.title }}</p>
@@ -96,7 +96,7 @@
 					</ul>
 				</div>
 				<div class="right-box">
-					{% if (post._wp_page_template == 'page-templates/petition.php' or post._wp_page_template == 'page-templates/petition-thankyou.php') %}
+					{% if (post.meta('_wp_page_template') == 'page-templates/petition.php' or post.meta('_wp_page_template') == 'page-templates/petition-thankyou.php') %}
 						<div class="stepper">
 							<div class="step is-checked js-step-sign">{{ strings.sign }}</div>							
 							<div class="step is-disabled js-step-donate">{{ strings.donate }}</div>
@@ -112,14 +112,14 @@
 			</div>
 		</div>
 		<div class="mobile-toolbar">
-			{% for key,item in navbar_menu.get_items %}
+			{% for key,item in navbar_menu.children %}
 			{% if (key) < 2 %}
-				<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
+				<a href="{{ item.link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
 				<p class="{{ key == 1 ? 'visuallyhidden' : '' }}">{{ item.title }}</p>
 				<span class="item__menu__icon"></span>
 				</a>
 			{% else %}
-				<a href="{{ item.get_link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
+				<a href="{{ item.link }}" class="item {{ item.class }} {{ item == item.current ? 'active' : '' }}">
 				<span class="item__menu__icon"></span>
 				<p>{{ item.title }}</p>
 				</a>

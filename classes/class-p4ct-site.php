@@ -602,7 +602,7 @@ class P4CT_Site {
 			default:
 				wp_enqueue_style( 'child-style-noto-sans-tc', 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&display=swap' );
 		}
-		
+
 		wp_enqueue_style( 'child-style-montserrat', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap' );
 		wp_enqueue_style( 'child-style-fonts', get_stylesheet_directory_uri() . '/static/css/' . $css_fonts, [], $css_creation );
 
@@ -738,7 +738,9 @@ class P4CT_Site {
 			$templates          = [ 'tease-related-post.twig' ];
 		}
 
-		$pagetype_posts     = new \Timber\PostQuery( $post_args, 'P4_Post' );
+		// Timber 2: PostQuery no longer accepts a query-args array. Use Timber::get_posts(), which takes WP_Query
+		// args and returns an iterable, paginated collection.
+		$pagetype_posts = \Timber\Timber::get_posts( $post_args );
 
 		return $pagetype_posts;
 
@@ -890,7 +892,7 @@ class P4CT_Site {
 	 * @param string  $link Link URL.
 	 * @param WP_Post $post Post object.
 	 */
-	function add_post_ref_query_to_link_url( $link_url = '', $post ) {
+	function add_post_ref_query_to_link_url( $link_url = '', $post = '') {
 
 		$home_url_info = parse_url( home_url() );
 		$domain = $home_url_info['host'];
