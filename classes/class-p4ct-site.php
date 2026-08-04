@@ -117,8 +117,8 @@ class P4CT_Site {
 	 */
 	protected function hooks() {
 
-		add_filter( 'timber_context', [ $this, 'add_to_context' ] );
-		add_filter( 'get_twig', [ $this, 'add_to_twig' ] );
+		add_filter( 'timber/context', [ $this, 'add_to_context' ] );
+		add_filter( 'timber/twig', [ $this, 'add_to_twig' ] );
 		add_action( 'init', [ $this, 'register_taxonomies' ], 2 );
 		add_action( 'init', [ $this, 'remove_planet4_actions' ] );
 		add_action( 'init', [ $this, 'add_parent_actions' ] );
