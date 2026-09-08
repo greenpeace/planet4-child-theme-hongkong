@@ -19,8 +19,8 @@
 
 use Timber\Timber;
 
-$context        = Timber::get_context();
-$post           = new P4_Post();
+$context        = Timber::context();
+$post           = Timber::get_post();
 $gpea_extra     = new P4CT_Site();
 $page_meta_data = get_post_meta( $post->ID );
 
@@ -115,7 +115,7 @@ if ( $context['engaging_page_id'] && ! $context['signatures'] ) {
 	} else {
 		$obj = json_decode( $result['body'], true );
 		$context['signatures'] = $obj['rows'][0]['columns'][4]['value'];
-	}	
+	}
 }
 
 if ( $context['petition_target'] && $context['signatures'] ) {

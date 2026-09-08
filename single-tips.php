@@ -12,13 +12,11 @@
 use Timber\Timber;
 
 // Initializing variables.
-$context = Timber::get_context();
+$context = Timber::context();
 /**
  * P4 Post Object
- *
- * @var P4_Post $post
  */
-$post            = Timber::query_post( false, 'P4_Post' );
+$post            = Timber::get_post();
 $context['post'] = $post;
 
 // Set Navigation Issues links.
@@ -52,7 +50,7 @@ $planet4_options = get_option( 'planet4_options' );
 
 if ( ! $context['og_image_data'] ) {
 	$tips_image = $page_meta_data['p4-gpea_tip_icon'][0] ?? '';
-	if ( null !== $tips_image ) {		
+	if ( null !== $tips_image ) {
 		$context['og_image_data'][0] = $tips_image;
 	}
 }

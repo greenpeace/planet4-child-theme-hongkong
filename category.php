@@ -16,7 +16,7 @@ use Timber\Timber;
 // use P4BKS\Controllers\Blocks\CampaignThumbnail_Controller as CampaignThumbnail;
 // use P4BKS\Controllers\Blocks\HappyPoint_Controller as HappyPoint;
 
-$context = Timber::get_context();
+$context = Timber::context();
 $gpea_extra = new P4CT_Site();
 
 if ( is_category() ) {
@@ -44,7 +44,7 @@ if ( is_category() ) {
 		// $context['background_image']      = get_term_meta( $context['tag']->term_id, 'tag_attachment', true );
 
 		$context['tag_name']            = $context['category']->name;
-		$context['tag_description']     = wpautop( $context['category']->description );		
+		$context['tag_description']     = wpautop( $context['category']->description );
 
 		$context['og_description'] = $context['tag_description'];
 		$context['projects'] = "[shortcake_projects_carousel layout='light' title='".$context['strings']['our_initiatives']."' topic='".$context['category']->term_id."' /]";

@@ -19,8 +19,8 @@
 
 use Timber\Timber;
 
-$context        = Timber::get_context();
-$post           = new P4_Post();
+$context        = Timber::context();
+$post           = Timber::get_post();
 $gpea_extra     = new P4CT_Site();
 $page_meta_data = get_post_meta( $post->ID );
 
@@ -103,7 +103,7 @@ $context['cf_basket_name']   = $page_meta_data['p4_basket_name'][0] ?? '';
 $context['cf_scope']         = $page_meta_data['p4_scope'][0] ?? '';
 $context['cf_department']    = $page_meta_data['p4_department'][0] ?? '';
 
-// donation box information 
+// donation box information
 
 if ( 'ko-KR' !== get_language_attributes() ) {
 	// if not korea site, add the reminder box

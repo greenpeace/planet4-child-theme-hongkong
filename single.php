@@ -12,13 +12,11 @@
 use Timber\Timber;
 
 // Initializing variables.
-$context = Timber::get_context();
+$context = Timber::context();
 /**
  * P4 Post Object
- *
- * @var P4_Post $post
  */
-$post            = Timber::query_post( false, 'P4_Post' );
+$post            = Timber::get_post();
 $context['post'] = $post;
 
 // Set Navigation Issues links.

@@ -16,7 +16,7 @@ use Timber\Timber;
 // use P4BKS\Controllers\Blocks\CampaignThumbnail_Controller as CampaignThumbnail;
 // use P4BKS\Controllers\Blocks\HappyPoint_Controller as HappyPoint;
 
-$context = Timber::get_context();
+$context = Timber::context();
 $gpea_extra = new P4CT_Site();
 
 if ( is_tag() ) {

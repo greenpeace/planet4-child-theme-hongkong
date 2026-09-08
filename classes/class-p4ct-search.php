@@ -6,7 +6,6 @@
  */
 
 use Timber\Timber;
-use Timber\Post as TimberPost;
 
 if ( ! class_exists( 'P4CT_Search' ) ) {
 
@@ -147,7 +146,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			if ( $context ) {
 				$this->context = $context;
 			} else {
-				$this->context = Timber::get_context();
+				$this->context = Timber::context();
 
 				$paged = ( 0 === get_query_var( 'paged' ) ) ? 1 : get_query_var( 'paged' );
 
@@ -185,7 +184,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		public function gpea_load_ajax( $search_query, $selected_sort = NULL, $filters = [], $context = null ) {
 
 			$this->search_query = $search_query;
-			$this->context = Timber::get_context();
+			$this->context = Timber::context();
 			$this->set_main_issues();
 
 			$paged = 1;
@@ -229,7 +228,7 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					$search_async = new static();
 					$search_async->set_context( $search_async->context );
 					$search_async->search_query = urldecode( filter_input( INPUT_GET, 'search_query', FILTER_SANITIZE_STRING ) );
-					
+
 					$has_search_query = @strlen($search_async->search_query) > 0;
 
 					// Get the decoded url query string and then use it as key for redis.
@@ -313,8 +312,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			// Use Timber's Post instead of WP_Post so that we can make use of Timber within the template.
 			if ( $posts ) {
 				foreach ( $posts as $post ) {
-					// TODO we don't really need the TimberPost overhead here. Could just use $post.
-					$timber_post = new TimberPost( $post->ID );
+					// TODO we don't really need the Timber post overhead here. Could just use $post.
+					$timber_post = Timber::get_post( $post->ID );
 
 					$timber_post->link = get_permalink( $post->ID );
 
