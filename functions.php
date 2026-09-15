@@ -98,31 +98,6 @@ function gpea_category_posts_per_page( $query ) {
 	$query->set( 'posts_per_page', P4CT_Search::POSTS_PER_PAGE );
 }
 
-/**
- * Returns the page links of a category page as HTML strings.
- *
- * The links use this theme's tag button style, so they need no new styles.
- * The current page gets the filled "active" style.
- */
-function gpea_category_page_links() {
-	$links = paginate_links(
-		[
-			'type'      => 'array',
-			'mid_size'  => 1,
-			'prev_text' => '&lsaquo;',
-			'next_text' => '&rsaquo;',
-		]
-	);
-	if ( ! $links ) {
-		return [];
-	}
-	foreach ( $links as &$link ) {
-		$link = str_replace( '<a class="', '<a class="button tag ', $link );
-		$link = str_replace( 'class="page-numbers current"', 'class="button tag active page-numbers current"', $link );
-	}
-	return $links;
-}
-
 /*
 /* collapsible notes for articles */
 
