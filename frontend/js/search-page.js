@@ -7,7 +7,10 @@ const p4ct_search = function() {
   if (!$search_form.length){ return; }
 
   var search_request;
-  var search_query = $('#search_input').val().trim();
+  // Read the search words from the page address, not from the search box.
+  // On a category or tag page the box shows the filter name.
+  // That name is a label here, so Load More must not search for it.
+  var search_query = (new URLSearchParams(window.location.search).get('s') || '').trim();
 
   const $result_page_result_posts = $('.multiple-search-result .results-list');
   const $load_more_button = $('.btn-load-more-click-scroll');

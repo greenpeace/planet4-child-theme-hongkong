@@ -549,6 +549,8 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 					];
 				}
 			}
+			// The search box shows the same names when no words were searched.
+			$context['active_filter_names'] = implode( ' ', wp_list_pluck( $context['active_filters'], 'name' ) );
 
 			if ( $this->search_query ) {
 				$context['page_title'] = sprintf(
