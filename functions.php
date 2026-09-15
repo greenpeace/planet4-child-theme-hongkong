@@ -76,6 +76,31 @@ function my_redirect() {
 	}
 }
 
+/* Redirect category archives. */
+add_action( 'template_redirect', 'gpea_redirect_category_archive' );
+function gpea_redirect_category_archive() {
+	// The master theme renders category archives with a template this theme has no styles for.
+	// Send readers to the issue page instead. Feeds keep working.
+	if ( ! is_category() || is_feed() ) {
+		return;
+	}
+	$category = get_queried_object();
+	if ( ! $category instanceof WP_Term ) {
+		return;
+	}
+	// Editors pick the issue page on the category screen ("Main issue page to redirect to").
+	$page_id = (int) get_term_meta( $category->term_id, 'gpea_mainissue_page', true );
+	if ( $page_id && 'publish' === get_post_status( $page_id ) ) {
+		wp_safe_redirect( get_permalink( $page_id ), 301 );
+		exit;
+	}
+	// No issue page chosen. Show the category through our own search page.
+	// The search page is styled and can load more results.
+	// 302 keeps browsers from caching this until an issue page is chosen.
+	wp_safe_redirect( add_query_arg( [ 's' => '', 'f' => [ 'cat' => $category->term_id ] ], home_url( '/' ) ), 302 );
+	exit;
+}
+
 /*
 /* collapsible notes for articles */
 
