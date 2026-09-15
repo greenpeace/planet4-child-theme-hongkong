@@ -88,6 +88,8 @@
   }
 
   .meta-box {
+    // The default meta grey is 3.40:1 on white. This brand grey is 4.78:1.
+    color: $color-neutral-600;
     font-size: 0.85rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -278,11 +280,21 @@
     }
   }
 
+  // The brand guideline allows only black or white text on a colour block.
+  // White fails contrast on most issue colours, so the box text is black.
+  // Links stay black and keep their underline, so they don't rely on colour.
   blockquote,
   .leader {
-    color: white;
+    color: black;
     text-align: left;
     font-size: 18px;
+    a,
+    a:visited,
+    a:hover,
+    a:focus {
+      color: black;
+      border-bottom-color: black;
+    }
   }
 
   img:not(.full-width) {
@@ -318,7 +330,8 @@
     font-size: 14px;
     padding: 0.4rem 0 0.4rem 0.75rem;
     border-left: 2px solid $color-green;
-    color: rgba(0, 0, 0, 0.4);
+    // The old 40% black was 2.85:1 on white. This brand grey is 9.09:1.
+    color: $color-neutral-800;
   }
 
   table {
@@ -368,6 +381,19 @@
     }
   }
   .oceans & {
+    // The oceans box keeps white text on blue, as the team chose.
+    // That pair is 3.48:1, below the 4.5:1 target for normal text.
+    blockquote,
+    .leader {
+      color: white;
+      a,
+      a:visited,
+      a:hover,
+      a:focus {
+        color: white;
+        border-bottom-color: white;
+      }
+    }
     blockquote,
     table thead th,
     .leader,
