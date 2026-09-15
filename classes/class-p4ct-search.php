@@ -227,6 +227,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				// Check if call action is correct.
 				if ( 'get_paged_posts' === $search_action ) {
 					$search_async = new static();
+					// Load the issue categories, as the first page does.
+					// Without them the cards added by Load More have no issue label.
+					$search_async->set_main_issues();
 					$search_async->set_context( $search_async->context );
 					$search_async->search_query = urldecode( filter_input( INPUT_GET, 'search_query', FILTER_SANITIZE_STRING ) );
 					
@@ -550,6 +553,21 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 				],
 			];
 			$context['is_search_page'] = '1';
+
+			// Names of the category and tag filters in use.
+			// The results line shows them, so readers know what they are looking at.
+			$context['active_filters'] = [];
+			foreach ( (array) $this->filters as $type => $term_id ) {
+				$term = get_term( (int) $term_id, 'cat' === $type ? 'category' : 'post_tag' );
+				if ( $term instanceof WP_Term ) {
+					$context['active_filters'][] = [
+						'name' => $term->name,
+						'slug' => $term->slug,
+					];
+				}
+			}
+			// The search box shows the same names when no words were searched.
+			$context['active_filter_names'] = implode( ' ', wp_list_pluck( $context['active_filters'], 'name' ) );
 
 			if ( $this->search_query ) {
 				$context['page_title'] = sprintf(
