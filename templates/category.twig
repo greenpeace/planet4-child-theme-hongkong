@@ -1,0 +1,31 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<section class="advanced-search">
+		<div class="ct-container">
+
+			<h1>{{ category.name|e('wp_kses_post')|raw }}</h1>
+			{% if category.description %}
+				{{ category_description|e('wp_kses_post')|raw }}
+			{% endif %}
+
+			{% if paged_posts %}
+			<div class="multiple-search-result">
+				<div class="results-list">
+					{% for post in paged_posts %}
+						{% include 'tease-search.twig' %}
+					{% endfor %}
+				</div>
+				{% if page_links %}
+				<nav class="has-load-more">
+					{% for link in page_links %}{{ link|raw }}{% endfor %}
+				</nav>
+				{% endif %}
+			</div>
+			{% else %}
+			<p><i><small>{{ search_strings.nothing_found }}</small></i></p>
+			{% endif %}
+
+		</div>
+	</section>
+{% endblock %}
