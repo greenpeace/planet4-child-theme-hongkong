@@ -76,6 +76,53 @@ function my_redirect() {
 	}
 }
 
+/* Category archives use this theme's own template. */
+add_filter( 'template_include', 'gpea_category_template', 20 );
+function gpea_category_template( $template ) {
+	// The parent theme sends every category to its own listing template.
+	// That template needs parent styles and scripts this theme turns off.
+	// So this theme renders categories itself. Priority 20 runs after the parent.
+	if ( is_category() ) {
+		return get_stylesheet_directory() . '/category.php';
+	}
+	return $template;
+}
+
+add_action( 'pre_get_posts', 'gpea_category_posts_per_page' );
+function gpea_category_posts_per_page( $query ) {
+	// A category page shows as many cards as one search page.
+	// The card grid has three columns, so twelve cards fill four rows.
+	if ( is_admin() || $query->is_feed() || ! $query->is_main_query() || ! $query->is_category() ) {
+		return;
+	}
+	$query->set( 'posts_per_page', P4CT_Search::POSTS_PER_PAGE );
+}
+
+/**
+ * Returns the page links of a category page as HTML strings.
+ *
+ * The links use this theme's tag button style, so they need no new styles.
+ * The current page gets the filled "active" style.
+ */
+function gpea_category_page_links() {
+	$links = paginate_links(
+		[
+			'type'      => 'array',
+			'mid_size'  => 1,
+			'prev_text' => '&lsaquo;',
+			'next_text' => '&rsaquo;',
+		]
+	);
+	if ( ! $links ) {
+		return [];
+	}
+	foreach ( $links as &$link ) {
+		$link = str_replace( '<a class="', '<a class="button tag ', $link );
+		$link = str_replace( 'class="page-numbers current"', 'class="button tag active page-numbers current"', $link );
+	}
+	return $links;
+}
+
 /*
 /* collapsible notes for articles */
 

@@ -1,79 +1,43 @@
 <?php
 /**
- * Displays a Main issue (category) page.
+ * Category archive page.
  *
- * Category <-> Issue
- * Tag <-> Campaign
- * Post <-> Action
+ * Shows the category name, its description and its posts as cards.
+ * The cards and the grid come from the search page.
+ * Numbered page links let readers and search engines reach every page.
  *
- * @package P4MT
+ * @package P4CT
  */
 
 use Timber\Timber;
-// use P4BKS\Controllers\Blocks\Covers_Controller as Covers;
-// use P4BKS\Controllers\Blocks\Articles_Controller as Articles;
-// use P4BKS\Controllers\Blocks\ContentFourColumn_Controller as ContentFourColumn;
-// use P4BKS\Controllers\Blocks\CampaignThumbnail_Controller as CampaignThumbnail;
-// use P4BKS\Controllers\Blocks\HappyPoint_Controller as HappyPoint;
 
-$context = Timber::get_context();
-$gpea_extra = new P4CT_Site();
+global $wp, $wp_query;
 
-if ( is_category() ) {
-	$context['category']  = get_queried_object();
-	$redirect_id = get_term_meta( $context['category']->term_id, 'gpea_mainissue_page', true );
+$context  = Timber::context();
+$category = get_queried_object();
 
-	if ( $redirect_id ) {
+// The search page turns posts into cards. Use the same code so the cards match.
+$search = new P4CT_ElasticSearch();
+$search->set_main_issues();
 
-		global $wp_query;
-		$redirect_page               = get_post( $redirect_id );
-		$wp_query->queried_object    = $redirect_page;
-		$wp_query->queried_object_id = $redirect_page->ID;
-		include 'page-templates/main-issue.php';
+$context['category']             = $category;
+$context['category_description'] = wpautop( $category->description );
+$context['taxonomy']             = $category;
+$context['wp_title']             = $category->name;
+$context['og_type']              = 'website';
+$context['og_description']       = $category->description;
+$context['page_category']        = 'Listing Page';
+$context['paged_posts']          = $search->make_card_posts( $wp_query->posts );
+$context['page_links']           = gpea_category_page_links();
 
-	} else {
+// The search page styles apply only to pages with the "search" body class.
+// This page reuses that card grid, so it takes the class too.
+$context['custom_body_classes'] = 'search';
 
-		$context['strings'] = [
-			'our_initiatives' => __( 'Our Initiatives', 'gpea_theme' ),
-			'latest_related_news' => __( 'Latest news about this topic', 'gpea_theme' ),
-			'read_all' => __( 'Read all', 'gpea_theme' ),
-		];
-
-		$context['custom_body_classes'] = 'white-bg page-issue-page';
-
-		// $context['background_image']      = get_term_meta( $context['tag']->term_id, 'tag_attachment', true );
-
-		$context['tag_name']            = $context['category']->name;
-		$context['tag_description']     = wpautop( $context['category']->description );		
-
-		$context['og_description'] = $context['tag_description'];
-		$context['projects'] = "[shortcake_projects_carousel layout='light' title='".$context['strings']['our_initiatives']."' topic='".$context['category']->term_id."' /]";
-
-		$context['related_posts'] = $gpea_extra->gpea_get_related( false, 6, 1, $context['category']->term_id, false );
-
-		//[shortcake_take_action_boxout take_action_page='$take_action_page' /]";
-
-		// $campaign = new P4_Taxonomy_Campaign( $templates, $context );
-
-		// $campaign->add_block(
-		// 	Covers::BLOCK_NAME,
-		// 	[
-		// 		'title'       => __( 'Things you can do', 'planet4-master-theme' ),
-		// 		'description' => __( 'We want you to take action because together we\'re strong.', 'planet4-master-theme' ),
-		// 		'select_tag'  => $context['tag']->term_id,
-		// 		'covers_view' => '0',   // Show 6 covers in Campaign page.
-		// 	]
-		// );
-
-		// $campaign->add_block(
-		// 	Articles::BLOCK_NAME,
-		// 	[
-		// 		'tags' => $context['tag']->term_id,
-		// 	]
-		// );
-
-		do_action('enqueue_google_tag_manager_script', $context);
-		Timber::render( [ 'tag.twig' ], $context );
-
-	}
+// Yoast SEO prints its own canonical link when it is active.
+if ( ! defined( 'WPSEO_VERSION' ) ) {
+	$context['canonical_link'] = home_url( $wp->request );
 }
+
+do_action( 'enqueue_google_tag_manager_script', $context );
+Timber::render( [ 'category.twig' ], $context );
