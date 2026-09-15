@@ -140,6 +140,41 @@
     }
   }
 
+  // The Easy Table of Contents plugin puts its list inside the article body.
+  // The list rules above would indent it and add a 20px gap under every entry.
+  // An ID selector outranks them, so the table stays compact.
+  // Entries match body paragraphs in text size and line height.
+  // The title matches their line height too.
+  // The list rule already gives the list the paragraph text size.
+  // The plugin shrinks entries to 95%, so they inherit the size back.
+  // The box fills the text column and uses the quote box spacing.
+  #ez-toc-container {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px 20px;
+    @include greaterThan('sm') {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      padding: 30px;
+    }
+    .ez-toc-title {
+      line-height: 1.7;
+    }
+    ul {
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+    li,
+    li a {
+      font-size: inherit;
+    }
+    li {
+      margin-bottom: 0;
+      line-height: 1.7;
+    }
+  }
+
   h2 {
     @include title-mid;
   }
@@ -189,6 +224,19 @@
     }
 
     > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Quote boxes use the same inner spacing as the table of contents box.
+  // Content often sits inside a wrapper, such as a summary holding a list.
+  // Every last element loses its bottom gap, so space above and below matches.
+  blockquote {
+    padding: 30px 20px;
+    @include greaterThan('sm') {
+      padding: 30px;
+    }
+    :last-child {
       margin-bottom: 0;
     }
   }
