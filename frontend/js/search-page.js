@@ -7,10 +7,7 @@ const p4ct_search = function() {
   if (!$search_form.length){ return; }
 
   var search_request;
-  // Read the search words from the page address, not from the search box.
-  // On a category or tag page the box shows the filter name.
-  // That name is a label here, so Load More must not search for it.
-  var search_query = (new URLSearchParams(window.location.search).get('s') || '').trim();
+  var search_query = $('#search_input').val().trim();
 
   const $result_page_result_posts = $('.multiple-search-result .results-list');
   const $load_more_button = $('.btn-load-more-click-scroll');
@@ -53,10 +50,7 @@ const p4ct_search = function() {
         'search-action': 'get_paged_posts',
         search_query: search_query,
         paged: next_page,
-        // Send the page's own query string. It carries the category and tag filters.
-        // So Load More stays inside the same filter as the first page.
-        // The server reads everything after "&query-string=". Keep this key last.
-        'query-string': window.location.search.substring(1),
+        'query-string': 's=' + search_query, // Ignore the ? in the search url (first char).
       },
       dataType: 'html',
     })

@@ -18,12 +18,7 @@
 			{% endif %}
 
 			<p class="results-no">
-				<b>
-					{% for active_filter in active_filters %}
-						<span class="issue {{ active_filter.slug }}">{{ active_filter.name|e('wp_kses_post')|raw }}</span>
-					{% endfor %}
-					{{ page_title|e('wp_kses_post')|raw }}
-				</b>
+				<b>{{ page_title|e('wp_kses_post')|raw }}</b>
 			</p>
 
 			{% if ( paged_posts ) %}
