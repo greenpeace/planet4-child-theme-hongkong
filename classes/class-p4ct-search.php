@@ -536,6 +536,19 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 			];
 			$context['is_search_page'] = '1';
 
+			// Names of the category and tag filters in use.
+			// The results line shows them, so readers know what they are looking at.
+			$context['active_filters'] = [];
+			foreach ( (array) $this->filters as $type => $term_id ) {
+				$term = get_term( (int) $term_id, 'cat' === $type ? 'category' : 'post_tag' );
+				if ( $term instanceof WP_Term ) {
+					$context['active_filters'][] = [
+						'name' => $term->name,
+						'slug' => $term->slug,
+					];
+				}
+			}
+
 			if ( $this->search_query ) {
 				$context['page_title'] = sprintf(
 					// translators: %1$d = Number of results.

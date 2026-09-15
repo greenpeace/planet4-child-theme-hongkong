@@ -50,7 +50,10 @@ const p4ct_search = function() {
         'search-action': 'get_paged_posts',
         search_query: search_query,
         paged: next_page,
-        'query-string': 's=' + search_query, // Ignore the ? in the search url (first char).
+        // Send the page's own query string. It carries the category and tag filters.
+        // So Load More stays inside the same filter as the first page.
+        // The server reads everything after "&query-string=". Keep this key last.
+        'query-string': window.location.search.substring(1),
       },
       dataType: 'html',
     })
