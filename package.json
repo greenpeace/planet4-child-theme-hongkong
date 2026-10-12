@@ -33,7 +33,7 @@
     "@babel/compat-data": "^7.14.7",
     "aos": "^2.3.4",
     "cleave.js": "^1.5.8",
-    "d3": "^5.15.0",
+    "d3": "^7.6.1",
     "gulp-cli": "^2.3.0",
     "jquery-appear-original": "^0.6.2",
     "js-cookie": "^2.2.1",
