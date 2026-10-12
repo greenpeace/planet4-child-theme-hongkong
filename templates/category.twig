@@ -1,0 +1,80 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<section class="advanced-search">
+		<div class="ct-container">
+
+			<h1>{{ category.name|e('wp_kses_post')|raw }}</h1>
+			{% if category.description %}
+				{{ category_description|e('wp_kses_post')|raw }}
+			{% endif %}
+
+			{% if paged_posts %}
+			<div class="multiple-search-result">
+				<div class="results-list">
+					{% for post in paged_posts %}
+						{% include 'tease-search.twig' %}
+					{% endfor %}
+				</div>
+				{% if next_page_link %}
+				<div class="has-load-more">
+					<a class="button js-category-load-more" href="{{ next_page_link|e('esc_url') }}">
+						{{ load_more_text }}
+					</a>
+				</div>
+				{% endif %}
+			</div>
+			{% else %}
+			<p><i><small>{{ search_strings.nothing_found }}</small></i></p>
+			{% endif %}
+
+		</div>
+	</section>
+
+	<script>
+	(function () {
+		// Load More fetches the next category page and adds its cards to this list.
+		// The button is a normal link to that page. Search engines follow it.
+		// Readers without JavaScript also reach every page through it.
+		var button = document.querySelector('.js-category-load-more');
+		var list = document.querySelector('.multiple-search-result .results-list');
+		if (!button || !list || !window.fetch || !window.DOMParser) {
+			return;
+		}
+		button.addEventListener('click', function (event) {
+			event.preventDefault();
+			if (button.classList.contains('loading')) {
+				return;
+			}
+			button.classList.add('loading');
+			fetch(button.href, { credentials: 'same-origin' })
+				.then(function (response) {
+					if (!response.ok) {
+						throw new Error('Load More failed with status ' + response.status);
+					}
+					return response.text();
+				})
+				.then(function (html) {
+					var page = new DOMParser().parseFromString(html, 'text/html');
+					page.querySelectorAll('.multiple-search-result .results-list > a').forEach(function (card) {
+						list.appendChild(document.importNode(card, true));
+					});
+					// The fetched page has its own button when more pages remain.
+					var next = page.querySelector('.js-category-load-more');
+					if (next) {
+						button.href = next.href;
+						button.classList.remove('loading');
+					} else {
+						// No more pages. Remove the button and its wrapper.
+						var wrapper = button.parentNode;
+						wrapper.parentNode.removeChild(wrapper);
+					}
+				})
+				.catch(function () {
+					// Open the next page normally when the request fails.
+					window.location.href = button.href;
+				});
+		});
+	})();
+	</script>
+{% endblock %}

@@ -76,6 +76,28 @@ function my_redirect() {
 	}
 }
 
+/* Category archives use this theme's own template. */
+add_filter( 'template_include', 'gpea_category_template', 20 );
+function gpea_category_template( $template ) {
+	// The parent theme sends every category to its own listing template.
+	// That template needs parent styles and scripts this theme turns off.
+	// So this theme renders categories itself. Priority 20 runs after the parent.
+	if ( is_category() ) {
+		return get_stylesheet_directory() . '/category.php';
+	}
+	return $template;
+}
+
+add_action( 'pre_get_posts', 'gpea_category_posts_per_page' );
+function gpea_category_posts_per_page( $query ) {
+	// A category page shows as many cards as one search page.
+	// The card grid has three columns, so twelve cards fill four rows.
+	if ( is_admin() || $query->is_feed() || ! $query->is_main_query() || ! $query->is_category() ) {
+		return;
+	}
+	$query->set( 'posts_per_page', P4CT_Search::POSTS_PER_PAGE );
+}
+
 /*
 /* collapsible notes for articles */
 

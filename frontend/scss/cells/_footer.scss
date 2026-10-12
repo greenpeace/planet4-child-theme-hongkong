@@ -312,6 +312,21 @@ body.sticky-button-enabled:after {
   }
 }
 
+// Below 1024px the article share bar is also fixed to the bottom of the screen.
+// The sticky donate button covers it, so only its top edge shows above the button.
+// The share bar is hidden there, and the button gets the site's card shadow.
+// The shadow only appears on pages that have a share bar.
+body.sticky-button-enabled {
+  @include lessThan('sm') {
+    .floating-share {
+      display: none;
+    }
+    &:has(.floating-share) .sticky-button {
+      box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
 // Old Version
 .footer--old {
   display: none;

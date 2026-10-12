@@ -88,6 +88,8 @@
   }
 
   .meta-box {
+    // The default meta grey is 3.40:1 on white. This brand grey is 4.78:1.
+    color: $color-neutral-600;
     font-size: 0.85rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -137,6 +139,41 @@
     padding-left: 20px;
     li {
       margin-bottom: 20px;
+    }
+  }
+
+  // The Easy Table of Contents plugin puts its list inside the article body.
+  // The list rules above would indent it and add a 20px gap under every entry.
+  // An ID selector outranks them, so the table stays compact.
+  // Entries match body paragraphs in text size and line height.
+  // The title matches their line height too.
+  // The list rule already gives the list the paragraph text size.
+  // The plugin shrinks entries to 95%, so they inherit the size back.
+  // The box fills the text column and uses the quote box spacing.
+  #ez-toc-container {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px 20px;
+    @include greaterThan('sm') {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      padding: 30px;
+    }
+    .ez-toc-title {
+      line-height: 1.7;
+    }
+    ul {
+      margin-bottom: 0;
+      padding-left: 0;
+    }
+    li,
+    li a {
+      font-size: inherit;
+    }
+    li {
+      margin-bottom: 0;
+      line-height: 1.7;
     }
   }
 
@@ -193,6 +230,19 @@
     }
   }
 
+  // Quote boxes use the same inner spacing as the table of contents box.
+  // Content often sits inside a wrapper, such as a summary holding a list.
+  // Every last element loses its bottom gap, so space above and below matches.
+  blockquote {
+    padding: 30px 20px;
+    @include greaterThan('sm') {
+      padding: 30px;
+    }
+    :last-child {
+      margin-bottom: 0;
+    }
+  }
+
   .leader {
     position: relative;
     width: 100%;
@@ -230,11 +280,21 @@
     }
   }
 
+  // The brand guideline allows only black or white text on a colour block.
+  // White fails contrast on most issue colours, so the box text is black.
+  // Links stay black and keep their underline, so they don't rely on colour.
   blockquote,
   .leader {
-    color: white;
+    color: black;
     text-align: left;
     font-size: 18px;
+    a,
+    a:visited,
+    a:hover,
+    a:focus {
+      color: black;
+      border-bottom-color: black;
+    }
   }
 
   img:not(.full-width) {
@@ -270,7 +330,8 @@
     font-size: 14px;
     padding: 0.4rem 0 0.4rem 0.75rem;
     border-left: 2px solid $color-green;
-    color: rgba(0, 0, 0, 0.4);
+    // The old 40% black was 2.85:1 on white. This brand grey is 9.09:1.
+    color: $color-neutral-800;
   }
 
   table {
@@ -320,6 +381,19 @@
     }
   }
   .oceans & {
+    // The oceans box keeps white text on blue, as the team chose.
+    // That pair is 3.48:1, below the 4.5:1 target for normal text.
+    blockquote,
+    .leader {
+      color: white;
+      a,
+      a:visited,
+      a:hover,
+      a:focus {
+        color: white;
+        border-bottom-color: white;
+      }
+    }
     blockquote,
     table thead th,
     .leader,

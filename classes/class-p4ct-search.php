@@ -306,9 +306,22 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 		 * @return array The respective Timber Posts.
 		 */
 		protected function get_timber_posts( $paged = 1 ) : array {
+			return $this->make_card_posts( $this->get_posts( $paged ) );
+		}
+
+		/**
+		 * Turns posts into the objects the card template needs.
+		 *
+		 * Each card shows the issue label, the post type, the thumbnail and the reading time.
+		 * The category page uses this too, so its cards match the search page.
+		 *
+		 * @param array $posts Posts from any query.
+		 *
+		 * @return array Timber posts with the card fields set.
+		 */
+		public function make_card_posts( array $posts ) : array {
 			$timber_posts = [];
 
-			$posts = $this->get_posts( $paged );
 			// Use Timber's Post instead of WP_Post so that we can make use of Timber within the template.
 			if ( $posts ) {
 				foreach ( $posts as $post ) {
@@ -349,8 +362,9 @@ if ( ! class_exists( 'P4CT_Search' ) ) {
 						}
 					) : NULL;
 
-					if ( $main_issue && isset( $main_issue[0] ) ) {
-						$main_issue = $main_issue[0];
+					// array_filter keeps the original keys. Take the first match, whatever its key.
+					$main_issue = $main_issue ? reset( $main_issue ) : false;
+					if ( $main_issue ) {
 						$timber_post->main_issue = $main_issue ? $this->main_issues[ $main_issue ]->name : 'none';
 						$timber_post->main_issue_slug = $main_issue ? $this->main_issues[ $main_issue ]->slug : 'none';
 					}
